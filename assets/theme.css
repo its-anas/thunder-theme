@@ -13,6 +13,7 @@ body {
      height: 100%;
      min-height: 100%;
      margin: 0;
+     /* line-height: 3em; */
 }
 
 /* ------------ ANCHOR: Typography ------------ */
@@ -41,10 +42,22 @@ h2,
 h3,
 h4,
 h5,
-h6,
+h6 {
+     color: var(--rich-text-color); 
+     line-height: 0.8;  
+}
+
+h1,
+h2 {
+     line-height: 0.8;
+}
+
 p {
+     /* line-height: 1.2em; */
      color: var(--rich-text-color);
 }
+
+
 
 h1 {
      font-size: calc((((((var(--font-size-type-scale)*var(--font-type-scale))*var(--font-type-scale))*var(--font-type-scale))*var(--font-type-scale))*var(--font-type-scale))*var(--font-type-scale)*1px);
@@ -137,20 +150,11 @@ p .small {
 }
 
 /* ------------ ANCHOR: Rich-text section ------------ */
-.rich-text-just-color {
-     background-color: var(--rich-text-background-color);
-}
+
 .wrapper {
      display: flex;
      flex-direction: column;
      justify-content: center;
-     gap: var(--rich-text-space-between);
-     padding-top: var(--rich-text-padding);
-     padding-bottom: var(--rich-text-padding);
-}
-
-.text-width {
-     width: var(--rich-text-text-width);
 }
 
 /* ------------ ANCHOR: Button ------------ */

@@ -1,28 +1,43 @@
-<style>
+{%- style -%}
    :root{
        --rich-text-color: {{ section.settings.text_color }};
-       --rich-text-background-color: {{ section.settings.background_color }};
-       --rich-text-space-between: {{ section.settings.space-between }}px;
-       --rich-text-padding: {{ section.settings.padding }}px;
-       --rich-text-text-width: {{ section.settings.text-width}}%;
        --wrapped-content-width: {{ settings.wrapped-content-width }}px;
    }
-   .rich-text-image {
-    {% if section.settings.section_width == "wrapped"%}
-    background-image: url({{ section.settings.background_image | image_url: width: settings.wrapped-content-width }});
-    background-repeat: no-repeat;
-    {% endif%}
-    {% if section.settings.section_width == "full-width"%}
-      background-image: url({{ section.settings.background_image | image_url }});
-      background-size: cover;
-    {% endif%}
-      background-position: center;
-   }
-</style>
 
-<section class="{% if section.settings.background_image == blank %} rich-text-just-color {% else %} rich-text-{{ section.settings.background_type}} {% endif %} {{ section.settings.section_width }}">
+    .{{ section.id}}  {
+     padding-top: {{ section.settings.padding }}px;;
+     padding-bottom: {{ section.settings.padding }}px;;
+     }
+
+     .{{ section.id}}-just-color {
+     background-color: {{ section.settings.background_color }};
+     }
+     
+     .{{ section.id}}-image {
+     {% if section.settings.section_width == "wrapped"%}
+     background-image: url({{ section.settings.background_image | image_url: width: settings.wrapped-content-width }});
+     background-repeat: no-repeat;
+     {% endif%}
+     {% if section.settings.section_width == "full-width"%}
+          background-image: url({{ section.settings.background_image | image_url }});
+          background-size: cover;
+     {% endif%}
+          background-position: center;
+     }
+
+     .{{ section.id}}-space-between {
+          gap: {{ section.settings.space-between }}px;
+     }
+
+     .{{ section.id}}-text-width {
+          width: {{ section.settings.text-width}}%;
+     }
+
+{%- endstyle -%}
+
+<section class="{{ section.id}} {% if section.settings.background_image == blank %}{{ section.id}}-just-color{% else %}{{ section.id}}-{{ section.settings.background_type}}{% endif %} {{ section.settings.section_width }}">
   <div style="margin:30px"">
-  <div class="wrapper text-alignment-{{ section.settings.text_alignment }} text-width text-position-{{ section.settings.text_position }}">
+  <div class="wrapper {{ section.id}}-space-between text-alignment-{{ section.settings.text_alignment }} {{ section.id}}-text-width text-position-{{ section.settings.text_position }}">
 
     {% if section.settings.subheading != blank %}
       <{{ section.settings.subheading_size }}>
@@ -40,7 +55,7 @@
 
     <div class="buttons buttons-{{ section.settings.text_alignment }}">
         {% if section.settings.primary_button_text != blank %}
-          <a class="button  {% if section.settings.button_style == "border" %}primary{%else%}secondary{% endif%}-button {{ section.settings.button_style}}" href="{{ section.settings.primary_button_link}}">
+          <a class="button {% if section.settings.button_style == "border" %}primary{%else%}secondary{% endif%}-button {{ section.settings.button_style}}" href="{{ section.settings.primary_button_link}}">
             <span></span> <span></span> <span></span> <span></span>
               {{ section.settings.primary_button_text}}
           </a>
@@ -194,7 +209,7 @@
       "type": "range",
       "id": "space-between",
       "label": "Space between elements",
-      "min": 0,
+      "min": 5,
       "max": 100,
       "step": 5,
       "unit": "px",
@@ -204,9 +219,9 @@
       "type": "range",
       "id": "padding",
       "label": "Space outside elements",
-      "min": 0,
+      "min": 5,
       "max": 100,
-      "step": 10,
+      "step": 5,
       "unit": "px",
       "default": 30
        },
