@@ -1,0 +1,311 @@
+*,
+*::before,
+*::after {
+     box-sizing: inherit;
+}
+
+/* ------------ ANCHOR: Intro ------------ */
+html,
+body {
+     box-sizing: border-box;
+     font-family: var(--font-family);
+     font-style: var(--font-style);
+     height: 100%;
+     min-height: 100%;
+     margin: 0;
+}
+
+/* ------------ ANCHOR: Typography ------------ */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+     padding: 0;
+     margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+     text-transform: uppercase;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+     color: var(--rich-text-color);
+}
+
+h1 {
+     font-size: calc((((((var(--font-size-type-scale)*var(--font-type-scale))*var(--font-type-scale))*var(--font-type-scale))*var(--font-type-scale))*var(--font-type-scale))*var(--font-type-scale)*1px);
+}
+
+h2 {
+     font-size: calc(((((var(--font-size-type-scale)*var(--font-type-scale))*var(--font-type-scale))*var(--font-type-scale))*var(--font-type-scale))*var(--font-type-scale)*1px);
+}
+
+h3 {
+     font-size: calc((((var(--font-size-type-scale)*var(--font-type-scale))*var(--font-type-scale))*var(--font-type-scale))*var(--font-type-scale)*1px);
+}
+
+h4 {
+     font-size: calc(((var(--font-size-type-scale)*var(--font-type-scale))*var(--font-type-scale))*var(--font-type-scale)*1px);
+}
+
+h5 {
+     font-size: calc((var(--font-size-type-scale)*var(--font-type-scale))*var(--font-type-scale)*1px);
+}
+
+h6 {
+     font-size: calc(var(--font-size-type-scale)*var(--font-type-scale)*1px);
+}
+
+p {
+     font-size: var(--font-size);
+}
+
+p .small {
+     font-size: calc(var(--font-size-type-scale)/var(--font-type-scale)*1px);
+}
+
+.subheading {
+     font-size: calc(var(--font-size-type-scale)/var(--font-type-scale)*1px);
+}
+
+.button {
+     font-size: calc((var(--font-size-type-scale)/var(--font-type-scale))*1px);
+     font-weight: 700;
+}
+
+.price-text {
+     font-size: var(--font-size);
+}
+
+.label-text {
+     font-size: calc((var(--font-size-type-scale)/var(--font-type-scale))/var(--font-type-scale)*1px);
+}
+
+.tag-text {
+     font-size: calc(((var(--font-size-type-scale)/var(--font-type-scale))/var(--font-type-scale))/var(--font-type-scale)*1px);
+}
+
+.text-alignment-center {
+     text-align: center;
+}
+
+.text-alignment-right {
+     text-align: right;
+}
+
+.text-alignment-left {
+     text-align: left;
+}
+
+.text-position-right {
+     margin-left: auto;
+}
+
+.text-position-left {
+     margin-right: auto;
+}
+
+.text-position-center {
+     margin-right: auto;
+     margin-left: auto;
+}
+
+/* ------------ ANCHOR: All sections ------------ */
+
+.full-width {
+     width: 100%;
+}
+
+.wrapped {
+     max-width: var(--wrapped-content-width);
+     margin-left: auto;
+     margin-right: auto;
+}
+
+/* ------------ ANCHOR: Rich-text section ------------ */
+.rich-text-just-color {
+     background-color: var(--rich-text-background-color);
+}
+.wrapper {
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     gap: var(--rich-text-space-between);
+     padding-top: var(--rich-text-padding);
+     padding-bottom: var(--rich-text-padding);
+}
+
+.text-width {
+     width: var(--rich-text-text-width);
+}
+
+/* ------------ ANCHOR: Button ------------ */
+
+.primary-button,
+.secondary-button {
+     text-transform: uppercase;
+     min-width: 200px;
+     padding: 15px 30px;
+     text-align: center;
+}
+
+.primary-button {
+     color: #000000;
+     background-color: #fcdb33;
+     transition: 0.2s;
+}
+
+.primary-button:hover {
+     color: #fff;
+     background-color: transparent;
+     border-color: #fff;
+     transition: 0.2s;
+}
+
+.primary-button:after {
+     content: " ➜";
+     opacity: 0%;
+     position: absolute;
+     transform: TranslateX(0px);
+     transition: 0.5s;
+}
+
+.primary-button:hover:after {
+     opacity: 100%;
+     transform: TranslateX(10px);
+}
+
+.secondary-button {
+     color: #fcdb33;
+     background-color: transparent;
+     border-width: 2px;
+     border-color: #fcdb33;
+     transition: 0.2s;
+}
+
+.secondary-button:hover {
+     color: #fff;
+     border-color: #fff;
+}
+
+.secondary-button:after {
+     content: " ➜";
+     position: absolute;
+     opacity: 0%;
+     transform: TranslateX(0px);
+     transition: 0.5s;
+}
+
+.secondary-button:hover:after {
+     opacity: 100%;
+     transform: TranslateX(10px);
+}
+
+.buttons {
+     display: flex;
+     width: 100%;
+     gap: 10px;
+     justify-content: center;
+     flex-direction: row;
+}
+
+.buttons-left {
+     justify-content: left;
+}
+
+.buttons-center {
+     justify-content: center;
+}
+
+.buttons-right {
+     justify-content: right;
+}
+
+a.button {
+     position: relative;
+     text-decoration: none;
+     overflow: hidden;
+     text-transform: uppercase;
+}
+
+a.border.primary-button, a.border.secondary-button {
+     border: 2px solid #fcdb33;
+}
+a.border.primary-button:hover, a.border.secondary-button:hover {
+     border: 2px solid #fff;
+     transition: 1s;
+}
+
+a.button span {
+     position: absolute;
+     display: block;
+}
+
+a.button span:nth-child(1) {
+     top: 0;
+     left: -100%;
+     width: 100%;
+     height: 2px;
+     background: linear-gradient(90deg, transparent, #fcdb33);
+}
+
+a.button:hover span:nth-child(1) {
+     left: 100%;
+     transition: 0.75s;
+}
+
+a.button span:nth-child(2) {
+     top: -100%;
+     right: 0;
+     width: 2px;
+     height: 100%;
+     background: linear-gradient(180deg, transparent, #fcdb33);
+}
+
+a.button:hover span:nth-child(2) {
+     top: 100%;
+     transition: 0.75s;
+     transition-delay: 0.2s;
+}
+
+a.button span:nth-child(3) {
+     bottom: 0;
+     right: -100%;
+     width: 100%;
+     height: 2px;
+     background: linear-gradient(270deg, transparent, #fcdb33);
+}
+
+a.button:hover span:nth-child(3) {
+     right: 100%;
+     transition: 0.75s;
+     transition-delay: 0.4s;
+}
+
+a.button span:nth-child(4) {
+     bottom: -100%;
+     left: 0;
+     width: 2px;
+     height: 100%;
+     background: linear-gradient(360deg, transparent, #fcdb33);
+}
+
+a.button:hover span:nth-child(4) {
+     bottom: 100%;
+     transition: 0.75s;
+     transition-delay: 0.6s;
+}

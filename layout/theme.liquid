@@ -1,0 +1,40 @@
+<!doctype html>
+<html class="no-js" lang="{{ request.locale.iso_code }}">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
+
+    {% style %}
+    {{ settings.font_type | font_face: font_display: 'swap' }}
+    {{ settings.font_type | font_face: font_display: 'swap' }}
+
+    :root {
+      --font-family: {{ settings.font_type.family }}, {{ settings.font_type.fallback_families }};
+      --font-style: {{ settings.font_type.style }};
+      --font-weight: {{ settings.font_type.weight }};
+      --font-weight-bold: {{ settings.font_type.weight | plus: 300 | at_most: 1000 }};
+      --font-size: {{ settings.size }}px;
+      --font-size-type-scale: {{ settings.size }};
+      --font-type-scale: {{ settings.type_scale}};
+    }
+
+
+  {% endstyle %}  
+  {{ 'theme.css' | asset_url | stylesheet_tag }}
+    <title>
+      {{ page_title }}
+    </title>
+    {% comment %} {% section 'announcement-bar' %} {% endcomment %}
+    {{ content_for_header }}
+
+    <script>
+      document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
+    </script>
+  </head>
+
+  <body>
+    {{ content_for_layout }}
+  </body>
+</html>

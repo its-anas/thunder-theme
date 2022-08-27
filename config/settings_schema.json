@@ -1,0 +1,95 @@
+[
+     {
+          "name": "theme_info",
+          "theme_name": "Skeleton",
+          "theme_author": "Theme_author",
+          "theme_version": "1.0.0",
+          "theme_documentation_url": "https://shopify.com",
+          "theme_support_url": "https://shopify.com"
+     },
+     {
+          "name": "Typography",
+          "settings": [
+               {
+                    "type": "header",
+                    "content": "Headings"
+               },
+               {
+                    "type": "font_picker",
+                    "id": "headings_font_type",
+                    "label": "Heading font type",
+                    "default": "montserrat_n5"
+               },
+               {
+                    "type": "header",
+                    "content": "Body text"
+               },
+               {
+                    "type": "font_picker",
+                    "id": "font_type",
+                    "label": "Font type",
+                    "default": "montserrat_n5"
+               },
+               {
+                    "type": "range",
+                    "id": "size",
+                    "label": "Font size",
+                    "min": 12,
+                    "max": 20,
+                    "step": 1,
+                    "unit": "px",
+                    "default": 15
+               },
+               {
+                    "type": "header",
+                    "content": "Type Scale "
+               },
+               {
+                    "type": "select",
+                    "id": "type_scale",
+                    "options": [
+                               {
+                                    "value": "1.067",
+                                    "label": "1.067 - Minor Second"
+                               },
+                               {
+                                    "value": "1.125",
+                                    "label": "1.125 - Major Second"
+                               },
+                               {
+                                    "value": "1.200",
+                                    "label": "1.125 - Minor Third"
+                               },
+                               {
+                                    "value": "1.250",
+                                    "label": "1.250 - Major Third"
+                               },
+                               {
+                                    "value": "1.333",
+                                    "label": "1.333 - Perfect Fourth"
+                               },
+                               {
+                                    "value": "1.414",
+                                    "label": "1.414 - Augmented Fourth"
+                               }
+                    ],
+                    "default":  "1.250"
+               }
+          ]
+     },
+     {
+          "name": "Sizes",
+          "settings": [
+               {
+                    "type": "range",
+                    "id": "wrapped-content-width",
+                    "label": "Wrapped content width",
+                    "min": 900,
+                    "max": 1300,
+                    "step": 20,
+                    "unit": "px",
+                    "default": 1240
+               }
+          ]
+     }
+]
