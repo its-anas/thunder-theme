@@ -7,22 +7,20 @@
     <script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
 
     {% style %}
-    {{ settings.font_type | font_face: font_display: 'swap' }}
-    {{ settings.font_type | font_face: font_display: 'swap' }}
+      {{ settings.font_type | font_face: font_display: 'swap' }}
+      {{ settings.font_type | font_face: font_display: 'swap' }}
 
-    :root {
-      --font-family: {{ settings.font_type.family }}, {{ settings.font_type.fallback_families }};
-      --font-style: {{ settings.font_type.style }};
-      --font-weight: {{ settings.font_type.weight }};
-      --font-weight-bold: {{ settings.font_type.weight | plus: 300 | at_most: 1000 }};
-      --font-size: {{ settings.size }}px;
-      --font-size-type-scale: {{ settings.size }};
-      --font-type-scale: {{ settings.type_scale}};
-    }
-
-
-  {% endstyle %}  
-  {{ 'theme.css' | asset_url | stylesheet_tag }}
+      :root {
+        --font-family: {{ settings.font_type.family }}, {{ settings.font_type.fallback_families }};
+        --font-style: {{ settings.font_type.style }};
+        --font-weight: {{ settings.font_type.weight }};
+        --font-weight-bold: {{ settings.font_type.weight | plus: 300 | at_most: 1000 }};
+        --font-size: {{ settings.size }}px;
+        --font-size-type-scale: {{ settings.size }};
+        --font-type-scale: {{ settings.type_scale }};
+      }
+    {% endstyle %}
+    {{ 'theme.css' | asset_url | stylesheet_tag }}
     <title>
       {{ page_title }}
     </title>
