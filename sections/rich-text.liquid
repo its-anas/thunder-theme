@@ -24,8 +24,10 @@
         gap: {{ section.settings.space-between }}px;
    }
 
-   .{{ section.id }}-text-width {
-        width: {{ section.settings.text-width }}%;
+   @media screen and (min-width: 750px) {
+        .{{ section.id }}-text-width {
+              width: {{ section.settings.text-width }}%;
+        }
    }
 {%- endstyle -%}
 
@@ -110,6 +112,7 @@
       "type": "range",
       "id": "text-width",
       "label": "Text width",
+      "info": "Desktop only",
       "min": 40,
       "max": 100,
       "step": 10,
@@ -120,6 +123,7 @@
       "type": "select",
       "id": "text_position",
       "label": "Text position",
+      "info": "Desktop only",
       "options": [
         {
           "value": "left",
@@ -160,6 +164,7 @@
       "type": "select",
       "id": "section_width",
       "label": "Section width",
+      "info": "Desktop only",
       "options": [
         {
           "value": "full-width",
@@ -210,7 +215,7 @@
     {
       "type": "subheading",
       "name": "Subheading",
-      "limit": 1,
+      "limit": 5,
       "settings": [
         {
           "type": "text",
@@ -255,7 +260,7 @@
     {
       "type": "heading",
       "name": "Heading",
-      "limit": 1,
+      "limit": 5,
       "settings": [
         {
           "type": "text",
@@ -300,7 +305,7 @@
     {
       "type": "text",
       "name": "Text",
-      "limit": 1,
+      "limit": 5,
       "settings": [
         {
           "type": "richtext",
@@ -313,7 +318,7 @@
     {
       "type": "button",
       "name": "Button",
-      "limit": 1,
+      "limit": 5,
       "settings": [
         {
           "type": "text",
@@ -358,7 +363,20 @@
   "presets": [
     {
       "name": "Rich text",
-      "settings": {}
+      "blocks": [
+        {
+          "type": "subheading"
+        },
+        {
+          "type": "heading"
+        },
+        {
+          "type": "text"
+        },
+        {
+          "type": "button"
+        }
+      ]
     }
   ]
 }

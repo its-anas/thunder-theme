@@ -15,9 +15,9 @@
         --font-style: {{ settings.font_type.style }};
         --font-weight: {{ settings.font_type.weight }};
         --font-weight-bold: {{ settings.font_type.weight | plus: 300 | at_most: 1000 }};
-        --font-size: {{ settings.size }}px;
-        --font-size-type-scale: {{ settings.size }};
-        --font-type-scale: {{ settings.type_scale }};
+        --font-size: {{ settings.size | minus: 1 }}px;
+        --font-size-type-scale: {{ settings.size | minus: 1 }};
+        --font-type-scale: {{ settings.type_scale | times: 0.9 }};
 
         --headings-color: {{ settings.headings_color }};
         --text-color:  {{ settings.text_color }};
@@ -34,8 +34,19 @@
         --button-text-border-hover-color: {{ settings.button_text_border_hover_color }};
         --button-background-hover-color: {{ settings.button_background_hover_color }};
         --button-animation-color: {{ settings.button_animation_color }};
+
+        --headings-style: {{ settings.headings_style }};
       }
+
+        @media screen and (min-width: 750px) {
+          :root{
+          --font-size: {{ settings.size }}px;
+          --font-size-type-scale: {{ settings.size }};
+          --font-type-scale: {{ settings.type_scale }};
+          }
+        }
     {% endstyle %}
+
     {{ 'theme.css' | asset_url | stylesheet_tag }}
     <title>
       {{ page_title }}

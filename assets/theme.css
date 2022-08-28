@@ -4,7 +4,7 @@
      box-sizing: inherit;
 }
 
-/* ------------ ANCHOR: Intro ------------ */
+/* ------------ ANCHOR: Base ------------ */
 html,
 body {
      box-sizing: border-box;
@@ -34,7 +34,7 @@ h3,
 h4,
 h5,
 h6 {
-     text-transform: uppercase;
+     text-transform: var(--headings-style);
 }
 
 h1,
@@ -44,7 +44,7 @@ h4,
 h5,
 h6 {
      color: var(--headings-color);
-     line-height: 0.8;
+     line-height: 0.9;
 }
 
 p {
@@ -68,7 +68,7 @@ h4 {
 }
 
 h5 {
-     font-size: calc((var(--font-size-type-scale) * var(--font-type-scale)) * var(--font-type-scale) * 1px);
+     font-size: calc(var(--font-size-type-scale) * (var(--font-type-scale) * var(--font-type-scale) * 1px));
 }
 
 h6 {
@@ -116,27 +116,38 @@ p .small {
      text-align: left;
 }
 
-.text-position-right {
-     margin-left: auto;
+@media screen and (min-width: 750px) {
+     .text-position-right {
+          margin-left: auto;
+     }
+
+     .text-position-left {
+          margin-right: auto;
+     }
+
+     .text-position-center {
+          margin-right: auto;
+          margin-left: auto;
+     }
+
 }
 
-.text-position-left {
-     margin-right: auto;
-}
-
-.text-position-center {
-     margin-right: auto;
-     margin-left: auto;
-}
-
-/* ------------ ANCHOR: Button ------------ */
+/* ------------ ANCHOR: Button style ------------ */
 
 .primary-button,
 .secondary-button {
      text-transform: uppercase;
-     min-width: 200px;
      padding: 15px 30px;
      text-align: center;
+}
+
+@media screen and (min-width: 750px) {
+
+     .primary-button,
+     .secondary-button {
+          min-width: 200px;
+     }
+
 }
 
 .primary-button {
@@ -190,19 +201,25 @@ a.border.secondary-button:hover {
      width: 100%;
      gap: 10px;
      justify-content: center;
-     flex-direction: row;
+     flex-direction: column;
 }
 
-.buttons-left {
-     justify-content: left;
-}
+@media screen and (min-width: 750px) {
+     .buttons {
+          flex-direction: row;
+     }
 
-.buttons-center {
-     justify-content: center;
-}
+     .buttons-left {
+          justify-content: left;
+     }
 
-.buttons-right {
-     justify-content: right;
+     .buttons-center {
+          justify-content: center;
+     }
+
+     .buttons-right {
+          justify-content: right;
+     }
 }
 
 /* ------------ ANCHOR: Button animation ------------ */
@@ -276,14 +293,16 @@ a.button:hover span:nth-child(4) {
 
 /* ------------ ANCHOR: All sections ------------ */
 
-.full-width {
-     width: 100%;
-}
+@media screen and (min-width: 750px) {
+     .full-width {
+          width: 100%;
+     }
 
-.wrapped {
-     max-width: var(--wrapped-content-width);
-     margin-left: auto;
-     margin-right: auto;
+     .wrapped {
+          max-width: var(--wrapped-content-width);
+          margin-left: auto;
+          margin-right: auto;
+     }
 }
 
 /* ------------ ANCHOR: Rich-text section ------------ */

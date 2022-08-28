@@ -21,6 +21,22 @@
                     "default": "montserrat_n5"
                },
                {
+                    "type": "select",
+                    "id": "headings_style",
+                    "label": "Headings style",
+                    "options": [
+                         {
+                              "value": "normal",
+                              "label": "Normal"
+                         },
+                         {
+                              "value": "uppercase",
+                              "label": "Uppercase"
+                         }
+                    ],
+                    "default": "uppercase"
+               },
+               {
                     "type": "header",
                     "content": "Body text"
                },
@@ -48,10 +64,6 @@
                     "type": "select",
                     "id": "type_scale",
                     "options": [
-                         {
-                              "value": "1.067",
-                              "label": "1.067 - Minor Second"
-                         },
                          {
                               "value": "1.125",
                               "label": "1.125 - Major Second"
