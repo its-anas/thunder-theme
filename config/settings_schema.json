@@ -48,32 +48,115 @@
                     "type": "select",
                     "id": "type_scale",
                     "options": [
-                               {
-                                    "value": "1.067",
-                                    "label": "1.067 - Minor Second"
-                               },
-                               {
-                                    "value": "1.125",
-                                    "label": "1.125 - Major Second"
-                               },
-                               {
-                                    "value": "1.200",
-                                    "label": "1.125 - Minor Third"
-                               },
-                               {
-                                    "value": "1.250",
-                                    "label": "1.250 - Major Third"
-                               },
-                               {
-                                    "value": "1.333",
-                                    "label": "1.333 - Perfect Fourth"
-                               },
-                               {
-                                    "value": "1.414",
-                                    "label": "1.414 - Augmented Fourth"
-                               }
+                         {
+                              "value": "1.067",
+                              "label": "1.067 - Minor Second"
+                         },
+                         {
+                              "value": "1.125",
+                              "label": "1.125 - Major Second"
+                         },
+                         {
+                              "value": "1.200",
+                              "label": "1.125 - Minor Third"
+                         },
+                         {
+                              "value": "1.250",
+                              "label": "1.250 - Major Third"
+                         },
+                         {
+                              "value": "1.333",
+                              "label": "1.333 - Perfect Fourth"
+                         },
+                         {
+                              "value": "1.414",
+                              "label": "1.414 - Augmented Fourth"
+                         }
                     ],
-                    "default":  "1.250"
+                    "default": "1.250"
+               }
+          ]
+     },
+     {
+          "name": "Colors",
+          "settings": [
+               {
+                    "type": "header",
+                    "content": "Text"
+               },
+               {
+                    "type": "color",
+                    "id": "headings_color",
+                    "label": "Headings",
+                    "default": "#FFFFFF"
+               },
+               {
+                    "type": "color",
+                    "id": "text_color",
+                    "label": "Text",
+                    "default": "#FFFFFF"
+               },
+               {
+                    "type": "color",
+                    "id": "page_background_color",
+                    "label": "Page background",
+                    "default": "#000000"
+               },
+               {
+                    "type": "header",
+                    "content": "Buttons"
+               },
+               {
+                    "type": "color",
+                    "id": "primary_button_text_color",
+                    "label": "Primary button text",
+                    "default": "#000000"
+               },
+               {
+                    "type": "color",
+                    "id": "primary_button_background_color",
+                    "label": "Primary button background",
+                    "default": "#fcdb33"
+               },
+               {
+                    "type": "color",
+                    "id": "primary_button_border_color",
+                    "label": "Primary button border",
+                    "default": "#fcdb33"
+               },
+               {
+                    "type": "color",
+                    "id": "secondary_button_text_color",
+                    "label": "Secondary button text",
+                    "default": "#fcdb33"
+               },
+               {
+                    "type": "color",
+                    "id": "secondary_button_background_color",
+                    "label": "Secondary button background"
+               },
+               {
+                    "type": "color",
+                    "id": "secondary_button_border_color",
+                    "label": "Secondary button border",
+                    "default": "#fcdb33"
+               },
+               {
+                    "type": "color",
+                    "id": "button_text_border_hover_color",
+                    "label": "Button on hover - text/border",
+                    "default": "#FFFFFF"
+               },
+               {
+                    "type": "color",
+                    "id": "button_background_hover_color",
+                    "label": "Button on hover - background"
+               },
+               {
+                    "type": "color",
+                    "id": "button_animation_color",
+                    "label": "Button animation color",
+                    "default": "#fcdb33"
                }
           ]
      },

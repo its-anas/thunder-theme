@@ -1,37 +1,32 @@
 {%- style -%}
-  :root{
-      --rich-text-color: {{ section.settings.text_color }};
-      --wrapped-content-width: {{ settings.wrapped-content-width }}px;
-  }
+  .{{ section.id }}  {
+   padding-top: {{ section.settings.top-padding }}px;;
+   padding-bottom: {{ section.settings.bottom-padding }}px;;
+   }
 
-   .{{ section.id }}  {
-    padding-top: {{ section.settings.top-padding }}px;;
-    padding-bottom: {{ section.settings.bottom-padding }}px;;
-    }
+   .{{ section.id }}-just-color {
+   background-color: {{ section.settings.background_color }};
+   }
 
-    .{{ section.id }}-just-color {
-    background-color: {{ section.settings.background_color }};
-    }
+   .{{ section.id }}-image {
+       {% if section.settings.section_width == "wrapped" %}
+            background-image: url({{ section.settings.background_image | image_url: width: settings.wrapped-content-width }});
+            background-repeat: no-repeat;
+       {% endif %}
+       {% if section.settings.section_width == "full-width" %}
+            background-image: url({{ section.settings.background_image | image_url }});
+            background-size: cover;
+       {% endif %}
+       background-position: center;
+   }
 
-    .{{ section.id }}-image {
-        {% if section.settings.section_width == "wrapped" %}
-             background-image: url({{ section.settings.background_image | image_url: width: settings.wrapped-content-width }});
-             background-repeat: no-repeat;
-        {% endif %}
-        {% if section.settings.section_width == "full-width" %}
-             background-image: url({{ section.settings.background_image | image_url }});
-             background-size: cover;
-        {% endif %}
-        background-position: center;
-    }
+   .{{ section.id }}-space-between {
+        gap: {{ section.settings.space-between }}px;
+   }
 
-    .{{ section.id }}-space-between {
-         gap: {{ section.settings.space-between }}px;
-    }
-
-    .{{ section.id }}-text-width {
-         width: {{ section.settings.text-width }}%;
-    }
+   .{{ section.id }}-text-width {
+        width: {{ section.settings.text-width }}%;
+   }
 {%- endstyle -%}
 
 <section class="{{ section.id }} {% if section.settings.background_image == blank %}{{ section.id }}-just-color{% else %}{{ section.id }}-{{ section.settings.background_type }}{% endif %} {{ section.settings.section_width }}">
@@ -202,7 +197,7 @@
       "type": "color",
       "id": "background_color",
       "label": "Background color",
-      "default": "#000000"
+      "default": "#222222"
     },
     {
       "type": "color",

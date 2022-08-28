@@ -18,6 +18,22 @@
         --font-size: {{ settings.size }}px;
         --font-size-type-scale: {{ settings.size }};
         --font-type-scale: {{ settings.type_scale }};
+
+        --headings-color: {{ settings.headings_color }};
+        --text-color:  {{ settings.text_color }};
+        --background-color : {{ settings.page_background_color }};
+
+        --wrapped-content-width: {{ settings.wrapped-content-width }}px;
+
+        --primary-button-text-color: {{ settings.primary_button_text_color }};
+        --primary-button-background-color: {{ settings.primary_button_background_color }};
+        --primary-button-border-color: {{ settings.primary_button_border_color }};
+        --secondary-button-text-color: {{ settings.secondary_button_text_color }};
+        --secondary-button-background-color: {{ settings.secondary_button_background_color }};
+        --secondary-button-border-color: {{ settings.secondary_button_border_color }};
+        --button-text-border-hover-color: {{ settings.button_text_border_hover_color }};
+        --button-background-hover-color: {{ settings.button_background_hover_color }};
+        --button-animation-color: {{ settings.button_animation_color }};
       }
     {% endstyle %}
     {{ 'theme.css' | asset_url | stylesheet_tag }}
