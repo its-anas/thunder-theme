@@ -1,7 +1,7 @@
 {%- style -%}
   .{{ section.id }}  {
-   padding-top: {{ section.settings.top-padding }}px;;
-   padding-bottom: {{ section.settings.bottom-padding }}px;;
+   padding-top: {{ section.settings.top_padding }}px;;
+   padding-bottom: {{ section.settings.bottom_padding }}px;;
    }
 
    .{{ section.id }}-just-color {
@@ -10,7 +10,7 @@
 
    .{{ section.id }}-image {
        {% if section.settings.section_width == "wrapped" %}
-            background-image: url({{ section.settings.background_image | image_url: width: settings.wrapped-content-width }});
+            background-image: url({{ section.settings.background_image | image_url: width: settings.wrapped_content_width }});
             background-repeat: no-repeat;
        {% endif %}
        {% if section.settings.section_width == "full-width" %}
@@ -21,12 +21,12 @@
    }
 
    .{{ section.id }}-space-between {
-        gap: {{ section.settings.space-between }}px;
+        gap: {{ section.settings.space_between }}px;
    }
 
    @media screen and (min-width: 750px) {
         .{{ section.id }}-text-width {
-              width: {{ section.settings.text-width }}%;
+              width: {{ section.settings.text_width }}%;
         }
    }
 {%- endstyle -%}
@@ -80,7 +80,7 @@
   "settings": [
     {
       "type": "range",
-      "id": "space-between",
+      "id": "space_between",
       "label": "Space between elements",
       "min": 5,
       "max": 100,
@@ -90,7 +90,7 @@
     },
     {
       "type": "range",
-      "id": "top-padding",
+      "id": "top_padding",
       "label": "Top padding",
       "min": 5,
       "max": 100,
@@ -100,7 +100,7 @@
     },
     {
       "type": "range",
-      "id": "bottom-padding",
+      "id": "bottom_padding",
       "label": "Bottom padding",
       "min": 5,
       "max": 100,
@@ -110,7 +110,7 @@
     },
     {
       "type": "range",
-      "id": "text-width",
+      "id": "text_width",
       "label": "Text width",
       "info": "Desktop only",
       "min": 40,
@@ -203,12 +203,6 @@
       "id": "background_color",
       "label": "Background color",
       "default": "#222222"
-    },
-    {
-      "type": "color",
-      "id": "text_color",
-      "label": "Text color",
-      "default": "#ffffff"
     }
   ],
   "blocks": [

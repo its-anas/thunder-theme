@@ -177,7 +177,7 @@
           "settings": [
                {
                     "type": "range",
-                    "id": "wrapped-content-width",
+                    "id": "wrapped_content_width",
                     "label": "Wrapped content width",
                     "min": 900,
                     "max": 1300,
