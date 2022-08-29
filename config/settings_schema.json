@@ -105,7 +105,7 @@
                {
                     "type": "color",
                     "id": "text_color",
-                    "label": "Text",
+                    "label": "Body text",
                     "default": "#FFFFFF"
                },
                {
@@ -116,69 +116,126 @@
                },
                {
                     "type": "header",
-                    "content": "Buttons"
+                    "content": "Primary button"
                },
                {
                     "type": "color",
                     "id": "primary_button_text_color",
-                    "label": "Primary button text",
+                    "label": "Text",
                     "default": "#000000"
                },
                {
                     "type": "color",
                     "id": "primary_button_background_color",
-                    "label": "Primary button background",
+                    "label": "Background",
                     "default": "#fcdb33"
                },
                {
                     "type": "color",
                     "id": "primary_button_border_color",
-                    "label": "Primary button border",
+                    "label": "Border",
                     "default": "#fcdb33"
+               },
+               {
+                    "type": "header",
+                    "content": "Secondary button"
                },
                {
                     "type": "color",
                     "id": "secondary_button_text_color",
-                    "label": "Secondary button text",
+                    "label": "Text",
                     "default": "#fcdb33"
                },
                {
                     "type": "color",
                     "id": "secondary_button_background_color",
-                    "label": "Secondary button background"
+                    "label": "Background"
                },
                {
                     "type": "color",
                     "id": "secondary_button_border_color",
-                    "label": "Secondary button border",
+                    "label": "Border",
                     "default": "#fcdb33"
+               },
+               {
+                    "type": "header",
+                    "content": "Buttons animation"
                },
                {
                     "type": "color",
                     "id": "button_text_border_hover_color",
-                    "label": "Button on hover - text/border",
+                    "label": "Text/border on hover",
                     "default": "#FFFFFF"
                },
                {
                     "type": "color",
                     "id": "button_background_hover_color",
-                    "label": "Button on hover - background"
+                    "label": "Background on hover"
                },
                {
                     "type": "color",
                     "id": "button_animation_color",
-                    "label": "Button animation color",
+                    "label": "Animated border",
                     "default": "#fcdb33"
                }
           ]
      },
      {
-          "name": "Sizes",
+          "name": "Appearance",
           "settings": [
+               {
+                    "type": "header",
+                    "content": "Button"
+               },
+               {
+                    "type": "range",
+                    "id": "button_border_width",
+                    "label": "Border width",
+                    "min": 1,
+                    "max": 5,
+                    "step": 1,
+                    "unit": "px",
+                    "default": 2
+               },
+               {
+                    "type": "range",
+                    "id": "button_border_radius",
+                    "label": "Border radius",
+                    "min": 0,
+                    "max": 20,
+                    "step": 1,
+                    "unit": "px",
+                    "default": 0
+               },
+               {
+                    "type": "range",
+                    "id": "button_border_radius_hover",
+                    "label": "Border radius - on hover",
+                    "min": 0,
+                    "max": 20,
+                    "step": 1,
+                    "unit": "px",
+                    "default": 10
+               },
+               {
+                    "type": "header",
+                    "content": "Others"
+               },
+               {
+                    "type": "range",
+                    "id": "block_border_radius",
+                    "label": "Block border radius",
+                    "min": 0,
+                    "max": 20,
+                    "step": 1,
+                    "unit": "px",
+                    "default": 0
+               },
                {
                     "type": "range",
                     "id": "wrapped_content_width",
-                    "label": "Wrapped content width",
+                    "label": "Content width",
+                    "info": "Only wrapped content",
                     "min": 900,
                     "max": 1300,
                     "step": 20,
