@@ -1,3 +1,5 @@
+{{ 'rich-text.css' | asset_url | stylesheet_tag }}
+
 {%- style -%}
   .{{ section.id }}  {
    padding-top: {{ section.settings.top_padding }}px;;
