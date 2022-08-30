@@ -1,0 +1,64 @@
+{
+    "sections": {
+        "main": {
+            "type": "page",
+            "settings": {}
+        },
+        "rich-text": {
+            "type": "rich-text",
+            "blocks": {
+                "subheading": {
+                    "type": "subheading",
+                    "settings": {
+                        "subheading": "Subheading",
+                        "subheading_size": "h6"
+                    }
+                },
+                "heading": {
+                    "type": "heading",
+                    "settings": {
+                        "heading": "Heading",
+                        "heading_size": "h2"
+                    }
+                },
+                "text": {
+                    "type": "text",
+                    "settings": {
+                        "text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<\/p>"
+                    }
+                },
+                "button": {
+                    "type": "button",
+                    "settings": {
+                        "primary_button_text": "Primary button",
+                        "primary_button_link": "",
+                        "secondary_button_text": "Secondary button",
+                        "secondary_button_link": "",
+                        "button_style": "border"
+                    }
+                }
+            },
+            "block_order": [
+                "subheading",
+                "heading",
+                "text",
+                "button"
+            ],
+            "settings": {
+                "space_between": 20,
+                "top_padding": 15,
+                "bottom_padding": 15,
+                "text_width": 70,
+                "text_position": "center",
+                "text_alignment": "center",
+                "section_width": "full-width",
+                "background_type": "just-color",
+                "background_color": "#222222"
+            }
+        }
+    },
+    "order": [
+        "main",
+        "rich-text"
+    ]
+}
