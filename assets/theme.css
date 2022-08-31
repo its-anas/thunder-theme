@@ -116,16 +116,29 @@ p .small {
      text-align: left;
 }
 
+.vertical--top {
+     justify-content: flex-start;
+}
+
+.vertical--center {
+     justify-content: center;
+}
+
+.vertical--bottom {
+     justify-content: flex-end;
+
+}
+
 @media screen and (min-width: 750px) {
-     .text-position-right {
+     .horizontal--right {
           margin-left: auto;
      }
 
-     .text-position-left {
+     .horizontal--left {
           margin-right: auto;
      }
 
-     .text-position-center {
+     .horizontal--center {
           margin-right: auto;
           margin-left: auto;
      }
@@ -134,8 +147,8 @@ p .small {
 
 /* ------------ ANCHOR: Button style ------------ */
 
-.primary-button,
-.secondary-button {
+.button--primary,
+.button--secondary {
      text-transform: uppercase;
      padding: 15px 30px;
      text-align: center;
@@ -143,54 +156,54 @@ p .small {
 
 @media screen and (min-width: 750px) {
 
-     .primary-button,
-     .secondary-button {
+     .button--primary,
+     .button--secondary {
           min-width: 200px;
      }
 
 }
 
-.primary-button {
+.button--primary {
      color: var(--primary-button-text-color);
      background-color: var(--primary-button-background-color);
 }
 
-.secondary-button {
+.button--secondary {
      color: var(--secondary-button-text-color);
      background-color: var(--secondary-button-background-color);
 }
 
-.primary-button:hover,
-.secondary-button:hover {
+.button--primary:hover,
+.button--secondary:hover {
      color: var(--button-text-border-hover-color);
      background-color: var(--button-background-hover-color);
      transition: 0.2s;
 }
 
-a.border.primary-button,
-a.border.secondary-button {
+a.border.button--primary,
+a.border.button--secondary {
      border-radius: var(--button-border-radius);
      transition: 1s;
 }
 
-a.border.primary-button {
+a.border.button--primary {
      border: var(--button-border-width) solid var(--primary-button-border-color);
 }
 
-a.border.secondary-button {
+a.border.button--secondary {
      border: var(--button-border-width) solid var(--secondary-button-border-color);
 }
 
-a.border.primary-button:hover,
-a.border.secondary-button:hover {
+a.border.button--primary:hover,
+a.border.button--secondary:hover {
      color: var(--button-text-border-hover-color);
      border: var(--button-border-width) solid var(--button-text-border-hover-color);
      border-radius: var(--button-border-radius-hover);
      transition: 0.2s;
 }
 
-.primary-button:after,
-.secondary-button:after {
+.button--primary:after,
+.button--secondary:after {
      content: " ➜";
      position: absolute;
      opacity: 0%;
@@ -198,8 +211,8 @@ a.border.secondary-button:hover {
      transition: 0.2s;
 }
 
-.primary-button:hover:after,
-.secondary-button:hover:after {
+.button--primary:hover:after,
+.button--secondary:hover:after {
      opacity: 100%;
      transform: TranslateX(10px);
 }
@@ -217,15 +230,15 @@ a.border.secondary-button:hover {
           flex-direction: row;
      }
 
-     .buttons-left {
+     .buttons--left {
           justify-content: left;
      }
 
-     .buttons-center {
+     .buttons--center {
           justify-content: center;
      }
 
-     .buttons-right {
+     .buttons--right {
           justify-content: right;
      }
 }
@@ -300,6 +313,10 @@ a.button:hover span:nth-child(4) {
 }
 
 /* ------------ ANCHOR: All sections ------------ */
+
+.container {
+     padding: 20px
+}
 
 @media screen and (min-width: 750px) {
      .full-width {

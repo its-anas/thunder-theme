@@ -34,96 +34,52 @@
 {%- endstyle -%}
 
 <section class="{{ section.id }} {% if section.settings.background_image == blank %}{{ section.id }}-just-color{% else %}{{ section.id }}-{{ section.settings.background_type }}{% endif %} {{ section.settings.section_width }}">
-  <div style="margin:30px">
-    <div class="wrapper {{ section.id }}-space-between text-alignment-{{ section.settings.text_alignment }} {{ section.id }}-text-width text-position-{{ section.settings.text_position }}">
-      {%- for block in section.blocks -%}
-        {%- case block.type -%}
-          {%- when 'subheading' -%}
-            <{{ block.settings.subheading_size }}>
-              {{ block.settings.subheading }}
-            </{{ block.settings.subheading_size }}>
-          {%- when 'heading' -%}
-            <{{ block.settings.heading_size }}>
-              {{ block.settings.heading }}
-            </{{ block.settings.heading_size }}>
-          {%- when 'text' -%}
-            {{ block.settings.text }}
-          {%- when 'button' -%}
-            <div class="buttons buttons-{{ section.settings.text_alignment }}">
-              {% if block.settings.primary_button_text != blank %}
-                <a
-                  class="button {% if block.settings.button_style == "border" %}primary{% else %}secondary{% endif %}-button {{ block.settings.button_style }}"
-                  href="{{ block.settings.primary_button_link }}"
-                >
-                  <span></span> <span></span> <span></span> <span></span>
-                  {{ block.settings.primary_button_text }}
-                </a>
-              {% endif %}
-              {% if block.settings.secondary_button_text != blank %}
-                <a
-                  class="button secondary-button {{ block.settings.button_style }}"
-                  href="{{ block.settings.secondary_button_link }}"
-                >
-                  <span></span> <span></span> <span></span> <span></span>
-                  {{ block.settings.secondary_button_text }}
-                </a>
-              {% endif %}
-            </div>
-        {%- endcase -%}
-      {%- endfor -%}
-    </div>
+  <div class="wrapper container {{ section.id }}-space-between text-alignment-{{ section.settings.text_alignment }} {{ section.id }}-text-width horizontal--{{ section.settings.horizontal_position }}">
+    {%- for block in section.blocks -%}
+      {%- case block.type -%}
+        {%- when 'subheading' -%}
+          <{{ block.settings.subheading_size }}>
+            {{ block.settings.subheading }}
+          </{{ block.settings.subheading_size }}>
+        {%- when 'heading' -%}
+          <{{ block.settings.heading_size }}>
+            {{ block.settings.heading }}
+          </{{ block.settings.heading_size }}>
+        {%- when 'text' -%}
+          {{ block.settings.text }}
+        {%- when 'button' -%}
+          <div class="buttons buttons--{{ section.settings.text_alignment }}">
+            {% if block.settings.primary_button_text != blank %}
+              <a
+                class="button button--{% if block.settings.button_style == "border" %}primary{% else %}secondary{% endif %} {{ block.settings.button_style }}"
+                href="{{ block.settings.primary_button_link }}"
+              >
+                <span></span> <span></span> <span></span> <span></span>
+                {{ block.settings.primary_button_text }}
+              </a>
+            {% endif %}
+            {% if block.settings.secondary_button_text != blank %}
+              <a
+                class="button button--secondary {{ block.settings.button_style }}"
+                href="{{ block.settings.secondary_button_link }}"
+              >
+                <span></span> <span></span> <span></span> <span></span>
+                {{ block.settings.secondary_button_text }}
+              </a>
+            {% endif %}
+          </div>
+      {%- endcase -%}
+    {%- endfor -%}
   </div>
 </section>
 
 {% schema %}
 {
   "name": "Rich text",
-  "class": "rich-text",
   "settings": [
     {
-      "type": "range",
-      "id": "space_between",
-      "label": "Space between elements",
-      "min": 5,
-      "max": 100,
-      "step": 5,
-      "unit": "px",
-      "default": 20
-    },
-    {
-      "type": "range",
-      "id": "top_padding",
-      "label": "Top padding",
-      "min": 5,
-      "max": 100,
-      "step": 5,
-      "unit": "px",
-      "default": 15
-    },
-    {
-      "type": "range",
-      "id": "bottom_padding",
-      "label": "Bottom padding",
-      "min": 5,
-      "max": 100,
-      "step": 5,
-      "unit": "px",
-      "default": 15
-    },
-    {
-      "type": "range",
-      "id": "text_width",
-      "label": "Text width",
-      "info": "Desktop only",
-      "min": 40,
-      "max": 100,
-      "step": 10,
-      "unit": "%",
-      "default": 70
-    },
-    {
       "type": "select",
-      "id": "text_position",
+      "id": "horizontal_position",
       "label": "Text position",
       "info": "Desktop only",
       "options": [
@@ -163,6 +119,84 @@
       "default": "center"
     },
     {
+      "type": "range",
+      "id": "text_width",
+      "label": "Text width",
+      "info": "Desktop only",
+      "min": 40,
+      "max": 100,
+      "step": 10,
+      "unit": "%",
+      "default": 70
+    },
+    {
+      "type": "header",
+      "content": "Background style"
+    },
+    {
+      "type": "select",
+      "id": "background_type",
+      "label": "Type",
+      "options": [
+        {
+          "value": "image",
+          "label": "Texture"
+        },
+        {
+          "value": "just-color",
+          "label": "Color"
+        }
+      ],
+      "default": "just-color"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Texture ",
+      "info": "Shown only if Type is Texture"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#222222",
+      "info": "Shown only if Type is Color"
+    },
+    {
+      "type": "header",
+      "content": "Section style"
+    },
+    {
+      "type": "range",
+      "id": "top_padding",
+      "label": "Top padding",
+      "min": 5,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "bottom_padding",
+      "label": "Bottom padding",
+      "min": 5,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "space_between",
+      "label": "Space between elements",
+      "min": 5,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 20
+    },
+    {
       "type": "select",
       "id": "section_width",
       "label": "Section width",
@@ -178,33 +212,6 @@
         }
       ],
       "default": "full-width"
-    },
-    {
-      "type": "select",
-      "id": "background_type",
-      "label": "Background type",
-      "options": [
-        {
-          "value": "image",
-          "label": "Image"
-        },
-        {
-          "value": "just-color",
-          "label": "Color"
-        }
-      ],
-      "default": "just-color"
-    },
-    {
-      "type": "image_picker",
-      "id": "background_image",
-      "label": "Background image"
-    },
-    {
-      "type": "color",
-      "id": "background_color",
-      "label": "Background color",
-      "default": "#222222"
     }
   ],
   "blocks": [
@@ -351,7 +358,8 @@
               "value": " ",
               "label": "Style 2"
             }
-          ]
+          ],
+          "default": " "
         }
       ]
     }
