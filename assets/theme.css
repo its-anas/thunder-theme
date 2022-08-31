@@ -1,19 +1,21 @@
+@charset "UTF-8";
+
 *,
 *::before,
 *::after {
-     box-sizing: inherit;
+  box-sizing: inherit;
 }
 
 /* ------------ ANCHOR: Base ------------ */
 html,
 body {
-     box-sizing: border-box;
-     font-family: var(--font-family);
-     font-style: var(--font-style);
-     height: 100%;
-     min-height: 100%;
-     margin: 0;
-     background-color: var(--background-color);
+  box-sizing: border-box;
+  font-family: var(--font-family);
+  font-style: var(--font-style);
+  height: 100%;
+  min-height: 100%;
+  margin: 0;
+  background-color: var(--background-color);
 }
 
 /* ------------ ANCHOR: Typography ------------ */
@@ -24,8 +26,8 @@ h4,
 h5,
 h6,
 p {
-     padding: 0;
-     margin: 0;
+  padding: 0;
+  margin: 0;
 }
 
 h1,
@@ -34,7 +36,7 @@ h3,
 h4,
 h5,
 h6 {
-     text-transform: var(--headings-style);
+  text-transform: var(--headings-style);
 }
 
 h1,
@@ -43,289 +45,283 @@ h3,
 h4,
 h5,
 h6 {
-     color: var(--headings-color);
-     line-height: 0.9;
+  color: var(--headings-color);
+  line-height: 0.9;
 }
 
 p {
-     color: var(--text-color);
+  color: var(--text-color);
 }
 
 h1 {
-     font-size: calc((((((var(--font-size-type-scale) * var(--font-type-scale)) * var(--font-type-scale)) * var(--font-type-scale)) * var(--font-type-scale)) * var(--font-type-scale)) * var(--font-type-scale) * 1px);
+  font-size: calc(var(--font-size-type-scale) * var(--font-type-scale) * var(--font-type-scale) * var(--font-type-scale) * var(--font-type-scale) * var(--font-type-scale) * var(--font-type-scale) * 1px);
 }
 
 h2 {
-     font-size: calc(((((var(--font-size-type-scale) * var(--font-type-scale)) * var(--font-type-scale)) * var(--font-type-scale)) * var(--font-type-scale)) * var(--font-type-scale) * 1px);
+  font-size: calc(var(--font-size-type-scale) * var(--font-type-scale) * var(--font-type-scale) * var(--font-type-scale) * var(--font-type-scale) * var(--font-type-scale) * 1px);
 }
 
 h3 {
-     font-size: calc((((var(--font-size-type-scale) * var(--font-type-scale)) * var(--font-type-scale)) * var(--font-type-scale)) * var(--font-type-scale) * 1px);
+  font-size: calc(var(--font-size-type-scale) * var(--font-type-scale) * var(--font-type-scale) * var(--font-type-scale) * var(--font-type-scale) * 1px);
 }
 
 h4 {
-     font-size: calc(((var(--font-size-type-scale) * var(--font-type-scale)) * var(--font-type-scale)) * var(--font-type-scale) * 1px);
+  font-size: calc(var(--font-size-type-scale) * var(--font-type-scale) * var(--font-type-scale) * var(--font-type-scale) * 1px);
 }
 
 h5 {
-     font-size: calc(var(--font-size-type-scale) * (var(--font-type-scale) * var(--font-type-scale) * 1px));
+  font-size: calc(var(--font-size-type-scale) * var(--font-type-scale) * var(--font-type-scale) * 1px);
 }
 
 h6 {
-     font-size: calc(var(--font-size-type-scale) * var(--font-type-scale) * 1px);
+  font-size: calc(var(--font-size-type-scale) * var(--font-type-scale) * 1px);
 }
 
 p {
-     font-size: var(--font-size);
+  font-size: var(--font-size);
 }
 
 p .small {
-     font-size: calc(var(--font-size-type-scale) / var(--font-type-scale) * 1px);
+  font-size: calc(var(--font-size-type-scale) / var(--font-type-scale) * 1px);
 }
 
 .subheading {
-     font-size: calc(var(--font-size-type-scale) / var(--font-type-scale) * 1px);
+  font-size: calc(var(--font-size-type-scale) / var(--font-type-scale) * 1px);
 }
 
 .button {
-     font-size: calc((var(--font-size-type-scale) / var(--font-type-scale)) * 1px);
-     font-weight: 700;
+  font-size: calc(var(--font-size-type-scale) / var(--font-type-scale) * 1px);
+  font-weight: 700;
 }
 
 .price-text {
-     font-size: var(--font-size);
+  font-size: var(--font-size);
 }
 
 .label-text {
-     font-size: calc((var(--font-size-type-scale) / var(--font-type-scale)) / var(--font-type-scale) * 1px);
+  font-size: calc(var(--font-size-type-scale) / var(--font-type-scale) / var(--font-type-scale) * 1px);
 }
 
 .tag-text {
-     font-size: calc(((var(--font-size-type-scale) / var(--font-type-scale)) / var(--font-type-scale)) / var(--font-type-scale) * 1px);
+  font-size: calc(var(--font-size-type-scale) / var(--font-type-scale) / var(--font-type-scale) / var(--font-type-scale) * 1px);
 }
 
 .text-alignment-center {
-     text-align: center;
+  text-align: center;
 }
 
 .text-alignment-right {
-     text-align: right;
+  text-align: right;
 }
 
 .text-alignment-left {
-     text-align: left;
+  text-align: left;
 }
 
 .vertical--top {
-     justify-content: flex-start;
+  justify-content: flex-start;
 }
 
 .vertical--center {
-     justify-content: center;
+  justify-content: center;
 }
 
 .vertical--bottom {
-     justify-content: flex-end;
-
+  justify-content: flex-end;
 }
 
 @media screen and (min-width: 750px) {
-     .horizontal--right {
-          margin-left: auto;
-     }
+  .horizontal--right {
+    margin-left: auto;
+  }
 
-     .horizontal--left {
-          margin-right: auto;
-     }
+  .horizontal--left {
+    margin-right: auto;
+  }
 
-     .horizontal--center {
-          margin-right: auto;
-          margin-left: auto;
-     }
-
+  .horizontal--center {
+    margin-right: auto;
+    margin-left: auto;
+  }
 }
 
 /* ------------ ANCHOR: Button style ------------ */
+.button--primary {
+  color: var(--primary-button-text-color);
+  background-color: var(--primary-button-background-color);
+}
+
+.button--secondary {
+  color: var(--secondary-button-text-color);
+  background-color: var(--secondary-button-background-color);
+}
 
 .button--primary,
 .button--secondary {
-     text-transform: uppercase;
-     padding: 15px 30px;
-     text-align: center;
-}
-
-@media screen and (min-width: 750px) {
-
-     .button--primary,
-     .button--secondary {
-          min-width: 200px;
-     }
-
-}
-
-.button--primary {
-     color: var(--primary-button-text-color);
-     background-color: var(--primary-button-background-color);
-}
-
-.button--secondary {
-     color: var(--secondary-button-text-color);
-     background-color: var(--secondary-button-background-color);
-}
-
-.button--primary:hover,
-.button--secondary:hover {
-     color: var(--button-text-border-hover-color);
-     background-color: var(--button-background-hover-color);
-     transition: 0.2s;
-}
-
-a.border.button--primary,
-a.border.button--secondary {
-     border-radius: var(--button-border-radius);
-     transition: 1s;
-}
-
-a.border.button--primary {
-     border: var(--button-border-width) solid var(--primary-button-border-color);
-}
-
-a.border.button--secondary {
-     border: var(--button-border-width) solid var(--secondary-button-border-color);
-}
-
-a.border.button--primary:hover,
-a.border.button--secondary:hover {
-     color: var(--button-text-border-hover-color);
-     border: var(--button-border-width) solid var(--button-text-border-hover-color);
-     border-radius: var(--button-border-radius-hover);
-     transition: 0.2s;
+  text-transform: uppercase;
+  padding: 15px 30px;
+  text-align: center;
 }
 
 .button--primary:after,
 .button--secondary:after {
-     content: " ➜";
-     position: absolute;
-     opacity: 0%;
-     transform: TranslateX(0px);
-     transition: 0.2s;
+  content: " ➜";
+  position: absolute;
+  opacity: 0%;
+  transform: TranslateX(0px);
+  transition: 0.2s;
+}
+
+.button--primary:hover,
+.button--secondary:hover {
+  color: var(--button-text-border-hover-color);
+  background-color: var(--button-background-hover-color);
+  transition: 0.2s;
 }
 
 .button--primary:hover:after,
 .button--secondary:hover:after {
-     opacity: 100%;
-     transform: TranslateX(10px);
+  opacity: 100%;
+  transform: TranslateX(10px);
+}
+
+a.border.button--primary {
+  border: var(--button-border-width) solid var(--primary-button-border-color);
+}
+
+a.border.button--secondary {
+  border: var(--button-border-width) solid var(--secondary-button-border-color);
+}
+
+a.border.button--primary,
+a.border.button--secondary {
+  border-radius: var(--button-border-radius);
+  transition: 1s;
+}
+
+a.border.button--primary:hover,
+a.border.button--secondary:hover {
+  color: var(--button-text-border-hover-color);
+  border: var(--button-border-width) solid var(--button-text-border-hover-color);
+  border-radius: var(--button-border-radius-hover);
+  transition: 0.2s;
+}
+
+@media screen and (min-width: 750px) {
+
+  .button--primary,
+  .button--secondary {
+    min-width: 200px;
+  }
 }
 
 .buttons {
-     display: flex;
-     width: 100%;
-     gap: 10px;
-     justify-content: center;
-     flex-direction: column;
+  display: flex;
+  width: 100%;
+  gap: 10px;
+  justify-content: center;
+  flex-direction: column;
 }
 
 @media screen and (min-width: 750px) {
-     .buttons {
-          flex-direction: row;
-     }
+  .buttons {
+    flex-direction: row;
+  }
 
-     .buttons--left {
-          justify-content: left;
-     }
+  .buttons--left {
+    justify-content: left;
+  }
 
-     .buttons--center {
-          justify-content: center;
-     }
+  .buttons--center {
+    justify-content: center;
+  }
 
-     .buttons--right {
-          justify-content: right;
-     }
+  .buttons--right {
+    justify-content: right;
+  }
 }
 
 /* ------------ ANCHOR: Button animation ------------ */
-
 a.button {
-     position: relative;
-     text-decoration: none;
-     overflow: hidden;
-     text-transform: uppercase;
+  position: relative;
+  text-decoration: none;
+  overflow: hidden;
+  text-transform: uppercase;
 }
 
 a.button span {
-     position: absolute;
-     display: block;
+  position: absolute;
+  display: block;
 }
 
 a.button span:nth-child(1) {
-     top: 0;
-     left: -100%;
-     width: 100%;
-     height: 2px;
-     background: linear-gradient(90deg, transparent, var(--button-animation-color));
-}
-
-a.button:hover span:nth-child(1) {
-     left: 100%;
-     transition: 0.75s;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--button-animation-color));
 }
 
 a.button span:nth-child(2) {
-     top: -100%;
-     right: 0;
-     width: 2px;
-     height: 100%;
-     background: linear-gradient(180deg, transparent, var(--button-animation-color));
-}
-
-a.button:hover span:nth-child(2) {
-     top: 100%;
-     transition: 0.75s;
-     transition-delay: 0.2s;
+  top: -100%;
+  right: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(180deg, transparent, var(--button-animation-color));
 }
 
 a.button span:nth-child(3) {
-     bottom: 0;
-     right: -100%;
-     width: 100%;
-     height: 2px;
-     background: linear-gradient(270deg, transparent, var(--button-animation-color));
-}
-
-a.button:hover span:nth-child(3) {
-     right: 100%;
-     transition: 0.75s;
-     transition-delay: 0.4s;
+  bottom: 0;
+  right: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(270deg, transparent, var(--button-animation-color));
 }
 
 a.button span:nth-child(4) {
-     bottom: -100%;
-     left: 0;
-     width: 2px;
-     height: 100%;
-     background: linear-gradient(360deg, transparent, var(--button-animation-color));
+  bottom: -100%;
+  left: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(360deg, transparent, var(--button-animation-color));
+}
+
+a.button:hover span:nth-child(1) {
+  left: 100%;
+  transition: 0.75s;
+}
+
+a.button:hover span:nth-child(2) {
+  top: 100%;
+  transition: 0.75s;
+  transition-delay: 0.2s;
+}
+
+a.button:hover span:nth-child(3) {
+  right: 100%;
+  transition: 0.75s;
+  transition-delay: 0.4s;
 }
 
 a.button:hover span:nth-child(4) {
-     bottom: 100%;
-     transition: 0.75s;
-     transition-delay: 0.6s;
+  bottom: 100%;
+  transition: 0.75s;
+  transition-delay: 0.6s;
 }
 
 /* ------------ ANCHOR: All sections ------------ */
-
 .container {
-     padding: 20px
+  padding: 20px;
 }
 
 @media screen and (min-width: 750px) {
-     .full-width {
-          width: 100%;
-     }
+  .full-width {
+    width: 100%;
+  }
 
-     .wrapped {
-          max-width: var(--wrapped-content-width);
-          margin-left: auto;
-          margin-right: auto;
-     }
+  .wrapped {
+    max-width: var(--wrapped-content-width);
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
