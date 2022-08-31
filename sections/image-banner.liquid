@@ -1,6 +1,84 @@
 {{ 'image-banner.css' | asset_url | stylesheet_tag }}
 
 {%- style -%}
+    .{{ section.id }}.image-banner__content {
+      background: rgba(0, 0, 0, {{ section.settings.overlay_opacity | divided_by: 100.0 }});
+      gap: 10px;
+    }
+
+    .{{ section.id }}.image-banner, .{{ section.id }}.image-banner__image {
+      height: {{ section.settings.image_height }}px;
+    }
+    
 {%- endstyle -%}
 
-<img class="" loading="lazy" height="1000" width=2726"" src="https://cdn.shopify.com/s/files/1/0648/9138/8123/files/person-stands-on-rocks-poking-out-of-the-ocean-shoreline_2726x.jpg?v=1657302463" alt="image"> </img>
+     <section class="{{ section.id }} image-banner">
+      {%- if section.settings.image != blank -%}
+        <div class="media">
+          <img
+            srcset="{{ section.settings.image | image_url }}"
+            loading="lazy"
+            alt="{{ section.settings.image.alt | escape }}"
+            width="{{ section.settings.image.width }}"
+            height="{{ section.settings.image.height }}"
+            class="{{ section.id }} image-banner__image"
+          >
+        </div>
+        {%- elsif section.settings.image == blank -%}
+        <div class="placeholder">
+          <div class="image-banner__image">
+          {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
+        </div>
+        </div>
+      {%- endif -%}
+
+      <div class="{{ section.id }} image-banner__content">
+        <div class="image-banner__subheading">
+          <h6>Subheading</h6>
+        </div>
+        <div class="image-banner__heading">
+          <h1>Heading</h1>
+        </div>
+        <div class="image-banner__text">
+          <span>Paragraph</span>
+        </div>
+        <div class="image-banner__buttons">
+          <a href="" class="button--primary">Primary button</a>
+        </div>
+      </div>
+    </section>
+
+
+  {% schema %}
+  {
+    "name": "Image banner",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      },
+      {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "unit": "%",
+      "label": "overlay opacity",
+      "default": 40
+    },
+      {
+      "type": "range",
+      "id": "image_height",
+      "min": 300,
+      "max": 3000,
+      "step": 100,
+      "unit": "%",
+      "label": "overlay opacity",
+      "default": 500
+    }
+    ]
+  }
+  {% endschema %}
+</div>
