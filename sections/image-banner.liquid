@@ -9,7 +9,7 @@
       background: rgba({{ section.settings.overlay_color.red }}, {{ section.settings.overlay_color.green }}, {{ section.settings.overlay_color.blue }}, {{ section.settings.overlay_opacity | divided_by: 100.0 }});
   }
 
-  .{{ section.id }}.image-banner__image, .{{ section.id }} > .placeholder > .placeholder-svg {
+  .{{ section.id }}.image-banner__picture {
     height: {{ section.settings.image_height }}px;
   }
 
@@ -21,22 +21,21 @@
 {%- endstyle -%}
 
 <section class="{{ section.id }} image-banner {% if section.settings.section_width == "wrapped" %} wrapped{% else %} {% endif %}">
-  {%- if section.settings.image == blank -%}
-    <div class="placeholder">
-      {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
-    </div>
-  {%- elsif section.settings.image != blank -%}
-    <div class="media">
-      <img
-        srcset="{{ section.settings.image | image_url }}"
-        loading="lazy"
-        alt="{{ section.settings.image.alt | escape }}"
-        width="{{ section.settings.image.width }}"
-        height="{{ section.settings.image.height }}"
-        class="{{ section.id }} image-banner__image"
-      >
-    </div>
-  {%- endif -%}
+  <div class="{{ section.id }} image-banner__picture">
+    {%- if section.settings.image == blank -%}
+      {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder' }}
+    {%- elsif section.settings.image != blank -%}
+      <div class="media">
+        <img
+          srcset="{{ section.settings.image | image_url }}"
+          loading="lazy"
+          alt="{{ section.settings.image.alt | escape }}"
+          width="{{ section.settings.image.width }}"
+          height="{{ section.settings.image.height }}"
+        >
+      </div>
+    {%- endif -%}
+  </div>
 
   <div class="{{ section.id }} image-banner__content container vertical--{{ section.settings.vertical_position }} {% if section.settings.background_style =="full-width" %} overlay {% endif %}">
     <div class="{{ section.id }} image-banner__box text-alignment-{{ section.settings.text_alignment }} {{ section.id }}-text-width horizontal--{{ section.settings.horizontal_position }} {% if section.settings.background_style =="block" %} overlay {% endif %}">

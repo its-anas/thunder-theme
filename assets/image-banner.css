@@ -1,17 +1,3 @@
-.placeholder {
-  display: flex;
-  justify-content: center;
-  background-color: rgb(34, 34, 34);
-  fill: rgb(142, 142, 142);
-}
-
-.media > img {
-  -o-object-fit: cover;
-     object-fit: cover;
-  -o-object-position: center center;
-     object-position: center center;
-}
-
 .image-banner {
   position: relative;
   display: flex;
@@ -20,18 +6,13 @@
   width: 100%;
   overflow: hidden;
 }
-.image-banner__image {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
 .image-banner__content {
+  width: 100%;
+  height: 100%;
   display: flex;
   position: absolute;
   flex-direction: column;
   align-items: center;
-  width: 100%;
-  height: 100%;
 }
 .image-banner__box {
   display: flex;

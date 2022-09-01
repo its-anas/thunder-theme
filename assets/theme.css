@@ -1,5 +1,4 @@
 @charset "UTF-8";
-
 *,
 *::before,
 *::after {
@@ -37,16 +36,9 @@ h4,
 h5,
 h6 {
   text-transform: var(--headings-style);
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
   color: var(--headings-color);
   line-height: 0.9;
+  width: 100%;
 }
 
 p {
@@ -109,11 +101,9 @@ p .small {
 .text-alignment-center {
   text-align: center;
 }
-
 .text-alignment-right {
   text-align: right;
 }
-
 .text-alignment-left {
   text-align: left;
 }
@@ -121,11 +111,9 @@ p .small {
 .vertical--top {
   justify-content: flex-start;
 }
-
 .vertical--center {
   justify-content: center;
 }
-
 .vertical--bottom {
   justify-content: flex-end;
 }
@@ -134,53 +122,41 @@ p .small {
   .horizontal--right {
     margin-left: auto;
   }
-
   .horizontal--left {
     margin-right: auto;
   }
-
   .horizontal--center {
     margin-right: auto;
     margin-left: auto;
   }
 }
-
 /* ------------ ANCHOR: Button style ------------ */
 .button--primary {
   color: var(--primary-button-text-color);
   background-color: var(--primary-button-background-color);
 }
-
 .button--secondary {
   color: var(--secondary-button-text-color);
   background-color: var(--secondary-button-background-color);
 }
-
-.button--primary,
-.button--secondary {
+.button--primary, .button--secondary {
   text-transform: uppercase;
   padding: 15px 30px;
   text-align: center;
 }
-
-.button--primary:after,
-.button--secondary:after {
+.button--primary:after, .button--secondary:after {
   content: " ➜";
   position: absolute;
   opacity: 0%;
   transform: TranslateX(0px);
   transition: 0.2s;
 }
-
-.button--primary:hover,
-.button--secondary:hover {
+.button--primary:hover, .button--secondary:hover {
   color: var(--button-text-border-hover-color);
   background-color: var(--button-background-hover-color);
   transition: 0.2s;
 }
-
-.button--primary:hover:after,
-.button--secondary:hover:after {
+.button--primary:hover:after, .button--secondary:hover:after {
   opacity: 100%;
   transform: TranslateX(10px);
 }
@@ -188,19 +164,14 @@ p .small {
 a.border.button--primary {
   border: var(--button-border-width) solid var(--primary-button-border-color);
 }
-
 a.border.button--secondary {
   border: var(--button-border-width) solid var(--secondary-button-border-color);
 }
-
-a.border.button--primary,
-a.border.button--secondary {
+a.border.button--primary, a.border.button--secondary {
   border-radius: var(--button-border-radius);
   transition: 1s;
 }
-
-a.border.button--primary:hover,
-a.border.button--secondary:hover {
+a.border.button--primary:hover, a.border.button--secondary:hover {
   color: var(--button-text-border-hover-color);
   border: var(--button-border-width) solid var(--button-text-border-hover-color);
   border-radius: var(--button-border-radius-hover);
@@ -208,13 +179,10 @@ a.border.button--secondary:hover {
 }
 
 @media screen and (min-width: 750px) {
-
-  .button--primary,
-  .button--secondary {
+  .button--primary, .button--secondary {
     min-width: 200px;
   }
 }
-
 .buttons {
   display: flex;
   width: 100%;
@@ -227,20 +195,16 @@ a.border.button--secondary:hover {
   .buttons {
     flex-direction: row;
   }
-
   .buttons--left {
     justify-content: left;
   }
-
   .buttons--center {
     justify-content: center;
   }
-
   .buttons--right {
     justify-content: right;
   }
 }
-
 /* ------------ ANCHOR: Button animation ------------ */
 a.button {
   position: relative;
@@ -248,12 +212,10 @@ a.button {
   overflow: hidden;
   text-transform: uppercase;
 }
-
 a.button span {
   position: absolute;
   display: block;
 }
-
 a.button span:nth-child(1) {
   top: 0;
   left: -100%;
@@ -261,7 +223,6 @@ a.button span:nth-child(1) {
   height: 2px;
   background: linear-gradient(90deg, transparent, var(--button-animation-color));
 }
-
 a.button span:nth-child(2) {
   top: -100%;
   right: 0;
@@ -269,7 +230,6 @@ a.button span:nth-child(2) {
   height: 100%;
   background: linear-gradient(180deg, transparent, var(--button-animation-color));
 }
-
 a.button span:nth-child(3) {
   bottom: 0;
   right: -100%;
@@ -277,7 +237,6 @@ a.button span:nth-child(3) {
   height: 2px;
   background: linear-gradient(270deg, transparent, var(--button-animation-color));
 }
-
 a.button span:nth-child(4) {
   bottom: -100%;
   left: 0;
@@ -285,24 +244,20 @@ a.button span:nth-child(4) {
   height: 100%;
   background: linear-gradient(360deg, transparent, var(--button-animation-color));
 }
-
 a.button:hover span:nth-child(1) {
   left: 100%;
   transition: 0.75s;
 }
-
 a.button:hover span:nth-child(2) {
   top: 100%;
   transition: 0.75s;
   transition-delay: 0.2s;
 }
-
 a.button:hover span:nth-child(3) {
   right: 100%;
   transition: 0.75s;
   transition-delay: 0.4s;
 }
-
 a.button:hover span:nth-child(4) {
   bottom: 100%;
   transition: 0.75s;
@@ -311,17 +266,59 @@ a.button:hover span:nth-child(4) {
 
 /* ------------ ANCHOR: All sections ------------ */
 .container {
-  padding: 20px;
+  padding: 10px;
+}
+@media screen and (min-width: 750px) {
+  .container {
+    padding: 20px;
+  }
+}
+
+.box {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+@media screen and (min-width: 750px) {
+  .box {
+    padding: 20px;
+  }
 }
 
 @media screen and (min-width: 750px) {
   .full-width {
     width: 100%;
   }
-
   .wrapped {
     max-width: var(--wrapped-content-width);
     margin-left: auto;
     margin-right: auto;
   }
+}
+/* ------------ ANCHOR: Media ------------ */
+.placeholder {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background-color: rgb(34, 34, 34);
+  fill: rgb(142, 142, 142);
+}
+
+.media {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.media > img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center center;
+     object-position: center center;
 }
