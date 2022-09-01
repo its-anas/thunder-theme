@@ -1,18 +1,20 @@
 .image-with-text {
   width: 100%;
   display: flex;
-  flex-direction: column;
   align-items: center;
   overflow: hidden;
 }
-.image-with-text--reverse {
+.image-with-text--first {
+  flex-direction: column;
+}
+.image-with-text--second {
   flex-direction: column-reverse;
 }
 @media screen and (min-width: 750px) {
-  .image-with-text {
+  .image-with-text--first {
     flex-direction: row;
   }
-  .image-with-text--reverse {
+  .image-with-text--second {
     flex-direction: row-reverse;
   }
 }
