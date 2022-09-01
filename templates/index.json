@@ -4,12 +4,12 @@
                "type": "page",
                "settings": {}
           },
-          "image-banner": {
-               "type": "image-banner"
+          "image-with-text": {
+               "type": "image-with-text"
           }
      },
      "order": [
           "main",
-          "image-banner"
+          "image-with-text"
      ]
 }
