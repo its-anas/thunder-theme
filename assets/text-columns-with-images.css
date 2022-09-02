@@ -1,0 +1,23 @@
+.text-columns-with-images {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  background-color: #222222;
+  overflow: hidden;
+}
+@media screen and (min-width: 750px) {
+  .text-columns-with-images {
+    flex-direction: row;
+  }
+}
+.text-columns-with-images__image {
+  width: 100%;
+}
+.text-columns-with-images__column {
+  border: 2px solid white;
+  height: auto;
+  width: auto;
+}

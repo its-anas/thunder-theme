@@ -3,13 +3,9 @@
           "main": {
                "type": "page",
                "settings": {}
-          },
-          "image-with-text": {
-               "type": "image-with-text"
           }
      },
      "order": [
-          "main",
-          "image-with-text"
+          "main"
      ]
 }
