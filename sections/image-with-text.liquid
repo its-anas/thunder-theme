@@ -5,8 +5,8 @@
       min-height: 700px;
       height: {{ section.settings.image_height }}px;
       background-color: {{ section.settings.background_color }};
-      margin-top: {{ section.settings.space_outside }}px;
-      margin-bottom: {{ section.settings.space_outside }}px;
+      margin-top: {{ section.settings.space_outside | divided_by: 2 }}px;
+      margin-bottom: {{ section.settings.space_outside | divided_by: 2 }}px;
   }
 
   @media screen and (min-width: 750px) {

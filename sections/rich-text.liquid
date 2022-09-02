@@ -2,12 +2,12 @@
 
 {%- style -%}
   .{{ section.id }}  {
-   padding-top: {{ section.settings.top_padding }}px;;
-   padding-bottom: {{ section.settings.bottom_padding }}px;;
+      margin-top: {{ section.settings.space_outside | divided_by: 2 }}px;
+      margin-bottom: {{ section.settings.space_outside | divided_by: 2 }}px;
    }
 
    .{{ section.id }}-just-color {
-   background-color: {{ section.settings.background_color }};
+    background-color: {{ section.settings.background_color }};
    }
 
    .{{ section.id }}-image {
@@ -140,7 +140,7 @@
       "options": [
         {
           "value": "image",
-          "label": "Texture"
+          "label": "Image"
         },
         {
           "value": "just-color",
@@ -152,39 +152,19 @@
     {
       "type": "image_picker",
       "id": "background_image",
-      "label": "Texture ",
-      "info": "Shown only if Type is Texture"
+      "label": "Image",
+      "info": "Applied only if Type is 'Image'"
     },
     {
       "type": "color",
       "id": "background_color",
       "label": "Background color",
       "default": "#222222",
-      "info": "Shown only if Type is Color"
+      "info": "Applied only if Type is 'Color'"
     },
     {
       "type": "header",
       "content": "Section style"
-    },
-    {
-      "type": "range",
-      "id": "top_padding",
-      "label": "Top padding",
-      "min": 5,
-      "max": 100,
-      "step": 5,
-      "unit": "px",
-      "default": 15
-    },
-    {
-      "type": "range",
-      "id": "bottom_padding",
-      "label": "Bottom padding",
-      "min": 5,
-      "max": 100,
-      "step": 5,
-      "unit": "px",
-      "default": 15
     },
     {
       "type": "range",
@@ -195,6 +175,16 @@
       "step": 5,
       "unit": "px",
       "default": 20
+    },
+    {
+      "type": "range",
+      "id": "space_outside",
+      "label": "Space outside section",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "unit": "px",
+      "default": 0
     },
     {
       "type": "select",

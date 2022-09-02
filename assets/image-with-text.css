@@ -11,6 +11,9 @@
   flex-direction: column-reverse;
 }
 @media screen and (min-width: 750px) {
+  .image-with-text {
+    height: auto;
+  }
   .image-with-text--first {
     flex-direction: row;
   }

@@ -1,6 +1,11 @@
 {{ 'image-banner.css' | asset_url | stylesheet_tag }}
 
 {%- style -%}
+    .{{ section.id }}.image-banner {
+      margin-top: {{ section.settings.space_outside | divided_by: 2 }}px;
+      margin-bottom: {{ section.settings.space_outside | divided_by: 2 }}px;
+    }
+
   .{{ section.id }}.image-banner__box {
     gap: {{ section.settings.space_between }}px;
   }
@@ -13,10 +18,10 @@
     height: {{ section.settings.image_height }}px;
   }
 
-     @media screen and (min-width: 750px) {
-        .{{ section.id }}-text-width {
-              width: {{ section.settings.text_width }}%;
-        }
+  @media screen and (min-width: 750px) {
+    .{{ section.id }}-text-width {
+          width: {{ section.settings.text_width }}%;
+    }
    }
 {%- endstyle -%}
 
@@ -32,13 +37,14 @@
           alt="{{ section.settings.image.alt | escape }}"
           width="{{ section.settings.image.width }}"
           height="{{ section.settings.image.height }}"
+          class="{{ section.settings.image_style }}"
         >
       </div>
     {%- endif -%}
   </div>
 
-  <div class="{{ section.id }} image-banner__content container vertical--{{ section.settings.vertical_position }} {% if section.settings.background_style =="full-width" %} overlay {% endif %}">
-    <div class="{{ section.id }} image-banner__box text-alignment-{{ section.settings.text_alignment }} {{ section.id }}-text-width horizontal--{{ section.settings.horizontal_position }} {% if section.settings.background_style =="block" %} overlay {% endif %}">
+  <div class="{{ section.id }} image-banner__content container vertical--{{ section.settings.vertical_position }} {% if section.settings.background_style == "full-width" %} overlay {% endif %}">
+    <div class="{{ section.id }} image-banner__box text-alignment-{{ section.settings.text_alignment }} {{ section.id }}-text-width horizontal--{{ section.settings.horizontal_position }} {% if section.settings.background_style == "block" %} overlay {% endif %}">
       {%- for block in section.blocks -%}
         {%- case block.type -%}
           {%- when 'subheading' -%}
@@ -96,6 +102,22 @@
       "unit": "px",
       "label": "Height",
       "default": 500
+    },
+    {
+      "type": "select",
+      "id": "image_style",
+      "label": "Image style",
+      "options": [
+        {
+          "value": "fit",
+          "label": "Fit section"
+        },
+        {
+          "value": "full",
+          "label": "Full image"
+        }
+      ],
+      "default": "fit"
     },
     {
       "type": "header",
@@ -222,6 +244,16 @@
       "step": 5,
       "unit": "px",
       "default": 10
+    },
+    {
+      "type": "range",
+      "id": "space_outside",
+      "label": "Space outside section",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "unit": "px",
+      "default": 0
     },
     {
       "type": "select",
