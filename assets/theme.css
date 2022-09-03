@@ -5,6 +5,52 @@
   box-sizing: inherit;
 }
 
+:root {
+  --h1-font-size: calc(
+    (
+        (
+            (
+                (
+                    (var(--font-size-type-scale) * var(--font-type-scale)) *
+                      var(--font-type-scale)
+                  ) * var(--font-type-scale)
+              ) * var(--font-type-scale)
+          ) * var(--font-type-scale)
+      ) * var(--font-type-scale) * 1px
+  );
+  --h2-font-size: calc(
+    (
+        (
+            (
+                (var(--font-size-type-scale) * var(--font-type-scale)) *
+                  var(--font-type-scale)
+              ) * var(--font-type-scale)
+          ) * var(--font-type-scale)
+      ) * var(--font-type-scale) * 1px
+  );
+  --h3-font-size: calc(
+    (
+        (
+            (var(--font-size-type-scale) * var(--font-type-scale)) *
+              var(--font-type-scale)
+          ) * var(--font-type-scale)
+      ) * var(--font-type-scale) * 1px
+  );
+  --h4-font-size: calc(
+    (
+        (var(--font-size-type-scale) * var(--font-type-scale)) *
+          var(--font-type-scale)
+      ) * var(--font-type-scale) * 1px
+  );
+  --h5-font-size: calc(
+    var(--font-size-type-scale) *
+      (var(--font-type-scale) * var(--font-type-scale) * 1px)
+  );
+  --h6-font-size: calc(
+    var(--font-size-type-scale) * var(--font-type-scale) * 1px
+  );
+}
+
 /* ------------ ANCHOR: Base ------------ */
 html,
 body {
@@ -46,27 +92,27 @@ p {
 }
 
 h1 {
-  font-size: calc(var(--font-size-type-scale) * var(--font-type-scale) * var(--font-type-scale) * var(--font-type-scale) * var(--font-type-scale) * var(--font-type-scale) * var(--font-type-scale) * 1px);
+  font-size: var(--h1-font-size);
 }
 
 h2 {
-  font-size: calc(var(--font-size-type-scale) * var(--font-type-scale) * var(--font-type-scale) * var(--font-type-scale) * var(--font-type-scale) * var(--font-type-scale) * 1px);
+  font-size: var(--h2-font-size);
 }
 
 h3 {
-  font-size: calc(var(--font-size-type-scale) * var(--font-type-scale) * var(--font-type-scale) * var(--font-type-scale) * var(--font-type-scale) * 1px);
+  font-size: var(--h3-font-size);
 }
 
 h4 {
-  font-size: calc(var(--font-size-type-scale) * var(--font-type-scale) * var(--font-type-scale) * var(--font-type-scale) * 1px);
+  font-size: var(--h4-font-size);
 }
 
 h5 {
-  font-size: calc(var(--font-size-type-scale) * var(--font-type-scale) * var(--font-type-scale) * 1px);
+  font-size: var(--h5-font-size);
 }
 
 h6 {
-  font-size: calc(var(--font-size-type-scale) * var(--font-type-scale) * 1px);
+  font-size: var(--h6-font-size);
 }
 
 p {

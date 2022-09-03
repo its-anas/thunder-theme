@@ -31,6 +31,50 @@
               width: {{ section.settings.text_width }}%;
         }
    }
+
+   .{{ section.id }}.scrolling-words-box > ul {
+    animation: scrollUp 8s infinite;
+   }
+
+  {%- comment -%}
+   {% if section.settings.words_count == "2" %}
+    @keyframes scrollUp {
+      15%, 25% {
+        transform: translateY(-20%);
+      }
+      90%, 100% {
+        transform: translateY(-80%);
+      }
+    }
+   {% elsif section.settings.words_count == "3" %}
+    @keyframes scrollUp {
+      15%, 25% {
+        transform: translateY(-20%);
+      }
+      40%, 50% {
+        transform: translateY(-40%);
+      }
+      90%, 100% {
+        transform: translateY(-80%);
+      }
+    }
+   {% elsif section.settings.words_count == "4" %}
+   @keyframes scrollUp {
+      15%, 25% {
+        transform: translateY(-20%);
+      }
+      40%, 50% {
+        transform: translateY(-40%);
+      }
+      65%, 75% {
+        transform: translateY(-60%);
+      }
+      90%, 100% {
+        transform: translateY(-80%);
+      }
+    }
+   {% endif %}
+   {%- endcomment -%}
 {%- endstyle -%}
 
 <section class="{{ section.id }} {% if section.settings.background_image == blank %}{{ section.id }}-just-color{% else %}{{ section.id }}-{{ section.settings.background_type }}{% endif %} {{ section.settings.section_width }}">
@@ -42,9 +86,39 @@
             {{ block.settings.subheading }}
           </{{ block.settings.subheading_size }}>
         {%- when 'heading' -%}
-          <{{ block.settings.heading_size }}>
-            {{ block.settings.heading }}
-          </{{ block.settings.heading_size }}>
+          {% if block.settings.animated %}
+            <div class="scrolling-words-container {{ section.settings.text_alignment }} {{ block.settings.animation_placement }}">
+              <div class="{{ section.id }} scrolling-words-box {{ block.settings.heading_size }}">
+                <ul>
+                  <{{ block.settings.heading_size }} style="color: {{ block.settings.word_1_color }}">
+                    {{- block.settings.word_1 -}}
+                  </{{ block.settings.heading_size }}>
+                  <{{ block.settings.heading_size }} style="color: {{ block.settings.word_2_color }}">
+                    {{- block.settings.word_2 -}}
+                  </{{ block.settings.heading_size }}>
+                  <{{ block.settings.heading_size }} style="color: {{ block.settings.word_3_color }}">
+                    {{- block.settings.word_3 -}}
+                  </{{ block.settings.heading_size }}>
+                  <{{ block.settings.heading_size }} style="color: {{ block.settings.word_4_color }}">
+                    {{- block.settings.word_4 -}}
+                  </{{ block.settings.heading_size }}>
+                  <{{ block.settings.heading_size }} style="color: {{ block.settings.word_1_color }}">
+                    {{- block.settings.word_1 -}}
+                  </{{ block.settings.heading_size }}>
+                </ul>
+              </div>
+
+              <span>
+                <{{ block.settings.heading_size }}>
+                  {{ block.settings.heading }}
+                </{{ block.settings.heading_size }}>
+              </span>
+            </div>
+          {% else %}
+            <{{ block.settings.heading_size }}>
+              {{ block.settings.heading }}
+            </{{ block.settings.heading_size }}>
+          {% endif %}
         {%- when 'text' -%}
           {{ block.settings.text }}
         {%- when 'button' -%}
@@ -202,13 +276,33 @@
         }
       ],
       "default": "full-width"
+    },
+    {
+      "type": "select",
+      "id": "words_count",
+      "label": "Number of words",
+      "options": [
+        {
+          "value": "2",
+          "label": "2"
+        },
+        {
+          "value": "3",
+          "label": "3"
+        },
+        {
+          "value": "4",
+          "label": "4"
+        }
+      ],
+      "default": "4"
     }
   ],
   "blocks": [
     {
       "type": "subheading",
       "name": "Subheading",
-      "limit": 5,
+      "limit": 1,
       "settings": [
         {
           "type": "text",
@@ -253,13 +347,18 @@
     {
       "type": "heading",
       "name": "Heading",
-      "limit": 5,
+      "limit": 1,
       "settings": [
+        {
+          "type": "header",
+          "content": "Heading settings",
+          "info": "Heading settings"
+        },
         {
           "type": "text",
           "id": "heading",
           "label": "Heading",
-          "default": "Heading"
+          "default": "Heading long one"
         },
         {
           "type": "select",
@@ -292,6 +391,80 @@
             }
           ],
           "default": "h2"
+        },
+        {
+          "type": "header",
+          "content": "Animation settings"
+        },
+        {
+          "type": "checkbox",
+          "id": "animated",
+          "label": "Activate animation",
+          "default": true
+        },
+        {
+          "type": "select",
+          "id": "animation_placement",
+          "label": "Animation placement",
+          "options": [
+            {
+              "value": "first",
+              "label": "First"
+            },
+            {
+              "value": "second",
+              "label": "Second"
+            }
+          ],
+          "default": "first"
+        },
+        {
+          "type": "text",
+          "id": "word_1",
+          "label": "Word #1",
+          "default": "Word 1"
+        },
+        {
+          "type": "color",
+          "id": "word_1_color",
+          "label": "Word #1 color",
+          "default": "#ea4335"
+        },
+        {
+          "type": "text",
+          "id": "word_2",
+          "label": "Word #2",
+          "default": "Word 2"
+        },
+        {
+          "type": "color",
+          "id": "word_2_color",
+          "label": "Word #2 color",
+          "default": "#4285f4"
+        },
+        {
+          "type": "text",
+          "id": "word_3",
+          "label": "Word #3",
+          "default": "Word 3"
+        },
+        {
+          "type": "color",
+          "id": "word_3_color",
+          "label": "Word #3 color",
+          "default": "#34a853"
+        },
+        {
+          "type": "text",
+          "id": "word_4",
+          "label": "Word #4",
+          "default": "Word 4"
+        },
+        {
+          "type": "color",
+          "id": "word_4_color",
+          "label": "Word #4 color",
+          "default": "#fbbc04"
         }
       ]
     },
@@ -311,7 +484,7 @@
     {
       "type": "button",
       "name": "Button",
-      "limit": 5,
+      "limit": 2,
       "settings": [
         {
           "type": "text",
