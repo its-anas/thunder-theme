@@ -1,9 +1,11 @@
-{{ 'rich-text.css' | asset_url | stylesheet_tag }}
+{{ 'animated-rich-text.css' | asset_url | stylesheet_tag }}
 
 {%- style -%}
-  .{{ section.id }}  {
+  section.{{ section.id }}  {
       margin-top: {{ section.settings.space_outside | divided_by: 2 }}px;
       margin-bottom: {{ section.settings.space_outside | divided_by: 2 }}px;
+      padding-top: {{ section.settings.top_padding }}px;
+      padding-bottom: {{ section.settings.bottom_padding }}px;
    }
 
    .{{ section.id }}-just-color {
@@ -33,48 +35,8 @@
    }
 
    .{{ section.id }}.scrolling-words-box > ul {
-    animation: scrollUp 8s infinite;
+    animation: scrollUp{{ section.settings.words_count }} {{ section.settings.animation_delay }}s infinite;
    }
-
-  {%- comment -%}
-   {% if section.settings.words_count == "2" %}
-    @keyframes scrollUp {
-      15%, 25% {
-        transform: translateY(-20%);
-      }
-      90%, 100% {
-        transform: translateY(-80%);
-      }
-    }
-   {% elsif section.settings.words_count == "3" %}
-    @keyframes scrollUp {
-      15%, 25% {
-        transform: translateY(-20%);
-      }
-      40%, 50% {
-        transform: translateY(-40%);
-      }
-      90%, 100% {
-        transform: translateY(-80%);
-      }
-    }
-   {% elsif section.settings.words_count == "4" %}
-   @keyframes scrollUp {
-      15%, 25% {
-        transform: translateY(-20%);
-      }
-      40%, 50% {
-        transform: translateY(-40%);
-      }
-      65%, 75% {
-        transform: translateY(-60%);
-      }
-      90%, 100% {
-        transform: translateY(-80%);
-      }
-    }
-   {% endif %}
-   {%- endcomment -%}
 {%- endstyle -%}
 
 <section class="{{ section.id }} {% if section.settings.background_image == blank %}{{ section.id }}-just-color{% else %}{{ section.id }}-{{ section.settings.background_type }}{% endif %} {{ section.settings.section_width }}">
@@ -87,8 +49,8 @@
           </{{ block.settings.subheading_size }}>
         {%- when 'heading' -%}
           {% if block.settings.animated %}
-            <div class="scrolling-words-container {{ section.settings.text_alignment }} {{ block.settings.animation_placement }}">
-              <div class="{{ section.id }} scrolling-words-box {{ block.settings.heading_size }}">
+            <div class="scrolling-words-container {{ section.settings.text_alignment }}">
+              <div class="{{ section.id }} scrolling-words-box {{ block.settings.heading_size }} {{ block.settings.animation_placement }}">
                 <ul>
                   <{{ block.settings.heading_size }} style="color: {{ block.settings.word_1_color }}">
                     {{- block.settings.word_1 -}}
@@ -96,23 +58,30 @@
                   <{{ block.settings.heading_size }} style="color: {{ block.settings.word_2_color }}">
                     {{- block.settings.word_2 -}}
                   </{{ block.settings.heading_size }}>
-                  <{{ block.settings.heading_size }} style="color: {{ block.settings.word_3_color }}">
-                    {{- block.settings.word_3 -}}
-                  </{{ block.settings.heading_size }}>
-                  <{{ block.settings.heading_size }} style="color: {{ block.settings.word_4_color }}">
-                    {{- block.settings.word_4 -}}
-                  </{{ block.settings.heading_size }}>
+                  {%- if section.settings.words_count == '3' %}
+                    <{{ block.settings.heading_size }} style="color: {{ block.settings.word_3_color }}">
+                      {{- block.settings.word_3 -}}
+                    </{{ block.settings.heading_size }}>
+                  {% endif -%}
+                  {%- if section.settings.words_count == '4' %}
+                    <{{ block.settings.heading_size }} style="color: {{ block.settings.word_3_color }}">
+                      {{- block.settings.word_3 -}}
+                    </{{ block.settings.heading_size }}>
+                    <{{ block.settings.heading_size }} style="color: {{ block.settings.word_4_color }}">
+                      {{- block.settings.word_4 -}}
+                    </{{ block.settings.heading_size }}>
+                  {% endif -%}
                   <{{ block.settings.heading_size }} style="color: {{ block.settings.word_1_color }}">
                     {{- block.settings.word_1 -}}
                   </{{ block.settings.heading_size }}>
                 </ul>
               </div>
 
-              <span>
+              <div class="normal-heading">
                 <{{ block.settings.heading_size }}>
                   {{ block.settings.heading }}
                 </{{ block.settings.heading_size }}>
-              </span>
+              </div>
             </div>
           {% else %}
             <{{ block.settings.heading_size }}>
@@ -149,8 +118,47 @@
 
 {% schema %}
 {
-  "name": "Rich text",
+  "name": "Animated rich text",
   "settings": [
+    {
+      "type": "header",
+      "content": "Animation settings",
+      "info": "Rest of animation settings are in the Header block"
+    },
+    {
+      "type": "select",
+      "id": "words_count",
+      "label": "Number of words in animation",
+      "options": [
+        {
+          "value": "2",
+          "label": "Show only first 2"
+        },
+        {
+          "value": "3",
+          "label": "Show only first 3"
+        },
+        {
+          "value": "4",
+          "label": "Show all of them"
+        }
+      ],
+      "default": "4"
+    },
+    {
+      "type": "range",
+      "id": "animation_delay",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "unit": "s",
+      "label": "Animation delay",
+      "default": 6
+    },
+    {
+      "type": "header",
+      "content": "Text style"
+    },
     {
       "type": "select",
       "id": "horizontal_position",
@@ -198,7 +206,7 @@
       "label": "Text width",
       "info": "Desktop only",
       "min": 40,
-      "max": 100,
+      "max": 90,
       "step": 10,
       "unit": "%",
       "default": 70
@@ -261,6 +269,26 @@
       "default": 0
     },
     {
+      "type": "range",
+      "id": "top_padding",
+      "label": "Top padding",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "bottom_padding",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "unit": "px",
+      "default": 0
+    },
+    {
       "type": "select",
       "id": "section_width",
       "label": "Section width",
@@ -276,26 +304,6 @@
         }
       ],
       "default": "full-width"
-    },
-    {
-      "type": "select",
-      "id": "words_count",
-      "label": "Number of words",
-      "options": [
-        {
-          "value": "2",
-          "label": "2"
-        },
-        {
-          "value": "3",
-          "label": "3"
-        },
-        {
-          "value": "4",
-          "label": "4"
-        }
-      ],
-      "default": "4"
     }
   ],
   "blocks": [
@@ -351,14 +359,13 @@
       "settings": [
         {
           "type": "header",
-          "content": "Heading settings",
-          "info": "Heading settings"
+          "content": "Heading settings"
         },
         {
           "type": "text",
           "id": "heading",
           "label": "Heading",
-          "default": "Heading long one"
+          "default": "Heading"
         },
         {
           "type": "select",
@@ -417,6 +424,11 @@
             }
           ],
           "default": "first"
+        },
+        {
+          "type": "header",
+          "content": "Words in animation",
+          "info": "'Number of words shown' + 'Animation delay' settings are in the section settings."
         },
         {
           "type": "text",
@@ -528,7 +540,7 @@
   ],
   "presets": [
     {
-      "name": "Rich text",
+      "name": "Animated rich text",
       "blocks": [
         {
           "type": "subheading"
