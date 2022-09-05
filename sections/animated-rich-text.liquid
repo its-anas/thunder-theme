@@ -40,7 +40,7 @@
 {%- endstyle -%}
 
 <section class="{{ section.id }} {% if section.settings.background_image == blank %}{{ section.id }}-just-color{% else %}{{ section.id }}-{{ section.settings.background_type }}{% endif %} {{ section.settings.section_width }}">
-  <div class="wrapper container {{ section.id }}-space-between text-alignment-{{ section.settings.text_alignment }} {{ section.id }}-text-width horizontal--{{ section.settings.horizontal_position }}">
+  <div class="wrapper container {{ section.id }}-space-between text-alignment--{{ section.settings.text_alignment }} {{ section.id }}-text-width horizontal--{{ section.settings.horizontal_position }}">
     {%- for block in section.blocks -%}
       {%- case block.type -%}
         {%- when 'subheading' -%}
@@ -184,6 +184,7 @@
       "type": "select",
       "id": "text_alignment",
       "label": "Text alignment",
+      "info": "Desktop only",
       "options": [
         {
           "value": "left",

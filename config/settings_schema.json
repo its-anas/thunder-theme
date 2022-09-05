@@ -241,6 +241,13 @@
                     "step": 20,
                     "unit": "px",
                     "default": 1240
+               },
+               {
+                    "type": "text",
+                    "id": "button_symbol",
+                    "label": "Button symbol",
+                    "info": "A symbol that shows up after buttons and links - don't put more than 2 characters. e.g. 🢂➜⮕→➾⤑⇢↬⮞➤⪢⫸⪼⋙⇌⥋➥⤅↠⇴..",
+                    "default": "➜"
                }
           ]
      }

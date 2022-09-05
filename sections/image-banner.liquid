@@ -25,7 +25,7 @@
    }
 {%- endstyle -%}
 
-<section class="{{ section.id }} image-banner {% if section.settings.section_width == "wrapped" %} wrapped{% else %} {% endif %}">
+<section class="{{ section.id }} image-banner {% if section.settings.section_width == "wrapped" %} wrapped{% else %}{% endif %}">
   <div class="{{ section.id }} image-banner__picture">
     {%- if section.settings.image == blank -%}
       {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder' }}
@@ -44,7 +44,7 @@
   </div>
 
   <div class="{{ section.id }} image-banner__content container vertical--{{ section.settings.vertical_position }} {% if section.settings.background_style == "full-width" %} overlay {% endif %}">
-    <div class="{{ section.id }} image-banner__box text-alignment-{{ section.settings.text_alignment }} {{ section.id }}-text-width horizontal--{{ section.settings.horizontal_position }} {% if section.settings.background_style == "block" %} overlay {% endif %}">
+    <div class="{{ section.id }} image-banner__box text-alignment--{{ section.settings.text_alignment }} {{ section.id }}-text-width horizontal--{{ section.settings.horizontal_position }} {% if section.settings.background_style == "block" %} overlay {% endif %}">
       {%- for block in section.blocks -%}
         {%- case block.type -%}
           {%- when 'subheading' -%}
@@ -204,6 +204,7 @@
       "type": "select",
       "id": "text_alignment",
       "label": "Text alignment",
+      "info": "Desktop only",
       "options": [
         {
           "value": "left",

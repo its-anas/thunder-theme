@@ -45,7 +45,7 @@
     </div>
   </div>
   <div class="{{ section.id }} container image-with-text__content">
-    <div class="box horizontal--{{ section.settings.horizontal_position }} vertical--{{ section.settings.vertical_position }} text-alignment-{{ section.settings.text_alignment }} {{ section.id }}-text-width">
+    <div class="box horizontal--{{ section.settings.horizontal_position }} vertical--{{ section.settings.vertical_position }} text-alignment--{{ section.settings.text_alignment }} {{ section.id }}-text-width">
       {%- for block in section.blocks -%}
         {%- case block.type -%}
           {%- when 'subheading' -%}
@@ -185,6 +185,7 @@
       "type": "select",
       "id": "text_alignment",
       "label": "Text alignment",
+      "info": "Desktop only",
       "options": [
         {
           "value": "left",

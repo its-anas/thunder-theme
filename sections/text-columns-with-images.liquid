@@ -70,7 +70,7 @@
           {% endif %}
         </div>
         <div class="text-columns-with-images__content">
-          <div class="box horizontal--center vertical--center text-alignment-center">
+          <div class="box horizontal--{{ section.settings.text_alignment }} vertical--center text-alignment--{{ section.settings.text_alignment }}">
             <h6>{{ block.settings.heading }}</h6>
             {{ block.settings.text }}
             <a
@@ -172,6 +172,27 @@
       "step": 1,
       "unit": "px",
       "default": 2
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text alignment",
+      "info": "Desktop only",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
     },
     {
       "type": "header",

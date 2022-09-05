@@ -44,6 +44,13 @@
 
       }
 
+      .button--primary.border:after,
+      .button--secondary.border:after,
+      .button--primary:not(.border):after,
+      .button--secondary:not(.border):after {
+        content: " {{ settings.button_symbol | truncate: 2 }}";
+      }
+
         @media screen and (min-width: 750px) {
           :root{
           --font-size: {{ settings.size }}px;

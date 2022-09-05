@@ -87,7 +87,6 @@ h6 {
   text-transform: var(--headings-style);
   color: var(--headings-color);
   line-height: 0.9;
-  width: 100%;
 }
 
 p {
@@ -156,16 +155,26 @@ p .small {
 }
 
 .text-alignment {
-  &-center {
+  &--center,
+  &--right,
+  &--left {
     text-align: center;
   }
+}
 
-  &-right {
-    text-align: right;
-  }
+@media screen and (min-width: 750px) {
+  .text-alignment {
+    &--center {
+      text-align: center;
+    }
 
-  &-left {
-    text-align: left;
+    &--right {
+      text-align: right;
+    }
+
+    &--left {
+      text-align: left;
+    }
   }
 }
 
@@ -218,11 +227,16 @@ p .small {
     padding: 15px 30px;
     text-align: center;
 
-    &:after {
-      content: " ➜";
+    &.border:after {
       position: absolute;
       opacity: 0%;
       transform: TranslateX(0px);
+      transition: 0.2s;
+    }
+
+    &:not(.border):after {
+      position: absolute;
+      transform: TranslateX(5px);
       transition: 0.2s;
     }
 
