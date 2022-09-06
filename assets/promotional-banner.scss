@@ -1,0 +1,52 @@
+.promotional-banner {
+  height: auto;
+  position: relative;
+  display: flex;
+  --gap: 2.5rem;
+  gap: var(--gap);
+  align-items: center;
+  overflow: hidden;
+  user-select: none;
+
+  &__content--style-1 {
+    flex-shrink: 0;
+    display: flex;
+    justify-content: space-around;
+    gap: var(--gap);
+    min-width: 100%;
+
+    > * {
+      flex: 0 0 auto;
+      color: white;
+      text-align: center;
+    }
+  }
+
+  &__content--style-2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-width: 100%;
+    padding: 0 1rem;
+    gap: 0.8rem;
+
+    @media screen and (min-width: 750px) {
+      flex-direction: row;
+      gap: var(--gap);
+      padding: 0 10rem;
+    }
+    p {
+      text-align: center;
+    }
+  }
+}
+
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-100% - var(--gap)));
+  }
+}
