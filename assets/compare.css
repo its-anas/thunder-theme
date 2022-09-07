@@ -1,0 +1,50 @@
+section {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+}
+@media screen and (max-width: 750px) {
+  section {
+    overflow: auto;
+  }
+}
+
+.compare {
+  border-collapse: collapse;
+  color: #333333;
+  text-align: center;
+  overflow: hidden;
+}
+.compare__head {
+  height: 200px;
+}
+.compare__cell {
+  padding: 1em 0em;
+  border-top: 1px solid #dddddd;
+  border-bottom: 1px solid #dddddd;
+}
+.compare__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  gap: 0.3rem;
+  padding: 0 0.1rem 1rem 0.1rem;
+}
+
+.prices {
+  display: flex;
+  flex-direction: column;
+}
+
+.compare-image {
+  height: 100px;
+  width: 100px;
+}
+
+.product-name {
+  text-transform: uppercase;
+  font-weight: bold;
+}

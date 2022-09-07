@@ -1,0 +1,332 @@
+{{ 'compare.css' | asset_url | stylesheet_tag }}
+
+{% assign blocks_count = section.blocks.size | plus: 1 %}
+
+{%- style -%}
+    section.{{ section.id }} {
+        background-color: {{ section.settings.background_color }};
+        margin-top: {{ section.settings.space_outside | divided_by: 2 }}px;
+        margin-bottom: {{ section.settings.space_outside | divided_by: 2 }}px;
+    }
+
+  @media screen and (max-width: 750px) {
+    section.{{ section.id }} {
+      /* margin-left: 600px; */
+      min-width: 100%;
+    }
+  }
+
+  .{{ section.id }}.compare {
+    max-width: {{ settings.wrapped_content_width | minus: 100 }}px;
+    margin-top: {{ section.settings.top_padding }}px;
+    margin-bottom: {{ section.settings.bottom_padding }}px;
+  }
+
+  .{{ section.id }}.compare__head:not(:nth-child(1)), .{{ section.id }}.compare__cell {
+    max-width: {{ section.settings.table_width | divided_by: blocks_count }}px;
+    min-width: {{ section.settings.table_width | divided_by: blocks_count }}px;
+  }
+{%- endstyle -%}
+
+<section class="{{ section.id }} {% if section.settings.section_width == "wrapped" %} wrapped{% else %}{% endif %}">
+  <table class="{{ section.id }} compare">
+    <thead>
+      <tr>
+        <th class="{{ section.id }} compare__head"></th>
+        {% for block in section.blocks %}
+          <th class="{{ section.id }} compare__head">
+            <a href="{{ block.settings.product.url }}">
+              <div class="compare__content">
+                {%- if block.settings.product == blank -%}
+                  {{ 'product-1' | placeholder_svg_tag: 'placeholder compare-image' }}
+                {%- elsif block.settings.product != blank -%}
+                  <div class="media compare-image">
+                    <img
+                      srcset="{{ block.settings.product.featured_image | image_url }}"
+                      loading="lazy"
+                      alt="{{ block.settings.product.featured_image.alt | escape }}"
+                      width="{{ block.settings.product.featured_image.width }}"
+                      height="{{ block.settings.product.featured_image.height }}"
+                      class="full"
+                    >
+                  </div>
+                {%- endif -%}
+                <p class="product-name">
+                  {% if block.settings.product_name == blank %}
+                    {{ block.settings.product.title }}
+                  {% elsif block.settings.product_name != blank %}
+                    {{ block.settings.product_name }}
+                  {% endif %}
+                </p>
+                <p class="small">{{ block.settings.product_description }}</p>
+                <div class="prices">
+                  <p class="compare-at-text">
+                    {% if block.settings.product.compare_at_price == blank %}
+                      $00.00
+                    {% elsif block.settings.product.compare_at_price != blank %}
+                      {{ block.settings.product.compare_at_price | money }}
+                    {% endif %}
+                  </p>
+                  <p class="price-text">
+                    {% if block.settings.product.price == blank %}
+                      $00.00
+                    {% elsif block.settings.product.price != blank %}
+                      {{ block.settings.product.price | money }}
+                    {% endif %}
+                  </p>
+                </div>
+              </div>
+            </a>
+          </th>
+        {% endfor %}
+      </tr>
+    </thead>
+    <tbody>
+      {% if section.settings.features_count >= 1                                                                                                                                                 %}
+        <tr>
+          <td class="{{ section.id }} compare__cell">
+            <p>{{ section.settings.feature_1 }}</p>
+          </td>
+          {% for block in section.blocks %}
+            <td class="{{ section.id }} compare__cell">
+              <p>{{ block.settings.product_feature_1 }}</p>
+            </td>
+          {% endfor %}
+        </tr>
+      {% endif %}
+      {% if section.settings.features_count >= 2                                                                                                                                                 %}
+        <tr>
+          <td class="{{ section.id }} compare__cell">
+            <p>{{ section.settings.feature_2 }}</p>
+          </td>
+          {% for block in section.blocks %}
+            <td class="{{ section.id }} compare__cell">
+              <p>{{ block.settings.product_feature_2 }}</p>
+            </td>
+          {% endfor %}
+        </tr>
+      {% endif %}
+      {% if section.settings.features_count >= 3                                                                                                                                                 %}
+        <tr>
+          <td class="{{ section.id }} compare__cell">
+            <p>{{ section.settings.feature_3 }}</p>
+          </td>
+          {% for block in section.blocks %}
+            <td class="{{ section.id }} compare__cell">
+              <p>{{ block.settings.product_feature_3 }}</p>
+            </td>
+          {% endfor %}
+        </tr>
+      {% endif %}
+      {% if section.settings.features_count >= 4                                                                                                                                                 %}
+        <tr>
+          <td class="{{ section.id }} compare__cell">
+            <p>{{ section.settings.feature_4 }}</p>
+          </td>
+          {% for block in section.blocks %}
+            <td class="{{ section.id }} compare__cell">
+              <p>{{ block.settings.product_feature_4 }}</p>
+            </td>
+          {% endfor %}
+        </tr>
+      {% endif %}
+      {% if section.settings.features_count >= 5                                                                                                                                                 %}
+        <tr>
+          <td class="{{ section.id }} compare__cell">
+            <p>{{ section.settings.feature_5 }}</p>
+          </td>
+          {% for block in section.blocks %}
+            <td class="{{ section.id }} compare__cell">
+              <p>{{ block.settings.product_feature_5 }}</p>
+            </td>
+          {% endfor %}
+        </tr>
+      {% endif %}
+    </tbody>
+  </table>
+</section>
+
+{% schema %}
+{
+  "name": "Compare",
+  "max_blocks": 5,
+  "settings": [
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "Section width",
+      "info": "Desktop only",
+      "options": [
+        {
+          "value": "full-width",
+          "label": "Full width"
+        },
+        {
+          "value": "wrapped",
+          "label": "Wrapped"
+        }
+      ],
+      "default": "full-width"
+    },
+    {
+      "type": "range",
+      "id": "table_width",
+      "label": "Table width",
+      "info": "Desktop only",
+      "min": 600,
+      "max": 1000,
+      "step": 100,
+      "unit": "px",
+      "default": 800
+    },
+    {
+      "type": "range",
+      "id": "space_outside",
+      "label": "Space outside section",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "top_padding",
+      "label": "Top padding",
+      "min": 20,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "bottom_padding",
+      "label": "Bottom padding",
+      "min": 20,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "default": 50
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Section background color",
+      "default": "#222222"
+    },
+    {
+      "type": "range",
+      "id": "features_count",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "unit": "ftr",
+      "label": "Number of features",
+      "default": 5
+    },
+    {
+      "type": "text",
+      "id": "feature_1",
+      "label": "Feature #1",
+      "default": "Feature 1"
+    },
+    {
+      "type": "text",
+      "id": "feature_2",
+      "label": "Feature #2",
+      "default": "Feature 2"
+    },
+    {
+      "type": "text",
+      "id": "feature_3",
+      "label": "Feature #3",
+      "default": "Feature 3"
+    },
+    {
+      "type": "text",
+      "id": "feature_4",
+      "label": "Feature #4",
+      "default": "Feature 4"
+    },
+    {
+      "type": "text",
+      "id": "feature_5",
+      "label": "Feature #5",
+      "default": "Feature 5"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Product",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product"
+        },
+        {
+          "type": "text",
+          "id": "product_name",
+          "label": "Product name",
+          "default": "Product name",
+          "info": "Leave it blank to show the original product name"
+        },
+        {
+          "type": "text",
+          "id": "product_description",
+          "label": "Short description",
+          "default": "Short description"
+        },
+        {
+          "type": "text",
+          "id": "product_feature_1",
+          "label": "Product feature #1",
+          "default": "Text"
+        },
+        {
+          "type": "text",
+          "id": "product_feature_2",
+          "label": "Product feature #2",
+          "default": "Text"
+        },
+        {
+          "type": "text",
+          "id": "product_feature_3",
+          "label": "Product feature #3",
+          "default": "Text"
+        },
+        {
+          "type": "text",
+          "id": "product_feature_4",
+          "label": "Product feature #4",
+          "default": "Text"
+        },
+        {
+          "type": "text",
+          "id": "product_feature_5",
+          "label": "Product feature #5",
+          "default": "Text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Compare",
+      "blocks": [
+        {
+          "type": "product"
+        },
+        {
+          "type": "product"
+        },
+        {
+          "type": "product"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -4,6 +4,7 @@
   .{{ section.id }}.promotional-banner {
     padding: {{ section.settings.space_outside_elements }}px 0;
     background: {{ section.settings.background_color }};
+        width: 100%;
   }
   .{{ section.id }}.promotional-banner__content--style-1 {
         animation: scroll {{ section.settings.animation_speed }}s linear infinite;
@@ -32,7 +33,7 @@
 {%- endstyle -%}
 
 <section>
-  <div class="{{ section.id }} promotional-banner">
+  <div class="{{ section.id }} promotional-banner {% if section.settings.section_width == "wrapped" %} wrapped{% else %}{% endif %}">
     {% if section.settings.banner_style == 'style-1' %}
       {% if section.settings.style_1_text != blank %}
         <div class="{{ section.id }} promotional-banner__content--style-1">
@@ -149,6 +150,23 @@
       "step": 1,
       "unit": "px",
       "default": 10
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "Section width",
+      "info": "Desktop only",
+      "options": [
+        {
+          "value": "full-width",
+          "label": "Full width"
+        },
+        {
+          "value": "wrapped",
+          "label": "Wrapped"
+        }
+      ],
+      "default": "full-width"
     },
     {
       "type": "header",

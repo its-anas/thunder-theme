@@ -121,8 +121,9 @@ p {
   font-size: var(--font-size);
 }
 
-p .small {
+p.small {
   font-size: calc(var(--font-size-type-scale) / var(--font-type-scale) * 1px);
+  font-weight: 300;
 }
 
 .subheading {
@@ -136,6 +137,17 @@ p .small {
 
 .price-text {
   font-size: var(--font-size);
+}
+
+a {
+  text-decoration: none;
+}
+
+.compare-at-text {
+  font-size: var(--font-size);
+  font-weight: lighter;
+  text-decoration: line-through;
+  opacity: 50%;
 }
 
 .label-text {
