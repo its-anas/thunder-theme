@@ -394,3 +394,14 @@ a.border.button--primary:hover, a.border.button--secondary:hover {
   -o-object-fit: contain;
      object-fit: contain;
 }
+
+/* ------------ ANCHOR: Horizontal slide overlay ------------ */
+@media screen and (max-width: 750px) {
+  .mobile-slide__overlay {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    pointer-events: none;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 80%, rgb(0, 0, 0) 100%);
+  }
+}

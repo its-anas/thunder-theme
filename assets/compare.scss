@@ -1,9 +1,7 @@
-section {
+section.compare__section {
   width: 100%;
   display: flex;
-
   overflow: hidden;
-
   .container {
     padding-top: 3rem;
   }
@@ -56,19 +54,26 @@ section {
       align-items: center;
       gap: 0.5rem;
 
-      .compare-image--small {
-        height: 80px;
-        width: 80px;
-      }
-
-      .compare-image--medium {
+      .compare-image {
         height: 100px;
         width: 100px;
-      }
 
-      .compare-image--large {
-        height: 120px;
-        width: 120px;
+        @media screen and (min-width: 750px) {
+          &.small {
+            height: 80px;
+            width: 80px;
+          }
+
+          &.medium {
+            height: 100px;
+            width: 100px;
+          }
+
+          &.large {
+            height: 120px;
+            width: 120px;
+          }
+        }
       }
 
       .product-name {

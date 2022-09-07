@@ -26,7 +26,7 @@
   }
 {%- endstyle -%}
 
-<section class="{{ section.id }} {% if section.settings.section_width == "wrapped" %} wrapped{% else %}{% endif %}">
+<section class="{{ section.id }} compare__section {% if section.settings.section_width == "wrapped" %} wrapped{% else %}{% endif %}">
   <div class="compare__heading">
     <h6>{{ section.settings.heading }}</h6>
   </div>
@@ -42,14 +42,14 @@
                   <div class="compare__content_image-and-text">
                     {%- if block.settings.product == blank -%}
                       {% if section.settings.image_size == 'small' %}
-                        {{ 'product-1' | placeholder_svg_tag: 'placeholder compare-image--small' }}
+                        {{ 'product-1' | placeholder_svg_tag: 'placeholder compare-image small' }}
                       {% elsif section.settings.image_size == 'medium' %}
-                        {{ 'product-1' | placeholder_svg_tag: 'placeholder compare-image--medium' }}
+                        {{ 'product-1' | placeholder_svg_tag: 'placeholder compare-image medium' }}
                       {% elsif section.settings.image_size == 'large' %}
-                        {{ 'product-1' | placeholder_svg_tag: 'placeholder compare-image--large' }}
+                        {{ 'product-1' | placeholder_svg_tag: 'placeholder compare-image large' }}
                       {% endif %}
                     {%- elsif block.settings.product != blank -%}
-                      <div class="media compare-image--{{ section.settings.image_size }}">
+                      <div class="media compare-image {{ section.settings.image_size }}">
                         <img
                           srcset="{{ block.settings.product.featured_image | image_url }}"
                           loading="lazy"
@@ -94,7 +94,7 @@
         </tr>
       </thead>
       <tbody>
-        {% if section.settings.features_count >= 1                                                                                                                                                                                                                             %}
+        {% if section.settings.features_count >= 1                                                                                                                                                                                                                                            %}
           <tr>
             <td class="{{ section.id }} compare__cell">
               <p>{{ section.settings.feature_1 }}</p>
@@ -106,7 +106,7 @@
             {% endfor %}
           </tr>
         {% endif %}
-        {% if section.settings.features_count >= 2                                                                                                                                                                                                                             %}
+        {% if section.settings.features_count >= 2                                                                                                                                                                                                                                            %}
           <tr>
             <td class="{{ section.id }} compare__cell">
               <p>{{ section.settings.feature_2 }}</p>
@@ -118,7 +118,7 @@
             {% endfor %}
           </tr>
         {% endif %}
-        {% if section.settings.features_count >= 3                                                                                                                                                                                                                             %}
+        {% if section.settings.features_count >= 3                                                                                                                                                                                                                                            %}
           <tr>
             <td class="{{ section.id }} compare__cell">
               <p>{{ section.settings.feature_3 }}</p>
@@ -130,7 +130,7 @@
             {% endfor %}
           </tr>
         {% endif %}
-        {% if section.settings.features_count >= 4                                                                                                                                                                                                                             %}
+        {% if section.settings.features_count >= 4                                                                                                                                                                                                                                            %}
           <tr>
             <td class="{{ section.id }} compare__cell">
               <p>{{ section.settings.feature_4 }}</p>
@@ -142,7 +142,7 @@
             {% endfor %}
           </tr>
         {% endif %}
-        {% if section.settings.features_count >= 5                                                                                                                                                                                                                             %}
+        {% if section.settings.features_count >= 5                                                                                                                                                                                                                                            %}
           <tr>
             <td class="{{ section.id }} compare__cell">
               <p>{{ section.settings.feature_5 }}</p>
@@ -239,7 +239,8 @@
           "label": "Large"
         }
       ],
-      "default": "medium"
+      "default": "medium",
+      "info": "Deskop only"
     },
     {
       "type": "select",
@@ -272,7 +273,7 @@
       "max": 1000,
       "step": 100,
       "unit": "px",
-      "default": 800
+      "default": 900
     },
     {
       "type": "range",
@@ -375,6 +376,12 @@
     {
       "name": "Compare",
       "blocks": [
+        {
+          "type": "product"
+        },
+        {
+          "type": "product"
+        },
         {
           "type": "product"
         },
