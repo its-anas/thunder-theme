@@ -3,17 +3,10 @@
 {% assign blocks_count = section.blocks.size | plus: 1 %}
 
 {%- style -%}
-    section.{{ section.id }} {
-        background-color: {{ section.settings.background_color }};
-        margin-top: {{ section.settings.space_outside | divided_by: 2 }}px;
-        margin-bottom: {{ section.settings.space_outside | divided_by: 2 }}px;
-    }
-
-  @media screen and (max-width: 750px) {
-    section.{{ section.id }} {
-      /* margin-left: 600px; */
-      min-width: 100%;
-    }
+  section.{{ section.id }} {
+      background-color: {{ section.settings.background_color }};
+      margin-top: {{ section.settings.space_outside | divided_by: 2 }}px;
+      margin-bottom: {{ section.settings.space_outside | divided_by: 2 }}px;
   }
 
   .{{ section.id }}.compare {
@@ -22,9 +15,14 @@
     margin-bottom: {{ section.settings.bottom_padding }}px;
   }
 
-  .{{ section.id }}.compare__head:not(:nth-child(1)), .{{ section.id }}.compare__cell {
+  .{{ section.id }}.compare__head:not(:nth-child(1)), .{{ section.id }}.compare__cell:not(:nth-child(1)) {
     max-width: {{ section.settings.table_width | divided_by: blocks_count }}px;
     min-width: {{ section.settings.table_width | divided_by: blocks_count }}px;
+  }
+
+   .{{ section.id }}.compare__head:nth-child(1), .{{ section.id }}.compare__cell:nth-child(1) {
+    max-width: {{ section.settings.table_width | divided_by: blocks_count | minus: 30 }}px;
+    min-width: {{ section.settings.table_width | divided_by: blocks_count | minus: 30 }}px;
   }
 {%- endstyle -%}
 
@@ -37,37 +35,41 @@
           <th class="{{ section.id }} compare__head">
             <a href="{{ block.settings.product.url }}">
               <div class="compare__content">
-                {%- if block.settings.product == blank -%}
-                  {{ 'product-1' | placeholder_svg_tag: 'placeholder compare-image' }}
-                {%- elsif block.settings.product != blank -%}
-                  <div class="media compare-image">
-                    <img
-                      srcset="{{ block.settings.product.featured_image | image_url }}"
-                      loading="lazy"
-                      alt="{{ block.settings.product.featured_image.alt | escape }}"
-                      width="{{ block.settings.product.featured_image.width }}"
-                      height="{{ block.settings.product.featured_image.height }}"
-                      class="full"
-                    >
-                  </div>
-                {%- endif -%}
-                <p class="product-name">
-                  {% if block.settings.product_name == blank %}
-                    {{ block.settings.product.title }}
-                  {% elsif block.settings.product_name != blank %}
-                    {{ block.settings.product_name }}
-                  {% endif %}
-                </p>
-                <p class="small">{{ block.settings.product_description }}</p>
-                <div class="prices">
-                  <p class="compare-at-text">
+                <div class="compare__content_image-and-text">
+                  {%- if block.settings.product == blank -%}
+                    {{ 'product-1' | placeholder_svg_tag: 'placeholder compare-image' }}
+                  {%- elsif block.settings.product != blank -%}
+                    <div class="media compare-image">
+                      <img
+                        srcset="{{ block.settings.product.featured_image | image_url }}"
+                        loading="lazy"
+                        alt="{{ block.settings.product.featured_image.alt | escape }}"
+                        width="{{ block.settings.product.featured_image.width }}"
+                        height="{{ block.settings.product.featured_image.height }}"
+                        class="full"
+                      >
+                    </div>
+                  {%- endif -%}
+                  <p class="product-name">
+                    {% if block.settings.product_name == blank %}
+                      {{ block.settings.product.title }}
+                    {% elsif block.settings.product_name != blank %}
+                      {{ block.settings.product_name }}
+                    {% endif %}
+                  </p>
+                </div>
+                <div class="compare__content_description">
+                  <p class="small">{{ block.settings.product_description }}</p>
+                </div>
+                <div class="compare__content_prices">
+                  <p class="price__sale">
                     {% if block.settings.product.compare_at_price == blank %}
                       $00.00
                     {% elsif block.settings.product.compare_at_price != blank %}
                       {{ block.settings.product.compare_at_price | money }}
                     {% endif %}
                   </p>
-                  <p class="price-text">
+                  <p class="price__normal">
                     {% if block.settings.product.price == blank %}
                       $00.00
                     {% elsif block.settings.product.price != blank %}
@@ -82,7 +84,7 @@
       </tr>
     </thead>
     <tbody>
-      {% if section.settings.features_count >= 1                                                                                                                                                 %}
+      {% if section.settings.features_count >= 1                                                                                                                                                                  %}
         <tr>
           <td class="{{ section.id }} compare__cell">
             <p>{{ section.settings.feature_1 }}</p>
@@ -94,7 +96,7 @@
           {% endfor %}
         </tr>
       {% endif %}
-      {% if section.settings.features_count >= 2                                                                                                                                                 %}
+      {% if section.settings.features_count >= 2                                                                                                                                                                  %}
         <tr>
           <td class="{{ section.id }} compare__cell">
             <p>{{ section.settings.feature_2 }}</p>
@@ -106,7 +108,7 @@
           {% endfor %}
         </tr>
       {% endif %}
-      {% if section.settings.features_count >= 3                                                                                                                                                 %}
+      {% if section.settings.features_count >= 3                                                                                                                                                                  %}
         <tr>
           <td class="{{ section.id }} compare__cell">
             <p>{{ section.settings.feature_3 }}</p>
@@ -118,7 +120,7 @@
           {% endfor %}
         </tr>
       {% endif %}
-      {% if section.settings.features_count >= 4                                                                                                                                                 %}
+      {% if section.settings.features_count >= 4                                                                                                                                                                  %}
         <tr>
           <td class="{{ section.id }} compare__cell">
             <p>{{ section.settings.feature_4 }}</p>
@@ -130,7 +132,7 @@
           {% endfor %}
         </tr>
       {% endif %}
-      {% if section.settings.features_count >= 5                                                                                                                                                 %}
+      {% if section.settings.features_count >= 5                                                                                                                                                                  %}
         <tr>
           <td class="{{ section.id }} compare__cell">
             <p>{{ section.settings.feature_5 }}</p>
@@ -212,7 +214,7 @@
     {
       "type": "color",
       "id": "background_color",
-      "label": "Section background color",
+      "label": "Background color",
       "default": "#222222"
     },
     {

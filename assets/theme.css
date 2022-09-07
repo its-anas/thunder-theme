@@ -131,7 +131,7 @@ p.small {
   font-weight: 700;
 }
 
-.price-text {
+.price__normal {
   font-size: var(--font-size);
 }
 
@@ -139,7 +139,7 @@ a {
   text-decoration: none;
 }
 
-.compare-at-text {
+.price__sale {
   font-size: var(--font-size);
   font-weight: lighter;
   text-decoration: line-through;

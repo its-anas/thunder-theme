@@ -1,12 +1,17 @@
 section {
   width: 100%;
   display: flex;
-  justify-content: center;
   overflow: hidden;
 }
 @media screen and (max-width: 750px) {
   section {
+    justify-content: flex-start;
     overflow: auto;
+  }
+}
+@media screen and (min-width: 750px) {
+  section {
+    justify-content: center;
   }
 }
 
@@ -15,6 +20,12 @@ section {
   color: #333333;
   text-align: center;
   overflow: hidden;
+}
+@media screen and (max-width: 750px) {
+  .compare {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
 }
 .compare__head {
   height: 200px;
@@ -33,8 +44,17 @@ section {
   gap: 0.3rem;
   padding: 0 0.1rem 1rem 0.1rem;
 }
-
-.prices {
+.compare__content_image-and-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+.compare__content_description {
+  height: 100%;
+}
+.compare__content_prices {
   display: flex;
   flex-direction: column;
 }

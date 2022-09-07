@@ -1,11 +1,16 @@
 section {
   width: 100%;
   display: flex;
-  justify-content: center;
+
   overflow: hidden;
 
   @media screen and (max-width: 750px) {
+    justify-content: flex-start;
     overflow: auto;
+  }
+
+  @media screen and (min-width: 750px) {
+    justify-content: center;
   }
 }
 
@@ -14,6 +19,11 @@ section {
   color: #333333;
   text-align: center;
   overflow: hidden;
+
+  @media screen and (max-width: 750px) {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
 
   &__head {
     height: 200px;
@@ -33,12 +43,24 @@ section {
     height: 100%;
     gap: 0.3rem;
     padding: 0 0.1rem 1rem 0.1rem;
-  }
-}
 
-.prices {
-  display: flex;
-  flex-direction: column;
+    &_image-and-text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    &_description {
+      height: 100%;
+    }
+
+    &_prices {
+      display: flex;
+      flex-direction: column;
+    }
+  }
 }
 
 .compare-image {
