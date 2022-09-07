@@ -3,6 +3,9 @@ section {
   display: flex;
   overflow: hidden;
 }
+section .container {
+  padding-top: 3rem;
+}
 @media screen and (max-width: 750px) {
   section {
     justify-content: flex-start;
@@ -21,14 +24,13 @@ section {
   text-align: center;
   overflow: hidden;
 }
-@media screen and (max-width: 750px) {
-  .compare {
-    margin-left: 20px;
-    margin-right: 20px;
-  }
+.compare__heading {
+  position: absolute;
+  width: 100%;
+  text-align: center;
 }
 .compare__head {
-  height: 200px;
+  height: 150px;
 }
 .compare__cell {
   padding: 1em 0em;
@@ -51,20 +53,26 @@ section {
   align-items: center;
   gap: 0.5rem;
 }
+.compare__content_image-and-text .compare-image--small {
+  height: 80px;
+  width: 80px;
+}
+.compare__content_image-and-text .compare-image--medium {
+  height: 100px;
+  width: 100px;
+}
+.compare__content_image-and-text .compare-image--large {
+  height: 120px;
+  width: 120px;
+}
+.compare__content_image-and-text .product-name {
+  text-transform: uppercase;
+  font-weight: bold;
+}
 .compare__content_description {
   height: 100%;
 }
 .compare__content_prices {
   display: flex;
   flex-direction: column;
-}
-
-.compare-image {
-  height: 100px;
-  width: 100px;
-}
-
-.product-name {
-  text-transform: uppercase;
-  font-weight: bold;
 }

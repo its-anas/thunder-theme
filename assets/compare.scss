@@ -4,6 +4,10 @@ section {
 
   overflow: hidden;
 
+  .container {
+    padding-top: 3rem;
+  }
+
   @media screen and (max-width: 750px) {
     justify-content: flex-start;
     overflow: auto;
@@ -20,13 +24,14 @@ section {
   text-align: center;
   overflow: hidden;
 
-  @media screen and (max-width: 750px) {
-    margin-left: 20px;
-    margin-right: 20px;
+  &__heading {
+    position: absolute;
+    width: 100%;
+    text-align: center;
   }
 
   &__head {
-    height: 200px;
+    height: 150px;
   }
 
   &__cell {
@@ -50,6 +55,26 @@ section {
       justify-content: center;
       align-items: center;
       gap: 0.5rem;
+
+      .compare-image--small {
+        height: 80px;
+        width: 80px;
+      }
+
+      .compare-image--medium {
+        height: 100px;
+        width: 100px;
+      }
+
+      .compare-image--large {
+        height: 120px;
+        width: 120px;
+      }
+
+      .product-name {
+        text-transform: uppercase;
+        font-weight: bold;
+      }
     }
 
     &_description {
@@ -61,14 +86,4 @@ section {
       flex-direction: column;
     }
   }
-}
-
-.compare-image {
-  height: 100px;
-  width: 100px;
-}
-
-.product-name {
-  text-transform: uppercase;
-  font-weight: bold;
 }
