@@ -1,0 +1,25 @@
+.multi-icon {
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+}
+@media screen and (max-width: 750px) {
+  .multi-icon {
+    overflow: auto;
+  }
+}
+.multi-icon__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.multi-icon__heading {
+  position: absolute;
+}
+.multi-icon__icons {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}

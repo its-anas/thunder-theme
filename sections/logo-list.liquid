@@ -1,0 +1,246 @@
+{{ 'logo-list.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+    .{{ section.id }}.logo-list {
+      background: rgb(0, 0, 0);
+      height: 100px;
+    }
+    .{{ section.id }}.logo-list > .slide {
+      height: 100px;
+      animation: slideshow 5s linear infinite;
+    }
+    .{{ section.id }}.logo-list > .slide  > img {
+      height: 70px;
+      width: auto;
+      object-fit: contain;
+      padding-right: 50px;
+      padding-left: 50px;
+    }
+
+  .{{ section.id }}.logo-list > .slide > .media > img {
+      height: 70px;
+      padding-right: 50px;
+      padding-left: 50px;
+    }
+{%- endstyle -%}
+
+<section class="{{ section.id }} logo-list">
+  <div class="slide">
+    {% for block in section.blocks %}
+      <img
+        srcset="{{ block.settings.logo | image_url }}"
+        loading="lazy"
+        alt="{{ block.settings.logo.alt | escape }}"
+        width="{{ block.settings.logo.width }}"
+        height="{{ block.settings.logo.height }}"
+        class="{{ section.settings.image_style }}"
+      >
+    {% endfor %}
+  </div>
+  <div class="slide">
+    {% for block in section.blocks %}
+      <img
+        srcset="{{ block.settings.logo | image_url }}"
+        loading="lazy"
+        alt="{{ block.settings.logo.alt | escape }}"
+        width="{{ block.settings.logo.width }}"
+        height="{{ block.settings.logo.height }}"
+        class="{{ section.settings.image_style }}"
+      >
+    {% endfor %}
+  </div>
+  <div class="slide">
+    {% for block in section.blocks %}
+      <img
+        srcset="{{ block.settings.logo | image_url }}"
+        loading="lazy"
+        alt="{{ block.settings.logo.alt | escape }}"
+        width="{{ block.settings.logo.width }}"
+        height="{{ block.settings.logo.height }}"
+        class="{{ section.settings.image_style }}"
+      >
+    {% endfor %}
+  </div>
+  <div class="slide">
+    {% for block in section.blocks %}
+      <img
+        srcset="{{ block.settings.logo | image_url }}"
+        loading="lazy"
+        alt="{{ block.settings.logo.alt | escape }}"
+        width="{{ block.settings.logo.width }}"
+        height="{{ block.settings.logo.height }}"
+        class="{{ section.settings.image_style }}"
+      >
+    {% endfor %}
+  </div>
+  <div class="slide">
+    {% for block in section.blocks %}
+      <img
+        srcset="{{ block.settings.logo | image_url }}"
+        loading="lazy"
+        alt="{{ block.settings.logo.alt | escape }}"
+        width="{{ block.settings.logo.width }}"
+        height="{{ block.settings.logo.height }}"
+        class="{{ section.settings.image_style }}"
+      >
+    {% endfor %}
+  </div>
+  <div class="slide">
+    {% for block in section.blocks %}
+      <img
+        srcset="{{ block.settings.logo | image_url }}"
+        loading="lazy"
+        alt="{{ block.settings.logo.alt | escape }}"
+        width="{{ block.settings.logo.width }}"
+        height="{{ block.settings.logo.height }}"
+        class="{{ section.settings.image_style }}"
+      >
+    {% endfor %}
+  </div>
+  <div class="slide">
+    {% for block in section.blocks %}
+      <img
+        srcset="{{ block.settings.logo | image_url }}"
+        loading="lazy"
+        alt="{{ block.settings.logo.alt | escape }}"
+        width="{{ block.settings.logo.width }}"
+        height="{{ block.settings.logo.height }}"
+        class="{{ section.settings.image_style }}"
+      >
+    {% endfor %}
+  </div>
+  <div class="slide">
+    {% for block in section.blocks %}
+      <img
+        srcset="{{ block.settings.logo | image_url }}"
+        loading="lazy"
+        alt="{{ block.settings.logo.alt | escape }}"
+        width="{{ block.settings.logo.width }}"
+        height="{{ block.settings.logo.height }}"
+        class="{{ section.settings.image_style }}"
+      >
+    {% endfor %}
+  </div>
+  <div class="slide">
+    {% for block in section.blocks %}
+      <img
+        srcset="{{ block.settings.logo | image_url }}"
+        loading="lazy"
+        alt="{{ block.settings.logo.alt | escape }}"
+        width="{{ block.settings.logo.width }}"
+        height="{{ block.settings.logo.height }}"
+        class="{{ section.settings.image_style }}"
+      >
+    {% endfor %}
+  </div>
+  <div class="slide">
+    {% for block in section.blocks %}
+      <img
+        srcset="{{ block.settings.logo | image_url }}"
+        loading="lazy"
+        alt="{{ block.settings.logo.alt | escape }}"
+        width="{{ block.settings.logo.width }}"
+        height="{{ block.settings.logo.height }}"
+        class="{{ section.settings.image_style }}"
+      >
+    {% endfor %}
+  </div>
+  <div class="slide">
+    {% for block in section.blocks %}
+      <img
+        srcset="{{ block.settings.logo | image_url }}"
+        loading="lazy"
+        alt="{{ block.settings.logo.alt | escape }}"
+        width="{{ block.settings.logo.width }}"
+        height="{{ block.settings.logo.height }}"
+        class="{{ section.settings.image_style }}"
+      >
+    {% endfor %}
+  </div>
+  <div class="slide">
+    {% for block in section.blocks %}
+      <img
+        srcset="{{ block.settings.logo | image_url }}"
+        loading="lazy"
+        alt="{{ block.settings.logo.alt | escape }}"
+        width="{{ block.settings.logo.width }}"
+        height="{{ block.settings.logo.height }}"
+        class="{{ section.settings.image_style }}"
+      >
+    {% endfor %}
+  </div>
+  <div class="slide">
+    {% for block in section.blocks %}
+      <img
+        srcset="{{ block.settings.logo | image_url }}"
+        loading="lazy"
+        alt="{{ block.settings.logo.alt | escape }}"
+        width="{{ block.settings.logo.width }}"
+        height="{{ block.settings.logo.height }}"
+        class="{{ section.settings.image_style }}"
+      >
+    {% endfor %}
+  </div>
+  <div class="slide">
+    {% for block in section.blocks %}
+      <img
+        srcset="{{ block.settings.logo | image_url }}"
+        loading="lazy"
+        alt="{{ block.settings.logo.alt | escape }}"
+        width="{{ block.settings.logo.width }}"
+        height="{{ block.settings.logo.height }}"
+        class="{{ section.settings.image_style }}"
+      >
+    {% endfor %}
+  </div>
+  <div class="slide">
+    {% for block in section.blocks %}
+      <img
+        srcset="{{ block.settings.logo | image_url }}"
+        loading="lazy"
+        alt="{{ block.settings.logo.alt | escape }}"
+        width="{{ block.settings.logo.width }}"
+        height="{{ block.settings.logo.height }}"
+        class="{{ section.settings.image_style }}"
+      >
+    {% endfor %}
+  </div>
+  <div class="slide">
+    {% for block in section.blocks %}
+      <img
+        srcset="{{ block.settings.logo | image_url }}"
+        loading="lazy"
+        alt="{{ block.settings.logo.alt | escape }}"
+        width="{{ block.settings.logo.width }}"
+        height="{{ block.settings.logo.height }}"
+        class="{{ section.settings.image_style }}"
+      >
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Logo list",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "image_picker",
+      "name": "Logo",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "logo",
+          "label": "Logo"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Logo list",
+      "blocks": []
+    }
+  ]
+}
+{% endschema %}

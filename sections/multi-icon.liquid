@@ -1,0 +1,34 @@
+{{ 'multi-icons.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+{%- endstyle -%}
+
+<section class="multi-icon">
+  <div class="multi-icon__container">
+    <div class="multi-icon__heading">
+      <h6>Heading</h6>
+    </div>
+    <div class="multi-icon__icons">
+      {% include 'multi-icon__icon' %}
+      {% include 'multi-icon__icon' %}
+      {% include 'multi-icon__icon' %}
+      {% include 'multi-icon__icon' %}
+      {% include 'multi-icon__icon' %}
+      {% include 'multi-icon__icon' %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Multi icons",
+  "settings": [],
+  "blocks": [],
+  "presets": [
+    {
+      "name": "Multi icons",
+      "blocks": []
+    }
+  ]
+}
+{% endschema %}

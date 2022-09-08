@@ -1,0 +1,28 @@
+.logo-list {
+  width: 100%;
+  position: relative;
+  display: flex;
+  overflow: hidden;
+}
+.logo-list .slide {
+  display: flex;
+  align-items: center;
+}
+
+@-webkit-keyframes slideshow {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes slideshow {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
