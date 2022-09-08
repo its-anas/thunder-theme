@@ -42,7 +42,7 @@
   text-align: center;
 }
 
-@-webkit-keyframes scroll {
+@-webkit-keyframes banner-scroll {
   from {
     transform: translateX(0);
   }
@@ -51,7 +51,7 @@
   }
 }
 
-@keyframes scroll {
+@keyframes banner-scroll {
   from {
     transform: translateX(0);
   }

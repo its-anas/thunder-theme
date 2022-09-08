@@ -1,16 +1,31 @@
 .logo-list {
-  width: 100%;
-  position: relative;
   display: flex;
-  overflow: hidden;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
 
-  .slide {
+  .logo-list__content {
+    width: 100%;
+    height: auto;
+    position: relative;
     display: flex;
-    align-items: center;
+    overflow: hidden;
+
+    .slide {
+      display: flex;
+      align-items: center;
+      height: auto;
+
+      .logo {
+        width: auto;
+        object-fit: contain;
+        margin: 0px 10px;
+      }
+    }
   }
 }
 
-@keyframes slideshow {
+@keyframes logos-scroll {
   0% {
     transform: translateX(0);
   }
