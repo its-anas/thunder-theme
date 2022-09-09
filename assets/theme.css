@@ -331,8 +331,10 @@ a.border.button--primary:hover, a.border.button--secondary:hover {
   }
 }
 /* ------------ ANCHOR: All sections ------------ */
-.container {
-  padding: 15px;
+@media screen and (mac-width: 750px) {
+  .container {
+    padding: 15px;
+  }
 }
 @media screen and (min-width: 750px) {
   .container {

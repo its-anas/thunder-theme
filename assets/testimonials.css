@@ -3,21 +3,20 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: s1rem;
+  gap: 2rem;
   overflow: hidden;
+  padding: 2rem 0;
 }
 .testimonials__content {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 2rem;
   width: 100%;
-  padding: 20px 0px;
+  padding-bottom: 0.8rem;
 }
 .testimonials__row, .testimonials__row--reversed {
   display: flex;
   flex-direction: row;
-  gap: 2rem;
 }
 .testimonials__row {
   justify-content: flex-end;
@@ -28,24 +27,60 @@
 .testimonials__slide--right, .testimonials__slide--left {
   display: flex;
   flex-direction: row;
-  gap: 2rem;
-}
-.testimonials__slide--right {
-  -webkit-animation: testimonials-slide--right 20s linear infinite;
-          animation: testimonials-slide--right 20s linear infinite;
-}
-.testimonials__slide--left {
-  -webkit-animation: testimonials-slide--left 20s linear infinite;
-          animation: testimonials-slide--left 20s linear infinite;
 }
 .testimonials__item {
-  background-color: aqua;
-  height: 200px;
-  width: 300px;
   transition: all 0.2s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  gap: 1rem;
 }
 .testimonials__item:hover {
-  transform: scale(1.1);
+  transform: scale(1.05);
+}
+.testimonials__reviewer {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+}
+.testimonials__reviewer-picture {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+@media screen and (min-width: 750px) {
+  .testimonials__reviewer-picture {
+    height: 60px;
+    width: 60px;
+  }
+}
+.testimonials__reviewer-info {
+  width: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+}
+.testimonials__reviewer-name {
+  opacity: 60%;
+  font-size: 0.8rem;
+}
+.testimonials__review {
+  width: 100%;
+  height: 100%;
+}
+.testimonials__review p {
+  font-size: 0.7rem;
+}
+@media screen and (min-width: 750px) {
+  .testimonials__review p {
+    font-size: 0.8rem;
+  }
 }
 
 @-webkit-keyframes testimonials-slide--right {

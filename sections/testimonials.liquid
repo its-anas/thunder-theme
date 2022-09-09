@@ -1,233 +1,853 @@
 {{ 'testimonials.css' | asset_url | stylesheet_tag }}
 
 {%- style -%}
+  .{{ section.id }}.testimonials {
+    margin-top: {{ section.settings.space_outside | divided_by: 2 }}px;
+    margin-bottom: {{ section.settings.space_outside | divided_by: 2 }}px;
+    padding-top: {{ section.settings.top_padding }}px;
+    padding-bottom: {{ section.settings.bottom_padding }}px;
+  }
+
+  .{{ section.id }}.testimonials--just-color {
+    background-color: {{ section.settings.background_color }};
+   }
+
+   .{{ section.id }}.testimonials--image {
+       {% if section.settings.section_width == "wrapped" %}
+            background-image: url({{ section.settings.background_image | image_url: width: settings.wrapped_content_width }});
+            background-repeat: no-repeat;
+       {% endif %}
+       {% if section.settings.section_width == "full-width" %}
+            background-image: url({{ section.settings.background_image | image_url }});
+            background-size: cover;
+       {% endif %}
+       background-position: center;
+   }
+
+  .{{ section.id }}.testimonials__content,
+  .{{ section.id }}.testimonials__row,
+  .{{ section.id }}.testimonials__row--reversed,
+  .{{ section.id }}.testimonials__slide--right,
+  .{{ section.id }}.testimonials__slide--left {
+    gap: {{ section.settings.space_between_elements | divided_by: 2.0 }}rem;
+  }
+  .{{ section.id }}.testimonials__item {
+    min-height: {{ section.settings.review_height | times: 0.8 }}px;
+    width: {{ section.settings.review_width | times: 0.8 }}px;
+    background-color: {{ section.settings.review_background_color }};
+    border: {{ section.settings.review_border_width }}px {{ section.settings.review_border_color }} solid;
+  }
+  @media screen and (min-width: 750px) {
+    .{{ section.id }}.testimonials__content,
+    .{{ section.id }}.testimonials__row,
+    .{{ section.id }}.testimonials__row--reversed,
+    .{{ section.id }}.testimonials__slide--right,
+    .{{ section.id }}.testimonials__slide--left {
+      gap: {{ section.settings.space_between_elements }}rem;
+    }
+    .{{ section.id }}.testimonials__item {
+      min-height: {{ section.settings.review_height }}px;
+      width: {{ section.settings.review_width }}px;
+    }
+  }
+
+  .{{ section.id }}.testimonials__slide--right {
+    {% if section.settings.animated %}
+      animation: testimonials-slide--right {{ section.settings.animation_speed }}s linear infinite;
+    {% endif %}
+  }
+  .{{ section.id }}.testimonials__slide--left {
+    {% if section.settings.animated %}
+      animation: testimonials-slide--left {{ section.settings.animation_speed }}s linear infinite;
+    {% endif %}
+  }
 {%- endstyle -%}
 
-<section class="testimonials">
+<section class="{{ section.id }} testimonials {% if section.settings.background_image == blank %}testimonials--just-color{% else %}testimonials--{{ section.settings.background_type }}{% endif %} {{ section.settings.section_width }}">
   <div class="testimonials__heading">
-    <h6>Recent reviews</h6>
+    <h6>{{ section.settings.heading }}</h6>
   </div>
-  <div class="testimonials__content">
-    <div class="testimonials__row">
-      <div class="testimonials__slide--right">
+  <div class="{{ section.id }} testimonials__content">
+    <div class="{{ section.id }} testimonials__row">
+      <div class="{{ section.id }} testimonials__slide--right">
         {% for block in section.blocks %}
           {% assign num = forloop.index | modulo: 2 %}
           {% if num == 0 %}
+          {% else %}
             <div class="testimonials__item">
               <h6>{{ block.settings.text }}</h6>
             </div>
-          {% else %}
-
           {% endif %}
         {% endfor -%}
       </div>
-      <div class="testimonials__slide--right">
+
+      <div class="{{ section.id }} testimonials__slide--right">
         {% for block in section.blocks %}
           {% assign num = forloop.index | modulo: 2 %}
           {% if num == 0 %}
-            <div class="testimonials__item">
-              <h6>{{ block.settings.text }}</h6>
-            </div>
           {% else %}
+            <div class="{{ section.id }} testimonials__item">
+              <div class="testimonials__reviewer">
+                <div class="testimonials__reviewer-picture media">
+                  {%- if block.settings.reviewer_picture == blank -%}
+                    {{ 'product-3' | placeholder_svg_tag: 'placeholder' }}
+                  {%- elsif block.settings.reviewer_picture != blank -%}
+                    <img
+                      srcset="{{ block.settings.reviewer_picture | image_url }}"
+                      alt="{{ block.settings.reviewer_picture.alt | escape }}"
+                      width="{{ block.settings.reviewer_picture.width }}"
+                      height="{{ block.settings.reviewer_picture.height }}"
+                      class="fit"
+                    >
+                  {% endif %}
+                </div>
 
+                <div class="testimonials__reviewer-info">
+                  <div class="testimonials__reviewer-stars">
+                    {% render 'stars', stars: block.settings.stars_count -%}
+                  </div>
+                  <p class="testimonials__reviewer-name">~{{ block.settings.reviewer_name }}</p>
+                </div>
+              </div>
+
+              <div class="testimonials__review">
+                <p>"{{ block.settings.review_text | truncate: 200 }}"</p>
+              </div>
+            </div>
           {% endif %}
         {% endfor -%}
       </div>
-      <div class="testimonials__slide--right">
+
+      <div class="{{ section.id }} testimonials__slide--right">
         {% for block in section.blocks %}
           {% assign num = forloop.index | modulo: 2 %}
           {% if num == 0 %}
-            <div class="testimonials__item">
-              <h6>{{ block.settings.text }}</h6>
-            </div>
           {% else %}
+            <div class="{{ section.id }} testimonials__item">
+              <div class="testimonials__reviewer">
+                <div class="testimonials__reviewer-picture media">
+                  {%- if block.settings.reviewer_picture == blank -%}
+                    {{ 'product-3' | placeholder_svg_tag: 'placeholder' }}
+                  {%- elsif block.settings.reviewer_picture != blank -%}
+                    <img
+                      srcset="{{ block.settings.reviewer_picture | image_url }}"
+                      alt="{{ block.settings.reviewer_picture.alt | escape }}"
+                      width="{{ block.settings.reviewer_picture.width }}"
+                      height="{{ block.settings.reviewer_picture.height }}"
+                      class="fit"
+                    >
+                  {% endif %}
+                </div>
 
+                <div class="testimonials__reviewer-info">
+                  <div class="testimonials__reviewer-stars">
+                    {% render 'stars', stars: block.settings.stars_count -%}
+                  </div>
+                  <p class="testimonials__reviewer-name">~{{ block.settings.reviewer_name }}</p>
+                </div>
+              </div>
+
+              <div class="testimonials__review">
+                <p>"{{ block.settings.review_text | truncate: 200 }}"</p>
+              </div>
+            </div>
           {% endif %}
         {% endfor -%}
       </div>
-      <div class="testimonials__slide--right">
+      <div class="{{ section.id }} testimonials__slide--right">
         {% for block in section.blocks %}
           {% assign num = forloop.index | modulo: 2 %}
           {% if num == 0 %}
-            <div class="testimonials__item">
-              <h6>{{ block.settings.text }}</h6>
-            </div>
           {% else %}
+            <div class="{{ section.id }} testimonials__item">
+              <div class="testimonials__reviewer">
+                <div class="testimonials__reviewer-picture media">
+                  {%- if block.settings.reviewer_picture == blank -%}
+                    {{ 'product-3' | placeholder_svg_tag: 'placeholder' }}
+                  {%- elsif block.settings.reviewer_picture != blank -%}
+                    <img
+                      srcset="{{ block.settings.reviewer_picture | image_url }}"
+                      alt="{{ block.settings.reviewer_picture.alt | escape }}"
+                      width="{{ block.settings.reviewer_picture.width }}"
+                      height="{{ block.settings.reviewer_picture.height }}"
+                      class="fit"
+                    >
+                  {% endif %}
+                </div>
 
+                <div class="testimonials__reviewer-info">
+                  <div class="testimonials__reviewer-stars">
+                    {% render 'stars', stars: block.settings.stars_count -%}
+                  </div>
+                  <p class="testimonials__reviewer-name">~{{ block.settings.reviewer_name }}</p>
+                </div>
+              </div>
+
+              <div class="testimonials__review">
+                <p>"{{ block.settings.review_text | truncate: 200 }}"</p>
+              </div>
+            </div>
           {% endif %}
         {% endfor -%}
       </div>
-      <div class="testimonials__slide--right">
+      <div class="{{ section.id }} testimonials__slide--right">
         {% for block in section.blocks %}
           {% assign num = forloop.index | modulo: 2 %}
           {% if num == 0 %}
-            <div class="testimonials__item">
-              <h6>{{ block.settings.text }}</h6>
-            </div>
           {% else %}
+            <div class="{{ section.id }} testimonials__item">
+              <div class="testimonials__reviewer">
+                <div class="testimonials__reviewer-picture media">
+                  {%- if block.settings.reviewer_picture == blank -%}
+                    {{ 'product-3' | placeholder_svg_tag: 'placeholder' }}
+                  {%- elsif block.settings.reviewer_picture != blank -%}
+                    <img
+                      srcset="{{ block.settings.reviewer_picture | image_url }}"
+                      alt="{{ block.settings.reviewer_picture.alt | escape }}"
+                      width="{{ block.settings.reviewer_picture.width }}"
+                      height="{{ block.settings.reviewer_picture.height }}"
+                      class="fit"
+                    >
+                  {% endif %}
+                </div>
 
+                <div class="testimonials__reviewer-info">
+                  <div class="testimonials__reviewer-stars">
+                    {% render 'stars', stars: block.settings.stars_count -%}
+                  </div>
+                  <p class="testimonials__reviewer-name">~{{ block.settings.reviewer_name }}</p>
+                </div>
+              </div>
+
+              <div class="testimonials__review">
+                <p>"{{ block.settings.review_text | truncate: 200 }}"</p>
+              </div>
+            </div>
           {% endif %}
         {% endfor -%}
       </div>
-      <div class="testimonials__slide--right">
+      <div class="{{ section.id }} testimonials__slide--right">
         {% for block in section.blocks %}
           {% assign num = forloop.index | modulo: 2 %}
           {% if num == 0 %}
-            <div class="testimonials__item">
-              <h6>{{ block.settings.text }}</h6>
-            </div>
           {% else %}
+            <div class="{{ section.id }} testimonials__item">
+              <div class="testimonials__reviewer">
+                <div class="testimonials__reviewer-picture media">
+                  {%- if block.settings.reviewer_picture == blank -%}
+                    {{ 'product-3' | placeholder_svg_tag: 'placeholder' }}
+                  {%- elsif block.settings.reviewer_picture != blank -%}
+                    <img
+                      srcset="{{ block.settings.reviewer_picture | image_url }}"
+                      alt="{{ block.settings.reviewer_picture.alt | escape }}"
+                      width="{{ block.settings.reviewer_picture.width }}"
+                      height="{{ block.settings.reviewer_picture.height }}"
+                      class="fit"
+                    >
+                  {% endif %}
+                </div>
 
+                <div class="testimonials__reviewer-info">
+                  <div class="testimonials__reviewer-stars">
+                    {% render 'stars', stars: block.settings.stars_count -%}
+                  </div>
+                  <p class="testimonials__reviewer-name">~{{ block.settings.reviewer_name }}</p>
+                </div>
+              </div>
+
+              <div class="testimonials__review">
+                <p>"{{ block.settings.review_text | truncate: 200 }}"</p>
+              </div>
+            </div>
           {% endif %}
         {% endfor -%}
       </div>
-      <div class="testimonials__slide--right">
+      <div class="{{ section.id }} testimonials__slide--right">
         {% for block in section.blocks %}
           {% assign num = forloop.index | modulo: 2 %}
           {% if num == 0 %}
-            <div class="testimonials__item">
-              <h6>{{ block.settings.text }}</h6>
-            </div>
           {% else %}
+            <div class="{{ section.id }} testimonials__item">
+              <div class="testimonials__reviewer">
+                <div class="testimonials__reviewer-picture media">
+                  {%- if block.settings.reviewer_picture == blank -%}
+                    {{ 'product-3' | placeholder_svg_tag: 'placeholder' }}
+                  {%- elsif block.settings.reviewer_picture != blank -%}
+                    <img
+                      srcset="{{ block.settings.reviewer_picture | image_url }}"
+                      alt="{{ block.settings.reviewer_picture.alt | escape }}"
+                      width="{{ block.settings.reviewer_picture.width }}"
+                      height="{{ block.settings.reviewer_picture.height }}"
+                      class="fit"
+                    >
+                  {% endif %}
+                </div>
 
+                <div class="testimonials__reviewer-info">
+                  <div class="testimonials__reviewer-stars">
+                    {% render 'stars', stars: block.settings.stars_count -%}
+                  </div>
+                  <p class="testimonials__reviewer-name">~{{ block.settings.reviewer_name }}</p>
+                </div>
+              </div>
+
+              <div class="testimonials__review">
+                <p>"{{ block.settings.review_text | truncate: 200 }}"</p>
+              </div>
+            </div>
           {% endif %}
         {% endfor -%}
       </div>
-      <div class="testimonials__slide--right">
+      <div class="{{ section.id }} testimonials__slide--right">
         {% for block in section.blocks %}
           {% assign num = forloop.index | modulo: 2 %}
           {% if num == 0 %}
-            <div class="testimonials__item">
-              <h6>{{ block.settings.text }}</h6>
-            </div>
           {% else %}
+            <div class="{{ section.id }} testimonials__item">
+              <div class="testimonials__reviewer">
+                <div class="testimonials__reviewer-picture media">
+                  {%- if block.settings.reviewer_picture == blank -%}
+                    {{ 'product-3' | placeholder_svg_tag: 'placeholder' }}
+                  {%- elsif block.settings.reviewer_picture != blank -%}
+                    <img
+                      srcset="{{ block.settings.reviewer_picture | image_url }}"
+                      alt="{{ block.settings.reviewer_picture.alt | escape }}"
+                      width="{{ block.settings.reviewer_picture.width }}"
+                      height="{{ block.settings.reviewer_picture.height }}"
+                      class="fit"
+                    >
+                  {% endif %}
+                </div>
 
+                <div class="testimonials__reviewer-info">
+                  <div class="testimonials__reviewer-stars">
+                    {% render 'stars', stars: block.settings.stars_count -%}
+                  </div>
+                  <p class="testimonials__reviewer-name">~{{ block.settings.reviewer_name }}</p>
+                </div>
+              </div>
+
+              <div class="testimonials__review">
+                <p>"{{ block.settings.review_text | truncate: 200 }}"</p>
+              </div>
+            </div>
           {% endif %}
         {% endfor -%}
       </div>
-      <div class="testimonials__slide--right">
+      <div class="{{ section.id }} testimonials__slide--right">
         {% for block in section.blocks %}
           {% assign num = forloop.index | modulo: 2 %}
           {% if num == 0 %}
-            <div class="testimonials__item">
-              <h6>{{ block.settings.text }}</h6>
-            </div>
           {% else %}
+            <div class="{{ section.id }} testimonials__item">
+              <div class="testimonials__reviewer">
+                <div class="testimonials__reviewer-picture media">
+                  {%- if block.settings.reviewer_picture == blank -%}
+                    {{ 'product-3' | placeholder_svg_tag: 'placeholder' }}
+                  {%- elsif block.settings.reviewer_picture != blank -%}
+                    <img
+                      srcset="{{ block.settings.reviewer_picture | image_url }}"
+                      alt="{{ block.settings.reviewer_picture.alt | escape }}"
+                      width="{{ block.settings.reviewer_picture.width }}"
+                      height="{{ block.settings.reviewer_picture.height }}"
+                      class="fit"
+                    >
+                  {% endif %}
+                </div>
 
+                <div class="testimonials__reviewer-info">
+                  <div class="testimonials__reviewer-stars">
+                    {% render 'stars', stars: block.settings.stars_count -%}
+                  </div>
+                  <p class="testimonials__reviewer-name">~{{ block.settings.reviewer_name }}</p>
+                </div>
+              </div>
+
+              <div class="testimonials__review">
+                <p>"{{ block.settings.review_text | truncate: 200 }}"</p>
+              </div>
+            </div>
           {% endif %}
         {% endfor -%}
       </div>
-      <div class="testimonials__slide--right">
+      <div class="{{ section.id }} testimonials__slide--right">
         {% for block in section.blocks %}
           {% assign num = forloop.index | modulo: 2 %}
           {% if num == 0 %}
-            <div class="testimonials__item">
-              <h6>{{ block.settings.text }}</h6>
-            </div>
           {% else %}
+            <div class="{{ section.id }} testimonials__item">
+              <div class="testimonials__reviewer">
+                <div class="testimonials__reviewer-picture media">
+                  {%- if block.settings.reviewer_picture == blank -%}
+                    {{ 'product-3' | placeholder_svg_tag: 'placeholder' }}
+                  {%- elsif block.settings.reviewer_picture != blank -%}
+                    <img
+                      srcset="{{ block.settings.reviewer_picture | image_url }}"
+                      alt="{{ block.settings.reviewer_picture.alt | escape }}"
+                      width="{{ block.settings.reviewer_picture.width }}"
+                      height="{{ block.settings.reviewer_picture.height }}"
+                      class="fit"
+                    >
+                  {% endif %}
+                </div>
 
+                <div class="testimonials__reviewer-info">
+                  <div class="testimonials__reviewer-stars">
+                    {% render 'stars', stars: block.settings.stars_count -%}
+                  </div>
+                  <p class="testimonials__reviewer-name">~{{ block.settings.reviewer_name }}</p>
+                </div>
+              </div>
+
+              <div class="testimonials__review">
+                <p>"{{ block.settings.review_text | truncate: 200 }}"</p>
+              </div>
+            </div>
           {% endif %}
         {% endfor -%}
       </div>
-      <div class="testimonials__slide--right">
+      <div class="{{ section.id }} testimonials__slide--right">
         {% for block in section.blocks %}
           {% assign num = forloop.index | modulo: 2 %}
           {% if num == 0 %}
-            <div class="testimonials__item">
-              <h6>{{ block.settings.text }}</h6>
-            </div>
           {% else %}
+            <div class="{{ section.id }} testimonials__item">
+              <div class="testimonials__reviewer">
+                <div class="testimonials__reviewer-picture media">
+                  {%- if block.settings.reviewer_picture == blank -%}
+                    {{ 'product-3' | placeholder_svg_tag: 'placeholder' }}
+                  {%- elsif block.settings.reviewer_picture != blank -%}
+                    <img
+                      srcset="{{ block.settings.reviewer_picture | image_url }}"
+                      alt="{{ block.settings.reviewer_picture.alt | escape }}"
+                      width="{{ block.settings.reviewer_picture.width }}"
+                      height="{{ block.settings.reviewer_picture.height }}"
+                      class="fit"
+                    >
+                  {% endif %}
+                </div>
 
+                <div class="testimonials__reviewer-info">
+                  <div class="testimonials__reviewer-stars">
+                    {% render 'stars', stars: block.settings.stars_count -%}
+                  </div>
+                  <p class="testimonials__reviewer-name">~{{ block.settings.reviewer_name }}</p>
+                </div>
+              </div>
+
+              <div class="testimonials__review">
+                <p>"{{ block.settings.review_text | truncate: 200 }}"</p>
+              </div>
+            </div>
           {% endif %}
         {% endfor -%}
       </div>
     </div>
-    <div class="testimonials__row--reversed">
-      <div class="testimonials__slide--left">
+    <div class="{{ section.id }} testimonials__row--reversed">
+      <div class="{{ section.id }} testimonials__slide--left">
         {% for block in section.blocks %}
           {% assign num = forloop.index | modulo: 2 %}
           {% if num == 0 %}
-          {% else %}
-            <div class="testimonials__item">
-              <h6>{{ block.settings.text }}</h6>
+            <div class="{{ section.id }} testimonials__item">
+              <div class="testimonials__reviewer">
+                <div class="testimonials__reviewer-picture media">
+                  {%- if block.settings.reviewer_picture == blank -%}
+                    {{ 'product-3' | placeholder_svg_tag: 'placeholder' }}
+                  {%- elsif block.settings.reviewer_picture != blank -%}
+                    <img
+                      srcset="{{ block.settings.reviewer_picture | image_url }}"
+                      alt="{{ block.settings.reviewer_picture.alt | escape }}"
+                      width="{{ block.settings.reviewer_picture.width }}"
+                      height="{{ block.settings.reviewer_picture.height }}"
+                      class="fit"
+                    >
+                  {% endif %}
+                </div>
+
+                <div class="testimonials__reviewer-info">
+                  <div class="testimonials__reviewer-stars">
+                    {% render 'stars', stars: block.settings.stars_count -%}
+                  </div>
+                  <p class="testimonials__reviewer-name">~{{ block.settings.reviewer_name }}</p>
+                </div>
+              </div>
+
+              <div class="testimonials__review">
+                <p>"{{ block.settings.review_text | truncate: 200 }}"</p>
+              </div>
             </div>
+          {% else %}
+
           {% endif %}
         {% endfor -%}
       </div>
-      <div class="testimonials__slide--left">
+      <div class="{{ section.id }} testimonials__slide--left">
         {% for block in section.blocks %}
           {% assign num = forloop.index | modulo: 2 %}
           {% if num == 0 %}
-          {% else %}
-            <div class="testimonials__item">
-              <h6>{{ block.settings.text }}</h6>
+            <div class="{{ section.id }} testimonials__item">
+              <div class="testimonials__reviewer">
+                <div class="testimonials__reviewer-picture media">
+                  {%- if block.settings.reviewer_picture == blank -%}
+                    {{ 'product-3' | placeholder_svg_tag: 'placeholder' }}
+                  {%- elsif block.settings.reviewer_picture != blank -%}
+                    <img
+                      srcset="{{ block.settings.reviewer_picture | image_url }}"
+                      alt="{{ block.settings.reviewer_picture.alt | escape }}"
+                      width="{{ block.settings.reviewer_picture.width }}"
+                      height="{{ block.settings.reviewer_picture.height }}"
+                      class="fit"
+                    >
+                  {% endif %}
+                </div>
+
+                <div class="testimonials__reviewer-info">
+                  <div class="testimonials__reviewer-stars">
+                    {% render 'stars', stars: block.settings.stars_count -%}
+                  </div>
+                  <p class="testimonials__reviewer-name">~{{ block.settings.reviewer_name }}</p>
+                </div>
+              </div>
+
+              <div class="testimonials__review">
+                <p>"{{ block.settings.review_text | truncate: 200 }}"</p>
+              </div>
             </div>
+          {% else %}
+
           {% endif %}
         {% endfor -%}
       </div>
-      <div class="testimonials__slide--left">
+      <div class="{{ section.id }} testimonials__slide--left">
         {% for block in section.blocks %}
           {% assign num = forloop.index | modulo: 2 %}
           {% if num == 0 %}
-          {% else %}
-            <div class="testimonials__item">
-              <h6>{{ block.settings.text }}</h6>
+            <div class="{{ section.id }} testimonials__item">
+              <div class="testimonials__reviewer">
+                <div class="testimonials__reviewer-picture media">
+                  {%- if block.settings.reviewer_picture == blank -%}
+                    {{ 'product-3' | placeholder_svg_tag: 'placeholder' }}
+                  {%- elsif block.settings.reviewer_picture != blank -%}
+                    <img
+                      srcset="{{ block.settings.reviewer_picture | image_url }}"
+                      alt="{{ block.settings.reviewer_picture.alt | escape }}"
+                      width="{{ block.settings.reviewer_picture.width }}"
+                      height="{{ block.settings.reviewer_picture.height }}"
+                      class="fit"
+                    >
+                  {% endif %}
+                </div>
+
+                <div class="testimonials__reviewer-info">
+                  <div class="testimonials__reviewer-stars">
+                    {% render 'stars', stars: block.settings.stars_count -%}
+                  </div>
+                  <p class="testimonials__reviewer-name">~{{ block.settings.reviewer_name }}</p>
+                </div>
+              </div>
+
+              <div class="testimonials__review">
+                <p>"{{ block.settings.review_text | truncate: 200 }}"</p>
+              </div>
             </div>
+          {% else %}
+
           {% endif %}
         {% endfor -%}
       </div>
-      <div class="testimonials__slide--left">
+      <div class="{{ section.id }} testimonials__slide--left">
         {% for block in section.blocks %}
           {% assign num = forloop.index | modulo: 2 %}
           {% if num == 0 %}
-          {% else %}
-            <div class="testimonials__item">
-              <h6>{{ block.settings.text }}</h6>
+            <div class="{{ section.id }} testimonials__item">
+              <div class="testimonials__reviewer">
+                <div class="testimonials__reviewer-picture media">
+                  {%- if block.settings.reviewer_picture == blank -%}
+                    {{ 'product-3' | placeholder_svg_tag: 'placeholder' }}
+                  {%- elsif block.settings.reviewer_picture != blank -%}
+                    <img
+                      srcset="{{ block.settings.reviewer_picture | image_url }}"
+                      alt="{{ block.settings.reviewer_picture.alt | escape }}"
+                      width="{{ block.settings.reviewer_picture.width }}"
+                      height="{{ block.settings.reviewer_picture.height }}"
+                      class="fit"
+                    >
+                  {% endif %}
+                </div>
+
+                <div class="testimonials__reviewer-info">
+                  <div class="testimonials__reviewer-stars">
+                    {% render 'stars', stars: block.settings.stars_count -%}
+                  </div>
+                  <p class="testimonials__reviewer-name">~{{ block.settings.reviewer_name }}</p>
+                </div>
+              </div>
+
+              <div class="testimonials__review">
+                <p>"{{ block.settings.review_text | truncate: 200 }}"</p>
+              </div>
             </div>
+          {% else %}
+
           {% endif %}
         {% endfor -%}
       </div>
-      <div class="testimonials__slide--left">
+      <div class="{{ section.id }} testimonials__slide--left">
         {% for block in section.blocks %}
           {% assign num = forloop.index | modulo: 2 %}
           {% if num == 0 %}
-          {% else %}
-            <div class="testimonials__item">
-              <h6>{{ block.settings.text }}</h6>
+            <div class="{{ section.id }} testimonials__item">
+              <div class="testimonials__reviewer">
+                <div class="testimonials__reviewer-picture media">
+                  {%- if block.settings.reviewer_picture == blank -%}
+                    {{ 'product-3' | placeholder_svg_tag: 'placeholder' }}
+                  {%- elsif block.settings.reviewer_picture != blank -%}
+                    <img
+                      srcset="{{ block.settings.reviewer_picture | image_url }}"
+                      alt="{{ block.settings.reviewer_picture.alt | escape }}"
+                      width="{{ block.settings.reviewer_picture.width }}"
+                      height="{{ block.settings.reviewer_picture.height }}"
+                      class="fit"
+                    >
+                  {% endif %}
+                </div>
+
+                <div class="testimonials__reviewer-info">
+                  <div class="testimonials__reviewer-stars">
+                    {% render 'stars', stars: block.settings.stars_count -%}
+                  </div>
+                  <p class="testimonials__reviewer-name">~{{ block.settings.reviewer_name }}</p>
+                </div>
+              </div>
+
+              <div class="testimonials__review">
+                <p>"{{ block.settings.review_text | truncate: 200 }}"</p>
+              </div>
             </div>
+          {% else %}
+
           {% endif %}
         {% endfor -%}
       </div>
-      <div class="testimonials__slide--left">
+      <div class="{{ section.id }} testimonials__slide--left">
         {% for block in section.blocks %}
           {% assign num = forloop.index | modulo: 2 %}
           {% if num == 0 %}
-          {% else %}
-            <div class="testimonials__item">
-              <h6>{{ block.settings.text }}</h6>
+            <div class="{{ section.id }} testimonials__item">
+              <div class="testimonials__reviewer">
+                <div class="testimonials__reviewer-picture media">
+                  {%- if block.settings.reviewer_picture == blank -%}
+                    {{ 'product-3' | placeholder_svg_tag: 'placeholder' }}
+                  {%- elsif block.settings.reviewer_picture != blank -%}
+                    <img
+                      srcset="{{ block.settings.reviewer_picture | image_url }}"
+                      alt="{{ block.settings.reviewer_picture.alt | escape }}"
+                      width="{{ block.settings.reviewer_picture.width }}"
+                      height="{{ block.settings.reviewer_picture.height }}"
+                      class="fit"
+                    >
+                  {% endif %}
+                </div>
+
+                <div class="testimonials__reviewer-info">
+                  <div class="testimonials__reviewer-stars">
+                    {% render 'stars', stars: block.settings.stars_count -%}
+                  </div>
+                  <p class="testimonials__reviewer-name">~{{ block.settings.reviewer_name }}</p>
+                </div>
+              </div>
+
+              <div class="testimonials__review">
+                <p>"{{ block.settings.review_text | truncate: 200 }}"</p>
+              </div>
             </div>
+          {% else %}
+
           {% endif %}
         {% endfor -%}
       </div>
-      <div class="testimonials__slide--left">
+      <div class="{{ section.id }} testimonials__slide--left">
         {% for block in section.blocks %}
           {% assign num = forloop.index | modulo: 2 %}
           {% if num == 0 %}
-          {% else %}
-            <div class="testimonials__item">
-              <h6>{{ block.settings.text }}</h6>
+            <div class="{{ section.id }} testimonials__item">
+              <div class="testimonials__reviewer">
+                <div class="testimonials__reviewer-picture media">
+                  {%- if block.settings.reviewer_picture == blank -%}
+                    {{ 'product-3' | placeholder_svg_tag: 'placeholder' }}
+                  {%- elsif block.settings.reviewer_picture != blank -%}
+                    <img
+                      srcset="{{ block.settings.reviewer_picture | image_url }}"
+                      alt="{{ block.settings.reviewer_picture.alt | escape }}"
+                      width="{{ block.settings.reviewer_picture.width }}"
+                      height="{{ block.settings.reviewer_picture.height }}"
+                      class="fit"
+                    >
+                  {% endif %}
+                </div>
+
+                <div class="testimonials__reviewer-info">
+                  <div class="testimonials__reviewer-stars">
+                    {% render 'stars', stars: block.settings.stars_count -%}
+                  </div>
+                  <p class="testimonials__reviewer-name">~{{ block.settings.reviewer_name }}</p>
+                </div>
+              </div>
+
+              <div class="testimonials__review">
+                <p>"{{ block.settings.review_text | truncate: 200 }}"</p>
+              </div>
             </div>
+          {% else %}
+
           {% endif %}
         {% endfor -%}
       </div>
-      <div class="testimonials__slide--left">
+      <div class="{{ section.id }} testimonials__slide--left">
         {% for block in section.blocks %}
           {% assign num = forloop.index | modulo: 2 %}
           {% if num == 0 %}
-          {% else %}
-            <div class="testimonials__item">
-              <h6>{{ block.settings.text }}</h6>
+            <div class="{{ section.id }} testimonials__item">
+              <div class="testimonials__reviewer">
+                <div class="testimonials__reviewer-picture media">
+                  {%- if block.settings.reviewer_picture == blank -%}
+                    {{ 'product-3' | placeholder_svg_tag: 'placeholder' }}
+                  {%- elsif block.settings.reviewer_picture != blank -%}
+                    <img
+                      srcset="{{ block.settings.reviewer_picture | image_url }}"
+                      alt="{{ block.settings.reviewer_picture.alt | escape }}"
+                      width="{{ block.settings.reviewer_picture.width }}"
+                      height="{{ block.settings.reviewer_picture.height }}"
+                      class="fit"
+                    >
+                  {% endif %}
+                </div>
+
+                <div class="testimonials__reviewer-info">
+                  <div class="testimonials__reviewer-stars">
+                    {% render 'stars', stars: block.settings.stars_count -%}
+                  </div>
+                  <p class="testimonials__reviewer-name">~{{ block.settings.reviewer_name }}</p>
+                </div>
+              </div>
+
+              <div class="testimonials__review">
+                <p>"{{ block.settings.review_text | truncate: 200 }}"</p>
+              </div>
             </div>
+          {% else %}
+
+          {% endif %}
+        {% endfor -%}
+      </div>
+      <div class="{{ section.id }} testimonials__slide--left">
+        {% for block in section.blocks %}
+          {% assign num = forloop.index | modulo: 2 %}
+          {% if num == 0 %}
+            <div class="{{ section.id }} testimonials__item">
+              <div class="testimonials__reviewer">
+                <div class="testimonials__reviewer-picture media">
+                  {%- if block.settings.reviewer_picture == blank -%}
+                    {{ 'product-3' | placeholder_svg_tag: 'placeholder' }}
+                  {%- elsif block.settings.reviewer_picture != blank -%}
+                    <img
+                      srcset="{{ block.settings.reviewer_picture | image_url }}"
+                      alt="{{ block.settings.reviewer_picture.alt | escape }}"
+                      width="{{ block.settings.reviewer_picture.width }}"
+                      height="{{ block.settings.reviewer_picture.height }}"
+                      class="fit"
+                    >
+                  {% endif %}
+                </div>
+
+                <div class="testimonials__reviewer-info">
+                  <div class="testimonials__reviewer-stars">
+                    {% render 'stars', stars: block.settings.stars_count -%}
+                  </div>
+                  <p class="testimonials__reviewer-name">~{{ block.settings.reviewer_name }}</p>
+                </div>
+              </div>
+
+              <div class="testimonials__review">
+                <p>"{{ block.settings.review_text | truncate: 200 }}"</p>
+              </div>
+            </div>
+          {% else %}
+
+          {% endif %}
+        {% endfor -%}
+      </div>
+      <div class="{{ section.id }} testimonials__slide--left">
+        {% for block in section.blocks %}
+          {% assign num = forloop.index | modulo: 2 %}
+          {% if num == 0 %}
+            <div class="{{ section.id }} testimonials__item">
+              <div class="testimonials__reviewer">
+                <div class="testimonials__reviewer-picture media">
+                  {%- if block.settings.reviewer_picture == blank -%}
+                    {{ 'product-3' | placeholder_svg_tag: 'placeholder' }}
+                  {%- elsif block.settings.reviewer_picture != blank -%}
+                    <img
+                      srcset="{{ block.settings.reviewer_picture | image_url }}"
+                      alt="{{ block.settings.reviewer_picture.alt | escape }}"
+                      width="{{ block.settings.reviewer_picture.width }}"
+                      height="{{ block.settings.reviewer_picture.height }}"
+                      class="fit"
+                    >
+                  {% endif %}
+                </div>
+
+                <div class="testimonials__reviewer-info">
+                  <div class="testimonials__reviewer-stars">
+                    {% render 'stars', stars: block.settings.stars_count -%}
+                  </div>
+                  <p class="testimonials__reviewer-name">~{{ block.settings.reviewer_name }}</p>
+                </div>
+              </div>
+
+              <div class="testimonials__review">
+                <p>"{{ block.settings.review_text | truncate: 200 }}"</p>
+              </div>
+            </div>
+          {% else %}
+
+          {% endif %}
+        {% endfor -%}
+      </div>
+      <div class="{{ section.id }} testimonials__slide--left">
+        {% for block in section.blocks %}
+          {% assign num = forloop.index | modulo: 2 %}
+          {% if num == 0 %}
+            <div class="{{ section.id }} testimonials__item">
+              <div class="testimonials__reviewer">
+                <div class="testimonials__reviewer-picture media">
+                  {%- if block.settings.reviewer_picture == blank -%}
+                    {{ 'product-3' | placeholder_svg_tag: 'placeholder' }}
+                  {%- elsif block.settings.reviewer_picture != blank -%}
+                    <img
+                      srcset="{{ block.settings.reviewer_picture | image_url }}"
+                      alt="{{ block.settings.reviewer_picture.alt | escape }}"
+                      width="{{ block.settings.reviewer_picture.width }}"
+                      height="{{ block.settings.reviewer_picture.height }}"
+                      class="fit"
+                    >
+                  {% endif %}
+                </div>
+
+                <div class="testimonials__reviewer-info">
+                  <div class="testimonials__reviewer-stars">
+                    {% render 'stars', stars: block.settings.stars_count -%}
+                  </div>
+                  <p class="testimonials__reviewer-name">~{{ block.settings.reviewer_name }}</p>
+                </div>
+              </div>
+
+              <div class="testimonials__review">
+                <p>"{{ block.settings.review_text | truncate: 200 }}"</p>
+              </div>
+            </div>
+          {% else %}
+
           {% endif %}
         {% endfor -%}
       </div>
@@ -238,22 +858,218 @@
 {% schema %}
 {
   "name": "Testimonials",
-  "settings": [],
+  "settings": [
+    {
+      "type": "header",
+      "content": "Animation settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "animated",
+      "label": "Activate animation",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "animation_speed",
+      "min": 1,
+      "max": 100,
+      "step": 1,
+      "unit": "s",
+      "label": "Animation speed",
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Section settings"
+    },
+    {
+      "type": "select",
+      "id": "background_type",
+      "label": "Type",
+      "options": [
+        {
+          "value": "image",
+          "label": "Image"
+        },
+        {
+          "value": "just-color",
+          "label": "Color"
+        }
+      ],
+      "default": "just-color"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Image",
+      "info": "Applied only if Type is 'Image'"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#000000",
+      "info": "Applied only if Type is 'Color'"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section heading",
+      "default": "Hear from our customers"
+    },
+    {
+      "type": "range",
+      "id": "space_outside",
+      "label": "Space outside section",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "space_between_elements",
+      "label": "Space between elements",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "unit": "rem",
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "top_padding",
+      "label": "Top padding",
+      "min": 30,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "bottom_padding",
+      "label": "Bottom padding",
+      "min": 30,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 50
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "Section width",
+      "info": "Desktop only",
+      "options": [
+        {
+          "value": "full-width",
+          "label": "Full width"
+        },
+        {
+          "value": "wrapped",
+          "label": "Wrapped"
+        }
+      ],
+      "default": "full-width"
+    },
+    {
+      "type": "header",
+      "content": "Review settings"
+    },
+    {
+      "type": "range",
+      "id": "review_width",
+      "min": 250,
+      "max": 350,
+      "step": 1,
+      "unit": "px",
+      "label": "Review width",
+      "default": 250
+    },
+    {
+      "type": "range",
+      "id": "review_height",
+      "min": 150,
+      "max": 250,
+      "step": 1,
+      "unit": "px",
+      "label": "Review height",
+      "default": 150
+    },
+    {
+      "type": "color",
+      "id": "review_background_color",
+      "label": "Review background color",
+      "default": "#222222"
+    },
+    {
+      "type": "color",
+      "id": "review_border_color",
+      "label": "Review border color",
+      "default": "#fff"
+    },
+    {
+      "type": "range",
+      "id": "review_border_width",
+      "label": "Review border width",
+      "min": 0,
+      "max": 5,
+      "step": 1,
+      "unit": "px",
+      "default": 2
+    }
+  ],
   "max_blocks": 20,
   "blocks": [
     {
       "type": "text",
-      "name": "text",
+      "name": "Review",
       "settings": [
         {
+          "type": "image_picker",
+          "id": "reviewer_picture",
+          "label": "Reviewer picture"
+        },
+        {
+          "type": "range",
+          "id": "stars_count",
+          "label": "Number of stars",
+          "min": 0,
+          "max": 5,
+          "step": 1,
+          "unit": "✰",
+          "default": 5
+        },
+        {
           "type": "text",
-          "id": "text",
-          "label": "Text",
-          "default": "Text"
+          "id": "reviewer_name",
+          "label": "Reviewer name",
+          "default": "Name"
+        },
+        {
+          "type": "text",
+          "id": "review_text",
+          "label": "Review",
+          "default": "Put your customer review here"
         }
       ]
     }
   ],
-  "presets": []
+  "presets": [
+    {
+      "name": "Testimonials",
+      "blocks": [
+        {
+          "type": "text"
+        },
+        {
+          "type": "text"
+        }
+      ]
+    }
+  ]
 }
 {% endschema %}
