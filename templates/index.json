@@ -1,18 +1,8 @@
 {
      "sections": {
-          "main": {
-               "type": "page",
-               "settings": {}
-          },
-          "testimonials": {
-               "type": "testimonials",
-               "blocks": {},
-               "block_order": [],
-               "settings": {}
-          }
+          "main": {}
      },
      "order": [
-          "main",
-          "testimonials"
+          "main"
      ]
 }
