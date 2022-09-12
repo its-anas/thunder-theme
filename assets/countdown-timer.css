@@ -1,17 +1,43 @@
+.countdown-timer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.countdown-timer__text {
+  text-align: center;
+}
 .countdown-timer__timers {
   display: none;
+  gap: 0.5rem;
 }
 .countdown-timer__timers.shown {
   display: flex;
-  flex-direction: row;
 }
-.countdown-timer__days {
-  color: orange;
+.countdown-timer__container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0.3rem 0.6rem;
 }
-.countdown-timer__days:after {
-  content: ":";
+.countdown-timer__container p {
+  font-weight: bold;
+}
+.countdown-timer__container:has(.digits--small) {
+  min-width: 3.5rem;
+}
+.countdown-timer__container:has(.digits--big) {
+  min-width: 4rem;
+}
+.countdown-timer__container .digits--small {
+  font-size: 1.4rem;
+}
+.countdown-timer__container .digits--big {
+  font-size: 2rem;
+}
+.countdown-timer__container .label {
+  font-size: 0.7rem;
 }
 .countdown-timer__message {
   -webkit-animation: 5s fadeIn;

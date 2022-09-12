@@ -4,6 +4,10 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+    {%- unless settings.headings_font_type.system? and settings.font_type.system? -%}
+      <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
+    {%- endunless -%}
     <script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
 
     {% style %}
@@ -51,13 +55,17 @@
         content: " {{ settings.button_symbol | truncate: 2 }}";
       }
 
-        @media screen and (min-width: 750px) {
-          :root{
-          --font-size: {{ settings.size }}px;
-          --font-size-type-scale: {{ settings.size }};
-          --font-type-scale: {{ settings.type_scale }};
-          }
+      .button--link:after {
+          content: " {{ settings.button_symbol | truncate: 2 }}";
+      }
+
+      @media screen and (min-width: 750px) {
+        :root{
+        --font-size: {{ settings.size }}px;
+        --font-size-type-scale: {{ settings.size }};
+        --font-type-scale: {{ settings.type_scale }};
         }
+      }
     {% endstyle %}
 
     {{ 'theme.css' | asset_url | stylesheet_tag }}

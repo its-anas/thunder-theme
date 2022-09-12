@@ -412,12 +412,25 @@ a.border.button {
   }
 }
 
+/* ------------ ANCHOR: Button type link style ------------ */
+.button--link {
+  color: #fcdb33;
+  padding: 0.5rem;
+  &:after {
+    position: absolute;
+    transform: TranslateX(5px);
+    transition: 0.2s;
+  }
+  &:hover:after {
+    transform: TranslateX(10px);
+    transition: 0.2s;
+  }
+}
+
 /* ------------ ANCHOR: All sections ------------ */
 
 .container {
-  @media screen and (max-width: 750px) {
-    padding: 15px;
-  }
+  padding: 15px;
 
   @media screen and (min-width: 750px) {
     padding: 20px;

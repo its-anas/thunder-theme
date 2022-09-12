@@ -1,6 +1,41 @@
 {{ 'countdown-timer.css' | asset_url | stylesheet_tag }}
 
 {%- style -%}
+  .{{ section.id }}.countdown-timer {
+    gap: {{ section.settings.space_between }}rem;
+    margin-top: {{ section.settings.space_outside | divided_by: 2 }}rem;
+    margin-bottom: {{ section.settings.space_outside | divided_by: 2 }}rem;
+    padding-top: {{ section.settings.top_padding }}rem;
+    padding-bottom: {{ section.settings.bottom_padding }}rem;
+  }
+  .{{ section.id}}--color {
+    background-color: {{ section.settings.background_color }};
+  }
+
+  .{{ section.id}}--image {
+    background-image: url({{ section.settings.background_image | image_url }});
+    background-size: cover;
+    background-position: center;
+  }
+
+  .{{ section.id }}.countdown-timer > .countdown-timer__timers > .countdown-timer__container {
+    background-color: {{ section.settings.digits_background_color }};
+    border-radius: {{ section.settings.digits_container_border }}%;
+  }
+
+  .{{ section.id }}.countdown-timer > .countdown-timer__timers > .countdown-timer__container > p {
+    color: {{ section.settings.digits_color }};
+  }
+
+  .{{ section.id }}.countdown-timer > .countdown-timer__buttons > .button--link {
+    color: {{ section.settings.button_color }};
+  }
+
+  @media screen and (min-width: 750px) {
+    .{{ section.id }} > .countdown-timer__text {
+          width: {{ section.settings.text_width }}%;
+    }
+  }
 {%- endstyle -%}
 
 {% liquid
@@ -9,6 +44,7 @@
   assign mins = section.settings.time_mins
   assign secs = section.settings.time_secs | divided_by: 60.00
   assign timeInMinutes = days | plus: hours | plus: mins | plus: secs
+
   assign year = section.settings.date_year
   assign month = section.settings.date_month | prepend: '00' | slice: -2, 2
   assign day = section.settings.date_day | prepend: '00' | slice: -2, 2
@@ -27,7 +63,11 @@
     countdownTimer( {{ coundownType }}, '{{ timeInDate }}', {{ timeInMinutes }}, {{ afterExpirationTimeOnly }}, 'countdown-timer-{{ section.id }}', 'countdown-timer-cookie-{{ section.id }}');
   }
 </script>
-<div id="countdown-timer-{{ section.id }}" class="countdown-timer">
+
+<div
+  id="countdown-timer-{{ section.id }}"
+  class="{{ section.id }} countdown-timer container {{ section.settings.section_width }} {% if section.settings.background_image == blank %}{{ section.id }}--color{% else %}{{ section.id }}--{{ section.settings.background_type }}{% endif %}"
+>
   <div class="countdown-timer__heading">
     <{{ section.settings.heading_size }}>
       {{ section.settings.heading }}
@@ -37,25 +77,29 @@
     <p>{{ section.settings.text }}</p>
   </div>
   <div class="countdown-timer__timers">
-    <div class="countdown-timer__days">
-      <p class="days"></p>
-      <p>Days</p>
+    <div class="countdown-timer__container">
+      <p class="days digits--{{ section.settings.digits_size }}"></p>
+      <p class="label">Days</p>
     </div>
-    <div class="countdown-timer__hours">
-      <p class="hours"></p>
-      <p>Hours</p>
+    <div class="countdown-timer__container">
+      <p class="hours digits--{{ section.settings.digits_size }}"></p>
+      <p class="label">Hours</p>
     </div>
-    <div class="countdown-timer__minutes">
-      <p class="minutes"><p>Minutes</p></p>
+    <div class="countdown-timer__container">
+      <p class="minutes digits--{{ section.settings.digits_size }}"></p>
+      <p class="label">Mins</p>
     </div>
-    <div class="countdown-timer__seconds">
-      <p class="seconds"><p>Seconds</p></p>
+    <div class="countdown-timer__container">
+      <p class="seconds digits--{{ section.settings.digits_size }}"></p>
+      <p class="label">Secs</p>
     </div>
   </div>
   <div class="countdown-timer__message">
     <h6>{{ section.settings.message }}</h6>
   </div>
-  <div class="countdown-timer__buttons"><a href="">BUTTON ></a></div>
+  <div class="countdown-timer__buttons">
+    <a href="{{ block.settings.button_link }}" class="button--link">{{ section.settings.button_text }}</a>
+  </div>
 </div>
 
 {% schema %}
@@ -63,14 +107,22 @@
   "name": "Countdown timer",
   "settings": [
     {
-      "type": "header",
-      "content": "Heading settings"
-    },
-    {
       "type": "text",
       "id": "heading",
       "label": "Heading",
       "default": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Text",
+      "default": "Ut Lorem labore ad amet commodo. Veniam veniam incididunt sunt veniam veniam est cillum reprehenderit pariatur excepteur deserunt est labore tempor. Ex dolor est velit est exercitation magna cupidatat do reprehenderit quis duis laborum mollit. Dolor ut nisi eu culpa labore tempor aute ipsum ea incididunt nulla."
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "Learn more"
     },
     {
       "type": "select",
@@ -105,10 +157,153 @@
       "default": "h2"
     },
     {
-      "type": "text",
-      "id": "text",
-      "label": "Text",
-      "default": "Text enset"
+      "type": "select",
+      "id": "digits_size",
+      "label": "Digits size",
+      "options": [
+        {
+          "value": "small",
+          "label": "Small"
+        },
+        {
+          "value": "big",
+          "label": "Big"
+        }
+      ],
+      "default": "small"
+    },
+    {
+      "type": "range",
+      "id": "digits_container_border",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "unit": "%",
+      "label": "Digits container border radius",
+      "default": 10
+    },
+    {
+      "type": "color",
+      "id": "digits_color",
+      "label": "Digits color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "digits_background_color",
+      "label": "Digits background color",
+      "default": "#fcdb33"
+    },
+    {
+      "type": "color",
+      "id": "button_color",
+      "label": "Button color",
+      "default": "#fcdb33"
+    },
+    {
+      "type": "header",
+      "content": "Background settings"
+    },
+    {
+      "type": "select",
+      "id": "background_type",
+      "label": "Type",
+      "options": [
+        {
+          "value": "image",
+          "label": "Image"
+        },
+        {
+          "value": "just-color",
+          "label": "Color"
+        }
+      ],
+      "default": "just-color"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Image",
+      "info": "Applied only if Type is 'Image'"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#222222",
+      "info": "Applied only if Type is 'Color'"
+    },
+    {
+      "type": "header",
+      "content": "Section style"
+    },
+    {
+      "type": "range",
+      "id": "text_width",
+      "label": "Text width",
+      "info": "Desktop only",
+      "min": 40,
+      "max": 90,
+      "step": 10,
+      "unit": "%",
+      "default": 70
+    },
+    {
+      "type": "range",
+      "id": "space_between",
+      "label": "Space between elements",
+      "min": 0.5,
+      "max": 3,
+      "step": 0.5,
+      "unit": "rem",
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "space_outside",
+      "label": "Space outside section",
+      "min": 0,
+      "max": 5,
+      "step": 1,
+      "unit": "rem",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "top_padding",
+      "label": "Top padding",
+      "min": 0,
+      "max": 7,
+      "step": 1,
+      "unit": "rem",
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "bottom_padding",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 7,
+      "step": 1,
+      "unit": "rem",
+      "default": 1
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "Section width",
+      "info": "Desktop only",
+      "options": [
+        {
+          "value": " ",
+          "label": "Full width"
+        },
+        {
+          "value": "wrapped",
+          "label": "Wrapped"
+        }
+      ],
+      "default": " "
     },
     {
       "type": "header",
@@ -161,7 +356,7 @@
       "step": 1,
       "unit": "h",
       "label": "Hours",
-      "default": 0
+      "default": 6
     },
     {
       "type": "range",
@@ -212,7 +407,7 @@
       "step": 1,
       "unit": "y",
       "label": "Year",
-      "default": 2022
+      "default": 2023
     },
     {
       "type": "range",
@@ -233,7 +428,7 @@
       "unit": "d",
       "label": "Day",
       "default": 1,
-      "info": "⚠️ Pay attention: If you put 31 to a month that ends with 30 or 28, it will result in an error in calculation."
+      "info": "⚠️ Pay attention: If you put 31 to a month that ends with 30 or 28 days, it will result in an error in calculation."
     },
     {
       "type": "range",
