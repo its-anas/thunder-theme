@@ -1,0 +1,49 @@
+{{ 'countdown-timer.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+{%- endstyle -%}
+
+{% assign days = 0 | times: 24.00 | times: 60.00 %}
+{% assign hours = 0 | times: 60.00 %}
+{% assign mins = 0 %}
+{% assign secs = 10 | divided_by: 60.00 %}
+{% assign timeInMinutes = days | plus: hours | plus: mins | plus: secs %}
+
+{% assign year = '2022' %}
+{% assign month = '09' %}
+{% assign day = '12' %}
+{% assign hour = '02' %}
+{% assign min = '28' %}
+{% assign sec = '20' %}
+{% capture timeInDate %}{{ year }}-{{ month }}-{{ day }}T{{ hour }}:{{ min }}:{{ sec }}{% endcapture %}
+
+<script>
+  document.addEventListener('DOMContentLoaded', theDomHasLoaded, false);
+  function theDomHasLoaded() {
+    countdownTimer('countdown-timer-{{ section.id }}', {{ timeInMinutes }} ,'{{ timeInDate }}' , 'countdown-timer-cookie-{{ section.id }}');
+  }
+</script>
+
+<div id="countdown-timer-{{ section.id }}" class="countdown-timer">
+  <div class="countdown-timer__timers">
+    <p class="days"></p>
+    <p class="hours"></p>
+    <p class="minutes"></p>
+    <p class="seconds"></p>
+  </div>
+  <div class="countdown-timer__message"><h6>Countdown timer ended</h6></div>
+</div>
+
+{% schema %}
+{
+  "name": "Countdown timer",
+  "settings": [],
+  "blocks": [],
+  "presets": [
+    {
+      "name": "Countdown timer",
+      "blocks": []
+    }
+  ]
+}
+{% endschema %}

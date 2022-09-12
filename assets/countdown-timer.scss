@@ -1,0 +1,22 @@
+.countdown-timer {
+  &__timers {
+    display: flex;
+    flex-direction: row;
+    display: none;
+
+    > p:not(:nth-child(4)):after {
+      content: ":";
+    }
+  }
+
+  &__message {
+  }
+}
+
+.hidden {
+  display: none;
+}
+
+.shown {
+  display: block;
+}

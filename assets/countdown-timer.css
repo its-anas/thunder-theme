@@ -1,0 +1,15 @@
+.countdown-timer__timers {
+  display: flex;
+  flex-direction: row;
+  display: none;
+}
+.countdown-timer__timers > p:not(:nth-child(4)):after {
+  content: ":";
+}
+.hidden {
+  display: none;
+}
+
+.shown {
+  display: block;
+}
