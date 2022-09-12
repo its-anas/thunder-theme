@@ -1,15 +1,40 @@
 .countdown-timer__timers {
-  display: flex;
-  flex-direction: row;
   display: none;
 }
-.countdown-timer__timers > p:not(:nth-child(4)):after {
+.countdown-timer__timers.shown {
+  display: flex;
+  flex-direction: row;
+}
+.countdown-timer__days {
+  color: orange;
+  display: flex;
+  flex-direction: row;
+}
+.countdown-timer__days:after {
   content: ":";
 }
-.hidden {
+.countdown-timer__message {
+  -webkit-animation: 5s fadeIn;
+          animation: 5s fadeIn;
+}
+.countdown-timer__message.hidden {
   display: none;
 }
 
-.shown {
-  display: block;
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }

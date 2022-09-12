@@ -1,22 +1,32 @@
 .countdown-timer {
   &__timers {
-    display: flex;
-    flex-direction: row;
     display: none;
-
-    > p:not(:nth-child(4)):after {
-      content: ":";
+    &.shown {
+      display: flex;
+      flex-direction: row;
     }
   }
-
+  &__days {
+    color: orange;
+    display: flex;
+    flex-direction: row;
+  }
+  &__days:after {
+    content: ":";
+  }
   &__message {
+    animation: 5s fadeIn;
+    &.hidden {
+      display: none;
+    }
   }
 }
 
-.hidden {
-  display: none;
-}
-
-.shown {
-  display: block;
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
