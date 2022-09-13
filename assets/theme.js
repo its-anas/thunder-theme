@@ -112,3 +112,15 @@ function countdownTimer(
     initializeClock(deadline);
   }
 }
+
+const sections = document.querySelectorAll(".video-with-text");
+sections.forEach((section) => {
+  const thumbnail = section.querySelector(".video-with-text__thumbnail");
+  const video = section.querySelector(".video");
+  const originalVideoSrc = video.src;
+
+  thumbnail.addEventListener("click", () => {
+    thumbnail.classList.add("hidden");
+    video.src = originalVideoSrc + "&autoplay=1";
+  });
+});

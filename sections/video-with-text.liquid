@@ -1,0 +1,384 @@
+{{ 'video-with-text.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+    .{{ section.id }}.video-with-text {
+        min-height: {{ section.settings.video_height }}px;
+        margin-top: {{ section.settings.space_outside | divided_by: 2 }}rem;
+        margin-bottom: {{ section.settings.space_outside | divided_by: 2 }}rem;
+    }
+
+  .{{ section.id }}.video-with-text.color {
+    background-color: {{ section.settings.background_color }};
+  }
+  @media screen and (min-width: 750px) {
+    .{{ section.id }}.video-with-text {
+        height: {{ section.settings.section_height }}px;
+    }
+    .{{ section.id }} > .video-with-text__media > .video-with-text__media-box {
+        height: {{ section.settings.video_height }}px;
+        width: {{ section.settings.video_height }}px;
+    }
+  }
+
+  .{{ section.id }}.video-with-text.image {
+    background-image: url({{ section.settings.background_image | image_url }});
+    background-size: cover;
+    background-position: center;
+  }
+
+  .{{ section.id }}.video-with-text > .video-with-text__content > .box {
+    gap: {{ section.settings.space_between }}rem;
+  }
+
+    @media screen and (min-width: 750px) {
+        .text-width-{{ section.id }} {
+        width: {{ section.settings.text_width }}%;
+        }
+    }
+{%- endstyle -%}
+
+<div class="{{ section.id }} video-with-text {{ section.settings.video_placement }} {{ section.settings.section_width }} {% if section.settings.background_image == blank %}color{% else %}{{ section.settings.background_type }}{% endif %}">
+  <div class="video-with-text__media">
+    <div class="video-with-text__media-box horizontal--{{ section.settings.video_horizontal_position }}">
+      <div class="video-with-text__video media">
+        <iframe
+          src="https://www.youtube.com/embed/{{ section.settings.video_url.id }}?enablejsapi&mute>"
+          class="video"
+          allow="autoplay; encrypted-media"
+          title="Title"
+          frameborder="0"
+        ></iframe>
+      </div>
+      <div class="video-with-text__thumbnail media">
+        <a id="play-icon" class="icon">
+          {% render 'icons', icon: 'play-icon' -%}
+        </a>
+        {% if section.settings.thumbnail == blank %}
+          {{ 'collection-2' | placeholder_svg_tag: 'placeholder' }}
+        {% else %}
+          <img
+            srcset="{{ section.settings.thumbnail | image_url }}"
+            loading="lazy"
+            alt="{{ section.settings.thumbnail.alt | escape }}"
+            width="{{ section.settings.thumbnail.width }}"
+            height="{{ section.settings.thumbnail.height }}"
+            class="fit"
+          >
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  <div class="video-with-text__content container">
+    <div class="box horizontal--{{ section.settings.text_horizontal_position }} vertical--center text-alignment--{{ section.settings.text_alignment }} text-width-{{ section.id }}">
+      {%- if section.settings.subheading != blank -%}
+        <h6>{{ section.settings.subheading }}</h6>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h3>{{ section.settings.heading }}</h3>
+      {%- endif -%}
+      {%- if section.settings.text != blank -%}
+        <p>
+          {{ section.settings.text }}
+        </p>
+      {%- endif -%}
+      <div class="buttons buttons--{{ section.settings.text_alignment }}">
+        {%- if section.settings.primary_button_text != blank -%}
+          <a
+            class="button button--{% if section.settings.button_style == "border" %}primary{% else %}secondary{% endif %} {{ section.settings.button_style }}"
+            href="{{ section.settings.primary_button_link }}"
+          >
+            <span></span> <span></span> <span></span> <span></span>
+            {{ section.settings.primary_button_text }}
+          </a>
+        {%- endif -%}
+        {%- if section.settings.secondary_button_text != blank -%}
+          <a
+            class="button button--secondary {{ section.settings.button_style }}"
+            href="{{ section.settings.secondary_button_link }}"
+          >
+            <span></span> <span></span> <span></span> <span></span>
+            {{ section.settings.secondary_button_text }}
+          </a>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Video with text",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Media"
+    },
+    {
+      "type": "image_picker",
+      "id": "thumbnail",
+      "label": "Poster"
+    },
+    {
+      "type": "video_url",
+      "id": "video_url",
+      "accept": ["youtube"],
+      "default": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+      "label": "Video url"
+    },
+    {
+      "type": "header",
+      "content": "Content settings"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Subheading"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Text",
+      "default": "Put a text here"
+    },
+    {
+      "type": "range",
+      "id": "text_width",
+      "label": "Text width",
+      "info": "Desktop only",
+      "min": 70,
+      "max": 100,
+      "step": 10,
+      "unit": "%",
+      "default": 70
+    },
+    {
+      "type": "header",
+      "content": "Button settings"
+    },
+    {
+      "type": "text",
+      "id": "primary_button_text",
+      "label": "Primary button text",
+      "default": "Primary button"
+    },
+    {
+      "type": "url",
+      "id": "primary_button_link",
+      "label": "Primary button link"
+    },
+    {
+      "type": "text",
+      "id": "secondary_button_text",
+      "label": "Secondary button text",
+      "default": "Secondary button"
+    },
+    {
+      "type": "url",
+      "id": "secondary_button_link",
+      "label": "Secondary button link"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Button style",
+      "options": [
+        {
+          "value": "border",
+          "label": "Style 1"
+        },
+        {
+          "value": " ",
+          "label": "Style 2"
+        }
+      ],
+      "default": "border"
+    },
+    {
+      "type": "header",
+      "content": "Background settings"
+    },
+    {
+      "type": "select",
+      "id": "background_type",
+      "label": "Type",
+      "options": [
+        {
+          "value": "image",
+          "label": "Image"
+        },
+        {
+          "value": "just-color",
+          "label": "Color"
+        }
+      ],
+      "default": "just-color"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#000000",
+      "info": "Applied only if Type is 'Color'"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background image",
+      "info": "Applied only if Type is 'Image'"
+    },
+    {
+      "type": "header",
+      "content": "Section settings"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text alignment",
+      "info": "Desktop only",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "select",
+      "id": "text_horizontal_position",
+      "label": "Text position",
+      "info": "Desktop only",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "range",
+      "id": "space_between",
+      "label": "Space between elements",
+      "min": 0.5,
+      "max": 3,
+      "step": 0.5,
+      "unit": "rem",
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "video_height",
+      "min": 350,
+      "max": 500,
+      "step": 10,
+      "unit": "px",
+      "label": "Video height/width",
+      "default": 500
+    },
+    {
+      "type": "select",
+      "id": "video_horizontal_position",
+      "label": "Video position",
+      "info": "Desktop only",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "right"
+    },
+    {
+      "type": "select",
+      "id": "video_placement",
+      "label": "Video placement",
+      "options": [
+        {
+          "value": "first",
+          "label": "Video first"
+        },
+        {
+          "value": "second",
+          "label": "Video second"
+        }
+      ],
+      "default": "first"
+    },
+    {
+      "type": "range",
+      "id": "space_outside",
+      "label": "Space outside section",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "unit": "rem",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "section_height",
+      "info": "Desktop only",
+      "min": 600,
+      "max": 800,
+      "step": 10,
+      "unit": "px",
+      "label": "Section height",
+      "default": 600
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "Section width",
+      "info": "Desktop only",
+      "options": [
+        {
+          "value": " ",
+          "label": "Full width"
+        },
+        {
+          "value": "wrapped",
+          "label": "Wrapped"
+        }
+      ],
+      "default": " "
+    }
+  ],
+  "presets": [
+    {
+      "name": "Video with text"
+    }
+  ]
+}
+{% endschema %}
