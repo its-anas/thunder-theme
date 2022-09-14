@@ -24,7 +24,7 @@
     width: 100%;
   }
 
-  &__section {
+  &__tab {
     cursor: pointer;
     width: 100%;
     &:hover {
@@ -60,7 +60,7 @@
   }
 }
 
-.faq__section.active {
+.faq__tab.active {
   .faq__answer {
     // These padding values shouldn't exceed 20px. if you want to increase that make sure it's increased in the function faqSections too.
     padding-top: 10px;

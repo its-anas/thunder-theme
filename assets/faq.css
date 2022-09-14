@@ -23,15 +23,15 @@
 .faq__content {
   width: 100%;
 }
-.faq__section {
+.faq__tab {
   cursor: pointer;
   width: 100%;
 }
-.faq__section:hover {
+.faq__tab:hover {
   border: 2px #fff solid;
 }
 @media screen and (min-width: 750px) {
-  .faq__section:hover {
+  .faq__tab:hover {
     transform: scale(1.02);
   }
 }
@@ -57,10 +57,10 @@
   transition: all 0.2s ease-in-out;
 }
 
-.faq__section.active .faq__answer {
+.faq__tab.active .faq__answer {
   padding-top: 10px;
   padding-bottom: 10px;
 }
-.faq__section.active .faq__question-svg {
+.faq__tab.active .faq__question-svg {
   transform: rotate(90deg);
 }

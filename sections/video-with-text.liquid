@@ -14,7 +14,7 @@
     .{{ section.id }}.video-with-text {
         height: {{ section.settings.section_height }}px;
     }
-    .{{ section.id }} > .video-with-text__media > .video-with-text__media-box {
+    .{{ section.id }} > .video-with-text__media > .video-with-text__video-box {
         height: {{ section.settings.video_height }}px;
         width: {{ section.settings.video_height }}px;
     }
@@ -23,7 +23,7 @@
   .{{ section.id }}.video-with-text.image {
     background-image: url({{ section.settings.background_image | image_url }});
     background-size: cover;
-    background-position: center;
+    background-position: center; 
   }
 
   .{{ section.id }}.video-with-text > .video-with-text__content > .box {
@@ -39,7 +39,7 @@
 
 <div class="{{ section.id }} video-with-text {{ section.settings.video_placement }} {{ section.settings.section_width }} {% if section.settings.background_image == blank %}color{% else %}{{ section.settings.background_type }}{% endif %}">
   <div class="video-with-text__media">
-    <div class="video-with-text__media-box horizontal--{{ section.settings.video_horizontal_position }}">
+    <div class="video-with-text__video-box horizontal--{{ section.settings.video_horizontal_position }}">
       <div class="video-with-text__video media">
         <iframe
           src="https://www.youtube.com/embed/{{ section.settings.video_url.id }}?enablejsapi&mute>"

@@ -37,7 +37,7 @@
     width: 50%;
   }
 }
-.video-with-text__media-box {
+.video-with-text__video-box {
   display: grid;
   height: 350px;
   width: 350px;
