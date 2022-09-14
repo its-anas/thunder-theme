@@ -1,3 +1,4 @@
+// FAQ section function
 const faqSections = document.querySelectorAll(".faq__section");
 faqSections.forEach((section) => {
   section.addEventListener("click", () => {
@@ -12,6 +13,7 @@ faqSections.forEach((section) => {
   });
 });
 
+// Countdown timer section function
 function countdownTimer(
   coundownType,
   timeInDate,
@@ -113,6 +115,7 @@ function countdownTimer(
   }
 }
 
+// Video with text section function
 const sections = document.querySelectorAll(".video-with-text");
 sections.forEach((section) => {
   const thumbnail = section.querySelector(".video-with-text__thumbnail");
@@ -121,6 +124,7 @@ sections.forEach((section) => {
 
   thumbnail.addEventListener("click", () => {
     thumbnail.classList.add("hidden");
+    video.classList.add("shown");
     video.src = originalVideoSrc + "&autoplay=1";
   });
 });

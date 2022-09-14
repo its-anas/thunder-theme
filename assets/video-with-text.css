@@ -39,8 +39,8 @@
 }
 .video-with-text__media-box {
   display: grid;
-  height: 90%;
-  width: 90%;
+  height: 350px;
+  width: 350px;
 }
 .video-with-text__video, .video-with-text__thumbnail {
   grid-column: 1;
@@ -48,6 +48,12 @@
 }
 .video-with-text__video {
   z-index: 1;
+}
+.video-with-text__video .video {
+  display: none;
+}
+.video-with-text__video .video.shown {
+  display: block;
 }
 .video-with-text__thumbnail {
   z-index: 2;
