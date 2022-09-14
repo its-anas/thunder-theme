@@ -1,17 +1,455 @@
 {{ 'video-hero.css' | asset_url | stylesheet_tag }}
 
 {%- style -%}
+    .{{ section.id }}.video-hero {
+      margin-top: {{ section.settings.space_outside | divided_by: 2 }}px;
+      margin-bottom: {{ section.settings.space_outside | divided_by: 2 }}px;
+    }
+
+  .{{ section.id }}.video-hero__box {
+    gap: {{ section.settings.space_between }}px;
+  }
+
+  .{{ section.id }}.overlay {
+      background: rgba({{ section.settings.overlay_color.red }}, {{ section.settings.overlay_color.green }}, {{ section.settings.overlay_color.blue }}, {{ section.settings.overlay_opacity | divided_by: 100.0 }});
+  }
+
+  .{{ section.id }}.video-hero__media {
+    width: 100vh;
+
+  }
+
+  @media screen and (min-width: 750px) {
+    .{{ section.id }}-text-width {
+      width: {{ section.settings.text_width }}%;
+    }
+    .{{ section.id }}.video-hero__media {
+      height: {{ section.settings.video_height }}px;
+      width: 100%;
+  }
+   }
+
+    .video-hero {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+  }
+  .video-hero > video {
+    width: 100%;
+  }
 {%- endstyle -%}
+
+<section class="{{ section.id }} video-hero {% if section.settings.section_width == "wrapped" %} wrapped{% else %}{% endif %}">
+  <div class="{{ section.id }} video-hero__media">
+    <div class="video-hero">
+      {% if section.settings.video_url == blank %}
+        <video
+          id="video"
+          class="video"
+          src="https://cdn.shopify.com/videos/c/o/v/e69e4ca2a06b40febbc187a80c979079.mp4"
+          autoplay
+          muted
+          loop
+          playsinline
+        ></video>
+      {% else %}
+        <video
+          id="video"
+          class="video"
+          src="{{ section.settings.video_url }}"
+          autoplay
+          muted
+          loop
+          playsinline
+        ></video>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="{{ section.id }} video-hero__content container vertical--{{ section.settings.vertical_position }} {% if section.settings.background_style == "full-width" %} overlay {% endif %}">
+    <div class="{{ section.id }} video-hero__box text-alignment--{{ section.settings.text_alignment }} {{ section.id }}-text-width horizontal--{{ section.settings.horizontal_position }} {% if section.settings.background_style == "block" %} overlay {% endif %}">
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'subheading' -%}
+            <{{ block.settings.subheading_size }}>
+              {{ block.settings.subheading }}
+            </{{ block.settings.subheading_size }}>
+          {%- when 'heading' -%}
+            <{{ block.settings.heading_size }}>
+              {{ block.settings.heading }}
+            </{{ block.settings.heading_size }}>
+          {%- when 'text' -%}
+            {{ block.settings.text }}
+          {%- when 'button' -%}
+            <div class="buttons buttons--{{ section.settings.text_alignment }}">
+              {%- if block.settings.primary_button_text != blank -%}
+                <a
+                  class="button button--{% if block.settings.button_style == "border" %}primary{% else %}secondary{% endif %} {{ block.settings.button_style }}"
+                  href="{{ block.settings.primary_button_link }}"
+                >
+                  <span></span> <span></span> <span></span> <span></span>
+                  {{ block.settings.primary_button_text }}
+                </a>
+              {%- endif -%}
+              {%- if block.settings.secondary_button_text != blank -%}
+                <a
+                  class="button button--secondary {{ block.settings.button_style }}"
+                  href="{{ block.settings.secondary_button_link }}"
+                >
+                  <span></span> <span></span> <span></span> <span></span>
+                  {{ block.settings.secondary_button_text }}
+                </a>
+              {%- endif -%}
+            </div>
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
 
 {% schema %}
 {
   "name": "Video hero",
-  "settings": [],
-  "blocks": [],
+  "settings": [
+    {
+      "type": "text",
+      "id": "video_url",
+      "label": "Video URL"
+    },
+    {
+      "type": "range",
+      "id": "video_height",
+      "min": 300,
+      "max": 1000,
+      "step": 100,
+      "unit": "px",
+      "label": "Height",
+      "default": 500
+    },
+    {
+      "type": "header",
+      "content": "Text background"
+    },
+    {
+      "type": "select",
+      "id": "background_style",
+      "label": "Style",
+      "options": [
+        {
+          "value": "block",
+          "label": "Block"
+        },
+        {
+          "value": "full-width",
+          "label": "Full width"
+        }
+      ],
+      "default": "block"
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "Color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "unit": "%",
+      "label": "Opacity",
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Text style"
+    },
+    {
+      "type": "select",
+      "id": "vertical_position",
+      "label": "Text position - Vertical",
+      "options": [
+        {
+          "value": "top",
+          "label": "Top"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "bottom",
+          "label": "Bottom"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "horizontal_position",
+      "label": "Text position - Horizonal",
+      "info": "Desktop only",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text alignment",
+      "info": "Desktop only",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "text_width",
+      "label": "Text width",
+      "info": "Desktop only",
+      "min": 40,
+      "max": 90,
+      "step": 10,
+      "unit": "%",
+      "default": 50
+    },
+    {
+      "type": "header",
+      "content": "Section style"
+    },
+    {
+      "type": "range",
+      "id": "space_between",
+      "label": "Space between elements",
+      "min": 5,
+      "max": 30,
+      "step": 5,
+      "unit": "px",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "space_outside",
+      "label": "Space outside section",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "Section width",
+      "info": "Desktop only",
+      "options": [
+        {
+          "value": "full-width",
+          "label": "Full width"
+        },
+        {
+          "value": "wrapped",
+          "label": "Wrapped"
+        }
+      ],
+      "default": "full-width"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "subheading",
+      "name": "Subheading",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "subheading",
+          "label": "Subheading",
+          "default": "Subheading"
+        },
+        {
+          "type": "select",
+          "id": "subheading_size",
+          "label": "Subeading size",
+          "options": [
+            {
+              "value": "h1",
+              "label": "h1"
+            },
+            {
+              "value": "h2",
+              "label": "h2"
+            },
+            {
+              "value": "h3",
+              "label": "h3"
+            },
+            {
+              "value": "h4",
+              "label": "h4"
+            },
+            {
+              "value": "h5",
+              "label": "h5"
+            },
+            {
+              "value": "h6",
+              "label": "h6"
+            }
+          ],
+          "default": "h6"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "name": "Heading",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Heading"
+        },
+        {
+          "type": "select",
+          "id": "heading_size",
+          "label": "Heading size",
+          "options": [
+            {
+              "value": "h1",
+              "label": "h1"
+            },
+            {
+              "value": "h2",
+              "label": "h2"
+            },
+            {
+              "value": "h3",
+              "label": "h3"
+            },
+            {
+              "value": "h4",
+              "label": "h4"
+            },
+            {
+              "value": "h5",
+              "label": "h5"
+            },
+            {
+              "value": "h6",
+              "label": "h6"
+            }
+          ],
+          "default": "h2"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Text",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>"
+        }
+      ]
+    },
+    {
+      "type": "button",
+      "name": "Button",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "primary_button_text",
+          "label": "Primary button text",
+          "default": "Primary button"
+        },
+        {
+          "type": "url",
+          "id": "primary_button_link",
+          "label": "Primary button link"
+        },
+        {
+          "type": "text",
+          "id": "secondary_button_text",
+          "label": "Secondary button text",
+          "default": "Secondary button"
+        },
+        {
+          "type": "url",
+          "id": "secondary_button_link",
+          "label": "Secondary button link"
+        },
+        {
+          "type": "select",
+          "id": "button_style",
+          "label": "Button style",
+          "options": [
+            {
+              "value": "border",
+              "label": "Style 1"
+            },
+            {
+              "value": " ",
+              "label": "Style 2"
+            }
+          ],
+          "default": "border"
+        }
+      ]
+    }
+  ],
   "presets": [
     {
       "name": "Video hero",
-      "blocks": []
+      "blocks": [
+        {
+          "type": "subheading"
+        },
+        {
+          "type": "heading"
+        },
+        {
+          "type": "text"
+        },
+        {
+          "type": "button"
+        }
+      ]
     }
   ]
 }

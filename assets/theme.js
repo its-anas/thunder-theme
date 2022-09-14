@@ -24,7 +24,7 @@ faqTabs.forEach((tab) => {
 /**============================================
  *               * ANCHOR: Countdown timer section
  *=============================================**/
-// a function that get it parameter's values from the section directly and insert back the time
+// a function that get the countdown timer parameter's values directly from the countdown-timer.liquid section and insert back the time
 function countdownTimer(
   countdownType,
   timeInDate,
@@ -158,7 +158,3 @@ videoBoxs.forEach((box) => {
     video.classList.add("shown");
   });
 });
-
-/**============================================
- *               * ANCHOR: Video hero section
- *=============================================**/
