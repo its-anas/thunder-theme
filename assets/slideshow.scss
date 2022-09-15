@@ -79,7 +79,9 @@
       transition: transform 0.1s;
 
       &:hover {
-        transform: scaleY(2);
+        @media screen and (min-width: 750px) {
+          transform: scaleY(2);
+        }
       }
 
       &.active::after {
@@ -100,11 +102,11 @@
   }
 
   80% {
-    opacity: 1;
+    // opacity: 1;
   }
 
   100% {
-    opacity: 0;
+    // opacity: 0;
     width: 50px;
   }
 }

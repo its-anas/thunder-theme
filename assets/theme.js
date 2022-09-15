@@ -166,7 +166,7 @@ videoBoxs.forEach((box) => {
  *=============================================**/
 // a function for slideshow to run it only when the section  is used
 function slideshow() {
-  // select the elements one by one
+  // select the container, the items, and the chevrons
   let slideshow = document.querySelector(".slideshow");
   let slideshowContent = document.querySelector(".slideshow__content");
   let slideshowItems = document.querySelectorAll(
@@ -174,8 +174,6 @@ function slideshow() {
   );
   let prev = document.querySelector(".slideshow__chevron .prev");
   let next = document.querySelector(".slideshow__chevron .next");
-  let indicatorsSpan = document.querySelectorAll(".slideshow__indicators span");
-  let indicators = document.querySelector(".slideshow__indicators");
   // set extra required variable to be used later
   let totalSlides = slideshowItems.length;
   let step = 100 / totalSlides;
@@ -186,7 +184,6 @@ function slideshow() {
   let interval = 4000;
   let time;
 
-  //! Add the functions from below to here
   //* Init slideshow
   loadIndicators();
   loop(true);
@@ -237,6 +234,10 @@ function slideshow() {
     item.addEventListener("click", (e) => {
       let slideTo = parseInt(e.target.dataset.slideTo);
 
+      let indicatorsSpan = document.querySelectorAll(
+        ".slideshow__indicators span"
+      );
+
       indicatorsSpan.forEach((item, index) => {
         if (item.classList.contains("active")) {
           activeIndicator = index;
@@ -271,12 +272,17 @@ function slideshow() {
   });
 
   //* Carousel functions
+
   function loadIndicators() {
     slideshowItems.forEach((slide, index) => {
       if (index === 0) {
-        indicators.innerHTML += `<span data-slide-to="${index}" class="active"></span>`;
+        document.querySelector(
+          ".slideshow__indicators"
+        ).innerHTML += `<span data-slide-to="${index}" class="active"></span>`;
       } else {
-        indicators.innerHTML += `<span data-slide-to="${index}"></span>`;
+        document.querySelector(
+          ".slideshow__indicators"
+        ).innerHTML += `<span data-slide-to="${index}"></span>`;
       }
     });
   }
