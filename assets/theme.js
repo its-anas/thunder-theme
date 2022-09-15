@@ -1,3 +1,5 @@
+document.addEventListener("DOMContentLoaded", theDomHasLoaded, false);
+
 /**============================================
  *               * ANCHOR: FAQ section
  *=============================================**/
@@ -158,3 +160,167 @@ videoBoxs.forEach((box) => {
     video.classList.add("shown");
   });
 });
+
+/**============================================
+ *               * ANCHOR: Slideshow
+ *=============================================**/
+// a function for slideshow to run it only when the section  is used
+function slideshow() {
+  // select the elements one by one
+  let slideshow = document.querySelector(".slideshow");
+  let slideshowContent = document.querySelector(".slideshow__content");
+  let slideshowItems = document.querySelectorAll(
+    ".slideshow__content .slideshow__item"
+  );
+  let prev = document.querySelector(".slideshow__chevron .prev");
+  let next = document.querySelector(".slideshow__chevron .next");
+  let indicatorsSpan = document.querySelectorAll(".slideshow__indicators span");
+  let indicators = document.querySelector(".slideshow__indicators");
+  // set extra required variable to be used later
+  let totalSlides = slideshowItems.length;
+  let step = 100 / totalSlides;
+  let activeSlide = 0;
+  let activeIndicator = 0;
+  let direction = -1;
+  let jump = 1;
+  let interval = 4000;
+  let time;
+
+  //! Add the functions from below to here
+  //* Init slideshow
+  loadIndicators();
+  loop(true);
+
+  //* Carousel events
+
+  next.addEventListener("click", () => {
+    slideToNext();
+  });
+
+  prev.addEventListener("click", () => {
+    slideToPrev();
+  });
+
+  slideshowContent.addEventListener("transitionend", () => {
+    if (direction === -1) {
+      if (jump > 1) {
+        for (let i = 0; i < jump; i++) {
+          activeSlide++;
+          slideshowContent.append(slideshowContent.firstElementChild);
+        }
+      } else {
+        activeSlide++;
+        slideshowContent.append(slideshowContent.firstElementChild);
+      }
+    } else if (direction === 1) {
+      if (jump > 1) {
+        for (let i = 0; i < jump; i++) {
+          activeSlide--;
+          slideshowContent.prepend(slideshowContent.lastElementChild);
+        }
+      } else {
+        activeSlide--;
+        slideshowContent.prepend(slideshowContent.lastElementChild);
+      }
+    }
+
+    slideshowContent.style.transition = "none";
+    slideshowContent.style.transform = "translateX(0%)";
+    setTimeout(() => {
+      jump = 1;
+      slideshowContent.style.transition = "all ease 1s";
+    });
+    updateIndicators();
+  });
+
+  document.querySelectorAll(".slideshow__indicators span").forEach((item) => {
+    item.addEventListener("click", (e) => {
+      let slideTo = parseInt(e.target.dataset.slideTo);
+
+      indicatorsSpan.forEach((item, index) => {
+        if (item.classList.contains("active")) {
+          activeIndicator = index;
+        }
+      });
+
+      if (slideTo - activeIndicator > 1) {
+        jump = slideTo - activeIndicator;
+        step = jump * step;
+        slideToNext();
+      } else if (slideTo - activeIndicator === 1) {
+        slideToNext();
+      } else if (slideTo - activeIndicator < 0) {
+        if (Math.abs(slideTo - activeIndicator) > 1) {
+          jump = Math.abs(slideTo - activeIndicator);
+          step = jump * step;
+          slideToPrev();
+        }
+        slideToPrev();
+      }
+      step = 100 / totalSlides;
+    });
+  });
+
+  // * To pause the loop on hover
+  slideshow.addEventListener("mouseover", () => {
+    loop(false);
+  });
+
+  slideshow.addEventListener("mouseout", () => {
+    loop(true);
+  });
+
+  //* Carousel functions
+  function loadIndicators() {
+    slideshowItems.forEach((slide, index) => {
+      if (index === 0) {
+        indicators.innerHTML += `<span data-slide-to="${index}" class="active"></span>`;
+      } else {
+        indicators.innerHTML += `<span data-slide-to="${index}"></span>`;
+      }
+    });
+  }
+
+  function updateIndicators() {
+    if (activeSlide > totalSlides - 1) {
+      activeSlide = 0;
+    } else if (activeSlide < 0) {
+      activeSlide = totalSlides - 1;
+    }
+    document
+      .querySelector(".slideshow__indicators span.active")
+      .classList.remove("active");
+    document
+      .querySelectorAll(".slideshow__indicators span")
+      [activeSlide].classList.add("active");
+  }
+
+  function slideToNext() {
+    if (direction === 1) {
+      direction = -1;
+      slideshowContent.prepend(slideshowContent.lastElementChild);
+    }
+
+    slideshow.style.justifyContent = "flex-start";
+    slideshowContent.style.transform = `translateX(-${step}%)`;
+  }
+
+  function slideToPrev() {
+    if (direction === -1) {
+      direction = 1;
+      slideshowContent.append(slideshowContent.firstElementChild);
+    }
+    slideshow.style.justifyContent = "flex-end";
+    slideshowContent.style.transform = `translateX(${step}%)`;
+  }
+
+  function loop(status) {
+    if (status === true) {
+      time = setInterval(() => {
+        slideToNext();
+      }, interval);
+    } else {
+      clearInterval(time);
+    }
+  }
+}

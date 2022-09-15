@@ -237,7 +237,7 @@
                     "label": "Content width",
                     "info": "Only wrapped content",
                     "min": 900,
-                    "max": 1300,
+                    "max": 1440,
                     "step": 20,
                     "unit": "px",
                     "default": 1240

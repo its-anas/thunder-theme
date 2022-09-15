@@ -1,0 +1,50 @@
+{{ 'slideshow.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+{%- endstyle -%}
+
+<div class="slideshow">
+  <div class="slideshow__content">
+    <div class="slideshow__item">
+      {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder' }}
+    </div>
+    <div class="slideshow__item">
+      {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder' }}
+    </div>
+    <div class="slideshow__item">
+      {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder' }}
+    </div>
+    <div class="slideshow__item">
+      {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder' }}
+    </div>
+  </div>
+  <div class="slideshow__chevron">
+    <span class="prev">
+      {% render 'icons', icon: 'slideshow-chevron-prev' -%}
+    </span>
+    <span class="next">
+      {% render 'icons', icon: 'slideshow-chevron-next' -%}
+    </span>
+  </div>
+  <div class="slideshow__indicators"></div>
+</div>
+
+<script>
+  function theDomHasLoaded() {
+    slideshow();
+  }
+</script>
+
+{% schema %}
+{
+  "name": "Slideshow",
+  "settings": [],
+  "blocks": [],
+  "presets": [
+    {
+      "name": "Slideshow",
+      "blocks": []
+    }
+  ]
+}
+{% endschema %}
