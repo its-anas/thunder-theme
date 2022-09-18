@@ -1,3 +1,5 @@
+$indicator-width: 40px;
+
 .slideshow {
     height: 350px;
     width: 100vw;
@@ -89,7 +91,7 @@
         span {
             display: inline-block;
             background-color: rgb(255, 255, 255, 0.5);
-            width: 30px;
+            width: $indicator-width;
             height: 5px;
             cursor: pointer;
             margin-right: 5px;
@@ -105,8 +107,8 @@
             &.active::after {
                 content: "";
                 position: absolute;
-                background-color: white;
-                transform: translateX(-15px);
+                background-color: #fcdb33;
+                transform: translateX(calc($indicator-width / -2));
                 height: 5px;
                 animation: load 4s normal forwards;
             }
@@ -120,7 +122,6 @@
     }
 
     100% {
-        // opacity: 0;
-        width: 30px;
+        width: 40px;
     }
 }
