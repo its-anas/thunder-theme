@@ -58,9 +58,9 @@
 {% capture afterExpirationTimeOnly %}'{{ section.settings.afterExpirationTimeOnly }}'{% endcapture %}
 
 <script>
-  function theDomHasLoaded() {
+  document.addEventListener('DOMContentLoaded', (event) => {
     countdownTimer( {{ coundownType }}, '{{ timeInDate }}', {{ timeInMinutes }}, {{ afterExpirationTimeOnly }}, 'countdown-timer-{{ section.id }}', 'countdown-timer-cookie-{{ section.id }}');
-  }
+  });
 </script>
 
 <div

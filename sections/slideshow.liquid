@@ -109,9 +109,9 @@
 
 <script>
   // run the slideshow function after the dom has loaded
-  function theDomHasLoaded() {
+  document.addEventListener('DOMContentLoaded', (event) => {
     slideshow();
-  }
+  });
 </script>
 
 {% schema %}
@@ -383,7 +383,20 @@
   "presets": [
     {
       "name": "Slideshow",
-      "blocks": []
+      "blocks": [
+        {
+          "type": "slide"
+        },
+        {
+          "type": "slide"
+        },
+        {
+          "type": "slide"
+        },
+        {
+          "type": "slide"
+        }
+      ]
     }
   ]
 }

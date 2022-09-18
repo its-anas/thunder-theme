@@ -1,5 +1,3 @@
-document.addEventListener("DOMContentLoaded", theDomHasLoaded, false);
-
 /**============================================
  *               * ANCHOR: FAQ section
  *=============================================**/
@@ -13,24 +11,38 @@ The code above does the following:
 6. When the faqTabs element is clicked, toggle the classList of tab to active.
 7. If the tab has the active classList, then set the height of the answer to answerHeight + 20px, otherwise set it to 0px. 
 */
-const faqTabs = document.querySelectorAll(".faq__tab");
-faqTabs.forEach((tab) => {
-        const answer = tab.childNodes[3];
-        const answerHeight = tab.childNodes[3].scrollHeight;
-        tab.addEventListener("click", () => {
-                if (!tab.classList.contains("active")) {
-                        faqTabs.forEach((tab) => {
-                                tab.classList.remove("active");
-                                tab.childNodes[3].style.height = "0px";
+class FaqSection extends HTMLElement {
+        constructor() {
+                super();
+        }
+        connectedCallback() {
+                this.showHide();
+        }
+        showHide() {
+                this.tabs = document.querySelectorAll(".faq__tab");
+                this.tabs.forEach((tab) => {
+                        const answer = tab.querySelector(".faq__answer");
+                        const answerHeight = answer.scrollHeight;
+                        tab.addEventListener("click", () => {
+                                if (!tab.classList.contains("active")) {
+                                        this.tabs.forEach((tb) => {
+                                                hideTab(tb);
+                                        });
+                                        tab.classList.add("active");
+                                        answer.style.height = answerHeight + 20 + "px";
+                                } else {
+                                        hideTab(tab);
+                                }
+                                function hideTab(selector) {
+                                        selector.classList.remove("active");
+                                        selector.childNodes[3].style.height = "0px";
+                                }
                         });
-                        tab.classList.add("active");
-                        answer.style.height = answerHeight + 20 + "px";
-                } else {
-                        tab.classList.remove("active");
-                        answer.style.height = "0px";
-                }
-        });
-});
+                });
+        }
+}
+
+customElements.define("faq-section", FaqSection);
 
 /**============================================
  *               * ANCHOR: Countdown timer section
@@ -149,25 +161,25 @@ Here is the explanation for the code above:
 5. We show the video and hide the thumbnail
 6. When the video ends, we reset the video src and hide the video and show the thumbnail again 
 */
-const videoBoxs = document.querySelectorAll(".video-with-text__video-box");
-
-videoBoxs.forEach((box) => {
-        const thumbnail = box.querySelector(".video-with-text__thumbnail");
-        const video = box.querySelector(".video");
-        const originalVideoSrc = video.src;
-
-        thumbnail.addEventListener("click", () => {
-                video.src = originalVideoSrc + "&autoplay=1";
-                thumbnail.classList.add("hidden");
-                video.classList.add("shown");
-        });
-
-        video.addEventListener("ended", () => {
-                video.src = originalVideoSrc;
-                thumbnail.classList.remove("hidden");
-                video.classList.remove("shown");
-        });
-});
+class videoWithText extends HTMLElement {
+        constructor() {
+                super();
+        }
+        connectedCallback() {
+                this.playVideo();
+        }
+        playVideo() {
+                this.thumbnail = document.querySelector(".video-with-text__thumbnail");
+                this.video = document.querySelector(".video");
+                this.originalVideoSrc = this.video.src;
+                this.thumbnail.addEventListener("click", () => {
+                        this.video.src = this.originalVideoSrc + "&autoplay=1";
+                        this.thumbnail.classList.add("hidden");
+                        this.video.classList.add("shown");
+                });
+        }
+}
+customElements.define("video-with-text", videoWithText);
 
 /**============================================
  *               * ANCHOR: Slideshow
