@@ -65,6 +65,12 @@
 .slideshow__chevron .next:hover {
   opacity: 1;
 }
+@media screen and (max-width: 750px) {
+  .slideshow__chevron .prev,
+.slideshow__chevron .next {
+    display: none;
+  }
+}
 .slideshow__indicators {
   position: absolute;
   bottom: 12px;

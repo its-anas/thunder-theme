@@ -9,7 +9,7 @@ The code above does the following:
 4. Get the height of the answer by using the scrollHeight property and store it in a variable called answerHeight.
 5. Add an event listener to each of the faqTabs elements.
 6. When the faqTabs element is clicked, toggle the classList of tab to active.
-7. If the tab has the active classList, then set the height of the answer to answerHeight + 20px, otherwise set it to 0px. 
+7. If the tab has the active classList, then set the height of the answer to answerHeight + 20px, otherwise set it to 0px.  
 */
 class FaqSection extends HTMLElement {
         constructor() {
@@ -246,6 +246,12 @@ class slideshow extends HTMLElement {
                 let jump = 1;
                 let interval = 4000;
                 let time;
+
+                if (totalSlides <= 1) {
+                        next.style = "display: none";
+                        prev.style = "display: none";
+                }
+
                 function loadIndicators() {
                         slideshowSlides.forEach((slide, index) => {
                                 let indicators = slideshow.querySelector(".slideshow__indicators");
@@ -258,6 +264,7 @@ class slideshow extends HTMLElement {
                         });
                 }
                 loadIndicators();
+
                 function slideToNext() {
                         if (direction === -1) {
                                 direction = -1;
@@ -266,8 +273,12 @@ class slideshow extends HTMLElement {
                                 slideshowContainer.prepend(slideshowContainer.lastElementChild);
                         }
                         slideshow.style.justifyContent = "flex-start";
-                        slideshowContainer.style.transform = `translateX(-${step}%)`;
+                        if (totalSlides <= 1) {
+                        } else {
+                                slideshowContainer.style.transform = `translateX(-${step}%)`;
+                        }
                 }
+
                 function slideToPrev() {
                         if (direction === -1) {
                                 direction = 1;
@@ -276,7 +287,10 @@ class slideshow extends HTMLElement {
                                 direction = 1;
                         }
                         slideshow.style.justifyContent = "flex-end";
-                        slideshowContainer.style.transform = `translateX(${step}%)`;
+                        if (totalSlides <= 1) {
+                        } else {
+                                slideshowContainer.style.transform = `translateX(${step}%)`;
+                        }
                 }
                 next.addEventListener("click", () => {
                         slideToNext();
@@ -284,6 +298,7 @@ class slideshow extends HTMLElement {
                 prev.addEventListener("click", () => {
                         slideToPrev();
                 });
+
                 function loop(status) {
                         if (status === true) {
                                 time = setInterval(() => {
@@ -294,12 +309,14 @@ class slideshow extends HTMLElement {
                         }
                 }
                 loop(true);
+
                 this.addEventListener("mouseover", () => {
                         loop(false);
                 });
                 this.addEventListener("mouseout", () => {
                         loop(true);
                 });
+
                 slideshowContainer.addEventListener("transitionend", (event) => {
                         if (event.target.className == "slideshow__container") {
                                 if (direction === -1) {
@@ -341,6 +358,7 @@ class slideshow extends HTMLElement {
                                 updateIndicators();
                         }
                 });
+
                 let indicator = slideshow.querySelectorAll(".slideshow__indicators span");
                 indicator.forEach((item) => {
                         item.addEventListener("click", (e) => {

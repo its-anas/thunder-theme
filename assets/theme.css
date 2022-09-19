@@ -5,49 +5,12 @@
 }
 
 :root {
-  --h1-font-size: calc(
-    (
-        (
-            (
-                (
-                    (var(--font-size-type-scale) * var(--font-type-scale)) *
-                      var(--font-type-scale)
-                  ) * var(--font-type-scale)
-              ) * var(--font-type-scale)
-          ) * var(--font-type-scale)
-      ) * var(--font-type-scale) * 1px
-  );
-  --h2-font-size: calc(
-    (
-        (
-            (
-                (var(--font-size-type-scale) * var(--font-type-scale)) *
-                  var(--font-type-scale)
-              ) * var(--font-type-scale)
-          ) * var(--font-type-scale)
-      ) * var(--font-type-scale) * 1px
-  );
-  --h3-font-size: calc(
-    (
-        (
-            (var(--font-size-type-scale) * var(--font-type-scale)) *
-              var(--font-type-scale)
-          ) * var(--font-type-scale)
-      ) * var(--font-type-scale) * 1px
-  );
-  --h4-font-size: calc(
-    (
-        (var(--font-size-type-scale) * var(--font-type-scale)) *
-          var(--font-type-scale)
-      ) * var(--font-type-scale) * 1px
-  );
-  --h5-font-size: calc(
-    var(--font-size-type-scale) *
-      (var(--font-type-scale) * var(--font-type-scale) * 1px)
-  );
-  --h6-font-size: calc(
-    var(--font-size-type-scale) * var(--font-type-scale) * 1px
-  );
+  --h1-font-size: calc((((((var(--font-size-type-scale) * var(--font-type-scale)) * var(--font-type-scale)) * var(--font-type-scale)) * var(--font-type-scale)) * var(--font-type-scale)) * var(--font-type-scale) * 1px);
+  --h2-font-size: calc(((((var(--font-size-type-scale) * var(--font-type-scale)) * var(--font-type-scale)) * var(--font-type-scale)) * var(--font-type-scale)) * var(--font-type-scale) * 1px);
+  --h3-font-size: calc((((var(--font-size-type-scale) * var(--font-type-scale)) * var(--font-type-scale)) * var(--font-type-scale)) * var(--font-type-scale) * 1px);
+  --h4-font-size: calc(((var(--font-size-type-scale) * var(--font-type-scale)) * var(--font-type-scale)) * var(--font-type-scale) * 1px);
+  --h5-font-size: calc(var(--font-size-type-scale) * (var(--font-type-scale) * var(--font-type-scale) * 1px));
+  --h6-font-size: calc(var(--font-size-type-scale) * var(--font-type-scale) * 1px);
 }
 
 /* ------------ ANCHOR: Base ------------ */
@@ -202,7 +165,7 @@ a {
 }
 .button--primary, .button--secondary {
   text-transform: uppercase;
-  padding: 15px 30px;
+  padding: 15px 0px;
   text-align: center;
 }
 .button--primary.border:after, .button--secondary.border:after {

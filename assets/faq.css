@@ -12,7 +12,6 @@
   justify-content: center;
   align-items: center;
   height: auto;
-  padding: 0px 1rem;
   width: 100%;
 }
 @media screen and (min-width: 750px) {
@@ -22,6 +21,15 @@
 }
 .faq__content {
   width: 100%;
+}
+@media screen and (max-width: 750px) {
+  .faq__content {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 }
 .faq__tab {
   cursor: pointer;
