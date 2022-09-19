@@ -16,10 +16,12 @@ class FaqSection extends HTMLElement {
                 super();
         }
         connectedCallback() {
+                this.attachShadow({ mode: "open" });
+                this.shadowRoot.innerHTML = "<slot></slot>";
                 this.showHide();
         }
         showHide() {
-                this.tabs = document.querySelectorAll(".faq__tab");
+                this.tabs = this.querySelectorAll(".faq__tab");
                 this.tabs.forEach((tab) => {
                         const answer = tab.querySelector(".faq__answer");
                         const answerHeight = answer.scrollHeight;
@@ -29,7 +31,8 @@ class FaqSection extends HTMLElement {
                                                 hideTab(tb);
                                         });
                                         tab.classList.add("active");
-                                        answer.style.height = answerHeight + 20 + "px";
+                                        // answer.style.height = answerHeight + 20 + "px";
+                                        answer.style.height = answerHeight + "px";
                                 } else {
                                         hideTab(tab);
                                 }
@@ -70,84 +73,104 @@ The code above does the following:
 4. The code then initializes the clock.
 5. The code finally creates a function that updates the clock every second.
 */
-function countdownTimer(countdownType, timeInDate, timeInMinutes, afterExpirationTimeOnly, id, cookieName) {
-        function getTimeRemaining(endTime) {
-                const total = Date.parse(endTime) - Date.parse(new Date());
-                const days = Math.floor(total / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((total / (1000 * 60 * 60)) % 24);
-                const minutes = Math.floor((total / 1000 / 60) % 60);
-                const seconds = Math.floor((total / 1000) % 60);
-                return {
-                        total,
-                        days,
-                        hours,
-                        minutes,
-                        seconds,
-                };
+
+domainName = window.location.hostname;
+actualDate = new Date().getTime();
+
+class countdownTimer extends HTMLElement {
+        constructor() {
+                super();
+                this.attachShadow({ mode: "open" });
+                this.shadowRoot.innerHTML = "<slot></slot>";
         }
+        connectedCallback() {
+                this.loadCountdown();
+        }
+        loadCountdown() {
+                const countdownType = this.getAttribute("countdown-type");
+                const timeInDate = this.getAttribute("time-in-date");
+                const timeInMinutes = Number(this.getAttribute("time-in-minutes"));
+                const afterExpirationTimeOnly = this.getAttribute("after-expiration");
+                const id = this.getAttribute("section-id");
+                const cookieName = this.getAttribute("cookie-name");
 
-        function initializeClock(endTime) {
-                const clock = document.getElementById(id);
-                const daysSpan = clock.querySelector(".days");
-                const hoursSpan = clock.querySelector(".hours");
-                const minutesSpan = clock.querySelector(".minutes");
-                const secondsSpan = clock.querySelector(".seconds");
+                function initializeClock(endTime) {
+                        const clock = document.querySelector(`#${id}`);
+                        const daysSpan = clock.querySelector(".days");
+                        const hoursSpan = clock.querySelector(".hours");
+                        const minutesSpan = clock.querySelector(".minutes");
+                        const secondsSpan = clock.querySelector(".seconds");
 
-                function updateClock() {
-                        const t = getTimeRemaining(endTime);
-                        daysSpan.innerHTML = t.days < 100 ? ("0" + t.days).slice(-2) : t.days;
-                        hoursSpan.innerHTML = ("0" + t.hours).slice(-2);
-                        minutesSpan.innerHTML = ("0" + t.minutes).slice(-2);
-                        secondsSpan.innerHTML = ("0" + t.seconds).slice(-2);
+                        function updateClock() {
+                                function getTimeRemaining(endTime) {
+                                        const total = Date.parse(endTime) - Date.parse(new Date());
+                                        const days = Math.floor(total / (1000 * 60 * 60 * 24));
+                                        const hours = Math.floor((total / (1000 * 60 * 60)) % 24);
+                                        const minutes = Math.floor((total / 1000 / 60) % 60);
+                                        const seconds = Math.floor((total / 1000) % 60);
+                                        return {
+                                                total,
+                                                days,
+                                                hours,
+                                                minutes,
+                                                seconds,
+                                        };
+                                }
+                                const t = getTimeRemaining(endTime);
+                                daysSpan.innerHTML = t.days < 100 ? ("0" + t.days).slice(-2) : t.days;
+                                hoursSpan.innerHTML = ("0" + t.hours).slice(-2);
+                                minutesSpan.innerHTML = ("0" + t.minutes).slice(-2);
+                                secondsSpan.innerHTML = ("0" + t.seconds).slice(-2);
 
-                        if (t.total >= 0) {
-                                clock.querySelector(".countdown-timer__timers").classList.add("shown");
-                                clock.querySelector(".countdown-timer__message").classList.add("hidden");
-                        }
+                                if (t.total >= 0) {
+                                        clock.querySelector(".countdown-timer__timers").classList.add("shown");
+                                        clock.querySelector(".countdown-timer__message").classList.add("hidden");
+                                }
 
-                        if (t.total <= 0) {
-                                clearInterval(timeInterval);
+                                if (t.total <= 0) {
+                                        clearInterval(timeInterval);
 
-                                if (afterExpirationTimeOnly === "showMessage") {
-                                        clock.querySelector(".countdown-timer__timers").classList.remove("shown");
-                                        clock.querySelector(".countdown-timer__message").classList.remove("hidden");
+                                        if (afterExpirationTimeOnly === "showMessage") {
+                                                clock.querySelector(".countdown-timer__timers").classList.remove("shown");
+                                                clock.querySelector(".countdown-timer__message").classList.remove("hidden");
+                                        }
                                 }
                         }
-                }
-                updateClock();
-                const timeInterval = setInterval(updateClock, 1000);
-        }
-
-        if (countdownType === "date") {
-                let deadline = timeInDate;
-                initializeClock(deadline);
-        } else if (countdownType === "time") {
-                let deadline = document.cookie
-                        .split("; ")
-                        .find((row) => row.startsWith(cookieName + "="))
-                        ?.split("=")[1];
-
-                function saveCookie() {
-                        const currentTime = Date.parse(new Date());
-                        deadline = new Date(timeInMinutes * 60 * 1000 + currentTime);
-                        domainName = window.location.hostname;
-                        document.cookie = cookieName + "=" + deadline + "; path=/; domain=." + domainName;
+                        updateClock();
+                        const timeInterval = setInterval(updateClock, 1000);
                 }
 
-                if (document.cookie && deadline) {
-                        actualDate = new Date().getTime();
-                        deadlineDate = new Date(deadline).getTime();
-                        if (actualDate > deadlineDate) {
-                                if (afterExpirationTimeOnly === "repeatCountdown") {
-                                        saveCookie();
-                                }
+                if (countdownType === "date") {
+                        let deadline = timeInDate;
+                        initializeClock(deadline);
+                } else if (countdownType === "time") {
+                        let deadline = document.cookie
+                                .split("; ")
+                                .find((row) => row.startsWith(cookieName + "="))
+                                ?.split("=")[1];
+                        function saveCookie() {
+                                const currentTime = Date.parse(new Date());
+
+                                deadline = new Date(timeInMinutes * 60 * 1000 + currentTime);
+
+                                document.cookie = cookieName + "=" + deadline + "; path=/; domain=." + domainName;
                         }
-                } else {
-                        saveCookie();
+
+                        if (document.cookie && deadline) {
+                                if (deadline < 0) {
+                                        if (afterExpirationTimeOnly === "repeatCountdown") {
+                                                saveCookie();
+                                        }
+                                }
+                        } else {
+                                saveCookie();
+                        }
+                        initializeClock(deadline);
                 }
-                initializeClock(deadline);
         }
 }
+
+customElements.define("countdown-timer", countdownTimer);
 
 /**============================================
  *               * ANCHOR: Video with text section
@@ -166,11 +189,13 @@ class videoWithText extends HTMLElement {
                 super();
         }
         connectedCallback() {
+                this.attachShadow({ mode: "open" });
+                this.shadowRoot.innerHTML = "<slot></slot>";
                 this.playVideo();
         }
         playVideo() {
-                this.thumbnail = document.querySelector(".video-with-text__thumbnail");
-                this.video = document.querySelector(".video");
+                this.thumbnail = this.querySelector(".video-with-text__thumbnail");
+                this.video = this.querySelector(".video");
                 this.originalVideoSrc = this.video.src;
                 this.thumbnail.addEventListener("click", () => {
                         this.video.src = this.originalVideoSrc + "&autoplay=1";
@@ -179,6 +204,7 @@ class videoWithText extends HTMLElement {
                 });
         }
 }
+
 customElements.define("video-with-text", videoWithText);
 
 /**============================================
@@ -197,158 +223,151 @@ Here is the explanation for the code above:
 9. We select all the indicators and add an event listener that will check which indicator was clicked and will slide the slides to the clicked indicator. 
 */
 
-function slideshow() {
-        let slideshow = document.querySelector(".slideshow");
-        let slideshowContainer = document.querySelector(".slideshow__container");
-        let slideshowSlides = document.querySelectorAll(".slideshow__container .slideshow__slide");
-        let prev = document.querySelector(".slideshow__chevron .prev");
-        let next = document.querySelector(".slideshow__chevron .next");
-        let totalSlides = slideshowSlides.length;
-        let step = 100 / totalSlides;
-        let activeSlide = 0;
-        let activeIndicator = 0;
-        let direction = -1;
-        let jump = 1;
-        let interval = 4000;
-        let time;
-
-        function loadIndicators() {
-                slideshowSlides.forEach((slide, index) => {
-                        if (index === 0) {
-                                document.querySelector(".slideshow__indicators").innerHTML += `<span data-slide-to="${index}" class="active"></span>`;
-                        } else {
-                                document.querySelector(".slideshow__indicators").innerHTML += `<span data-slide-to="${index}"></span>`;
-                        }
-                });
+class slideshow extends HTMLElement {
+        constructor() {
+                super();
         }
+        connectedCallback() {
+                this.attachShadow({ mode: "open" });
+                this.shadowRoot.innerHTML = "<slot></slot>";
+                this.loadSlideshow();
+        }
+        loadSlideshow() {
+                let slideshow = this.querySelector(".slideshow");
+                let slideshowContainer = this.querySelector(".slideshow__container");
+                let slideshowSlides = this.querySelectorAll(".slideshow__container .slideshow__slide");
+                let prev = this.querySelector(".slideshow__chevron .prev");
+                let next = this.querySelector(".slideshow__chevron .next");
+                let totalSlides = slideshowSlides.length;
+                let step = 100 / totalSlides;
+                let activeSlide = 0;
+                let activeIndicator = 0;
+                let direction = -1;
+                let jump = 1;
+                let interval = 4000;
+                let time;
+                function loadIndicators() {
+                        slideshowSlides.forEach((slide, index) => {
+                                let indicators = slideshow.querySelector(".slideshow__indicators");
 
-        loadIndicators();
-
-        function slideToNext() {
-                if (direction === -1) {
-                        direction = -1;
-                } else if (direction === 1) {
-                        direction = -1;
-                        slideshowContainer.prepend(slideshowContainer.lastElementChild);
+                                if (index === 0) {
+                                        indicators.innerHTML += `<span data-slide-to="${index}" class="active"></span>`;
+                                } else {
+                                        indicators.innerHTML += `<span data-slide-to="${index}"></span>`;
+                                }
+                        });
                 }
-
-                slideshow.style.justifyContent = "flex-start";
-                slideshowContainer.style.transform = `translateX(-${step}%)`;
-        }
-
-        function slideToPrev() {
-                if (direction === -1) {
-                        direction = 1;
-                        slideshowContainer.append(slideshowContainer.firstElementChild);
-                } else if (direction === 1) {
-                        direction = 1;
-                }
-
-                slideshow.style.justifyContent = "flex-end";
-                slideshowContainer.style.transform = `translateX(${step}%)`;
-        }
-
-        next.addEventListener("click", () => {
-                slideToNext();
-        });
-        prev.addEventListener("click", () => {
-                slideToPrev();
-        });
-
-        function loop(status) {
-                if (status === true) {
-                        time = setInterval(() => {
-                                slideToNext();
-                        }, interval);
-                } else {
-                        clearInterval(time);
-                }
-        }
-
-        loop(true);
-
-        slideshow.addEventListener("mouseover", () => {
-                loop(false);
-        });
-
-        slideshow.addEventListener("mouseout", () => {
-                loop(true);
-        });
-
-        slideshowContainer.addEventListener("transitionend", (event) => {
-                if (event.target.className == "slideshow__container") {
+                loadIndicators();
+                function slideToNext() {
                         if (direction === -1) {
-                                if (jump > 1) {
-                                        for (let i = 0; i < jump; i++) {
+                                direction = -1;
+                        } else if (direction === 1) {
+                                direction = -1;
+                                slideshowContainer.prepend(slideshowContainer.lastElementChild);
+                        }
+                        slideshow.style.justifyContent = "flex-start";
+                        slideshowContainer.style.transform = `translateX(-${step}%)`;
+                }
+                function slideToPrev() {
+                        if (direction === -1) {
+                                direction = 1;
+                                slideshowContainer.append(slideshowContainer.firstElementChild);
+                        } else if (direction === 1) {
+                                direction = 1;
+                        }
+                        slideshow.style.justifyContent = "flex-end";
+                        slideshowContainer.style.transform = `translateX(${step}%)`;
+                }
+                next.addEventListener("click", () => {
+                        slideToNext();
+                });
+                prev.addEventListener("click", () => {
+                        slideToPrev();
+                });
+                function loop(status) {
+                        if (status === true) {
+                                time = setInterval(() => {
+                                        slideToNext();
+                                }, interval);
+                        } else {
+                                clearInterval(time);
+                        }
+                }
+                loop(true);
+                this.addEventListener("mouseover", () => {
+                        loop(false);
+                });
+                this.addEventListener("mouseout", () => {
+                        loop(true);
+                });
+                slideshowContainer.addEventListener("transitionend", (event) => {
+                        if (event.target.className == "slideshow__container") {
+                                if (direction === -1) {
+                                        if (jump > 1) {
+                                                for (let i = 0; i < jump; i++) {
+                                                        activeSlide++;
+                                                        slideshowContainer.append(slideshowContainer.firstElementChild);
+                                                }
+                                        } else {
                                                 activeSlide++;
                                                 slideshowContainer.append(slideshowContainer.firstElementChild);
                                         }
-                                } else {
-                                        activeSlide++;
-                                        slideshowContainer.append(slideshowContainer.firstElementChild);
-                                }
-                        } else if (direction === 1) {
-                                if (jump > 1) {
-                                        for (let i = 0; i < jump; i++) {
+                                } else if (direction === 1) {
+                                        if (jump > 1) {
+                                                for (let i = 0; i < jump; i++) {
+                                                        activeSlide--;
+                                                        slideshowContainer.prepend(slideshowContainer.lastElementChild);
+                                                }
+                                        } else {
                                                 activeSlide--;
                                                 slideshowContainer.prepend(slideshowContainer.lastElementChild);
                                         }
-                                } else {
-                                        activeSlide--;
-                                        slideshowContainer.prepend(slideshowContainer.lastElementChild);
                                 }
+                                slideshowContainer.style.transition = "none";
+                                slideshowContainer.style.transform = "translateX(0%)";
+                                setTimeout(() => {
+                                        jump = 1;
+                                        slideshowContainer.style.transition = "all ease 1s";
+                                });
+                                function updateIndicators() {
+                                        if (activeSlide > totalSlides - 1) {
+                                                activeSlide = 0;
+                                        } else if (activeSlide < 0) {
+                                                activeSlide = totalSlides - 1;
+                                        }
+                                        slideshow.querySelector(".slideshow__indicators span.active").classList.remove("active");
+                                        slideshow.querySelectorAll(".slideshow__indicators span")[activeSlide].classList.add("active");
+                                }
+                                updateIndicators();
                         }
-
-                        slideshowContainer.style.transition = "none";
-                        slideshowContainer.style.transform = "translateX(0%)";
-
-                        setTimeout(() => {
-                                jump = 1;
-                                slideshowContainer.style.transition = "all ease 1s";
-                        });
-
-                        function updateIndicators() {
-                                if (activeSlide > totalSlides - 1) {
-                                        activeSlide = 0;
-                                } else if (activeSlide < 0) {
-                                        activeSlide = totalSlides - 1;
-                                }
-
-                                document.querySelector(".slideshow__indicators span.active").classList.remove("active");
-                                document.querySelectorAll(".slideshow__indicators span")[activeSlide].classList.add("active");
-                        }
-
-                        updateIndicators();
-                }
-        });
-
-        let indicators = document.querySelectorAll(".slideshow__indicators span");
-
-        indicators.forEach((item) => {
-                item.addEventListener("click", (e) => {
-                        let slideTo = parseInt(e.target.dataset.slideTo);
-
-                        indicators.forEach((item, index) => {
-                                if (item.classList.contains("active")) {
-                                        activeIndicator = index;
-                                }
-                        });
-
-                        if (slideTo - activeIndicator > 1) {
-                                jump = slideTo - activeIndicator;
-                                step = jump * step;
-                                slideToNext();
-                        } else if (slideTo - activeIndicator === 1) {
-                                slideToNext();
-                        } else if (slideTo - activeIndicator < 0) {
-                                if (Math.abs(slideTo - activeIndicator) > 1) {
-                                        jump = Math.abs(slideTo - activeIndicator);
+                });
+                let indicator = slideshow.querySelectorAll(".slideshow__indicators span");
+                indicator.forEach((item) => {
+                        item.addEventListener("click", (e) => {
+                                let slideTo = parseInt(e.target.dataset.slideTo);
+                                indicator.forEach((item, index) => {
+                                        if (item.classList.contains("active")) {
+                                                activeIndicator = index;
+                                        }
+                                });
+                                if (slideTo - activeIndicator > 1) {
+                                        jump = slideTo - activeIndicator;
                                         step = jump * step;
+                                        slideToNext();
+                                } else if (slideTo - activeIndicator === 1) {
+                                        slideToNext();
+                                } else if (slideTo - activeIndicator < 0) {
+                                        if (Math.abs(slideTo - activeIndicator) > 1) {
+                                                jump = Math.abs(slideTo - activeIndicator);
+                                                step = jump * step;
+                                                slideToPrev();
+                                        }
                                         slideToPrev();
                                 }
-                                slideToPrev();
-                        }
-                        step = 100 / totalSlides;
+                                step = 100 / totalSlides;
+                        });
                 });
-        });
+        }
 }
+
+customElements.define("slideshow-section", slideshow);

@@ -29,90 +29,85 @@
    }
 {%- endstyle -%}
 
-<div class="{{ section.id }} slideshow {% if section.settings.section_width == "wrapped" %} wrapped{% else %}{% endif %}">
-  {% comment %} slides {% endcomment %}
-  <div class="slideshow__container">
-    {% for block in section.blocks %}
-      <div class="slideshow__slide">
-        {% comment %} Picture {% endcomment %}
-        <div class="{{ section.id }} slideshow__picture">
-          {%- if block.settings.image == blank -%}
-            {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder' }}
-          {%- elsif block.settings.image != blank -%}
-            <div class="media">
-              <img
-                srcset="{{ block.settings.image | image_url }}"
-                loading="lazy"
-                alt="{{ block.settings.image.alt | escape }}"
-                width="{{ block.settings.image.width }}"
-                height="{{ block.settings.image.height }}"
-                class="fit"
-              >
-            </div>
-          {%- endif -%}
-        </div>
-        {% comment %} Picture end {% endcomment %}
-
-        {% comment %} Content {% endcomment %}
-        <div class="slideshow__content container vertical--{{ section.settings.vertical_position }}">
-          <div class="{{ section.id }} slideshow__box text-alignment--{{ section.settings.text_alignment }} {{ section.id }}-text-width horizontal--{{ section.settings.horizontal_position }}">
-            <{{ block.settings.subheading_size }}>
-              {{ block.settings.subheading }}
-            </{{ block.settings.subheading_size }}>
-
-            <{{ block.settings.heading_size }}>
-              {{ block.settings.heading }}
-            </{{ block.settings.heading_size }}>
-
-            {{ block.settings.text }}
-
-            <div class="buttons buttons--{{ section.settings.text_alignment }}">
-              {%- if block.settings.primary_button_text != blank -%}
-                <a
-                  class="button button--{% if block.settings.button_style == "border" %}primary{% else %}secondary{% endif %} {{ block.settings.button_style }}"
-                  href="{{ block.settings.primary_button_link }}"
+<slideshow-section>
+  <div class="{{ section.id }} slideshow {% if section.settings.section_width == "wrapped" %} wrapped{% else %}{% endif %}">
+    {% comment %} slides {% endcomment %}
+    <div class="slideshow__container">
+      {% for block in section.blocks %}
+        <div class="slideshow__slide">
+          {% comment %} Picture {% endcomment %}
+          <div class="{{ section.id }} slideshow__picture">
+            {%- if block.settings.image == blank -%}
+              {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder' }}
+            {%- elsif block.settings.image != blank -%}
+              <div class="media">
+                <img
+                  srcset="{{ block.settings.image | image_url }}"
+                  loading="lazy"
+                  alt="{{ block.settings.image.alt | escape }}"
+                  width="{{ block.settings.image.width }}"
+                  height="{{ block.settings.image.height }}"
+                  class="fit"
                 >
-                  <span></span> <span></span> <span></span> <span></span>
-                  {{ block.settings.primary_button_text }}
-                </a>
-              {%- endif -%}
-              {%- if block.settings.secondary_button_text != blank -%}
-                <a
-                  class="button button--secondary {{ block.settings.button_style }}"
-                  href="{{ block.settings.secondary_button_link }}"
-                >
-                  <span></span> <span></span> <span></span> <span></span>
-                  {{ block.settings.secondary_button_text }}
-                </a>
-              {%- endif -%}
+              </div>
+            {%- endif -%}
+          </div>
+          {% comment %} Picture end {% endcomment %}
+
+          {% comment %} Content {% endcomment %}
+          <div class="slideshow__content container vertical--{{ section.settings.vertical_position }}">
+            <div class="{{ section.id }} slideshow__box text-alignment--{{ section.settings.text_alignment }} {{ section.id }}-text-width horizontal--{{ section.settings.horizontal_position }}">
+              <{{ block.settings.subheading_size }}>
+                {{ block.settings.subheading }}
+              </{{ block.settings.subheading_size }}>
+
+              <{{ block.settings.heading_size }}>
+                {{ block.settings.heading }}
+              </{{ block.settings.heading_size }}>
+
+              {{ block.settings.text }}
+
+              <div class="buttons buttons--{{ section.settings.text_alignment }}">
+                {%- if block.settings.primary_button_text != blank -%}
+                  <a
+                    class="button button--{% if block.settings.button_style == "border" %}primary{% else %}secondary{% endif %} {{ block.settings.button_style }}"
+                    href="{{ block.settings.primary_button_link }}"
+                  >
+                    <span></span> <span></span> <span></span> <span></span>
+                    {{ block.settings.primary_button_text }}
+                  </a>
+                {%- endif -%}
+                {%- if block.settings.secondary_button_text != blank -%}
+                  <a
+                    class="button button--secondary {{ block.settings.button_style }}"
+                    href="{{ block.settings.secondary_button_link }}"
+                  >
+                    <span></span> <span></span> <span></span> <span></span>
+                    {{ block.settings.secondary_button_text }}
+                  </a>
+                {%- endif -%}
+              </div>
             </div>
           </div>
+          {% comment %} Content end {% endcomment %}
         </div>
-        {% comment %} Content end {% endcomment %}
-      </div>
-    {% endfor %}
+      {% endfor %}
+    </div>
+
+    {% comment %} chevrons {% endcomment %}
+    <div class="slideshow__chevron">
+      <span class="prev">
+        {% render 'icons', icon: 'slideshow-chevron-prev' -%}
+      </span>
+      <span class="next">
+        {% render 'icons', icon: 'slideshow-chevron-next' -%}
+      </span>
+    </div>
+
+    {% comment %} indicators {% endcomment %}
+    <div class="slideshow__indicators"></div>
   </div>
-
-  {% comment %} chevrons {% endcomment %}
-  <div class="slideshow__chevron">
-    <span class="prev">
-      {% render 'icons', icon: 'slideshow-chevron-prev' -%}
-    </span>
-    <span class="next">
-      {% render 'icons', icon: 'slideshow-chevron-next' -%}
-    </span>
-  </div>
-
-  {% comment %} indicators {% endcomment %}
-  <div class="slideshow__indicators"></div>
-</div>
-
-<script>
-  // run the slideshow function after the dom has loaded
-  document.addEventListener('DOMContentLoaded', (event) => {
-    slideshow();
-  });
-</script>
+</slideshow-section>
 
 {% schema %}
 {

@@ -1,6 +1,5 @@
 .slideshow {
   height: 350px;
-  width: 100vw;
   overflow-x: hidden;
   position: relative;
   display: flex;

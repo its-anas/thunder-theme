@@ -54,14 +54,8 @@
 %}
 
 {% capture timeInDate %}{{ year }}-{{ month }}-{{ day }}T{{ hour }}:{{ min }}:{{ sec }}{% endcapture %}
-{% capture coundownType %}'{{ section.settings.countdown_timer_type }}'{% endcapture %}
-{% capture afterExpirationTimeOnly %}'{{ section.settings.afterExpirationTimeOnly }}'{% endcapture %}
-
-<script>
-  document.addEventListener('DOMContentLoaded', (event) => {
-    countdownTimer( {{ coundownType }}, '{{ timeInDate }}', {{ timeInMinutes }}, {{ afterExpirationTimeOnly }}, 'countdown-timer-{{ section.id }}', 'countdown-timer-cookie-{{ section.id }}');
-  });
-</script>
+{% capture countdownType %}{{ section.settings.countdown_timer_type }}{% endcapture %}
+{% capture afterExpirationTimeOnly %}{{ section.settings.afterExpirationTimeOnly }}{% endcapture %}
 
 <div
   id="countdown-timer-{{ section.id }}"
@@ -75,7 +69,15 @@
   <div class="countdown-timer__text">
     <p>{{ section.settings.text }}</p>
   </div>
-  <div class="countdown-timer__timers">
+  <countdown-timer
+    countdown-type="{{ countdownType }}"
+    time-in-date="{{ timeInDate }}"
+    time-in-minutes="{{ timeInMinutes }}"
+    after-expiration="{{ afterExpirationTimeOnly }}"
+    section-id="countdown-timer-{{ section.id }}"
+    cookie-name="countdown-timer-cookie-{{ section.id }}"
+    class="countdown-timer__timers"
+  >
     <div class="countdown-timer__container">
       <p class="days digits--{{ section.settings.digits_size }}"></p>
       <p class="label">Days</p>
@@ -92,7 +94,7 @@
       <p class="seconds digits--{{ section.settings.digits_size }}"></p>
       <p class="label">Secs</p>
     </div>
-  </div>
+  </countdown-timer>
   <div class="countdown-timer__message">
     <h6>{{ section.settings.message }}</h6>
   </div>
@@ -306,8 +308,7 @@
     },
     {
       "type": "header",
-      "content": "Countdown timer settings",
-      "info": "⚠️ Warning: save the settings for your new changes to take effect. If your new settings don't take effect immediately or the time disapeared, please refresh this page"
+      "content": "Countdown timer settings"
     },
     {
       "type": "text",
