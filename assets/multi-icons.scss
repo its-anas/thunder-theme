@@ -14,7 +14,7 @@
         }
 
         &__container {
-                width: 80%;
+                width: 100%;
                 height: auto;
                 display: flex;
                 flex-direction: row;
@@ -32,12 +32,20 @@
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
-                width: 100px;
                 height: auto;
+                width: auto;
+                max-width: 100px;
                 .icon {
                         height: 100px;
+                        width: 100px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        .media {
+                        }
                 }
                 .text {
+                        text-align: center;
                 }
         }
 }

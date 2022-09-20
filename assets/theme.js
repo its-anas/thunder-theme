@@ -11,6 +11,7 @@ The code above does the following:
 6. When the faqTabs element is clicked, toggle the classList of tab to active.
 7. If the tab has the active classList, then set the height of the answer to answerHeight + 20px, otherwise set it to 0px.  
 */
+
 class FaqSection extends HTMLElement {
         constructor() {
                 super();
@@ -184,6 +185,7 @@ Here is the explanation for the code above:
 5. We show the video and hide the thumbnail
 6. When the video ends, we reset the video src and hide the video and show the thumbnail again 
 */
+
 class videoWithText extends HTMLElement {
         constructor() {
                 super();
@@ -403,6 +405,7 @@ Here is the explanation for the code above:
 6. The scrollLeftAnimate() function is used to animate the scrolling of the icons container.
 7. The prev and next buttons are given event listeners to call the scrollLeftAnimate() function when clicked. 
 */
+
 class multiIcon extends HTMLElement {
         constructor() {
                 super();
@@ -432,16 +435,16 @@ class multiIcon extends HTMLElement {
                 updateSliderInfo();
 
                 iconsContainer.addEventListener("scroll", () => {
-                        if (iconsContainer.scrollLeft === 0) {
+                        if (Math.round(iconsContainer.scrollLeft) === 0) {
                                 prev.style.display = "none";
                         }
-                        if (iconsContainer.scrollLeft > 0) {
+                        if (Math.round(iconsContainer.scrollLeft) > 0) {
                                 prev.style.display = "block";
                         }
-                        if (iconsContainer.scrollLeft >= maxSlideScroll) {
+                        if (Math.round(iconsContainer.scrollLeft) >= maxSlideScroll) {
                                 next.style.display = "none";
                         }
-                        if (iconsContainer.scrollLeft < maxSlideScroll) {
+                        if (Math.round(iconsContainer.scrollLeft) < maxSlideScroll) {
                                 next.style.display = "block";
                         }
                 });

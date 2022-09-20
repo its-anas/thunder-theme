@@ -11,7 +11,7 @@
   padding: 20px 0;
 }
 .multi-icon__container {
-  width: 80%;
+  width: 100%;
   height: auto;
   display: flex;
   flex-direction: row;
@@ -27,12 +27,21 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100px;
   height: auto;
+  width: auto;
+  max-width: 100px;
 }
 .multi-icon__icon .icon {
   height: 100px;
+  width: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+.multi-icon__icon .text {
+  text-align: center;
+}
+
 .chevrons .prev {
   display: none;
 }
