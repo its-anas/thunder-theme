@@ -435,9 +435,6 @@ a.border.button--primary:hover, a.border.button--secondary:hover {
   left: 12px;
   top: 50%;
   transform: translateY(-50%);
-  background-position: center;
-  background-size: auto 100%;
-  background-repeat: no-repeat;
   cursor: pointer;
   opacity: 0.5;
 }
@@ -449,9 +446,6 @@ a.border.button--primary:hover, a.border.button--secondary:hover {
   right: 12px;
   top: 50%;
   transform: translateY(-50%);
-  background-position: center;
-  background-size: auto 100%;
-  background-repeat: no-repeat;
   cursor: pointer;
   opacity: 0.5;
 }
