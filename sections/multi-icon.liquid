@@ -3,31 +3,39 @@
 {%- style -%}
 {%- endstyle -%}
 
-<section class="multi-icon">
-  <div class="multi-icon__container">
+<multi-icon>
+  <div class="multi-icon">
     <div class="multi-icon__heading">
       <h6>Heading</h6>
     </div>
-    <div class="multi-icon__icons">
-      {% include 'multi-icon__icon' %}
-      {% include 'multi-icon__icon' %}
-      {% include 'multi-icon__icon' %}
-      {% include 'multi-icon__icon' %}
-      {% include 'multi-icon__icon' %}
-      {% include 'multi-icon__icon' %}
+    <div class="multi-icon__container">
+      {% for blocks in section.blocks %}
+        <div class="multi-icon__icon">
+          <div class="icon">{% render 'multi-icon__icon' %}</div>
+          <p class="text">logo</p>
+        </div>
+      {% endfor %}
+    </div>
+    <div class="chevrons">
+      <span class="prev">
+        {% render 'icons', icon: 'slideshow-chevron-prev' -%}
+      </span>
+      <span class="next">
+        {% render 'icons', icon: 'slideshow-chevron-next' -%}
+      </span>
     </div>
   </div>
-</section>
+</multi-icon>
 
 {% schema %}
 {
   "name": "Multi icons",
   "settings": [],
-  "blocks": [],
+  "blocks": [{ "type": "icon", "name": "Icon", "settings": [] }],
   "presets": [
     {
       "name": "Multi icons",
-      "blocks": []
+      "blocks": [{ "type": "icon" }, { "type": "icon" }, { "type": "icon" }]
     }
   ]
 }

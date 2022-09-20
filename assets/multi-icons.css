@@ -1,25 +1,38 @@
 .multi-icon {
-  width: 100%;
+  width: 100vw;
   height: auto;
-  overflow: hidden;
-}
-@media screen and (max-width: 750px) {
-  .multi-icon {
-    overflow: auto;
-  }
-}
-.multi-icon__container {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
+  gap: 0.5rem;
+  padding: 20px 0;
 }
-.multi-icon__heading {
-  position: absolute;
-}
-.multi-icon__icons {
+.multi-icon__container {
+  width: 80%;
+  height: auto;
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: center;
+  align-items: flex-start;
+  overflow-x: auto;
+}
+.multi-icon__container::-webkit-scrollbar {
+  width: 0;
+}
+.multi-icon__icon {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
+  width: 100px;
+  height: auto;
+}
+.multi-icon__icon .icon {
+  height: 100px;
+}
+.chevrons .prev {
+  display: none;
 }

@@ -236,8 +236,8 @@ class slideshow extends HTMLElement {
                 let slideshow = this.querySelector(".slideshow");
                 let slideshowContainer = this.querySelector(".slideshow__container");
                 let slideshowSlides = this.querySelectorAll(".slideshow__container .slideshow__slide");
-                let prev = this.querySelector(".slideshow__chevron .prev");
-                let next = this.querySelector(".slideshow__chevron .next");
+                let prev = this.querySelector(".chevrons .prev");
+                let next = this.querySelector(".chevrons .next");
                 let totalSlides = slideshowSlides.length;
                 let step = 100 / totalSlides;
                 let activeSlide = 0;
@@ -389,3 +389,109 @@ class slideshow extends HTMLElement {
 }
 
 customElements.define("slideshow-section", slideshow);
+
+/**============================================
+ *               * ANCHOR: Multi icon
+ *=============================================**/
+/* 
+Here is the explanation for the code above:
+1. The function updateSliderInfo() is called at the beginning of the code to get the width of the icons, the container which holds the icons, and the maximum scroll left value of the icons container.
+2. An event listener is added to the icons container to check if the scroll left value equals 0, which means the icons container is scrolled all the way to the left, then the previous button should be hidden. If the scroll left value is greater than 0, the previous button should be shown.
+3. Then the same thing happens with the next button, if the scroll left value equals the maximum scroll left value, the next button should be hidden. If the scroll left value is less than the maximum scroll left value, the next button should be shown.
+4. The function toggleButtons() is called at the beginning of the code to check if the total width of the icons is less than or equal to the width of the container. If it is, the previous and next buttons are hidden, and the icons are centered.
+5. An event listener is added to the window to call the toggleButtons() function when the window is resized.
+6. The scrollLeftAnimate() function is used to animate the scrolling of the icons container.
+7. The prev and next buttons are given event listeners to call the scrollLeftAnimate() function when clicked. 
+*/
+class multiIcon extends HTMLElement {
+        constructor() {
+                super();
+        }
+        connectedCallback() {
+                this.attachShadow({ mode: "open" });
+                this.shadowRoot.innerHTML = "<slot></slot>";
+                this.loadSlider();
+        }
+        loadSlider() {
+                let iconsContainer = this.querySelector(".multi-icon__container");
+                let icon = this.querySelector(".multi-icon__icon");
+                let icons = this.querySelectorAll(".multi-icon__icon");
+                let prev = this.querySelector(".prev");
+                let next = this.querySelector(".next");
+                let iconWidth;
+                let iconsWidth;
+                let iconsContainerWidth;
+                let maxSlideScroll;
+
+                function updateSliderInfo() {
+                        iconWidth = icon.offsetWidth;
+                        iconsWidth = icons.length * iconWidth;
+                        iconsContainerWidth = iconsContainer.clientWidth;
+                        maxSlideScroll = iconsWidth - iconsContainerWidth;
+                }
+                updateSliderInfo();
+
+                iconsContainer.addEventListener("scroll", () => {
+                        if (iconsContainer.scrollLeft === 0) {
+                                prev.style.display = "none";
+                        }
+                        if (iconsContainer.scrollLeft > 0) {
+                                prev.style.display = "block";
+                        }
+                        if (iconsContainer.scrollLeft >= maxSlideScroll) {
+                                next.style.display = "none";
+                        }
+                        if (iconsContainer.scrollLeft < maxSlideScroll) {
+                                next.style.display = "block";
+                        }
+                });
+                let event = new Event("scroll");
+                iconsContainer.dispatchEvent(event);
+
+                function toggleButtons() {
+                        updateSliderInfo();
+                        if (iconsWidth <= iconsContainerWidth) {
+                                prev.style.display = "none";
+                                next.style.display = "none";
+                                iconsContainer.style.justifyContent = "center";
+                        }
+
+                        if (iconsWidth >= iconsContainerWidth) {
+                                next.style.display = "block";
+                                iconsContainer.style.justifyContent = "flex-start";
+                        }
+                }
+                toggleButtons();
+                window.addEventListener("resize", toggleButtons);
+
+                function scrollLeftAnimate(elem, unit) {
+                        let time = 300;
+                        let from = elem.scrollLeft; //
+                        let start = new Date().getTime();
+                        let timer = setInterval(function () {
+                                let step = Math.min(1, (new Date().getTime() - start) / time);
+                                elem.scrollLeft = step * unit + from;
+
+                                if (step === 1) {
+                                        clearInterval(timer);
+                                }
+                        });
+                }
+
+                prev.addEventListener("click", function () {
+                        updateSliderInfo();
+                        if (iconsContainer.scrollLeft > 0) {
+                                scrollLeftAnimate(iconsContainer, -iconWidth * 1);
+                        }
+                });
+
+                next.addEventListener("click", function () {
+                        updateSliderInfo();
+                        if (iconsContainer.scrollLeft < maxSlideScroll) {
+                                scrollLeftAnimate(iconsContainer, iconWidth * 1);
+                        }
+                });
+        }
+}
+
+customElements.define("multi-icon", multiIcon);
