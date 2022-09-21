@@ -10,6 +10,16 @@
   gap: 0.5rem;
   padding: 20px 0;
 }
+.multi-icon .wrap {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.multi-icon .wrap .prev {
+  visibility: "hidden";
+}
 .multi-icon__container {
   width: 100%;
   height: auto;
@@ -18,6 +28,11 @@
   justify-content: center;
   align-items: flex-start;
   overflow-x: auto;
+}
+@media screen and (max-width: 750px) {
+  .multi-icon__container {
+    max-width: 100%;
+  }
 }
 .multi-icon__container::-webkit-scrollbar {
   width: 0;
@@ -40,8 +55,4 @@
 }
 .multi-icon__icon .text {
   text-align: center;
-}
-
-.chevrons .prev {
-  display: none;
 }

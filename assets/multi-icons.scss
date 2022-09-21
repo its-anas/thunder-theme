@@ -10,7 +10,15 @@
         gap: 0.5rem;
         padding: 20px 0;
 
-        &__heading {
+        .wrap {
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                .prev {
+                        visibility: "hidden";
+                }
         }
 
         &__container {
@@ -21,6 +29,10 @@
                 justify-content: center;
                 align-items: flex-start;
                 overflow-x: auto;
+
+                @media screen and (max-width: 750px) {
+                        max-width: 100%;
+                }
 
                 &::-webkit-scrollbar {
                         width: 0;
@@ -41,17 +53,9 @@
                         display: flex;
                         justify-content: center;
                         align-items: center;
-                        .media {
-                        }
                 }
                 .text {
                         text-align: center;
                 }
-        }
-}
-
-.chevrons {
-        .prev {
-                display: none;
         }
 }

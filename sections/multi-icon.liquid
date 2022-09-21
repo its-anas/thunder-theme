@@ -6,7 +6,7 @@
     padding: {{ section.settings.space_outside_elements | divided_by: 2  }}px 0;
   }
 
-  .{{ section.id }} > .multi-icon__container > .multi-icon__icon > .icon > .media {
+  .{{ section.id }} > .wrap > .multi-icon__container > .multi-icon__icon > .icon > .media {
     height: {{ section.settings.icon_size }}px;
     width: {{ section.settings.icon_size }}px;
   }
@@ -14,44 +14,54 @@
 
 <multi-icon>
   <div class="{{ section.id }} multi-icon {% if section.settings.section_width == "wrapped" %}wrapped{% else %}{% endif %}">
-    <div class="multi-icon__heading">
-      <h6>{{ section.settings.heading }}</h6>
-    </div>
-    <div class="multi-icon__container">
-      {% for block in section.blocks %}
-        <div class="multi-icon__icon">
-          <div class="icon">
-            <div class="media">
-              {% if block.settings.icon_type == 'svg' %}
-                {% if block.settings.svg == blank %}
-                  {% render 'icons', icon: 'multi-icon' %}
-                {% else %}
-                  {{ block.settings.svg }}
-                {% endif %}
-              {% elsif block.settings.icon_type == 'image' %}
-                {% if block.settings.image == blank %}
-                  {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
-                {% else %}
-                  <img
-                    srcset="{{ block.settings.image | image_url }}"
-                    loading="lazy"
-                    alt="{{ block.settings.image | escape }}"
-                    width="{{ block.settings.image.width }}"
-                    height="{{ block.settings.image.height }}"
-                    class="full"
-                  >
-                {% endif %}
-              {% endif %}
-            </div>
-          </div>
-          <p class="text">{{ block.settings.text }}</p>
-        </div>
-      {% endfor %}
-    </div>
-    <div class="chevrons">
+    {% if section.settings.heading != blank %}
+      <div class="multi-icon__heading">
+        <h6>{{ section.settings.heading }}</h6>
+      </div>
+    {% endif %}
+    <div class="wrap">
       <span class="prev">
         {% render 'icons', icon: 'slideshow-chevron-prev' -%}
       </span>
+
+      <div
+        class="multi-icon__container"
+        data-icons="{{ section.settings.icons_count }}"
+        data-icons-jump="{{ section.settings.icons_jump }}"
+      >
+        {% for block in section.blocks %}
+          <div class="multi-icon__icon">
+            <div class="icon">
+              <div class="media">
+                {% if block.settings.icon_type == 'svg' %}
+                  {% if block.settings.svg == blank %}
+                    {% render 'icons', icon: 'multi-icon' %}
+                  {% else %}
+                    {{ block.settings.svg }}
+                  {% endif %}
+                {% elsif block.settings.icon_type == 'image' %}
+                  {% if block.settings.image == blank %}
+                    {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
+                  {% else %}
+                    <img
+                      srcset="{{ block.settings.image | image_url }}"
+                      loading="lazy"
+                      alt="{{ block.settings.image | escape }}"
+                      width="{{ block.settings.image.width }}"
+                      height="{{ block.settings.image.height }}"
+                      class="full"
+                    >
+                  {% endif %}
+                {% endif %}
+              </div>
+            </div>
+            {% if block.settings.text != blank %}
+              <p class="text">{{ block.settings.text }}</p>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+
       <span class="next">
         {% render 'icons', icon: 'slideshow-chevron-next' -%}
       </span>
@@ -70,26 +80,30 @@
       "default": "Filter by"
     },
     {
-      "type": "select",
-      "id": "section_width",
-      "label": "Section width",
-      "info": "Desktop only",
-      "options": [
-        {
-          "value": "full-width",
-          "label": "Full width"
-        },
-        {
-          "value": "wrapped",
-          "label": "Wrapped"
-        }
-      ],
-      "default": "full-width"
+      "type": "range",
+      "id": "icons_count",
+      "min": 3,
+      "max": 10,
+      "step": 1,
+      "unit": "icn",
+      "label": "Icons per slide",
+      "default": 6,
+      "info": "Desktop only. On mobile it's 3"
+    },
+    {
+      "type": "range",
+      "id": "icons_jump",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "unit": "icn",
+      "label": "N* of icons displayed after clicking the Next/Previous buttons",
+      "default": 1
     },
     {
       "type": "range",
       "id": "icon_size",
-      "min": 50,
+      "min": 40,
       "max": 70,
       "step": 1,
       "unit": "px",
@@ -112,6 +126,23 @@
       "id": "background_color",
       "label": "Background color",
       "default": "#222222"
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "Section width",
+      "info": "Desktop only",
+      "options": [
+        {
+          "value": "full-width",
+          "label": "Full width"
+        },
+        {
+          "value": "wrapped",
+          "label": "Wrapped"
+        }
+      ],
+      "default": "full-width"
     }
   ],
   "blocks": [

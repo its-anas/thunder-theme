@@ -238,8 +238,8 @@ class slideshow extends HTMLElement {
                 let slideshow = this.querySelector(".slideshow");
                 let slideshowContainer = this.querySelector(".slideshow__container");
                 let slideshowSlides = this.querySelectorAll(".slideshow__container .slideshow__slide");
-                let prev = this.querySelector(".chevrons .prev");
-                let next = this.querySelector(".chevrons .next");
+                let prev = this.querySelector(".prev");
+                let next = this.querySelector(".next");
                 let totalSlides = slideshowSlides.length;
                 let step = 100 / totalSlides;
                 let activeSlide = 0;
@@ -415,13 +415,21 @@ class multiIcon extends HTMLElement {
                 this.shadowRoot.innerHTML = "<slot></slot>";
                 this.loadSlider();
         }
+
         loadSlider() {
-                let iconsContainer = this.querySelector(".multi-icon__container");
                 let icon = this.querySelector(".multi-icon__icon");
                 let icons = this.querySelectorAll(".multi-icon__icon");
                 let prev = this.querySelector(".prev");
                 let next = this.querySelector(".next");
-                let iconWidth;
+
+                let iconsContainer = this.querySelector(".multi-icon__container");
+                let maxIcons = window.matchMedia("(max-width: 750px)").matches === true ? 3 : iconsContainer.getAttribute("data-icons");
+                let jump = iconsContainer.getAttribute("data-icons-jump");
+
+                let iconWidth = icon.offsetWidth;
+                let containerMaxWidth = iconWidth * maxIcons;
+                iconsContainer.style.maxWidth = `${containerMaxWidth}px`;
+
                 let iconsWidth;
                 let iconsContainerWidth;
                 let maxSlideScroll;
@@ -434,38 +442,20 @@ class multiIcon extends HTMLElement {
                 }
                 updateSliderInfo();
 
-                iconsContainer.addEventListener("scroll", () => {
-                        if (Math.round(iconsContainer.scrollLeft) === 0) {
-                                prev.style.display = "none";
-                        }
-                        if (Math.round(iconsContainer.scrollLeft) > 0) {
-                                prev.style.display = "block";
-                        }
-                        if (Math.round(iconsContainer.scrollLeft) >= maxSlideScroll) {
-                                next.style.display = "none";
-                        }
-                        if (Math.round(iconsContainer.scrollLeft) < maxSlideScroll) {
-                                next.style.display = "block";
-                        }
-                });
-                let event = new Event("scroll");
-                iconsContainer.dispatchEvent(event);
-
                 function toggleButtons() {
                         updateSliderInfo();
                         if (iconsWidth <= iconsContainerWidth) {
-                                prev.style.display = "none";
-                                next.style.display = "none";
+                                prev.style.visibility = "hidden";
+                                next.style.visibility = "hidden";
                                 iconsContainer.style.justifyContent = "center";
                         }
 
                         if (iconsWidth >= iconsContainerWidth) {
-                                next.style.display = "block";
+                                next.style.visibility = "visible";
                                 iconsContainer.style.justifyContent = "flex-start";
                         }
                 }
                 toggleButtons();
-                window.addEventListener("resize", toggleButtons);
 
                 function scrollLeftAnimate(elem, unit) {
                         let time = 300;
@@ -484,16 +474,35 @@ class multiIcon extends HTMLElement {
                 prev.addEventListener("click", function () {
                         updateSliderInfo();
                         if (iconsContainer.scrollLeft > 0) {
-                                scrollLeftAnimate(iconsContainer, -iconWidth * 1);
+                                scrollLeftAnimate(iconsContainer, -iconWidth * jump);
                         }
                 });
 
                 next.addEventListener("click", function () {
                         updateSliderInfo();
                         if (iconsContainer.scrollLeft < maxSlideScroll) {
-                                scrollLeftAnimate(iconsContainer, iconWidth * 1);
+                                scrollLeftAnimate(iconsContainer, iconWidth * jump);
                         }
                 });
+
+                iconsContainer.addEventListener("scroll", () => {
+                        if (Math.round(iconsContainer.scrollLeft) === 0) {
+                                prev.style.visibility = "hidden";
+                        }
+                        if (Math.round(iconsContainer.scrollLeft) > 0) {
+                                prev.style.visibility = "visible";
+                        }
+                        if (Math.round(iconsContainer.scrollLeft) >= maxSlideScroll) {
+                                next.style.visibility = "hidden";
+                        }
+                        if (Math.round(iconsContainer.scrollLeft) < maxSlideScroll) {
+                                next.style.visibility = "visible";
+                        }
+                });
+                let event = new Event("scroll");
+                iconsContainer.dispatchEvent(event);
+
+                window.addEventListener("resize", toggleButtons);
         }
 }
 
