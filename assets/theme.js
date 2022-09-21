@@ -464,7 +464,7 @@ class multiIcon extends HTMLElement {
                 toggleButtons();
 
                 function scrollLeftAnimate(elem, unit) {
-                        let time = 500;
+                        let time = 300;
                         let from = elem.scrollLeft; //
                         let start = new Date().getTime();
                         let timer = setInterval(function () {
