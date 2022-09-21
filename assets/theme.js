@@ -413,6 +413,7 @@ class multiIcon extends HTMLElement {
         connectedCallback() {
                 this.attachShadow({ mode: "open" });
                 this.shadowRoot.innerHTML = "<slot></slot>";
+
                 this.loadSlider();
         }
 
@@ -421,18 +422,23 @@ class multiIcon extends HTMLElement {
                 let icons = this.querySelectorAll(".multi-icon__icon");
                 let prev = this.querySelector(".prev");
                 let next = this.querySelector(".next");
-
                 let iconsContainer = this.querySelector(".multi-icon__container");
-                let maxIcons = window.matchMedia("(max-width: 750px)").matches === true ? 3 : iconsContainer.getAttribute("data-icons");
-                let jump = iconsContainer.getAttribute("data-icons-jump");
-
                 let iconWidth = icon.offsetWidth;
-                let containerMaxWidth = iconWidth * maxIcons;
-                iconsContainer.style.maxWidth = `${containerMaxWidth}px`;
+
+                let maxDesktopIcons = iconsContainer.getAttribute("data-icons-count");
+                let maxMobileIcons = 3;
+                let mobile = window.matchMedia("(max-width: 750px)");
 
                 let iconsWidth;
                 let iconsContainerWidth;
                 let maxSlideScroll;
+
+                function checkDevice(e) {
+                        let iconsCount = e.matches ? maxMobileIcons : maxDesktopIcons;
+                        let containerMaxWidth = iconWidth * iconsCount;
+                        iconsContainer.style.maxWidth = `${containerMaxWidth}px`;
+                }
+                checkDevice(mobile);
 
                 function updateSliderInfo() {
                         iconWidth = icon.offsetWidth;
@@ -458,7 +464,7 @@ class multiIcon extends HTMLElement {
                 toggleButtons();
 
                 function scrollLeftAnimate(elem, unit) {
-                        let time = 300;
+                        let time = 500;
                         let from = elem.scrollLeft; //
                         let start = new Date().getTime();
                         let timer = setInterval(function () {
@@ -472,20 +478,38 @@ class multiIcon extends HTMLElement {
                 }
 
                 prev.addEventListener("click", function () {
-                        updateSliderInfo();
-                        if (iconsContainer.scrollLeft > 0) {
-                                scrollLeftAnimate(iconsContainer, -iconWidth * jump);
+                        function checkDevice(e) {
+                                if (e.matches) {
+                                        if (iconsContainer.scrollLeft > 0) {
+                                                updateSliderInfo();
+                                                scrollLeftAnimate(iconsContainer, -iconWidth * maxMobileIcons);
+                                        }
+                                } else {
+                                        if (iconsContainer.scrollLeft > 0) {
+                                                scrollLeftAnimate(iconsContainer, -iconWidth * maxDesktopIcons);
+                                        }
+                                }
                         }
+                        checkDevice(mobile);
                 });
 
                 next.addEventListener("click", function () {
-                        updateSliderInfo();
-                        if (iconsContainer.scrollLeft < maxSlideScroll) {
-                                scrollLeftAnimate(iconsContainer, iconWidth * jump);
+                        function checkDevice(e) {
+                                if (e.matches) {
+                                        if (iconsContainer.scrollLeft < maxSlideScroll) {
+                                                scrollLeftAnimate(iconsContainer, iconWidth * maxMobileIcons);
+                                        }
+                                } else {
+                                        if (iconsContainer.scrollLeft < maxSlideScroll) {
+                                                scrollLeftAnimate(iconsContainer, iconWidth * maxDesktopIcons);
+                                        }
+                                }
                         }
+                        checkDevice(mobile);
                 });
 
                 iconsContainer.addEventListener("scroll", () => {
+                        updateSliderInfo();
                         if (Math.round(iconsContainer.scrollLeft) === 0) {
                                 prev.style.visibility = "hidden";
                         }
@@ -503,6 +527,8 @@ class multiIcon extends HTMLElement {
                 iconsContainer.dispatchEvent(event);
 
                 window.addEventListener("resize", toggleButtons);
+
+                mobile.addEventListener("change", checkDevice);
         }
 }
 

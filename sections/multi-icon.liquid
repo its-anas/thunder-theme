@@ -21,13 +21,12 @@
     {% endif %}
     <div class="wrap">
       <span class="prev">
-        {% render 'icons', icon: 'slideshow-chevron-prev' -%}
+        {% render 'icons', icon: 'chevron-prev' -%}
       </span>
 
       <div
         class="multi-icon__container"
-        data-icons="{{ section.settings.icons_count }}"
-        data-icons-jump="{{ section.settings.icons_jump }}"
+        data-icons-count="{{ section.settings.icons_count }}"
       >
         {% for block in section.blocks %}
           <div class="multi-icon__icon">
@@ -63,7 +62,7 @@
       </div>
 
       <span class="next">
-        {% render 'icons', icon: 'slideshow-chevron-next' -%}
+        {% render 'icons', icon: 'chevron-next' -%}
       </span>
     </div>
   </div>
@@ -97,7 +96,7 @@
       "max": 3,
       "step": 1,
       "unit": "icn",
-      "label": "N* of icons displayed after clicking the Next/Previous buttons",
+      "label": "N* of new icons displayed after clicking the Next/Previous buttons",
       "default": 1
     },
     {
@@ -194,6 +193,12 @@
     {
       "name": "Multi icons",
       "blocks": [
+        {
+          "type": "image_picker"
+        },
+        {
+          "type": "image_picker"
+        },
         {
           "type": "image_picker"
         },

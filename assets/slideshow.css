@@ -70,15 +70,31 @@
   -webkit-animation: load 4s normal forwards;
           animation: load 4s normal forwards;
 }
-.slideshow__chevrons .prev:hover,
-.slideshow__chevrons .next:hover {
-  opacity: 1;
+.slideshow .chevrons .prev {
+  display: inline-block;
+  height: 32px;
+  width: 32px;
+  cursor: pointer;
+  opacity: 0.5;
+  left: 12px;
 }
-@media screen and (max-width: 750px) {
-  .slideshow__chevrons .prev,
-.slideshow__chevrons .next {
-    display: none;
-  }
+.slideshow .chevrons .next {
+  display: inline-block;
+  height: 32px;
+  width: 32px;
+  cursor: pointer;
+  opacity: 0.5;
+  right: 12px;
+}
+.slideshow .chevrons .prev,
+.slideshow .chevrons .next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.slideshow .chevrons .prev:hover,
+.slideshow .chevrons .next:hover {
+  opacity: 1;
 }
 
 @-webkit-keyframes load {
