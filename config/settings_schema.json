@@ -236,9 +236,9 @@
                     "id": "wrapped_content_width",
                     "label": "Content width",
                     "info": "Only wrapped content",
-                    "min": 900,
+                    "min": 1025,
                     "max": 1440,
-                    "step": 20,
+                    "step": 5,
                     "unit": "px",
                     "default": 1240
                },

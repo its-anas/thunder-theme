@@ -1,5 +1,5 @@
 /**---------------------media queries---------------------**/
-let mediaQueries = [window.matchMedia("(max-width: 750px)"), window.matchMedia("(min-width: 750px) and (max-width: 1024px)"), window.matchMedia("(min-width: 1024px)")];
+let mediaQueries = [window.matchMedia("screen and (max-width: 350px)"), window.matchMedia("screen and (min-width: 350px) and (max-width: 750px)"), window.matchMedia("screen and (min-width: 750px) and (max-width: 1024px)"), window.matchMedia("screen and (min-width: 1024px)")];
 let domainName = window.location.hostname;
 let actualDate = new Date().getTime();
 /**---------------------------------------------------------**/
@@ -539,7 +539,7 @@ class slider extends HTMLElement {
                 this.loadSlider();
         }
         loadSlider() {
-                let sliderContainer = this.querySelector(".sliderContainer");
+                let sliderContainer = this.querySelector(".slider-container");
                 let slider = this.querySelector(".slider");
                 let items = this.querySelectorAll(".item");
                 let prev = this.querySelector(".prev");
@@ -553,32 +553,38 @@ class slider extends HTMLElement {
                 let tabletItemsDisplayed = this.getAttribute("data-tablet-items");
 
                 for (let i = 0; i < mediaQueries.length; i++) {
-                        mediaQueries[i].addEventListener("change", WidthChange);
-                        WidthChange(mediaQueries[i]);
+                        mediaQueries[i].addEventListener("change", widthChange);
+                        widthChange(mediaQueries[i]);
                 }
 
-                function WidthChange() {
+                function widthChange() {
                         if (mediaQueries[0].matches) {
                                 ItemsDisplayed = mobileItemsDisplayed;
                         } else if (mediaQueries[1].matches) {
-                                ItemsDisplayed = tabletItemsDisplayed;
+                                ItemsDisplayed = mobileItemsDisplayed;
                         } else if (mediaQueries[2].matches) {
+                                ItemsDisplayed = tabletItemsDisplayed;
+                        } else if (mediaQueries[3].matches) {
                                 ItemsDisplayed = desktopItemsDisplayed;
                         }
                         slider.style.transform = "translateX(0px)";
                         itemWidth = sliderContainer.querySelector(".item").offsetWidth;
-                        if (items.length > ItemsDisplayed) {
+                        if (items.length >= ItemsDisplayed) {
                                 maxSliderScroll = -itemWidth * (items.length - ItemsDisplayed);
-                                next.style.visibility = "visible";
+                                if (items.length > ItemsDisplayed) {
+                                        next.style.visibility = "visible";
+                                }
                         } else {
                                 maxSliderScroll = items.length;
                                 sliderContainer.style.justifyContent = "center";
+                                next.style.visibility = "hidden";
                         }
-                        sliderContainer.style.width = itemWidth * ItemsDisplayed + "px";
+                        sliderContainer.style.minWidth = itemWidth * ItemsDisplayed + "px";
+                        sliderContainer.style.maxWidth = itemWidth * ItemsDisplayed + "px";
                 }
-                WidthChange();
+                widthChange();
 
-                function translateX(type) {
+                function getTranslateX(type) {
                         let actualTranslate = parseInt(slider.style.transform == "translateX(0px)" ? 0 : slider.style.transform.match(/[-]{0,1}[\d]*[.]{0,1}[\d]+/g)[0]);
                         let newTranslate = 0;
 
@@ -605,11 +611,11 @@ class slider extends HTMLElement {
                 }
 
                 prev.addEventListener("click", function () {
-                        let translatePrev = translateX("prev");
+                        let translatePrev = getTranslateX("prev");
                         slider.style.transform = `translateX(${translatePrev}px)`;
                 });
                 next.addEventListener("click", function () {
-                        let translateNext = translateX("next");
+                        let translateNext = getTranslateX("next");
                         slider.style.transform = `translateX(${translateNext}px)`;
                 });
         }

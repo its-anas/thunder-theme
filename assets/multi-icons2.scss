@@ -82,37 +82,55 @@
                         }
 
                         .item {
-                                background-color: #222;
-                                border: 2px solid #fff;
+                                display: flex;
+                                flex-direction: column;
+                                justify-content: center;
+                                align-items: center;
 
                                 @media screen and (max-width: 350px) {
-                                        height: 100px;
+                                        width: 65px;
+                                        max-width: 65px;
+                                        min-width: 65px;
+                                }
+
+                                @media screen and (min-width: 350px) and (max-width: 750px) {
                                         width: 100px;
                                         max-width: 100px;
                                         min-width: 100px;
                                 }
 
-                                @media screen and (min-width: 350px) and (max-width: 750px) {
-                                        height: 140px;
-                                        width: 140px;
-                                        max-width: 140px;
-                                        min-width: 140px;
-                                }
-
                                 @media screen and (min-width: 750px) and (max-width: 1024px) {
-                                        height: 200px;
-                                        width: 200px;
-                                        max-width: 200px;
-                                        min-width: 200px;
+                                        width: 100px;
+                                        max-width: 100px;
+                                        min-width: 100px;
                                 }
 
                                 @media screen and (min-width: 1024px) {
-                                        height: 230px;
-                                        width: 230px;
-                                        max-width: 230px;
-                                        min-width: 230px;
+                                        width: 100px;
+                                        max-width: 100px;
+                                        min-width: 100px;
                                 }
                         }
                 }
+        }
+}
+
+.multi-icon__icon {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: auto;
+        width: auto;
+        max-width: 100px;
+        .icon {
+                height: 100px;
+                width: 100px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+        }
+        .text {
+                text-align: center;
         }
 }

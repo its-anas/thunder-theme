@@ -1,0 +1,263 @@
+{{ 'multi-icons2.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .{{ section.id }}.multi-icon {
+    background-color: {{ section.settings.background_color }};
+    padding: {{ section.settings.space_outside_elements | divided_by: 2  }}px 0;
+  }
+
+  .{{ section.id }} > .wrap > .multi-icon__container > .multi-icon__icon > .icon > .media {
+    height: {{ section.settings.icon_size }}px;
+    width: {{ section.settings.icon_size }}px;
+  }
+{%- endstyle -%}
+
+{% comment %}
+   <multi-icon>
+    <div class="{{ section.id }} multi-icon {% if section.settings.section_width == "wrapped" %}wrapped{% else %}{% endif %}">
+      {% if section.settings.heading != blank %}
+        <div class="multi-icon__heading">
+          <h6>{{ section.settings.heading }}</h6>
+        </div>
+      {% endif %}
+      <div class="wrap">
+        <span class="prev">
+          {% render 'icons', icon: 'chevron-prev' -%}
+        </span>
+
+        <div
+          class="multi-icon__container"
+          data-icons-count="{{ section.settings.icons_count }}"
+        >
+          {% for block in section.blocks %}
+            <div class="multi-icon__icon">
+              <div class="icon">
+                <div class="media">
+                  {% if block.settings.icon_type == 'svg' %}
+                    {% if block.settings.svg == blank %}
+                      {% render 'icons', icon: 'multi-icon' %}
+                    {% else %}
+                      {{ block.settings.svg }}
+                    {% endif %}
+                  {% elsif block.settings.icon_type == 'image' %}
+                    {% if block.settings.image == blank %}
+                      {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
+                    {% else %}
+                      <img
+                        srcset="{{ block.settings.image | image_url }}"
+                        loading="lazy"
+                        alt="{{ block.settings.image | escape }}"
+                        width="{{ block.settings.image.width }}"
+                        height="{{ block.settings.image.height }}"
+                        class="full"
+                      >
+                    {% endif %}
+                  {% endif %}
+                </div>
+              </div>
+              {% if block.settings.text != blank %}
+                <p class="text">{{ block.settings.text }}</p>
+              {% endif %}
+            </div>
+          {% endfor %}
+        </div>
+
+        <span class="next">
+          {% render 'icons', icon: 'chevron-next' -%}
+        </span>
+      </div>
+    </div>
+  </multi-icon>
+{% endcomment %}
+
+<slider-component data-desktop-items="6" data-tablet-items="5" data-mobile-items="3">
+  <section class="slider-component {{ section.id }} multi-icon {% if section.settings.section_width == "wrapped" %}wrapped{% else %}{% endif %}">
+    <div class="prev">
+      {% render 'icons', icon: 'chevron-prev' -%}
+    </div>
+    <div class="slider-container">
+      <div class="slider">
+        {% for block in section.blocks %}
+          <div class="item">
+            <div class="multi-icon__icon">
+              <div class="icon">
+                <div class="media">
+                  {% if block.settings.icon_type == 'svg' %}
+                    {% if block.settings.svg == blank %}
+                      {% render 'icons', icon: 'multi-icon' %}
+                    {% else %}
+                      {{ block.settings.svg }}
+                    {% endif %}
+                  {% elsif block.settings.icon_type == 'image' %}
+                    {% if block.settings.image == blank %}
+                      {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
+                    {% else %}
+                      <img
+                        srcset="{{ block.settings.image | image_url }}"
+                        loading="lazy"
+                        alt="{{ block.settings.image | escape }}"
+                        width="{{ block.settings.image.width }}"
+                        height="{{ block.settings.image.height }}"
+                        class="full"
+                      >
+                    {% endif %}
+                  {% endif %}
+                </div>
+              </div>
+              {% if block.settings.text != blank %}
+                <p class="text">{{ block.settings.text }}</p>
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="next">
+      {% render 'icons', icon: 'chevron-next' -%}
+    </div>
+  </section>
+</slider-component>
+
+{% schema %}
+{
+  "name": "Multi icons2",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Filter by"
+    },
+    {
+      "type": "range",
+      "id": "icons_jump",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "unit": "icn",
+      "label": "N* of new icons displayed after clicking the Next/Previous buttons",
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "min": 40,
+      "max": 70,
+      "step": 1,
+      "unit": "px",
+      "label": "Icon size",
+      "default": 60,
+      "info": "1:1 - height/width"
+    },
+    {
+      "type": "range",
+      "id": "space_outside_elements",
+      "label": "Space outside elements",
+      "min": 30,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 50
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#222222"
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "Section width",
+      "info": "Desktop only",
+      "options": [
+        {
+          "value": "full-width",
+          "label": "Full width"
+        },
+        {
+          "value": "wrapped",
+          "label": "Wrapped"
+        }
+      ],
+      "default": "full-width"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image_picker",
+      "name": "Icon",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Icon"
+        },
+        {
+          "type": "header",
+          "content": "Icon settings"
+        },
+        {
+          "type": "select",
+          "id": "icon_type",
+          "label": "Icon type",
+          "options": [
+            {
+              "value": "svg",
+              "label": "svg"
+            },
+            {
+              "value": "image",
+              "label": "image"
+            }
+          ],
+          "default": "svg",
+          "info": "It is recommended to use svg icons instead of jpeg/png icons to get the best quality"
+        },
+        {
+          "type": "liquid",
+          "id": "svg",
+          "label": "Icon - svg"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Icon - image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Multi icons2",
+      "blocks": [
+        {
+          "type": "image_picker"
+        },
+        {
+          "type": "image_picker"
+        },
+        {
+          "type": "image_picker"
+        },
+        {
+          "type": "image_picker"
+        },
+        {
+          "type": "image_picker"
+        },
+        {
+          "type": "image_picker"
+        },
+        {
+          "type": "image_picker"
+        },
+        {
+          "type": "image_picker"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
