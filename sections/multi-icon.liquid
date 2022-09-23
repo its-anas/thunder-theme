@@ -1,76 +1,69 @@
-{{ 'multi-icons.css' | asset_url | stylesheet_tag }}
+{{ 'multi-icon.css' | asset_url | stylesheet_tag }}
 
 {%- style -%}
   .{{ section.id }}.multi-icon {
     background-color: {{ section.settings.background_color }};
-    padding: {{ section.settings.space_outside_elements | divided_by: 2  }}px 0;
-  }
-
-  .{{ section.id }} > .wrap > .multi-icon__container > .multi-icon__icon > .icon > .media {
-    height: {{ section.settings.icon_size }}px;
-    width: {{ section.settings.icon_size }}px;
+    padding: {{ section.settings.space_outside_elements | divided_by: 2 }}px 0;
   }
 {%- endstyle -%}
 
-<multi-icon>
-  <div class="{{ section.id }} multi-icon {% if section.settings.section_width == "wrapped" %}wrapped{% else %}{% endif %}">
-    {% if section.settings.heading != blank %}
-      <div class="multi-icon__heading">
-        <h6>{{ section.settings.heading }}</h6>
-      </div>
-    {% endif %}
-    <div class="wrap">
-      <span class="prev">
-        {% render 'icons', icon: 'chevron-prev' -%}
-      </span>
-
-      <div
-        class="multi-icon__container"
-        data-icons-count="{{ section.settings.icons_count }}"
-      >
+<slider-section
+  data-desktop-items="6"
+  data-tablet-items="5"
+  data-mobile-items="3"
+  class="{{ section.id }} multi-icon {% if section.settings.section_width == "wrapped" %}wrapped{% else %}{% endif %}"
+>
+  {% if section.settings.heading != blank %}
+    <div class="multi-icon__heading">
+      <h6>{{ section.settings.heading }}</h6>
+    </div>
+  {% endif %}
+  <div class="slider-component">
+    <div class="prev">
+      {% render 'icons', icon: 'chevron-prev' -%}
+    </div>
+    <div class="slides-container">
+      <div class="slide">
         {% for block in section.blocks %}
-          <div class="multi-icon__icon">
-            <div class="icon">
-              <div class="media">
-                {% if block.settings.icon_type == 'svg' %}
-                  {% if block.settings.svg == blank %}
-                    {% render 'icons', icon: 'multi-icon' %}
-                  {% else %}
-                    {{ block.settings.svg }}
-                  {% endif %}
-                {% elsif block.settings.icon_type == 'image' %}
-                  {% if block.settings.image == blank %}
-                    {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
-                  {% else %}
-                    <img
-                      srcset="{{ block.settings.image | image_url }}"
-                      loading="lazy"
-                      alt="{{ block.settings.image | escape }}"
-                      width="{{ block.settings.image.width }}"
-                      height="{{ block.settings.image.height }}"
-                      class="full"
-                    >
-                  {% endif %}
+          <div class="item">
+            <a href="{{ block.settings.url }}" class="multi-icon__icon media">
+              {% if block.settings.icon_type == 'svg' %}
+                {% if block.settings.svg == blank %}
+                  {% render 'icons', icon: 'multi-icon' %}
+                {% else %}
+                  {{ block.settings.svg }}
                 {% endif %}
-              </div>
-            </div>
+              {% elsif block.settings.icon_type == 'image' %}
+                {% if block.settings.image == blank %}
+                  {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
+                {% else %}
+                  <img
+                    srcset="{{ block.settings.image | image_url }}"
+                    loading="lazy"
+                    alt="{{ block.settings.image | escape }}"
+                    width="{{ block.settings.image.width }}"
+                    height="{{ block.settings.image.height }}"
+                    class="full"
+                  >
+                {% endif %}
+              {% endif %}
+            </a>
             {% if block.settings.text != blank %}
-              <p class="text">{{ block.settings.text }}</p>
+              <p class="multi-icon__text">{{ block.settings.text }}</p>
             {% endif %}
           </div>
         {% endfor %}
       </div>
-
-      <span class="next">
-        {% render 'icons', icon: 'chevron-next' -%}
-      </span>
+    </div>
+    <div class="next">
+      {% render 'icons', icon: 'chevron-next' -%}
     </div>
   </div>
-</multi-icon>
+</slider-section>
 
 {% schema %}
 {
-  "name": "Multi icons",
+  "name": "Multi icon",
   "settings": [
     {
       "type": "text",
@@ -79,36 +72,10 @@
       "default": "Filter by"
     },
     {
-      "type": "range",
-      "id": "icons_count",
-      "min": 3,
-      "max": 10,
-      "step": 1,
-      "unit": "icn",
-      "label": "Icons per slide",
-      "default": 6,
-      "info": "Desktop only. On mobile it's 3"
-    },
-    {
-      "type": "range",
-      "id": "icons_jump",
-      "min": 1,
-      "max": 3,
-      "step": 1,
-      "unit": "icn",
-      "label": "N* of new icons displayed after clicking the Next/Previous buttons",
-      "default": 1
-    },
-    {
-      "type": "range",
-      "id": "icon_size",
-      "min": 40,
-      "max": 70,
-      "step": 1,
-      "unit": "px",
-      "label": "Icon size",
-      "default": 60,
-      "info": "1:1 - height/width"
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#222222"
     },
     {
       "type": "range",
@@ -120,12 +87,7 @@
       "unit": "px",
       "default": 50
     },
-    {
-      "type": "color",
-      "id": "background_color",
-      "label": "Background color",
-      "default": "#222222"
-    },
+
     {
       "type": "select",
       "id": "section_width",
@@ -150,14 +112,9 @@
       "name": "Icon",
       "settings": [
         {
-          "type": "text",
-          "id": "text",
-          "label": "Text",
-          "default": "Icon"
-        },
-        {
-          "type": "header",
-          "content": "Icon settings"
+          "type": "url",
+          "id": "url",
+          "label": "Direction URL"
         },
         {
           "type": "select",
@@ -170,7 +127,7 @@
             },
             {
               "value": "image",
-              "label": "image"
+              "label": "Image"
             }
           ],
           "default": "svg",
@@ -179,12 +136,20 @@
         {
           "type": "liquid",
           "id": "svg",
-          "label": "Icon - svg"
+          "label": "Icon - svg",
+          "info": "Applicable only if icon type is svg"
         },
         {
           "type": "image_picker",
           "id": "image",
-          "label": "Icon - image"
+          "label": "Icon - image",
+          "info": "Applicable only if icon type is image"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Icon text",
+          "default": "Icon"
         }
       ]
     }

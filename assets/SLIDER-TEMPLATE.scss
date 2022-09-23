@@ -1,0 +1,30 @@
+.SECTIONNAME {
+        .item {
+                @media screen and (max-width: 350px) {
+                        width: 65px;
+                        max-width: 65px;
+                        min-width: 65px;
+                }
+
+                @media screen and (min-width: 350px) and (max-width: 750px) {
+                        width: 100px;
+                        max-width: 100px;
+                        min-width: 100px;
+                }
+
+                @media screen and (min-width: 750px) and (max-width: 1024px) {
+                        width: 100px;
+                        max-width: 100px;
+                        min-width: 100px;
+                }
+
+                @media screen and (min-width: 1024px) {
+                        width: 100px;
+                        max-width: 100px;
+                        min-width: 100px;
+                }
+        }
+        .item > * {
+                max-width: 95%;
+        }
+}
