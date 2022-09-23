@@ -19,6 +19,37 @@
                 .prev {
                         visibility: "hidden";
                 }
+                .prev {
+                        @media screen and (max-width: 750px) {
+                                left: 12px;
+                        }
+                }
+
+                .next {
+                        @media screen and (max-width: 750px) {
+                                right: 12px;
+                        }
+                }
+
+                .prev,
+                .next {
+                        display: inline-block;
+                        height: 32px;
+                        width: 32px;
+                        cursor: pointer;
+                        opacity: 0.5;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        &:hover {
+                                opacity: 1;
+                        }
+                        @media screen and (max-width: 750px) {
+                                position: absolute;
+                                top: 50%;
+                                transform: translateY(-50%);
+                        }
+                }
         }
 
         &__container {

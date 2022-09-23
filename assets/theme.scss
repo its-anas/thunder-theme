@@ -497,39 +497,3 @@ a.border.button {
                 }
         }
 }
-
-/* ------------ ANCHOR: Slides chevrons ------------ */
-
-.prev {
-        display: inline-block;
-        height: 32px;
-        width: 32px;
-        cursor: pointer;
-        opacity: 0.5;
-        @media screen and (max-width: 750px) {
-                left: 12px;
-        }
-}
-
-.next {
-        display: inline-block;
-        height: 32px;
-        width: 32px;
-        cursor: pointer;
-        opacity: 0.5;
-        @media screen and (max-width: 750px) {
-                right: 12px;
-        }
-}
-
-.prev,
-.next {
-        &:hover {
-                opacity: 1;
-        }
-        @media screen and (max-width: 750px) {
-                position: absolute;
-                top: 50%;
-                transform: translateY(-50%);
-        }
-}

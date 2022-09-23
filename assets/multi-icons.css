@@ -20,6 +20,39 @@
 .multi-icon .wrap .prev {
   visibility: "hidden";
 }
+@media screen and (max-width: 750px) {
+  .multi-icon .wrap .prev {
+    left: 12px;
+  }
+}
+@media screen and (max-width: 750px) {
+  .multi-icon .wrap .next {
+    right: 12px;
+  }
+}
+.multi-icon .wrap .prev,
+.multi-icon .wrap .next {
+  display: inline-block;
+  height: 32px;
+  width: 32px;
+  cursor: pointer;
+  opacity: 0.5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.multi-icon .wrap .prev:hover,
+.multi-icon .wrap .next:hover {
+  opacity: 1;
+}
+@media screen and (max-width: 750px) {
+  .multi-icon .wrap .prev,
+.multi-icon .wrap .next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
 .multi-icon__container {
   width: 100%;
   height: auto;

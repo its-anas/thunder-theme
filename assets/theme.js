@@ -1,3 +1,9 @@
+/**---------------------media queries---------------------**/
+let mediaQueries = [window.matchMedia("(max-width: 750px)"), window.matchMedia("(min-width: 750px) and (max-width: 1024px)"), window.matchMedia("(min-width: 1024px)")];
+let domainName = window.location.hostname;
+let actualDate = new Date().getTime();
+/**---------------------------------------------------------**/
+
 /**============================================
  *               * ANCHOR: FAQ section
  *=============================================**/
@@ -52,31 +58,20 @@ customElements.define("faq-section", FaqSection);
  *               * ANCHOR: Countdown timer section
  *=============================================**/
 /* 
-The "countdownTimer" function has five arguments:
-1. "countdownType" - this can be either "date" or "time".
-2. "timeInDate" - this is the date when the countdown should end. This variable only works if the "countdownType" variable is set to "date".
-3. "timeInMinutes" - this is the time in minutes when the countdown should end. This variable only works if the "countdownType" variable is set to "time".
-4. "afterExpirationTimeOnly" - this can be either "showMessage" or "repeatCountdown".
-5. "id" - this is the ID of the countdown timer HTML element.
-6. "cookieName" - this is the name of the cookie. This variable only works if the "countdownType" variable is set to "time".
-
 The code above does the following:
 1. The code checks if the countdown type is "date" or "time".
 2. If it is "date", the code sets the deadline to the date specified in the "timeInDate" variable.
 3. If it is "time":
-    3.1 the code checks if the cookie exists. 
-        3.1.1 If it does, the code checks if the current date is greater than the cookie date. 
-            3.1.1.1 If it is, the code checks if the "afterExpirationTimeOnly" variable is set to "repeatCountdown". 
-                3.1.1.1.1 If it is, the code saves a new cookie with the current date plus the time specified in the "timeInMinutes" variable. 
-            3.1.1.2 If the "afterExpirationTimeOnly" variable is not set to "repeatCountdown", the code does nothing. 
-        3.1.2 If the current date is not greater than the cookie date, the code does nothing. 
-    3.2 If the cookie does not exist, the code saves a new cookie with the current date plus the time specified in the "timeInMinutes" variable.
+3.1 the code checks if the cookie exists. 
+3.1.1 If it does, the code checks if the current date is greater than the cookie date. 
+3.1.1.1 If it is, the code checks if the "afterExpirationTimeOnly" variable is set to "repeatCountdown". 
+3.1.1.1.1 If it is, the code saves a new cookie with the current date plus the time specified in the "timeInMinutes" variable. 
+3.1.1.2 If the "afterExpirationTimeOnly" variable is not set to "repeatCountdown", the code does nothing. 
+3.1.2 If the current date is not greater than the cookie date, the code does nothing. 
+3.2 If the cookie does not exist, the code saves a new cookie with the current date plus the time specified in the "timeInMinutes" variable.
 4. The code then initializes the clock.
 5. The code finally creates a function that updates the clock every second.
 */
-
-domainName = window.location.hostname;
-actualDate = new Date().getTime();
 
 class countdownTimer extends HTMLElement {
         constructor() {
@@ -176,8 +171,7 @@ customElements.define("countdown-timer", countdownTimer);
 /**============================================
  *               * ANCHOR: Video with text section
  *=============================================**/
-/* 
-Here is the explanation for the code above:
+/* Here is the explanation for the code above:
 1. We get all the video boxes (the ones that contain the thumbnail and the video)
 2. We loop through each video box
 3. We get the thumbnail and the video in the box
@@ -210,10 +204,9 @@ class videoWithText extends HTMLElement {
 customElements.define("video-with-text", videoWithText);
 
 /**============================================
- *               * ANCHOR: Slideshow
+ *               * ANCHOR: Slideshow section
  *=============================================**/
-/* 
-Here is the explanation for the code above:
+/* Here is the explanation for the code above:
 1. First, we select all the elements we need to manipulate and other variables we need to use.
 2. We create and call a function that will load the indicators dynamically.
 3. We create two functions, one will slide to the next slide and the other to the previous slide.
@@ -393,10 +386,9 @@ class slideshow extends HTMLElement {
 customElements.define("slideshow-section", slideshow);
 
 /**============================================
- *               * ANCHOR: Multi icon
+ *               * ANCHOR: Multi icon section
  *=============================================**/
-/* 
-Here is the explanation for the code above:
+/* Here is the explanation for the code above:
 1. The function updateSliderInfo() is called at the beginning of the code to get the width of the icons, the container which holds the icons, and the maximum scroll left value of the icons container.
 2. An event listener is added to the icons container to check if the scroll left value equals 0, which means the icons container is scrolled all the way to the left, then the previous button should be hidden. If the scroll left value is greater than 0, the previous button should be shown.
 3. Then the same thing happens with the next button, if the scroll left value equals the maximum scroll left value, the next button should be hidden. If the scroll left value is less than the maximum scroll left value, the next button should be shown.
@@ -413,7 +405,6 @@ class multiIcon extends HTMLElement {
         connectedCallback() {
                 this.attachShadow({ mode: "open" });
                 this.shadowRoot.innerHTML = "<slot></slot>";
-
                 this.loadSlider();
         }
 
@@ -533,3 +524,94 @@ class multiIcon extends HTMLElement {
 }
 
 customElements.define("multi-icon", multiIcon);
+
+/**============================================
+ *               * ANCHOR: Collections list section
+ *=============================================**/
+
+class slider extends HTMLElement {
+        constructor() {
+                super();
+        }
+        connectedCallback() {
+                this.attachShadow({ mode: "open" });
+                this.shadowRoot.innerHTML = "<slot></slot>";
+                this.loadSlider();
+        }
+        loadSlider() {
+                let sliderContainer = this.querySelector(".sliderContainer");
+                let slider = this.querySelector(".slider");
+                let items = this.querySelectorAll(".item");
+                let prev = this.querySelector(".prev");
+                let next = this.querySelector(".next");
+                let maxSliderScroll;
+                let ItemsDisplayed;
+                let itemWidth;
+
+                let desktopItemsDisplayed = this.getAttribute("data-desktop-items");
+                let mobileItemsDisplayed = this.getAttribute("data-mobile-items");
+                let tabletItemsDisplayed = this.getAttribute("data-tablet-items");
+
+                for (let i = 0; i < mediaQueries.length; i++) {
+                        mediaQueries[i].addEventListener("change", WidthChange);
+                        WidthChange(mediaQueries[i]);
+                }
+
+                function WidthChange() {
+                        if (mediaQueries[0].matches) {
+                                ItemsDisplayed = mobileItemsDisplayed;
+                        } else if (mediaQueries[1].matches) {
+                                ItemsDisplayed = tabletItemsDisplayed;
+                        } else if (mediaQueries[2].matches) {
+                                ItemsDisplayed = desktopItemsDisplayed;
+                        }
+                        slider.style.transform = "translateX(0px)";
+                        itemWidth = sliderContainer.querySelector(".item").offsetWidth;
+                        if (items.length > ItemsDisplayed) {
+                                maxSliderScroll = -itemWidth * (items.length - ItemsDisplayed);
+                                next.style.visibility = "visible";
+                        } else {
+                                maxSliderScroll = items.length;
+                                sliderContainer.style.justifyContent = "center";
+                        }
+                        sliderContainer.style.width = itemWidth * ItemsDisplayed + "px";
+                }
+                WidthChange();
+
+                function translateX(type) {
+                        let actualTranslate = parseInt(slider.style.transform == "translateX(0px)" ? 0 : slider.style.transform.match(/[-]{0,1}[\d]*[.]{0,1}[\d]+/g)[0]);
+                        let newTranslate = 0;
+
+                        if (type === "next") {
+                                newTranslate = Math.max(actualTranslate - itemWidth * ItemsDisplayed, maxSliderScroll);
+                        } else if (type === "prev") {
+                                newTranslate = Math.min(actualTranslate + itemWidth * ItemsDisplayed, 0);
+                        }
+
+                        if (newTranslate === 0) {
+                                prev.style.visibility = "hidden";
+                        }
+                        if (newTranslate < 0) {
+                                prev.style.visibility = "visible";
+                        }
+                        if (newTranslate >= maxSliderScroll) {
+                                next.style.visibility = "visible";
+                        }
+                        if (newTranslate <= maxSliderScroll) {
+                                next.style.visibility = "hidden";
+                        }
+
+                        return newTranslate;
+                }
+
+                prev.addEventListener("click", function () {
+                        let translatePrev = translateX("prev");
+                        slider.style.transform = `translateX(${translatePrev}px)`;
+                });
+                next.addEventListener("click", function () {
+                        let translateNext = translateX("next");
+                        slider.style.transform = `translateX(${translateNext}px)`;
+                });
+        }
+}
+customElements.define("slider-component", slider);

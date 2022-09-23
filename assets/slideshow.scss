@@ -81,34 +81,25 @@ $indicator-width: 40px;
 
         .chevrons {
                 .prev {
-                        display: inline-block;
-                        height: 32px;
-                        width: 32px;
-                        cursor: pointer;
-                        opacity: 0.5;
-
                         left: 12px;
                 }
 
                 .next {
-                        display: inline-block;
-                        height: 32px;
-                        width: 32px;
-                        cursor: pointer;
-                        opacity: 0.5;
-
                         right: 12px;
                 }
 
                 .prev,
                 .next {
+                        display: inline-block;
+                        height: 32px;
+                        width: 32px;
+                        cursor: pointer;
+                        opacity: 0.5;
+                        position: absolute;
+                        top: 50%;
                         &:hover {
                                 opacity: 1;
                         }
-
-                        position: absolute;
-                        top: 50%;
-                        transform: translateY(-50%);
                 }
         }
 }

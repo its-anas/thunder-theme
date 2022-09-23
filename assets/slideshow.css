@@ -71,26 +71,20 @@
           animation: load 4s normal forwards;
 }
 .slideshow .chevrons .prev {
-  display: inline-block;
-  height: 32px;
-  width: 32px;
-  cursor: pointer;
-  opacity: 0.5;
   left: 12px;
 }
 .slideshow .chevrons .next {
-  display: inline-block;
-  height: 32px;
-  width: 32px;
-  cursor: pointer;
-  opacity: 0.5;
   right: 12px;
 }
 .slideshow .chevrons .prev,
 .slideshow .chevrons .next {
+  display: inline-block;
+  height: 32px;
+  width: 32px;
+  cursor: pointer;
+  opacity: 0.5;
   position: absolute;
   top: 50%;
-  transform: translateY(-50%);
 }
 .slideshow .chevrons .prev:hover,
 .slideshow .chevrons .next:hover {
