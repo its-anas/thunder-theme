@@ -1,20 +1,19 @@
 *,
 *::before,
 *::after {
-        box-sizing: inherit;
+        box-sizing: inherit; 
 }
 :root {
         --h1-font-size: calc((((((var(--font-size-type-scale) * var(--font-type-scale)) * var(--font-type-scale)) * var(--font-type-scale)) * var(--font-type-scale)) * var(--font-type-scale)) * var(--font-type-scale) * 1px);
-
         --h2-font-size: calc(((((var(--font-size-type-scale) * var(--font-type-scale)) * var(--font-type-scale)) * var(--font-type-scale)) * var(--font-type-scale)) * var(--font-type-scale) * 1px);
-
         --h3-font-size: calc((((var(--font-size-type-scale) * var(--font-type-scale)) * var(--font-type-scale)) * var(--font-type-scale)) * var(--font-type-scale) * 1px);
-
         --h4-font-size: calc(((var(--font-size-type-scale) * var(--font-type-scale)) * var(--font-type-scale)) * var(--font-type-scale) * 1px);
-
         --h5-font-size: calc(var(--font-size-type-scale) * (var(--font-type-scale) * var(--font-type-scale) * 1px));
-
         --h6-font-size: calc(var(--font-size-type-scale) * var(--font-type-scale) * 1px);
+        --slider-350-width: 240;
+        --slider-350-750-width: 280;
+        --slider-750-1024-width: 680;
+        --slider-1024-width: 920;
 }
 
 /**------------------------------------------------------------------------------------------------

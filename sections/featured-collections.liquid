@@ -17,8 +17,8 @@
         background-position: center;
    }
 
-
-  @media screen and (max-width: 350px) {
+ 
+  @media screen and (max-width: 350px) { 
     .featured-collections .item {
       width: 120px;
       max-width: 120px;
@@ -53,9 +53,9 @@
 {%- endstyle -%}
 
 <slider-section
-  data-desktop-items="4"
-  data-tablet-items="4"
   data-mobile-items="2"
+  data-tablet-items="4"
+  data-desktop-items="4"
   class="{{ section.id }} featured-collections just-color {% if section.settings.background_image == blank %}just-color{% else %}{{ section.settings.background_type }}{% endif %} {{ section.settings.section_width }}"
 >
   <div class="featured-collections__heading">
