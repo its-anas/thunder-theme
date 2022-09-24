@@ -8,10 +8,18 @@
 
 {%- style -%}
    .featured-collections {
-    --mobile-small-item-width: calc(var(--slider-350-width) / {{ mobile_items }} * 1px);
-    --mobile-item-width: calc(var(--slider-350-750-width) / {{ mobile_items }} * 1px);
-    --tablet-item-width: calc(var(--slider-750-1024-width) / {{ tablet_items }} * 1px);
-    --desktop-item-width: calc(var(--slider-1024-width) / {{ desktop_items }} * 1px);
+    --mobile-small-item-width: calc(var(--slider-350-width) / {{ mobile_items }});
+    --mobile-item-width: calc(var(--slider-350-750-width) / {{ mobile_items }});
+    --tablet-item-width: calc(var(--slider-750-1024-width) / {{ tablet_items }});
+    --desktop-item-width: calc(var(--slider-1024-width) / {{ desktop_items }});
+
+    --desktop-item-height: {{ section.settings.collection_height }};
+    --desktop-to-tablet-decrease: calc((var(--tablet-item-width) - var(--desktop-item-width)) / var(--desktop-item-width));
+    --tablet-to-mobile-decrease: calc((var(--mobile-item-width) - var(--tablet-item-width)) / var(--tablet-item-width));
+    --mobile-to-mobile-small-decrease: calc((var(--mobile-small-item-width) - var(--mobile-item-width)) / var(--mobile-item-width));
+    --tablet-item-height: calc((var(--desktop-item-height) * var(--desktop-to-tablet-decrease)) + var(--desktop-item-height));
+    --mobile-item-height: calc((var(--tablet-item-height) * var(--tablet-to-mobile-decrease)) + var(--tablet-item-height));
+    --mobile-small-item-height: calc((var(--mobile-item-height) * var(--mobile-to-mobile-small-decrease)) + var(--mobile-item-height));
    }
 
   .{{ section.id }}.featured-collections {
@@ -33,34 +41,34 @@
 
   @media screen and (max-width: 350px) {
     .featured-collections .item {
-      width: var(--mobile-small-item-width);
-      max-width: var(--mobile-small-item-width);
-      min-width: var(--mobile-small-item-width);
-      height: 180px;
+      width:  calc(var(--mobile-small-item-width) * 1px);
+      max-width: calc(var(--mobile-small-item-width) * 1px);
+      min-width: calc(var(--mobile-small-item-width) * 1px);
+      height: calc(var(--mobile-small-item-height) * 1px);
     }
   }
   @media screen and (min-width: 350px) and (max-width: 750px) {
     .featured-collections .item {
-      width: var(--mobile-item-width);
-      max-width: var(--mobile-item-width);
-      min-width: var(--mobile-item-width);
-      height: 200px;
+      width: calc(var(--mobile-item-width) * 1px);
+      max-width: calc(var(--mobile-item-width) * 1px);
+      min-width: calc(var(--mobile-item-width) * 1px);
+      height:  calc(var(--mobile-item-height) * 1px);
     }
   }
   @media screen and (min-width: 750px) and (max-width: 1024px) {
     .featured-collections .item {
-      width: var(--tablet-item-width);
-      max-width: var(--tablet-item-width);
-      min-width: var(--tablet-item-width);
-      height: 250px;
+      width: calc(var(--tablet-item-width) * 1px);
+      max-width: calc(var(--tablet-item-width) * 1px);
+      min-width: calc(var(--tablet-item-width) * 1px);
+      height: calc(var(--tablet-item-height) * 1px);
     }
   }
   @media screen and (min-width: 1024px) {
     .featured-collections .item {
-      width: var(--desktop-item-width);
-      max-width: var(--desktop-item-width);
-      min-width: var(--desktop-item-width);
-      height: 350px;
+      width: calc(var(--desktop-item-width) * 1px);
+      max-width: calc(var(--desktop-item-width) * 1px);
+      min-width: calc(var(--desktop-item-width) * 1px);
+      height: calc(var(--desktop-item-height) * 1px);
     }
   }
 {%- endstyle -%}
@@ -174,6 +182,17 @@
       "id": "background_image",
       "label": "Image",
       "info": "Applied only if Type is 'Image'"
+    },
+    {
+      "type": "range",
+      "id": "collection_height",
+      "min": 200,
+      "max": 400,
+      "step": 50,
+      "unit": "px",
+      "label": "Collection height",
+      "default": 350,
+      "info": "This is for desktop only. In the other screens the height will be calculated automatically based on this number."
     },
     {
       "type": "range",
