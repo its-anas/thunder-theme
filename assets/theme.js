@@ -1,8 +1,59 @@
-/**---------------------media queries---------------------**/
+/**---------------------Media queries---------------------**/
 let mediaQueries = [window.matchMedia("screen and (max-width: 350px)"), window.matchMedia("screen and (min-width: 350px) and (max-width: 750px)"), window.matchMedia("screen and (min-width: 750px) and (max-width: 1024px)"), window.matchMedia("screen and (min-width: 1024px)")];
+
+/**---------------------Actual date and domain name---------------------**/
 let domainName = window.location.hostname;
 let actualDate = new Date().getTime();
-/**---------------------------------------------------------**/
+
+/**---------------------Lazy load the background-images---------------------**/
+// document.addEventListener("DOMContentLoaded", function () {
+//         let lazyloadImages;
+
+//         if ("IntersectionObserver" in window) {
+//                 lazyloadImages = document.querySelectorAll(".lazy");
+//                 let imageObserver = new IntersectionObserver(function (entries, observer) {
+//                         entries.forEach(function (entry) {
+//                                 if (entry.isIntersecting) {
+//                                         let image = entry.target;
+//                                         image.classList.remove("lazy");
+//                                         imageObserver.unobserve(image);
+//                                 }
+//                         });
+//                 });
+
+//                 lazyloadImages.forEach(function (image) {
+//                         imageObserver.observe(image);
+//                 });
+//         } else {
+//                 let lazyloadThrottleTimeout;
+//                 lazyloadImages = document.querySelectorAll(".lazy");
+
+//                 function lazyload() {
+//                         if (lazyloadThrottleTimeout) {
+//                                 clearTimeout(lazyloadThrottleTimeout);
+//                         }
+
+//                         lazyloadThrottleTimeout = setTimeout(function () {
+//                                 let scrollTop = window.pageYOffset;
+//                                 lazyloadImages.forEach(function (img) {
+//                                         if (img.offsetTop < window.innerHeight + scrollTop) {
+//                                                 img.src = img.dataset.src;
+//                                                 img.classList.remove("lazy");
+//                                         }
+//                                 });
+//                                 if (lazyloadImages.length == 0) {
+//                                         document.removeEventListener("scroll", lazyload);
+//                                         window.removeEventListener("resize", lazyload);
+//                                         window.removeEventListener("orientationChange", lazyload);
+//                                 }
+//                         }, 20);
+//                 }
+
+//                 document.addEventListener("scroll", lazyload);
+//                 window.addEventListener("resize", lazyload);
+//                 window.addEventListener("orientationChange", lazyload);
+//         }
+// });
 
 /**============================================
  *               * ANCHOR: FAQ section
@@ -549,6 +600,9 @@ class sliderSection extends HTMLElement {
                 let maxSliderScroll;
                 let ItemsDisplayed;
                 let itemWidth;
+                let itemHeight = slideContainer.querySelector(".item").offsetHeight;
+                prev.style.height = itemHeight + "px";
+                next.style.height = itemHeight + "px";
 
                 let desktopItemsDisplayed = this.getAttribute("data-desktop-items");
                 let mobileItemsDisplayed = this.getAttribute("data-mobile-items");
@@ -572,6 +626,9 @@ class sliderSection extends HTMLElement {
 
                         slide.style.transform = "translateX(0px)";
                         itemWidth = slideContainer.querySelector(".item").offsetWidth;
+                        itemHeight = slideContainer.querySelector(".item").offsetHeight;
+                        prev.style.height = itemHeight + "px";
+                        next.style.height = itemHeight + "px";
 
                         if (items.length >= ItemsDisplayed) {
                                 maxSliderScroll = -itemWidth * (items.length - ItemsDisplayed);

@@ -1,9 +1,4 @@
 .multi-icon {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-
         &__icon {
                 height: 100px;
                 width: auto;
@@ -16,7 +11,11 @@
                 text-align: center;
         }
 
-        .item > * {
-                max-width: 95%;
+        .item {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                margin-bottom: auto;
         }
 }

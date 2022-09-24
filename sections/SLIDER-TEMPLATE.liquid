@@ -44,7 +44,7 @@
     <div class="slides-container">
       <div class="slide">
         {% for block in section.blocks %}
-          <div class="item"></div>
+          <div class="item" {{ block.shopify_attributes }}></div>
         {% endfor %}
       </div>
     </div>

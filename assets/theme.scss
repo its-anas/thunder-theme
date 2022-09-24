@@ -88,7 +88,8 @@ p {
         font-size: var(--font-size);
 }
 
-p.small {
+p.small,
+a.small {
         font-size: calc(var(--font-size-type-scale) / var(--font-type-scale) * 1px);
         font-weight: 300;
 }
@@ -100,6 +101,7 @@ p.small {
 .button {
         font-size: calc((var(--font-size-type-scale) / var(--font-type-scale)) * 1px);
         font-weight: 700;
+        text-transform: uppercase;
 }
 
 .price__normal {
@@ -371,10 +373,11 @@ a.border.button {
  *------------------------------------------------------------------------------------------------**/
 
 .button--link {
+        position: relative;
         color: #fcdb33;
-        padding: 0.5rem;
         &:after {
                 position: absolute;
+                bottom: 0px;
                 transform: TranslateX(5px);
                 transition: 0.2s;
         }
@@ -520,6 +523,10 @@ a.border.button {
  **                                       ANCHOR: Slider section
  *------------------------------------------------------------------------------------------------**/
 slider-section {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
         .slider-component {
                 height: auto;
                 width: 100vw;
@@ -588,11 +595,11 @@ slider-section {
                                         transition: all 0.8s cubic-bezier(0.45, 0.05, 0.55, 0.95);
                                 }
                                 .item {
-                                        display: flex;
-                                        flex-direction: column;
-                                        justify-content: center;
-                                        align-items: center;
-                                        margin-bottom: auto;
+                                        overflow: hidden;
+                                        > * {
+                                                max-width: 95%;
+                                                overflow: hidden;
+                                        }
                                 }
                         }
                 }
