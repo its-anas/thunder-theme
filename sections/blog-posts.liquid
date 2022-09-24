@@ -7,13 +7,13 @@
 %}
 
 {%- style -%}
-   :root {
+   .blog-posts {
     --mobile-small-item-width: calc(var(--slider-350-width) / {{ mobile_items }} * 1px);
     --mobile-item-width: calc(var(--slider-350-750-width) / {{ mobile_items }} * 1px);
     --tablet-item-width: calc(var(--slider-750-1024-width) / {{ tablet_items }} * 1px);
     --desktop-item-width: calc(var(--slider-1024-width) / {{ desktop_items }} * 1px);
-
    }
+
   .{{ section.id }}.blog-posts {
     gap: {{ section.settings.space_between_elements }}rem;
     padding: {{ section.settings.space_outside_elements | divided_by: 2 }}px 0;

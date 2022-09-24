@@ -1,6 +1,19 @@
 {{ 'multi-icon.css' | asset_url | stylesheet_tag }}
 
+{% liquid
+  assign mobile_items = 3
+  assign tablet_items = 6
+  assign desktop_items = 8
+%}
+
 {%- style -%}
+   .multi-icon {
+    --mobile-small-item-width: calc(var(--slider-350-width) / {{ mobile_items }} * 1px);
+    --mobile-item-width: calc(var(--slider-350-750-width) / {{ mobile_items }} * 1px);
+    --tablet-item-width: calc(var(--slider-750-1024-width) / {{ tablet_items }} * 1px);
+    --desktop-item-width: calc(var(--slider-1024-width) / {{ desktop_items }} * 1px);
+   }
+
   .{{ section.id }}.multi-icon {
     background-color: {{ section.settings.background_color }};
     padding: {{ section.settings.space_outside_elements | divided_by: 2 }}px 0;
@@ -9,38 +22,38 @@
 
   @media screen and (max-width: 350px) {
     .multi-icon .item {
-      width: 65px;
-      max-width: 65px;
-      min-width: 65px;
+      width: var(--mobile-small-item-width);
+      max-width: var(--mobile-small-item-width);
+      min-width: var(--mobile-small-item-width);
     }
   }
   @media screen and (min-width: 350px) and (max-width: 750px) {
     .multi-icon .item {
-      width: 100px;
-      max-width: 100px;
-      min-width: 100px;
+      width: var(--mobile-item-width);
+      max-width: var(--mobile-item-width);
+      min-width: var(--mobile-item-width);
     }
   }
   @media screen and (min-width: 750px) and (max-width: 1024px) {
     .multi-icon .item {
-      width: 100px;
-      max-width: 100px;
-      min-width: 100px;
+      width: var(--tablet-item-width);
+      max-width: var(--tablet-item-width);
+      min-width: var(--tablet-item-width);
     }
   }
   @media screen and (min-width: 1024px) {
     .multi-icon .item {
-      width: 100px;
-      max-width: 100px;
-      min-width: 100px;
+      width: var(--desktop-item-width);
+      max-width: var(--desktop-item-width);
+      min-width: var(--desktop-item-width);
     }
   }
 {%- endstyle -%}
 
 <slider-section
-  data-desktop-items="6"
-  data-tablet-items="5"
-  data-mobile-items="3"
+  data-mobile-items="{{ mobile_items }}"
+  data-tablet-items="{{ tablet_items }}"
+  data-desktop-items="{{ desktop_items }}"
   class="{{ section.id }} multi-icon {% if section.settings.section_width == "wrapped" %}wrapped{% else %}{% endif %}"
 >
   {% if section.settings.heading != blank %}
@@ -187,6 +200,18 @@
     {
       "name": "Multi icon",
       "blocks": [
+        {
+          "type": "image_picker"
+        },
+        {
+          "type": "image_picker"
+        },
+        {
+          "type": "image_picker"
+        },
+        {
+          "type": "image_picker"
+        },
         {
           "type": "image_picker"
         },
