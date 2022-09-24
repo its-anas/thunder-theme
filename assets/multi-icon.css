@@ -14,34 +14,6 @@
 .multi-icon__text {
   text-align: center;
 }
-@media screen and (max-width: 350px) {
-  .multi-icon .item {
-    width: 65px;
-    max-width: 65px;
-    min-width: 65px;
-  }
-}
-@media screen and (min-width: 350px) and (max-width: 750px) {
-  .multi-icon .item {
-    width: 100px;
-    max-width: 100px;
-    min-width: 100px;
-  }
-}
-@media screen and (min-width: 750px) and (max-width: 1024px) {
-  .multi-icon .item {
-    width: 100px;
-    max-width: 100px;
-    min-width: 100px;
-  }
-}
-@media screen and (min-width: 1024px) {
-  .multi-icon .item {
-    width: 100px;
-    max-width: 100px;
-    min-width: 100px;
-  }
-}
 .multi-icon .item > * {
   max-width: 95%;
 }

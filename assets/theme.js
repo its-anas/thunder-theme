@@ -529,6 +529,8 @@ customElements.define("slideshow-section", slideshow);
  *               * ANCHOR: Collections list section
  *=============================================**/
 
+// load all events after the section is loaded
+
 class sliderSection extends HTMLElement {
         constructor() {
                 super();
@@ -567,8 +569,10 @@ class sliderSection extends HTMLElement {
                         } else if (mediaQueries[3].matches) {
                                 ItemsDisplayed = desktopItemsDisplayed;
                         }
+
                         slide.style.transform = "translateX(0px)";
                         itemWidth = slideContainer.querySelector(".item").offsetWidth;
+
                         if (items.length >= ItemsDisplayed) {
                                 maxSliderScroll = -itemWidth * (items.length - ItemsDisplayed);
                                 if (items.length > ItemsDisplayed) {
@@ -579,6 +583,7 @@ class sliderSection extends HTMLElement {
                                 slideContainer.style.justifyContent = "center";
                                 next.style.visibility = "hidden";
                         }
+
                         slideContainer.style.minWidth = itemWidth * ItemsDisplayed + "px";
                         slideContainer.style.maxWidth = itemWidth * ItemsDisplayed + "px";
                 }

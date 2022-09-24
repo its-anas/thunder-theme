@@ -5,6 +5,36 @@
     background-color: {{ section.settings.background_color }};
     padding: {{ section.settings.space_outside_elements | divided_by: 2 }}px 0;
   }
+
+
+  @media screen and (max-width: 350px) {
+    .multi-icon .item {
+      width: 65px;
+      max-width: 65px;
+      min-width: 65px;
+    }
+  }
+  @media screen and (min-width: 350px) and (max-width: 750px) {
+    .multi-icon .item {
+      width: 100px;
+      max-width: 100px;
+      min-width: 100px;
+    }
+  }
+  @media screen and (min-width: 750px) and (max-width: 1024px) {
+    .multi-icon .item {
+      width: 100px;
+      max-width: 100px;
+      min-width: 100px;
+    }
+  }
+  @media screen and (min-width: 1024px) {
+    .multi-icon .item {
+      width: 100px;
+      max-width: 100px;
+      min-width: 100px;
+    }
+  }
 {%- endstyle -%}
 
 <slider-section
@@ -156,7 +186,7 @@
   ],
   "presets": [
     {
-      "name": "Multi icons",
+      "name": "Multi icon",
       "blocks": [
         {
           "type": "image_picker"
