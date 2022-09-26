@@ -30,7 +30,7 @@
 {%- endstyle -%}
 
 <slideshow-section>
-  <div class="{{ section.id }} slideshow {% if section.settings.section_width == "wrapped" %} wrapped{% else %}{% endif %}">
+  <div class="{{ section.id }} slideshow {% if section.settings.section_width == "wrapped" %} wrapped{% endif %}">
     {% comment %} slides {% endcomment %}
     <div class="slideshow__container">
       {% for block in section.blocks %}

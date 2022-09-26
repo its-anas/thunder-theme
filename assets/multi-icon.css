@@ -1,9 +1,13 @@
 .multi-icon__icon {
-  height: 100px;
-  width: auto;
+  width: 100%;
+  aspect-ratio: 1/1;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.multi-icon__icon > * {
+  width: 50%;
+  height: 50%;
 }
 .multi-icon__text {
   text-align: center;
@@ -13,5 +17,5 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-bottom: auto;
+  aspect-ratio: 1/1;
 }

@@ -17,7 +17,7 @@
   .{{ section.id }}.video-hero__media {
     width: 100vh;
 
-  } 
+  }
 
   @media screen and (min-width: 750px) {
     .{{ section.id }}-text-width {
@@ -41,7 +41,7 @@
   }
 {%- endstyle -%}
 
-<section class="{{ section.id }} video-hero {% if section.settings.section_width == "wrapped" %} wrapped{% else %}{% endif %}">
+<section class="{{ section.id }} video-hero {% if section.settings.section_width == "wrapped" %} wrapped{% endif %}">
   <div class="{{ section.id }} video-hero__media">
     <div class="video-hero">
       {% if section.settings.video_url == blank %}

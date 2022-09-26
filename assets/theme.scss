@@ -10,10 +10,6 @@
         --h4-font-size: calc(((var(--font-size-type-scale) * var(--font-type-scale)) * var(--font-type-scale)) * var(--font-type-scale) * 1px);
         --h5-font-size: calc(var(--font-size-type-scale) * (var(--font-type-scale) * var(--font-type-scale) * 1px));
         --h6-font-size: calc(var(--font-size-type-scale) * var(--font-type-scale) * 1px);
-        --slider-350-width: 240;
-        --slider-350-750-width: 280;
-        --slider-750-1024-width: 680;
-        --slider-1024-width: 920;
 }
 
 /**------------------------------------------------------------------------------------------------
@@ -103,7 +99,7 @@ a.small {
         text-transform: uppercase;
 }
 
-.price__normal {
+.price--normal {
         font-size: var(--font-size);
 }
 
@@ -111,7 +107,7 @@ a {
         text-decoration: none;
 }
 
-.price__sale {
+.price--sale {
         font-size: var(--font-size);
         font-weight: lighter;
         text-decoration: line-through;
@@ -526,6 +522,7 @@ slider-section {
         flex-direction: column;
         justify-content: center;
         align-items: center;
+
         .slider-component {
                 height: auto;
                 width: 100%;
@@ -554,9 +551,6 @@ slider-section {
                         }
                         @media screen and (min-width: 751px) and (max-width: 1024px) {
                                 width: 10%;
-                        }
-                        @media screen and (min-width: 1025px) {
-                                width: 25%;
                         }
 
                         &:hover {
@@ -587,7 +581,7 @@ slider-section {
                 }
 
                 .slides-container {
-                        width: var(--section-width);
+                        width: var(--container-width);
                         overflow: hidden;
                         display: flex;
                         justify-content: center;
@@ -604,7 +598,6 @@ slider-section {
                         }
                         @media screen and (min-width: 1025px) {
                                 --slider-items: var(--desktop-items);
-                                --container-width: calc(var(--section-width) * 0.5);
                         }
 
                         .slide {
@@ -634,5 +627,39 @@ slider-section {
                                 }
                         }
                 }
+        }
+}
+
+.tag {
+        &--animated {
+                position: absolute;
+                border: 2px solid;
+                padding: 0.05rem 0.15rem;
+                pointer-events: none;
+                animation: blink 1s linear infinite;
+                color: var(--primary-button-background-color);
+        }
+        @keyframes blink {
+                0% {
+                        opacity: 0.5;
+                }
+                49% {
+                        opacity: 0.5;
+                }
+                50% {
+                        opacity: 1;
+                }
+                99% {
+                        opacity: 1;
+                }
+        }
+}
+
+.quick-add-icon {
+        width: 1.5rem;
+        height: 1.5rem;
+        .svg {
+                width: 100%;
+                height: 100%;
         }
 }

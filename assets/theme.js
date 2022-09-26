@@ -510,7 +510,7 @@ class sliderSection extends HTMLElement {
                                 next.style.visibility = "hidden";
                         }
                         return newTranslate;
-                }
+                } 
 
                 function moveNext() {
                         let translateNext = getTranslateX("next");

@@ -14,7 +14,7 @@
   }
 {%- endstyle -%}
 
-<section class="{{ section.id }} logo-list {% if section.settings.inner_shadow == true %}inner-shadow--all inner-shadow--all--left inner-shadow--all--right{% else %}{% endif %} {% if section.settings.section_width == "wrapped" %} wrapped{% else %}{% endif %}">
+<section class="{{ section.id }} logo-list {% if section.settings.inner_shadow == true %}inner-shadow--all inner-shadow--all--left inner-shadow--all--right{% endif %} {% if section.settings.section_width == "wrapped" %} wrapped{% endif %}">
   {% if section.settings.heading != blank %}
     <div class="logo-list__heading">
       <h6>{{ section.settings.heading }}</h6>

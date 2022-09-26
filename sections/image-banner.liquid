@@ -25,7 +25,7 @@
    }
 {%- endstyle -%}
 
-<section class="{{ section.id }} image-banner {% if section.settings.section_width == "wrapped" %} wrapped{% else %}{% endif %}">
+<section class="{{ section.id }} image-banner {% if section.settings.section_width == "wrapped" %} wrapped{% endif %}">
   <div class="{{ section.id }} image-banner__picture">
     {%- if section.settings.image == blank -%}
       {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder' }}

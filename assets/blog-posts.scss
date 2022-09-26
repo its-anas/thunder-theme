@@ -1,18 +1,9 @@
 .blog-posts {
-        &__heading {
-                > * {
-                        text-align: center;
-                }
-        }
-
         .item {
                 display: flex;
                 flex-direction: column;
                 align-items: center;
                 justify-self: center;
-        }
-        &__image,
-        &__container {
         }
 
         &__image {
@@ -31,7 +22,7 @@
         }
         &__author {
                 .text {
-                        opacity: 0.5;
+                        color: rgb(91, 91, 91);
                 }
         }
         &__author,

@@ -26,7 +26,7 @@
   }
 {%- endstyle -%}
 
-<section class="{{ section.id }} compare__section {% if section.settings.section_width == "wrapped" %} wrapped{% else %}{% endif %}">
+<section class="{{ section.id }} compare__section {% if section.settings.section_width == "wrapped" %} wrapped{% endif %}">
   <div class="compare__heading">
     <h6>{{ section.settings.heading }}</h6>
   </div>
@@ -72,14 +72,14 @@
                     <p class="small">{{ block.settings.product_description }}</p>
                   </div>
                   <div class="compare__content_prices">
-                    <p class="price__sale">
+                    <p class="price--sale">
                       {% if block.settings.product.compare_at_price == blank %}
                         $00.00
                       {% elsif block.settings.product.compare_at_price != blank %}
                         {{ block.settings.product.compare_at_price | money }}
                       {% endif %}
                     </p>
-                    <p class="price__normal">
+                    <p class="price--normal">
                       {% if block.settings.product.price == blank %}
                         $00.00
                       {% elsif block.settings.product.price != blank %}

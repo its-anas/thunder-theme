@@ -1,6 +1,3 @@
-.featured-collections__heading > * {
-  text-align: center;
-}
 .featured-collections .item {
   display: grid;
   justify-items: center;
@@ -28,7 +25,6 @@
   min-width: 95%;
   max-width: 95%;
   background-color: var(--primary-button-border-color);
-  bottom: 1%;
   display: flex;
   justify-content: center;
   align-items: center;

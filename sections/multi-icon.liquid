@@ -2,51 +2,34 @@
 
 {% liquid
   assign mobile_items = 3
-  assign tablet_items = 6
-  assign desktop_items = 8
+  assign tablet_items = 5
+  assign desktop_items = 6
+  assign desktop_section_width = 40
 %}
 
 {%- style -%}
-   .multi-icon {
-    --mobile-small-item-width: calc(var(--slider-350-width) / {{ mobile_items }} * 1px);
-    --mobile-item-width: calc(var(--slider-350-750-width) / {{ mobile_items }} * 1px);
-    --tablet-item-width: calc(var(--slider-750-1024-width) / {{ tablet_items }} * 1px);
-    --desktop-item-width: calc(var(--slider-1024-width) / {{ desktop_items }} * 1px);
-   }
+   .multi-icon  > .slider-component > .slides-container {
+    --mobile-items: {{ mobile_items }};
+    --tablet-items: {{ tablet_items }};
+    --desktop-items: {{ desktop_items }};
+  }
+  @media screen and (min-width: 1025px) {
+    .multi-icon > .slider-component > .slides-container {
+      --container-width: calc(var(--section-width) * {{ desktop_section_width | divided_by: 100.00 }} );
+    }
+    .multi-icon > .slider-component > .prev,
+    .multi-icon > .slider-component > .next {
+      width: {{ 100 | minus: desktop_section_width | divided_by: 2 }}%;
+    }
+  }
+
+  .multi-icon > .slider-component > .slides-container > .slide > .item {
+    aspect-ratio: 0.8;
+  }
 
   .{{ section.id }}.multi-icon {
     background-color: {{ section.settings.background_color }};
     padding: {{ section.settings.space_outside_elements | divided_by: 2 }}px 0;
-  }
-
-
-  @media screen and (max-width: 350px) {
-    .multi-icon .item {
-      width: var(--mobile-small-item-width);
-      max-width: var(--mobile-small-item-width);
-      min-width: var(--mobile-small-item-width);
-    }
-  }
-  @media screen and (min-width: 350px) and (max-width: 750px) {
-    .multi-icon .item {
-      width: var(--mobile-item-width);
-      max-width: var(--mobile-item-width);
-      min-width: var(--mobile-item-width);
-    }
-  }
-  @media screen and (min-width: 750px) and (max-width: 1024px) {
-    .multi-icon .item {
-      width: var(--tablet-item-width);
-      max-width: var(--tablet-item-width);
-      min-width: var(--tablet-item-width);
-    }
-  }
-  @media screen and (min-width: 1024px) {
-    .multi-icon .item {
-      width: var(--desktop-item-width);
-      max-width: var(--desktop-item-width);
-      min-width: var(--desktop-item-width);
-    }
   }
 {%- endstyle -%}
 
@@ -54,7 +37,7 @@
   data-mobile-items="{{ mobile_items }}"
   data-tablet-items="{{ tablet_items }}"
   data-desktop-items="{{ desktop_items }}"
-  class="{{ section.id }} multi-icon {% if section.settings.section_width == "wrapped" %}wrapped{% else %}{% endif %}"
+  class="{{ section.id }} multi-icon {% if section.settings.section_width == "wrapped" %}wrapped{% endif %}"
 >
   {% if section.settings.heading != blank %}
     <div class="multi-icon__heading">
@@ -69,7 +52,12 @@
       <div class="slide">
         {% for block in section.blocks %}
           <div class="item" {{ block.shopify_attributes }}>
-            <a href="{{ block.settings.url }}" class="multi-icon__icon media">
+            <a
+              {% if block.settings.url != blank %}
+                href="{{ block.settings.url }}"
+              {% endif %}
+              class="multi-icon__icon media"
+            >
               {% if block.settings.icon_type == 'svg' %}
                 {% if block.settings.svg == blank %}
                   {% render 'icons', icon: 'multi-icon' %}

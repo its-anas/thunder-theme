@@ -4,6 +4,7 @@
   assign mobile_items = 1
   assign tablet_items = 2
   assign desktop_items = 3
+  assign desktop_section_width = 50
 %}
 
 {%- style -%}
@@ -12,9 +13,18 @@
     --tablet-items: {{ tablet_items }};
     --desktop-items: {{ desktop_items }};
   }
+  @media screen and (min-width: 1025px) {
+    .blog-posts > .slider-component > .slides-container {
+      --container-width: calc(var(--section-width) * {{ desktop_section_width | divided_by: 100.00 }} );
+    }
+    .blog-posts > .slider-component > .prev,
+    .blog-posts > .slider-component > .next {
+      width: {{ 100 | minus: desktop_section_width | divided_by: 2 }}%;
+    }
+  }
 
   .blog-posts > .slider-component > .slides-container > .slide > .item {
-    aspect-ratio: 16/9;
+    aspect-ratio: 16/10;
   }
 
   .{{ section.id }}.blog-posts {
@@ -27,10 +37,10 @@
    }
 
   .{{ section.id }}.image {
-      background-image: url({{ section.settings.background_image | image_url: width: settings.wrapped_content_width }});
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-position: center;
+    background-image: url({{ section.settings.background_image | image_url: width: settings.wrapped_content_width }});
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
   }
 {%- endstyle -%}
 
@@ -63,7 +73,7 @@
                     class="fit"
                   >
                 {% else %}
-                  {{ 'collection-1' | placeholder_svg_tag: 'placeholder' }}
+                  {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder' }}
                 {% endif %}
               </div>
             </a>
@@ -77,6 +87,53 @@
             </a>
           </div>
         {%- endfor -%}
+        {% if section.settings.blog == blank %}
+          <div class="item">
+            <a class="blog-posts__image">
+              <div class="media">
+                {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder' }}
+              </div>
+            </a>
+            <a class="blog-posts__container">
+              <div class="blog-posts__author">
+                <p class="text label-text ">Publication date</p>
+              </div>
+              <div class="blog-posts__title">
+                <p class="text small">Article title</p>
+              </div>
+            </a>
+          </div>
+          <div class="item">
+            <a class="blog-posts__image">
+              <div class="media">
+                {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder' }}
+              </div>
+            </a>
+            <a class="blog-posts__container">
+              <div class="blog-posts__author">
+                <p class="text label-text ">Publication date</p>
+              </div>
+              <div class="blog-posts__title">
+                <p class="text small">Article title</p>
+              </div>
+            </a>
+          </div>
+          <div class="item">
+            <a class="blog-posts__image">
+              <div class="media">
+                {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder' }}
+              </div>
+            </a>
+            <a class="blog-posts__container">
+              <div class="blog-posts__author">
+                <p class="text label-text ">Publication date</p>
+              </div>
+              <div class="blog-posts__title">
+                <p class="text small">Article title</p>
+              </div>
+            </a>
+          </div>
+        {% endif %}
       </div>
     </div>
     <div class="next">
@@ -84,7 +141,7 @@
     </div>
   </div>
   <div class="blog-posts__link">
-    <a class="button--link small" href="{{ section.settings.blog.url}}">View all</a>
+    <a class="button--link small" href="{{ section.settings.blog.url }}">View all</a>
   </div>
 </slider-section>
 
@@ -132,17 +189,7 @@
       "label": "Image",
       "info": "Applied only if Type is 'Image'"
     },
-    {
-      "type": "range",
-      "id": "article_height",
-      "min": 200,
-      "max": 300,
-      "step": 10,
-      "unit": "px",
-      "label": "Article height",
-      "default": 200,
-      "info": "This is for desktop only. In the other screens the height will be calculated automatically based on this number."
-    },
+
     {
       "type": "range",
       "id": "space_between_elements",

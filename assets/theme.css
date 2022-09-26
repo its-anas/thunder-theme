@@ -11,10 +11,6 @@
   --h4-font-size: calc(((var(--font-size-type-scale) * var(--font-type-scale)) * var(--font-type-scale)) * var(--font-type-scale) * 1px);
   --h5-font-size: calc(var(--font-size-type-scale) * (var(--font-type-scale) * var(--font-type-scale) * 1px));
   --h6-font-size: calc(var(--font-size-type-scale) * var(--font-type-scale) * 1px);
-  --slider-350-width: 240;
-  --slider-350-750-width: 280;
-  --slider-750-1024-width: 680;
-  --slider-1024-width: 920;
 }
 
 /**------------------------------------------------------------------------------------------------
@@ -104,7 +100,7 @@ a.small {
   text-transform: uppercase;
 }
 
-.price__normal {
+.price--normal {
   font-size: var(--font-size);
 }
 
@@ -112,7 +108,7 @@ a {
   text-decoration: none;
 }
 
-.price__sale {
+.price--sale {
   font-size: var(--font-size);
   font-weight: lighter;
   text-decoration: line-through;
@@ -494,12 +490,6 @@ slider-section .slider-component .next {
     width: 10%;
   }
 }
-@media screen and (min-width: 1025px) {
-  slider-section .slider-component .prev,
-slider-section .slider-component .next {
-    width: 25%;
-  }
-}
 slider-section .slider-component .prev:hover,
 slider-section .slider-component .next:hover {
   opacity: 1;
@@ -530,7 +520,7 @@ slider-section .slider-component .prev {
   }
 }
 slider-section .slider-component .slides-container {
-  width: var(--section-width);
+  width: var(--container-width);
   overflow: hidden;
   display: flex;
   justify-content: center;
@@ -552,7 +542,6 @@ slider-section .slider-component .slides-container {
 @media screen and (min-width: 1025px) {
   slider-section .slider-component .slides-container {
     --slider-items: var(--desktop-items);
-    --container-width: calc(var(--section-width) * 0.5);
   }
 }
 slider-section .slider-component .slides-container .slide {
@@ -580,4 +569,51 @@ slider-section .slider-component .slides-container .slide .item {
 slider-section .slider-component .slides-container .slide .item > * {
   max-width: 95%;
   overflow: hidden;
+}
+
+.tag--animated {
+  position: absolute;
+  border: 2px solid;
+  padding: 0.05rem 0.15rem;
+  pointer-events: none;
+  -webkit-animation: blink 1s linear infinite;
+          animation: blink 1s linear infinite;
+  color: var(--primary-button-background-color);
+}
+@-webkit-keyframes blink {
+  0% {
+    opacity: 0.5;
+  }
+  49% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+  99% {
+    opacity: 1;
+  }
+}
+@keyframes blink {
+  0% {
+    opacity: 0.5;
+  }
+  49% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+  99% {
+    opacity: 1;
+  }
+}
+
+.quick-add-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+.quick-add-icon .svg {
+  width: 100%;
+  height: 100%;
 }
