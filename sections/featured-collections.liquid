@@ -2,25 +2,20 @@
 
 {% liquid
   assign mobile_items = 2
-  assign tablet_items = 4
+  assign tablet_items = 3
   assign desktop_items = 4
 %}
 
 {%- style -%}
-   .featured-collections {
-    --mobile-small-item-width: calc(var(--slider-350-width) / {{ mobile_items }});
-    --mobile-item-width: calc(var(--slider-350-750-width) / {{ mobile_items }});
-    --tablet-item-width: calc(var(--slider-750-1024-width) / {{ tablet_items }});
-    --desktop-item-width: calc(var(--slider-1024-width) / {{ desktop_items }});
+  .featured-collections > .slider-component > .slides-container {
+    --mobile-items: {{ mobile_items }};
+    --tablet-items: {{ tablet_items }};
+    --desktop-items: {{ desktop_items }};
+  }
 
-    --desktop-item-height: {{ section.settings.collection_height }};
-    --desktop-to-tablet-decrease: calc((var(--tablet-item-width) - var(--desktop-item-width)) / var(--desktop-item-width));
-    --tablet-to-mobile-decrease: calc((var(--mobile-item-width) - var(--tablet-item-width)) / var(--tablet-item-width));
-    --mobile-to-mobile-small-decrease: calc((var(--mobile-small-item-width) - var(--mobile-item-width)) / var(--mobile-item-width));
-    --tablet-item-height: calc((var(--desktop-item-height) * var(--desktop-to-tablet-decrease)) + var(--desktop-item-height));
-    --mobile-item-height: calc((var(--tablet-item-height) * var(--tablet-to-mobile-decrease)) + var(--tablet-item-height));
-    --mobile-small-item-height: calc((var(--mobile-item-height) * var(--mobile-to-mobile-small-decrease)) + var(--mobile-item-height));
-   }
+  .featured-collections > .slider-component > .slides-container > .slide > .item {
+    aspect-ratio: 0.8;
+  }
 
   .{{ section.id }}.featured-collections {
     gap: {{ section.settings.space_between_elements }}rem;
@@ -32,45 +27,11 @@
    }
 
    .{{ section.id }}.image {
-        background-image: url({{ section.settings.background_image | image_url: width: settings.wrapped_content_width }});
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: center;
+    background-image: url({{ section.settings.background_image | image_url: width: settings.wrapped_content_width }});
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
    }
-
-
-  @media screen and (max-width: 350px) {
-    .featured-collections .item {
-      width:  calc(var(--mobile-small-item-width) * 1px);
-      max-width: calc(var(--mobile-small-item-width) * 1px);
-      min-width: calc(var(--mobile-small-item-width) * 1px);
-      height: calc(var(--mobile-small-item-height) * 1px);
-    }
-  }
-  @media screen and (min-width: 350px) and (max-width: 750px) {
-    .featured-collections .item {
-      width: calc(var(--mobile-item-width) * 1px);
-      max-width: calc(var(--mobile-item-width) * 1px);
-      min-width: calc(var(--mobile-item-width) * 1px);
-      height:  calc(var(--mobile-item-height) * 1px);
-    }
-  }
-  @media screen and (min-width: 750px) and (max-width: 1024px) {
-    .featured-collections .item {
-      width: calc(var(--tablet-item-width) * 1px);
-      max-width: calc(var(--tablet-item-width) * 1px);
-      min-width: calc(var(--tablet-item-width) * 1px);
-      height: calc(var(--tablet-item-height) * 1px);
-    }
-  }
-  @media screen and (min-width: 1024px) {
-    .featured-collections .item {
-      width: calc(var(--desktop-item-width) * 1px);
-      max-width: calc(var(--desktop-item-width) * 1px);
-      min-width: calc(var(--desktop-item-width) * 1px);
-      height: calc(var(--desktop-item-height) * 1px);
-    }
-  }
 {%- endstyle -%}
 
 <slider-section

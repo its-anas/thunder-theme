@@ -7,38 +7,51 @@
 %}
 
 {%- style -%}
-  :root {
-    --mobile-small-item-width: calc(var(--slider-350-width) / {{mobile_items}} * 1px);
-    --mobile-item-width: calc(var(--slider-350-750-width) / {{mobile_items}} * 1px);
-    --tablet-item-width: calc(var(--slider-750-1024-width) / {{tablet_items}} * 1px);
-    --desktop-item-width: calc(var(--slider-1024-width) / {{desktop_items}} * 1px);
-  }
+   .featured-collections {
+    --mobile-small-item-width: calc(var(--slider-350-width) / {{ mobile_items }});
+    --mobile-item-width: calc(var(--slider-350-750-width) / {{ mobile_items }});
+    --tablet-item-width: calc(var(--slider-750-1024-width) / {{ tablet_items }});
+    --desktop-item-width: calc(var(--slider-1024-width) / {{ desktop_items }});
+
+    --desktop-item-height: {{ SECTION.settings.item_height }};
+    --desktop-to-tablet-decrease: calc((var(--tablet-item-width) - var(--desktop-item-width)) / var(--desktop-item-width));
+    --tablet-to-mobile-decrease: calc((var(--mobile-item-width) - var(--tablet-item-width)) / var(--tablet-item-width));
+    --mobile-to-mobile-small-decrease: calc((var(--mobile-small-item-width) - var(--mobile-item-width)) / var(--mobile-item-width));
+    --tablet-item-height: calc((var(--desktop-item-height) * var(--desktop-to-tablet-decrease)) + var(--desktop-item-height));
+    --mobile-item-height: calc((var(--tablet-item-height) * var(--tablet-to-mobile-decrease)) + var(--tablet-item-height));
+    --mobile-small-item-height: calc((var(--mobile-item-height) * var(--mobile-to-mobile-small-decrease)) + var(--mobile-item-height));
+   }
+
   @media screen and (max-width: 350px) {
-    .SECTIONNAME .item {
-      width: var(--mobile-small-item-width);
-      max-width: var(--mobile-small-item-width);
-      min-width: var(--mobile-small-item-width);
+    .featured-collections .item {
+      width:  calc(var(--mobile-small-item-width) * 1px);
+      max-width: calc(var(--mobile-small-item-width) * 1px);
+      min-width: calc(var(--mobile-small-item-width) * 1px);
+      height: calc(var(--mobile-small-item-height) * 1px);
     }
   }
   @media screen and (min-width: 350px) and (max-width: 750px) {
-    .SECTIONNAME .item {
-      width: var(--mobile-item-width);
-      max-width: var(--mobile-item-width);
-      min-width: var(--mobile-item-width);
+    .featured-collections .item {
+      width: calc(var(--mobile-item-width) * 1px);
+      max-width: calc(var(--mobile-item-width) * 1px);
+      min-width: calc(var(--mobile-item-width) * 1px);
+      height:  calc(var(--mobile-item-height) * 1px);
     }
   }
   @media screen and (min-width: 750px) and (max-width: 1024px) {
-    .SECTIONNAME .item {
-      width: var(--tablet-item-width);
-      max-width: var(--tablet-item-width);
-      min-width: var(--tablet-item-width);
+    .featured-collections .item {
+      width: calc(var(--tablet-item-width) * 1px);
+      max-width: calc(var(--tablet-item-width) * 1px);
+      min-width: calc(var(--tablet-item-width) * 1px);
+      height: calc(var(--tablet-item-height) * 1px);
     }
   }
   @media screen and (min-width: 1024px) {
-    .SECTIONNAME .item {
-      width: var(--desktop-item-width);
-      max-width: var(--desktop-item-width);
-      min-width: var(--desktop-item-width);
+    .featured-collections .item {
+      width: calc(var(--desktop-item-width) * 1px);
+      max-width: calc(var(--desktop-item-width) * 1px);
+      min-width: calc(var(--desktop-item-width) * 1px);
+      height: calc(var(--desktop-item-height) * 1px);
     }
   }
 {%- endstyle -%}
@@ -69,7 +82,91 @@
 {% schema %}
 {
   "name": "SECTIONTEMPLATE",
-  "settings": [],
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Featured collections"
+    },
+    {
+      "type": "select",
+      "id": "background_type",
+      "label": "Type",
+      "options": [
+        {
+          "value": "image",
+          "label": "Image"
+        },
+        {
+          "value": "just-color",
+          "label": "Color"
+        }
+      ],
+      "default": "just-color"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#000000",
+      "info": "Applied only if Type is 'Color'"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Image",
+      "info": "Applied only if Type is 'Image'"
+    },
+    {
+      "type": "range",
+      "id": "item_height",
+      "min": 200,
+      "max": 400,
+      "step": 50,
+      "unit": "px",
+      "label": "Item height",
+      "default": 350,
+      "info": "This is for desktop only. In the other screens the height will be calculated automatically based on this number."
+    },
+    {
+      "type": "range",
+      "id": "space_between_elements",
+      "label": "Space between elements",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "unit": "rem",
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "space_outside_elements",
+      "label": "Space outside elements",
+      "min": 30,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 50
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "Section width",
+      "default": "full",
+      "options": [
+        {
+          "value": " ",
+          "label": "Full width"
+        },
+        {
+          "value": "wrapped",
+          "label": "Wrapped"
+        }
+      ],
+      "default": " "
+    }
+  ],
   "blocks": [],
   "presets": [
     {

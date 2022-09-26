@@ -1,5 +1,5 @@
 /**---------------------Media queries---------------------**/
-let mediaQueries = [window.matchMedia("screen and (max-width: 350px)"), window.matchMedia("screen and (min-width: 350px) and (max-width: 750px)"), window.matchMedia("screen and (min-width: 750px) and (max-width: 1024px)"), window.matchMedia("screen and (min-width: 1024px)")];
+let mediaQueries = [window.matchMedia("screen and (max-width: 750px)"), window.matchMedia("screen and (min-width: 751px) and (max-width: 1024px)"), window.matchMedia("screen and (min-width: 1025px)")];
 
 /**---------------------Actual date and domain name---------------------**/
 let domainName = window.location.hostname;
@@ -436,151 +436,9 @@ class slideshow extends HTMLElement {
 
 customElements.define("slideshow-section", slideshow);
 
-/**============================================
- *?                OLD: Multi icon section
- *=============================================**/
-// /* Here is the explanation for the code above:
-// 1. The function updateSliderInfo() is called at the beginning of the code to get the width of the icons, the container which holds the icons, and the maximum scroll left value of the icons container.
-// 2. An event listener is added to the icons container to check if the scroll left value equals 0, which means the icons container is scrolled all the way to the left, then the previous button should be hidden. If the scroll left value is greater than 0, the previous button should be shown.
-// 3. Then the same thing happens with the next button, if the scroll left value equals the maximum scroll left value, the next button should be hidden. If the scroll left value is less than the maximum scroll left value, the next button should be shown.
-// 4. The function toggleButtons() is called at the beginning of the code to check if the total width of the icons is less than or equal to the width of the container. If it is, the previous and next buttons are hidden, and the icons are centered.
-// 5. An event listener is added to the window to call the toggleButtons() function when the window is resized.
-// 6. The scrollLeftAnimate() function is used to animate the scrolling of the icons container.
-// 7. The prev and next buttons are given event listeners to call the scrollLeftAnimate() function when clicked.
-// */
-
-// class multiIcon extends HTMLElement {
-//         constructor() {
-//                 super();
-//         }
-//         connectedCallback() {
-//                 this.attachShadow({ mode: "open" });
-//                 this.shadowRoot.innerHTML = "<slot></slot>";
-//                 this.loadSlider();
-//         }
-
-//         loadSlider() {
-//                 let icon = this.querySelector(".multi-icon__icon");
-//                 let icons = this.querySelectorAll(".multi-icon__icon");
-//                 let prev = this.querySelector(".prev");
-//                 let next = this.querySelector(".next");
-//                 let iconsContainer = this.querySelector(".multi-icon__container");
-//                 let iconWidth = icon.offsetWidth;
-
-//                 let maxDesktopIcons = iconsContainer.getAttribute("data-icons-count");
-//                 let maxMobileIcons = 3;
-//                 let mobile = window.matchMedia("(max-width: 750px)");
-
-//                 let iconsWidth;
-//                 let iconsContainerWidth;
-//                 let maxSlideScroll;
-
-//                 function checkDevice(e) {
-//                         let iconsCount = e.matches ? maxMobileIcons : maxDesktopIcons;
-//                         let containerMaxWidth = iconWidth * iconsCount;
-//                         iconsContainer.style.maxWidth = `${containerMaxWidth}px`;
-//                 }
-//                 checkDevice(mobile);
-
-//                 function updateSliderInfo() {
-//                         iconWidth = icon.offsetWidth;
-//                         iconsWidth = icons.length * iconWidth;
-//                         iconsContainerWidth = iconsContainer.clientWidth;
-//                         maxSlideScroll = iconsWidth - iconsContainerWidth;
-//                 }
-//                 updateSliderInfo();
-
-//                 function toggleButtons() {
-//                         updateSliderInfo();
-//                         if (iconsWidth <= iconsContainerWidth) {
-//                                 prev.style.visibility = "hidden";
-//                                 next.style.visibility = "hidden";
-//                                 iconsContainer.style.justifyContent = "center";
-//                         }
-
-//                         if (iconsWidth >= iconsContainerWidth) {
-//                                 next.style.visibility = "visible";
-//                                 iconsContainer.style.justifyContent = "flex-start";
-//                         }
-//                 }
-//                 toggleButtons();
-
-//                 function scrollLeftAnimate(elem, unit) {
-//                         let time = 300;
-//                         let from = elem.scrollLeft; //
-//                         let start = new Date().getTime();
-//                         let timer = setInterval(function () {
-//                                 let step = Math.min(1, (new Date().getTime() - start) / time);
-//                                 elem.scrollLeft = step * unit + from;
-
-//                                 if (step === 1) {
-//                                         clearInterval(timer);
-//                                 }
-//                         });
-//                 }
-
-//                 prev.addEventListener("click", function () {
-//                         function checkDevice(e) {
-//                                 if (e.matches) {
-//                                         if (iconsContainer.scrollLeft > 0) {
-//                                                 updateSliderInfo();
-//                                                 scrollLeftAnimate(iconsContainer, -iconWidth * maxMobileIcons);
-//                                         }
-//                                 } else {
-//                                         if (iconsContainer.scrollLeft > 0) {
-//                                                 scrollLeftAnimate(iconsContainer, -iconWidth * maxDesktopIcons);
-//                                         }
-//                                 }
-//                         }
-//                         checkDevice(mobile);
-//                 });
-
-//                 next.addEventListener("click", function () {
-//                         function checkDevice(e) {
-//                                 if (e.matches) {
-//                                         if (iconsContainer.scrollLeft < maxSlideScroll) {
-//                                                 scrollLeftAnimate(iconsContainer, iconWidth * maxMobileIcons);
-//                                         }
-//                                 } else {
-//                                         if (iconsContainer.scrollLeft < maxSlideScroll) {
-//                                                 scrollLeftAnimate(iconsContainer, iconWidth * maxDesktopIcons);
-//                                         }
-//                                 }
-//                         }
-//                         checkDevice(mobile);
-//                 });
-
-//                 iconsContainer.addEventListener("scroll", () => {
-//                         updateSliderInfo();
-//                         if (Math.round(iconsContainer.scrollLeft) === 0) {
-//                                 prev.style.visibility = "hidden";
-//                         }
-//                         if (Math.round(iconsContainer.scrollLeft) > 0) {
-//                                 prev.style.visibility = "visible";
-//                         }
-//                         if (Math.round(iconsContainer.scrollLeft) >= maxSlideScroll) {
-//                                 next.style.visibility = "hidden";
-//                         }
-//                         if (Math.round(iconsContainer.scrollLeft) < maxSlideScroll) {
-//                                 next.style.visibility = "visible";
-//                         }
-//                 });
-//                 let event = new Event("scroll");
-//                 iconsContainer.dispatchEvent(event);
-
-//                 window.addEventListener("resize", toggleButtons);
-
-//                 mobile.addEventListener("change", checkDevice);
-//         }
-// }
-
-// customElements.define("multi-icon", multiIcon);
-
-/**============================================
- *               * ANCHOR: Collections list section
- *=============================================**/
-
-// load all events after the section is loaded
+// /**============================================
+//  *               * ANCHOR: Slider component
+//  =============================================**/
 
 class sliderSection extends HTMLElement {
         constructor() {
@@ -591,69 +449,52 @@ class sliderSection extends HTMLElement {
                 this.shadowRoot.innerHTML = "<slot></slot>";
                 this.loadSlider();
         }
+
         loadSlider() {
-                let slideContainer = this.querySelector(".slides-container");
+                let slidesContainer = this.querySelector(".slides-container");
                 let slide = this.querySelector(".slide");
+                let item = this.querySelector(".item");
                 let items = this.querySelectorAll(".item");
                 let prev = this.querySelector(".prev");
                 let next = this.querySelector(".next");
                 let maxSliderScroll;
-                let ItemsDisplayed;
+                let itemsDisplayed;
                 let itemWidth;
-                let itemHeight = slideContainer.querySelector(".item").offsetHeight;
-                prev.style.height = itemHeight + "px";
-                next.style.height = itemHeight + "px";
+                let itemHeight;
+                let itemsFound;
 
-                let desktopItemsDisplayed = this.getAttribute("data-desktop-items");
-                let mobileItemsDisplayed = this.getAttribute("data-mobile-items");
-                let tabletItemsDisplayed = this.getAttribute("data-tablet-items");
-
-                for (let i = 0; i < mediaQueries.length; i++) {
-                        mediaQueries[i].addEventListener("change", widthChange);
-                        widthChange(mediaQueries[i]);
-                }
-
-                function widthChange() {
-                        if (mediaQueries[0].matches) {
-                                ItemsDisplayed = mobileItemsDisplayed;
-                        } else if (mediaQueries[1].matches) {
-                                ItemsDisplayed = mobileItemsDisplayed;
-                        } else if (mediaQueries[2].matches) {
-                                ItemsDisplayed = tabletItemsDisplayed;
-                        } else if (mediaQueries[3].matches) {
-                                ItemsDisplayed = desktopItemsDisplayed;
-                        }
-
+                function setMaxScroll() {
+                        itemsDisplayed = getComputedStyle(slidesContainer).getPropertyValue("--slider-items");
+                        itemsFound = items.length;
+                        itemWidth = item.offsetWidth;
+                        itemHeight = item.offsetHeight;
                         slide.style.transform = "translateX(0px)";
-                        itemWidth = slideContainer.querySelector(".item").offsetWidth;
-                        itemHeight = slideContainer.querySelector(".item").offsetHeight;
+                        prev.style.visibility = "hidden";
                         prev.style.height = itemHeight + "px";
                         next.style.height = itemHeight + "px";
 
-                        if (items.length >= ItemsDisplayed) {
-                                maxSliderScroll = -itemWidth * (items.length - ItemsDisplayed);
-                                if (items.length > ItemsDisplayed) {
+                        if (itemsFound >= itemsDisplayed) {
+                                maxSliderScroll = -itemWidth * (itemsFound - itemsDisplayed);
+                                if (itemsFound > itemsDisplayed) {
                                         next.style.visibility = "visible";
                                 }
+                                slide.style.justifyContent = "flex-start";
                         } else {
-                                maxSliderScroll = items.length;
-                                slideContainer.style.justifyContent = "center";
+                                maxSliderScroll = -itemWidth * itemsFound;
+                                slide.style.justifyContent = "center";
                                 next.style.visibility = "hidden";
                         }
-
-                        slideContainer.style.minWidth = itemWidth * ItemsDisplayed + "px";
-                        slideContainer.style.maxWidth = itemWidth * ItemsDisplayed + "px";
                 }
-                widthChange();
+                setMaxScroll();
 
                 function getTranslateX(type) {
                         let actualTranslate = parseInt(slide.style.transform == "translateX(0px)" ? 0 : slide.style.transform.match(/[-]{0,1}[\d]*[.]{0,1}[\d]+/g)[0]);
                         let newTranslate = 0;
 
                         if (type === "next") {
-                                newTranslate = Math.max(actualTranslate - itemWidth * ItemsDisplayed, maxSliderScroll);
+                                newTranslate = Math.max(actualTranslate - itemWidth * itemsDisplayed, maxSliderScroll);
                         } else if (type === "prev") {
-                                newTranslate = Math.min(actualTranslate + itemWidth * ItemsDisplayed, 0);
+                                newTranslate = Math.min(actualTranslate + itemWidth * itemsDisplayed, 0);
                         }
 
                         if (newTranslate === 0) {
@@ -662,24 +503,32 @@ class sliderSection extends HTMLElement {
                         if (newTranslate < 0) {
                                 prev.style.visibility = "visible";
                         }
-                        if (newTranslate >= maxSliderScroll) {
+                        if (newTranslate > maxSliderScroll) {
                                 next.style.visibility = "visible";
                         }
                         if (newTranslate <= maxSliderScroll) {
                                 next.style.visibility = "hidden";
                         }
-
                         return newTranslate;
                 }
 
-                prev.addEventListener("click", function () {
-                        let translatePrev = getTranslateX("prev");
-                        slide.style.transform = `translateX(${translatePrev}px)`;
-                });
-                next.addEventListener("click", function () {
+                function moveNext() {
                         let translateNext = getTranslateX("next");
                         slide.style.transform = `translateX(${translateNext}px)`;
-                });
+                }
+
+                function movePrev() {
+                        let translatePrev = getTranslateX("prev");
+                        slide.style.transform = `translateX(${translatePrev}px)`;
+                }
+
+                for (let i = 0; i < mediaQueries.length; i++) {
+                        mediaQueries[i].addEventListener("change", setMaxScroll);
+                        setMaxScroll(mediaQueries[i]);
+                }
+                window.addEventListener("resize", setMaxScroll);
+                next.addEventListener("click", moveNext);
+                prev.addEventListener("click", movePrev);
         }
 }
 customElements.define("slider-section", sliderSection);
