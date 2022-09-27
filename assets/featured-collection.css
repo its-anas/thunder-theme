@@ -9,7 +9,8 @@
   height: 100%;
   width: 100%;
 }
-.featured-collection__image .tag--animated {
+.featured-collection__image .tag--normal {
+  position: absolute;
   left: 0.2rem;
   top: 0.2rem;
 }
@@ -26,15 +27,15 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 0.25rem;
+  gap: 0.5rem;
 }
 .featured-collection__name .text {
   text-align: center;
 }
 .featured-collection__price {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.1rem;
 }

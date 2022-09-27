@@ -11,6 +11,7 @@
   --h4-font-size: calc(((var(--font-size-type-scale) * var(--font-type-scale)) * var(--font-type-scale)) * var(--font-type-scale) * 1px);
   --h5-font-size: calc(var(--font-size-type-scale) * (var(--font-type-scale) * var(--font-type-scale) * 1px));
   --h6-font-size: calc(var(--font-size-type-scale) * var(--font-type-scale) * 1px);
+  --tag-font-size: calc(((var(--font-size-type-scale) / var(--font-type-scale)) / var(--font-type-scale)) / var(--font-type-scale) * 1px);
 }
 
 /**------------------------------------------------------------------------------------------------
@@ -120,7 +121,7 @@ a {
 }
 
 .tag-text {
-  font-size: calc(var(--font-size-type-scale) / var(--font-type-scale) / var(--font-type-scale) / var(--font-type-scale) * 1px);
+  font-size: var(--tag-font-size);
 }
 
 .text-alignment--center, .text-alignment--right, .text-alignment--left {
@@ -571,14 +572,32 @@ slider-section .slider-component .slides-container .slide .item > * {
   overflow: hidden;
 }
 
+.tag--normal {
+  color: var(--primary-button-background-color);
+}
 .tag--animated {
-  position: absolute;
-  border: 2px solid;
+  -webkit-animation: blink 1s linear infinite;
+          animation: blink 1s linear infinite;
+  color: var(--primary-button-background-color);
+}
+.tag--animated-hover:after {
+  content: "NEW";
+  vertical-align: middle;
+}
+.tag--normal, .tag--animated {
+  padding: 0.05rem 0.15rem;
+  pointer-events: none;
+}
+.tag--animated, .tag--animated-hover:after {
+  font-size: var(--tag-font-size);
+  color: var(--text-color);
   padding: 0.05rem 0.15rem;
   pointer-events: none;
   -webkit-animation: blink 1s linear infinite;
           animation: blink 1s linear infinite;
-  color: var(--primary-button-background-color);
+}
+.tag--normal, .tag--animated, .tag--animated-hover:after {
+  border: 1px solid;
 }
 @-webkit-keyframes blink {
   0% {

@@ -1,30 +1,30 @@
 {{ 'featured-collections.css' | asset_url | stylesheet_tag }}
 
 {% liquid
-  assign mobile_items = 2
-  assign tablet_items = 3
-  assign desktop_items = 4
-  assign desktop_section_width = 50
+  assign mobile_items = section.settings.mobile_items
+  assign tablet_items = section.settings.tablet_items
+  assign desktop_items = section.settings.desktop_items
+  assign desktop_section_width = section.settings.row_width
 %}
 
 {%- style -%}
-  .featured-collections > .slider-component > .slides-container {
+  .{{ section.id }}.featured-collections > .slider-component > .slides-container {
     --mobile-items: {{ mobile_items }};
     --tablet-items: {{ tablet_items }};
     --desktop-items: {{ desktop_items }};
   }
   @media screen and (min-width: 1025px) {
-    .featured-collections > .slider-component > .slides-container {
+    .{{ section.id }}.featured-collections > .slider-component > .slides-container {
       --container-width: calc(var(--section-width) * {{ desktop_section_width | divided_by: 100.00 }} );
     }
-    .featured-collections > .slider-component > .prev,
-    .featured-collections > .slider-component > .next {
-      width: {{ 100 | minus: desktop_section_width | divided_by: 2 }}%; 
+    .{{ section.id }}.featured-collections > .slider-component > .prev,
+    .{{ section.id }}.featured-collections > .slider-component > .next {
+      width: {{ 100 | minus: desktop_section_width | divided_by: 2 }}%;
     }
   }
 
-  .featured-collections > .slider-component > .slides-container > .slide > .item {
-    aspect-ratio: 0.6;
+  .{{ section.id }}.featured-collections > .slider-component > .slides-container > .slide > .item {
+    aspect-ratio: {{ section.settings.aspect_ratio }};
   }
 
   .{{ section.id }}.featured-collections {
@@ -120,6 +120,55 @@
   "name": "Featured collections",
   "settings": [
     {
+      "type": "header",
+      "content": "Collection settings"
+    },
+    {
+      "type": "range",
+      "id": "aspect_ratio",
+      "min": 0.5,
+      "max": 2,
+      "step": 0.1,
+      "unit": "a/r",
+      "label": "Aspect ratio",
+      "default": 0.6 
+    },
+    {
+      "type": "range",
+      "id": "mobile_items",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "unit": "n",
+      "label": "Items per row in mobile",
+      "default": 2
+    },
+    {
+      "type": "range",
+      "id": "tablet_items",
+      "min": 3,
+      "max": 6,
+      "step": 1,
+      "unit": "n",
+      "label": "Items per row in tablet",
+      "default": 3
+    },
+    {
+      "type": "range",
+      "id": "desktop_items",
+      "min": 3,
+      "max": 6,
+      "step": 1,
+      "unit": "n",
+      "label": "Items per row in desktop",
+      "default": 4
+    },
+    {
+      "type": "header",
+      "content": "Section settings"
+    },
+
+    {
       "type": "text",
       "id": "heading",
       "label": "Heading",
@@ -183,6 +232,16 @@
       "max": 100,
       "step": 1,
       "unit": "px",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "row_width",
+      "min": 40,
+      "max": 90,
+      "step": 5,
+      "unit": "%",
+      "label": "Row width relative to screen",
       "default": 50
     },
     {

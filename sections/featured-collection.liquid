@@ -1,30 +1,30 @@
 {{ 'featured-collection.css' | asset_url | stylesheet_tag }}
 
 {% liquid
-  assign mobile_items = 2
-  assign tablet_items = 3
-  assign desktop_items = 4
-  assign desktop_section_width = 50
+  assign mobile_items = section.settings.mobile_items
+  assign tablet_items = section.settings.tablet_items
+  assign desktop_items = section.settings.desktop_items
+  assign desktop_section_width = section.settings.row_width
 %}
 
 {%- style -%}
-  .featured-collection > .slider-component > .slides-container {
+  .{{ section.id }}.featured-collection > .slider-component > .slides-container {
     --mobile-items: {{ mobile_items }};
     --tablet-items: {{ tablet_items }};
     --desktop-items: {{ desktop_items }};
   }
   @media screen and (min-width: 1025px) {
-    .featured-collection > .slider-component > .slides-container {
+    .{{ section.id }}.featured-collection > .slider-component > .slides-container {
       --container-width: calc(var(--section-width) * {{ desktop_section_width | divided_by: 100.00 }} );
     }
-    .featured-collection > .slider-component > .prev,
-    .featured-collection > .slider-component > .next {
+    .{{ section.id }}.featured-collection > .slider-component > .prev,
+    .{{ section.id }}.featured-collection > .slider-component > .next {
       width: {{ 100 | minus: desktop_section_width | divided_by: 2 }}%;
     }
   }
 
-  .featured-collection > .slider-component > .slides-container > .slide > .item > .image {
-    aspect-ratio: 1 / 1;
+  .{{ section.id }}.featured-collection > .slider-component > .slides-container > .slide > .item > .featured-collection__image {
+    aspect-ratio: {{ section.settings.aspect_ratio }};
   }
 
   .{{ section.id }}.featured-collection {
@@ -63,14 +63,7 @@
           {% for product in section.settings.collection.products %}
             <div class="item">
               <div class="featured-collection__image">
-                {% assign product_date = product.published_at | date: '%d' %}
-                {% assign current_date = 'now' | date: '%d' %}
-                {% assign difference = current_date | minus: product_date %}
-                {% if difference < section.settings.new_tag_time %}
-                  <p class="tag--animated tag-text">
-                    <span class="tag--new">New</span>
-                  </p>
-                {% endif %}
+                <p class="tag--normal tag-text">SAVE {{ product.compare_at_price | minus: product.price | money }}</p>
                 <a class="quick-add-icon">
                   {% render 'icons', icon: 'quick-add' -%}
                 </a>
@@ -91,11 +84,16 @@
               </div>
               <div class="featured-collection__container">
                 <div class="featured-collection__name">
-                  <p class="text ">{{ product.title }}</p>
+                  {% assign product_date = product.published_at | date: '%d' %}
+                  {% assign current_date = 'now' | date: '%d' %}
+                  {% assign difference = current_date | minus: product_date %}
+                  <p class="text {% if section.settings.new_tag == true and difference < section.settings.new_tag_time %}tag--animated-hover{% endif %}">
+                    {{ product.title }}
+                  </p>
                 </div>
                 <div class="featured-collection__price">
-                  <p class="text price--normal">{{ product.price | money }}</p>
                   <p class="text price--sale">{{ product.compare_at_price | money }}</p>
+                  <p class="text price--normal">{{ product.price | money }}</p>
                 </div>
               </div>
             </div>
@@ -103,15 +101,17 @@
         {% else %}
           <div class="item">
             <div class="featured-collection__image">
-              <p class="tag--animated tag-text">NEW</p>
+              <p class="tag--normal tag-text">SAVE {{ product.compare_at_price | minus: product.price | money }}</p>
               <a class="quick-add-icon">
-                {% render 'icons', icon: 'quick-add-icon' -%}
+                {% render 'icons', icon: 'quick-add' -%}
               </a>
               {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
             </div>
             <div class="featured-collection__container">
               <div class="featured-collection__name">
-                <p class="text ">Product title</p>
+                <p class="text {% if section.settings.new_tag == true %}tag--animated-hover{% endif %}">
+                  Product title
+                </p>
               </div>
               <div class="featured-collection__price">
                 <p class="text price--normal">00.00</p>
@@ -121,15 +121,17 @@
           </div>
           <div class="item">
             <div class="featured-collection__image">
-              <p class="tag--animated tag-text">NEW</p>
+              <p class="tag--normal tag-text">SAVE {{ product.compare_at_price | minus: product.price | money }}</p>
               <a class="quick-add-icon">
-                {% render 'icons', icon: 'quick-add-icon' -%}
+                {% render 'icons', icon: 'quick-add' -%}
               </a>
               {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
             </div>
             <div class="featured-collection__container">
               <div class="featured-collection__name">
-                <p class="text ">Product title</p>
+                <p class="text {% if section.settings.new_tag == true %}tag--animated-hover{% endif %}">
+                  Product title
+                </p>
               </div>
               <div class="featured-collection__price">
                 <p class="text price--normal">00.00</p>
@@ -139,15 +141,17 @@
           </div>
           <div class="item">
             <div class="featured-collection__image">
-              <p class="tag--animated tag-text">NEW</p>
+              <p class="tag--normal tag-text">SAVE {{ product.compare_at_price | minus: product.price | money }}</p>
               <a class="quick-add-icon">
-                {% render 'icons', icon: 'quick-add-icon' -%}
+                {% render 'icons', icon: 'quick-add' -%}
               </a>
               {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
             </div>
             <div class="featured-collection__container">
               <div class="featured-collection__name">
-                <p class="text ">Product title</p>
+                <p class="text {% if section.settings.new_tag == true %}tag--animated-hover{% endif %}">
+                  Product title
+                </p>
               </div>
               <div class="featured-collection__price">
                 <p class="text price--normal">00.00</p>
@@ -157,15 +161,17 @@
           </div>
           <div class="item">
             <div class="featured-collection__image">
-              <p class="tag--animated tag-text">NEW</p>
+              <p class="tag--normal tag-text">SAVE {{ product.compare_at_price | minus: product.price | money }}</p>
               <a class="quick-add-icon">
-                {% render 'icons', icon: 'quick-add-icon' -%}
+                {% render 'icons', icon: 'quick-add' -%}
               </a>
               {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
             </div>
             <div class="featured-collection__container">
               <div class="featured-collection__name">
-                <p class="text ">Product title</p>
+                <p class="text {% if section.settings.new_tag == true %}tag--animated-hover{% endif %}">
+                  Product title
+                </p>
               </div>
               <div class="featured-collection__price">
                 <p class="text price--normal">00.00</p>
@@ -200,17 +206,6 @@
       "content": "Collection settings"
     },
     {
-      "type": "range",
-      "id": "new_tag_time",
-      "min": 0,
-      "max": 90,
-      "step": 1,
-      "unit": "D",
-      "label": "'NEW' tag",
-      "info": "Show the 'NEW' tag if the product is published in the last X days",
-      "default": 30
-    },
-    {
       "type": "collection",
       "id": "collection",
       "label": "Collection"
@@ -220,6 +215,67 @@
       "id": "heading",
       "label": "Heading",
       "default": "Featured collection"
+    },
+    {
+      "type": "checkbox",
+      "id": "new_tag",
+      "label": "Show 'NEW' tag",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "new_tag_time",
+      "label": "'NEW' tag countback",
+      "info": "Show the 'NEW' tag if the product is published in the last X days",
+      "min": 0,
+      "max": 90,
+      "step": 1,
+      "unit": "D",
+      "default": 30
+    },
+    {
+      "type": "header",
+      "content": "Item settings"
+    },
+    {
+      "type": "range",
+      "id": "aspect_ratio",
+      "min": 0.5,
+      "max": 2,
+      "step": 0.1,
+      "unit": "a/r",
+      "label": "Aspect ratio",
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "mobile_items",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "unit": "n",
+      "label": "Items per row in mobile",
+      "default": 2
+    },
+    {
+      "type": "range",
+      "id": "tablet_items",
+      "min": 3,
+      "max": 6,
+      "step": 1,
+      "unit": "n",
+      "label": "Items per row in tablet",
+      "default": 3
+    },
+    {
+      "type": "range",
+      "id": "desktop_items",
+      "min": 3,
+      "max": 6,
+      "step": 1,
+      "unit": "n",
+      "label": "Items per row in desktop",
+      "default": 4
     },
     {
       "type": "header",
@@ -245,7 +301,7 @@
       "type": "color",
       "id": "background_color",
       "label": "Background color",
-      "default": "#000000",
+      "default": "transparent",
       "info": "Applied only if Type is 'Color'"
     },
     {
@@ -272,6 +328,16 @@
       "max": 100,
       "step": 1,
       "unit": "px",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "row_width",
+      "min": 40,
+      "max": 90,
+      "step": 5,
+      "unit": "%",
+      "label": "Row width relative to screen",
       "default": 50
     },
     {

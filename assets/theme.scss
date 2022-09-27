@@ -10,6 +10,7 @@
         --h4-font-size: calc(((var(--font-size-type-scale) * var(--font-type-scale)) * var(--font-type-scale)) * var(--font-type-scale) * 1px);
         --h5-font-size: calc(var(--font-size-type-scale) * (var(--font-type-scale) * var(--font-type-scale) * 1px));
         --h6-font-size: calc(var(--font-size-type-scale) * var(--font-type-scale) * 1px);
+        --tag-font-size: calc(((var(--font-size-type-scale) / var(--font-type-scale)) / var(--font-type-scale)) / var(--font-type-scale) * 1px);
 }
 
 /**------------------------------------------------------------------------------------------------
@@ -119,7 +120,7 @@ a {
 }
 
 .tag-text {
-        font-size: calc(((var(--font-size-type-scale) / var(--font-type-scale)) / var(--font-type-scale)) / var(--font-type-scale) * 1px);
+        font-size: var(--tag-font-size);
 }
 
 .text-alignment {
@@ -631,14 +632,38 @@ slider-section {
 }
 
 .tag {
+        &--normal {
+                color: var(--primary-button-background-color);
+        }
         &--animated {
-                position: absolute;
-                border: 2px solid;
-                padding: 0.05rem 0.15rem;
-                pointer-events: none;
                 animation: blink 1s linear infinite;
                 color: var(--primary-button-background-color);
         }
+        &--animated-hover {
+                &:after {
+                        content: "NEW";
+                        vertical-align: middle;
+                }
+        }
+        &--normal,
+        &--animated {
+                padding: 0.05rem 0.15rem;
+                pointer-events: none;
+        }
+        &--animated,
+        &--animated-hover:after {
+                font-size: var(--tag-font-size);
+                color: var(--text-color);
+                padding: 0.05rem 0.15rem;
+                pointer-events: none;
+                animation: blink 1s linear infinite;
+        }
+        &--normal,
+        &--animated,
+        &--animated-hover:after {
+                border: 1px solid;
+        }
+
         @keyframes blink {
                 0% {
                         opacity: 0.5;
