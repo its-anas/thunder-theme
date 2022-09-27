@@ -99,86 +99,31 @@
             </div>
           {% endfor %}
         {% else %}
-          <div class="item">
-            <div class="featured-collection__image">
-              <p class="tag--normal tag-text">SAVE {{ product.compare_at_price | minus: product.price | money }}</p>
-              <a class="quick-add-icon">
-                {% render 'icons', icon: 'quick-add' -%}
-              </a>
-              {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
-            </div>
-            <div class="featured-collection__container">
-              <div class="featured-collection__name">
-                <p class="text {% if section.settings.new_tag == true %}tag--animated-hover{% endif %}">
-                  Product title
-                </p>
+          {%- capture placeholder_collection -%}
+            <div class="item">
+              <div class="featured-collection__image">
+                <p class="tag--normal tag-text">SAVE {{ product.compare_at_price | minus: product.price | money }}</p>
+                <a class="quick-add-icon">
+                  {% render 'icons', icon: 'quick-add' -%}
+                </a>
+                {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
               </div>
-              <div class="featured-collection__price">
-                <p class="text price--normal">00.00</p>
-                <p class="text price--sale">00.00</p>
-              </div>
-            </div>
-          </div>
-          <div class="item">
-            <div class="featured-collection__image">
-              <p class="tag--normal tag-text">SAVE {{ product.compare_at_price | minus: product.price | money }}</p>
-              <a class="quick-add-icon">
-                {% render 'icons', icon: 'quick-add' -%}
-              </a>
-              {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
-            </div>
-            <div class="featured-collection__container">
-              <div class="featured-collection__name">
-                <p class="text {% if section.settings.new_tag == true %}tag--animated-hover{% endif %}">
-                  Product title
-                </p>
-              </div>
-              <div class="featured-collection__price">
-                <p class="text price--normal">00.00</p>
-                <p class="text price--sale">00.00</p>
+              <div class="featured-collection__container">
+                <div class="featured-collection__name">
+                  <p class="text {% if section.settings.new_tag == true %}tag--animated-hover{% endif %}">
+                    Product title
+                  </p>
+                </div>
+                <div class="featured-collection__price">
+                  <p class="text price--normal">00.00</p>
+                  <p class="text price--sale">00.00</p>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="item">
-            <div class="featured-collection__image">
-              <p class="tag--normal tag-text">SAVE {{ product.compare_at_price | minus: product.price | money }}</p>
-              <a class="quick-add-icon">
-                {% render 'icons', icon: 'quick-add' -%}
-              </a>
-              {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
-            </div>
-            <div class="featured-collection__container">
-              <div class="featured-collection__name">
-                <p class="text {% if section.settings.new_tag == true %}tag--animated-hover{% endif %}">
-                  Product title
-                </p>
-              </div>
-              <div class="featured-collection__price">
-                <p class="text price--normal">00.00</p>
-                <p class="text price--sale">00.00</p>
-              </div>
-            </div>
-          </div>
-          <div class="item">
-            <div class="featured-collection__image">
-              <p class="tag--normal tag-text">SAVE {{ product.compare_at_price | minus: product.price | money }}</p>
-              <a class="quick-add-icon">
-                {% render 'icons', icon: 'quick-add' -%}
-              </a>
-              {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
-            </div>
-            <div class="featured-collection__container">
-              <div class="featured-collection__name">
-                <p class="text {% if section.settings.new_tag == true %}tag--animated-hover{% endif %}">
-                  Product title
-                </p>
-              </div>
-              <div class="featured-collection__price">
-                <p class="text price--normal">00.00</p>
-                <p class="text price--sale">00.00</p>
-              </div>
-            </div>
-          </div>
+          {%- endcapture -%}
+          {% for i in (1..5) %}
+            {{ placeholder_collection }}
+          {% endfor %}
         {% endif %}
       </div>
     </div>

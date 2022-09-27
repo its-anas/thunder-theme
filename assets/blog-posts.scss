@@ -10,6 +10,7 @@
                 height: 100%;
                 width: 100%;
         }
+
         &__container {
                 height: auto;
                 width: 100%;
@@ -20,17 +21,25 @@
                 justify-content: center;
                 align-items: flex-start;
         }
+
         &__author {
                 .text {
-                        color: rgb(91, 91, 91);
+                        color: rgb(137, 137, 137);
                 }
         }
+
+        &__title {
+                .text {
+                        color: rgb(255, 255, 255);
+                }
+        }
+
         &__author,
         &__title {
                 .text {
                         text-decoration: none;
                         text-align: left;
-                        color: rgb(255, 255, 255);
+
                         padding: 0 5px;
                 }
         }

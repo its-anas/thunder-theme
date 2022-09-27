@@ -19,12 +19,14 @@
   align-items: flex-start;
 }
 .blog-posts__author .text {
-  color: rgb(91, 91, 91);
+  color: rgb(137, 137, 137);
+}
+.blog-posts__title .text {
+  color: rgb(255, 255, 255);
 }
 .blog-posts__author .text, .blog-posts__title .text {
   text-decoration: none;
   text-align: left;
-  color: rgb(255, 255, 255);
   padding: 0 5px;
 }
 .blog-posts__link a {

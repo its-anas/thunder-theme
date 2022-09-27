@@ -88,51 +88,26 @@
           </div>
         {%- endfor -%}
         {% if section.settings.blog == blank %}
-          <div class="item">
-            <a class="blog-posts__image">
-              <div class="media">
-                {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder' }}
-              </div>
-            </a>
-            <a class="blog-posts__container">
-              <div class="blog-posts__author">
-                <p class="text label-text ">Publication date</p>
-              </div>
-              <div class="blog-posts__title">
-                <p class="text small">Article title</p>
-              </div>
-            </a>
-          </div>
-          <div class="item">
-            <a class="blog-posts__image">
-              <div class="media">
-                {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder' }}
-              </div>
-            </a>
-            <a class="blog-posts__container">
-              <div class="blog-posts__author">
-                <p class="text label-text ">Publication date</p>
-              </div>
-              <div class="blog-posts__title">
-                <p class="text small">Article title</p>
-              </div>
-            </a>
-          </div>
-          <div class="item">
-            <a class="blog-posts__image">
-              <div class="media">
-                {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder' }}
-              </div>
-            </a>
-            <a class="blog-posts__container">
-              <div class="blog-posts__author">
-                <p class="text label-text ">Publication date</p>
-              </div>
-              <div class="blog-posts__title">
-                <p class="text small">Article title</p>
-              </div>
-            </a>
-          </div>
+          {% capture placeholder_post %}
+            <div class="item">
+              <a class="blog-posts__image">
+                <div class="media">
+                  {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder' }}
+                </div>
+              </a>
+              <a class="blog-posts__container">
+                <div class="blog-posts__author">
+                  <p class="text label-text ">Publication date</p>
+                </div>
+                <div class="blog-posts__title">
+                  <p class="text small">Article title</p>
+                </div>
+              </a>
+            </div>
+          {% endcapture %}
+          {% for i in (1..5) %}
+            {{ placeholder_post }}
+          {% endfor %}
         {% endif %}
       </div>
     </div>
