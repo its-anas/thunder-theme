@@ -1,5 +1,3 @@
-{{ 'countdown-timer.css' | asset_url | stylesheet_tag }}
-
 {%- style -%}
   .{{ section.id }}.countdown-timer {
     gap: {{ section.settings.space_between }}rem;
@@ -231,7 +229,7 @@
       "type": "color",
       "id": "background_color",
       "label": "Background color",
-      "default": "#222222",
+      "default": "transparent",
       "info": "Applied only if Type is 'Color'"
     },
     {

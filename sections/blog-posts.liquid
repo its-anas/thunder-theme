@@ -1,10 +1,9 @@
-{{ 'blog-posts.css' | asset_url | stylesheet_tag }}
-
 {% liquid
   assign mobile_items = section.settings.mobile_items
   assign tablet_items = section.settings.tablet_items
   assign desktop_items = section.settings.desktop_items
   assign desktop_section_width = section.settings.row_width
+  assign items_limit = 20
 %}
 
 {%- style -%}
@@ -59,7 +58,7 @@
     </div>
     <div class="slides-container">
       <div class="slide">
-        {%- for article in section.settings.blog.articles -%}
+        {%- for article in section.settings.blog.articles limit: section.settings.items_limit -%}
           <div class="item">
             <a href="{{ article.url }}" class="blog-posts__image">
               <div class="media">
@@ -155,8 +154,8 @@
       "min": 1,
       "max": 3,
       "step": 1,
-      "unit": "n",
-      "label": "Items per row in mobile",
+      "unit": "p",
+      "label": "Posts per row - mobile",
       "default": 1
     },
     {
@@ -165,8 +164,8 @@
       "min": 2,
       "max": 6,
       "step": 1,
-      "unit": "n",
-      "label": "Items per row in tablet",
+      "unit": "p",
+      "label": "Posts per row - tablet",
       "default": 2
     },
     {
@@ -175,9 +174,19 @@
       "min": 3,
       "max": 6,
       "step": 1,
-      "unit": "n",
-      "label": "Items per row in desktop",
+      "unit": "p",
+      "label": "Posts per row - desktop",
       "default": 3
+    },
+    {
+      "type": "range",
+      "id": "items_limit",
+      "min": 3,
+      "max": 20,
+      "step": 1,
+      "unit": "p",
+      "label": "Maximum number of posts",
+      "default": 8
     },
     {
       "type": "header",
@@ -203,7 +212,7 @@
       "type": "color",
       "id": "background_color",
       "label": "Background color",
-      "default": "#000000",
+      "default": "transparent",
       "info": "Applied only if Type is 'Color'"
     },
     {

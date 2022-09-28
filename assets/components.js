@@ -1,73 +1,13 @@
-/**---------------------Media queries---------------------**/
-let mediaQueries = [window.matchMedia("screen and (max-width: 750px)"), window.matchMedia("screen and (min-width: 751px) and (max-width: 1024px)"), window.matchMedia("screen and (min-width: 1025px)")];
-
-/**---------------------Actual date and domain name---------------------**/
-let domainName = window.location.hostname;
-let actualDate = new Date().getTime();
-
-/**---------------------Lazy load the background-images---------------------**/
-// document.addEventListener("DOMContentLoaded", function () {
-//         let lazyloadImages;
-
-//         if ("IntersectionObserver" in window) {
-//                 lazyloadImages = document.querySelectorAll(".lazy");
-//                 let imageObserver = new IntersectionObserver(function (entries, observer) {
-//                         entries.forEach(function (entry) {
-//                                 if (entry.isIntersecting) {
-//                                         let image = entry.target;
-//                                         image.classList.remove("lazy");
-//                                         imageObserver.unobserve(image);
-//                                 }
-//                         });
-//                 });
-
-//                 lazyloadImages.forEach(function (image) {
-//                         imageObserver.observe(image);
-//                 });
-//         } else {
-//                 let lazyloadThrottleTimeout;
-//                 lazyloadImages = document.querySelectorAll(".lazy");
-
-//                 function lazyload() {
-//                         if (lazyloadThrottleTimeout) {
-//                                 clearTimeout(lazyloadThrottleTimeout);
-//                         }
-
-//                         lazyloadThrottleTimeout = setTimeout(function () {
-//                                 let scrollTop = window.pageYOffset;
-//                                 lazyloadImages.forEach(function (img) {
-//                                         if (img.offsetTop < window.innerHeight + scrollTop) {
-//                                                 img.src = img.dataset.src;
-//                                                 img.classList.remove("lazy");
-//                                         }
-//                                 });
-//                                 if (lazyloadImages.length == 0) {
-//                                         document.removeEventListener("scroll", lazyload);
-//                                         window.removeEventListener("resize", lazyload);
-//                                         window.removeEventListener("orientationChange", lazyload);
-//                                 }
-//                         }, 20);
-//                 }
-
-//                 document.addEventListener("scroll", lazyload);
-//                 window.addEventListener("resize", lazyload);
-//                 window.addEventListener("orientationChange", lazyload);
-//         }
-// });
-
 /**============================================
  *               * ANCHOR: FAQ section
  *=============================================**/
-/* 
-The code above does the following:
-1. Select all the faq__tab class elements and store them in a variable called faqTabs.
+/* 1. Select all the faq__tab class elements and store them in a variable called faqTabs.
 2. Loop through each of the faqTabs elements.
 3. Select the answer by using the childNodes property and store it in a variable called answer.
 4. Get the height of the answer by using the scrollHeight property and store it in a variable called answerHeight.
 5. Add an event listener to each of the faqTabs elements.
 6. When the faqTabs element is clicked, toggle the classList of tab to active.
-7. If the tab has the active classList, then set the height of the answer to answerHeight + 20px, otherwise set it to 0px.  
-*/
+7. If the tab has the active classList, then set the height of the answer to answerHeight + 20px, otherwise set it to 0px.  */
 
 class FaqSection extends HTMLElement {
         constructor() {
@@ -108,9 +48,7 @@ customElements.define("faq-section", FaqSection);
 /**============================================
  *               * ANCHOR: Countdown timer section
  *=============================================**/
-/* 
-The code above does the following:
-1. The code checks if the countdown type is "date" or "time".
+/* 1. The code checks if the countdown type is "date" or "time".
 2. If it is "date", the code sets the deadline to the date specified in the "timeInDate" variable.
 3. If it is "time":
 3.1 the code checks if the cookie exists. 
@@ -121,8 +59,7 @@ The code above does the following:
 3.1.2 If the current date is not greater than the cookie date, the code does nothing. 
 3.2 If the cookie does not exist, the code saves a new cookie with the current date plus the time specified in the "timeInMinutes" variable.
 4. The code then initializes the clock.
-5. The code finally creates a function that updates the clock every second.
-*/
+5. The code finally creates a function that updates the clock every second.*/
 
 class countdownTimer extends HTMLElement {
         constructor() {
@@ -222,14 +159,12 @@ customElements.define("countdown-timer", countdownTimer);
 /**============================================
  *               * ANCHOR: Video with text section
  *=============================================**/
-/* Here is the explanation for the code above:
-1. We get all the video boxes (the ones that contain the thumbnail and the video)
+/* 1. We get all the video boxes (the ones that contain the thumbnail and the video)
 2. We loop through each video box
 3. We get the thumbnail and the video in the box
 4. When the user clicks on the thumbnail, we get the original video src and add &autoplay=1 to it (this is the magic that makes the video autoplay)
 5. We show the video and hide the thumbnail
-6. When the video ends, we reset the video src and hide the video and show the thumbnail again 
-*/
+6. When the video ends, we reset the video src and hide the video and show the thumbnail again */
 
 class videoWithText extends HTMLElement {
         constructor() {
@@ -257,8 +192,7 @@ customElements.define("video-with-text", videoWithText);
 /**============================================
  *               * ANCHOR: Slideshow section
  *=============================================**/
-/* Here is the explanation for the code above:
-1. First, we select all the elements we need to manipulate and other variables we need to use.
+/* 1. First, we select all the elements we need to manipulate and other variables we need to use.
 2. We create and call a function that will load the indicators dynamically.
 3. We create two functions, one will slide to the next slide and the other to the previous slide.
 4. We add event listeners to the next and previous button that will call the slideToNext or slideToPrev function.
@@ -266,8 +200,7 @@ customElements.define("video-with-text", videoWithText);
 6. We add an event listener to the slideshow that will stop the loop when the mouse is on top of it and restarts it when the mouse is not on top of it.
 7. We add an event listener to the slideshow container that will check if the transition is finished and if it is finished, it will check the direction and move the slides to the next or to the previous slide.
 8. We create and call a function that will update the indicators.
-9. We select all the indicators and add an event listener that will check which indicator was clicked and will slide the slides to the clicked indicator. 
-*/
+9. We select all the indicators and add an event listener that will check which indicator was clicked and will slide the slides to the clicked indicator. */
 
 class slideshow extends HTMLElement {
         constructor() {
@@ -439,7 +372,10 @@ customElements.define("slideshow-section", slideshow);
 // /**============================================
 //  *               * ANCHOR: Slider component
 //  =============================================**/
-
+/* Here is the explanation for the code above:
+1. The first function (setMaxScroll) is called when the page loads and then every time the window is resized or the media queries are changed. It sets the maxSliderScroll variable which is used to calculate the maximum scroll amount for the slider. It also sets the visibility of the next/prev buttons depending on the number of items found and the number of items displayed. 
+2. The getTranslateX function calculates the new translateX value for the slider depending on the type of action (next or prev). This is used in the moveNext and movePrev functions. These functions also hide and show the next/prev buttons depending on the new translateX value.
+3. The event listeners for the next/prev buttons and the media queries call the setMaxScroll function. */
 class sliderSection extends HTMLElement {
         constructor() {
                 super();
@@ -510,7 +446,7 @@ class sliderSection extends HTMLElement {
                                 next.style.visibility = "hidden";
                         }
                         return newTranslate;
-                } 
+                }
 
                 function moveNext() {
                         let translateNext = getTranslateX("next");
