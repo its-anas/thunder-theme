@@ -1,1 +1,38 @@
-<p>This is the product section.</p>
+<section id="product-template" data-product="{{ product.id }}" ></section>
+
+<script defer>
+    function updateRecentlyViewedProductsCookie() {
+        let recentlyViewedProducts = [];
+        
+        let recentlyViewedProductsCookie = document.cookie.indexOf('recentlyViewedProducts=') !== -1  ? JSON.parse(document.cookie.split("; ").find((row) => row.startsWith("recentlyViewedProducts")).split('=').slice(1).join('=')) : [];
+         let expiry = new Date(400 * 24 * 60 * 60 * 1000 + Date.parse(new Date()));
+
+        let productData = {
+            id: "{{ product.id }}",
+            title: "{{ product.title }}",
+            url: "{{ product.url }}",
+            image: "{{ product.featured_image | image_url }}",
+            image_alt: "{{ product.featured_image.alt }}",
+            image_width: "{{ product.featured_image.width }}",
+            image_height: "{{ product.featured_image.height }}",
+            price: "{{ product.price | money }}",
+            compare_at_price: "{{ product.compare_at_price | money }}",
+            price_difference: "{{ product.compare_at_price | minus: product.price | money | at_least: 0 }}",
+            published_at: "{{ product.published_at | date: "%d" }}",
+            current_date: "{{ 'now' | date: "%d"}}",
+            date_difference: "{{ 'now' | date: "%d" | minus: product.published_at | date: "%d" }}"
+        };
+    
+        for (product = 0; product < recentlyViewedProductsCookie.length; product++) {
+            if (recentlyViewedProductsCookie[product].id === productData.id) {
+                recentlyViewedProductsCookie.splice(product, 1);
+            } 
+        }
+
+        recentlyViewedProductsCookie.push(productData);
+        let newList = JSON.stringify(recentlyViewedProductsCookie);
+
+        document.cookie = "recentlyViewedProducts" + "=" + newList + "; expires=" + expiry + "; path=/; domain=." + window.location.hostname;
+    }
+    updateRecentlyViewedProductsCookie();
+</script>

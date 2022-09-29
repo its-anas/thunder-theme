@@ -3,7 +3,7 @@
   assign tablet_items = section.settings.tablet_items
   assign desktop_items = section.settings.desktop_items
   assign desktop_section_width = section.settings.row_width
-  assign items_limit = 20
+  assign items_limit = section.settings.items_limit
 %}
 
 {%- style -%}
@@ -41,7 +41,13 @@
     background-repeat: no-repeat;
     background-position: center;
    }
+
+   #selectit {
+    width: 100%;
+    height: 100%;
+   }
 {%- endstyle -%}
+<div id="selectit"></div>
 
 <slider-section
   data-mobile-items="{{ mobile_items }}"
@@ -58,87 +64,102 @@
     </div>
 
     <div class="slides-container">
-      <div class="slide">
-        {% comment %}
-           <div class="item">
-            <div class="recently-viewed-products__image">
-              <p class="tag--normal tag-text">SAVE {{ product.compare_at_price | minus: product.price | money }}</p>
-              <a class="quick-add-icon">
-                {% render 'icons', icon: 'quick-add' -%}
-              </a>
-              {% if product.featured_image != blank %}
-                <a href="{{ product.url }}" class="media">
-                  <img
-                    srcset="{{ product.featured_image | image_url }}"
-                    loading="lazy"
-                    alt="{{ product.featured_image.alt | escape }}"
-                    width="{{ product.featured_image.width }}"
-                    height="{{ product.featured_image.height }}"
-                    class="fit"
-                  >
-                </a>
-              {% else %}
-                {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
-              {% endif %}
-            </div>
-            <div class="recently-viewed-products__container">
-              <div class="recently-viewed-products__name">
-                {% assign product_date = product.published_at | date: '%d' %}
-                {% assign current_date = 'now' | date: '%d' %}
-                {% assign difference = current_date | minus: product_date %}
-                <p class="text {% if section.settings.new_tag == true and difference < section.settings.new_tag_time %}tag--animated-hover{% endif %}">
-                  {{ product.title }}
-                </p>
-              </div>
-              <div class="recently-viewed-products__price">
-                <p class="text price--normal">{{ product.price | money }}</p>
-                <p class="text price--sale">{{ product.compare_at_price | money }}</p>
-              </div>
-            </div>
-          </div>
-        {% endcomment %}
-
-        {%- capture placeholder_product -%}
-          <div class="item">
-            <div class="recently-viewed-products__image">
-              <p class="tag--normal tag-text">SAVE {{ product.compare_at_price | minus: product.price | money }}</p>
-              <a class="quick-add-icon">
-                {% render 'icons', icon: 'quick-add' -%}
-              </a>
-              {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
-            </div>
-            <div class="recently-viewed-products__container">
-              <div class="recently-viewed-products__name">
-                <p class="text {% if section.settings.new_tag == true %}tag--animated-hover{% endif %}">
-                  Product title
-                </p>
-              </div>
-              <div class="recently-viewed-products__price">
-                <p class="text price--normal">00.00</p>
-                <p class="text price--sale">00.00</p>
-              </div>
-            </div>
-          </div>
-        {%- endcapture -%}
-        {% for i in (1..5) %}
-          {{ placeholder_product }}
-        {% endfor %}
-      </div>
+      <recently-viewed-products class="slide"></recently-viewed-products>
     </div>
     <div class="next">
       {% render 'icons', icon: 'chevron-next' -%}
     </div>
   </div>
-  <div class="recently-viewed-products__link">
-    <a
-      class="button--link small"
-      {% if section.settings.collection != blank %}
-        href="{{ section.settings.collection.url }}"
-      {% endif %}
-      >View all</a
-    >
   </div>
 </slider-section>
+
+<script defer>
+  {% comment %} 
+  /**============================================
+ *               * ANCHOR: Recently viewed products section
+ *=============================================**/
+  1. We get the cookie from the browser and parse it to an array using the JSON.parse() method
+  2. We check if the cookie is not empty and if it is, we hide the slider-section
+  3. We loop through the array and get the product information
+  4. We create a div element with the class name “item”
+  5. We set the innerHTML of the div element to the product information we got from the array
+  6. We append the div element to the slider-element 
+{% endcomment %}
+  class recentlyViewedProducts extends HTMLElement {
+          constructor() {
+                  super();
+          }
+          connectedCallback() {
+                  this.attachShadow({ mode: "open" });
+                  this.shadowRoot.innerHTML = "<slot></slot>";
+                  this.addProducts();
+          }
+
+          addProducts() {
+                  let products =
+                          document.cookie.indexOf("recentlyViewedProducts=") !== -1
+                                  ? JSON.parse(
+                                            document.cookie
+                                                    .split("; ")
+                                                    .find((row) => row.startsWith("recentlyViewedProducts"))
+                                                    .split("=")
+                                                    .slice(1)
+                                                    .join("=")
+                                    )
+                                  : [];
+
+                  if (products.length > 0) {
+                          let maxItems = products.length > {{ items_limit }} ? {{ items_limit }} : products.length;
+                          for (let product = maxItems - 1; product >= 0; product--) {
+                                  let productId = products[product].id;
+                                  let productTitle = products[product].title;
+                                  let productUrl = products[product].url;
+                                  let productImage = products[product].image;
+                                  let productImageAlt = products[product].image_alt;
+                                  let productImageWidth = products[product].image_width;
+                                  let productImageHeight = products[product].image_height;
+                                  let productPrice = products[product].price;
+                                  let productCompareAtPrice = products[product].compare_at_price;
+                                  let productPriceDifference = products[product].price_difference;
+                                  let productPublishedAt = products[product].published_at;
+                                  let currentDate = products[product].current_date;
+                                  let date_difference = products[product].date_difference;
+                                  // create a document 'div' element called itemElement with the class name 'item'
+                                  let itemElement = document.createElement("div");
+                                  itemElement.classList.add("item");
+
+                                  itemElement.innerHTML = `
+                                      <div class="recently-viewed-products__image">
+                                      <a class="quick-add-icon">
+                                          {% render 'icons', icon: 'quick-add' -%}
+                                      </a>
+                                          <a href="${productUrl}" class="media">
+                                          <img srcset="${productImage}" loading="lazy" alt="${productImageAlt}" width="${productImageWidth}" height="${productImageHeight}" class="fit" >
+                                          </a>
+                                      </div>
+                                      <div class="recently-viewed-products__container">
+                                          <p class="text">
+                                          ${productTitle}
+                                          </p>
+                                      <div class="recently-viewed-products__price">
+                                          <p class="text price--normal">${productPrice}</p>
+                                          <p class="text price--sale">${productCompareAtPrice}</p>
+                                      </div>
+                                      </div>
+                                  `;
+
+                                  this.appendChild(itemElement);
+                          }
+                  } else {
+                    let recentlyViewedProductsSections = document.querySelectorAll('recently-viewed-products');
+                    recentlyViewedProductsSections.forEach(section => {
+                      section.closest('slider-section').style.display = 'none';
+                    });
+                  }
+          }
+  }
+  customElements.define("recently-viewed-products", recentlyViewedProducts);
+</script>
 
 {% schema %}
 {
@@ -146,39 +167,8 @@
   "settings": [
     {
       "type": "header",
-      "content": "Collection settings"
-    },
-    {
-      "type": "collection",
-      "id": "collection",
-      "label": "Collection"
-    },
-    {
-      "type": "text",
-      "id": "heading",
-      "label": "Heading",
-      "default": "Recently viewed products"
-    },
-    {
-      "type": "checkbox",
-      "id": "new_tag",
-      "label": "Show 'NEW' tag",
-      "default": true
-    },
-    {
-      "type": "range",
-      "id": "new_tag_time",
-      "label": "'NEW' tag countback",
-      "info": "Show the 'NEW' tag if the product is published in the last X days",
-      "min": 0,
-      "max": 90,
-      "step": 1,
-      "unit": "D",
-      "default": 30
-    },
-    {
-      "type": "header",
-      "content": "Item settings"
+      "content": "Product settings",
+      "info": "⚠️ Section is displayed in the store only if the customer (or you) has viewed at least one product."
     },
     {
       "type": "range",
@@ -232,12 +222,23 @@
     },
     {
       "type": "header",
+      "content": "Alert",
+      "info": "⚠️ Due to the way how this section is created, any change you make to the settings above will disable the slider, and some edits may not show up only after you save the changes."
+    },
+    {
+      "type": "header",
       "content": "Section settings"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Recently viewed products"
     },
     {
       "type": "select",
       "id": "background_type",
-      "label": "Type",
+      "label": "Background type",
       "options": [
         {
           "value": "image",

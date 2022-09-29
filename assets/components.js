@@ -134,10 +134,8 @@ class countdownTimer extends HTMLElement {
                                 ?.split("=")[1];
                         function saveCookie() {
                                 const currentTime = Date.parse(new Date());
-
                                 deadline = new Date(timeInMinutes * 60 * 1000 + currentTime);
-
-                                document.cookie = cookieName + "=" + deadline + "; path=/; domain=." + domainName;
+                                document.cookie = cookieName + "=" + deadline + "; expires=" + deadline + "; path=/; domain=." + domainName;
                         }
 
                         if (document.cookie && deadline) {
@@ -462,9 +460,11 @@ class sliderSection extends HTMLElement {
                         mediaQueries[i].addEventListener("change", setMaxScroll);
                         setMaxScroll(mediaQueries[i]);
                 }
+
                 window.addEventListener("resize", setMaxScroll);
                 next.addEventListener("click", moveNext);
                 prev.addEventListener("click", movePrev);
         }
 }
 customElements.define("slider-section", sliderSection);
+
