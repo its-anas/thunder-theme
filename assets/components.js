@@ -473,8 +473,11 @@ customElements.define("slider-component", sliderComponent);
 // /**============================================
 //  *               * ANCHOR: Recently viewed component
 //  =============================================**/
-/* Here is the explanation for the code above:
- */
+/* 1. First, we check if the cookie exists. If it does, we parse it into an array.
+2. If the array is not empty, we reverse it to make sure the last visited products are shown first. We also get the number of items that we want to show.
+3. We loop through the array and get the product information we need.
+4. We create an item element, add the appropriate classes to it, and add the HTML for each product.
+5. If the array is empty, we hide the section using the display property. */
 
 class recentlyViewedComponent extends sliderComponent {
         constructor() {
@@ -497,12 +500,10 @@ class recentlyViewedComponent extends sliderComponent {
 
                 if (products.length > 0) {
                         products = products.reverse();
-
                         let itemsLimits = parseInt(this.querySelector(".slides-container").getAttribute("data-items-limit"));
                         let imageStyle = this.querySelector(".slides-container").getAttribute("data-image-style");
                         let newTag = this.querySelector(".slides-container").getAttribute("data-new-tag");
                         let newTagTime = this.querySelector(".slides-container").getAttribute("data-new-tag-time");
-
                         let maxItems = products.length > itemsLimits ? itemsLimits : products.length;
 
                         for (let product = 0; product < maxItems; product++) {
@@ -517,8 +518,6 @@ class recentlyViewedComponent extends sliderComponent {
                                 let productCompareAtPrice = products[product].compare_at_price;
                                 let productPriceDifference = products[product].price_difference;
                                 let productPriceDifferenceWithCurrency = products[product].price_difference_with_currency;
-                                let productPublishedAt = products[product].published_at;
-                                let currentDate = products[product].current_date;
                                 let date_difference = products[product].date_difference;
                                 let newTagClass = newTag === "true" && date_difference < parseInt(newTagTime) ? " tag--animated-hover" : "";
                                 let itemElement = document.createElement("div");
@@ -557,7 +556,7 @@ class recentlyViewedComponent extends sliderComponent {
                                 this.querySelector(".slide").appendChild(itemElement);
                         }
                 } else {
-                        let recentlyViewedProductsSections = document.querySelectorAll("recently-viewed");
+                        let recentlyViewedProductsSections = document.querySelectorAll("recently-viewed-component");
                         recentlyViewedProductsSections.forEach((section) => {
                                 section.closest("slider-component").style.display = "none";
                         });

@@ -19,8 +19,6 @@
             compare_at_price: "{{ product.compare_at_price | money }}",
             price_difference: "{{ product.compare_at_price | minus: product.price }}",
             price_difference_with_currency: "{{ product.compare_at_price | minus: product.price | money }}",
-            published_at: "{{ product.published_at | date: "%d" }}",
-            current_date: "{{ 'now' | date: "%d"}}",
             date_difference: "{{ 'now' | date: "%d" | minus: product.published_at | date: "%d" }}"
         };
     
