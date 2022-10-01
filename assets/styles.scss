@@ -509,7 +509,7 @@ a.border.button {
 /**------------------------------------------------------------------------------------------------
  **                                       ANCHOR: Slider component
  *------------------------------------------------------------------------------------------------**/
-slider-section {
+slider-component {
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -1921,7 +1921,7 @@ $indicator-width: 40px;
 /**------------------------------------------------------------------------------------------------
  **                                       ANCHOR: Recently viewed products section
  *------------------------------------------------------------------------------------------------**/
-.recently-viewed-products {
+.recently-viewed {
         .item {
                 display: flex;
                 flex-direction: column;

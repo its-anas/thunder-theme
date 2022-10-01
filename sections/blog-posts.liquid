@@ -43,7 +43,7 @@
   }
 {%- endstyle -%}
 
-<slider-section
+<slider-component
   data-mobile-items="{{ mobile_items }}"
   data-tablet-items="{{ tablet_items }}"
   data-desktop-items="{{ desktop_items }}"
@@ -117,7 +117,7 @@
   <div class="blog-posts__link">
     <a class="button--link small" href="{{ section.settings.blog.url }}">View all</a>
   </div>
-</slider-section>
+</slider-component>
 
 {% schema %}
 {
@@ -179,7 +179,7 @@
       "default": 3
     },
     {
-      "type": "range",
+      "type": "range", 
       "id": "items_limit",
       "min": 3,
       "max": 20,

@@ -1,7 +1,7 @@
 {% liquid
   assign mobile_items = section.settings.mobile_items
   assign tablet_items = section.settings.tablet_items
-  assign desktop_items = section.settings.desktop_items
+  assign desktop_items = section.settings.desktop_items 
   assign desktop_section_width = section.settings.row_width
 %}
 
@@ -11,12 +11,12 @@
     --tablet-items: {{ tablet_items }};
     --desktop-items: {{ desktop_items }};
   }
-  @media screen and (min-width: 1025px) {
+  @media screen and (min-width: 1025px) { 
     .{{ section.id }}.featured-collections > .slider-component > .slides-container {
       --container-width: calc(var(--section-width) * {{ desktop_section_width | divided_by: 100.00 }} );
     }
     .{{ section.id }}.featured-collections > .slider-component > .prev,
-    .{{ section.id }}.featured-collections > .slider-component > .next {
+    .{{ section.id }}.featured-collections > .slider-component > .next { 
       width: {{ 100 | minus: desktop_section_width | divided_by: 2 }}%;
     }
   }
@@ -39,10 +39,10 @@
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-   }
+   } 
 {%- endstyle -%}
 
-<slider-section
+<slider-component
   data-mobile-items="{{ mobile_items }}"
   data-tablet-items="{{ tablet_items }}"
   data-desktop-items="{{ desktop_items }}"
@@ -111,7 +111,7 @@
   <div class="featured-collections__link">
     <a class="button--link small" href="/collections/">View all</a>
   </div>
-</slider-section>
+</slider-component>
 
 {% schema %}
 {

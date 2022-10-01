@@ -439,13 +439,13 @@ a.border.button--primary:hover, a.border.button--secondary:hover {
 /**------------------------------------------------------------------------------------------------
  **                                       ANCHOR: Slider component
  *------------------------------------------------------------------------------------------------**/
-slider-section {
+slider-component {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-slider-section .slider-component {
+slider-component .slider-component {
   height: auto;
   width: 100%;
   display: flex;
@@ -455,12 +455,12 @@ slider-section .slider-component {
   overflow: hidden;
 }
 @media screen and (max-width: 750px) {
-  slider-section .slider-component {
+  slider-component .slider-component {
     justify-content: space-evenly;
   }
 }
-slider-section .slider-component .prev,
-slider-section .slider-component .next {
+slider-component .slider-component .prev,
+slider-component .slider-component .next {
   justify-content: center;
   visibility: hidden;
   height: 100%;
@@ -470,47 +470,47 @@ slider-section .slider-component .next {
   align-items: center;
 }
 @media screen and (max-width: 750px) {
-  slider-section .slider-component .prev,
-slider-section .slider-component .next {
+  slider-component .slider-component .prev,
+slider-component .slider-component .next {
     width: 10%;
   }
 }
 @media screen and (min-width: 751px) and (max-width: 1024px) {
-  slider-section .slider-component .prev,
-slider-section .slider-component .next {
+  slider-component .slider-component .prev,
+slider-component .slider-component .next {
     width: 10%;
   }
 }
-slider-section .slider-component .prev:hover,
-slider-section .slider-component .next:hover {
+slider-component .slider-component .prev:hover,
+slider-component .slider-component .next:hover {
   opacity: 1;
 }
-slider-section .slider-component .prev {
+slider-component .slider-component .prev {
   visibility: "hidden";
 }
 @media screen and (max-width: 750px) {
-  slider-section .slider-component .prev {
+  slider-component .slider-component .prev {
     left: 12px;
   }
 }
 @media screen and (min-width: 1024px) {
-  slider-section .slider-component .prev {
+  slider-component .slider-component .prev {
     padding-right: 20px;
     justify-content: flex-end;
   }
 }
 @media screen and (max-width: 750px) {
-  slider-section .slider-component .next {
+  slider-component .slider-component .next {
     right: 12px;
   }
 }
 @media screen and (min-width: 1024px) {
-  slider-section .slider-component .next {
+  slider-component .slider-component .next {
     padding-left: 20px;
     justify-content: flex-start;
   }
 }
-slider-section .slider-component .slides-container {
+slider-component .slider-component .slides-container {
   width: var(--container-width);
   overflow: hidden;
   display: flex;
@@ -519,23 +519,23 @@ slider-section .slider-component .slides-container {
   --item-width: calc(var(--section-width) / var(--slider-items));
 }
 @media screen and (max-width: 750px) {
-  slider-section .slider-component .slides-container {
+  slider-component .slider-component .slides-container {
     --slider-items: var(--mobile-items);
     --container-width: calc(var(--section-width) * 0.8);
   }
 }
 @media screen and (min-width: 751px) and (max-width: 1024px) {
-  slider-section .slider-component .slides-container {
+  slider-component .slider-component .slides-container {
     --slider-items: var(--tablet-items);
     --container-width: calc(var(--section-width) * 0.8);
   }
 }
 @media screen and (min-width: 1025px) {
-  slider-section .slider-component .slides-container {
+  slider-component .slider-component .slides-container {
     --slider-items: var(--desktop-items);
   }
 }
-slider-section .slider-component .slides-container .slide {
+slider-component .slider-component .slides-container .slide {
   width: 100%;
   height: 100%;
   display: flex;
@@ -546,18 +546,18 @@ slider-section .slider-component .slides-container .slide {
   transition: all 0.5s cubic-bezier(0.45, 0.05, 0.55, 0.95);
 }
 @media screen and (min-width: 751px) {
-  slider-section .slider-component .slides-container .slide {
+  slider-component .slider-component .slides-container .slide {
     transition: all 0.8s cubic-bezier(0.45, 0.05, 0.55, 0.95);
   }
 }
-slider-section .slider-component .slides-container .slide .item {
+slider-component .slider-component .slides-container .slide .item {
   height: 100%;
   width: var(--item-width);
   min-width: var(--item-width);
   max-width: var(--item-width);
   overflow: hidden;
 }
-slider-section .slider-component .slides-container .slide .item > * {
+slider-component .slider-component .slides-container .slide .item > * {
   max-width: 95%;
   overflow: hidden;
 }
@@ -1853,28 +1853,28 @@ section.compare__section .container {
 /**------------------------------------------------------------------------------------------------
  **                                       ANCHOR: Recently viewed products section
  *------------------------------------------------------------------------------------------------**/
-.recently-viewed-products .item {
+.recently-viewed .item {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-self: center;
 }
-.recently-viewed-products__image {
+.recently-viewed__image {
   position: relative;
   height: 100%;
   width: 100%;
 }
-.recently-viewed-products__image .tag--normal {
+.recently-viewed__image .tag--normal {
   position: absolute;
   left: 0.2rem;
   top: 0.2rem;
 }
-.recently-viewed-products__image .quick-add-icon {
+.recently-viewed__image .quick-add-icon {
   position: absolute;
   right: 0.1rem;
   bottom: 0.1rem;
 }
-.recently-viewed-products__container {
+.recently-viewed__container {
   height: auto;
   max-width: 100%;
   padding: 0.5rem 0;
@@ -1884,10 +1884,10 @@ section.compare__section .container {
   align-items: center;
   gap: 0.5rem;
 }
-.recently-viewed-products__container .text {
+.recently-viewed__container .text {
   text-align: center;
 }
-.recently-viewed-products__price {
+.recently-viewed__price {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;

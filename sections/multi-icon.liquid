@@ -31,13 +31,13 @@
   }
 {%- endstyle -%}
 
-<slider-section
+<slider-component
   data-mobile-items="{{ mobile_items }}"
   data-tablet-items="{{ tablet_items }}"
   data-desktop-items="{{ desktop_items }}"
   class="{{ section.id }} multi-icon {% if section.settings.section_width == "wrapped" %}wrapped{% endif %}"
 >
-  {% if section.settings.heading != blank %}
+  {% if section.settings.heading != blank %} 
     <div class="multi-icon__heading">
       <h6>{{ section.settings.heading }}</h6>
     </div>
@@ -88,7 +88,7 @@
       {% render 'icons', icon: 'chevron-next' -%}
     </div>
   </div>
-</slider-section>
+</slider-component>
 
 {% schema %}
 {
