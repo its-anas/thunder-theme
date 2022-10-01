@@ -594,7 +594,7 @@ slider-component {
 
                         .slide {
                                 width: 100%;
-                                height: 100%;
+                                height: auto;
                                 display: flex;
                                 flex-direction: row;
                                 justify-content: flex-start;
@@ -1882,7 +1882,6 @@ $indicator-width: 40px;
 
         &__image {
                 position: relative;
-                height: 100%;
                 width: 100%;
                 .tag--normal {
                         position: absolute;
@@ -1901,8 +1900,9 @@ $indicator-width: 40px;
                 padding: 0.5rem 0;
                 display: flex;
                 flex-direction: column;
-                justify-content: center;
+                justify-content: space-between;
                 align-items: center;
+                flex-grow: 1;
                 gap: 0.5rem;
         }
         &__name {
@@ -1931,7 +1931,6 @@ $indicator-width: 40px;
 
         &__image {
                 position: relative;
-                height: 100%;
                 width: 100%;
                 .tag--normal {
                         position: absolute;
@@ -1950,8 +1949,9 @@ $indicator-width: 40px;
                 padding: 0.5rem 0;
                 display: flex;
                 flex-direction: column;
-                justify-content: center;
+                justify-content: space-between;
                 align-items: center;
+                flex-grow: 1;
                 gap: 0.5rem;
                 .text {
                         text-align: center;
