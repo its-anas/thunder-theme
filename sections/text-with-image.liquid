@@ -1,57 +1,57 @@
 {%- style -%}
-    .{{ section.id }}.text-columns-with-images {
+    .{{ section.id }}.text-with-image {
       margin-top: {{ section.settings.space_outside | divided_by: 2 }}px;
       margin-bottom: {{ section.settings.space_outside | divided_by: 2 }}px;
     }
 
   {%- if section.settings.background_type == "color" -%}
-      .{{ section.id }}.text-columns-with-images {
+      .{{ section.id }}.text-with-image {
         background-color: {{ section.settings.background_color }};
       }
   {%- elsif section.settings.background_type == "image" -%}
-      .{{ section.id }}.text-columns-with-images {
+      .{{ section.id }}.text-with-image {
           background-image: url({{ section.settings.background_image | image_url }});
       }
   {%- endif -%}
 
-  .{{ section.id }}.text-columns-with-images__columns {
+  .{{ section.id }}.text-with-image__columns {
     padding: 15px 15px;
   }
 
-  .{{ section.id }} .text-columns-with-images__column {
+  .{{ section.id }} .text-with-image__column {
     background: rgba({{ section.settings.column_background_color.red }}, {{ section.settings.column_background_color.green }}, {{ section.settings.column_background_color.blue }}, {{ section.settings.column_background_opacity | divided_by: 100.0 }});
     backdrop-filter: blur({{ section.settings.column_background_blur }}px);
     border: {{ section.settings.column_border_width }}px solid {{ section.settings.column_border_color }};
   }
 
-  .{{ section.id }}.text-columns-with-images__image {
+  .{{ section.id }}.text-with-image__image {
     height: {{ section.settings.column_image_height_mobile }}px;
   }
 
   @media screen and (min-width: 750px) {
-    .{{ section.id }}.text-columns-with-images__columns {
+    .{{ section.id }}.text-with-image__columns {
       padding: 20px 20px;
     }
 
-    .{{ section.id }}.text-columns-with-images > .text-columns-with-images__columns {
+    .{{ section.id }}.text-with-image > .text-with-image__columns {
       width: {{ section.settings.columns_width }}px;
     }
 
-    .{{ section.id }} .text-columns-with-images__column {
+    .{{ section.id }} .text-with-image__column {
       width: {{ section.settings.columns-per-row }}%;
     }
 
-    .{{ section.id }}.text-columns-with-images__image {
+    .{{ section.id }}.text-with-image__image {
       height: {{ section.settings.column_image_height_desktop }}px;
     }
   }
 {%- endstyle -%}
 
-<div class="{{ section.id }} text-columns-with-images {{ section.settings.section_width }}">
-  <div class="{{ section.id }} text-columns-with-images__columns">
+<div class="{{ section.id }} text-with-image {{ section.settings.section_width }}">
+  <div class="{{ section.id }} text-with-image__columns">
     {% for block in section.blocks %}
-      <div class="text-columns-with-images__column">
-        <div class="{{ section.id }} text-columns-with-images__image">
+      <div class="text-with-image__column">
+        <div class="{{ section.id }} text-with-image__image">
           {%- if block.settings.column_image == blank -%}
             {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder' }}
           {%- elsif block.settings.column_image != blank -%}
@@ -67,17 +67,21 @@
             </div>
           {% endif %}
         </div>
-        <div class="text-columns-with-images__content">
+        <div class="text-with-image__content">
           <div class="box horizontal--{{ section.settings.text_alignment }} vertical--center text-alignment--{{ section.settings.text_alignment }}">
             <h6>{{ block.settings.heading }}</h6>
             {{ block.settings.text }}
-            <a
-              class="button button--secondary"
-              href="{{ block.settings.secondary_button_link }}"
-            >
-              <span></span> <span></span> <span></span> <span></span>
-              {{ block.settings.secondary_button_text }}
-            </a>
+
+            {% if block.settings.secondary_button_text != blank %}
+              <a
+                {% if block.settings.secondary_button_link != blank %}
+                  href="{{ block.settings.secondary_button_link }}"
+                {% endif %}
+                class="button--link"
+              >
+                {{ block.settings.secondary_button_text }}
+              </a>
+            {% endif %}
           </div>
         </div>
       </div>
@@ -87,7 +91,7 @@
 
 {% schema %}
 {
-  "name": "Text columns with images",
+  "name": "Text with image",
   "settings": [
     {
       "type": "header",
@@ -331,7 +335,7 @@
   ],
   "presets": [
     {
-      "name": "Text columns with images",
+      "name": "Text with image",
       "blocks": [
         {
           "type": "column"

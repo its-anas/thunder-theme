@@ -522,6 +522,7 @@ class recentlyViewedComponent extends sliderComponent {
                                 let newTagClass = newTag === "true" && date_difference < parseInt(newTagTime) ? " tag--animated-hover" : "";
                                 let itemElement = document.createElement("div");
                                 let saleTag = productPriceDifference <= 0 ? "" : `<p class="tag--normal tag-text">SAVE ${productPriceDifferenceWithCurrency}</p>`;
+
                                 itemElement.classList.add("item");
 
                                 itemElement.innerHTML = `

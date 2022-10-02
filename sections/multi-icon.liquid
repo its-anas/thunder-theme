@@ -6,7 +6,7 @@
 %}
 
 {%- style -%}
-   .{{ section.id }}.multi-icon  > .slider-component > .slides-container {
+  .{{ section.id }}.multi-icon  > .slider-component > .slides-container {
     --mobile-items: {{ mobile_items }};
     --tablet-items: {{ tablet_items }};
     --desktop-items: {{ desktop_items }};
@@ -37,7 +37,7 @@
   data-desktop-items="{{ desktop_items }}"
   class="{{ section.id }} multi-icon {% if section.settings.section_width == "wrapped" %}wrapped{% endif %}"
 >
-  {% if section.settings.heading != blank %} 
+  {% if section.settings.heading != blank %}
     <div class="multi-icon__heading">
       <h6>{{ section.settings.heading }}</h6>
     </div>

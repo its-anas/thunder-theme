@@ -31,7 +31,7 @@
 {%- endstyle -%}
 
 <section>
-  <div class="{{ section.id }} promotional-banner {% if section.settings.section_width == "wrapped" %} wrapped{% endif %}">
+  <div class="{{ section.id }} promotional-banner {% if section.settings.section_width == "wrapped" %}wrapped{% endif %}">
     {% if section.settings.banner_style == 'style-1' %}
       {% if section.settings.style_1_text != blank %}
         <div class="{{ section.id }} promotional-banner__content--style-1">
@@ -137,7 +137,7 @@
       "type": "color",
       "id": "background_color",
       "label": "Background color",
-      "default": "#fcdb33"
+      "default": "transparent"
     },
     {
       "type": "range",

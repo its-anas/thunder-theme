@@ -82,7 +82,7 @@ a.small {
 }
 
 .subheading {
-  font-size: calc(var(--font-size-type-scale) / var(--font-type-scale) * 1px);
+  font-size: calc(var(--font-size-type-scale) * var(--font-type-scale) * 1px);
 }
 
 .button {
@@ -1404,7 +1404,7 @@ section.compare__section .container {
 /**------------------------------------------------------------------------------------------------
  **                                       ANCHOR: Text columns with images section
  *------------------------------------------------------------------------------------------------**/
-.text-columns-with-images {
+.text-with-image {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -1414,20 +1414,20 @@ section.compare__section .container {
   background-size: cover;
   background-position: center;
 }
-.text-columns-with-images__image {
+.text-with-image__image {
   width: 100%;
 }
-.text-columns-with-images__content .box {
+.text-with-image__content .box {
   margin-top: 10px;
   gap: 7px;
 }
 @media screen and (min-width: 750px) {
-  .text-columns-with-images__content .box .button--secondary {
+  .text-with-image__content .box .button--secondary {
     min-width: 0px;
     margin: auto;
   }
 }
-.text-columns-with-images__columns {
+.text-with-image__columns {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -1435,19 +1435,19 @@ section.compare__section .container {
   max-width: 100%;
 }
 @media screen and (min-width: 750px) {
-  .text-columns-with-images__columns {
+  .text-with-image__columns {
     flex-direction: row;
     flex-wrap: wrap;
     gap: 20px;
     margin: 20px 0px;
   }
 }
-.text-columns-with-images__column {
+.text-with-image__column {
   height: auto;
   width: 100%;
   justify-items: stretch;
 }
-.text-columns-with-images .media > .full {
+.text-with-image .media > .full {
   padding: 10px;
 }
 
@@ -1892,4 +1892,63 @@ section.compare__section .container {
   justify-content: center;
   flex-wrap: wrap;
   gap: 0.3rem;
+}
+
+/**------------------------------------------------------------------------------------------------
+ **                                       ANCHOR: Text with icon section
+ *------------------------------------------------------------------------------------------------**/
+.text-with-icon {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+}
+.text-with-icon__container {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+@media screen and (max-width: 750px) {
+  .text-with-icon__container {
+    gap: 2rem;
+  }
+}
+@media screen and (min-width: 750px) {
+  .text-with-icon__container {
+    flex-direction: row;
+  }
+}
+.text-with-icon__column {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  height: 100%;
+  width: 100%;
+}
+@media screen and (min-width: 1024px) {
+  .text-with-icon__column {
+    width: 25%;
+  }
+}
+.text-with-icon__content-box {
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+}
+.text-with-icon__content-box .icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.text-with-icon__content-box .icon > * {
+  width: 90%;
+  height: 90%;
+}
+.text-with-icon__content-box .text {
+  text-align: center;
 }
