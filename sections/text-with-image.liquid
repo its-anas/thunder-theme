@@ -50,7 +50,7 @@
 <div class="{{ section.id }} text-with-image {{ section.settings.section_width }}">
   <div class="{{ section.id }} text-with-image__columns">
     {% for block in section.blocks %}
-      <div class="text-with-image__column">
+      <div class="text-with-image__column" {{ block.shopify_attributes }}>
         <div class="{{ section.id }} text-with-image__image">
           {%- if block.settings.column_image == blank -%}
             {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder' }}
