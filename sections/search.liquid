@@ -23,7 +23,7 @@
 
    @media screen and (min-width: 750px) {
     .{{ section.id }}.search-section > .search-section__container  {
-        width: 449px;
+        width: {{ section.settings.field_width }}px;
     }
    }
 {%- endstyle -%}
@@ -67,7 +67,17 @@
       "label": "Heading",
       "default": "Search our store"
     },
-
+    {
+      "type": "range",
+      "id": "field_width",
+      "min": 300,
+      "max": 600,
+      "step": 50,
+      "unit": "px",
+      "label": "Field width",
+      "default": 450,
+      "info": "Desktop and tablet only"
+    },
     {
       "type": "select",
       "id": "background_type",
