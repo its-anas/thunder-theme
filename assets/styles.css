@@ -44,6 +44,12 @@ input {
   border-radius: 0;
 }
 
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
 /**------------------------------------------------------------------------------------------------
  **                                       ANCHOR: Typography
  *------------------------------------------------------------------------------------------------**/
@@ -172,7 +178,35 @@ a {
   }
 }
 /**------------------------------------------------------------------------------------------------
- **                                       ANCHOR: Button style
+ **                                       ANCHOR: Form
+ *------------------------------------------------------------------------------------------------**/
+input {
+  font-size: 1rem;
+  color: #fff;
+  background-color: rgb(0, 0, 0);
+  height: 44px;
+  border: 1px solid rgb(144, 144, 144);
+  padding: 0.5rem;
+  outline: none;
+}
+input::-moz-placeholder {
+  color: rgb(144, 144, 144);
+  font-size: 1rem;
+}
+input:-ms-input-placeholder {
+  color: rgb(144, 144, 144);
+  font-size: 1rem;
+}
+input::placeholder {
+  color: rgb(144, 144, 144);
+  font-size: 1rem;
+}
+input:focus {
+  border: 1px solid rgb(255, 255, 255);
+}
+
+/**------------------------------------------------------------------------------------------------
+ **                                       ANCHOR: Button
  *------------------------------------------------------------------------------------------------**/
 .button--primary {
   color: var(--primary-button-text-color);
@@ -315,7 +349,7 @@ a.border.button--primary:hover, a.border.button--secondary:hover {
   }
 }
 /**------------------------------------------------------------------------------------------------
- **                                       ANCHOR: Button-link style
+ **                                       ANCHOR: Button-link
  *------------------------------------------------------------------------------------------------**/
 .button--link {
   position: relative;
@@ -2125,53 +2159,28 @@ section.compare__section .container {
   display: flex;
   justify-content: center;
   flex-direction: row;
+  width: 100%;
 }
 @media screen and (max-width: 750px) {
   .search-section__container {
-    width: 90%;
+    max-width: 90%;
   }
 }
 .search-section__form {
   position: relative;
   width: 100%;
 }
-.search-section__field, .search-section:focus {
-  outline: none;
-  border: none;
-}
-.search-section__field {
-  width: 449px;
-  height: 44px;
+.search-section__input {
   min-width: 100%;
-  font-size: 1rem;
-  color: #fff;
-  background-color: rgb(0, 0, 0);
-  border: 1px solid rgb(255, 255, 255);
-  padding: 0.5rem;
 }
-.search-section__field::-webkit-search-cancel-button {
+.search-section__input::-webkit-search-cancel-button {
   content: url("data:image/svg+xml,%3Csvg width='25' height='25' viewBox='0 0 25 25' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M6.43359 18.5L18.4336 6.5' stroke='white' stroke-width='1.5'/%3E%3Cpath d='M6.43359 6.5L18.4336 18.5' stroke='white' stroke-width='1.5'/%3E%3C/svg%3E%0A");
   cursor: pointer;
 }
 @media screen and (max-width: 750px) {
-  .search-section__field {
+  .search-section__input {
     width: 100%;
   }
-}
-.search-section__field::-moz-placeholder {
-  color: rgb(144, 144, 144);
-  font-size: 1rem;
-}
-.search-section__field:-ms-input-placeholder {
-  color: rgb(144, 144, 144);
-  font-size: 1rem;
-}
-.search-section__field::placeholder {
-  color: rgb(144, 144, 144);
-  font-size: 1rem;
-}
-.search-section__field:focus {
-  border: 1px solid rgb(255, 255, 255);
 }
 .search-section__results {
   position: absolute;
@@ -2246,4 +2255,62 @@ section.compare__section .container {
   cursor: pointer;
   color: #fcdb33;
   width: 100%;
+}
+
+/**------------------------------------------------------------------------------------------------
+ **                                       ANCHOR: Newsletter section
+ *------------------------------------------------------------------------------------------------**/
+.newsletter {
+  background-color: #333333;
+  width: 100vw;
+  padding: 100px 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: content;
+  align-items: center;
+}
+.newsletter .newsletter__form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+@media screen and (max-width: 750px) {
+  .newsletter .newsletter__form {
+    width: 90%;
+  }
+}
+.newsletter__container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+.newsletter__input {
+  width: 100%;
+}
+.newsletter__button {
+  background: #fcdb33;
+  display: grid;
+  align-items: center;
+}
+.newsletter__button :nth-child(1),
+.newsletter__button :nth-child(2) {
+  grid-column: 1;
+  grid-row: 1;
+}
+.newsletter__button :nth-child(1) {
+  color: rgb(0, 0, 0);
+}
+.newsletter__button :nth-child(2):after {
+  content: var(--button_symbol);
+  color: rgb(0, 0, 0);
+  opacity: 0;
+}
+.newsletter__button:hover :nth-child(1) {
+  opacity: 0;
+}
+.newsletter__button:hover :nth-child(2):after {
+  opacity: 1;
 }

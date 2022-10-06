@@ -50,6 +50,12 @@ input {
         border-radius: 0;
 }
 
+button {
+        background: none;
+        border: none;
+        cursor: pointer;
+}
+
 /**------------------------------------------------------------------------------------------------
  **                                       ANCHOR: Typography
  *------------------------------------------------------------------------------------------------**/
@@ -198,9 +204,31 @@ a {
 }
 
 /**------------------------------------------------------------------------------------------------
- **                                       ANCHOR: Button style
+ **                                       ANCHOR: Form
  *------------------------------------------------------------------------------------------------**/
+input {
+        font-size: 1rem;
+        color: #fff;
+        background-color: rgb(0, 0, 0);
+        height: 44px;
 
+        border: 1px solid rgb(144, 144, 144);
+        padding: 0.5rem;
+        outline: none;
+
+        &::placeholder {
+                color: rgb(144, 144, 144);
+                font-size: 1rem;
+        }
+
+        &:focus {
+                border: 1px solid rgb(255, 255, 255);
+        }
+}
+
+/**------------------------------------------------------------------------------------------------
+ **                                       ANCHOR: Button
+ *------------------------------------------------------------------------------------------------**/
 .button {
         &--primary {
                 color: var(--primary-button-text-color);
@@ -377,7 +405,7 @@ a.border.button {
 }
 
 /**------------------------------------------------------------------------------------------------
- **                                       ANCHOR: Button-link style
+ **                                       ANCHOR: Button-link
  *------------------------------------------------------------------------------------------------**/
 
 .button--link {
@@ -2213,9 +2241,10 @@ $indicator-width: 40px;
                 display: flex;
                 justify-content: center;
                 flex-direction: row;
+                width: 100%;
 
                 @media screen and (max-width: 750px) {
-                        width: 90%;
+                        max-width: 90%;
                 }
         }
 
@@ -2224,21 +2253,8 @@ $indicator-width: 40px;
                 width: 100%;
         }
 
-        &__field,
-        &:focus {
-                outline: none;
-                border: none;
-        }
-
-        &__field {
-                width: 449px;
-                height: 44px;
+        &__input {
                 min-width: 100%;
-                font-size: 1rem;
-                color: #fff;
-                background-color: rgb(0, 0, 0);
-                border: 1px solid rgb(255, 255, 255);
-                padding: 0.5rem;
 
                 &::-webkit-search-cancel-button {
                         content: url("data:image/svg+xml,%3Csvg width='25' height='25' viewBox='0 0 25 25' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M6.43359 18.5L18.4336 6.5' stroke='white' stroke-width='1.5'/%3E%3Cpath d='M6.43359 6.5L18.4336 18.5' stroke='white' stroke-width='1.5'/%3E%3C/svg%3E%0A");
@@ -2247,15 +2263,6 @@ $indicator-width: 40px;
 
                 @media screen and (max-width: 750px) {
                         width: 100%;
-                }
-
-                &::placeholder {
-                        color: rgb(144, 144, 144);
-                        font-size: 1rem;
-                }
-
-                &:focus {
-                        border: 1px solid rgb(255, 255, 255);
                 }
         }
 
@@ -2345,5 +2352,76 @@ $indicator-width: 40px;
                 cursor: pointer;
                 color: #fcdb33;
                 width: 100%;
+        }
+}
+
+/**------------------------------------------------------------------------------------------------
+ **                                       ANCHOR: Newsletter section
+ *------------------------------------------------------------------------------------------------**/
+.newsletter {
+        background-color: #333333;
+        width: 100vw;
+        padding: 100px 0px;
+        display: flex;
+        flex-direction: column;
+        justify-content: content;
+        align-items: center;
+
+        &__heading {
+        }
+
+        .newsletter__form {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+
+                @media screen and (max-width: 750px) {
+                        width: 90%;
+                }
+        }
+
+        &__container {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                width: 100%;
+        }
+
+        &__input {
+                width: 100%;
+        }
+
+        &__button {
+                background: #fcdb33;
+                display: grid;
+                align-items: center;
+
+                :nth-child(1),
+                :nth-child(2) {
+                        grid-column: 1;
+                        grid-row: 1;
+                }
+
+                :nth-child(1) {
+                        color: rgb(0, 0, 0);
+                }
+
+                :nth-child(2):after {
+                        content: var(--button_symbol);
+                        color: rgb(0, 0, 0);
+                        opacity: 0;
+                }
+
+                &:hover {
+                        :nth-child(1) {
+                                opacity: 0;
+                        }
+
+                        :nth-child(2):after {
+                                opacity: 1;
+                        }
+                }
         }
 }
