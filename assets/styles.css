@@ -2239,5 +2239,5 @@ input::-webkit-search-cancel-button, input::-webkit-search-decoration, input::-w
 }
 
 input {
-  -webkit-appearance: none;
+  border-radius: 0;
 }
