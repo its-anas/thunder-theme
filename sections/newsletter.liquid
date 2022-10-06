@@ -29,7 +29,12 @@
 {%- endstyle -%}
 
 <div class="{{ section.id }} newsletter {% if section.settings.background_image == blank %}just-color{% else %}{{ section.settings.background_type }}{% endif %} {{ section.settings.section_width }}">
-  <h6 class="newsletter__heading">{{ section.settings.heading }}</h6>
+  {% if section.settings.heading != blank %}
+    <h6 class="newsletter__heading">{{ section.settings.heading }}</h6>
+  {% endif %}
+  {% if section.settings.text != blank %}
+    <p class="newsletter__text">{{ section.settings.text }}</p>
+  {% endif %}
 
   {% form 'customer', class: 'newsletter__form' %}
     <div class="newsletter__container">
@@ -82,13 +87,19 @@
 
 {% schema %}
 {
-  "name": "Search",
+  "name": "Newsletter",
   "settings": [
     {
       "type": "text",
       "id": "heading",
       "label": "Heading",
       "default": "Newsletter"
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Text",
+      "default": "Subscribe to get special offers, free giveaways, and once in a lifetime deals."
     },
     {
       "type": "range",

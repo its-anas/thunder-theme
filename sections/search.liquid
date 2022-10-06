@@ -29,7 +29,9 @@
 {%- endstyle -%}
 
 <section class="{{ section.id }} search-section {% if section.settings.background_image == blank %}just-color{% else %}{{ section.settings.background_type }}{% endif %} {{ section.settings.section_width }}">
-  <h6 class="search-section__heading">{{ section.settings.heading }}</h6>
+  {% if section.settings.heading != blank %}
+    <h6 class="search-section__heading">{{ section.settings.heading }}</h6>
+  {% endif %}
   <predictive-search class="search-section__container">
     <form action="{{ routes.search_url }}" method="get" class="search-section__form">
       <input type="hidden" name="contact[tags]" value="newsletter">
