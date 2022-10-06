@@ -2135,7 +2135,6 @@ section.compare__section .container {
   padding: 0.5rem;
 }
 .search-section__field::-webkit-search-cancel-button {
-  -webkit-appearance: none;
   content: url("data:image/svg+xml,%3Csvg width='25' height='25' viewBox='0 0 25 25' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M6.43359 18.5L18.4336 6.5' stroke='white' stroke-width='1.5'/%3E%3Cpath d='M6.43359 6.5L18.4336 18.5' stroke='white' stroke-width='1.5'/%3E%3C/svg%3E%0A");
   cursor: pointer;
 }
@@ -2233,4 +2232,9 @@ section.compare__section .container {
 .divider {
   height: 1px;
   background: rgb(255, 255, 255);
+}
+
+input::-webkit-search-cancel-button, input::-webkit-search-decoration, input::-webkit-search-results-button, input::-webkit-search-results-decoration {
+  -webkit-appearance: none;
+  display: none;
 }
