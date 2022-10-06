@@ -14,13 +14,18 @@ body {
         font-style: var(--font-style);
         height: 100%;
         min-height: 100%;
-        margin: 0;
         background-color: var(--background-color);
 }
 
 /**------------------------------------------------------------------------------------------------
- **                                       ANCHOR: Typography
+ **                                       ANCHOR: Reset
  *------------------------------------------------------------------------------------------------**/
+
+html,
+body {
+        margin: 0;
+}
+
 h1,
 h2,
 h3,
@@ -32,6 +37,22 @@ p {
         margin: 0;
 }
 
+input {
+        &::-webkit-search-cancel-button,
+        &::-webkit-search-decoration,
+        &::-webkit-search-results-button,
+        &::-webkit-search-results-decoration {
+                -webkit-appearance: none;
+        }
+}
+
+input {
+        border-radius: 0;
+}
+
+/**------------------------------------------------------------------------------------------------
+ **                                       ANCHOR: Typography
+ *------------------------------------------------------------------------------------------------**/
 h1,
 h2,
 h3,
@@ -2267,7 +2288,7 @@ $indicator-width: 40px;
 /**------------------------------------------------------------------------------------------------
  **                                       ANCHOR: Search results
  *------------------------------------------------------------------------------------------------**/
-.predictive-search {
+.search-results {
         &__results-list {
                 display: flex;
                 flex-direction: column;
@@ -2275,8 +2296,14 @@ $indicator-width: 40px;
                 border: 1px solid rgb(255, 255, 255);
         }
 
+        &__divider {
+                height: 1px;
+                background: rgb(255, 255, 255);
+        }
+
         &__list-item {
                 padding: 10px;
+
                 &:hover {
                         background-color: rgb(21, 21, 21);
                 }
@@ -2287,15 +2314,13 @@ $indicator-width: 40px;
                 height: 60px;
                 min-width: 60px;
                 min-height: 60px;
-                // make border on corners only
-                &:hover {
-                }
         }
 
         &__item {
                 display: flex;
                 flex-direction: row;
                 gap: 0.5rem;
+
                 &-content {
                         display: flex;
                         flex-direction: column;
@@ -2321,22 +2346,4 @@ $indicator-width: 40px;
                 color: #fcdb33;
                 width: 100%;
         }
-}
-
-.divider {
-        height: 1px;
-        background: rgb(255, 255, 255);
-}
-
-input {
-        &::-webkit-search-cancel-button,
-        &::-webkit-search-decoration,
-        &::-webkit-search-results-button,
-        &::-webkit-search-results-decoration {
-                -webkit-appearance: none;
-        }
-}
-
-input {
-        border-radius: 0;
 }
