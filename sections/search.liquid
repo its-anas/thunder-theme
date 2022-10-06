@@ -1,1 +1,134 @@
-<p>This is the search section.</p>
+{%- style -%}
+  .{{ section.id }}.search-section {
+      margin-top: {{ section.settings.space_outside | divided_by: 2 }}px;
+      margin-bottom: {{ section.settings.space_outside | divided_by: 2 }}px;
+      gap: {{ section.settings.space_between_elements }}rem;
+      padding: {{ section.settings.space_outside_elements | divided_by: 2 }}px 0;
+   }
+
+   .{{ section.id }}.just-color {
+    background-color: {{ section.settings.background_color }};
+   }
+
+   .{{ section.id }}.image {
+       {% if section.settings.section_width == "wrapped" %}
+            background-image: url({{ section.settings.background_image | image_url: width: settings.wrapped_content_width }});
+            background-repeat: no-repeat;
+       {% else %}
+            background-image: url({{ section.settings.background_image | image_url }});
+            background-size: cover;
+       {% endif %}
+       background-position: center;
+   }
+{%- endstyle -%}
+
+<section class="{{ section.id }} search-section  {% if section.settings.background_image == blank %}just-color{% else %}{{ section.settings.background_type }}{% endif %} {{ section.settings.section_width }}">
+  <h6 class="search-section__heading">Search our store</h6>
+  <predictive-search class="search-section__container">
+    <form action="{{ routes.search_url }}" method="get" role="search" class="search-section__form">
+      <input
+        id="Search"
+        class="search-section__field"
+        type="search"
+        name="q"
+        value="{{ search.terms | escape }}"
+        placeholder="Search..."
+        {%- if settings.predictive_search_enabled -%}
+          autocorrect="off"
+          autocomplete="off"
+          autocapitalize="off"
+          spellcheck="false"
+        {%- endif -%}
+      >
+      {%- if settings.predictive_search_enabled -%}
+        <div class="search-section__results" id="predictive-search" tabindex="-1"></div>
+      {%- endif -%}
+    </form>
+    <a class="search-section__icon">
+      {% render 'icons', icon: 'search' %}
+    </a>
+  </predictive-search>
+</section>
+
+{% schema %}
+{
+  "name": "Search",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section settings"
+    },
+    {
+      "type": "select",
+      "id": "background_type",
+      "label": "Type",
+      "options": [
+        {
+          "value": "image",
+          "label": "Image"
+        },
+        {
+          "value": "just-color",
+          "label": "Color"
+        }
+      ],
+      "default": "just-color"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "transparent",
+      "info": "Applied only if Type is 'Color'"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Image",
+      "info": "Applied only if Type is 'Image'"
+    },
+
+    {
+      "type": "range",
+      "id": "space_between_elements",
+      "label": "Space between elements",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "unit": "rem",
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "space_outside_elements",
+      "label": "Space outside elements",
+      "min": 100,
+      "max": 200,
+      "step": 50,
+      "unit": "px",
+      "default": 100
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "Section width",
+      "default": " ",
+      "options": [
+        {
+          "value": " ",
+          "label": "Full width"
+        },
+        {
+          "value": "wrapped",
+          "label": "Wrapped"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Search"
+    }
+  ]
+}
+{% endschema %}

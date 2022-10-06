@@ -250,5 +250,16 @@
                     "default": "➜"
                }
           ]
+     },
+     {
+          "name": "Search behavior",
+          "settings": [
+               {
+                    "type": "checkbox",
+                    "id": "predictive_search_enabled",
+                    "default": true,
+                    "label": "Enable product suggestions"
+               }
+          ]
      }
 ]

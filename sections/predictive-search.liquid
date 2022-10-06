@@ -1,0 +1,32 @@
+{%- if predictive_search.performed -%}
+  <div id="predictive-search-results">
+    <div
+      id="predictive-search-results-list"
+      class="predictive-search__results-list"
+    >
+      {%- for product in predictive_search.resources.products -%}
+        <div class="predictive-search__list-item">
+          <a href="{{ product.url }}" class="predictive-search__item">
+            {%- if product.featured_media != blank -%}
+              <div class="predictive-search__image media">
+                <img
+                  class="fit"
+                  src="{{ product.featured_media | img_url: '150x' }}"
+                  alt="{{ product.featured_media.alt }}"
+                >
+              </div>
+            {%- endif -%}
+            <div class="predictive-search__item-content">
+              <span class="predictive-search__item-heading">{{ product.title }}</span>
+              <span class="predictive-search__item-price">{{ product.price | money }}</span>
+            </div>
+          </a>
+        </div>
+        <div class="divider"></div>
+      {%- endfor -%}
+      <div class="predictive-search__link-container">
+        <button class="predictive-search__link button--link">Search for “{{ predictive_search.terms }}”</button>
+      </div>
+    </div>
+  </div>
+{%- endif -%}

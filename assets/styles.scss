@@ -2175,3 +2175,156 @@ $indicator-width: 40px;
                 }
         }
 }
+
+/**------------------------------------------------------------------------------------------------
+ **                                       ANCHOR: Search section
+ *------------------------------------------------------------------------------------------------**/
+.search-section {
+        width: 100vw;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-left: auto;
+        margin-right: auto;
+
+        &__container {
+                display: flex;
+                justify-content: center;
+                flex-direction: row;
+
+                @media screen and (max-width: 750px) {
+                        width: 90%;
+                }
+        }
+
+        &__form {
+                position: relative;
+                width: 100%;
+        }
+
+        &__field,
+        &:focus {
+                outline: none;
+                border: none;
+        }
+
+        &__field {
+                width: 449px;
+                height: 44px;
+                min-width: 100%;
+                font-size: 1rem;
+                color: #fff;
+                background-color: rgb(0, 0, 0);
+                border: 1px solid rgb(255, 255, 255);
+                padding: 0.5rem;
+
+                &::-webkit-search-cancel-button {
+                        -webkit-appearance: none;
+                        content: url("data:image/svg+xml,%3Csvg width='25' height='25' viewBox='0 0 25 25' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M6.43359 18.5L18.4336 6.5' stroke='white' stroke-width='1.5'/%3E%3Cpath d='M6.43359 6.5L18.4336 18.5' stroke='white' stroke-width='1.5'/%3E%3C/svg%3E%0A");
+                        cursor: pointer;
+                }
+
+                @media screen and (max-width: 750px) {
+                        width: 100%;
+                }
+
+                &::placeholder {
+                        color: rgb(144, 144, 144);
+                        font-size: 1rem;
+                }
+
+                &:focus {
+                        border: 1px solid rgb(255, 255, 255);
+                }
+        }
+
+        &__results {
+                position: absolute;
+                background-color: rgb(0, 0, 0);
+                width: 100%;
+        }
+
+        &__icon {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 44px;
+                height: 44px;
+                background: #fcdb33;
+                cursor: pointer;
+                &:hover {
+                        > * {
+                                display: none;
+                        }
+                        &:after {
+                                content: var(--button_symbol);
+                                color: rgb(0, 0, 0);
+                        }
+                }
+        }
+}
+
+/**------------------------------------------------------------------------------------------------
+ **                                       ANCHOR: Search results
+ *------------------------------------------------------------------------------------------------**/
+.predictive-search {
+        &__results-list {
+                display: flex;
+                flex-direction: column;
+                padding: 0% 0%;
+                border: 1px solid rgb(255, 255, 255);
+        }
+
+        &__list-item {
+                padding: 10px;
+                &:hover {
+                        background-color: rgb(21, 21, 21);
+                }
+        }
+
+        &__image {
+                width: 60px;
+                height: 60px;
+                min-width: 60px;
+                min-height: 60px;
+                // make border on corners only
+                &:hover {
+                }
+        }
+
+        &__item {
+                display: flex;
+                flex-direction: row;
+                gap: 0.5rem;
+                &-content {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 0.5rem;
+                }
+                &-heading {
+                        font-size: 1rem;
+                        color: #fff;
+                }
+                &-price {
+                        color: rgb(162, 162, 162);
+                }
+        }
+
+        &__link-container {
+                text-align: center;
+        }
+
+        &__link {
+                background: none;
+                border: none;
+                cursor: pointer;
+                color: #fcdb33;
+                width: 100%;
+        }
+}
+
+.divider {
+        height: 1px;
+        background: rgb(255, 255, 255);
+}
