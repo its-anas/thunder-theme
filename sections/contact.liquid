@@ -58,6 +58,8 @@
       name="contact[name]"
       value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}"
       placeholder="Name"
+      class="contact__name"
+      required
     >
 
     <input
@@ -67,7 +69,8 @@
       spellcheck="false"
       autocapitalize="off"
       value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
-      aria-required="true"
+      required
+      class="contact__email"
       placeholder="Email"
     >
 
@@ -78,6 +81,8 @@
       pattern="[0-9\-]*"
       value="{% if form.phone %}{{ form.phone }}{% elsif customer %}{{ customer.phone }}{% endif %}"
       placeholder="Phone"
+      class="contact__phone"
+      required
     >
 
     <textarea
@@ -85,6 +90,7 @@
       name="contact[body]"
       placeholder="Message"
       class="contact__message"
+      required
     >
     {{- form.body -}}
     </textarea>

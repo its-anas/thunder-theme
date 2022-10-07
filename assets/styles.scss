@@ -45,7 +45,8 @@ input {
         }
 }
 
-input {
+input,
+textarea {
         border-radius: 0;
 }
 
@@ -2462,6 +2463,15 @@ $indicator-width: 40px;
 
         &__heading {
                 text-align: center;
+        }
+
+        @media screen and (max-width: 750px) {
+                &__name,
+                &__email,
+                &__phone,
+                &__message {
+                        width: 100%;
+                }
         }
 
         &__message {
