@@ -651,6 +651,7 @@ slider-component {
         }
         &--normal,
         &--animated {
+                z-index: 3;
                 padding: 0.05rem 0.15rem;
                 pointer-events: none;
         }
@@ -685,6 +686,7 @@ slider-component {
 }
 
 .quick-add-icon {
+        z-index: 3;
         width: 1.5rem;
         height: 1.5rem;
         .svg {
@@ -2475,5 +2477,33 @@ $indicator-width: 40px;
                                 opacity: 1;
                         }
                 }
+        }
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+a,
+svg,
+.reveal {
+        transform: translate(50%, 0);
+        animation: reveal 600ms;
+        animation-fill-mode: forwards;
+}
+
+@keyframes reveal {
+        0% {
+                opacity: 0;
+        }
+        50% {
+                opacity: 0;
+        }
+        100% {
+                opacity: 1;
+                transform: translate(0%, 0);
         }
 }

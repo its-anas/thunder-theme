@@ -379,6 +379,7 @@ class sliderComponent extends HTMLElement {
         constructor() {
                 super();
         }
+
         connectedCallback() {
                 this.attachShadow({ mode: "open" });
                 this.shadowRoot.innerHTML = "<slot></slot>";

@@ -44,7 +44,7 @@
 
 <slider-component
   data-mobile-items="{{ mobile_items }}"
-  data-tablet-items="{{ tablet_items }}" 
+  data-tablet-items="{{ tablet_items }}"
   data-desktop-items="{{ desktop_items }}"
   class="{{ section.id }} featured-collection just-color {% if section.settings.background_image == blank %}just-color{% else %}{{ section.settings.background_type }}{% endif %} {{ section.settings.section_width }}"
 >
@@ -55,7 +55,7 @@
     <div class="prev">
       {% render 'icons', icon: 'chevron-prev' -%}
     </div>
-    <div class="slides-container"> 
+    <div class="slides-container">
       <div class="slide">
         {% if section.settings.collection != blank %}
           {% for product in section.settings.collection.products limit: section.settings.items_limit %}
@@ -63,7 +63,7 @@
               <div class="featured-collection__image">
                 {% assign price_difference = product.compare_at_price | minus: product.price %}
                 {% if price_difference > 0 %}
-                  <p class="tag--normal tag-text">SAVE {{ product.compare_at_price | minus: product.price | money }}</p> 
+                  <p class="tag--normal tag-text">SAVE {{ product.compare_at_price | minus: product.price | money }}</p>
                 {% endif %}
                 <a class="quick-add-icon">
                   {% render 'icons', icon: 'quick-add' -%}
@@ -71,7 +71,17 @@
                 {% if product.featured_image != blank %}
                   <a href="{{ product.url }}" class="media">
                     <img
-                      srcset="{{ product.featured_image | image_url }}"
+                      srcset="
+                        {%- if product.featured_image.width >= 165 -%}{{ product.featured_image | image_url: width: 165 }} 165w,{%- endif -%}
+                        {%- if product.featured_image.width >= 360 -%}{{ product.featured_image | image_url: width: 360 }} 360w,{%- endif -%}
+                        {%- if product.featured_image.width >= 533 -%}{{ product.featured_image | image_url: width: 533 }} 533w,{%- endif -%}
+                        {%- if product.featured_image.width >= 720 -%}{{ product.featured_image | image_url: width: 720 }} 720w,{%- endif -%}
+                        {%- if product.featured_image.width >= 940 -%}{{ product.featured_image | image_url: width: 940 }} 940w,{%- endif -%}
+                        {%- if product.featured_image.width >= 1066 -%}{{ product.featured_image | image_url: width: 1066 }} 1066w,{%- endif -%}
+                        {{ product.featured_image | image_url }} {{ product.featured_image.width }}w
+                      "
+                      src="{{ product.featured_image | image_url: width: 300 }}"
+                      sizes="300px"
                       loading="lazy"
                       alt="{{ product.featured_image.alt | escape }}"
                       width="{{ product.featured_image.width }}"
@@ -156,7 +166,7 @@
       "type": "header",
       "content": "Product settings"
     },
-      {
+    {
       "type": "select",
       "id": "image_style",
       "label": "Image style",
