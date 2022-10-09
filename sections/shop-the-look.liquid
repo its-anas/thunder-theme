@@ -5,7 +5,8 @@
 
   .{{ section.id }}.shop-the-look {
     gap: {{ section.settings.space_between_elements }}rem;
-    padding: {{ section.settings.space_outside_elements | divided_by: 2 }}px 0;
+    margin-top: {{ section.settings.space_outside | divided_by: 2 }}px;
+    margin-bottom: {{ section.settings.space_outside | divided_by: 2 }}px;
   }
 {%- endstyle -%}
 
@@ -140,13 +141,13 @@
     },
     {
       "type": "range",
-      "id": "space_outside_elements",
+      "id": "space_outside",
       "label": "Space outside elements",
       "min": 0,
       "max": 100,
       "step": 5,
       "unit": "px",
-      "default": 50
+      "default": 0
     },
     {
       "type": "select",
@@ -155,7 +156,7 @@
       "default": "full",
       "options": [
         {
-          "value": " ",
+          "value": "full-width",
           "label": "Full width"
         },
         {
@@ -163,7 +164,7 @@
           "label": "Wrapped"
         }
       ],
-      "default": " "
+      "default": "full-width"
     }
   ],
   "blocks": [

@@ -54,9 +54,3 @@ let actualDate = new Date().getTime();
 //                 window.addEventListener("orientationChange", lazyload);
 //         }
 // });
-
-document.querySelectorAll("img").forEach((img) => {
-        img.addEventListener("load", () => {
-                img.classList.add("reveal");
-        });
-});

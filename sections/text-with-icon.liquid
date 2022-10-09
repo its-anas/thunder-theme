@@ -1,7 +1,8 @@
 {%- style -%}
    .{{ section.id }}.text-with-icon {
      background-color: {{ section.settings.background_color }};
-     padding: {{ section.settings.space_outside_elements | divided_by: 2  }}px 0;
+    margin-top: {{ section.settings.space_outside_elements | divided_by: 2 }}px;
+    margin-bottom: {{ section.settings.space_outside_elements | divided_by: 2 }}px;
    }
    @media screen and (min-width: 1024px) {
      .{{ section.id }} > .text-with-icon__container {
@@ -30,7 +31,7 @@
   }
 {%- endstyle -%}
 
-<section class="{{ section.id }} text-with-icon {% if section.settings.section_style == "wrapped" %}wrapped{% endif %}  {% if section.settings.background_image == blank %}{{ section.id }}-just-color{% else %}{{ section.id }}-{{ section.settings.background_type }}{% endif %}">
+<section class="{{ section.id }} text-with-icon {{ section.settings.section_style }}  {% if section.settings.background_image == blank %}{{ section.id }}-just-color{% else %}{{ section.id }}-{{ section.settings.background_type }}{% endif %}">
   <div class="text-with-icon__container">
     {% for block in section.blocks %}
       <div class="text-with-icon__column" {{ block.shopify_attributes }}>
@@ -108,11 +109,11 @@
       "type": "range",
       "id": "space_outside_elements",
       "label": "Space outside elements",
-      "min": 30,
+      "min": 0,
       "max": 200,
       "step": 10,
       "unit": "px",
-      "default": 80
+      "default": 0
     },
     {
       "type": "range",

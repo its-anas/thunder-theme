@@ -3,7 +3,7 @@
       margin-top: {{ section.settings.space_outside | divided_by: 2 }}px;
       margin-bottom: {{ section.settings.space_outside | divided_by: 2 }}px;
       gap: {{ section.settings.space_between_elements }}rem;
-      padding: {{ section.settings.space_outside_elements | divided_by: 2 }}px 0;
+      min-height: {{ section.settings.height }}px;
    }
 
    .{{ section.id }}.just-color {
@@ -11,7 +11,7 @@
    }
 
    .{{ section.id }}.image {
-       {% if section.settings.section_width == "wrapped" %}
+       {% if section.settings.section_style == "wrapped" %}
             background-image: url({{ section.settings.background_image | image_url: width: settings.wrapped_content_width }});
             background-repeat: no-repeat;
        {% else %}
@@ -28,7 +28,7 @@
    }
 {%- endstyle -%}
 
-<section class="{{ section.id }} search-section {% if section.settings.background_image == blank %}just-color{% else %}{{ section.settings.background_type }}{% endif %} {{ section.settings.section_width }}">
+<section class="{{ section.id }} search-section {% if section.settings.background_image == blank %}just-color{% else %}{{ section.settings.background_type }}{% endif %} {{ section.settings.section_style }}">
   {% if section.settings.heading != blank %}
     <h6 class="search-section__heading">{{ section.settings.heading }}</h6>
   {% endif %}
@@ -131,13 +131,23 @@
       "default": 100
     },
     {
+      "type": "range",
+      "id": "height",
+      "min": 150,
+      "max": 300,
+      "step": 50,
+      "unit": "px",
+      "label": "Section height",
+      "default": 150
+    },
+    {
       "type": "select",
-      "id": "section_width",
+      "id": "section_style",
       "label": "Section width",
-      "default": " ",
+      "default": "full-width",
       "options": [
         {
-          "value": " ",
+          "value": "full-width",
           "label": "Full width"
         },
         {

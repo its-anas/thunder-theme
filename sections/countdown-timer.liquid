@@ -1,10 +1,8 @@
 {%- style -%}
   .{{ section.id }}.countdown-timer {
-    gap: {{ section.settings.space_between }}rem;
+    gap: {{ section.settings.space_between_elements }}rem;
     margin-top: {{ section.settings.space_outside | divided_by: 2 }}rem;
     margin-bottom: {{ section.settings.space_outside | divided_by: 2 }}rem;
-    padding-top: {{ section.settings.top_padding }}rem;
-    padding-bottom: {{ section.settings.bottom_padding }}rem;
   }
   .{{ section.id}}--color {
     background-color: {{ section.settings.background_color }};
@@ -57,7 +55,7 @@
 
 <div
   id="countdown-timer-{{ section.id }}"
-  class="{{ section.id }} countdown-timer container {{ section.settings.section_width }} {% if section.settings.background_image == blank %}{{ section.id }}--color{% else %}{{ section.id }}--{{ section.settings.background_type }}{% endif %}"
+  class="{{ section.id }} countdown-timer container {{ section.settings.section_style }} {% if section.settings.background_image == blank %}{{ section.id }}--color{% else %}{{ section.id }}--{{ section.settings.background_type }}{% endif %}"
 >
   <div class="countdown-timer__heading">
     <{{ section.settings.heading_size }}>
@@ -249,31 +247,11 @@
     },
     {
       "type": "range",
-      "id": "space_between",
+      "id": "space_between_elements",
       "label": "Space between elements",
-      "min": 0.5,
+      "min": 1,
       "max": 3,
       "step": 0.5,
-      "unit": "rem",
-      "default": 1
-    },
-    {
-      "type": "range",
-      "id": "space_outside",
-      "label": "Space outside section",
-      "min": 0,
-      "max": 5,
-      "step": 1,
-      "unit": "rem",
-      "default": 0
-    },
-    {
-      "type": "range",
-      "id": "top_padding",
-      "label": "Top padding",
-      "min": 0,
-      "max": 7,
-      "step": 1,
       "unit": "rem",
       "default": 1
     },
@@ -289,12 +267,12 @@
     },
     {
       "type": "select",
-      "id": "section_width",
+      "id": "section_style",
       "label": "Section width",
       "info": "Desktop only",
       "options": [
         {
-          "value": " ",
+          "value": "full-width",
           "label": "Full width"
         },
         {
@@ -302,7 +280,7 @@
           "label": "Wrapped"
         }
       ],
-      "default": " "
+      "default": "full-width"
     },
     {
       "type": "header",

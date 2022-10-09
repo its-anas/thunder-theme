@@ -5,8 +5,6 @@
     background-color: {{ section.settings.background_color }};
     margin-top: {{ section.settings.space_outside | divided_by: 2 }}px;
     margin-bottom: {{ section.settings.space_outside | divided_by: 2 }}px;
-    padding-top: {{ section.settings.top_padding }}px;
-    padding-bottom: {{ section.settings.bottom_padding }}px;
   }
 
   .{{ section.id }}.compare {
@@ -24,7 +22,7 @@
   }
 {%- endstyle -%}
 
-<section class="{{ section.id }} compare__section {% if section.settings.section_width == "wrapped" %} wrapped{% endif %}">
+<section class="{{ section.id }} compare__section container {{ section.settings.section_style }}">
   <div class="compare__heading">
     <h6>{{ section.settings.heading }}</h6>
   </div>
@@ -164,7 +162,7 @@
   "settings": [
     {
       "type": "select",
-      "id": "section_width",
+      "id": "section_style",
       "label": "Section width",
       "info": "Desktop only",
       "options": [
@@ -188,26 +186,6 @@
       "step": 1,
       "unit": "px",
       "default": 0
-    },
-    {
-      "type": "range",
-      "id": "top_padding",
-      "label": "Top padding",
-      "min": 30,
-      "max": 100,
-      "step": 1,
-      "unit": "px",
-      "default": 50
-    },
-    {
-      "type": "range",
-      "id": "bottom_padding",
-      "label": "Bottom padding",
-      "min": 30,
-      "max": 100,
-      "step": 1,
-      "unit": "px",
-      "default": 50
     },
     {
       "type": "color",

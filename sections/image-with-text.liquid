@@ -19,11 +19,11 @@
   }
 
   .{{ section.id }} > .box {
-      gap: {{ section.settings.space_between }}px;
+      gap: {{ section.settings.space_between_elements }}rem;
   }
 {%- endstyle -%}
 
-<div class="{{ section.id }} image-with-text image-with-text--{{ section.settings.image_placement }} {{ section.settings.section_width }}">
+<div class="{{ section.id }} image-with-text image-with-text--{{ section.settings.image_placement }} {{ section.settings.section_style }}">
   <div class="image-with-text__image">
     <div class="image-with-text__image--{{ section.settings.image_position }}">
       {% if section.settings.image == blank %}
@@ -227,13 +227,13 @@
     },
     {
       "type": "range",
-      "id": "space_between",
+      "id": "space_between_elements",
       "label": "Space between elements",
-      "min": 5,
-      "max": 30,
-      "step": 5,
-      "unit": "px",
-      "default": 10
+      "min": 1,
+      "max": 3,
+      "step": 0.5,
+      "unit": "rem",
+      "default": 1
     },
     {
       "type": "range",
@@ -247,12 +247,12 @@
     },
     {
       "type": "select",
-      "id": "section_width",
+      "id": "section_style",
       "label": "Section width",
       "info": "Desktop only",
       "options": [
         {
-          "value": " ",
+          "value": "full-width",
           "label": "Full width"
         },
         {
@@ -260,7 +260,7 @@
           "label": "Wrapped"
         }
       ],
-      "default": " "
+      "default": "full-width"
     }
   ],
   "blocks": [

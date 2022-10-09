@@ -2,8 +2,6 @@
   .{{ section.id }}.testimonials {
     margin-top: {{ section.settings.space_outside | divided_by: 2 }}px;
     margin-bottom: {{ section.settings.space_outside | divided_by: 2 }}px;
-    padding-top: {{ section.settings.top_padding }}px;
-    padding-bottom: {{ section.settings.bottom_padding }}px;
   }
 
   .{{ section.id }}.testimonials--just-color {
@@ -11,11 +9,11 @@
    }
 
    .{{ section.id }}.testimonials--image {
-       {% if section.settings.section_width == "wrapped" %}
+       {% if section.settings.section_style == "wrapped" %}
             background-image: url({{ section.settings.background_image | image_url: width: settings.wrapped_content_width }});
             background-repeat: no-repeat;
        {% endif %}
-       {% if section.settings.section_width == "full-width" %}
+       {% if section.settings.section_style == "full-width" %}
             background-image: url({{ section.settings.background_image | image_url }});
             background-size: cover;
        {% endif %}
@@ -61,7 +59,7 @@
   }
 {%- endstyle -%}
 
-<section class="{{ section.id }} testimonials {% if section.settings.background_image == blank %}testimonials--just-color{% else %}testimonials--{{ section.settings.background_type }}{% endif %} {{ section.settings.section_width }}">
+<section class="{{ section.id }} testimonials {% if section.settings.background_image == blank %}testimonials--just-color{% else %}testimonials--{{ section.settings.background_type }}{% endif %} {{ section.settings.section_style }}">
   <div class="testimonials__heading">
     <h6>{{ section.settings.heading }}</h6>
   </div>
@@ -229,34 +227,14 @@
       "id": "space_between_elements",
       "label": "Space between elements",
       "min": 1,
-      "max": 5,
-      "step": 1,
+      "max": 3,
+      "step": 0.5,
       "unit": "rem",
       "default": 1
     },
     {
-      "type": "range",
-      "id": "top_padding",
-      "label": "Top padding",
-      "min": 30,
-      "max": 100,
-      "step": 1,
-      "unit": "px",
-      "default": 50
-    },
-    {
-      "type": "range",
-      "id": "bottom_padding",
-      "label": "Bottom padding",
-      "min": 30,
-      "max": 100,
-      "step": 1,
-      "unit": "px",
-      "default": 50
-    },
-    {
       "type": "select",
-      "id": "section_width",
+      "id": "section_style",
       "label": "Section width",
       "info": "Desktop only",
       "options": [

@@ -14,10 +14,6 @@
       }
   {%- endif -%}
 
-  .{{ section.id }}.text-with-image__columns {
-    padding: 15px 15px;
-  }
-
   .{{ section.id }} .text-with-image__column {
     background: rgba({{ section.settings.column_background_color.red }}, {{ section.settings.column_background_color.green }}, {{ section.settings.column_background_color.blue }}, {{ section.settings.column_background_opacity | divided_by: 100.0 }});
     backdrop-filter: blur({{ section.settings.column_background_blur }}px);
@@ -29,9 +25,6 @@
   }
 
   @media screen and (min-width: 750px) {
-    .{{ section.id }}.text-with-image__columns {
-      padding: 20px 20px;
-    }
 
     .{{ section.id }}.text-with-image > .text-with-image__columns {
       width: {{ section.settings.columns_width }}px;
@@ -47,8 +40,8 @@
   }
 {%- endstyle -%}
 
-<div class="{{ section.id }} text-with-image {{ section.settings.section_width }}">
-  <div class="{{ section.id }} text-with-image__columns">
+<div class="{{ section.id }} text-with-image {{ section.settings.section_style }}">
+  <div class="{{ section.id }} text-with-image__columns container">
     {% for block in section.blocks %}
       <div class="text-with-image__column" {{ block.shopify_attributes }}>
         <div class="{{ section.id }} text-with-image__image">
@@ -242,12 +235,12 @@
     },
     {
       "type": "select",
-      "id": "section_width",
+      "id": "section_style",
       "label": "Section width",
       "info": "Desktop only",
       "options": [
         {
-          "value": " ",
+          "value": "full-width",
           "label": "Full width"
         },
         {
@@ -255,7 +248,7 @@
           "label": "Wrapped"
         }
       ],
-      "default": " "
+      "default": "full-width"
     },
     {
       "type": "select",

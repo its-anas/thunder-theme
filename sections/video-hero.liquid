@@ -5,7 +5,7 @@
     }
 
   .{{ section.id }}.video-hero__box {
-    gap: {{ section.settings.space_between }}px;
+    gap: {{ section.settings.space_between_elements }}rem;
   }
 
   .{{ section.id }}.overlay {
@@ -27,19 +27,12 @@
   }
    }
 
-    .video-hero {
-    height: 100%;
-    width: 100%;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-  }
   .video-hero > video {
     width: 100%;
   }
 {%- endstyle -%}
 
-<section class="{{ section.id }} video-hero {% if section.settings.section_width == "wrapped" %} wrapped{% endif %}">
+<section class="{{ section.id }} video-hero {{ section.settings.section_style }}">
   <div class="{{ section.id }} video-hero__media">
     <div class="video-hero">
       {% if section.settings.video_url == blank %}
@@ -246,13 +239,13 @@
     },
     {
       "type": "range",
-      "id": "space_between",
+      "id": "space_between_elements",
       "label": "Space between elements",
-      "min": 5,
-      "max": 30,
-      "step": 5,
-      "unit": "px",
-      "default": 10
+      "min": 1,
+      "max": 3,
+      "step": 0.5,
+      "unit": "rem",
+      "default": 1
     },
     {
       "type": "range",
@@ -266,7 +259,7 @@
     },
     {
       "type": "select",
-      "id": "section_width",
+      "id": "section_style",
       "label": "Section width",
       "info": "Desktop only",
       "options": [

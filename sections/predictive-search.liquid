@@ -1,32 +1,27 @@
 {%- if predictive_search.performed -%}
-  <div id="search-results-results">
-    <div
-      id="search-results-results-list"
-      class="search-results__results-list"
-    >
-      {%- for product in predictive_search.resources.products -%}
-        <div class="search-results__list-item">
-          <a href="{{ product.url }}" class="search-results__item">
-            {%- if product.featured_media != blank -%}
-              <div class="search-results__image media">
-                <img
-                  class="fit"
-                  src="{{ product.featured_media | img_url: '150x' }}"
-                  alt="{{ product.featured_media.alt }}"
-                >
-              </div>
-            {%- endif -%}
-            <div class="search-results__item-content">
-              <span class="search-results__item-heading">{{ product.title }}</span>
-              <span class="search-results__item-price">{{ product.price | money }}</span>
+  <div class="search-results__results-list">
+    {%- for product in predictive_search.resources.products -%}
+      <div class="search-results__list-item">
+        <a href="{{ product.url }}" class="search-results__item">
+          {%- if product.featured_media != blank -%}
+            <div class="search-results__image media">
+              <img
+                class="fit"
+                src="{{ product.featured_media | img_url: '150x' }}"
+                alt="{{ product.featured_media.alt }}"
+              >
             </div>
-          </a>
-        </div>
-        <div class="search-results__divider"></div>
-      {%- endfor -%}
-      <div class="search-results__link-container">
-        <button class="search-results__link button--link">Search for “{{ predictive_search.terms }}”</button>
+          {%- endif -%}
+          <div class="search-results__item-content">
+            <span class="search-results__item-heading">{{ product.title }}</span>
+            <span class="search-results__item-price">{{ product.price | money }}</span>
+          </div>
+        </a>
       </div>
+      <div class="search-results__divider"></div>
+    {%- endfor -%}
+    <div class="search-results__link-container">
+      <button class="search-results__link button--link">Search for “{{ predictive_search.terms }}”</button>
     </div>
   </div>
 {%- endif -%}

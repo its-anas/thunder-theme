@@ -27,7 +27,8 @@
 
   .{{ section.id }}.featured-collection {
     gap: {{ section.settings.space_between_elements }}rem;
-    padding: {{ section.settings.space_outside_elements | divided_by: 2 }}px 0;
+    margin-top: {{ section.settings.space_outside_elements | divided_by: 2 }}px;
+    margin-bottom: {{ section.settings.space_outside_elements | divided_by: 2 }}px;
   }
 
   .{{ section.id }}.just-color {
@@ -46,7 +47,7 @@
   data-mobile-items="{{ mobile_items }}"
   data-tablet-items="{{ tablet_items }}"
   data-desktop-items="{{ desktop_items }}"
-  class="{{ section.id }} featured-collection just-color {% if section.settings.background_image == blank %}just-color{% else %}{{ section.settings.background_type }}{% endif %} {{ section.settings.section_width }}"
+  class="{{ section.id }} featured-collection just-color {% if section.settings.background_image == blank %}just-color{% else %}{{ section.settings.background_type }}{% endif %} {{ section.settings.section_style }}"
 >
   <div class="featured-collection__heading">
     <h6>{{ section.settings.heading }}</h6>
@@ -294,7 +295,7 @@
       "label": "Space between elements",
       "min": 1,
       "max": 3,
-      "step": 1,
+      "step": 0.5,
       "unit": "rem",
       "default": 1
     },
@@ -302,11 +303,11 @@
       "type": "range",
       "id": "space_outside_elements",
       "label": "Space outside elements",
-      "min": 30,
+      "min": 0,
       "max": 100,
       "step": 1,
       "unit": "px",
-      "default": 50
+      "default": 0
     },
     {
       "type": "range",
@@ -320,12 +321,12 @@
     },
     {
       "type": "select",
-      "id": "section_width",
+      "id": "section_style",
       "label": "Section width",
       "default": "full",
       "options": [
         {
-          "value": " ",
+          "value": "full-width",
           "label": "Full width"
         },
         {
@@ -333,7 +334,7 @@
           "label": "Wrapped"
         }
       ],
-      "default": " "
+      "default": "full-width"
     }
   ],
 

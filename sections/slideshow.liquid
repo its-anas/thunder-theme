@@ -13,7 +13,7 @@
   }
 
   .{{ section.id }}.slideshow__box {
-    gap: {{ section.settings.space_between }}rem;
+    gap: {{ section.settings.space_between_elements }}rem;
   }
 
   @media screen and (min-width: 750px) {
@@ -28,7 +28,7 @@
 {%- endstyle -%}
 
 <slideshow-section>
-  <div class="{{ section.id }} slideshow {% if section.settings.section_width == "wrapped" %} wrapped{% endif %}">
+  <div class="{{ section.id }} slideshow {{ section.settings.section_style }}">
     {% comment %} slides {% endcomment %}
     <div class="slideshow__container">
       {% for block in section.blocks %}
@@ -54,7 +54,7 @@
 
           {% comment %} Content {% endcomment %}
           <div class="slideshow__content vertical--{{ section.settings.vertical_position }}">
-            <div class="{{ section.id }} slideshow__box text-alignment--{{ section.settings.text_alignment }} {{ section.id }}-text-width horizontal--{{ section.settings.horizontal_position }}">
+            <div class="{{ section.id }} slideshow__box container text-alignment--{{ section.settings.text_alignment }} {{ section.id }}-text-width horizontal--{{ section.settings.horizontal_position }}">
               <{{ block.settings.subheading_size }}>
                 {{ block.settings.subheading }}
               </{{ block.settings.subheading_size }}>
@@ -204,13 +204,13 @@
     },
     {
       "type": "range",
-      "id": "space_between",
+      "id": "space_between_elements",
       "label": "Space between elements",
-      "min": 0.5,
+      "min": 1,
       "max": 3,
       "step": 0.5,
       "unit": "rem",
-      "default": 0.5
+      "default": 1
     },
     {
       "type": "range",
@@ -224,7 +224,7 @@
     },
     {
       "type": "select",
-      "id": "section_width",
+      "id": "section_style",
       "label": "Section width",
       "info": "Desktop only",
       "options": [

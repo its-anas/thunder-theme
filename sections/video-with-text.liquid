@@ -24,8 +24,8 @@
     background-position: center;
   }
 
-  .{{ section.id }}.video-with-text > .video-with-text__content > .box {
-    gap: {{ section.settings.space_between }}rem;
+  .{{ section.id }}.video-with-text > .video-with-text__content > * {
+    gap: {{ section.settings.space_between_elements }}rem;
   }
 
     @media screen and (min-width: 750px) {
@@ -35,7 +35,7 @@
     }
 {%- endstyle -%}
 
-<video-with-text class="{{ section.id }} video-with-text {{ section.settings.video_placement }} {{ section.settings.section_width }} {% if section.settings.background_image == blank %}color{% else %}{{ section.settings.background_type }}{% endif %}">
+<video-with-text class="{{ section.id }} video-with-text {{ section.settings.video_placement }} {{ section.settings.section_style }} {% if section.settings.background_image == blank %}color{% else %}{{ section.settings.background_type }}{% endif %}">
   <div class="video-with-text__media">
     <div class="video-with-text__video-box horizontal--{{ section.settings.video_horizontal_position }}">
       <div class="video-with-text__video media">
@@ -66,8 +66,8 @@
       </div>
     </div>
   </div>
-  <div class="video-with-text__content container">
-    <div class="box horizontal--{{ section.settings.text_horizontal_position }} vertical--center text-alignment--{{ section.settings.text_alignment }} text-width-{{ section.id }}">
+  <div class="video-with-text__content">
+    <div class="horizontal--{{ section.settings.text_horizontal_position }} vertical--center text-alignment--{{ section.settings.text_alignment }} text-width-{{ section.id }}">
       {%- if section.settings.subheading != blank -%}
         <h6>{{ section.settings.subheading }}</h6>
       {%- endif -%}
@@ -279,9 +279,9 @@
     },
     {
       "type": "range",
-      "id": "space_between",
+      "id": "space_between_elements",
       "label": "Space between elements",
-      "min": 0.5,
+      "min": 1,
       "max": 3,
       "step": 0.5,
       "unit": "rem",
@@ -357,12 +357,12 @@
     },
     {
       "type": "select",
-      "id": "section_width",
+      "id": "section_style",
       "label": "Section width",
       "info": "Desktop only",
       "options": [
         {
-          "value": " ",
+          "value": "full-width",
           "label": "Full width"
         },
         {
@@ -370,7 +370,7 @@
           "label": "Wrapped"
         }
       ],
-      "default": " "
+      "default": "full-width"
     }
   ],
   "presets": [

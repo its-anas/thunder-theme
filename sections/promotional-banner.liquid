@@ -1,8 +1,9 @@
 {%- style -%}
   .{{ section.id }}.promotional-banner {
-    padding: {{ section.settings.space_outside_elements }}px 0;
+    margin-top: {{ section.settings.space_outside_elements | divided_by: 2 }}px;
+    margin-bottom: {{ section.settings.space_outside_elements | divided_by: 2 }}px;
     background: {{ section.settings.background_color }};
-    width: 100%;
+    min-height: {{ section.settings.height }}px;
   }
   .{{ section.id }}.promotional-banner__content--style-1 {
         animation: banner-scroll {{ section.settings.animation_speed }}s linear infinite;
@@ -30,8 +31,8 @@
   }
 {%- endstyle -%}
 
-<section>
-  <div class="{{ section.id }} promotional-banner {% if section.settings.section_width == "wrapped" %}wrapped{% endif %}">
+<section class="{{ section.settings.section_style }}">
+  <div class="{{ section.id }} promotional-banner">
     {% if section.settings.banner_style == 'style-1' %}
       {% if section.settings.style_1_text != blank %}
         <div class="{{ section.id }} promotional-banner__content--style-1">
@@ -137,21 +138,31 @@
       "type": "color",
       "id": "background_color",
       "label": "Background color",
-      "default": "transparent"
+      "default": "#fcdb33"
     },
     {
       "type": "range",
       "id": "space_outside_elements",
       "label": "Space outside elements",
-      "min": 10,
+      "min": 0,
       "max": 100,
       "step": 1,
       "unit": "px",
-      "default": 10
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "height",
+      "min": 80,
+      "max": 150,
+      "step": 10,
+      "unit": "px",
+      "label": "Section height",
+      "default": 100
     },
     {
       "type": "select",
-      "id": "section_width",
+      "id": "section_style",
       "label": "Section width",
       "info": "Desktop only",
       "options": [

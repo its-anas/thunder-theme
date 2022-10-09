@@ -2,8 +2,6 @@
   section.{{ section.id }}  {
       margin-top: {{ section.settings.space_outside | divided_by: 2 }}px;
       margin-bottom: {{ section.settings.space_outside | divided_by: 2 }}px;
-      padding-top: {{ section.settings.top_padding }}px;
-      padding-bottom: {{ section.settings.bottom_padding }}px;
    }
 
    .{{ section.id }}-just-color {
@@ -11,11 +9,10 @@
    }
 
    .{{ section.id }}-image {
-       {% if section.settings.section_width == "wrapped" %}
+       {% if section.settings.section_style == "wrapped" %}
             background-image: url({{ section.settings.background_image | image_url: width: settings.wrapped_content_width }});
             background-repeat: no-repeat;
-       {% endif %}
-       {% if section.settings.section_width == "full-width" %}
+       {% else %}
             background-image: url({{ section.settings.background_image | image_url }});
             background-size: cover;
        {% endif %}
@@ -23,7 +20,7 @@
    }
 
    .{{ section.id }}-space-between {
-        gap: {{ section.settings.space_between }}px;
+        gap: {{ section.settings.space_between_elements }}rem;
    }
 
    @media screen and (min-width: 750px) {
@@ -37,7 +34,7 @@
    }
 {%- endstyle -%}
 
-<section class="{{ section.id }} {% if section.settings.background_image == blank %}{{ section.id }}-just-color{% else %}{{ section.id }}-{{ section.settings.background_type }}{% endif %} {{ section.settings.section_width }}">
+<section class="{{ section.id }} {% if section.settings.background_image == blank %}{{ section.id }}-just-color{% else %}{{ section.id }}-{{ section.settings.background_type }}{% endif %} {{ section.settings.section_style }}">
   <div class="wrapper container {{ section.id }}-space-between text-alignment--{{ section.settings.text_alignment }} {{ section.id }}-text-width horizontal--{{ section.settings.horizontal_position }}">
     {%- for block in section.blocks -%}
       {%- case block.type -%}
@@ -249,13 +246,13 @@
     },
     {
       "type": "range",
-      "id": "space_between",
+      "id": "space_between_elements",
       "label": "Space between elements",
-      "min": 5,
-      "max": 100,
-      "step": 5,
-      "unit": "px",
-      "default": 20
+      "min": 1,
+      "max": 3,
+      "step": 0.5,
+      "unit": "rem",
+      "default": 1
     },
     {
       "type": "range",
@@ -268,33 +265,13 @@
       "default": 0
     },
     {
-      "type": "range",
-      "id": "top_padding",
-      "label": "Top padding",
-      "min": 0,
-      "max": 100,
-      "step": 10,
-      "unit": "px",
-      "default": 0
-    },
-    {
-      "type": "range",
-      "id": "bottom_padding",
-      "label": "Bottom padding",
-      "min": 0,
-      "max": 100,
-      "step": 10,
-      "unit": "px",
-      "default": 0
-    },
-    {
       "type": "select",
-      "id": "section_width",
+      "id": "section_style",
       "label": "Section width",
       "info": "Desktop only",
       "options": [
         {
-          "value": " ",
+          "value": "full-width",
           "label": "Full width"
         },
         {
@@ -302,7 +279,7 @@
           "label": "Wrapped"
         }
       ],
-      "default": " "
+      "default": "full-width"
     }
   ],
   "blocks": [

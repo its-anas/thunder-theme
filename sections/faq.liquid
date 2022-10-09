@@ -1,14 +1,13 @@
 {%- style -%}
   .{{ section.id }}.faq {
     background-color: {{ section.settings.background_color }};
-    padding-top: {{ section.settings.top_padding }}rem;
-    padding-bottom: {{ section.settings.bottom_padding }}rem;
     margin-top: {{ section.settings.space_outside | divided_by: 2 }}rem;
     margin-bottom: {{ section.settings.space_outside | divided_by: 2 }}rem;
+    gap: {{ section.settings.space_between_elements }}rem;
   }
 
   .{{ section.id }} > .faq__container {
-    gap: {{ section.settings.space_between_elements }}rem;
+
   }
 
   .{{ section.id }} > .faq__container > .faq__image {
@@ -39,7 +38,7 @@
   }
 {%- endstyle -%}
 
-<faq-section class="{{ section.id }} faq {{ section.settings.section_width }}">
+<faq-section class="{{ section.id }} faq container {{ section.settings.section_style }}">
   <h6 class="faq__heading">{{ section.settings.heading }}</h6>
   <div class="faq__container">
     {% if section.settings.show_image %}
@@ -135,46 +134,26 @@
       "max": 10,
       "step": 2,
       "unit": "rem",
-      "default": 4
+      "default": 0
     },
     {
       "type": "range",
       "id": "space_between_elements",
       "label": "Space between elements",
-      "min": 1.0,
-      "max": 5.0,
+      "min": 1,
+      "max": 3,
       "step": 0.5,
       "unit": "rem",
-      "default": 1.5
-    },
-    {
-      "type": "range",
-      "id": "top_padding",
-      "label": "Top padding",
-      "min": 1,
-      "max": 5,
-      "step": 1,
-      "unit": "rem",
-      "default": 2
-    },
-    {
-      "type": "range",
-      "id": "bottom_padding",
-      "label": "Bottom padding",
-      "min": 1,
-      "max": 5,
-      "step": 1,
-      "unit": "rem",
-      "default": 2
+      "default": 1
     },
     {
       "type": "select",
-      "id": "section_width",
+      "id": "section_style",
       "label": "Section style",
       "info": "Desktop only",
       "options": [
         {
-          "value": " ",
+          "value": "full-width",
           "label": "Full width"
         },
         {
@@ -182,7 +161,7 @@
           "label": "Wrapped"
         }
       ],
-      "default": " "
+      "default": "full-width"
     },
     {
       "type": "header",
