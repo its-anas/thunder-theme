@@ -9,12 +9,10 @@
     background-color: {{ section.settings.background_color }};
   }
   @media screen and (min-width: 750px) {
-    .{{ section.id }}.video-with-text {
-        height: {{ section.settings.section_height }}px;
-    }
+
     .{{ section.id }} > .video-with-text__media > .video-with-text__video-box {
-        height: {{ section.settings.video_height }}px;
         width: {{ section.settings.video_height }}px;
+        aspect-ratio: 1;
     }
   }
 
@@ -24,15 +22,15 @@
     background-position: center;
   }
 
-  .{{ section.id }}.video-with-text > .video-with-text__content > * {
+  .{{ section.id }}.video-with-text > .video-with-text__content > .video-with-text__box {
     gap: {{ section.settings.space_between_elements }}rem;
   }
 
-    @media screen and (min-width: 750px) {
-        .text-width-{{ section.id }} {
+  @media screen and (min-width: 1024px) {
+      .text-width-{{ section.id }} {
         width: {{ section.settings.text_width }}%;
-        }
-    }
+      }
+  }
 {%- endstyle -%}
 
 <video-with-text class="{{ section.id }} video-with-text {{ section.settings.video_placement }} {{ section.settings.section_style }} {% if section.settings.background_image == blank %}color{% else %}{{ section.settings.background_type }}{% endif %}">
@@ -67,7 +65,7 @@
     </div>
   </div>
   <div class="video-with-text__content">
-    <div class="horizontal--{{ section.settings.text_horizontal_position }} vertical--center text-alignment--{{ section.settings.text_alignment }} text-width-{{ section.id }}">
+    <div class="video-with-text__box horizontal--{{ section.settings.text_horizontal_position }} vertical--center text-alignment--{{ section.settings.text_alignment }} text-width-{{ section.id }}">
       {%- if section.settings.subheading != blank -%}
         <h6>{{ section.settings.subheading }}</h6>
       {%- endif -%}
@@ -343,17 +341,6 @@
       "step": 1,
       "unit": "rem",
       "default": 0
-    },
-    {
-      "type": "range",
-      "id": "section_height",
-      "info": "Desktop only",
-      "min": 600,
-      "max": 800,
-      "step": 10,
-      "unit": "px",
-      "label": "Section height",
-      "default": 600
     },
     {
       "type": "select",

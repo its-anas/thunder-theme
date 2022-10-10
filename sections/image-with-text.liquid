@@ -1,18 +1,19 @@
 {%- style -%}
   .{{ section.id }}.image-with-text {
-      min-height: 700px;
+      min-height: 600px;
       height: {{ section.settings.image_height }}px;
       background-color: {{ section.settings.background_color }};
       margin-top: {{ section.settings.space_outside | divided_by: 2 }}px;
       margin-bottom: {{ section.settings.space_outside | divided_by: 2 }}px;
   }
 
-  @media screen and (min-width: 750px) {
+  @media screen and (min-width: 751px) {
   .{{ section.id }}.image-with-text {
       min-height: 0px;
       height: {{ section.settings.image_height }}px;
   }
-
+  }
+  @media screen and (min-width: 1025px) {
     .{{ section.id }}-text-width {
       width: {{ section.settings.text_width }}%;
     }
@@ -95,8 +96,8 @@
     {
       "type": "range",
       "id": "image_height",
-      "min": 350,
-      "max": 1000,
+      "min": 600,
+      "max": 800,
       "step": 10,
       "unit": "px",
       "label": "Height",

@@ -12,24 +12,14 @@
       background: rgba({{ section.settings.overlay_color.red }}, {{ section.settings.overlay_color.green }}, {{ section.settings.overlay_color.blue }}, {{ section.settings.overlay_opacity | divided_by: 100.0 }});
   }
 
-  .{{ section.id }}.video-hero__media {
-    width: 100vh;
-
-  }
-
-  @media screen and (min-width: 750px) {
+  @media screen and (min-width: 1025px) {
     .{{ section.id }}-text-width {
       width: {{ section.settings.text_width }}%;
     }
-    .{{ section.id }}.video-hero__media {
-      height: {{ section.settings.video_height }}px;
-      width: 100%;
-  }
    }
-
-  .video-hero > video {
-    width: 100%;
-  }
+  .{{ section.id }}.video-hero__media {
+      height: {{ section.settings.video_height }}px;
+    }
 {%- endstyle -%}
 
 <section class="{{ section.id }} video-hero {{ section.settings.section_style }}">

@@ -27,19 +27,19 @@
 
     {% if section.blocks.size == 2 and section.settings.gallery_style == "multiple_rows" %}
       .{{ section.id }}.gallery > div:nth-child(1) {
-        width: 75%;
+        width: 65%;
       }
       .{{ section.id }}.gallery > div:nth-child(2) {
-        width: 25%;
+        width: 35%;
       }
     {% endif %}
 
     {% if section.blocks.size == 3 and section.settings.gallery_style == "multiple_rows" %}
       .{{ section.id }}.gallery > div:nth-child(1) {
-        width: 75%;
+        width: 65%;
       }
       .{{ section.id }}.gallery > div:nth-child(2) {
-        width: 25%;
+        width: 35%;
       }
       .{{ section.id }}.gallery > div:nth-child(3) {
         width: 100%;
@@ -48,19 +48,19 @@
 
     {% if section.blocks.size == 4 and section.settings.gallery_style == "multiple_rows" %}
       .{{ section.id }}.gallery > div:nth-child(1), .gallery > div:nth-child(4) {
-        width: 75%;
+        width: 65%;
       }
       .{{ section.id }}.gallery > div:nth-child(2), .gallery > div:nth-child(3) {
-        width: 25%;
+        width: 35%;
       }
     {% endif %}
 
     {% if section.blocks.size == 5 and section.settings.gallery_style == "multiple_rows" %}
       .{{ section.id }}.gallery > div:nth-child(1), .gallery > div:nth-child(4) {
-        width: 75%;
+        width: 65%;
       }
       .{{ section.id }}.gallery > div:nth-child(2), .gallery > div:nth-child(3) {
-        width: 25%;
+        width: 35%;
       }
       .{{ section.id }}.gallery > div:nth-child(5) {
         width: 100%;
@@ -69,10 +69,10 @@
 
     {% if section.blocks.size == 6 and section.settings.gallery_style == "multiple_rows" %}
       .{{ section.id }}.gallery > div:nth-child(1), .gallery > div:nth-child(4), .gallery > div:nth-child(5) {
-        width: 75%;
+        width: 65%;
       }
       .{{ section.id }}.gallery > div:nth-child(2), .gallery > div:nth-child(3), .gallery > div:nth-child(6) {
-        width: 25%;
+        width: 35%;
       }
     {% endif %}
   }
@@ -133,7 +133,7 @@
           "label": "All in one row"
         }
       ],
-      "default": "multiple_rows",
+      "default": "all_in_one",
       "info": "Desktop only"
     },
     {

@@ -334,6 +334,7 @@ a.border.button {
 @media screen and (min-width: 750px) {
         .buttons {
                 flex-direction: row;
+                flex-wrap: wrap;
 
                 &--left {
                         justify-content: left;
@@ -869,12 +870,12 @@ $item-count4: 5;
                 padding-top: 3rem;
         }
 
-        @media screen and (max-width: 750px) {
+        @media screen and (max-width: 1024px) {
                 justify-content: flex-start;
                 overflow: auto;
         }
 
-        @media screen and (min-width: 750px) {
+        @media screen and (min-width: 1024px) {
                 justify-content: center;
         }
 }
@@ -1050,13 +1051,17 @@ $item-count4: 5;
         }
 
         &__content {
-                width: 100%;
-                @media screen and (max-width: 750px) {
-                        width: 90%;
-                        display: flex;
-                        flex-direction: column;
-                        justify-content: center;
-                        align-items: center;
+                width: 90%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+
+                @media screen and (min-width: 751px) and (max-width: 1024px) {
+                        width: 80%;
+                }
+                @media screen and (min-width: 1025px) {
+                        width: 100%;
                 }
         }
 
@@ -1229,6 +1234,7 @@ $item-count4: 5;
 
                 @media screen and (min-width: 750px) {
                         height: 100%;
+                        width: 50%;
                 }
 
                 &--fit {
@@ -1249,6 +1255,7 @@ $item-count4: 5;
 
                 @media screen and (min-width: 750px) {
                         height: 100%;
+                        width: 50%;
                 }
         }
 }
@@ -1469,66 +1476,6 @@ $item-count4: 5;
 }
 
 /**------------------------------------------------------------------------------------------------
- **                                       ANCHOR: Text with images section
- *------------------------------------------------------------------------------------------------**/
-.text-with-image {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        height: auto;
-        background-size: cover;
-        background-position: center;
-        padding: 2rem 0rem;
-        @media screen and (max-width: 750px) {
-                padding: 4rem 0rem;
-        }
-
-        &__image {
-                width: 100%;
-        }
-
-        &__content {
-                .box {
-                        margin-top: 10px;
-                        gap: 7px;
-
-                        .button--secondary {
-                                @media screen and (min-width: 750px) {
-                                        min-width: 0px;
-                                        margin: auto;
-                                }
-                        }
-                }
-        }
-
-        &__columns {
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                gap: 15px;
-                max-width: 100%;
-
-                @media screen and (min-width: 750px) {
-                        flex-direction: row;
-                        flex-wrap: wrap;
-                        gap: 20px;
-                }
-        }
-
-        &__column {
-                height: auto;
-                width: 95%;
-                justify-items: stretch;
-        }
-
-        .media > .full {
-                padding: 10px;
-        }
-}
-
-/**------------------------------------------------------------------------------------------------
  **                                       ANCHOR: Video hero section
  *------------------------------------------------------------------------------------------------**/
 .video-hero {
@@ -1538,6 +1485,10 @@ $item-count4: 5;
         overflow: hidden;
         height: 100%;
         align-items: center;
+
+        &__media {
+                width: 100%;
+        }
 
         &__content {
                 width: 100%;
@@ -1553,6 +1504,10 @@ $item-count4: 5;
                 flex-direction: column;
                 padding: 15px;
         }
+
+        video {
+                min-width: 100%;
+        }
 }
 
 /**------------------------------------------------------------------------------------------------
@@ -1562,104 +1517,111 @@ $item-count4: 5;
         display: flex;
         align-items: center;
         overflow: hidden;
-        gap: 0.5rem;
+        gap: 2rem;
         padding: 50px 15px;
+
         @media screen and (min-width: 750px) {
                 gap: 1rem;
         }
-}
-@media screen and (max-width: 750px) {
-        .video-with-text {
-                height: 800px;
-        }
-}
-.video-with-text.first {
-        flex-direction: column;
-}
-@media screen and (min-width: 750px) {
-        .video-with-text.first {
-                flex-direction: row;
-        }
-}
-.video-with-text.second {
-        flex-direction: column-reverse;
-}
-@media screen and (min-width: 750px) {
-        .video-with-text.second {
-                flex-direction: row-reverse;
-        }
-}
-.video-with-text__media {
-        height: 100%;
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-}
-@media screen and (min-width: 750px) {
-        .video-with-text__media {
-                width: 50%;
-        }
-}
-.video-with-text__video-box {
-        display: grid;
-        height: 350px;
-        width: 350px;
-}
-.video-with-text__video,
-.video-with-text__thumbnail {
-        grid-column: 1;
-        grid-row: 1;
-}
-.video-with-text__video {
-        z-index: 1;
-}
-.video-with-text__video .video {
-        display: none;
-}
-.video-with-text__video .video.shown {
-        display: block;
-}
-.video-with-text__thumbnail {
-        z-index: 2;
-        display: grid;
-        justify-items: center;
-}
-.video-with-text__thumbnail:hover {
-        cursor: pointer;
-}
-.video-with-text__thumbnail.hidden {
-        display: none;
-}
-.video-with-text__thumbnail * {
-        grid-column: 1;
-        grid-row: 1;
-}
-.video-with-text__thumbnail img {
-        z-index: 3;
-}
-.video-with-text__thumbnail .icon {
-        z-index: 4;
-}
-.video-with-text__content {
-        height: 100%;
-        width: 100%;
-}
-.video-with-text__content > * {
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        padding: 10px;
-}
 
-@media screen and (min-width: 750px) {
-        .video-with-text__content {
-                width: 50%;
+        &.first {
+                flex-direction: column;
+
+                @media screen and (min-width: 750px) {
+                        flex-direction: row;
+                }
         }
-}
-.video-with-text__content > * {
-        display: flex;
-        flex-direction: column;
+
+        &.second {
+                flex-direction: column-reverse;
+
+                @media screen and (min-width: 750px) {
+                        flex-direction: row-reverse;
+                }
+        }
+
+        &__media {
+                height: 100%;
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                @media screen and (min-width: 750px) {
+                        width: 50%;
+                }
+        }
+        &__video-box {
+                display: grid;
+                width: 350px;
+        }
+
+        &__video,
+        &__thumbnail {
+                grid-column: 1;
+                grid-row: 1;
+        }
+        &__video {
+                z-index: 1;
+                .video {
+                        display: none;
+                        &.shown {
+                                display: block;
+                        }
+                }
+        }
+
+        &__thumbnail {
+                z-index: 2;
+                display: grid;
+                justify-items: center;
+                &:hover {
+                        cursor: pointer;
+                }
+                &.hidden {
+                        display: none;
+                }
+
+                * {
+                        grid-column: 1;
+                        grid-row: 1;
+                }
+
+                img {
+                        z-index: 3;
+                }
+
+                .icon {
+                        z-index: 4;
+                }
+        }
+
+        &__content {
+                height: 100%;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                @media screen and (min-width: 750px) {
+                        width: 50%;
+                }
+        }
+
+        &__box {
+                display: flex;
+                flex-direction: column;
+
+                width: 100%;
+
+                @media screen and (min-width: 751px) and (max-width: 1024px) {
+                        align-items: center;
+                        width: 100%;
+                        .buttons {
+                                justify-content: center;
+                        }
+                }
+        }
 }
 
 /**------------------------------------------------------------------------------------------------
@@ -2080,19 +2042,12 @@ $indicator-width: 40px;
  **                                       ANCHOR: Shop the look section
  *------------------------------------------------------------------------------------------------**/
 .shop-the-look {
+        width: 100%;
         overflow: hidden;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        padding-top: 2rem;
+        width: 100%;
+        display: grid;
 
         &__heading {
-        }
-
-        &__wrapper {
-                width: 100%;
-                display: grid;
         }
 
         &__image,
