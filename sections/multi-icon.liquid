@@ -41,7 +41,9 @@
 >
   {% if section.settings.heading != blank %}
     <div class="multi-icon__heading">
-      <h6>{{ section.settings.heading }}</h6>
+      <{{ section.settings.heading_size }}>
+        {{ section.settings.heading }}
+      </{{ section.settings.heading_size }}>
     </div>
   {% endif %}
   <div class="slider-component">
@@ -101,6 +103,38 @@
       "id": "heading",
       "label": "Heading",
       "default": "Filter by"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "options": [
+        {
+          "value": "h1",
+          "label": "h1"
+        },
+        {
+          "value": "h2",
+          "label": "h2"
+        },
+        {
+          "value": "h3",
+          "label": "h3"
+        },
+        {
+          "value": "h4",
+          "label": "h4"
+        },
+        {
+          "value": "h5",
+          "label": "h5"
+        },
+        {
+          "value": "h6",
+          "label": "h6"
+        }
+      ],
+      "default": "h6"
     },
     {
       "type": "header",

@@ -50,7 +50,9 @@
   class="{{ section.id }} featured-collection just-color {% if section.settings.background_image == blank %}just-color{% else %}{{ section.settings.background_type }}{% endif %} {{ section.settings.section_style }}"
 >
   <div class="featured-collection__heading">
-    <h6>{{ section.settings.heading }}</h6>
+    <{{ section.settings.heading_size }}>
+      {{ section.settings.heading }}
+    </{{ section.settings.heading_size }}>
   </div>
   <div class="slider-component">
     <div class="prev">
@@ -259,6 +261,38 @@
       "id": "heading",
       "label": "Heading",
       "default": "Featured collection"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "options": [
+        {
+          "value": "h1",
+          "label": "h1"
+        },
+        {
+          "value": "h2",
+          "label": "h2"
+        },
+        {
+          "value": "h3",
+          "label": "h3"
+        },
+        {
+          "value": "h4",
+          "label": "h4"
+        },
+        {
+          "value": "h5",
+          "label": "h5"
+        },
+        {
+          "value": "h6",
+          "label": "h6"
+        }
+      ],
+      "default": "h6"
     },
     {
       "type": "select",

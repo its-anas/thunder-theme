@@ -99,9 +99,9 @@
       </div>
       <div class="{{ section.id }} gallery__content container text-alignment--{{ section.settings.horizontal_position }} vertical--{{ section.settings.vertical_position }}">
         {%- if block.settings.heading != blank -%}
-          <h6>
+          <{{ block.settings.heading_size }}>
             {{ block.settings.heading }}
-          </h6>
+          </{{ block.settings.heading_size }}>
         {% endif %}
         {%- if block.settings.text != blank -%}
           <p>{{ block.settings.text }}</p>
@@ -248,6 +248,38 @@
           "label": "Heading",
           "default": "Heading"
         },
+        {
+          "type": "select",
+          "id": "heading_size",
+          "label": "Heading size",
+          "options": [
+            {
+              "value": "h1",
+              "label": "h1"
+            },
+            {
+              "value": "h2",
+              "label": "h2"
+            },
+            {
+              "value": "h3",
+              "label": "h3"
+            },
+            {
+              "value": "h4",
+              "label": "h4"
+            },
+            {
+              "value": "h5",
+              "label": "h5"
+            },
+            {
+              "value": "h6",
+              "label": "h6"
+            }
+          ],
+          "default": "h2"
+        }
         {
           "type": "text",
           "id": "text",

@@ -29,7 +29,11 @@
 
 <div class="{{ section.id }} newsletter container {% if section.settings.background_image == blank %}just-color{% else %}{{ section.settings.background_type }}{% endif %} {{ section.settings.section_style }}">
   {% if section.settings.heading != blank %}
-    <h6 class="newsletter__heading">{{ section.settings.heading }}</h6>
+    <div class="newsletter__heading">
+      <{{ section.settings.heading_size }}>
+        {{ section.settings.heading }}
+      </{{ section.settings.heading_size }}>
+    </div>
   {% endif %}
   {% if section.settings.text != blank %}
     <p class="newsletter__text">{{ section.settings.text }}</p>
@@ -93,6 +97,38 @@
       "id": "heading",
       "label": "Heading",
       "default": "Newsletter"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "options": [
+        {
+          "value": "h1",
+          "label": "h1"
+        },
+        {
+          "value": "h2",
+          "label": "h2"
+        },
+        {
+          "value": "h3",
+          "label": "h3"
+        },
+        {
+          "value": "h4",
+          "label": "h4"
+        },
+        {
+          "value": "h5",
+          "label": "h5"
+        },
+        {
+          "value": "h6",
+          "label": "h6"
+        }
+      ],
+      "default": "h4"
     },
     {
       "type": "text",

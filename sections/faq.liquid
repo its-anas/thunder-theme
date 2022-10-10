@@ -39,7 +39,11 @@
 {%- endstyle -%}
 
 <faq-section class="{{ section.id }} faq container {{ section.settings.section_style }}">
-  <h6 class="faq__heading">{{ section.settings.heading }}</h6>
+  <div class="faq__heading">
+    <{{ section.settings.heading_size }}>
+      {{ section.settings.heading }}
+    </{{ section.settings.heading_size }}>
+  </div>
   <div class="faq__container">
     {% if section.settings.show_image %}
       <div class="faq__image media">
@@ -92,6 +96,38 @@
       "id": "heading",
       "label": "Section heading",
       "default": "FAQ"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "options": [
+        {
+          "value": "h1",
+          "label": "h1"
+        },
+        {
+          "value": "h2",
+          "label": "h2"
+        },
+        {
+          "value": "h3",
+          "label": "h3"
+        },
+        {
+          "value": "h4",
+          "label": "h4"
+        },
+        {
+          "value": "h5",
+          "label": "h5"
+        },
+        {
+          "value": "h6",
+          "label": "h6"
+        }
+      ],
+      "default": "h6"
     },
     {
       "type": "checkbox",
