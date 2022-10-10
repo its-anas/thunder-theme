@@ -868,17 +868,16 @@ slider-component .slider-component .slides-container .slide .item > * {
     justify-content: center;
   }
 }
-
-.compare {
-  border-collapse: collapse;
-  color: #333333;
-  text-align: center;
-  overflow: hidden;
-}
 .compare__heading {
   position: absolute;
   width: 100%;
   text-align: center;
+}
+.compare__table {
+  border-collapse: collapse;
+  color: #333333;
+  text-align: center;
+  overflow: hidden;
 }
 .compare__head {
   height: 150px;
@@ -905,6 +904,7 @@ slider-component .slider-component .slides-container .slide .item > * {
   gap: 0.5rem;
 }
 .compare__content_image-and-text .compare-image {
+  position: relative;
   height: 100px;
   width: 100px;
 }
@@ -921,6 +921,11 @@ slider-component .slider-component .slides-container .slide .item > * {
     height: 120px;
     width: 120px;
   }
+}
+.compare__content_image-and-text .compare-image .quick-add-icon {
+  position: absolute;
+  right: 0.1rem;
+  bottom: 0.1rem;
 }
 .compare__content_image-and-text .product-name {
   text-transform: uppercase;

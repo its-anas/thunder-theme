@@ -1,13 +1,13 @@
 {% assign blocks_count = section.blocks.size | plus: 1 %}
 
 {%- style -%}
-  section.{{ section.id }} {
+  {{ section.id }}.compare__section {
     background-color: {{ section.settings.background_color }};
     margin-top: {{ section.settings.space_outside | divided_by: 2 }}px;
     margin-bottom: {{ section.settings.space_outside | divided_by: 2 }}px;
   }
 
-  .{{ section.id }}.compare {
+  .{{ section.id }}.compare__table {
     max-width: {{ settings.wrapped_content_width | minus: 100 }}px;
   }
 
@@ -22,31 +22,31 @@
   }
 {%- endstyle -%}
 
-<section class="{{ section.id }} compare__section  {{ section.settings.section_style }}">
+<section class="{{ section.id }} compare__section {{ section.settings.section_style }}">
   <div class="compare__heading">
     <{{ section.settings.heading_size }}>
       {{ section.settings.heading }}
     </{{ section.settings.heading_size }}>
   </div>
   <div class="container">
-    <table class="{{ section.id }} compare">
+    <table class="{{ section.id }} compare__table">
       <thead>
         <tr>
           <th class="{{ section.id }} compare__head"></th>
           {% for block in section.blocks %}
             <th class="{{ section.id }} compare__head" {{ block.shopify_attributes }}>
-              <a href="{{ block.settings.product.url }}">
-                <div class="compare__content">
-                  <div class="compare__content_image-and-text">
-                    {%- if block.settings.product == blank -%}
-                      {% if section.settings.image_size == 'small' %}
-                        {{ 'product-1' | placeholder_svg_tag: 'placeholder compare-image small' }}
-                      {% elsif section.settings.image_size == 'medium' %}
-                        {{ 'product-1' | placeholder_svg_tag: 'placeholder compare-image medium' }}
-                      {% elsif section.settings.image_size == 'large' %}
-                        {{ 'product-1' | placeholder_svg_tag: 'placeholder compare-image large' }}
-                      {% endif %}
-                    {%- elsif block.settings.product != blank -%}
+              <div class="compare__content">
+                <div class="compare__content_image-and-text">
+                  {%- if block.settings.product == blank -%}
+                    {% if section.settings.image_size == 'small' %}
+                      {{ 'product-1' | placeholder_svg_tag: 'placeholder compare-image small' }}
+                    {% elsif section.settings.image_size == 'medium' %}
+                      {{ 'product-1' | placeholder_svg_tag: 'placeholder compare-image medium' }}
+                    {% elsif section.settings.image_size == 'large' %}
+                      {{ 'product-1' | placeholder_svg_tag: 'placeholder compare-image large' }}
+                    {% endif %}
+                  {%- elsif block.settings.product != blank -%}
+                    <a href="{{ block.settings.product.url }}">
                       <div class="media compare-image {{ section.settings.image_size }}">
                         <img
                           srcset="{{ block.settings.product.featured_image | image_url }}"
@@ -56,37 +56,47 @@
                           height="{{ block.settings.product.featured_image.height }}"
                           class="{{ section.settings.image_style }}"
                         >
+                        <a class="quick-add-icon">
+                          {% render 'icons', icon: 'quick-add' -%}
+                        </a>
                       </div>
-                    {%- endif -%}
-                    <p class="product-name">
+                    </a>
+                  {%- endif -%}
+                  <a
+                    {% if block.settings.product.url != blank %}
+                      href="{{ block.settings.product.url }}"
+                    {% endif %}
+                    class="product-name"
+                  >
+                    <p>
                       {% if block.settings.product_name == blank %}
                         {{ block.settings.product.title }}
                       {% elsif block.settings.product_name != blank %}
                         {{ block.settings.product_name }}
                       {% endif %}
                     </p>
-                  </div>
-                  <div class="compare__content_description">
-                    <p class="small">{{ block.settings.product_description }}</p>
-                  </div>
-                  <div class="compare__content_prices">
-                    <p class="price--sale">
-                      {% if block.settings.product.compare_at_price == blank %}
-                        $00.00
-                      {% elsif block.settings.product.compare_at_price != blank %}
-                        {{ block.settings.product.compare_at_price | money }}
-                      {% endif %}
-                    </p>
-                    <p class="price--normal">
-                      {% if block.settings.product.price == blank %}
-                        $00.00
-                      {% elsif block.settings.product.price != blank %}
-                        {{ block.settings.product.price | money }}
-                      {% endif %}
-                    </p>
-                  </div>
+                  </a>
                 </div>
-              </a>
+                <div class="compare__content_description">
+                  <p class="small">{{ block.settings.product_description }}</p>
+                </div>
+                <div class="compare__content_prices">
+                  <p class="price--sale">
+                    {% if block.settings.product.compare_at_price == blank %}
+                      $00.00
+                    {% elsif block.settings.product.compare_at_price != blank %}
+                      {{ block.settings.product.compare_at_price | money }}
+                    {% endif %}
+                  </p>
+                  <p class="price--normal">
+                    {% if block.settings.product.price == blank %}
+                      $00.00
+                    {% elsif block.settings.product.price != blank %}
+                      {{ block.settings.product.price | money }}
+                    {% endif %}
+                  </p>
+                </div>
+              </div>
             </th>
           {% endfor %}
         </tr>
