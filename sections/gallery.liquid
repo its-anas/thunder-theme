@@ -107,13 +107,7 @@
           <p>{{ block.settings.text }}</p>
         {% endif %}
         {%- if block.settings.button_text != blank -%}
-          <a
-            class="button horizontal--{{ section.settings.horizontal_position }} button--{% if section.settings.button_type == "border" and section.settings.button_style == "primary" %}primary{% else %}secondary{% endif %} {{ section.settings.button_type }}"
-            href="{{ block.settings.button_link }}"
-          >
-            <span></span> <span></span> <span></span> <span></span>
-            {{ block.settings.button_text }}
-          </a>
+          <a href="{{ block.settings.button_link }}" class="button--link">{{ block.settings.button_text }}</a>
         {% endif %}
       </div>
     </div>
@@ -175,38 +169,7 @@
       "label": "Overlay opacity",
       "default": 10
     },
-    {
-      "type": "select",
-      "id": "button_type",
-      "label": "Button type",
-      "options": [
-        {
-          "value": "border",
-          "label": "Button"
-        },
-        {
-          "value": " ",
-          "label": "Link"
-        }
-      ],
-      "default": "border"
-    },
-    {
-      "type": "select",
-      "id": "button_style",
-      "label": "Button style",
-      "options": [
-        {
-          "value": "primary",
-          "label": "Filled"
-        },
-        {
-          "value": "secondary",
-          "label": "Empty"
-        }
-      ],
-      "default": "secondary"
-    },
+
     {
       "type": "select",
       "id": "vertical_position",

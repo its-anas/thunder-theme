@@ -860,9 +860,11 @@ $item-count4: 5;
 /**------------------------------------------------------------------------------------------------
  **                                       ANCHOR: Compare section
  *------------------------------------------------------------------------------------------------**/
-section.compare__section {
+.compare__section {
         display: flex;
         overflow: hidden;
+        padding: 2rem 0px;
+
         .container {
                 padding-top: 3rem;
         }
@@ -1032,6 +1034,7 @@ section.compare__section {
         display: flex;
         flex-direction: column;
         align-items: center;
+
         &__container {
                 display: flex;
                 flex-direction: column;
@@ -1041,7 +1044,7 @@ section.compare__section {
                 gap: 1rem;
                 width: 100%;
 
-                @media screen and (min-width: 750px) {
+                @media screen and (min-width: 1024px) {
                         flex-direction: row;
                 }
         }

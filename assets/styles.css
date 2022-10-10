@@ -848,21 +848,22 @@ slider-component .slider-component .slides-container .slide .item > * {
 /**------------------------------------------------------------------------------------------------
  **                                       ANCHOR: Compare section
  *------------------------------------------------------------------------------------------------**/
-section.compare__section {
+.compare__section {
   display: flex;
   overflow: hidden;
+  padding: 2rem 0px;
 }
-section.compare__section .container {
+.compare__section .container {
   padding-top: 3rem;
 }
 @media screen and (max-width: 750px) {
-  section.compare__section {
+  .compare__section {
     justify-content: flex-start;
     overflow: auto;
   }
 }
 @media screen and (min-width: 750px) {
-  section.compare__section {
+  .compare__section {
     justify-content: center;
   }
 }
@@ -1019,7 +1020,7 @@ section.compare__section .container {
   gap: 1rem;
   width: 100%;
 }
-@media screen and (min-width: 750px) {
+@media screen and (min-width: 1024px) {
   .faq__container {
     flex-direction: row;
   }
