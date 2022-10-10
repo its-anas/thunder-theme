@@ -68,9 +68,9 @@
                 {% if price_difference > 0 %}
                   <p class="tag--normal tag-text">SAVE {{ product.compare_at_price | minus: product.price | money }}</p>
                 {% endif %}
-                <a class="quick-add-icon">
+                <div class="quick-add-icon">
                   {% render 'icons', icon: 'quick-add' -%}
-                </a>
+                </div>
                 {% if product.featured_image != blank %}
                   <a href="{{ product.url }}" class="media">
                     <img
@@ -117,9 +117,9 @@
             <div class="item">
               <div class="featured-collection__image">
                 <p class="tag--normal tag-text">SAVE {{ product.compare_at_price | minus: product.price | money }}</p>
-                <a class="quick-add-icon">
+                <div class="quick-add-icon">
                   {% render 'icons', icon: 'quick-add' -%}
-                </a>
+                </div>
                 {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
               </div>
               <div class="featured-collection__container">
@@ -350,7 +350,7 @@
       "max": 90,
       "step": 5,
       "unit": "%",
-      "label": "Row width relative to screen",
+      "label": "Section width relative to screen",
       "default": 50
     },
     {
