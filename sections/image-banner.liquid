@@ -46,17 +46,17 @@
       {%- for block in section.blocks -%}
         {%- case block.type -%}
           {%- when 'subheading' -%}
-            <{{ block.settings.subheading_size }}>
+            <{{ block.settings.subheading_size }} {{ block.shopify_attributes }}>
               {{ block.settings.subheading }}
             </{{ block.settings.subheading_size }}>
           {%- when 'heading' -%}
-            <{{ block.settings.heading_size }}>
+            <{{ block.settings.heading_size }} {{ block.shopify_attributes }}>
               {{ block.settings.heading }}
             </{{ block.settings.heading_size }}>
           {%- when 'text' -%}
-            {{ block.settings.text }}
+            <div {{ block.shopify_attributes }}>{{ block.settings.text }}</div>
           {%- when 'button' -%}
-            <div class="buttons buttons--{{ section.settings.text_alignment }}">
+            <div class="buttons buttons--{{ section.settings.text_alignment }}" {{ block.shopify_attributes }}>
               {%- if block.settings.primary_button_text != blank -%}
                 <a
                   class="button button--{% if block.settings.button_style == "border" %}primary{% else %}secondary{% endif %} {{ block.settings.button_style }}"

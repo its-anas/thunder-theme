@@ -32,7 +32,7 @@
         <tr>
           <th class="{{ section.id }} compare__head"></th>
           {% for block in section.blocks %}
-            <th class="{{ section.id }} compare__head">
+            <th class="{{ section.id }} compare__head" {{ block.shopify_attributes }}>
               <a href="{{ block.settings.product.url }}">
                 <div class="compare__content">
                   <div class="compare__content_image-and-text">

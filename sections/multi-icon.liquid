@@ -51,7 +51,7 @@
     <div class="slides-container">
       <div class="slide">
         {% for block in section.blocks %}
-          <div class="item" {{ block.shopify_attributes }}>
+          <div class="item" {{ block.shopify_attributes }} {{ block.shopify_attributes }}>
             <a
               {% if block.settings.url != blank %}
                 href="{{ block.settings.url }}"

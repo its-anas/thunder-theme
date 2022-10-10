@@ -80,7 +80,7 @@
 
 <section class="{{ section.id }} gallery {{ section.settings.section_style }}">
   {% for block in section.blocks %}
-    <div class="gallery__item">
+    <div class="gallery__item" {{ block.shopify_attributes }}>
       <div class="{{ section.id }} gallery__image">
         {%- if block.settings.image == blank -%}
           {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder' }}

@@ -32,7 +32,7 @@
     {% comment %} slides {% endcomment %}
     <div class="slideshow__container">
       {% for block in section.blocks %}
-        <div class="slideshow__slide">
+        <div class="slideshow__slide" {{ block.shopify_attributes }}>
           {% comment %} Picture {% endcomment %}
           <div class="{{ section.id }} slideshow__picture">
             {%- if block.settings.image == blank -%}
