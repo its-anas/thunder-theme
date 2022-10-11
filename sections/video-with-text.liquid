@@ -83,7 +83,9 @@
               {%- if block.settings.primary_button_text != blank -%}
                 <a
                   class="button button--{% if block.settings.button_style == "border" %}primary{% else %}secondary{% endif %} {{ block.settings.button_style }}"
-                  href="{{ block.settings.primary_button_link }}"
+                  {% if block.settings.primary_button_link != blank %}
+                    href="{{ block.settings.primary_button_link }}"
+                  {% endif %}
                 >
                   <span></span> <span></span> <span></span> <span></span>
                   {{ block.settings.primary_button_text }}
@@ -92,7 +94,9 @@
               {%- if block.settings.secondary_button_text != blank -%}
                 <a
                   class="button button--secondary {{ block.settings.button_style }}"
-                  href="{{ block.settings.secondary_button_link }}"
+                  {% if block.settings.secondary_button_link != blank %}
+                    href="{{ block.settings.secondary_button_link }}"
+                  {% endif %}
                 >
                   <span></span> <span></span> <span></span> <span></span>
                   {{ block.settings.secondary_button_text }}

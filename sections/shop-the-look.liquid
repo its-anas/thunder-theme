@@ -89,7 +89,13 @@
                 {% endif %}
               </p>
             </div>
-            <a href="{{ block.settings.product.url }}" class="button button--link">View product</a>
+            <a
+              {% if block.settings.product.url != blank %}
+                href="{{ block.settings.product.url }}"
+              {% endif %}
+              class="button-text button--link"
+              >View product</a
+            >
           </div>
         </div>
       </div>

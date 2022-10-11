@@ -66,14 +66,14 @@
           {% if block.settings.text != blank %}
             <p class="text">{{ block.settings.text }}</p>
           {% endif %}
-          {% if block.settings.link_text != blank %}
+          {%- if block.settings.button_text != blank -%}
             <a
-              {% if block.settings.link_url != blank %}
-                href="{{ block.settings.link_url }}"
+              {% if block.settings.button_link != blank %}
+                href="{{ block.settings.button_link }}"
               {% endif %}
-              class="button button--link"
+              class="button-text button--link"
             >
-              {{- block.settings.link_text -}}
+              {{- block.settings.button_text -}}
             </a>
           {% endif %}
         </div>
@@ -255,14 +255,14 @@
         },
         {
           "type": "text",
-          "id": "link_text",
-          "label": "Link text",
-          "default": "Learn more"
+          "id": "button_text",
+          "label": "Button text",
+          "default": "Button"
         },
         {
           "type": "url",
-          "id": "link_url",
-          "label": "Link url"
+          "id": "button_link",
+          "label": "Button link"
         }
       ]
     }

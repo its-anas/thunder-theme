@@ -107,7 +107,14 @@
           <p>{{ block.settings.text }}</p>
         {% endif %}
         {%- if block.settings.button_text != blank -%}
-          <a href="{{ block.settings.button_link }}" class="button button--link">{{ block.settings.button_text }}</a>
+          <a
+            {% if block.settings.button_link != blank %}
+              href="{{ block.settings.button_link }}"
+            {% endif %}
+            class="button-text button--link"
+          >
+            {{- block.settings.button_text -}}
+          </a>
         {% endif %}
       </div>
     </div>

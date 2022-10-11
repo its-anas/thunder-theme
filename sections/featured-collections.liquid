@@ -112,7 +112,13 @@
     </div>
   </div>
   <div class="featured-collections__link">
-    <a class="button button--link small" href="/collections/">View all</a>
+    <a
+      class="button-text button--link small"
+      {% if block.settings.collection != blank %}
+        href="/collections/"
+      {% endif %}
+      >View all</a
+    >
   </div>
 </slider-component>
 

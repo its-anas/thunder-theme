@@ -122,6 +122,7 @@ a.small {
         font-size: calc(var(--font-size-type-scale) * var(--font-type-scale) * 1px);
 }
 
+.button-text,
 .button {
         font-size: calc((var(--font-size-type-scale) / var(--font-type-scale)) * 1px);
         font-weight: 700;

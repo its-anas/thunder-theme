@@ -128,7 +128,8 @@
     </div>
   </div>
   <div class="blog-posts__link">
-    <a class="button--link small" href="{{ section.settings.blog.url }}">View all</a>
+    <a class="button-text button--link" {% if section.settings.blog.url != blank  %}href="{{ section.settings.blog.url }}{% endif %}">View all</a>
+
   </div>
 </slider-component>
 
