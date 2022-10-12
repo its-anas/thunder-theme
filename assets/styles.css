@@ -4,9 +4,6 @@
   box-sizing: inherit;
 }
 
-/**------------------------------------------------------------------------------------------------
- **                                       ANCHOR: Base
- *------------------------------------------------------------------------------------------------**/
 html,
 body {
   box-sizing: border-box;
@@ -17,9 +14,6 @@ body {
   background-color: var(--background-color);
 }
 
-/**------------------------------------------------------------------------------------------------
- **                                       ANCHOR: Reset
- *------------------------------------------------------------------------------------------------**/
 html,
 body {
   margin: 0;
@@ -62,9 +56,6 @@ img[loading=lazy] {
           clip-path: inset(0.5px);
 }
 
-/**------------------------------------------------------------------------------------------------
- **                                       ANCHOR: Typography
- *------------------------------------------------------------------------------------------------**/
 h1,
 h2,
 h3,
@@ -200,9 +191,6 @@ p[data-spam-detection-disclaimer] > a {
     margin-left: auto;
   }
 }
-/**------------------------------------------------------------------------------------------------
- **                                       ANCHOR: Form
- *------------------------------------------------------------------------------------------------**/
 input {
   height: 44px;
 }
@@ -237,9 +225,23 @@ textarea::placeholder {
   font-family: var(--font-family);
 }
 
-/**------------------------------------------------------------------------------------------------
- **                                       ANCHOR: Button
- *------------------------------------------------------------------------------------------------**/
+.form__error, .form__success {
+  padding-top: 0.5rem;
+  text-align: center;
+}
+.form__error {
+  color: #ff3333;
+}
+.form__error-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.form__success {
+  color: #4bb543;
+}
+
 button {
   font-family: var(--font-family);
 }
@@ -323,9 +325,6 @@ a.border.button--primary:hover, a.border.button--secondary:hover {
     justify-content: right;
   }
 }
-/**------------------------------------------------------------------------------------------------
- **                                       ANCHOR: Button animation
- *------------------------------------------------------------------------------------------------**/
 @media screen and (min-width: 751px) {
   a.button {
     position: relative;
@@ -385,9 +384,6 @@ a.border.button--primary:hover, a.border.button--secondary:hover {
     transition-delay: 0.6s;
   }
 }
-/**------------------------------------------------------------------------------------------------
- **                                       ANCHOR: Button-link
- *------------------------------------------------------------------------------------------------**/
 .button--link {
   position: relative;
   color: #fcdb33;
@@ -403,9 +399,6 @@ a.border.button--primary:hover, a.border.button--secondary:hover {
   transition: 0.2s;
 }
 
-/**------------------------------------------------------------------------------------------------
- **                                       ANCHOR: Media
- *------------------------------------------------------------------------------------------------**/
 .placeholder {
   height: 100%;
   width: 100%;
@@ -443,9 +436,6 @@ a.border.button--primary:hover, a.border.button--secondary:hover {
      object-position: center center;
 }
 
-/**------------------------------------------------------------------------------------------------
- **                                       ANCHOR: All sections
- *------------------------------------------------------------------------------------------------**/
 .container {
   padding: 2rem 15px;
 }
@@ -478,9 +468,6 @@ a.border.button--primary:hover, a.border.button--secondary:hover {
     margin-right: auto;
   }
 }
-/**------------------------------------------------------------------------------------------------
- **                                       ANCHOR: Slider component
- *------------------------------------------------------------------------------------------------**/
 slider-component {
   display: flex;
   flex-direction: column;
@@ -671,9 +658,6 @@ slider-component .slider-component .slides-container .slide .item > * {
   height: 100%;
 }
 
-/**------------------------------------------------------------------------------------------------
- **                                       ANCHOR: Animated rich text section
- *------------------------------------------------------------------------------------------------**/
 .wrapper {
   display: flex;
   flex-direction: column;
@@ -857,9 +841,6 @@ slider-component .slider-component .slides-container .slide .item > * {
     transform: translateY(-80%);
   }
 }
-/**------------------------------------------------------------------------------------------------
- **                                       ANCHOR: Compare section
- *------------------------------------------------------------------------------------------------**/
 .compare__section {
   display: flex;
   overflow: hidden;
@@ -950,9 +931,6 @@ slider-component .slider-component .slides-container .slide .item > * {
   flex-direction: column;
 }
 
-/**------------------------------------------------------------------------------------------------
- **                                       ANCHOR: Countdown timer section
- *------------------------------------------------------------------------------------------------**/
 .countdown-timer {
   display: flex;
   flex-direction: column;
@@ -1019,9 +997,6 @@ slider-component .slider-component .slides-container .slide .item > * {
     opacity: 1;
   }
 }
-/**------------------------------------------------------------------------------------------------
- **                                       ANCHOR: FAQ section
- *------------------------------------------------------------------------------------------------**/
 .faq {
   height: auto;
   display: flex;
@@ -1101,9 +1076,6 @@ slider-component .slider-component .slides-container .slide .item > * {
   transform: rotate(90deg);
 }
 
-/**------------------------------------------------------------------------------------------------
- **                                       ANCHOR: Gallery section
- *------------------------------------------------------------------------------------------------**/
 .gallery {
   display: flex;
   flex-direction: column;
@@ -1143,9 +1115,6 @@ slider-component .slider-component .slides-container .slide .item > * {
   }
 }
 
-/**------------------------------------------------------------------------------------------------
- **                                       ANCHOR: Image banner section
- *------------------------------------------------------------------------------------------------**/
 .image-banner {
   position: relative;
   display: grid;
@@ -1179,9 +1148,6 @@ slider-component .slider-component .slides-container .slide .item > * {
   }
 }
 
-/**------------------------------------------------------------------------------------------------
- **                                       ANCHOR: Image with text section
- *------------------------------------------------------------------------------------------------**/
 .image-with-text {
   display: flex;
   align-items: center;
@@ -1237,9 +1203,6 @@ slider-component .slider-component .slides-container .slide .item > * {
   }
 }
 
-/**------------------------------------------------------------------------------------------------
- **                                       ANCHOR: Logo list section
- *------------------------------------------------------------------------------------------------**/
 .logo-list {
   display: flex;
   flex-direction: column;
@@ -1283,9 +1246,6 @@ slider-component .slider-component .slides-container .slide .item > * {
     transform: translateX(-100%);
   }
 }
-/**------------------------------------------------------------------------------------------------
- **                                       ANCHOR: Promotional banner section
- *------------------------------------------------------------------------------------------------**/
 .promotional-banner {
   height: auto;
   position: relative;
@@ -1351,9 +1311,6 @@ slider-component .slider-component .slides-container .slide .item > * {
     transform: translateX(calc(-100% - var(--gap)));
   }
 }
-/**------------------------------------------------------------------------------------------------
- **                                       ANCHOR: Testimonials section
- *------------------------------------------------------------------------------------------------**/
 .testimonials {
   display: flex;
   flex-direction: column;
@@ -1471,9 +1428,6 @@ slider-component .slider-component .slides-container .slide .item > * {
     transform: translateX(-100%);
   }
 }
-/**------------------------------------------------------------------------------------------------
- **                                       ANCHOR: Video hero section
- *------------------------------------------------------------------------------------------------**/
 .video-hero {
   position: relative;
   display: flex;
@@ -1502,9 +1456,6 @@ slider-component .slider-component .slides-container .slide .item > * {
   min-width: 100%;
 }
 
-/**------------------------------------------------------------------------------------------------
- **                                       ANCHOR: Video with text section
- *------------------------------------------------------------------------------------------------**/
 .video-with-text {
   display: flex;
   align-items: center;
@@ -1610,9 +1561,6 @@ slider-component .slider-component .slides-container .slide .item > * {
   }
 }
 
-/**------------------------------------------------------------------------------------------------
- **                                       ANCHOR: Slideshow section
- *------------------------------------------------------------------------------------------------**/
 .slideshow {
   height: 350px;
   overflow-x: hidden;
@@ -1722,9 +1670,6 @@ slider-component .slider-component .slides-container .slide .item > * {
     width: 40px;
   }
 }
-/**------------------------------------------------------------------------------------------------
- **                                       ANCHOR: Multi icon section
- *------------------------------------------------------------------------------------------------**/
 .multi-icon {
   padding: 2rem 0rem;
 }
@@ -1750,9 +1695,6 @@ slider-component .slider-component .slides-container .slide .item > * {
   aspect-ratio: 1/1;
 }
 
-/**------------------------------------------------------------------------------------------------
- **                                       ANCHOR: Blog posts section
- *------------------------------------------------------------------------------------------------**/
 .blog-posts {
   padding: 2rem 0;
 }
@@ -1791,9 +1733,6 @@ slider-component .slider-component .slides-container .slide .item > * {
   text-transform: uppercase;
 }
 
-/**------------------------------------------------------------------------------------------------
- **                                       ANCHOR: Featured collections section
- *------------------------------------------------------------------------------------------------**/
 .featured-collections .item {
   display: grid;
   justify-items: center;
@@ -1834,9 +1773,6 @@ slider-component .slider-component .slides-container .slide .item > * {
   text-transform: uppercase;
 }
 
-/**------------------------------------------------------------------------------------------------
- **                                       ANCHOR: Featured collection section
- *------------------------------------------------------------------------------------------------**/
 .featured-collection {
   padding: 2rem 0;
 }
@@ -1881,9 +1817,6 @@ slider-component .slider-component .slides-container .slide .item > * {
   gap: 0.2rem;
 }
 
-/**------------------------------------------------------------------------------------------------
- **                                       ANCHOR: Recently viewed products section
- *------------------------------------------------------------------------------------------------**/
 .recently-viewed {
   padding: 2rem 0;
 }
@@ -1928,9 +1861,6 @@ slider-component .slider-component .slides-container .slide .item > * {
   gap: 0.3rem;
 }
 
-/**------------------------------------------------------------------------------------------------
- **                                       ANCHOR: Text with icon section
- *------------------------------------------------------------------------------------------------**/
 .text-with-icon {
   height: auto;
   display: flex;
@@ -1992,12 +1922,15 @@ slider-component .slider-component .slides-container .slide .item > * {
   text-align: center;
 }
 
-/**------------------------------------------------------------------------------------------------
- **                                       ANCHOR: Shop the look section
- *------------------------------------------------------------------------------------------------**/
 .shop-the-look {
-  width: 100%;
+  width: 100vw;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.shop-the-look__wrapper {
   width: 100%;
   display: grid;
 }
@@ -2093,7 +2026,7 @@ slider-component .slider-component .slides-container .slide .item > * {
 .shop-the-look__selector {
   z-index: 1;
 }
-@media screen and (min-width: 1025px) {
+@media screen and (min-width: 1024px) {
   .shop-the-look__selector:hover + div {
     transition-delay: 0s;
     transition-timing-function: ease-in-out;
@@ -2127,9 +2060,6 @@ slider-component .slider-component .slides-container .slide .item > * {
   width: 100px;
 }
 
-/**------------------------------------------------------------------------------------------------
- **                                       ANCHOR: Search section
- *------------------------------------------------------------------------------------------------**/
 .search-section {
   display: flex;
   flex-direction: column;
@@ -2187,9 +2117,6 @@ slider-component .slider-component .slides-container .slide .item > * {
   color: rgb(0, 0, 0);
 }
 
-/**------------------------------------------------------------------------------------------------
- **                                       ANCHOR: Search results
- *------------------------------------------------------------------------------------------------**/
 .search-section__results {
   z-index: 100;
 }
@@ -2244,33 +2171,6 @@ slider-component .slider-component .slides-container .slide .item > * {
   width: 100%;
 }
 
-/**------------------------------------------------------------------------------------------------
- **                                       ANCHOR: Form
- *------------------------------------------------------------------------------------------------**/
-/*
- To see contact form success message:
-/?contact_posted=true
-
-To see subscribe form success message:
-/?customer_posted=true
-
-To see contact & subscribe forms error message:
-/?contact%5Btags%5D=newsletter&form_type=customer
-*/
-.form__error, .form__success {
-  padding-top: 0.5rem;
-  text-align: center;
-}
-.form__error {
-  color: #ff3333;
-}
-.form__success {
-  color: #4bb543;
-}
-
-/**------------------------------------------------------------------------------------------------
- **                                       ANCHOR: Newsletter section
- *------------------------------------------------------------------------------------------------**/
 .newsletter {
   background-color: #333333;
   display: flex;
@@ -2331,9 +2231,6 @@ To see contact & subscribe forms error message:
   opacity: 1;
 }
 
-/**------------------------------------------------------------------------------------------------
- **                                       ANCHOR: Contact section
- *------------------------------------------------------------------------------------------------**/
 .contact {
   display: flex;
   flex-direction: column;
