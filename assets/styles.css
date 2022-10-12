@@ -148,6 +148,16 @@ a {
   font-size: var(--tag-font-size);
 }
 
+p[data-spam-detection-disclaimer],
+p[data-spam-detection-disclaimer] > * {
+  color: grey;
+  text-align: center;
+}
+
+p[data-spam-detection-disclaimer] > a {
+  text-decoration: underline;
+}
+
 .text-alignment--center, .text-alignment--right, .text-alignment--left {
   text-align: center;
 }
@@ -2232,6 +2242,30 @@ slider-component .slider-component .slides-container .slide .item > * {
   cursor: pointer;
   color: #fcdb33;
   width: 100%;
+}
+
+/**------------------------------------------------------------------------------------------------
+ **                                       ANCHOR: Form
+ *------------------------------------------------------------------------------------------------**/
+/*
+ To see contact form success message:
+/?contact_posted=true
+
+To see subscribe form success message:
+/?customer_posted=true
+
+To see contact & subscribe forms error message:
+/?contact%5Btags%5D=newsletter&form_type=customer
+*/
+.form__error, .form__success {
+  padding-top: 0.5rem;
+  text-align: center;
+}
+.form__error {
+  color: #ff3333;
+}
+.form__success {
+  color: #4bb543;
 }
 
 /**------------------------------------------------------------------------------------------------

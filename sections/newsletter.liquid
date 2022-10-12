@@ -73,16 +73,20 @@
     </div>
 
     {%- if form.errors -%}
-      <p class="form-error" id="">!!! Error</p>
+      <p class="form__error">
+        ⚠
+        {{ form.errors.translated_fields.email | capitalize }}
+        {{ form.errors.messages.email }}
+      </p>
     {%- endif -%}
 
     {%- if form.posted_successfully? -%}
       <p
-        class="form-success"
-        id=""
+        class="form__success"
         tabindex="-1"
+        autofocus
       >
-        V Success
+        ✓ Subscription confirmed
       </p>
     {%- endif -%}
   {%- endform -%}
