@@ -1,7 +1,4 @@
-/**---------------------Media queries---------------------**/
 let mediaQueries = [window.matchMedia("screen and (max-width: 750px)"), window.matchMedia("screen and (min-width: 751px) and (max-width: 1024px)"), window.matchMedia("screen and (min-width: 1025px)")];
-
-/**---------------------Actual date and domain name---------------------**/
 let domainName = window.location.hostname;
 let actualDate = new Date().getTime();
 

@@ -1,7 +1,7 @@
 {% assign blocks_count = section.blocks.size | plus: 1 %}
 
 {%- style -%}
-  {{ section.id }}.compare__section {
+  .{{ section.id }}.compare__section {
     background-color: {{ section.settings.background_color }};
     margin-top: {{ section.settings.space_outside | divided_by: 2 }}px;
     margin-bottom: {{ section.settings.space_outside | divided_by: 2 }}px;

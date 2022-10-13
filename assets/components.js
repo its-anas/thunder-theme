@@ -1,6 +1,4 @@
-/**============================================
- *               * ANCHOR: FAQ section
- *=============================================**/
+// SECTION: FAQ
 /* 1. Select all the faq__tab class elements and store them in a variable called faqTabs.
 2. Loop through each of the faqTabs elements.
 3. Select the answer by using the childNodes property and store it in a variable called answer.
@@ -46,7 +44,7 @@ class FaqSection extends HTMLElement {
 customElements.define("faq-section", FaqSection);
 
 /**============================================
- *               * ANCHOR: Countdown timer section
+// SECTION: Countdown timer 
  *=============================================**/
 /* 1. The code checks if the countdown type is "date" or "time".
 2. If it is "date", the code sets the deadline to the date specified in the "timeInDate" variable.
@@ -155,7 +153,7 @@ class countdownTimer extends HTMLElement {
 customElements.define("countdown-timer", countdownTimer);
 
 /**============================================
- *               * ANCHOR: Video with text section
+// SECTION: Video with text 
  *=============================================**/
 /* 1. We get all the video boxes (the ones that contain the thumbnail and the video)
 2. We loop through each video box
@@ -188,7 +186,7 @@ class videoWithText extends HTMLElement {
 customElements.define("video-with-text", videoWithText);
 
 /**============================================
- *               * ANCHOR: Slideshow section
+// SECTION: Slideshow 
  *=============================================**/
 /* 1. First, we select all the elements we need to manipulate and other variables we need to use.
 2. We create and call a function that will load the indicators dynamically.
@@ -368,7 +366,7 @@ class slideshow extends HTMLElement {
 customElements.define("slideshow-section", slideshow);
 
 // /**============================================
-//  *               * ANCHOR: Slider component
+// // ANCHOR: Slider component
 //  =============================================**/
 /* Here is the explanation for the code above:
 1. The first function (setMaxScroll) is called when the page loads and then every time the window is resized or the media queries are changed. It sets the maxSliderScroll variable which is used to calculate the maximum scroll amount for the slider. It also sets the visibility of the next/prev buttons depending on the number of items found and the number of items displayed. 
@@ -472,7 +470,7 @@ class sliderComponent extends HTMLElement {
 customElements.define("slider-component", sliderComponent);
 
 // /**============================================
-//  *               * ANCHOR: Recently viewed component
+// // ANCHOR: Recently viewed component
 //  =============================================**/
 /* 1. First, we check if the cookie exists. If it does, we parse it into an array.
 2. If the array is not empty, we reverse it to make sure the last visited products are shown first. We also get the number of items that we want to show.
@@ -569,7 +567,7 @@ class recentlyViewedComponent extends sliderComponent {
 customElements.define("recently-viewed-component", recentlyViewedComponent);
 
 // /**============================================
-//  *               * ANCHOR: Search component
+// // ANCHOR: Search component
 //  =============================================**/
 /* Here is the explanation for the code above:
 1. It creates a constructor method that adds an input event listener to the input element and binds the onChange method to the constructor.

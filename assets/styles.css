@@ -1,19 +1,3 @@
-*,
-*::before,
-*::after {
-  box-sizing: inherit;
-}
-
-html,
-body {
-  box-sizing: border-box;
-  font-family: var(--font-family);
-  font-style: var(--font-style);
-  height: 100%;
-  min-height: 100%;
-  background-color: var(--background-color);
-}
-
 html,
 body {
   margin: 0;
@@ -54,6 +38,36 @@ img {
 img[loading=lazy] {
   -webkit-clip-path: inset(0.5px);
           clip-path: inset(0.5px);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+html,
+body {
+  box-sizing: border-box;
+  font-family: var(--font-family);
+  font-style: var(--font-style);
+  height: 100%;
+  min-height: 100%;
+  background-color: var(--background-color);
+}
+
+@media screen and (max-width: 1024px) {
+  .desktop-only,
+.desktop-only > * {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 1025px) {
+  .mobile-only,
+.mobile-only > * {
+    display: none;
+  }
 }
 
 h1,
@@ -1923,12 +1937,15 @@ slider-component .slider-component .slides-container .slide .item > * {
 }
 
 .shop-the-look {
-  width: 100vw;
+  width: 100%;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+.shop-the-look__heading {
+  padding: 2rem 0;
 }
 .shop-the-look__wrapper {
   width: 100%;
@@ -1951,77 +1968,6 @@ slider-component .slider-component .slides-container .slide .item > * {
   display: flex;
   flex-direction: column-reverse;
   position: absolute;
-}
-.shop-the-look__box .spinners {
-  margin-top: 50px;
-  display: flex;
-  justify-content: flex-start;
-  flex-wrap: wrap;
-}
-.shop-the-look__box .spinners .spinner-block {
-  width: 46.5px;
-  text-align: center;
-  margin-right: 83px;
-}
-.shop-the-look__box .spinner {
-  position: relative;
-  width: 46.5px;
-  height: 46.5px;
-}
-.shop-the-look__box .spinner:before, .shop-the-look__box .spinner:after {
-  content: "";
-  display: block;
-  position: absolute;
-  border-width: 4px;
-  border-style: solid;
-  border-radius: 50%;
-}
-@-webkit-keyframes scale {
-  0% {
-    transform: scale(0);
-    opacity: 0;
-  }
-  50% {
-    transform: scale(0.7);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(1);
-    opacity: 0;
-  }
-}
-@keyframes scale {
-  0% {
-    transform: scale(0);
-    opacity: 0;
-  }
-  50% {
-    transform: scale(0.7);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(1);
-    opacity: 0;
-  }
-}
-.shop-the-look__box .spinner.spinner-scale:before {
-  width: 38.5px;
-  height: 38.5px;
-  border-color: #ffffff;
-  top: 0px;
-  left: 0px;
-  -webkit-animation: scale 2s linear 0s infinite;
-          animation: scale 2s linear 0s infinite;
-}
-.shop-the-look__box .spinner.spinner-scale:after {
-  width: 38.5px;
-  height: 38.5px;
-  border-color: #ffffff;
-  top: 0;
-  left: 0;
-  opacity: 0;
-  -webkit-animation: scale 2s linear 1s infinite;
-          animation: scale 2s linear 1s infinite;
 }
 .shop-the-look__selector {
   z-index: 1;
