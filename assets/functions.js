@@ -51,3 +51,34 @@ let actualDate = new Date().getTime();
 //                 window.addEventListener("orientationChange", lazyload);
 //         }
 // });
+
+let icons = document.querySelectorAll(".shop-the-look__icon");
+
+icons.forEach((icon) => {
+        icon.addEventListener("click", () => {
+                if (!icon.classList.contains("shop-the-look__icon-rotate")) {
+                        icons.forEach((i) => {
+                                i.classList.remove("shop-the-look__icon-rotate");
+                                if (i.nextElementSibling) {
+                                        i.nextElementSibling.classList.remove("clicked");
+                                }
+                        });
+                        icon.classList.add("shop-the-look__icon-rotate");
+                        icon.nextElementSibling.classList.add("clicked");
+                } else {
+                        icon.classList.remove("shop-the-look__icon-rotate");
+                        icon.nextElementSibling.classList.remove("clicked");
+                }
+        });
+});
+
+document.addEventListener("click", (event) => {
+        icons.forEach((icon) => {
+                if (!icon.contains(event.target)) {
+                        icon.classList.remove("shop-the-look__icon-rotate");
+                        if (icon.nextElementSibling) {
+                                icon.nextElementSibling.classList.remove("clicked");
+                        }
+                }
+        });
+});
