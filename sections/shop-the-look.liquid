@@ -89,7 +89,7 @@
           "
           class="shop-the-look__box desktop-only"
         >
-          <div class="shop-the-look__icon">
+          <div class="shop-the-look__icon" {{ block.shopify_attributes }}>
             <div class="shop-the-look__icon-edge"></div>
             <div class="shop-the-look__icon-center"></div>
           </div>
@@ -165,12 +165,12 @@
 
         <div
           style="
-            {%- if block.settings.mobile_vertical_position <= 70 -%}
+            {%- if block.settings.mobile_vertical_position <= 50 -%}
               bottom: {{ block.settings.mobile_vertical_position }}%;
             {%- else -%}
               bottom: calc({{ block.settings.mobile_vertical_position }}% - 80px);
             {%- endif -%}
-            {%- if block.settings.mobile_horizontal_position <= 75 -%}
+            {%- if block.settings.mobile_horizontal_position <= 50 -%}
               left: {{ block.settings.mobile_horizontal_position }}%;
             {%- else -%}
               left: calc({{ block.settings.mobile_horizontal_position }}% - 80px);
@@ -334,7 +334,7 @@
           "type": "range",
           "id": "mobile_vertical_position",
           "min": 5,
-          "max": 70,
+          "max": 95,
           "step": 1,
           "unit": "%",
           "label": "Mobile vertical position",
@@ -344,7 +344,7 @@
           "type": "range",
           "id": "mobile_horizontal_position",
           "min": 5,
-          "max": 75,
+          "max": 95,
           "step": 1,
           "unit": "%",
           "label": "Mobile horizontal position",
@@ -392,7 +392,7 @@
           "type": "range",
           "id": "mobile_vertical_position",
           "min": 5,
-          "max": 70,
+          "max": 95,
           "step": 1,
           "unit": "%",
           "label": "Mobile vertical position",
@@ -402,7 +402,7 @@
           "type": "range",
           "id": "mobile_horizontal_position",
           "min": 5,
-          "max": 75,
+          "max": 95,
           "step": 1,
           "unit": "%",
           "label": "Mobile horizontal position",
