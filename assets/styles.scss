@@ -2485,3 +2485,120 @@ $indicator-width: 40px;
 //                 transform: translate(0%, 0);
 //         }
 // }
+
+// SECTION: Header
+.header {
+        width: 100%;
+        z-index: 4;
+
+        &.boxed {
+                padding: 8px;
+                position: absolute;
+                @media screen and (min-width: 1025px) {
+                        padding: 15px;
+                }
+        }
+        &.sticky {
+                position: fixed;
+        }
+
+        &__content {
+                width: 100%;
+                min-height: 85px;
+                height: auto;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                padding: 10px 15px;
+
+                @media screen and (min-width: 1025px) {
+                        padding: 10px 30px;
+                }
+        }
+
+        &__logo {
+                max-height: 50px;
+                max-width: 250px;
+                width: 250px;
+                overflow: hidden;
+                display: flex;
+                align-items: center;
+        }
+
+        @media screen and (max-width: 1024px) {
+                &__logo {
+                        justify-content: center;
+                }
+                &__logo {
+                        order: 2;
+                }
+                &__menu {
+                        order: 1;
+                }
+        }
+
+        &__menu {
+                padding: 0;
+                justify-content: flex-start;
+                &-list {
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: center;
+                        align-items: center;
+                        gap: 5rem;
+                        list-style: none;
+                        @media screen and (max-width: 1024px) {
+                                display: none;
+                        }
+                        &.hidden {
+                                display: none;
+                        }
+                }
+
+                a {
+                        text-decoration: none;
+                        color: white;
+                }
+
+                &-link {
+                        position: relative;
+                        a {
+                                display: flex;
+                                flex-direction: row;
+                                align-items: center;
+                        }
+                }
+
+                &-dropdown-child {
+                        position: absolute;
+                }
+        }
+
+        &__icons {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                order: 3;
+                gap: 0.8rem;
+
+                @media screen and (min-width: 1025px) {
+                        gap: 1rem;
+                }
+
+                &-search {
+                        @media screen and (max-width: 1024px) {
+                                display: none;
+                        }
+                }
+
+                &-drawer {
+                        &.hidden {
+                                @media screen and (min-width: 1025px) {
+                                        display: none;
+                                }
+                        }
+                }
+        }
+}

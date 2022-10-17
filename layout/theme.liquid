@@ -9,7 +9,6 @@
       <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
     {%- endunless -%}
 
-    <!-- ANCHOR: Assets -->
     <link href="{{ 'root.css' | asset_url }}" rel="stylesheet" type="text/css" media="all">
     {{ 'styles.css' | asset_url | stylesheet_tag }}
     <script src="{{ 'functions.js' | asset_url }}" defer></script>
@@ -25,13 +24,10 @@
     </title>
 
     {{ content_for_header }}
-
-    <script>
-      document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
-    </script>
   </head>
 
   <body>
+    {% section 'header' %}
     {{ content_for_layout }}
   </body>
 </html>

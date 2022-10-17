@@ -4,11 +4,11 @@
     margin-top: {{ section.settings.space_outside | divided_by: 2 }}rem;
     margin-bottom: {{ section.settings.space_outside | divided_by: 2 }}rem;
   }
-  .{{ section.id}}--color {
+  .{{ section.id }}--color {
     background-color: {{ section.settings.background_color }};
   }
 
-  .{{ section.id}}--image {
+  .{{ section.id }}--image {
     background-image: url({{ section.settings.background_image | image_url }});
     background-size: cover;
     background-position: center;
