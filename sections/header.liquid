@@ -13,7 +13,6 @@
         }
     {%- endif -%}
 
-
    @media screen and (min-width: 1024px) {
         {%- if section.settings.menu_layout == "logo_first_navigation_inline" -%}
         .header__menu {
@@ -140,20 +139,21 @@
       </a>
     </div>
     <div class="header__icons">
+      <a href="#" class="header__icons-search">
+        <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M16.5056 15.9884L19.9986 19.4813" stroke="{{ section.settings.content_color }}" stroke-width="1.5"/>
+          <circle cx="11.6255" cy="11.1234" r="6.37717" stroke="{{ section.settings.content_color }}" stroke-width="1.5"/>
+        </svg>
+      </a>
+
       {% if section.settings.menu_layout != 'drawer' %}
-        <a href="#" class="header__icons-search">
-          <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M16.5056 15.9884L19.9986 19.4813" stroke="{{ section.settings.content_color }}" stroke-width="1.5"/>
-            <circle cx="11.6255" cy="11.1234" r="6.37717" stroke="{{ section.settings.content_color }}" stroke-width="1.5"/>
+        <a href="/account/" class="header__icons-account">
+          <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="12" cy="7.75574" r="2.5" stroke="{{ section.settings.content_color }}" stroke-width="1.5"/>
+            <path d="M4.75 14.25H19.25V19.75H4.75V14.25Z" stroke="{{ section.settings.content_color }}" stroke-width="1.5"/>
           </svg>
         </a>
       {% endif %}
-      <a href="/account/" class="header__icons-account">
-        <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="12" cy="7.75574" r="2.5" stroke="{{ section.settings.content_color }}" stroke-width="1.5"/>
-          <path d="M4.75 14.25H19.25V19.75H4.75V14.25Z" stroke="{{ section.settings.content_color }}" stroke-width="1.5"/>
-        </svg>
-      </a>
 
       <a href="#" class="header__icons-cart">
         <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
