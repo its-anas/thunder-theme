@@ -83,6 +83,7 @@ class countdownTimer extends HTMLElement {
                         const minutesSpan = clock.querySelector(".minutes");
                         const secondsSpan = clock.querySelector(".seconds");
 
+                        const timeInterval = setInterval(updateClock, 1000);
                         function updateClock() {
                                 function getTimeRemaining(endTime) {
                                         const total = Date.parse(endTime) - Date.parse(new Date());
@@ -119,7 +120,6 @@ class countdownTimer extends HTMLElement {
                                 }
                         }
                         updateClock();
-                        const timeInterval = setInterval(updateClock, 1000);
                 }
 
                 if (countdownType === "date") {
@@ -137,7 +137,7 @@ class countdownTimer extends HTMLElement {
                         }
 
                         if (document.cookie && deadline) {
-                                if (deadline < 0) {
+                                if (Date.parse(deadline) - Date.parse(new Date()) < 0) {
                                         if (afterExpirationTimeOnly === "repeatCountdown") {
                                                 saveCookie();
                                         }
@@ -647,3 +647,134 @@ class PredictiveSearch extends HTMLElement {
 }
 
 customElements.define("predictive-search", PredictiveSearch);
+
+/**============================================
+// SECTION: Announcement bar 
+ *=============================================**/
+
+class announcement extends HTMLElement {
+        constructor() {
+                super();
+        }
+        connectedCallback() {
+                this.attachShadow({ mode: "open" });
+                this.shadowRoot.innerHTML = "<slot></slot>";
+                this.loadSlideshow();
+        }
+        loadSlideshow() {
+                let announcement = this.querySelector(".announcement");
+                let announcementContainer = this.querySelector(".announcement__container");
+                let announcementSlides = this.querySelectorAll(".announcement__container .announcement__slide");
+                let prev = this.querySelector(".prev");
+                let next = this.querySelector(".next");
+                let totalSlides = announcementSlides.length;
+                let step = 100 / totalSlides;
+                let activeSlide = 0;
+                let activeIndicator = 0;
+                let direction = -1;
+                let jump = 1;
+                let interval = 4000;
+                let time;
+
+                if (totalSlides <= 1) {
+                        next.style = "display: none";
+                        prev.style = "display: none";
+                }
+
+                function slideToNext() {
+                        if (direction === -1) {
+                                direction = -1;
+                        } else if (direction === 1) {
+                                direction = -1;
+                                announcementContainer.prepend(announcementContainer.lastElementChild);
+                        }
+                        announcement.style.justifyContent = "flex-start";
+                        if (totalSlides <= 1) {
+                        } else {
+                                announcementContainer.style.transform = `translateX(-${step}%)`;
+                        }
+                }
+
+                function slideToPrev() {
+                        if (direction === -1) {
+                                direction = 1;
+                                announcementContainer.append(announcementContainer.firstElementChild);
+                        } else if (direction === 1) {
+                                direction = 1;
+                        }
+                        announcement.style.justifyContent = "flex-end";
+                        if (totalSlides <= 1) {
+                        } else {
+                                announcementContainer.style.transform = `translateX(${step}%)`;
+                        }
+                }
+                next.addEventListener("click", () => {
+                        slideToNext();
+                });
+                prev.addEventListener("click", () => {
+                        slideToPrev();
+                });
+
+                function loop(status) {
+                        if (status === true) {
+                                time = setInterval(() => {
+                                        slideToNext();
+                                }, interval);
+                        } else {
+                                clearInterval(time);
+                        }
+                }
+                loop(true);
+
+                this.addEventListener("mouseover", () => {
+                        loop(false);
+                });
+                this.addEventListener("mouseout", () => {
+                        loop(true);
+                });
+
+                announcementContainer.addEventListener("transitionend", (event) => {
+                        if (event.target.className == "announcement__container") {
+                                if (direction === -1) {
+                                        if (jump > 1) {
+                                                for (let i = 0; i < jump; i++) {
+                                                        activeSlide++;
+                                                        announcementContainer.append(announcementContainer.firstElementChild);
+                                                }
+                                        } else {
+                                                activeSlide++;
+                                                announcementContainer.append(announcementContainer.firstElementChild);
+                                        }
+                                } else if (direction === 1) {
+                                        if (jump > 1) {
+                                                for (let i = 0; i < jump; i++) {
+                                                        activeSlide--;
+                                                        announcementContainer.prepend(announcementContainer.lastElementChild);
+                                                }
+                                        } else {
+                                                activeSlide--;
+                                                announcementContainer.prepend(announcementContainer.lastElementChild);
+                                        }
+                                }
+                                announcementContainer.style.transition = "none";
+                                announcementContainer.style.transform = "translateX(0%)";
+                                setTimeout(() => {
+                                        jump = 1;
+                                        announcementContainer.style.transition = "all ease 1s";
+                                });
+                                function updateIndicators() {
+                                        if (activeSlide > totalSlides - 1) {
+                                                activeSlide = 0;
+                                        } else if (activeSlide < 0) {
+                                                activeSlide = totalSlides - 1;
+                                        }
+                                        announcement.querySelector(".announcement__indicators span.active").classList.remove("active");
+                                        announcement.querySelectorAll(".announcement__indicators span")[activeSlide].classList.add("active");
+                                }
+                                updateIndicators();
+                        }
+                });
+        }
+}
+
+customElements.define("announcement-bar", announcement);

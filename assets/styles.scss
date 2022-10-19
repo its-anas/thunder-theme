@@ -160,6 +160,7 @@ p[data-spam-detection-disclaimer],
 p[data-spam-detection-disclaimer] > * {
         color: grey;
         text-align: center;
+        font-size: 0.8rem;
 }
 
 p[data-spam-detection-disclaimer] > a {
@@ -2486,17 +2487,6 @@ $indicator-width: 40px;
 
 // SECTION: Header
 .header {
-        width: 100%;
-        z-index: 4;
-
-        &.boxed {
-                padding: 15px;
-                position: absolute;
-        }
-        &.sticky {
-                position: fixed;
-        }
-
         &__content {
                 width: 100%;
                 min-height: 55px;
@@ -2519,9 +2509,12 @@ $indicator-width: 40px;
         }
 
         &__logo {
+                display: flex;
+        }
+
+        &__logo-container {
                 max-height: 50px;
                 max-width: 250px;
-                width: 250px;
                 overflow: hidden;
                 display: flex;
                 align-items: center;
@@ -2542,6 +2535,7 @@ $indicator-width: 40px;
         &__menu {
                 padding: 0;
                 justify-content: flex-start;
+                // flex: 1 1 0;
                 &-list {
                         display: flex;
                         flex-direction: row;
@@ -2580,7 +2574,7 @@ $indicator-width: 40px;
                 display: flex;
                 flex-direction: row;
                 justify-content: center;
-                align-items: center;
+                justify-content: flex-end;
                 order: 3;
                 gap: 0.5rem;
 
@@ -2601,5 +2595,124 @@ $indicator-width: 40px;
                                 }
                         }
                 }
+        }
+
+        @media screen and (max-width: 1024px) {
+                &__logo {
+                        flex: 3 1 0px;
+                }
+                &__menu,
+                &__icons {
+                        @media screen and (max-width: 1024px) {
+                                flex: 1 1 0px;
+                        }
+                }
+        }
+}
+
+// SECTION: Announcement bar
+.announcement {
+        overflow: hidden;
+        position: relative;
+        display: flex;
+        justify-content: flex-start;
+        height: 45px;
+
+        @media screen and (max-width: 750px) {
+                min-height: 55px;
+                height: auto;
+        }
+
+        &__container {
+                height: 100%;
+                display: flex;
+                transition: all 1s ease;
+        }
+
+        &__slide {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+                padding-right: 2rem;
+                padding-left: 2rem;
+                gap: 0.5rem;
+
+                @media screen and (max-width: 750px) {
+                        padding-right: 1rem;
+                        padding-left: 1rem;
+                }
+
+                .coupon {
+                        padding: 0 0.2rem;
+                        border: 1px dashed;
+                        border-radius: 5px;
+                        font-size: 0.8rem;
+                }
+        }
+
+        &__content {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: row;
+                gap: 0.5rem;
+                text-align: center;
+                @media screen and (max-width: 750px) {
+                        font-size: 0.8rem;
+                        gap: 0.2rem;
+                        flex-direction: column;
+                        padding-top: 0.3rem;
+                        padding-bottom: 0.3rem;
+                }
+        }
+
+        .chevrons {
+                .prev {
+                        left: 0.1rem;
+                        @media screen and (min-width: 751px) {
+                                left: 0.5rem;
+                        }
+                }
+
+                .next {
+                        right: 0.1rem;
+                        @media screen and (min-width: 751px) {
+                                right: 0.5rem;
+                        }
+                }
+
+                .prev,
+                .next {
+                        display: inline-block;
+                        height: 25px;
+                        width: 25px;
+                        cursor: pointer;
+                        position: absolute;
+                        top: calc(50% - 12.5px);
+                }
+        }
+}
+
+// ANCHOR: Header container
+.header {
+        &-section {
+                width: 100%;
+                z-index: 5;
+                &.boxed {
+                        padding: 15px;
+                        position: absolute;
+                }
+
+                &.sticky {
+                        position: fixed;
+                }
+        }
+        &-container {
+                width: 100%;
+                z-index: 5;
+                display: flex;
+                flex-direction: column;
+                overflow: hidden;
         }
 }

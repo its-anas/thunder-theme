@@ -261,5 +261,86 @@
                     "label": "Enable product suggestions"
                }
           ]
+     },
+     {
+          "name": "Header",
+          "settings": [
+               {
+                    "type": "select",
+                    "id": "header_layout",
+                    "label": "Header layout",
+                    "options": [
+                         {
+                              "value": "header_first",
+                              "label": "Header first, announcement bar second"
+                         },
+                         {
+                              "value": "header_second",
+                              "label": "Announcement bar first, header second"
+                         }
+                    ],
+                    "default": "header_first"
+               },
+               {
+                    "type": "checkbox",
+                    "id": "header_full_width",
+                    "label": "Full width header",
+                    "default": false
+               },
+               {
+                    "type": "checkbox",
+                    "id": "header_sticky",
+                    "label": "Sticky header",
+                    "default": true
+               },
+               {
+                    "type": "select",
+                    "id": "header_position_mobile",
+                    "label": "Header position on mobile",
+                    "options": [
+                         {
+                              "value": "top",
+                              "label": "Top"
+                         },
+                         {
+                              "value": "bottom",
+                              "label": "Bottom"
+                         }
+                    ],
+                    "default": "top",
+                    "info": "Some merchants prefer to have the menu on the bottom of the screen on mobile devices to help their customers use less finger movements"
+               },
+               {
+                    "type": "header",
+                    "content": "Border",
+                    "info": "Border settings are applied only if 'Full width header' is disabled"
+               },
+               {
+                    "type": "range",
+                    "id": "border_width",
+                    "min": 0,
+                    "max": 3,
+                    "step": 1,
+                    "unit": "px",
+                    "label": "Border width",
+                    "default": 2
+               },
+               {
+                    "type": "range",
+                    "id": "border_radius",
+                    "min": 0,
+                    "max": 20,
+                    "step": 1,
+                    "unit": "px",
+                    "label": "Border corners radius",
+                    "default": 0
+               },
+               {
+                    "type": "color",
+                    "id": "border_color",
+                    "label": "Border color",
+                    "default": "#fff"
+               }
+          ]
      }
 ]

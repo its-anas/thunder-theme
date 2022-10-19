@@ -17,6 +17,36 @@
     {% style %}
       {{ settings.font_type | font_face: font_display: 'swap' }}
       {{ settings.font_type | font_face: font_display: 'swap' }}
+
+      {%- if settings.header_layout == "header_first" -%}
+          #shopify-section-announcement-bar {
+                  order: 2;
+          }
+          #shopify-section-header {
+                  order: 1;
+          }
+      {%- else -%}
+          #shopify-section-announcement-bar {
+                  order: 1;
+          }
+          #shopify-section-header {
+                  order: 2;
+          }
+      {%- endif -%}
+
+      {%- if settings.header_position_mobile == "bottom" -%}
+        @media screen and (max-width: 750px) {
+          .header-section {
+                  bottom: 0px;
+          }
+        }
+      {%- endif -%}
+
+      .header-section.boxed > .header-container {
+        border-radius: {{ settings.border_radius }}px;
+        border: {{ settings.border_width }}px solid {{ settings.border_color }};
+
+      }
     {% endstyle %}
 
     <title>
@@ -27,7 +57,12 @@
   </head>
 
   <body>
-    {% section 'header' %}
+    <div class="header-section {% if settings.header_full_width == false %}boxed{% endif %} {% if settings.header_sticky == true %}sticky{% endif %}">
+      <div class="header-container">
+        {% section 'header' %}
+        {% section 'announcement-bar' %}
+      </div>
+    </div>
     {{ content_for_layout }}
   </body>
 </html>

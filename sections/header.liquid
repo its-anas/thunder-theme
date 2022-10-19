@@ -1,96 +1,100 @@
 {% style %}
   .header__content {
     background-color: {{ section.settings.header_background_color }};
-  }
-  .header__content {
-    background-color: {{ section.settings.header_background_color }};
    }
-   {%- if section.settings.menu_position_mobile == "bottom" -%}
-        @media screen and (max-width: 750px) {
-            .header {
-                bottom: 0px;
-           }
-        }
-    {%- endif -%}
-
-   @media screen and (min-width: 1024px) {
-        {%- if section.settings.menu_layout == "logo_first_navigation_inline" -%}
-        .header__menu {
-                width: 100%;
-        }
-        {%- endif -%}
-        .header__menu-list {
-            {%- if section.settings.menu_layout == "logo_first_navigation_inline" -%}
-                padding: 0px 4rem;
-                width: 100%;
-                justify-content: flex-start;
-            {%- else -%}
-                justify-content: center;
-            {%- endif -%}
-        }
-
-        {%- if section.settings.menu_layout == "drawer" -%}
-            .header__logo {
-                justify-content: center;
-            }
-        {%- endif -%}
-
-        {% if section.settings.menu_layout == "navigation_first" or section.settings.menu_layout == "drawer" %}
-            .header__logo {
-                order: 2;
-            }
-            .header__menu {
-                order: 1;
-            }
-        {%- elsif section.settings.menu_layout == "logo_first" -%}
-            .header__logo {
-                order: 1;
-            }
-            .header__menu {
-                order: 2;
-            }
-        {%- endif -%}
-    }
-
-  .header.boxed > .header__content {
-    border: {{ section.settings.border_width }}px solid {{ section.settings.content_color }};
-    border-radius: {{ section.settings.border_radius }}px;
-  }
 
   .header__menu-link > a {
     color: {{ section.settings.content_color }};
     font-weight: bold;
   }
+
+  @media screen and (min-width: 1024px) {
+      {%- if section.settings.menu_layout == "logo_first_navigation_inline" -%}
+      .header__menu {
+              width: 100%;
+      }
+      .header__logo {
+              max-width: 250px;
+      }
+
+      {%- endif -%}
+      .header__menu-list {
+          {%- if section.settings.menu_layout == "logo_first_navigation_inline" -%}
+              padding: 0px 2rem;
+              width: 100%;
+              justify-content: flex-start;
+          {%- else -%}
+              justify-content: center;
+          {%- endif -%}
+      }
+
+      {%- if section.settings.menu_layout == "drawer" -%}
+          .header__logo {
+              justify-content: center;
+          }
+      {%- endif -%}
+
+      {% if section.settings.menu_layout == "navigation_first" or section.settings.menu_layout == "drawer" %}
+          .header__logo {
+              order: 2;
+              justify-content: center;
+          }
+          .header__menu {
+              order: 1;
+          }
+          .header__menu > * {
+                justify-content: flex-start;
+          }
+      {%- elsif section.settings.menu_layout == "logo_first" -%}
+          .header__logo {
+              order: 1;
+              justify-content: flex-start;
+          }
+          .header__menu {
+              order: 2;
+          }
+      {%- endif -%}
+  }
+
+    @media screen and (min-width: 1024px) {
+        .header__logo,
+        .header__menu,
+        .header__icons {
+                flex: 1 1 0px;
+        }
+    }
 {% endstyle %}
 
-<section class="header {% if section.settings.full_width == false %}boxed{% endif%} {% if section.settings.sticky == true %}sticky{% endif%}">
+<section class="header">
   <div class="header__content">
-    <a href="/" class="header__logo">
-      {% if section.settings.logo_type == 'svg' %}
-        {% if section.settings.logo_svg == blank %}
-          <p style="text-transform: uppercase; font-size: 1.2rem; font-weight: bold; text-align: center;">
-            {{ shop.name }}
-          </p>
-        {% else %}
-          {{ section.settings.logo_svg }}
+    <div class="header__logo">
+      <a href="/" class="header__logo-container">
+        {% if section.settings.logo_type == 'svg' %}
+          {% if section.settings.logo_svg == blank %}
+            <p style="text-transform: uppercase; font-size: 1.2rem; font-weight: bold; text-align: center;">
+              {{ shop.name }}
+            </p>
+          {% else %}
+            {{ section.settings.logo_svg }}
+          {% endif %}
+        {% elsif section.settings.logo_type == 'image' %}
+          {% if section.settings.logo_image == blank %}
+            <p style="text-transform: uppercase; font-size: 1.2rem; font-weight: bold; text-align: center;">
+              {{ shop.name }}
+            </p>
+          {% else %}
+            <img
+              srcset="{{ section.settings.logo_image | image_url }}"
+              loading="lazy"
+              alt="{{ section.settings.logo_image | escape }}"
+              width="{{ section.settings.logo_image.width }}"
+              height="{{ section.settings.logo_image.height }}"
+              class="full"
+            >
+          {% endif %}
         {% endif %}
-      {% elsif section.settings.logo_type == 'image' %}
-        {% if section.settings.logo_image == blank %}
-          <p style="text-transform: uppercase; font-size: 1.2rem; font-weight: bold; text-align: center;">
-            {{ shop.name }}
-          </p>
-        {% else %}
-          <img
-            srcset="{{ section.settings.logo_image | image_url }}"
-            loading="lazy"
-            alt="{{ section.settings.logo_image | escape }}"
-            width="{{ section.settings.logo_image.width }}"
-            height="{{ section.settings.logo_image.height }}"
-            class="full"
-          >
-        {% endif %}
-      {% endif %}
-    </a>
+      </a>
+    </div>
     <div class="header__menu">
       <div class="header__menu-list {% if section.settings.menu_layout == 'drawer' %}hidden{% endif %}">
         {% for link in section.settings.menu.links %}
@@ -237,23 +241,6 @@
       "info": "This is for desktop only. Drawer layout will be applied to mobile devices"
     },
     {
-      "type": "select",
-      "id": "menu_position_mobile",
-      "label": "Menu position on mobile",
-      "options": [
-        {
-          "value": "top",
-          "label": "Top"
-        },
-        {
-          "value": "bottom",
-          "label": "Bottom"
-        }
-      ],
-      "default": "top",
-      "info": "Some merchants prefer to have the menu on the bottom of the screen on mobile devices to help their customers use less finger movements"
-    },
-    {
       "type": "color",
       "id": "header_background_color",
       "label": "Background color",
@@ -264,38 +251,6 @@
       "id": "content_color",
       "label": "Content color",
       "default": "#fff"
-    },
-    {
-      "type": "checkbox",
-      "id": "full_width",
-      "label": "Full width header",
-      "default": false
-    },
-    {
-      "type": "checkbox",
-      "id": "sticky",
-      "label": "Sticky header",
-      "default": true
-    },
-    {
-      "type": "range",
-      "id": "border_width",
-      "min": 0,
-      "max": 5,
-      "step": 1,
-      "unit": "px",
-      "label": "Border width",
-      "default": 2
-    },
-    {
-      "type": "range",
-      "id": "border_radius",
-      "min": 0,
-      "max": 20,
-      "step": 1,
-      "unit": "px",
-      "label": "Border corners radius",
-      "default": 0
     }
   ],
   "blocks": []
