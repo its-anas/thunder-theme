@@ -2427,7 +2427,6 @@ slider-component .slider-component .slides-container .slide .item > * {
 }
 @media screen and (max-width: 750px) {
   .announcement {
-    min-height: 55px;
     height: auto;
   }
 }
