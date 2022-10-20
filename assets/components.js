@@ -566,88 +566,6 @@ class recentlyViewedComponent extends sliderComponent {
 
 customElements.define("recently-viewed-component", recentlyViewedComponent);
 
-// /**============================================
-// // ANCHOR: Search component
-//  =============================================**/
-/* Here is the explanation for the code above:
-1. It creates a constructor method that adds an input event listener to the input element and binds the onChange method to the constructor.
-2. The onChange method gets the value of the input and it checks if the value is an empty string. If the value is an empty string, the close method is called. Otherwise, the getSearchResults method is called with the value of the input as an argument.
-3. The getSearchResults method is an asynchronous method that fetches the search results from the Shopify search API. It also handles errors.
-4. The open and close methods are used to show and hide the predictive search results.
-5. The debounce method is used to limit the number of times the onChange method is called. */
-
-class PredictiveSearch extends HTMLElement {
-        constructor() {
-                super();
-
-                this.input = this.querySelector('input[type="search"]');
-                this.icon = this.querySelector(".search-section__icon");
-                this.predictiveSearchResults = this.querySelector("#predictive-search");
-
-                this.input.addEventListener(
-                        "input",
-                        this.debounce((event) => {
-                                this.onChange(event);
-                        }, 300).bind(this)
-                );
-
-                this.icon.addEventListener("click", () => {
-                        window.location.href = "/search?q=" + this.input.value;
-                });
-        }
-
-        onChange() {
-                const searchTerm = this.input.value.trim();
-
-                if (!searchTerm.length) {
-                        this.close();
-                        return;
-                }
-
-                this.getSearchResults(searchTerm);
-        }
-
-        getSearchResults(searchTerm) {
-                fetch(`/search/suggest?q=${searchTerm}&resources[type]=product&resources[limit]=8&section_id=predictive-search`)
-                        .then((response) => {
-                                if (!response.ok) {
-                                        var error = new Error(response.status);
-                                        this.close();
-                                        throw error;
-                                }
-
-                                return response.text();
-                        })
-                        .then((text) => {
-                                const resultsMarkup = new DOMParser().parseFromString(text, "text/html").querySelector("#shopify-section-predictive-search").innerHTML;
-                                this.predictiveSearchResults.innerHTML = resultsMarkup;
-                                this.open();
-                        })
-                        .catch((error) => {
-                                this.close();
-                                throw error;
-                        });
-        }
-
-        open() {
-                this.predictiveSearchResults.style.display = "block";
-        }
-
-        close() {
-                this.predictiveSearchResults.style.display = "none";
-        }
-
-        debounce(fn, wait) {
-                let t;
-                return (...args) => {
-                        clearTimeout(t);
-                        t = setTimeout(() => fn.apply(this, args), wait);
-                };
-        }
-}
-
-customElements.define("predictive-search", PredictiveSearch);
-
 /**============================================
 // SECTION: Announcement bar 
  *=============================================**/
@@ -768,3 +686,76 @@ class announcement extends HTMLElement {
 }
 
 customElements.define("announcement-bar", announcement);
+
+// // ANCHOR: Predictive search drawer
+
+class PredictiveSearch extends HTMLElement {
+        constructor() {
+                super();
+
+                this.input = this.querySelector('input[type="search"]');
+                this.icon = this.querySelector(".search-section__icon");
+                this.predictiveSearchResults = this.querySelector("#predictive-search");
+
+                this.input.addEventListener(
+                        "input",
+                        this.debounce((event) => {
+                                this.onChange(event);
+                        }, 300).bind(this)
+                );
+
+                this.icon.addEventListener("click", () => {
+                        window.location.href = "/search?q=" + this.input.value;
+                });
+        }
+
+        onChange() {
+                const searchTerm = this.input.value.trim();
+                if (!searchTerm.length) {
+                        this.close();
+                        return;
+                }
+
+                this.getSearchResults(searchTerm);
+        }
+
+        getSearchResults(searchTerm) {
+                fetch(`/search/suggest?q=${searchTerm}&resources[type]=product&resources[limit]=8&section_id=predictive-search`)
+                        .then((response) => {
+                                if (!response.ok) {
+                                        var error = new Error(response.status);
+                                        this.close();
+                                        throw error;
+                                }
+
+                                return response.text();
+                        })
+                        .then((text) => {
+                                const resultsMarkup = new DOMParser().parseFromString(text, "text/html").querySelector("#shopify-section-predictive-search").innerHTML;
+                                this.predictiveSearchResults.innerHTML = resultsMarkup;
+                                this.open();
+                        })
+                        .catch((error) => {
+                                this.close();
+                                throw error;
+                        });
+        }
+
+        open() {
+                this.querySelector(".search-section__results").classList.remove("hidden");
+        }
+
+        close() {
+                this.querySelector(".search-section__results").classList.add("hidden");
+        }
+
+        debounce(fn, wait) {
+                let t;
+                return (...args) => {
+                        clearTimeout(t);
+                        t = setTimeout(() => fn.apply(this, args), wait);
+                };
+        }
+}
+
+customElements.define("predictive-search", PredictiveSearch);

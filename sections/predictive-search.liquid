@@ -1,5 +1,5 @@
 {%- if predictive_search.performed -%}
-  <div class="search-results__results-list">
+  <div class="search-results__results-list hidden">
     {%- for product in predictive_search.resources.products -%}
       <div class="search-results__list-item">
         <a href="{{ product.url }}" class="search-results__item">

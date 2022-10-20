@@ -52,6 +52,7 @@ let actualDate = new Date().getTime();
 //         }
 // });
 
+// ANCHOR: Shop the look
 let icons = document.querySelectorAll(".shop-the-look__icon");
 
 icons.forEach((icon) => {
@@ -83,34 +84,85 @@ document.addEventListener("click", (event) => {
         });
 });
 
+// ANCHOR: Search drawer
+let searchDrawer = document.querySelector(".search-drawer");
+
 window.addEventListener("load", (event) => {
         document.querySelector(".search-drawer").style.height = `calc(100% - ${document.querySelector(".header-section").offsetHeight}px + 15px)`;
+});
+for (let i = 0; i < mediaQueries.length; i++) {
+        mediaQueries[i].addEventListener("change", () => {
+                document.querySelector(".search-drawer").style.height = `calc(100% - ${document.querySelector(".header-section").offsetHeight}px + 15px)`;
+        });
+}
+
+function showSearchDrawer() {
+        document.querySelector(".search-drawer").classList.remove("hidden");
+        document.querySelector(".search-drawer").classList.add("active");
+        document.querySelector("html").classList.add("lock");
+        document.querySelector(".theme-overlay").classList.remove("hidden");
+}
+
+function hideSearchDrawer() {
+        document.querySelector(".search-drawer").classList.remove("active");
+        document.querySelector(".search-drawer").classList.add("hidden");
+        document.querySelector("html").classList.remove("lock");
+        document.querySelector(".theme-overlay").classList.add("hidden");
+}
+
+function resetSearch() {
+        document.querySelector(".search-section__input").value = "";
+        document.querySelector(".search-section__results").classList.add("hidden");
+}
+
+document.addEventListener("shopify:section:load", function (event) {
+        event.target.classList.forEach((i) => {
+                if (i === "section-search-drawer") {
+                        document.querySelector(".search-drawer").style.height = `calc(100% - ${document.querySelector(".header-section").offsetHeight}px + 15px)`;
+                        showSearchDrawer();
+                }
+        });
+});
+
+document.addEventListener("shopify:section:select", function (event) {
+        event.target.classList.forEach((i) => {
+                if (i === "section-search-drawer") {
+                        document.querySelector(".search-drawer").style.height = `calc(100% - ${document.querySelector(".header-section").offsetHeight}px + 15px)`;
+                        showSearchDrawer();
+                }
+        });
+});
+
+document.addEventListener("shopify:section:deselect", function (event) {
+        event.target.classList.forEach((i) => {
+                if (i === "section-search-drawer") {
+                        hideSearchDrawer();
+                }
+        });
 });
 
 document.addEventListener("click", (event) => {
         if (document.querySelector("#header__search-icon").contains(event.target)) {
-                if (document.querySelector(".search-drawer__container").classList.contains("hidden")) {
-                        document.querySelector(".search-drawer__container").classList.remove("hidden");
-                        document.querySelector(".search-drawer__container").classList.add("active");
+                if (searchDrawer.classList.contains("hidden")) {
+                        showSearchDrawer();
                 } else {
-                        document.querySelector(".search-drawer__container").classList.add("hidden");
-                        document.querySelector(".search-drawer__container").classList.remove("active");
+                        hideSearchDrawer();
                 }
-        } else if (!document.querySelector(".search-drawer__container").contains(event.target)) {
-                document.querySelector(".search-drawer__container").classList.remove("active");
-                document.querySelector(".search-drawer__container").classList.add("hidden");
+        } else if (!searchDrawer.contains(event.target)) {
+                hideSearchDrawer();
+                resetSearch();
         }
 });
 
 document.querySelector(".search-section__close").addEventListener("click", () => {
-        document.querySelector(".search-drawer__container").classList.add("hidden");
-        document.querySelector(".search-drawer__container").classList.remove("active");
+        hideSearchDrawer();
+        resetSearch();
 });
 
 document.querySelector(".search-section__input").addEventListener("input", (event) => {
         if (event.target.value.length > 0) {
-                document.querySelector(".preload").style.display = "none";
+                document.querySelector(".preload").classList.add("hidden");
         } else {
-                document.querySelector(".preload").style.display = "flex";
+                document.querySelector(".preload").classList.remove("hidden");
         }
 });

@@ -1,6 +1,6 @@
-<section class="search-drawer">
-  <div class="search-drawer__container hidden">
-    <predictive-search class="search-section__container">
+<predictive-search class="search-drawer hidden">
+  <div class="search-drawer__container">
+    <div class="search-section__container">
       <form action="{{ routes.search_url }}" method="get" class="search-section__form">
         <input type="hidden" name="contact[tags]" value="newsletter">
         <input
@@ -27,13 +27,13 @@
           </svg>
         </div>
       </form>
-    </predictive-search>
+    </div>
     {% if section.blocks.size > 0 %}
       <div class="preload">
         {% for block in section.blocks %}
           {% case block.type %}
             {% when 'products' %}
-              <div class="group">
+              <div class="group" {{ block.shopify_attributes }}>
                 {% if block.settings.product_1 != blank
                   or block.settings.product_2 != blank
                   or block.settings.product_3 != blank
@@ -51,7 +51,7 @@
                 {% endif %}
               </div>
             {% when 'collections' %}
-              <div class="group">
+              <div class="group" {{ block.shopify_attributes }}>
                 {% if block.settings.collection_1 != blank
                   or block.settings.collection_2 != blank
                   or block.settings.collection_3 != blank
@@ -70,7 +70,7 @@
               </div>
             {% when 'menu' %}
               {% if block.settings.menu.links.size > 0 %}
-                <div class="group">
+                <div class="group" {{ block.shopify_attributes }}>
                   <h6>{{ block.settings.group_name }}</h6>
                   {% for item in block.settings.menu.links %}
                     <a href="{{ item.url }}">{{ item.title }}</a>
@@ -82,11 +82,12 @@
       </div>
     {% endif %}
   </div>
-</section>
+</predictive-search>
 
 {% schema %}
 {
   "name": "Search",
+  "class": "section-search-drawer",
   "settings": [],
   "blocks": [
     {
@@ -160,12 +161,6 @@
           "default": "main-menu"
         }
       ]
-    }
-  ],
-  "presets": [
-    {
-      "name": "Search",
-      "blocks": []
     }
   ]
 }

@@ -13,131 +13,144 @@
   }
 {%- endstyle -%}
 
-<announcement-bar>
-  {% if section.blocks.size > 0 %}
-    <div class="announcement">
-      <div class="announcement__container">
-        {% for block in section.blocks %}
-          <div class="announcement__slide" {{ block.shopify_attributes }}>
-            <div class="announcement__content">
-              {%- case block.type -%}
-                {%- when 'text_with_button' -%}
-                  <p>
-                    {{ block.settings.text }}
-                    <a
-                      class="button-text button--link"
-                      {% if block.settings.button_link != blank %}
-                        href="{{ block.settings.button_link }}"
+{% if section.settings.show_announcement_bar == true %}
+  <announcement-bar>
+    {% if section.blocks.size > 0 %}
+      <div class="announcement">
+        <div class="announcement__container">
+          {% for block in section.blocks %}
+            <div class="announcement__slide" {{ block.shopify_attributes }}>
+              <div class="announcement__content">
+                {%- case block.type -%}
+                  {%- when 'text_with_button' -%}
+                    <p>
+                      {{ block.settings.text }}
+                      {% if block.settings.button_text != blank %}
+                        <a
+                          class="button-text button--link"
+                          {% if block.settings.button_link != blank %}
+                            href="{{ block.settings.button_link }}"
+                          {% endif %}
+                        >
+                          {{ block.settings.button_text }}
+                        </a>
                       {% endif %}
-                    >
-                      {{ block.settings.button_text }}
-                    </a>
-                  </p>
-                {%- when 'text_with_coupon' -%}
-                  <p>
-                    {{ block.settings.text }}
-                    <a class="coupon">{{ block.settings.coupon_text }}</a>
-                  </p>
-                {%- when 'text_with_countdown' -%}
-                  {%- style -%}
-                    .countdown-timer__timers {
-                      gap: 0.3rem;
-                    }
-                    .countdown-timer__timers > .countdown-timer__container {
-                      background-color: {{ block.settings.digits_background_color }};
-                      border-radius: {{ block.settings.digits_container_border }}%;
-                      padding: 0.1rem 0.3rem;
-                      min-width: 1.5rem;
-                    }
-                    .countdown-timer__timers > .countdown-timer__container > p {
-                      color: {{ block.settings.digits_color }};
-                    }
-                    .countdown-timer__timers > .countdown-timer__container > .small {
-                      font-size: 1.2rem;
-                      line-height: 0.9;
-                    }
-                    .countdown-timer__timers > .countdown-timer__container > .label {
-                      font-size: 0.5rem;
-                    }
-                  {%- endstyle -%}
+                    </p>
+                  {%- when 'text_with_coupon' -%}
+                    <p>
+                      {{ block.settings.text }}
+                      {% if block.settings.coupon_text != blank %}
+                        <a class="coupon">{{ block.settings.coupon_text }}</a>
+                      {% endif %}
+                    </p>
+                  {%- when 'text_with_countdown' -%}
+                    {%- style -%}
+                      .countdown-timer__timers {
+                        gap: 0.3rem;
+                      }
+                      .countdown-timer__timers > .countdown-timer__container {
+                        background-color: {{ block.settings.digits_background_color }};
+                        border-radius: {{ block.settings.digits_container_border }}%;
+                        padding: 0.1rem 0.3rem;
+                        min-width: 1.5rem;
+                      }
+                      .countdown-timer__timers > .countdown-timer__container > p {
+                        color: {{ block.settings.digits_color }};
+                      }
+                      .countdown-timer__timers > .countdown-timer__container > .small {
+                        font-size: 1.2rem;
+                        line-height: 0.9;
+                      }
+                      .countdown-timer__timers > .countdown-timer__container > .label {
+                        font-size: 0.5rem;
+                      }
+                    {%- endstyle -%}
 
-                  {% liquid
-                    assign days = block.settings.time_days | times: 24.00 | times: 60.00
-                    assign hours = block.settings.time_hours | times: 60.00
-                    assign mins = block.settings.time_mins
-                    assign secs = block.settings.time_secs | divided_by: 60.00
-                    assign timeInMinutes = days | plus: hours | plus: mins | plus: secs
-                    assign year = block.settings.date_year
-                    assign month = block.settings.date_month | prepend: '00' | slice: -2, 2
-                    assign day = block.settings.date_day | prepend: '00' | slice: -2, 2
-                    assign hour = block.settings.date_hour | prepend: '00' | slice: -2, 2
-                    assign min = block.settings.date_min | prepend: '00' | slice: -2, 2
-                    assign sec = block.settings.date_sec | prepend: '00' | slice: -2, 2
-                  %}
+                    {% liquid
+                      assign days = block.settings.time_days | times: 24.00 | times: 60.00
+                      assign hours = block.settings.time_hours | times: 60.00
+                      assign mins = block.settings.time_mins
+                      assign secs = block.settings.time_secs | divided_by: 60.00
+                      assign timeInMinutes = days | plus: hours | plus: mins | plus: secs
+                      assign year = block.settings.date_year
+                      assign month = block.settings.date_month | prepend: '00' | slice: -2, 2
+                      assign day = block.settings.date_day | prepend: '00' | slice: -2, 2
+                      assign hour = block.settings.date_hour | prepend: '00' | slice: -2, 2
+                      assign min = block.settings.date_min | prepend: '00' | slice: -2, 2
+                      assign sec = block.settings.date_sec | prepend: '00' | slice: -2, 2
+                    %}
 
-                  {% capture timeInDate -%}
-                    {{- year }}-{{ month }}-{{ day }}T{{ hour }}:{{ min }}:{{ sec -}}
-                  {%- endcapture %}
-                  {% capture countdownType %}{{ block.settings.countdown_timer_type }}{% endcapture %}
-                  {% capture afterExpirationTimeOnly %}{{ block.settings.afterExpirationTimeOnly }}{% endcapture %}
+                    {% capture timeInDate -%}
+                      {{- year }}-{{ month }}-{{ day }}T{{ hour }}:{{ min }}:{{ sec -}}
+                    {%- endcapture %}
+                    {% capture countdownType %}{{ block.settings.countdown_timer_type }}{% endcapture %}
+                    {% capture afterExpirationTimeOnly %}{{ block.settings.afterExpirationTimeOnly }}{% endcapture %}
 
-                  <p>{{ block.settings.text }}</p>
-                  <div id="countdown-timer-{{ block.id }}">
-                    <countdown-timer
-                      countdown-type="{{ countdownType }}"
-                      time-in-date="{{ timeInDate }}"
-                      time-in-minutes="{{ timeInMinutes }}"
-                      after-expiration="{{ afterExpirationTimeOnly }}"
-                      section-id="countdown-timer-{{ block.id }}"
-                      cookie-name="countdown-timer-cookie-{{ block.id }}"
-                      class="countdown-timer__timers"
-                    >
-                      <div class="countdown-timer__container">
-                        <p class="days small"></p>
-                        <p class="label">Days</p>
+                    <p>{{ block.settings.text }}</p>
+                    <div id="countdown-timer-{{ block.id }}">
+                      <countdown-timer
+                        countdown-type="{{ countdownType }}"
+                        time-in-date="{{ timeInDate }}"
+                        time-in-minutes="{{ timeInMinutes }}"
+                        after-expiration="{{ afterExpirationTimeOnly }}"
+                        section-id="countdown-timer-{{ block.id }}"
+                        cookie-name="countdown-timer-cookie-{{ block.id }}"
+                        class="countdown-timer__timers"
+                      >
+                        <div class="countdown-timer__container">
+                          <p class="days small"></p>
+                          <p class="label">Days</p>
+                        </div>
+                        <div class="countdown-timer__container">
+                          <p class="hours small"></p>
+                          <p class="label">Hours</p>
+                        </div>
+                        <div class="countdown-timer__container">
+                          <p class="minutes small"></p>
+                          <p class="label">Mins</p>
+                        </div>
+                        <div class="countdown-timer__container">
+                          <p class="seconds small"></p>
+                          <p class="label">Secs</p>
+                        </div>
+                      </countdown-timer>
+                      <div class="countdown-timer__message">
+                        <h6>{{ block.settings.message }}</h6>
                       </div>
-                      <div class="countdown-timer__container">
-                        <p class="hours small"></p>
-                        <p class="label">Hours</p>
-                      </div>
-                      <div class="countdown-timer__container">
-                        <p class="minutes small"></p>
-                        <p class="label">Mins</p>
-                      </div>
-                      <div class="countdown-timer__container">
-                        <p class="seconds small"></p>
-                        <p class="label">Secs</p>
-                      </div>
-                    </countdown-timer>
-                    <div class="countdown-timer__message">
-                      <h6>{{ block.settings.message }}</h6>
                     </div>
-                  </div>
-              {%- endcase -%}
+                {%- endcase -%}
+              </div>
             </div>
-          </div>
-        {% endfor %}
+          {% endfor %}
+        </div>
+        <div class="chevrons">
+          <span class="prev">
+            <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M14 17.854L9 12.854L14 7.85397" stroke="white" stroke-width="1.5"/>
+            </svg>
+          </span>
+          <span class="next">
+            <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M10 7.85397L15 12.854L10 17.854" stroke="white" stroke-width="1.5"/>
+            </svg>
+          </span>
+        </div>
       </div>
-      <div class="chevrons">
-        <span class="prev">
-          <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M14 17.854L9 12.854L14 7.85397" stroke="white" stroke-width="1.5"/>
-          </svg>
-        </span>
-        <span class="next">
-          <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M10 7.85397L15 12.854L10 17.854" stroke="white" stroke-width="1.5"/>
-          </svg>
-        </span>
-      </div>
-    </div>
-  {% endif %}
-</announcement-bar>
+    {% endif %}
+  </announcement-bar>
+{% endif %}
 
 {% schema %}
 {
   "name": "Announcement bar",
+  "class": "section-announcement-bar",
   "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_announcement_bar",
+      "label": "Show announcement bar",
+      "default": true
+    },
     {
       "type": "color",
       "id": "background_color",
