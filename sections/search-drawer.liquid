@@ -1,0 +1,172 @@
+<section class="search-drawer">
+  <div class="search-drawer__container hidden">
+    <predictive-search class="search-section__container">
+      <form action="{{ routes.search_url }}" method="get" class="search-section__form">
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        <input
+          id="Search"
+          class="search-section__input"
+          type="search"
+          name="q"
+          value="{{ search.terms | escape }}"
+          placeholder="Search..."
+          {%- if settings.predictive_search_enabled -%}
+            autocorrect="off"
+            autocomplete="off"
+            autocapitalize="off"
+            spellcheck="false"
+          {%- endif -%}
+        >
+        {%- if settings.predictive_search_enabled -%}
+          <div class="search-section__results" id="predictive-search" tabindex="-1"></div>
+        {%- endif -%}
+        <div class="search-section__close">
+          <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6.43359 18.5L18.4336 6.5" stroke="white" stroke-width="1.5"/>
+            <path d="M6.43359 6.5L18.4336 18.5" stroke="white" stroke-width="1.5"/>
+          </svg>
+        </div>
+      </form>
+    </predictive-search>
+    {% if section.blocks.size > 0 %}
+      <div class="preload">
+        {% for block in section.blocks %}
+          {% case block.type %}
+            {% when 'products' %}
+              <div class="group">
+                {% if block.settings.product_1 != blank
+                  or block.settings.product_2 != blank
+                  or block.settings.product_3 != blank
+                %}
+                  <h6>{{ block.settings.group_name }}</h6>
+                  {% if block.settings.product_1 != blank -%}
+                    <a href="{{ block.settings.product_1.url }}">{{ block.settings.product_1 }}</a>
+                  {%- endif %}
+                  {% if block.settings.product_2 != blank -%}
+                    <a href="{{ block.settings.product_2.url }}">{{ block.settings.product_2 }}</a>
+                  {%- endif %}
+                  {% if block.settings.product_3 != blank -%}
+                    <a href="{{ block.settings.product_3.url }}">{{ block.settings.product_3 }}</a>
+                  {%- endif %}
+                {% endif %}
+              </div>
+            {% when 'collections' %}
+              <div class="group">
+                {% if block.settings.collection_1 != blank
+                  or block.settings.collection_2 != blank
+                  or block.settings.collection_3 != blank
+                %}
+                  <h6>{{ block.settings.group_name }}</h6>
+                  {% if block.settings.collection_1 != blank -%}
+                    <a href="{{ block.settings.collection_1.url }}">{{ block.settings.collection_1 }}</a>
+                  {%- endif %}
+                  {% if block.settings.collection_2 != blank -%}
+                    <a href="{{ block.settings.collection_1.url }}">{{ block.settings.collection_2 }}</a>
+                  {%- endif %}
+                  {% if block.settings.collection_3 != blank -%}
+                    <a href="{{ block.settings.collection_1.url }}">{{ block.settings.collection_3 }}</a>
+                  {%- endif %}
+                {% endif %}
+              </div>
+            {% when 'menu' %}
+              {% if block.settings.menu.links.size > 0 %}
+                <div class="group">
+                  <h6>{{ block.settings.group_name }}</h6>
+                  {% for item in block.settings.menu.links %}
+                    <a href="{{ item.url }}">{{ item.title }}</a>
+                  {% endfor %}
+                </div>
+              {% endif %}
+          {% endcase %}
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Search",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "products",
+      "name": "Products",
+      "settings": [
+        {
+          "type": "text",
+          "id": "group_name",
+          "label": "Text",
+          "default": "Popular products"
+        },
+        {
+          "type": "product",
+          "id": "product_1",
+          "label": "Product 1"
+        },
+        {
+          "type": "product",
+          "id": "product_2",
+          "label": "Product 2"
+        },
+        {
+          "type": "product",
+          "id": "product_3",
+          "label": "Product 3"
+        }
+      ]
+    },
+    {
+      "type": "collections",
+      "name": "Collections",
+      "settings": [
+        {
+          "type": "text",
+          "id": "group_name",
+          "label": "Text",
+          "default": "Popular collections"
+        },
+        {
+          "type": "collection",
+          "id": "collection_1",
+          "label": "Collection 1"
+        },
+        {
+          "type": "collection",
+          "id": "collection_2",
+          "label": "Collection 2"
+        },
+        {
+          "type": "collection",
+          "id": "collection_3",
+          "label": "Collection 3"
+        }
+      ]
+    },
+    {
+      "type": "menu",
+      "name": "Menu",
+      "settings": [
+        {
+          "type": "text",
+          "id": "group_name",
+          "label": "Text",
+          "default": "Menu"
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": "Menu",
+          "default": "main-menu"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Search",
+      "blocks": []
+    }
+  ]
+}
+{% endschema %}

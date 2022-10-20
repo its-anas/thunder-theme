@@ -294,23 +294,6 @@
                     "default": true
                },
                {
-                    "type": "select",
-                    "id": "header_position_mobile",
-                    "label": "Header position on mobile",
-                    "options": [
-                         {
-                              "value": "top",
-                              "label": "Top"
-                         },
-                         {
-                              "value": "bottom",
-                              "label": "Bottom"
-                         }
-                    ],
-                    "default": "top",
-                    "info": "Some merchants prefer to have the menu on the bottom of the screen on mobile devices to help their customers use less finger movements"
-               },
-               {
                     "type": "header",
                     "content": "Border",
                     "info": "Border settings are applied only if 'Full width header' is disabled"

@@ -34,13 +34,11 @@
           }
       {%- endif -%}
 
-      {%- if settings.header_position_mobile == "bottom" -%}
-        @media screen and (max-width: 750px) {
-          .header-section {
-                  bottom: 0px;
-          }
+      @media screen and (max-width: 750px) {
+        .header-section.bottom {
+                bottom: 0px;
         }
-      {%- endif -%}
+      }
 
       .header-section.boxed > .header-container {
         border-radius: {{ settings.border_radius }}px;
@@ -63,6 +61,7 @@
         {% section 'announcement-bar' %}
       </div>
     </div>
+    {% section 'search-drawer' %}
     {{ content_for_layout }}
   </body>
 </html>

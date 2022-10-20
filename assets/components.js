@@ -608,7 +608,7 @@ class PredictiveSearch extends HTMLElement {
         }
 
         getSearchResults(searchTerm) {
-                fetch(`/search/suggest?q=${searchTerm}&resources[type]=product&resources[limit]=4&section_id=predictive-search`)
+                fetch(`/search/suggest?q=${searchTerm}&resources[type]=product&resources[limit]=8&section_id=predictive-search`)
                         .then((response) => {
                                 if (!response.ok) {
                                         var error = new Error(response.status);
@@ -762,16 +762,6 @@ class announcement extends HTMLElement {
                                         jump = 1;
                                         announcementContainer.style.transition = "all ease 1s";
                                 });
-                                function updateIndicators() {
-                                        if (activeSlide > totalSlides - 1) {
-                                                activeSlide = 0;
-                                        } else if (activeSlide < 0) {
-                                                activeSlide = totalSlides - 1;
-                                        }
-                                        announcement.querySelector(".announcement__indicators span.active").classList.remove("active");
-                                        announcement.querySelectorAll(".announcement__indicators span")[activeSlide].classList.add("active");
-                                }
-                                updateIndicators();
                         }
                 });
         }
