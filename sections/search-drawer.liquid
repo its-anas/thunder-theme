@@ -1,3 +1,11 @@
+{% style %}
+  .search-drawer__container {
+    background-color: {{ section.settings.background_color }};
+    border: {{ section.settings.border_width }}px solid {{ section.settings.border_color }};
+    border-radius: {{ section.settings.border_radius }}px;
+  }
+{% endstyle %}
+
 <predictive-search class="search-drawer hidden">
   <div class="search-drawer__container">
     <div class="search-section__container">
@@ -88,7 +96,40 @@
 {
   "name": "Search",
   "class": "section-search-drawer",
-  "settings": [],
+  "settings": [
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#000"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border color",
+      "default": "#fff"
+    },
+    {
+      "type": "range",
+      "id": "border_width",
+      "min": 0,
+      "max": 3,
+      "step": 1,
+      "unit": "px",
+      "label": "Border width",
+      "default": 2
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Border corners radius",
+      "default": 0
+    }
+  ],
   "blocks": [
     {
       "type": "products",
