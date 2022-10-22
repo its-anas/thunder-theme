@@ -11,6 +11,10 @@
     }
   }
 
+  .shop-the-look__product {
+    background-color: {{ section.settings.openable_background_color }};
+  }
+
   .{{ section.id }}.shop-the-look {
     padding: {{ section.settings.space_outside_elements | divided_by: 2 }}px 0;
   }
@@ -233,6 +237,12 @@
       "type": "color",
       "id": "selector_background_color",
       "label": "Selector background color",
+      "default": "#000"
+    },
+    {
+      "type": "color",
+      "id": "openable_background_color",
+      "label": "Openable element background color",
       "default": "#000"
     },
     {

@@ -43,9 +43,7 @@ class FaqSection extends HTMLElement {
 
 customElements.define("faq-section", FaqSection);
 
-/**============================================
-// SECTION: Countdown timer 
- *=============================================**/
+// SECTION: Countdown timer
 /* 1. The code checks if the countdown type is "date" or "time".
 2. If it is "date", the code sets the deadline to the date specified in the "timeInDate" variable.
 3. If it is "time":
@@ -59,7 +57,7 @@ customElements.define("faq-section", FaqSection);
 4. The code then initializes the clock.
 5. The code finally creates a function that updates the clock every second.*/
 
-class countdownTimer extends HTMLElement {
+class CountdownTimer extends HTMLElement {
         constructor() {
                 super();
                 this.attachShadow({ mode: "open" });
@@ -150,11 +148,9 @@ class countdownTimer extends HTMLElement {
         }
 }
 
-customElements.define("countdown-timer", countdownTimer);
+customElements.define("countdown-timer", CountdownTimer);
 
-/**============================================
-// SECTION: Video with text 
- *=============================================**/
+// SECTION: Video with text
 /* 1. We get all the video boxes (the ones that contain the thumbnail and the video)
 2. We loop through each video box
 3. We get the thumbnail and the video in the box
@@ -162,7 +158,7 @@ customElements.define("countdown-timer", countdownTimer);
 5. We show the video and hide the thumbnail
 6. When the video ends, we reset the video src and hide the video and show the thumbnail again */
 
-class videoWithText extends HTMLElement {
+class VideoWithText extends HTMLElement {
         constructor() {
                 super();
         }
@@ -183,11 +179,9 @@ class videoWithText extends HTMLElement {
         }
 }
 
-customElements.define("video-with-text", videoWithText);
+customElements.define("video-with-text", VideoWithText);
 
-/**============================================
-// SECTION: Slideshow 
- *=============================================**/
+// SECTION: Slideshow
 /* 1. First, we select all the elements we need to manipulate and other variables we need to use.
 2. We create and call a function that will load the indicators dynamically.
 3. We create two functions, one will slide to the next slide and the other to the previous slide.
@@ -198,7 +192,7 @@ customElements.define("video-with-text", videoWithText);
 8. We create and call a function that will update the indicators.
 9. We select all the indicators and add an event listener that will check which indicator was clicked and will slide the slides to the clicked indicator. */
 
-class slideshow extends HTMLElement {
+class Slideshow extends HTMLElement {
         constructor() {
                 super();
         }
@@ -223,8 +217,8 @@ class slideshow extends HTMLElement {
                 let time;
 
                 if (totalSlides <= 1) {
-                        next.style = "display: none";
-                        prev.style = "display: none";
+                        next.style.display = "none";
+                        prev.style.display = "none";
                 }
 
                 function loadIndicators() {
@@ -363,17 +357,134 @@ class slideshow extends HTMLElement {
         }
 }
 
-customElements.define("slideshow-section", slideshow);
+customElements.define("slideshow-section", Slideshow);
 
-// /**============================================
-// // ANCHOR: Slider component
-//  =============================================**/
+// SECTION: Announcement bar
+
+class Announcement extends HTMLElement {
+        constructor() {
+                super();
+        }
+        connectedCallback() {
+                this.attachShadow({ mode: "open" });
+                this.shadowRoot.innerHTML = "<slot></slot>";
+                this.loadSlideshow();
+        }
+        loadSlideshow() {
+                let announcement = this.querySelector(".announcement");
+                let announcementContainer = this.querySelector(".announcement__container");
+                let announcementSlides = this.querySelectorAll(".announcement__container .announcement__slide");
+                let prev = this.querySelector(".prev");
+                let next = this.querySelector(".next");
+                let totalSlides = announcementSlides.length;
+                let step = 100 / totalSlides;
+                let activeSlide = 0;
+                let activeIndicator = 0;
+                let direction = -1;
+                let jump = 1;
+                let interval = 4000;
+                let time;
+
+                if (totalSlides <= 1) {
+                        next.style.display = "none";
+                        prev.style.display = "none";
+                }
+
+                function slideToNext() {
+                        if (direction === -1) {
+                                direction = -1;
+                        } else if (direction === 1) {
+                                direction = -1;
+                                announcementContainer.prepend(announcementContainer.lastElementChild);
+                        }
+                        announcement.style.justifyContent = "flex-start";
+                        if (totalSlides <= 1) {
+                        } else {
+                                announcementContainer.style.transform = `translateX(-${step}%)`;
+                        }
+                }
+
+                function slideToPrev() {
+                        if (direction === -1) {
+                                direction = 1;
+                                announcementContainer.append(announcementContainer.firstElementChild);
+                        } else if (direction === 1) {
+                                direction = 1;
+                        }
+                        announcement.style.justifyContent = "flex-end";
+                        if (totalSlides <= 1) {
+                        } else {
+                                announcementContainer.style.transform = `translateX(${step}%)`;
+                        }
+                }
+                next.addEventListener("click", () => {
+                        slideToNext();
+                });
+                prev.addEventListener("click", () => {
+                        slideToPrev();
+                });
+
+                function loop(status) {
+                        if (status === true) {
+                                time = setInterval(() => {
+                                        slideToNext();
+                                }, interval);
+                        } else {
+                                clearInterval(time);
+                        }
+                }
+                loop(true);
+
+                this.addEventListener("mouseover", () => {
+                        loop(false);
+                });
+                this.addEventListener("mouseout", () => {
+                        loop(true);
+                });
+
+                announcementContainer.addEventListener("transitionend", (event) => {
+                        if (event.target.className == "announcement__container") {
+                                if (direction === -1) {
+                                        if (jump > 1) {
+                                                for (let i = 0; i < jump; i++) {
+                                                        activeSlide++;
+                                                        announcementContainer.append(announcementContainer.firstElementChild);
+                                                }
+                                        } else {
+                                                activeSlide++;
+                                                announcementContainer.append(announcementContainer.firstElementChild);
+                                        }
+                                } else if (direction === 1) {
+                                        if (jump > 1) {
+                                                for (let i = 0; i < jump; i++) {
+                                                        activeSlide--;
+                                                        announcementContainer.prepend(announcementContainer.lastElementChild);
+                                                }
+                                        } else {
+                                                activeSlide--;
+                                                announcementContainer.prepend(announcementContainer.lastElementChild);
+                                        }
+                                }
+                                announcementContainer.style.transition = "none";
+                                announcementContainer.style.transform = "translateX(0%)";
+                                setTimeout(() => {
+                                        jump = 1;
+                                        announcementContainer.style.transition = "all ease 1s";
+                                });
+                        }
+                });
+        }
+}
+
+customElements.define("announcement-bar", Announcement);
+
+// ANCHOR: Slider component
 /* Here is the explanation for the code above:
 1. The first function (setMaxScroll) is called when the page loads and then every time the window is resized or the media queries are changed. It sets the maxSliderScroll variable which is used to calculate the maximum scroll amount for the slider. It also sets the visibility of the next/prev buttons depending on the number of items found and the number of items displayed. 
 2. The getTranslateX function calculates the new translateX value for the slider depending on the type of action (next or prev). This is used in the moveNext and movePrev functions. These functions also hide and show the next/prev buttons depending on the new translateX value.
 3. The event listeners for the next/prev buttons and the media queries call the setMaxScroll function. */
 
-class sliderComponent extends HTMLElement {
+class SliderComponent extends HTMLElement {
         constructor() {
                 super();
         }
@@ -467,18 +578,16 @@ class sliderComponent extends HTMLElement {
         }
 }
 
-customElements.define("slider-component", sliderComponent);
+customElements.define("slider-component", SliderComponent);
 
-// /**============================================
-// // ANCHOR: Recently viewed component
-//  =============================================**/
+// ANCHOR: Recently viewed
 /* 1. First, we check if the cookie exists. If it does, we parse it into an array.
 2. If the array is not empty, we reverse it to make sure the last visited products are shown first. We also get the number of items that we want to show.
 3. We loop through the array and get the product information we need.
 4. We create an item element, add the appropriate classes to it, and add the HTML for each product.
 5. If the array is empty, we hide the section using the display property. */
 
-class recentlyViewedComponent extends sliderComponent {
+class RecentlyViewedComponent extends SliderComponent {
         constructor() {
                 super();
                 this.addProducts();
@@ -564,130 +673,9 @@ class recentlyViewedComponent extends sliderComponent {
         }
 }
 
-customElements.define("recently-viewed-component", recentlyViewedComponent);
+customElements.define("recently-viewed-component", RecentlyViewedComponent);
 
-/**============================================
-// SECTION: Announcement bar 
- *=============================================**/
-
-class announcement extends HTMLElement {
-        constructor() {
-                super();
-        }
-        connectedCallback() {
-                this.attachShadow({ mode: "open" });
-                this.shadowRoot.innerHTML = "<slot></slot>";
-                this.loadSlideshow();
-        }
-        loadSlideshow() {
-                let announcement = this.querySelector(".announcement");
-                let announcementContainer = this.querySelector(".announcement__container");
-                let announcementSlides = this.querySelectorAll(".announcement__container .announcement__slide");
-                let prev = this.querySelector(".prev");
-                let next = this.querySelector(".next");
-                let totalSlides = announcementSlides.length;
-                let step = 100 / totalSlides;
-                let activeSlide = 0;
-                let activeIndicator = 0;
-                let direction = -1;
-                let jump = 1;
-                let interval = 4000;
-                let time;
-
-                if (totalSlides <= 1) {
-                        next.style = "display: none";
-                        prev.style = "display: none";
-                }
-
-                function slideToNext() {
-                        if (direction === -1) {
-                                direction = -1;
-                        } else if (direction === 1) {
-                                direction = -1;
-                                announcementContainer.prepend(announcementContainer.lastElementChild);
-                        }
-                        announcement.style.justifyContent = "flex-start";
-                        if (totalSlides <= 1) {
-                        } else {
-                                announcementContainer.style.transform = `translateX(-${step}%)`;
-                        }
-                }
-
-                function slideToPrev() {
-                        if (direction === -1) {
-                                direction = 1;
-                                announcementContainer.append(announcementContainer.firstElementChild);
-                        } else if (direction === 1) {
-                                direction = 1;
-                        }
-                        announcement.style.justifyContent = "flex-end";
-                        if (totalSlides <= 1) {
-                        } else {
-                                announcementContainer.style.transform = `translateX(${step}%)`;
-                        }
-                }
-                next.addEventListener("click", () => {
-                        slideToNext();
-                });
-                prev.addEventListener("click", () => {
-                        slideToPrev();
-                });
-
-                function loop(status) {
-                        if (status === true) {
-                                time = setInterval(() => {
-                                        slideToNext();
-                                }, interval);
-                        } else {
-                                clearInterval(time);
-                        }
-                }
-                loop(true);
-
-                this.addEventListener("mouseover", () => {
-                        loop(false);
-                });
-                this.addEventListener("mouseout", () => {
-                        loop(true);
-                });
-
-                announcementContainer.addEventListener("transitionend", (event) => {
-                        if (event.target.className == "announcement__container") {
-                                if (direction === -1) {
-                                        if (jump > 1) {
-                                                for (let i = 0; i < jump; i++) {
-                                                        activeSlide++;
-                                                        announcementContainer.append(announcementContainer.firstElementChild);
-                                                }
-                                        } else {
-                                                activeSlide++;
-                                                announcementContainer.append(announcementContainer.firstElementChild);
-                                        }
-                                } else if (direction === 1) {
-                                        if (jump > 1) {
-                                                for (let i = 0; i < jump; i++) {
-                                                        activeSlide--;
-                                                        announcementContainer.prepend(announcementContainer.lastElementChild);
-                                                }
-                                        } else {
-                                                activeSlide--;
-                                                announcementContainer.prepend(announcementContainer.lastElementChild);
-                                        }
-                                }
-                                announcementContainer.style.transition = "none";
-                                announcementContainer.style.transform = "translateX(0%)";
-                                setTimeout(() => {
-                                        jump = 1;
-                                        announcementContainer.style.transition = "all ease 1s";
-                                });
-                        }
-                });
-        }
-}
-
-customElements.define("announcement-bar", announcement);
-
-// // ANCHOR: Predictive search drawer
+// ANCHOR: Predictive search
 
 class PredictiveSearch extends HTMLElement {
         constructor() {
@@ -704,9 +692,17 @@ class PredictiveSearch extends HTMLElement {
                         }, 300).bind(this)
                 );
 
-                this.icon.addEventListener("click", () => {
-                        window.location.href = "/search?q=" + this.input.value;
-                });
+                if (this.icon !== null) {
+                        this.icon.addEventListener("click", () => {
+                                window.location.href = "/search?q=" + this.input.value;
+                        });
+                }
+
+                this.searchDrawer = this.querySelector(".search-drawer");
+                this.closeIcon = this.searchDrawer.querySelector(".search-section__close");
+                this.inputField = this.searchDrawer.querySelector(".search-section__input");
+
+                this.decideDrawerAction();
         }
 
         onChange() {
@@ -756,6 +752,184 @@ class PredictiveSearch extends HTMLElement {
                         t = setTimeout(() => fn.apply(this, args), wait);
                 };
         }
+
+        showSearchDrawer() {
+                this.searchDrawer.classList.remove("hidden");
+                this.searchDrawer.classList.add("active");
+                document.querySelector(".theme-overlay").style.zIndex = "99";
+                this.searchDrawer.style.zIndex = "100";
+                lockPage();
+        }
+
+        hideSearchDrawer() {
+                this.searchDrawer.classList.remove("active");
+                this.searchDrawer.classList.add("hidden");
+                this.searchDrawer.style.zIndex = "98";
+                unlockPage();
+                document.querySelector(".theme-overlay").style.zIndex = "-1";
+        }
+
+        resetSearch() {
+                this.inputField.value = "";
+                this.searchDrawer.querySelector(".search-section__results").classList.add("hidden");
+        }
+
+        decideDrawerAction() {
+                document.addEventListener("click", (event) => {
+                        if (document.querySelector("#header__search-icon").contains(event.target)) {
+                                this.showSearchDrawer();
+                        } else if (!this.searchDrawer.querySelector(".search-drawer__container").contains(event.target) && document.querySelector(".popup__container").classList.contains("hidden")) {
+                                this.hideSearchDrawer();
+                                this.resetSearch();
+                        }
+                });
+
+                this.closeIcon.addEventListener("click", () => {
+                        this.hideSearchDrawer();
+                        this.resetSearch();
+                });
+
+                this.inputField.addEventListener("input", (event) => {
+                        if (event.target.value.length > 0) {
+                                this.searchDrawer.querySelector(".preload").classList.add("hidden");
+                        } else {
+                                this.searchDrawer.querySelector(".preload").classList.remove("hidden");
+                        }
+                });
+
+                if (Shopify.designMode) {
+                        document.addEventListener("shopify:section:load", (event) => {
+                                event.target.classList.forEach((i) => {
+                                        if (i === "section-search-drawer") {
+                                                this.searchDrawer.style.height = `calc(100% - ${document.querySelector(".header-section").offsetHeight}px + 15px)`;
+                                                this.showSearchDrawer();
+                                        }
+                                });
+                        });
+
+                        document.addEventListener("shopify:section:select", (event) => {
+                                event.target.classList.forEach((i) => {
+                                        if (i === "section-search-drawer") {
+                                                this.searchDrawer.style.height = `calc(100% - ${document.querySelector(".header-section").offsetHeight}px + 15px)`;
+                                                this.showSearchDrawer();
+                                        }
+                                });
+                        });
+
+                        document.addEventListener("shopify:section:deselect", (event) => {
+                                event.target.classList.forEach((i) => {
+                                        if (i === "section-search-drawer") {
+                                                this.hideSearchDrawer();
+                                        }
+                                });
+                        });
+                }
+        }
 }
 
 customElements.define("predictive-search", PredictiveSearch);
+
+// ANCHOR:  Popup component
+
+class PopupComponent extends HTMLElement {
+        constructor() {
+                super();
+        }
+
+        connectedCallback() {
+                this.drawer = this.querySelector("[openable]");
+                this.delayTime = this.drawer.getAttribute("data-delay-time");
+                this.decideDrawerAction();
+                this.cookie = document.cookie.split("; ").find((row) => row.startsWith("popupCookie"))
+                        ? JSON.parse(
+                                  document.cookie
+                                          .split("; ")
+                                          .find((row) => row.startsWith("popupCookie"))
+                                          .split("=")
+                                          .slice(1)
+                                          .join("=")
+                          )
+                        : "";
+
+                this.attachShadow({ mode: "open" });
+                this.shadowRoot.innerHTML = "<slot></slot>";
+        }
+
+        saveInCookie() {
+                let popupMessage = "closed";
+                let expiry = new Date(400 * 24 * 60 * 60 * 1000 + Date.parse(new Date()));
+                let newList = JSON.stringify(popupMessage);
+                if (!Shopify.designMode) {
+                        document.cookie = "popupCookie" + "=" + newList + "; path=/; domain=." + window.location.hostname;
+                }
+        }
+
+        openPopupDrawer() {
+                if (this.cookie !== "closed") {
+                        this.querySelector(".popup").style.display = "flex";
+                        this.querySelector(".popup").style.zIndex = "102";
+                        setTimeout(() => {
+                                lockPage();
+                                document.querySelector(".theme-overlay").style.zIndex = "101";
+                                this.drawer.classList.remove("hidden");
+                                this.drawer.classList.add("active");
+                                setTimeout(() => {
+                                        this.drawer.querySelector(".popup__picture").classList.add("slide-in");
+                                        this.drawer.querySelector(".popup__content").classList.add("slide-in");
+                                        setTimeout(() => {
+                                                this.drawer.classList.add("border");
+                                        }, 1000);
+                                }, 1000);
+                        }, 1000);
+                }
+        }
+
+        hidePopupDrawer() {
+                unlockPage();
+                this.drawer.classList.remove("active");
+                this.drawer.classList.add("hidden");
+                setTimeout(() => {
+                        this.querySelector(".popup").style.display = "none";
+                        this.querySelector(".popup").style.zIndex = "98";
+                        this.drawer.querySelector(".popup__picture").classList.remove("slide-in");
+                        this.drawer.querySelector(".popup__content").classList.remove("slide-in");
+                        document.querySelector(".theme-overlay").style.zIndex = "-1";
+                        this.drawer.classList.remove("border");
+                }, 300);
+                this.saveInCookie();
+        }
+
+        decideDrawerAction() {
+                if (!Shopify.designMode && this.drawer.classList.contains("hidden")) {
+                        setTimeout(() => {
+                                this.openPopupDrawer();
+                        }, this.delayTime);
+                }
+
+                if (Shopify.designMode) {
+                        document.addEventListener("shopify:section:select", (event) => {
+                                event.target.classList.forEach((i) => {
+                                        if (i === "section-popup") {
+                                                this.openPopupDrawer();
+                                        }
+                                });
+                        });
+                        document.addEventListener("shopify:section:deselect", (event) => {
+                                event.target.classList.forEach((i) => {
+                                        if (i === "section-popup") {
+                                                this.hidePopupDrawer();
+                                        }
+                                });
+                        });
+                }
+                setTimeout(() => {
+                        document.addEventListener("click", (event) => {
+                                if ((!this.drawer.contains(event.target) && this.drawer.classList.contains("active")) || this.drawer.querySelector(".popup__link").contains(event.target) || this.drawer.querySelector(".popup__close").contains(event.target)) {
+                                        this.hidePopupDrawer();
+                                }
+                        });
+                }, this.delayTime + 3000);
+        }
+}
+
+customElements.define("popup-component", PopupComponent);
