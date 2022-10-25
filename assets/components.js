@@ -567,14 +567,68 @@ class SliderComponent extends HTMLElement {
                         slide.style.transform = `translateX(${translatePrev}px)`;
                 }
 
-                for (let i = 0; i < mediaQueries.length; i++) {
-                        mediaQueries[i].addEventListener("change", setMaxScroll);
-                        setMaxScroll(mediaQueries[i]);
-                }
+                // for (let i = 0; i < mediaQueries.length; i++) {
+                //         mediaQueries[i].addEventListener("change", setMaxScroll);
+                //         setMaxScroll(mediaQueries[i]);
+                // }
 
                 window.addEventListener("resize", setMaxScroll);
                 next.addEventListener("click", moveNext);
                 prev.addEventListener("click", movePrev);
+
+                // NOTE: NEW STUFF
+                let isDragging = false;
+                let startPos = 0;
+                let currentTranslate = 0;
+                let prevTranslate = 0;
+                let currentIndex = 0;
+
+                items.forEach((slide, index) => {
+                        // disable default image drag
+                        slide.addEventListener("dragstart", (e) => e.preventDefault());
+                        // touch events
+                        slide.addEventListener("touchstart", touchStart(index));
+                        slide.addEventListener("touchend", touchEnd);
+                        slide.addEventListener("touchmove", touchMove);
+                        // mouse events
+                        slide.addEventListener("mousedown", touchStart(index));
+                        slide.addEventListener("mouseup", touchEnd);
+                        slide.addEventListener("mousemove", touchMove);
+                        slide.addEventListener("mouseleave", touchEnd);
+                });
+
+                function touchStart(index) {
+                        return function (event) {
+                                currentIndex = index;
+                                startPos = event.type.includes("mouse") ? event.pageX : event.touches[0].clientX;
+                                isDragging = true;
+                                slide.classList.add("grabbing");
+                        };
+                }
+
+                function touchMove(event) {
+                        if (isDragging) {
+                                const currentPosition = event.type.includes("mouse") ? event.pageX : event.touches[0].clientX;
+                                currentTranslate = prevTranslate + currentPosition - startPos;
+                        }
+                }
+
+                function touchEnd() {
+                        if (isDragging) {
+                                isDragging = false;
+                                const movedBy = currentTranslate - prevTranslate;
+
+                                if (movedBy < -100 && currentIndex < items.length - 1) currentIndex = getTranslateX("next");
+
+                                if (movedBy > 100 && currentIndex > 0) currentIndex = getTranslateX("prev");
+
+                                currentTranslate = currentIndex;
+                                prevTranslate = currentTranslate;
+                                slide.style.transform = `translateX(${currentTranslate}px)`;
+
+                                slide.classList.remove("grabbing");
+                        }
+                }
         }
 }
 

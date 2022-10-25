@@ -676,6 +676,10 @@ slider-component {
                                         transition: all 0.8s cubic-bezier(0.45, 0.05, 0.55, 0.95);
                                 }
 
+                                &.grabbing {
+                                        cursor: grabbing;
+                                }
+
                                 .item {
                                         height: 100%;
                                         width: var(--item-width);
