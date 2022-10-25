@@ -838,8 +838,7 @@ class PopupComponent extends HTMLElement {
 
         connectedCallback() {
                 this.drawer = this.querySelector("[openable]");
-                this.delayTime = this.drawer.getAttribute("data-delay-time");
-                this.decideDrawerAction();
+                this.delayTime = parseInt(this.drawer.getAttribute("data-delay-time"));
                 this.cookie = document.cookie.split("; ").find((row) => row.startsWith("popupCookie"))
                         ? JSON.parse(
                                   document.cookie
@@ -850,6 +849,7 @@ class PopupComponent extends HTMLElement {
                                           .join("=")
                           )
                         : "";
+                this.decideDrawerAction();
 
                 this.attachShadow({ mode: "open" });
                 this.shadowRoot.innerHTML = "<slot></slot>";
@@ -857,10 +857,10 @@ class PopupComponent extends HTMLElement {
 
         saveInCookie() {
                 let popupMessage = "closed";
-                let expiry = new Date(400 * 24 * 60 * 60 * 1000 + Date.parse(new Date()));
-                let newList = JSON.stringify(popupMessage);
+                let message = JSON.stringify(popupMessage);
                 if (!Shopify.designMode) {
-                        document.cookie = "popupCookie" + "=" + newList + "; path=/; domain=." + window.location.hostname;
+                        // let expiry = new Date(400 * 24 * 60 * 60 * 1000 + Date.parse(new Date()));
+                        document.cookie = "popupCookie" + "=" + message + "; path=/; domain=." + window.location.hostname;
                 }
         }
 
@@ -868,14 +868,18 @@ class PopupComponent extends HTMLElement {
                 if (this.cookie !== "closed") {
                         this.querySelector(".popup").style.display = "flex";
                         this.querySelector(".popup").style.zIndex = "102";
+
                         setTimeout(() => {
                                 lockPage();
+
                                 document.querySelector(".theme-overlay").style.zIndex = "101";
                                 this.drawer.classList.remove("hidden");
                                 this.drawer.classList.add("active");
+
                                 setTimeout(() => {
                                         this.drawer.querySelector(".popup__picture").classList.add("slide-in");
                                         this.drawer.querySelector(".popup__content").classList.add("slide-in");
+
                                         setTimeout(() => {
                                                 this.drawer.classList.add("border");
                                         }, 1000);
@@ -886,8 +890,10 @@ class PopupComponent extends HTMLElement {
 
         hidePopupDrawer() {
                 unlockPage();
+
                 this.drawer.classList.remove("active");
                 this.drawer.classList.add("hidden");
+
                 setTimeout(() => {
                         this.querySelector(".popup").style.display = "none";
                         this.querySelector(".popup").style.zIndex = "98";
@@ -896,6 +902,7 @@ class PopupComponent extends HTMLElement {
                         document.querySelector(".theme-overlay").style.zIndex = "-1";
                         this.drawer.classList.remove("border");
                 }, 300);
+
                 this.saveInCookie();
         }
 

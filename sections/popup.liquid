@@ -3,25 +3,14 @@
     @media screen and (max-width: 1025px) {
       .popup__content:before {
         background-image: url({{ section.settings.image | image_url }});
-        background-size: cover;
-        background-position: center;
-        content: ' ';
-        display: block;
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        opacity: 0.6;
-        background-repeat: no-repeat;
-        background-position: 50% 0;
-        background-size: cover;
       }
     }
   {% endif %}
+
   .popup__content {
     background-color: {{ section.settings.background_color }};
   }
+
   {% if section.settings.border_width > 0%}
     .popup__container.border {
       border: {{ section.settings.border_width }}px solid {{ section.settings.border_color }} ;
@@ -81,8 +70,6 @@
                   autocomplete="email"
                   {% if form.errors %}
                     autofocus
-                  {% elsif form.posted_successfully? %}
-
                   {% endif %}
                   placeholder="Type your email address"
                   required
