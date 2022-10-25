@@ -579,6 +579,10 @@ class SliderComponent extends HTMLElement {
                 // NOTE: NEW STUFF
                 let isDragging = false;
                 let startPos = 0;
+                let actual = 0;
+                let max = 0;
+                let maxNext = 0;
+                let maxPrev = 0;
                 let currentTranslate = 0;
                 let prevTranslate = 0;
                 let currentIndex = 0;
@@ -600,33 +604,37 @@ class SliderComponent extends HTMLElement {
                 function touchStart(index) {
                         return function (event) {
                                 currentIndex = index;
-                                startPos = event.type.includes("mouse") ? event.pageX : event.touches[0].clientX;
+                                startPos = event.touches[0].clientX;
                                 isDragging = true;
                                 slide.classList.add("grabbing");
+                                actual = parseInt(slide.style.transform == "translateX(0px)" ? 0 : slide.style.transform.match(/[-]{0,1}[\d]*[.]{0,1}[\d]+/g)[0]);
+                                maxNext = getTranslateX("next");
+                                maxPrev = getTranslateX("prev");
                         };
                 }
 
                 function touchMove(event) {
                         if (isDragging) {
-                                const currentPosition = event.type.includes("mouse") ? event.pageX : event.touches[0].clientX;
-                                currentTranslate = prevTranslate + currentPosition - startPos;
+                                let currentPosition = event.touches[0].clientX;
+
+                                currentTranslate = actual + currentPosition - startPos;
+
+                                max = currentPosition > startPos ? maxPrev : maxNext;
+
+                                let currentT = currentPosition > max ? max : currentTranslate;
+
+                                slide.style.transform = `translateX(${currentT}px)`;
                         }
                 }
 
                 function touchEnd() {
                         if (isDragging) {
-                                isDragging = false;
-                                const movedBy = currentTranslate - prevTranslate;
-
-                                if (movedBy < -100 && currentIndex < items.length - 1) currentIndex = getTranslateX("next");
-
-                                if (movedBy > 100 && currentIndex > 0) currentIndex = getTranslateX("prev");
-
-                                currentTranslate = currentIndex;
-                                prevTranslate = currentTranslate;
-                                slide.style.transform = `translateX(${currentTranslate}px)`;
-
-                                slide.classList.remove("grabbing");
+                                // isDragging = false;
+                                // const movedBy = currentTranslate - prevTranslate;
+                                // if (movedBy < -100 && currentIndex < items.length - 1) currentIndex = getTranslateX("next");
+                                // if (movedBy > 100 && currentIndex > 0) currentIndex = getTranslateX("prev");
+                                // slide.style.transform = `translateX(${currentIndex}px)`;
+                                // slide.classList.remove("grabbing");
                         }
                 }
         }
