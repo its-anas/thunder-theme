@@ -516,6 +516,12 @@ a.border.button--primary:hover, a.border.button--secondary:hover {
     margin-right: auto;
   }
 }
+@media screen and (max-width: 750px) {
+  slider-component.multi-icon .slider-component .slides-container {
+    --container-width: calc(var(--section-width) * 0.75);
+  }
+}
+
 slider-component {
   display: flex;
   flex-direction: column;
@@ -599,7 +605,7 @@ slider-component .slider-component .slides-container {
 @media screen and (max-width: 750px) {
   slider-component .slider-component .slides-container {
     --slider-items: var(--mobile-items);
-    --container-width: calc(var(--section-width) * 0.8);
+    --container-width: calc(var(--section-width) * 0.88);
   }
 }
 @media screen and (min-width: 751px) and (max-width: 1024px) {

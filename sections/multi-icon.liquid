@@ -11,6 +11,7 @@
     --tablet-items: {{ tablet_items }};
     --desktop-items: {{ desktop_items }};
   }
+
   @media screen and (min-width: 1025px) {
     .{{ section.id }}.multi-icon > .slider-component > .slides-container {
       --container-width: calc(var(--section-width) * {{ desktop_section_width | divided_by: 100.00 }} );

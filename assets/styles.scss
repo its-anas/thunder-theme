@@ -578,6 +578,12 @@ a.border.button {
         }
 }
 
+slider-component.multi-icon .slider-component .slides-container {
+        @media screen and (max-width: 750px) {
+                --container-width: calc(var(--section-width) * 0.75);
+        }
+}
+
 // SECTION: Slider component
 slider-component {
         display: flex;
@@ -653,7 +659,7 @@ slider-component {
 
                         @media screen and (max-width: 750px) {
                                 --slider-items: var(--mobile-items);
-                                --container-width: calc(var(--section-width) * 0.8);
+                                --container-width: calc(var(--section-width) * 0.88);
                         }
                         @media screen and (min-width: 751px) and (max-width: 1024px) {
                                 --slider-items: var(--tablet-items);
