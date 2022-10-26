@@ -374,7 +374,6 @@ class Slideshow extends HTMLElement {
                         return function (event) {
                                 isDragging = true;
                                 startPos = event.touches[0].clientX;
-                                loop(false);
                         };
                 }
 
