@@ -550,12 +550,14 @@ slider-component .slider-component .next {
   slider-component .slider-component .prev,
 slider-component .slider-component .next {
     width: 10%;
+    display: none;
   }
 }
 @media screen and (min-width: 751px) and (max-width: 1024px) {
   slider-component .slider-component .prev,
 slider-component .slider-component .next {
     width: 10%;
+    display: none;
   }
 }
 slider-component .slider-component .prev:hover,
@@ -589,7 +591,6 @@ slider-component .slider-component .prev {
 }
 slider-component .slider-component .slides-container {
   width: var(--container-width);
-  overflow: hidden;
   display: flex;
   justify-content: center;
   --section-width: 100%;
@@ -610,6 +611,7 @@ slider-component .slider-component .slides-container {
 @media screen and (min-width: 1025px) {
   slider-component .slider-component .slides-container {
     --slider-items: var(--desktop-items);
+    overflow: hidden;
   }
 }
 slider-component .slider-component .slides-container .slide {
@@ -1786,6 +1788,9 @@ slider-component .slider-component .slides-container .slide .item > * {
   text-transform: uppercase;
 }
 
+.featured-collections {
+  padding: 2rem 0;
+}
 .featured-collections .item {
   display: grid;
   justify-items: center;

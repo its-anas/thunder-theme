@@ -354,6 +354,40 @@ class Slideshow extends HTMLElement {
                                 step = 100 / totalSlides;
                         });
                 });
+
+                // NOTE: NEW STUFF
+                // let isDragging = false;
+                // let startPos = 0;
+                // let actual = 0;
+                // let nextTranslate = 0;
+                // let maxNext = 0;
+                // let maxPrev = 0;
+                // let currentTranslate = 0;
+                // let currentPosition = 0;
+
+                // items.forEach((slide) => {
+                //         slide.addEventListener("touchstart", touchStart());
+                //         slide.addEventListener("touchmove", touchMove);
+                // });
+
+                // function touchStart() {
+                //         return function (event) {
+                //                 isDragging = true;
+                //                 startPos = event.touches[0].clientX;
+                //                 actual = parseInt(slide.style.transform == "translateX(0px)" ? 0 : slide.style.transform.match(/[-]{0,1}[\d]*[.]{0,1}[\d]+/g)[0]);
+                //                 maxNext = getTranslateX("next");
+                //                 maxPrev = getTranslateX("prev");
+                //         };
+                // }
+
+                // function touchMove(event) {
+                //         if (isDragging) {
+                //                 currentPosition = event.touches[0].clientX;
+                //                 currentTranslate = actual + currentPosition - startPos;
+                //                 nextTranslate = currentPosition > startPos ? maxPrev : maxNext;
+                //                 slide.style.transform = `translateX(${nextTranslate}px)`;
+                //         }
+                // }
         }
 }
 
@@ -507,6 +541,14 @@ class SliderComponent extends HTMLElement {
                 let itemWidth;
                 let itemHeight;
                 let itemsFound;
+                let isDragging = false;
+                let startPos = 0;
+                let actual = 0;
+                let nextTranslate = 0;
+                let maxNext = 0;
+                let maxPrev = 0;
+                let currentTranslate = 0;
+                let currentPosition = 0;
 
                 function setMaxScroll() {
                         itemsDisplayed = getComputedStyle(slidesContainer).getPropertyValue("--slider-items");
@@ -567,46 +609,10 @@ class SliderComponent extends HTMLElement {
                         slide.style.transform = `translateX(${translatePrev}px)`;
                 }
 
-                // for (let i = 0; i < mediaQueries.length; i++) {
-                //         mediaQueries[i].addEventListener("change", setMaxScroll);
-                //         setMaxScroll(mediaQueries[i]);
-                // }
-
-                window.addEventListener("resize", setMaxScroll);
-                next.addEventListener("click", moveNext);
-                prev.addEventListener("click", movePrev);
-
-                // NOTE: NEW STUFF
-                let isDragging = false;
-                let startPos = 0;
-                let actual = 0;
-                let max = 0;
-                let maxNext = 0;
-                let maxPrev = 0;
-                let currentTranslate = 0;
-                let prevTranslate = 0;
-                let currentIndex = 0;
-
-                items.forEach((slide, index) => {
-                        // disable default image drag
-                        slide.addEventListener("dragstart", (e) => e.preventDefault());
-                        // touch events
-                        slide.addEventListener("touchstart", touchStart(index));
-                        slide.addEventListener("touchend", touchEnd);
-                        slide.addEventListener("touchmove", touchMove);
-                        // mouse events
-                        slide.addEventListener("mousedown", touchStart(index));
-                        slide.addEventListener("mouseup", touchEnd);
-                        slide.addEventListener("mousemove", touchMove);
-                        slide.addEventListener("mouseleave", touchEnd);
-                });
-
-                function touchStart(index) {
+                function touchStart() {
                         return function (event) {
-                                currentIndex = index;
-                                startPos = event.touches[0].clientX;
                                 isDragging = true;
-                                slide.classList.add("grabbing");
+                                startPos = event.touches[0].clientX;
                                 actual = parseInt(slide.style.transform == "translateX(0px)" ? 0 : slide.style.transform.match(/[-]{0,1}[\d]*[.]{0,1}[\d]+/g)[0]);
                                 maxNext = getTranslateX("next");
                                 maxPrev = getTranslateX("prev");
@@ -615,28 +621,21 @@ class SliderComponent extends HTMLElement {
 
                 function touchMove(event) {
                         if (isDragging) {
-                                let currentPosition = event.touches[0].clientX;
-
+                                currentPosition = event.touches[0].clientX;
                                 currentTranslate = actual + currentPosition - startPos;
-
-                                max = currentPosition > startPos ? maxPrev : maxNext;
-
-                                let currentT = currentPosition > max ? max : currentTranslate;
-
-                                slide.style.transform = `translateX(${currentT}px)`;
+                                nextTranslate = currentPosition > startPos ? maxPrev : maxNext;
+                                slide.style.transform = `translateX(${nextTranslate}px)`;
                         }
                 }
 
-                function touchEnd() {
-                        if (isDragging) {
-                                // isDragging = false;
-                                // const movedBy = currentTranslate - prevTranslate;
-                                // if (movedBy < -100 && currentIndex < items.length - 1) currentIndex = getTranslateX("next");
-                                // if (movedBy > 100 && currentIndex > 0) currentIndex = getTranslateX("prev");
-                                // slide.style.transform = `translateX(${currentIndex}px)`;
-                                // slide.classList.remove("grabbing");
-                        }
-                }
+                window.addEventListener("resize", setMaxScroll);
+                next.addEventListener("click", moveNext);
+                prev.addEventListener("click", movePrev);
+
+                items.forEach((slide) => {
+                        slide.addEventListener("touchstart", touchStart());
+                        slide.addEventListener("touchmove", touchMove);
+                });
         }
 }
 

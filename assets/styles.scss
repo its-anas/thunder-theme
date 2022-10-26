@@ -610,9 +610,11 @@ slider-component {
 
                         @media screen and (max-width: 750px) {
                                 width: 10%;
+                                display: none;
                         }
                         @media screen and (min-width: 751px) and (max-width: 1024px) {
                                 width: 10%;
+                                display: none;
                         }
 
                         &:hover {
@@ -644,7 +646,6 @@ slider-component {
 
                 .slides-container {
                         width: var(--container-width);
-                        overflow: hidden;
                         display: flex;
                         justify-content: center;
                         --section-width: 100%;
@@ -660,6 +661,7 @@ slider-component {
                         }
                         @media screen and (min-width: 1025px) {
                                 --slider-items: var(--desktop-items);
+                                overflow: hidden;
                         }
 
                         .slide {
@@ -1871,6 +1873,7 @@ $indicator-width: 40px;
 
 // SECTION: Featured collections
 .featured-collections {
+        padding: 2rem 0;
         .item {
                 display: grid;
                 justify-items: center;
