@@ -356,38 +356,51 @@ class Slideshow extends HTMLElement {
                 });
 
                 // NOTE: NEW STUFF
-                // let isDragging = false;
-                // let startPos = 0;
-                // let actual = 0;
-                // let nextTranslate = 0;
-                // let maxNext = 0;
-                // let maxPrev = 0;
-                // let currentTranslate = 0;
-                // let currentPosition = 0;
+                let isDragging = false;
+                let startPos = 0;
+                let actual = 0;
+                let nextTranslate = 0;
+                let maxNext = 0;
+                let maxPrev = 0;
+                let currentTranslate = 0;
+                let currentPosition = 0;
 
-                // items.forEach((slide) => {
-                //         slide.addEventListener("touchstart", touchStart());
-                //         slide.addEventListener("touchmove", touchMove);
-                // });
+                slideshowSlides.forEach((slide) => {
+                        slide.addEventListener("touchstart", touchStart());
+                        slide.addEventListener("touchmove", touchMove);
+                });
 
-                // function touchStart() {
-                //         return function (event) {
-                //                 isDragging = true;
-                //                 startPos = event.touches[0].clientX;
-                //                 actual = parseInt(slide.style.transform == "translateX(0px)" ? 0 : slide.style.transform.match(/[-]{0,1}[\d]*[.]{0,1}[\d]+/g)[0]);
-                //                 maxNext = getTranslateX("next");
-                //                 maxPrev = getTranslateX("prev");
-                //         };
-                // }
+                function touchStart() {
+                        return function (event) {
+                                isDragging = true;
+                                startPos = event.touches[0].clientX;
+                                loop(false);
+                        };
+                }
 
-                // function touchMove(event) {
-                //         if (isDragging) {
-                //                 currentPosition = event.touches[0].clientX;
-                //                 currentTranslate = actual + currentPosition - startPos;
-                //                 nextTranslate = currentPosition > startPos ? maxPrev : maxNext;
-                //                 slide.style.transform = `translateX(${nextTranslate}px)`;
-                //         }
-                // }
+                function touchMove(event) {
+                        if (isDragging) {
+                                currentPosition = event.touches[0].clientX;
+                                currentTranslate = currentPosition - startPos;
+
+                                if (currentTranslate > 0) {
+                                        slideToPrev();
+                                } else if (currentTranslate < 0) {
+                                        slideToNext();
+                                }
+
+                                // nextTranslate = currentPosition > startPos ? maxPrev : maxNext;
+                                // slide.style.transform = `translateX(${nextTranslate}px)`;
+                                // console.log(currentPosition);
+                        }
+                }
+
+                this.addEventListener("touchstart", () => {
+                        loop(false);
+                });
+                this.addEventListener("touchend", () => {
+                        loop(true);
+                });
         }
 }
 
