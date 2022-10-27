@@ -1632,7 +1632,7 @@ slider-component .slider-component .slides-container .slide .item > * {
 .slideshow__container {
   height: 100%;
   display: flex;
-  transition: all 1s ease;
+  transition: all 0.8s cubic-bezier(0.45, 0.05, 0.55, 0.95);
 }
 .slideshow__slide {
   position: relative;

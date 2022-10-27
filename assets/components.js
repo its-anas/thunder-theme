@@ -198,6 +198,7 @@ class Slideshow extends HTMLElement {
         }
         connectedCallback() {
                 this.attachShadow({ mode: "open" });
+                this.delayTime = parseInt(this.getAttribute("data-delay-time"));
                 this.shadowRoot.innerHTML = "<slot></slot>";
                 this.loadSlideshow();
         }
@@ -208,6 +209,7 @@ class Slideshow extends HTMLElement {
                 let prev = this.querySelector(".prev");
                 let next = this.querySelector(".next");
                 let totalSlides = slideshowSlides.length;
+                let indicator = slideshow.querySelectorAll(".slideshow__indicators span");
                 let step = 100 / totalSlides;
                 let activeSlide = 0;
                 let activeIndicator = 0;
@@ -215,6 +217,10 @@ class Slideshow extends HTMLElement {
                 let jump = 1;
                 let interval = 4000;
                 let time;
+                let isDragging = false;
+                let startPos = 0;
+                let movement = 0;
+                let currentPosition = 0;
 
                 if (totalSlides <= 1) {
                         next.style.display = "none";
@@ -261,12 +267,6 @@ class Slideshow extends HTMLElement {
                                 slideshowContainer.style.transform = `translateX(${step}%)`;
                         }
                 }
-                next.addEventListener("click", () => {
-                        slideToNext();
-                });
-                prev.addEventListener("click", () => {
-                        slideToPrev();
-                });
 
                 function loop(status) {
                         if (status === true) {
@@ -279,12 +279,25 @@ class Slideshow extends HTMLElement {
                 }
                 loop(true);
 
-                this.addEventListener("mouseover", () => {
-                        loop(false);
-                });
-                this.addEventListener("mouseout", () => {
-                        loop(true);
-                });
+                function touchStart() {
+                        return function (event) {
+                                isDragging = true;
+                                startPos = event.touches[0].clientX;
+                        };
+                }
+
+                function touchMove(event) {
+                        if (isDragging) {
+                                currentPosition = event.touches[0].clientX;
+                                movement = currentPosition - startPos;
+
+                                if (movement > 100) {
+                                        slideToPrev();
+                                } else if (movement < -100) {
+                                        slideToNext();
+                                }
+                        }
+                }
 
                 slideshowContainer.addEventListener("transitionend", (event) => {
                         if (event.target.className == "slideshow__container") {
@@ -313,7 +326,7 @@ class Slideshow extends HTMLElement {
                                 slideshowContainer.style.transform = "translateX(0%)";
                                 setTimeout(() => {
                                         jump = 1;
-                                        slideshowContainer.style.transition = "all ease 1s";
+                                        slideshowContainer.style.transition = "all 0.8s cubic-bezier(0.45, 0.05, 0.55, 0.95)";
                                 });
                                 function updateIndicators() {
                                         if (activeSlide > totalSlides - 1) {
@@ -328,7 +341,6 @@ class Slideshow extends HTMLElement {
                         }
                 });
 
-                let indicator = slideshow.querySelectorAll(".slideshow__indicators span");
                 indicator.forEach((item) => {
                         item.addEventListener("click", (e) => {
                                 let slideTo = parseInt(e.target.dataset.slideTo);
@@ -355,44 +367,24 @@ class Slideshow extends HTMLElement {
                         });
                 });
 
-                // NOTE: NEW STUFF
-                let isDragging = false;
-                let startPos = 0;
-                let actual = 0;
-                let nextTranslate = 0;
-                let maxNext = 0;
-                let maxPrev = 0;
-                let currentTranslate = 0;
-                let currentPosition = 0;
+                next.addEventListener("click", () => {
+                        slideToNext();
+                });
+                prev.addEventListener("click", () => {
+                        slideToPrev();
+                });
+
+                this.addEventListener("mouseover", () => {
+                        loop(false);
+                });
+                this.addEventListener("mouseout", () => {
+                        loop(true);
+                });
 
                 slideshowSlides.forEach((slide) => {
                         slide.addEventListener("touchstart", touchStart());
                         slide.addEventListener("touchmove", touchMove);
                 });
-
-                function touchStart() {
-                        return function (event) {
-                                isDragging = true;
-                                startPos = event.touches[0].clientX;
-                        };
-                }
-
-                function touchMove(event) {
-                        if (isDragging) {
-                                currentPosition = event.touches[0].clientX;
-                                currentTranslate = currentPosition - startPos;
-
-                                if (currentTranslate > 0) {
-                                        slideToPrev();
-                                } else if (currentTranslate < 0) {
-                                        slideToNext();
-                                }
-
-                                // nextTranslate = currentPosition > startPos ? maxPrev : maxNext;
-                                // slide.style.transform = `translateX(${nextTranslate}px)`;
-                                // console.log(currentPosition);
-                        }
-                }
 
                 this.addEventListener("touchstart", () => {
                         loop(false);
@@ -432,8 +424,12 @@ class Announcement extends HTMLElement {
                 let time;
 
                 if (totalSlides <= 1) {
-                        next.style.display = "none";
-                        prev.style.display = "none";
+                        if (next) {
+                                next.style.display = "none";
+                        }
+                        if (prev) {
+                                prev.style.display = "none";
+                        }
                 }
 
                 function slideToNext() {
@@ -443,7 +439,9 @@ class Announcement extends HTMLElement {
                                 direction = -1;
                                 announcementContainer.prepend(announcementContainer.lastElementChild);
                         }
-                        announcement.style.justifyContent = "flex-start";
+                        if (announcement) {
+                                announcement.style.justifyContent = "flex-start";
+                        }
                         if (totalSlides <= 1) {
                         } else {
                                 announcementContainer.style.transform = `translateX(-${step}%)`;
@@ -463,12 +461,16 @@ class Announcement extends HTMLElement {
                                 announcementContainer.style.transform = `translateX(${step}%)`;
                         }
                 }
-                next.addEventListener("click", () => {
-                        slideToNext();
-                });
-                prev.addEventListener("click", () => {
-                        slideToPrev();
-                });
+                if (next) {
+                        next.addEventListener("click", () => {
+                                slideToNext();
+                        });
+                }
+                if (prev) {
+                        prev.addEventListener("click", () => {
+                                slideToPrev();
+                        });
+                }
 
                 function loop(status) {
                         if (status === true) {
@@ -488,37 +490,39 @@ class Announcement extends HTMLElement {
                         loop(true);
                 });
 
-                announcementContainer.addEventListener("transitionend", (event) => {
-                        if (event.target.className == "announcement__container") {
-                                if (direction === -1) {
-                                        if (jump > 1) {
-                                                for (let i = 0; i < jump; i++) {
+                if (announcementContainer) {
+                        announcementContainer.addEventListener("transitionend", (event) => {
+                                if (event.target.className == "announcement__container") {
+                                        if (direction === -1) {
+                                                if (jump > 1) {
+                                                        for (let i = 0; i < jump; i++) {
+                                                                activeSlide++;
+                                                                announcementContainer.append(announcementContainer.firstElementChild);
+                                                        }
+                                                } else {
                                                         activeSlide++;
                                                         announcementContainer.append(announcementContainer.firstElementChild);
                                                 }
-                                        } else {
-                                                activeSlide++;
-                                                announcementContainer.append(announcementContainer.firstElementChild);
-                                        }
-                                } else if (direction === 1) {
-                                        if (jump > 1) {
-                                                for (let i = 0; i < jump; i++) {
+                                        } else if (direction === 1) {
+                                                if (jump > 1) {
+                                                        for (let i = 0; i < jump; i++) {
+                                                                activeSlide--;
+                                                                announcementContainer.prepend(announcementContainer.lastElementChild);
+                                                        }
+                                                } else {
                                                         activeSlide--;
                                                         announcementContainer.prepend(announcementContainer.lastElementChild);
                                                 }
-                                        } else {
-                                                activeSlide--;
-                                                announcementContainer.prepend(announcementContainer.lastElementChild);
                                         }
+                                        announcementContainer.style.transition = "none";
+                                        announcementContainer.style.transform = "translateX(0%)";
+                                        setTimeout(() => {
+                                                jump = 1;
+                                                announcementContainer.style.transition = "all ease 1s";
+                                        });
                                 }
-                                announcementContainer.style.transition = "none";
-                                announcementContainer.style.transform = "translateX(0%)";
-                                setTimeout(() => {
-                                        jump = 1;
-                                        announcementContainer.style.transition = "all ease 1s";
-                                });
-                        }
-                });
+                        });
+                }
         }
 }
 
@@ -636,7 +640,10 @@ class SliderComponent extends HTMLElement {
                                 currentPosition = event.touches[0].clientX;
                                 currentTranslate = actual + currentPosition - startPos;
                                 nextTranslate = currentPosition > startPos ? maxPrev : maxNext;
-                                slide.style.transform = `translateX(${nextTranslate}px)`;
+                                let movement = currentPosition - startPos;
+                                if (movement > 100 || movement < -100) {
+                                        slide.style.transform = `translateX(${nextTranslate}px)`;
+                                }
                         }
                 }
 
@@ -950,7 +957,9 @@ class PopupComponent extends HTMLElement {
                                 this.drawer.classList.add("active");
 
                                 setTimeout(() => {
-                                        this.drawer.querySelector(".popup__picture").classList.add("slide-in");
+                                        if (this.drawer.querySelector(".popup__picture")) {
+                                                this.drawer.querySelector(".popup__picture").classList.add("slide-in");
+                                        }
                                         this.drawer.querySelector(".popup__content").classList.add("slide-in");
 
                                         setTimeout(() => {
@@ -970,7 +979,9 @@ class PopupComponent extends HTMLElement {
                 setTimeout(() => {
                         this.querySelector(".popup").style.display = "none";
                         this.querySelector(".popup").style.zIndex = "98";
-                        this.drawer.querySelector(".popup__picture").classList.remove("slide-in");
+                        if (this.drawer.querySelector(".popup__picture")) {
+                                this.drawer.querySelector(".popup__picture").classList.remove("slide-in");
+                        }
                         this.drawer.querySelector(".popup__content").classList.remove("slide-in");
                         document.querySelector(".theme-overlay").style.zIndex = "-1";
                         this.drawer.classList.remove("border");
