@@ -291,9 +291,9 @@ class Slideshow extends HTMLElement {
                                 currentPosition = event.touches[0].clientX;
                                 movement = currentPosition - startPos;
 
-                                if (movement > 100) {
+                                if (movement > 50) {
                                         slideToPrev();
-                                } else if (movement < -100) {
+                                } else if (movement < -50) {
                                         slideToNext();
                                 }
                         }
@@ -641,7 +641,7 @@ class SliderComponent extends HTMLElement {
                                 currentTranslate = actual + currentPosition - startPos;
                                 nextTranslate = currentPosition > startPos ? maxPrev : maxNext;
                                 let movement = currentPosition - startPos;
-                                if (movement > 100 || movement < -100) {
+                                if (movement > 50 || movement < -50) {
                                         slide.style.transform = `translateX(${nextTranslate}px)`;
                                 }
                         }
