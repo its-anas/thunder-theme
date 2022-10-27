@@ -1685,8 +1685,6 @@ slider-component .slider-component .slides-container .slide .item > * {
   background-color: #fcdb33;
   transform: translateX(-20px);
   height: 5px;
-  -webkit-animation: load 4s normal forwards;
-          animation: load 4s normal forwards;
 }
 .slideshow .chevrons .prev {
   left: 12px;

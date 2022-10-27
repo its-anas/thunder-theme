@@ -16,6 +16,10 @@
     gap: {{ section.settings.space_between_elements }}rem;
   }
 
+  .slideshow__indicators span.active::after {
+    animation: load {{ section.settings.autoplay_delay_time }}s normal forwards;
+  }
+
   @media screen and (min-width: 751px) {
     .{{ section.id }}.slideshow {
       height: {{ section.settings.image_height }}px;
@@ -27,7 +31,10 @@
    }
 {%- endstyle -%}
 
-<slideshow-section>
+<slideshow-section
+  data-autoplay="{{ section.settings.enable_autoplay }}"
+  data-delay-time="{{ section.settings.autoplay_delay_time | times: 1000 }}"
+>
   <div class="{{ section.id }} slideshow {{ section.settings.section_style }}">
     {% comment %} slides {% endcomment %}
     <div class="slideshow__container">
@@ -116,6 +123,22 @@
   "name": "Slideshow",
   "class": "section-slideshow",
   "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_autoplay",
+      "label": "Enable autoplay",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "autoplay_delay_time",
+      "min": 3,
+      "max": 10,
+      "step": 1,
+      "unit": "s",
+      "label": "Delay time",
+      "default": 4
+    },
     {
       "type": "range",
       "id": "image_height",

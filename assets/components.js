@@ -198,7 +198,6 @@ class Slideshow extends HTMLElement {
         }
         connectedCallback() {
                 this.attachShadow({ mode: "open" });
-                this.delayTime = parseInt(this.getAttribute("data-delay-time"));
                 this.shadowRoot.innerHTML = "<slot></slot>";
                 this.loadSlideshow();
         }
@@ -209,13 +208,15 @@ class Slideshow extends HTMLElement {
                 let prev = this.querySelector(".prev");
                 let next = this.querySelector(".next");
                 let totalSlides = slideshowSlides.length;
-                let indicator = slideshow.querySelectorAll(".slideshow__indicators span");
+                this.delayTime = parseInt(this.getAttribute("data-delay-time"));
+                this.autoPlay = this.getAttribute("data-autoplay");
+
                 let step = 100 / totalSlides;
                 let activeSlide = 0;
                 let activeIndicator = 0;
                 let direction = -1;
                 let jump = 1;
-                let interval = 4000;
+                let interval = this.delayTime;
                 let time;
                 let isDragging = false;
                 let startPos = 0;
@@ -277,7 +278,10 @@ class Slideshow extends HTMLElement {
                                 clearInterval(time);
                         }
                 }
-                loop(true);
+
+                if (this.autoPlay === "true") {
+                        loop(true);
+                }
 
                 function touchStart() {
                         return function (event) {
@@ -341,8 +345,10 @@ class Slideshow extends HTMLElement {
                         }
                 });
 
+                let indicator = slideshow.querySelectorAll(".slideshow__indicators span");
                 indicator.forEach((item) => {
                         item.addEventListener("click", (e) => {
+                                console.log("clicked");
                                 let slideTo = parseInt(e.target.dataset.slideTo);
                                 indicator.forEach((item, index) => {
                                         if (item.classList.contains("active")) {
@@ -378,7 +384,9 @@ class Slideshow extends HTMLElement {
                         loop(false);
                 });
                 this.addEventListener("mouseout", () => {
-                        loop(true);
+                        if (this.autoPlay === "true") {
+                                loop(true);
+                        }
                 });
 
                 slideshowSlides.forEach((slide) => {
@@ -390,7 +398,9 @@ class Slideshow extends HTMLElement {
                         loop(false);
                 });
                 this.addEventListener("touchend", () => {
-                        loop(true);
+                        if (this.autoPlay === "true") {
+                                loop(true);
+                        }
                 });
         }
 }
@@ -416,11 +426,13 @@ class Announcement extends HTMLElement {
                 let next = this.querySelector(".next");
                 let totalSlides = announcementSlides.length;
                 let step = 100 / totalSlides;
+                this.delayTime = parseInt(this.getAttribute("data-delay-time"));
+                this.autoPlay = this.getAttribute("data-autoplay");
                 let activeSlide = 0;
                 let activeIndicator = 0;
                 let direction = -1;
                 let jump = 1;
-                let interval = 4000;
+                let interval = this.delayTime;
                 let time;
 
                 if (totalSlides <= 1) {
@@ -481,13 +493,18 @@ class Announcement extends HTMLElement {
                                 clearInterval(time);
                         }
                 }
-                loop(true);
+                if (this.autoPlay === "true") {
+                        loop(true);
+                }
 
                 this.addEventListener("mouseover", () => {
                         loop(false);
                 });
+
                 this.addEventListener("mouseout", () => {
-                        loop(true);
+                        if (this.autoPlay === "true") {
+                                loop(true);
+                        }
                 });
 
                 if (announcementContainer) {
@@ -518,7 +535,7 @@ class Announcement extends HTMLElement {
                                         announcementContainer.style.transform = "translateX(0%)";
                                         setTimeout(() => {
                                                 jump = 1;
-                                                announcementContainer.style.transition = "all ease 1s";
+                                                announcementContainer.style.transition = "all 0.8s cubic-bezier(0.45, 0.05, 0.55, 0.95)";
                                         });
                                 }
                         });

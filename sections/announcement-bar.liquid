@@ -14,7 +14,10 @@
 {%- endstyle -%}
 
 {% if section.settings.show_announcement_bar == true %}
-  <announcement-bar>
+  <announcement-bar
+    data-autoplay="{{ section.settings.enable_autoplay }}"
+    data-delay-time="{{ section.settings.autoplay_delay_time | times: 1000 }}"
+  >
     {% if section.blocks.size > 0 %}
       <div class="announcement">
         <div class="announcement__container">
@@ -150,6 +153,22 @@
       "id": "show_announcement_bar",
       "label": "Show announcement bar",
       "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_autoplay",
+      "label": "Enable autoplay",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "autoplay_delay_time",
+      "min": 3,
+      "max": 10,
+      "step": 1,
+      "unit": "s",
+      "label": "Delay time",
+      "default": 4
     },
     {
       "type": "color",
