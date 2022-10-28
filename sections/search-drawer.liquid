@@ -29,10 +29,7 @@
             <div class="search-section__results" id="predictive-search" tabindex="-1"></div>
           {%- endif -%}
           <div class="search-section__close">
-            <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M6.43359 18.5L18.4336 6.5" stroke="white" stroke-width="1.5"/>
-              <path d="M6.43359 6.5L18.4336 18.5" stroke="white" stroke-width="1.5"/>
-            </svg>
+            {% render 'icons', icon: 'close' %}
           </div>
         </form>
       </div>
@@ -110,7 +107,7 @@
       "label": "Border color",
       "default": "#fff"
     },
-    { 
+    {
       "type": "range",
       "id": "border_width",
       "min": 0,

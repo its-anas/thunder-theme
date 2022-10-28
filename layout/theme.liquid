@@ -16,7 +16,7 @@
 
     {% style %}
       {{ settings.font_type | font_face: font_display: 'swap' }}
-      {{ settings.font_type | font_face: font_display: 'swap' }}
+      /* --text-font-weight: {{ settings.font_type.weight | default: '700'  }}; */
 
       {%- if settings.header_layout == "header_first" -%}
           #shopify-section-announcement-bar {
@@ -63,6 +63,7 @@
       </div>
     </div>
     {% section 'search-drawer' %}
+    {% section 'cart-drawer' %}
     {% section 'popup' %}
     {{ content_for_layout }}
     {% section 'footer' %}

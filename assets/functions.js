@@ -44,12 +44,10 @@ function unlockPage() {
 // ANCHOR: Search drawer
 let searchDrawer = document.querySelector(".search-drawer");
 
-window.addEventListener("load", (event) => {
+window.addEventListener("load", () => {
         document.querySelector(".search-drawer").style.height = `calc(100% - ${document.querySelector(".header-section").offsetHeight}px + 15px)`;
 });
 
-for (let i = 0; i < mediaQueries.length; i++) {
-        mediaQueries[i].addEventListener("change", () => {
-                document.querySelector(".search-drawer").style.height = `calc(100% - ${document.querySelector(".header-section").offsetHeight}px + 15px)`;
-        });
-}
+window.addEventListener("resize", () => {
+        document.querySelector(".search-drawer").style.height = `calc(100% - ${document.querySelector(".header-section").offsetHeight}px + 15px)`;
+});
