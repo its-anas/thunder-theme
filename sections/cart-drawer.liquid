@@ -14,7 +14,7 @@
 {%- endstyle -%}
 
 <cart-drawer>
-  <openable-element>
+  <openable-element class="active">
     <div class="cart-drawer">
       {% comment %}
                {%- if cart.item_count == 0 -%}
@@ -138,8 +138,7 @@
             </div>
           </div>
           <div class="cart-drawer__interaction">
-            <div class="divider" style="height: 0.5px; width: 100%; background-color: white;"></div>
-
+            <div class="shadow-divider"></div>
             <div class="buttons">
               <a
                 class="button button--primary border border"

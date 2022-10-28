@@ -3114,18 +3114,26 @@ openable-element #close-icon {
   width: 90%;
 }
 .cart-drawer__interaction {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-right: 1rem;
-  padding-left: 1rem;
-  padding-bottom: 1rem;
+  padding: 1rem;
   gap: 0.8rem;
 }
 @media screen and (min-width: 1025px) {
   .cart-drawer__interaction {
     gap: 1rem;
   }
+}
+.cart-drawer__interaction .shadow-divider {
+  width: 100%;
+  height: 40px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgb(0, 0, 0) 100%);
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translateY(-100%);
 }
 .cart-drawer__interaction .buttons {
   display: flex;
@@ -3169,6 +3177,9 @@ openable-element #close-icon {
 .cart-drawer .recommended-products.desktop-only .recommended-products__list {
   overflow-y: auto;
   height: 100%;
+}
+.cart-drawer .recommended-products.mobile-only {
+  margin-bottom: 2rem;
 }
 .cart-drawer .recommended-products.mobile-only .recommended-products__list-container {
   flex-direction: row;
