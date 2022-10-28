@@ -1088,8 +1088,18 @@ class OpenableElement extends HTMLElement {
                 document.addEventListener("click", (event) => {
                         if (document.querySelector(".header__icons-cart").contains(event.target)) {
                                 this.showDrawer();
+
+                                if (this.querySelector(".recommended-products.desktop-only")) {
+                                        setTimeout(() => {
+                                                this.querySelector(".recommended-products.desktop-only").classList.add("active");
+                                        }, 500);
+                                }
                         } else if (!this.contains(event.target) && document.querySelector(".popup__container").classList.contains("hidden")) {
                                 this.hideDrawer();
+
+                                if (!this.contains(event.target) && document.querySelector(".popup__container").classList.contains("hidden")) {
+                                        this.querySelector(".recommended-products.desktop-only").classList.remove("active");
+                                }
                         }
                 });
 
@@ -1129,15 +1139,15 @@ class OpenableElement extends HTMLElement {
 
 customElements.define("openable-element", OpenableElement);
 
-class CartDrawer extends OpenableElement {
-        connectedCallback() {
-                document.addEventListener("click", (event) => {
-                        if (document.querySelector(".header__icons-cart").contains(event.target)) {
-                                this.querySelector(".recommended-products.desktop-only").classList.add("active");
-                        } else if (!this.contains(event.target) && document.querySelector(".popup__container").classList.contains("hidden")) {
-                                this.querySelector(".recommended-products.desktop-only").classList.remove("active");
-                        }
-                });
-        }
-}
-customElements.define("cart-drawer", CartDrawer);
+// class CartDrawer extends OpenableElement {
+//         connectedCallback() {
+//                 document.addEventListener("click", (event) => {
+//                         if (document.querySelector(".header__icons-cart").contains(event.target)) {
+//                                 this.querySelector(".recommended-products.desktop-only").classList.add("active");
+//                         } else if (!this.contains(event.target) && document.querySelector(".popup__container").classList.contains("hidden")) {
+//                                 this.querySelector(".recommended-products.desktop-only").classList.remove("active");
+//                         }
+//                 });
+//         }
+// }
+// customElements.define("cart-drawer", CartDrawer);

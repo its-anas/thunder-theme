@@ -3027,7 +3027,6 @@ openable-element #close-icon {
   position: relative;
   height: 100%;
   width: 100%;
-  border: 2px solid white;
 }
 .cart-drawer__content--empty {
   height: 100%;
@@ -3052,7 +3051,6 @@ openable-element #close-icon {
   flex-direction: column;
   justify-content: space-between;
   width: 100%;
-  background-color: black;
   z-index: 2;
 }
 .cart-drawer__head {
@@ -3098,14 +3096,23 @@ openable-element #close-icon {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  justify-content: space-between;
-  height: 100%;
+  justify-content: center;
+  gap: 2rem;
 }
 .cart-drawer__product__details-side .remove {
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.cart-drawer .free-shipping-bar {
+  padding: 1rem 0;
+  width: 100%;
+  -moz-text-align-last: center;
+       text-align-last: center;
+}
+.cart-drawer .free-shipping-bar > * {
+  width: 90%;
 }
 .cart-drawer__interaction {
   display: flex;
@@ -3120,12 +3127,6 @@ openable-element #close-icon {
   .cart-drawer__interaction {
     gap: 1rem;
   }
-}
-.cart-drawer__interaction .free-shipping-bar {
-  width: 100%;
-}
-.cart-drawer__interaction .free-shipping-bar > * {
-  width: 100%;
 }
 .cart-drawer__interaction .buttons {
   display: flex;
@@ -3150,7 +3151,6 @@ openable-element #close-icon {
   left: 0;
   transform: translateX(0%);
   transition: transform 1s cubic-bezier(0.75, 0, 0.175, 1);
-  border: 2px solid white;
   z-index: 1;
   padding-top: 2rem;
   padding-right: 1rem;
@@ -3160,7 +3160,7 @@ openable-element #close-icon {
   gap: 2rem;
 }
 .cart-drawer .recommended-products.desktop-only.active {
-  transform: translateX(-100%);
+  transform: translateX(-99%);
   transition: transform 1s cubic-bezier(0.75, 0, 0.175, 1);
 }
 .cart-drawer .recommended-products.desktop-only .recommended-products__list-container {
@@ -3178,7 +3178,6 @@ openable-element #close-icon {
   overflow-y: auto;
 }
 .cart-drawer .recommended-products {
-  background-color: #222;
   padding: 0.5rem 0rem;
   display: flex;
   flex-direction: column;
@@ -3202,12 +3201,22 @@ openable-element #close-icon {
   gap: 0.3rem;
   padding-left: 0.5rem;
 }
+@media screen and (min-width: 751px) {
+  .cart-drawer .recommended-product {
+    width: 220px;
+  }
+}
 .cart-drawer .recommended-product__details {
   padding: 0.2rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   width: 100%;
+}
+.cart-drawer .recommended-product__details .details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
 }
 .cart-drawer .recommended-product__details .product-name,
 .cart-drawer .recommended-product__details .price--normal {
