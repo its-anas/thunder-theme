@@ -370,5 +370,17 @@
                     "label": "Vimeo link"
                }
           ]
+     },
+     {
+          "name": "Cart",
+          "settings": [
+               {
+                    "type": "text",
+                    "id": "free_shipping_threshold",
+                    "label": "Free shipping minimum order value",
+                    "info": "Enter amount using the currency format. e.g. 100",
+                    "default": "75"
+               }
+          ]
      }
 ]

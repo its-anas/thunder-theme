@@ -1092,7 +1092,7 @@ class OpenableElement extends HTMLElement {
                                 if (this.querySelector(".recommended-products.desktop-only")) {
                                         setTimeout(() => {
                                                 this.querySelector(".recommended-products.desktop-only").classList.add("active");
-                                        }, 500);
+                                        }, 800);
                                 }
                         } else if (!this.contains(event.target) && document.querySelector(".popup__container").classList.contains("hidden")) {
                                 this.hideDrawer();
