@@ -3070,7 +3070,7 @@ openable-element #close-icon {
   justify-content: space-between;
   align-items: flex-start;
   gap: 0.5rem;
-  padding: 0.8rem;
+  padding: 0.5rem 0.8rem;
 }
 @media screen and (min-width: 1025px) {
   .cart-drawer__product {
@@ -3106,7 +3106,6 @@ openable-element #close-icon {
   align-items: center;
 }
 .cart-drawer .free-shipping-bar {
-  padding: 1rem 0;
   width: 100%;
   -moz-text-align-last: center;
        text-align-last: center;
