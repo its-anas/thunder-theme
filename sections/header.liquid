@@ -3,9 +3,8 @@
     background-color: {{ section.settings.header_background_color }};
    }
 
-  .header__menu-link > a {
+  .menu__parent-title {
     color: {{ section.settings.content_color }};
-    font-weight: bold;
   }
 
   @media screen and (min-width: 1024px) {
@@ -18,7 +17,7 @@
       }
 
       {%- endif -%}
-      .header__menu-list {
+      .header__menu__content  {
           {%- if section.settings.menu_layout == "logo_first_navigation_inline" -%}
               padding: 0px 2rem;
               width: 100%;
@@ -95,42 +94,40 @@
         {% endif %}
       </a>
     </div>
-    <div class="header__menu">
-      <div class="header__menu-list {% if section.settings.menu_layout == 'drawer' %}hidden{% endif %}">
+    <div class="header__menu desktop-only">
+      <div class="header__menu__content {% if section.settings.menu_layout == 'drawer' %}hidden{% endif %}">
         {% for link in section.settings.menu.links %}
-          <li class="header__menu-link">
-            <a href="{{ link.url }}">
+          <div class="menu__parent">
+            <a class="menu__parent-title {% if link.links.size > 0 %}filled{% endif %}" href="{{ link.url }}">
               {{- link.title }}
-              {% if link.links.size > 0 %}
-                <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M8.99213 13.6927L12.25 15.9506L15.5079 13.6927" stroke="{{ section.settings.content_color }}" stroke-width="1.5"/>
-                  <path d="M8.99213 9.32922L12.25 11.5871L15.5079 9.32922" stroke="{{ section.settings.content_color }}" stroke-width="1.5"/>
-                </svg>
-              {% endif %}
             </a>
 
-            {% comment %}
-               {% if link.links.size > 0 %}
-                <ul class="header__menu-dropdown-child">
-                  {% for child_link in link.links %}
-                    <li class="menu-link">
-                      <a href="{{ child_link.url }}">{{ child_link.title }}</a>
+            {% if link.links.size > 0 %}
+              <div class="menu__dropdown">
+                <div class="menu__dropdown-wrapper">
+                  <div class="menu__dropdown-content">
+                    <div class="menu__childs">
+                      {% for child_link in link.links %}
+                        <div class="menu__child {% if child_link.links.size > 0 %}filled{% endif %}">
+                          <a class="menu__child-title" href="{{ child_link.url }}">{{ child_link.title }}</a>
 
-                      {% if child_link.links.size > 0 %}
-                        <ul class="menu dropdown-grandchild">
-                          {% for grandchild_link in child_link.links %}
-                            <li class="menu-link">
-                              <a href="{{ grandchild_link.url }}">{{ grandchild_link.title }}</a>
-                            </li>
-                          {% endfor %}
-                        </ul>
-                      {% endif %}
-                    </li>
-                  {% endfor %}
-                </ul>
-              {% endif %}
-            {% endcomment %}
-          </li>
+                          {% if child_link.links.size > 0 %}
+                            <div class="menu__grandchilds">
+                              {% for grandchild_link in child_link.links %}
+                                <a class="menu__grandchild" href="{{ grandchild_link.url }}">
+                                  {{- grandchild_link.title -}}
+                                </a>
+                              {% endfor %}
+                            </div>
+                          {% endif %}
+                        </div>
+                      {% endfor %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {% endif %}
+          </div>
         {% endfor %}
       </div>
 

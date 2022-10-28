@@ -51,3 +51,15 @@ window.addEventListener("load", () => {
 window.addEventListener("resize", () => {
         document.querySelector(".search-drawer").style.height = `calc(100% - ${document.querySelector(".header-section").offsetHeight}px + 15px)`;
 });
+
+// ANCHOR: Menu drawer
+
+let extraPadding = document.querySelector(".header-section").classList.contains("boxed") ? 15 : 0;
+
+window.addEventListener("load", () => {
+        document.querySelector(".menu__dropdown-wrapper").style.paddingTop = `calc(${document.querySelector(".announcement").offsetHeight}px + ${extraPadding}px)`;
+});
+
+window.addEventListener("resize", () => {
+        document.querySelector(".menu__dropdown-wrapper").style.paddingTop = `calc(${document.querySelector(".announcement").offsetHeight}px + ${extraPadding}px)`;
+});
