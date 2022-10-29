@@ -2398,6 +2398,7 @@ slider-component .slider-component .slides-container .slide .item > * {
   justify-content: space-between;
   align-items: center;
   padding: 10px 10px;
+  gap: 1rem;
 }
 @media screen and (min-width: 751px) and (max-width: 1024px) {
   .header__content {
@@ -2420,17 +2421,6 @@ slider-component .slider-component .slides-container .slide .item > * {
   display: flex;
   align-items: center;
 }
-@media screen and (max-width: 1024px) {
-  .header__logo {
-    justify-content: center;
-  }
-  .header__logo {
-    order: 2;
-  }
-  .header__menu {
-    order: 1;
-  }
-}
 .header__menu {
   padding: 0;
   justify-content: flex-start;
@@ -2440,7 +2430,6 @@ slider-component .slider-component .slides-container .slide .item > * {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  gap: 5rem;
   list-style: none;
 }
 @media screen and (max-width: 1024px) {
@@ -2477,12 +2466,31 @@ slider-component .slider-component .slides-container .slide .item > * {
     display: none;
   }
 }
+@media screen and (min-width: 1024px) {
+  .header__logo, .header__icons, .header__menu {
+    flex-shrink: 1;
+    flex-basis: 0px;
+  }
+  .header__logo, .header__icons {
+    flex-grow: 1;
+  }
+  .header__menu {
+    flex-grow: 4;
+  }
+}
 @media screen and (max-width: 1024px) {
+  .header__logo {
+    justify-content: center;
+  }
+  .header__logo {
+    order: 2;
+  }
+  .header__menu {
+    order: 1;
+  }
   .header__logo {
     flex: 3 1 0px;
   }
-}
-@media screen and (max-width: 1024px) and (max-width: 1024px) {
   .header__menu, .header__icons {
     flex: 1 1 0px;
   }
@@ -2493,7 +2501,17 @@ slider-component .slider-component .slides-container .slide .item > * {
   color: white;
 }
 .menu__parent {
-  padding: 1.8rem 0;
+  padding: 1.8rem 0rem;
+}
+@media screen and (min-width: 1025px) {
+  .menu__parent {
+    padding: 1.8rem 1rem;
+  }
+}
+@media screen and (min-width: 1441px) {
+  .menu__parent {
+    padding: 1.8rem 2rem;
+  }
 }
 .menu__parent-title {
   display: flex;
@@ -2501,6 +2519,7 @@ slider-component .slider-component .slides-container .slide .item > * {
   align-items: center;
   font-weight: bold;
   position: relative;
+  text-align: center;
 }
 .menu__parent-title:before {
   content: "";
@@ -2524,11 +2543,9 @@ slider-component .slider-component .slides-container .slide .item > * {
   opacity: 0;
   z-index: -1;
   height: 0px;
-  transform: translateX(-50%) translateY(-10%);
+  transform: translateY(-10%);
   position: absolute;
   top: 100%;
-  left: 50%;
-  width: 1200px;
   pointer-events: none;
   transition: all 0.2s cubic-bezier(0.75, 0, 0.175, 1);
 }
@@ -2567,6 +2584,9 @@ slider-component .slider-component .slides-container .slide .item > * {
 .menu__child:hover {
   background-color: #222;
 }
+.menu__child-title {
+  position: relative;
+}
 .menu__child.filled:after {
   content: url("data:image/svg+xml,%3Csvg width='9' height='8' viewBox='0 0 9 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M1.84289 7.76007L4.10076 4.5022L4.39685 4.07498L4.10076 3.64776L1.84289 0.389887L0.610031 1.24432L2.57182 4.07498L0.610031 6.90564L1.84289 7.76007ZM6.20635 7.76007L8.46423 4.5022L8.76031 4.07498L8.46423 3.64776L6.20635 0.389887L4.9735 1.24432L6.93529 4.07498L4.9735 6.90564L6.20635 7.76007Z' fill='white'/%3E%3C/svg%3E%0A");
   position: absolute;
@@ -2577,7 +2597,6 @@ slider-component .slider-component .slides-container .slide .item > * {
   position: absolute;
   top: 0;
   right: 0;
-  transform: translateX(150%);
   width: 600px;
   height: 100%;
   display: flex;
@@ -2612,9 +2631,6 @@ slider-component .slider-component .slides-container .slide .item > * {
   padding: 1rem 2rem;
   min-width: 300px;
 }
-.menu__childs, .menu__grandchilds {
-  border-right: 1px solid white;
-}
 .menu__grandchild {
   font-size: 0.9rem;
   font-weight: 100;
@@ -2639,12 +2655,15 @@ slider-component .slider-component .slides-container .slide .item > * {
   opacity: 1;
   z-index: 1;
   height: auto;
-  transform: translateX(-50%) translateY(0%);
+  transform: translateY(0%);
   pointer-events: all;
   transition: all 0.2s cubic-bezier(0.75, 0, 0.175, 1);
 }
-.menu__parent:hover .menu__childs:not(:hover) .menu__child.filled:nth-child(1) .menu__grandchilds,
-.menu__parent:hover .menu__childs:not(:hover) .menu__child.filled:nth-child(1) .menu__content {
+.menu__parent:hover .menu__childs:not(:hover) .menu__child:nth-child(1) {
+  background-color: #222;
+}
+.menu__parent:hover .menu__childs:not(:hover) .menu__child:nth-child(1) .menu__grandchilds,
+.menu__parent:hover .menu__childs:not(:hover) .menu__child:nth-child(1) .menu__content {
   pointer-events: all;
   opacity: 1;
 }

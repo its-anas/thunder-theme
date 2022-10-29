@@ -54,14 +54,6 @@
           }
       {%- endif -%}
   }
-
-    @media screen and (min-width: 1024px) {
-        .header__logo,
-        .header__menu,
-        .header__icons {
-                flex: 1 1 0px;
-        }
-    }
 {% endstyle %}
 
 <section class="header">
@@ -97,7 +89,40 @@
     <div class="header__menu desktop-only">
       <div class="header__menu__content {% if section.settings.menu_layout == 'drawer' %}hidden{% endif %}">
         {% for menu_parent in section.settings.menu.links %}
-          <div class="menu__parent">
+          {% assign menu_parent_title = menu_parent.title
+            | downcase
+            | remove: ' '
+            | remove: '\'
+            | remove: '!'
+            | remove: '@'
+            | remove: '£'
+            | remove: '$'
+            | remove: '%'
+            | remove: '^'
+            | remove: '&'
+            | remove: '*'
+            | remove: '('
+            | remove: ')'
+            | remove: '-'
+            | remove: '+'
+            | remove: '='
+            | remove: '{'
+            | remove: '}'
+            | remove: ':'
+            | remove: '|'
+            | remove: '\'
+            | remove: '<'
+            | remove: '>'
+            | remove: ','
+            | remove: '.'
+            | remove: '?'
+            | remove: '~'
+            | remove: '`'
+            | remove: '\'
+            | remove: '/'
+          -%}
+
+          <div class="menu__parent menu_parent_title--{{ menu_parent_title }}">
             <a
               class="menu__parent-title {% if menu_parent.links.size > 0 %}filled{% endif %}"
               href="{{ menu_parent.url }}"
@@ -106,15 +131,80 @@
             </a>
 
             {% if menu_parent.links.size > 0 %}
-              <div class="menu__dropdown">
+              <div class="menu__dropdown menu_parent_title--{{ menu_parent_title }}">
                 <div class="menu__dropdown-wrapper">
                   <div class="menu__dropdown-content">
-                    <div class="menu__childs">
+                    <div class="menu__childs menu_parent_title--{{ menu_parent_title }}">
                       {% for menu_child in menu_parent.links %}
+                        {% assign menu_child_title = menu_child.title
+                          | downcase
+                          | remove: ' '
+                          | remove: '\'
+                          | remove: '!'
+                          | remove: '@'
+                          | remove: '£'
+                          | remove: '$'
+                          | remove: '%'
+                          | remove: '^'
+                          | remove: '&'
+                          | remove: '*'
+                          | remove: '('
+                          | remove: ')'
+                          | remove: '-'
+                          | remove: '+'
+                          | remove: '='
+                          | remove: '{'
+                          | remove: '}'
+                          | remove: ':'
+                          | remove: '|'
+                          | remove: '\'
+                          | remove: '<'
+                          | remove: '>'
+                          | remove: ','
+                          | remove: '.'
+                          | remove: '?'
+                          | remove: '~'
+                          | remove: '`'
+                          | remove: '\'
+                          | remove: '/'
+                        -%}
+
                         <div class="menu__child {% if menu_child.links.size > 0 %}filled{% endif %}">
+                          {% if menu_child.links.size > 0 %}
+                            {% style %}
+                              .menu__dropdown.menu_parent_title--{{ menu_parent_title }} {
+                                width: 600px;
+                              }
+                              .menu__childs.menu_parent_title--{{ menu_parent_title }} {
+                                border-right: 1px solid white;
+                              }
+                              {% if section.settings.menu_layout == 'navigation_first' %}
+                                @media screen and (max-width: 1440px) {
+                                  .menu__dropdown.menu_parent_title--{{ menu_parent_title }} {
+                                  width: 600px;
+                                  transform: translateX(-50%) translateY(-10%);
+                                  left: 50%;
+                                  }
+
+                                  .menu__parent:hover .menu__dropdown.menu_parent_title--{{ menu_parent_title }} {
+                                    transform: translateX(-50%) translateY(0%);
+                                  }
+                                }
+                              {% else %}
+                                 .menu__dropdown.menu_parent_title--{{ menu_parent_title }} {
+                                  width: 600px;
+                                  transform: translateX(-50%) translateY(-10%);
+                                  left: 50%;
+                                  }
+                                  .menu__parent:hover .menu__dropdown.menu_parent_title--{{ menu_parent_title }} {
+                                    transform: translateX(-50%) translateY(0%);
+                                  }
+                              {% endif %}
+                            {% endstyle %}
+                          {% endif %}
                           {% for block in section.blocks %}
                             {% if block.settings.tab_title == menu_child.title %}
-                              <div class="menu__child-icon">
+                              <div class="menu__child-icon media">
                                 {% if block.settings.tab_icon_type == 'svg' %}
                                   {% if block.settings.tab_icon_svg == blank %}
                                     {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
@@ -138,19 +228,146 @@
                               </div>
                             {% endif %}
                           {% endfor %}
-                          <a class="menu__child-title" href="{{ menu_child.url }}">{{ menu_child.title }}</a>
+                          {% if menu_child.title contains '~' %}
+                            {% assign splittedChildTitle = menu_child.title | split: '~' %}
+                            {% style %}
+                              .menu__child-title.menu_child_title--{{ menu_child_title }}.tag--animated-hover:after {
+                                content: "{{ splittedChildTitle[1] | truncate: 10 }}";
+                                margin-left: 0.3rem;
+                                color: var(--primary-button-background-color);
+                              }
 
-                          {% if menu_child.links.size > 0 %}
-                            <div class="menu__grandchilds">
-                              {% for grandmenu_child in menu_child.links %}
-                                <a class="menu__grandchild" href="{{ grandmenu_child.url }}">
-                                  {{- grandmenu_child.title -}}
+                              .menu__parent.menu_parent_title--{{ menu_parent_title }} {
+                                    display: flex;
+                                    flex-direction: row;
+                              }
+
+                              .menu__parent.menu_parent_title--{{ menu_parent_title }}:before {
+                                content: " ";
+                                background-color: var(--primary-button-background-color);
+                                width: 7px;
+                                height: 7px;
+                                border-radius: 50%;
+                                animation: blink 1s linear infinite;
+                                color: var(--primary-button-background-color);
+                                padding-right: 0.2rem;
+                              }
+                            {% endstyle %}
+                            <a
+                              class="menu__child-title menu_child_title--{{ menu_child_title }} tag--animated-hover"
+                              href="{{ menu_child.url }}"
+                            >
+                              {{ splittedChildTitle[0] }}
+                            </a>
+                          {% else %}
+                            <a
+                              class="menu__child-title menu_child_title--{{ menu_child_title }}"
+                              href="{{ menu_child.url }}"
+                            >
+                              {{ menu_child.title }}
+                            </a>
+                          {% endif %}
+
+                          <div class="menu__grandchilds menu_parent_title--{{ menu_parent_title }}">
+                            {% for grandmenu_child in menu_child.links %}
+                              {% if grandmenu_child.title contains '~' %}
+                                {% assign splittedGrandChildTitle = grandmenu_child.title | split: '~' %}
+                                {% style %}
+                                  .menu__grandchild.menu_parent_title--{{ menu_parent_title }}.tag--animated-hover:after {
+                                    content: "{{ splittedGrandChildTitle[1] | truncate: 10 }}";
+                                    margin-left: 0.3rem;
+                                    color: var(--primary-button-background-color);
+                                  }
+
+                                  .menu__parent.menu_parent_title--{{ menu_parent_title }}, .menu__child-title.menu_child_title--{{ menu_child_title }} {
+                                        display: flex;
+                                        flex-direction: row;
+                                  }
+
+                                  .menu__parent.menu_parent_title--{{ menu_parent_title }}:before, .menu__child-title.menu_child_title--{{ menu_child_title }}:before {
+                                    content: " ";
+                                    background-color: var(--primary-button-background-color);
+                                    width: 7px;
+                                    height: 7px;
+                                    border-radius: 50%;
+                                    animation: blink 1s linear infinite;
+                                    color: var(--primary-button-background-color);
+                                    padding-right: 0.2rem;
+                                  }
+                                {% endstyle %}
+                                <a
+                                  class="menu__grandchild menu_parent_title--{{ menu_parent_title }} tag--animated-hover"
+                                  href="{{ grandmenu_child.url }}"
+                                >
+                                  {{ splittedGrandChildTitle[0] }}
                                 </a>
-                              {% endfor %}
-                            </div>
-                            {% for block in section.blocks %}
-                              {% if block.settings.tab_title == menu_child.title %}
-                                <div class="menu__content">
+                              {% else %}
+                                <a class="menu__grandchild" href="{{ grandmenu_child.url }}">
+                                  {{ grandmenu_child.title }}
+                                </a>
+                              {% endif %}
+                            {% endfor %}
+                          </div>
+                          {% if menu_child.links.size > 0 %}
+                            {% style %}
+                              .menu__dropdown.menu_parent_title--{{ menu_parent_title }} {
+                                width: 600px !important;
+                              }
+                              .menu__grandchilds.menu_parent_title--{{ menu_parent_title }} {
+                                  border-right: 1px solid white;
+                              }
+                            {% endstyle %}
+                          {% endif %}
+                          {% for block in section.blocks %}
+                            {% if block.settings.tab_title == menu_child.title %}
+                              {% if block.settings.show_tab_picture == true %}
+                                {% style %}
+                                    .menu__childs.menu_parent_title--{{ menu_parent_title }} {
+                                      border-right: 1px solid white;
+                                    }
+                                  {% if menu_child.links.size > 0 %}
+                                    .menu__dropdown.menu_parent_title--{{ menu_parent_title }} {
+                                      width: 1200px !important;
+                                    }
+                                    .menu__grandchilds.menu_parent_title--{{ menu_parent_title }} {
+                                      border-right: 1px solid white;
+                                    }
+                                    .menu__content.menu_parent_title--{{ menu_parent_title }} {
+                                      transform: translateX(150%);
+                                    }
+                                  {% else %}
+                                    .menu__dropdown.menu_parent_title--{{ menu_parent_title }} {
+                                      width: 900px !important;
+                                    }
+                                    .menu__content.menu_parent_title--{{ menu_parent_title }} {
+                                      transform: translateX(100%);
+                                    }
+                                  {% endif %}
+
+                                  {% if section.settings.menu_layout == 'navigation_first' %}
+                                    @media screen and (max-width: 1440px) {
+                                      .menu__dropdown.menu_parent_title--{{ menu_parent_title }} {
+                                        width: 600px;
+                                        transform: translateX(-50%) translateY(-10%);
+                                        left: 50%;
+                                      }
+                                      .menu__parent:hover .menu__dropdown.menu_parent_title--{{ menu_parent_title }} {
+                                        transform: translateX(-50%) translateY(0%);
+                                      }
+                                    }
+                                  {% else %}
+                                    .menu__dropdown.menu_parent_title--{{ menu_parent_title }} {
+                                      width: 600px;
+                                      transform: translateX(-50%) translateY(-10%);
+                                      left: 50%;
+                                      }
+                                      .menu__parent:hover .menu__dropdown.menu_parent_title--{{ menu_parent_title }} {
+                                        transform: translateX(-50%) translateY(0%);
+                                      }
+                                  {% endif %}
+                                {% endstyle %}
+
+                                <div class="menu__content menu_parent_title--{{ menu_parent_title }}">
                                   <div class="menu__picture media">
                                     {% if block.settings.tab_content_type == 'svg' %}
                                       {% if block.settings.tab_content_svg == blank %}
@@ -168,7 +385,7 @@
                                           alt="{{ block.settings.tab_content_image | escape }}"
                                           width="{{ block.settings.tab_content_image.width }}"
                                           height="{{ block.settings.tab_content_image.height }}"
-                                          class="full"
+                                          class="fit"
                                         >
                                       {% endif %}
                                     {% endif %}
@@ -178,8 +395,8 @@
                                   </p>
                                 </div>
                               {% endif %}
-                            {% endfor %}
-                          {% endif %}
+                            {% endif %}
+                          {% endfor %}
                         </div>
                       {% endfor %}
                     </div>
@@ -320,7 +537,7 @@
           "type": "text",
           "id": "tab_title",
           "label": "Tab title",
-          "info": "Put the title of the tab here, exactly like it's shown in the menu. Respect the uppercase, lowercase and spaces"
+          "info": "Put the title of the tab (menu child) here, exactly like it's shown in the menu. Make sure they are unique and not duplicates. And also respect the uppercase, lowercase and spaces."
         },
         {
           "type": "select",
@@ -353,7 +570,13 @@
         },
         {
           "type": "header",
-          "content": "Tab content"
+          "content": "Tab picture"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_tab_picture",
+          "label": "Show tab picture and description",
+          "default": true
         },
         {
           "type": "select",

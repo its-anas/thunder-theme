@@ -2579,6 +2579,7 @@ $indicator-width: 40px;
                 justify-content: space-between;
                 align-items: center;
                 padding: 10px 10px;
+                gap: 1rem;
 
                 @media screen and (min-width: 751px) and (max-width: 1024px) {
                         min-height: 70px;
@@ -2601,18 +2602,6 @@ $indicator-width: 40px;
                 display: flex;
                 align-items: center;
         }
-
-        @media screen and (max-width: 1024px) {
-                &__logo {
-                        justify-content: center;
-                }
-                &__logo {
-                        order: 2;
-                }
-                &__menu {
-                        order: 1;
-                }
-        }
         &__menu {
                 padding: 0;
                 justify-content: flex-start;
@@ -2621,11 +2610,17 @@ $indicator-width: 40px;
                         flex-direction: row;
                         justify-content: center;
                         align-items: center;
-                        gap: 5rem;
                         list-style: none;
                         @media screen and (max-width: 1024px) {
                                 display: none;
                         }
+                        // @media screen and (min-width: 1025px) {
+                        //         gap: 2rem;
+                        // }
+                        // @media screen and (min-width: 1441px) {
+                        //         gap: 4rem;
+                        // }
+
                         &.hidden {
                                 display: none;
                         }
@@ -2665,18 +2660,54 @@ $indicator-width: 40px;
                 }
         }
 
+        @media screen and (min-width: 1024px) {
+                &__logo,
+                &__icons,
+                &__menu {
+                        flex-shrink: 1;
+                        flex-basis: 0px;
+                }
+                &__logo,
+                &__icons {
+                        flex-grow: 1;
+                }
+                &__menu {
+                        flex-grow: 4;
+                }
+        }
+
         @media screen and (max-width: 1024px) {
+                &__logo {
+                        justify-content: center;
+                }
+                &__logo {
+                        order: 2;
+                }
+                &__menu {
+                        order: 1;
+                }
                 &__logo {
                         flex: 3 1 0px;
                 }
                 &__menu,
                 &__icons {
-                        @media screen and (max-width: 1024px) {
-                                flex: 1 1 0px;
-                        }
+                        flex: 1 1 0px;
                 }
         }
 }
+
+// .menu__parent:after {
+//         content: " ";
+//         position: absolute;
+//         background-color: var(--primary-button-background-color);
+//         width: 7px;
+//         height: 7px;
+//         border-radius: 50%;
+//         animation: blink 1s linear infinite;
+//         right: 22px;
+//         top: 28px;
+//         transform: translate(-50%, -50%);
+// }
 
 // SECTION: Menu
 .menu {
@@ -2686,7 +2717,14 @@ $indicator-width: 40px;
         }
 
         &__parent {
-                padding: 1.8rem 0;
+                padding: 1.8rem 0rem;
+
+                @media screen and (min-width: 1025px) {
+                        padding: 1.8rem 1rem;
+                }
+                @media screen and (min-width: 1441px) {
+                        padding: 1.8rem 2rem;
+                }
 
                 &-title {
                         display: flex;
@@ -2694,6 +2732,7 @@ $indicator-width: 40px;
                         align-items: center;
                         font-weight: bold;
                         position: relative;
+                        text-align: center;
 
                         &:before {
                                 content: "";
@@ -2723,11 +2762,9 @@ $indicator-width: 40px;
                 opacity: 0;
                 z-index: -1;
                 height: 0px;
-                transform: translateX(-50%) translateY(-10%);
+                transform: translateY(-10%);
                 position: absolute;
                 top: 100%;
-                left: 50%;
-                width: 1200px;
                 pointer-events: none;
                 transition: all 0.2s cubic-bezier(0.75, 0, 0.175, 1);
 
@@ -2746,7 +2783,6 @@ $indicator-width: 40px;
                 flex-direction: column;
                 align-items: flex-start;
                 position: relative;
-                // padding-left: 2rem;
                 margin: 1rem 0;
                 height: 100%;
         }
@@ -2772,6 +2808,10 @@ $indicator-width: 40px;
                         background-color: #222;
                 }
 
+                &-title {
+                        position: relative;
+                }
+
                 &.filled:after {
                         content: url("data:image/svg+xml,%3Csvg width='9' height='8' viewBox='0 0 9 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M1.84289 7.76007L4.10076 4.5022L4.39685 4.07498L4.10076 3.64776L1.84289 0.389887L0.610031 1.24432L2.57182 4.07498L0.610031 6.90564L1.84289 7.76007ZM6.20635 7.76007L8.46423 4.5022L8.76031 4.07498L8.46423 3.64776L6.20635 0.389887L4.9735 1.24432L6.93529 4.07498L4.9735 6.90564L6.20635 7.76007Z' fill='white'/%3E%3C/svg%3E%0A");
                         position: absolute;
@@ -2784,7 +2824,6 @@ $indicator-width: 40px;
                 position: absolute;
                 top: 0;
                 right: 0;
-                transform: translateX(150%);
                 width: 600px;
                 height: 100%;
                 display: flex;
@@ -2823,11 +2862,6 @@ $indicator-width: 40px;
                 min-width: 300px;
         }
 
-        &__childs,
-        &__grandchilds {
-                border-right: 1px solid white;
-        }
-
         &__grandchild {
                 font-size: 0.9rem;
                 font-weight: 100;
@@ -2859,12 +2893,13 @@ $indicator-width: 40px;
                 opacity: 1;
                 z-index: 1;
                 height: auto;
-                transform: translateX(-50%) translateY(0%);
+                transform: translateY(0%);
                 pointer-events: all;
                 transition: all 0.2s cubic-bezier(0.75, 0, 0.175, 1);
         }
         .menu__childs:not(:hover) {
-                .menu__child.filled:nth-child(1) {
+                .menu__child:nth-child(1) {
+                        background-color: #222;
                         .menu__grandchilds,
                         .menu__content {
                                 pointer-events: all;

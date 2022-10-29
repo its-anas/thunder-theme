@@ -52,30 +52,37 @@ window.addEventListener("resize", () => {
         document.querySelector(".search-drawer").style.height = `calc(100% - ${document.querySelector(".header-section").offsetHeight}px + 15px)`;
 });
 
-// ANCHOR: Menu drawer
+// ANCHOR: Menu drawer - height and padding
 
 let extraPadding = document.querySelector(".header-section").classList.contains("boxed") ? 15 : 0;
 let announcementHeight = document.querySelector(".announcement") ? document.querySelector(".announcement").offsetHeight : 0;
-
-window.addEventListener("load", () => {
-        document.querySelector(".menu__dropdown-wrapper").style.paddingTop = `calc(${announcementHeight}px + ${extraPadding}px)`;
-});
-
-window.addEventListener("resize", () => {
-        document.querySelector(".menu__dropdown-wrapper").style.paddingTop = `calc(${announcementHeight}px + ${extraPadding}px)`;
-});
-
-let menuGrandchilds = [];
+let allChildHeights = [];
+let menuChildContainer = document.querySelectorAll(".menu__childs");
 let height = 0;
 let margin = 32;
 
+function setDropdownPadding() {
+        document.querySelectorAll(".menu__dropdown-wrapper").forEach((dropdown) => {
+                dropdown.style.paddingTop = `calc(${announcementHeight}px + ${extraPadding}px)`;
+        });
+}
+
 document.querySelectorAll(".menu__grandchilds").forEach((grandchild) => {
         height = grandchild.offsetHeight;
-        menuGrandchilds.push(height);
+        allChildHeights.push(height);
         grandchild.style.height = "100%";
 });
 
-menuGrandchilds.push(document.querySelector(".menu__childs").offsetHeight);
+menuChildContainer.forEach((ChildContainer) => {
+        allChildHeights.push(ChildContainer.offsetHeight);
+        ChildContainer.style.height = `${Math.max.apply(Math, allChildHeights) + margin}px`;
+        ChildContainer.style.minHeight = "300px";
+});
 
-document.querySelector(".menu__childs").style.height = `${Math.max.apply(Math, menuGrandchilds) + margin}px`;
-document.querySelector(".menu__childs").style.minHeight = "300px";
+window.addEventListener("load", () => {
+        setDropdownPadding();
+});
+
+window.addEventListener("resize", () => {
+        setDropdownPadding();
+});
