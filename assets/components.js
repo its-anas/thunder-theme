@@ -384,7 +384,7 @@ class Slideshow extends HTMLElement {
                         loop(false);
                 });
                 this.addEventListener("mouseout", () => {
-                        if (this.autoPlay === "true") {
+                        if (this.autoPlay === "true") { 
                                 loop(true);
                         }
                 });

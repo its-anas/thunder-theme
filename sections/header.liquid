@@ -96,29 +96,89 @@
     </div>
     <div class="header__menu desktop-only">
       <div class="header__menu__content {% if section.settings.menu_layout == 'drawer' %}hidden{% endif %}">
-        {% for link in section.settings.menu.links %}
+        {% for menu_parent in section.settings.menu.links %}
           <div class="menu__parent">
-            <a class="menu__parent-title {% if link.links.size > 0 %}filled{% endif %}" href="{{ link.url }}">
-              {{- link.title }}
+            <a
+              class="menu__parent-title {% if menu_parent.links.size > 0 %}filled{% endif %}"
+              href="{{ menu_parent.url }}"
+            >
+              {{- menu_parent.title }}
             </a>
 
-            {% if link.links.size > 0 %}
+            {% if menu_parent.links.size > 0 %}
               <div class="menu__dropdown">
                 <div class="menu__dropdown-wrapper">
                   <div class="menu__dropdown-content">
                     <div class="menu__childs">
-                      {% for child_link in link.links %}
-                        <div class="menu__child {% if child_link.links.size > 0 %}filled{% endif %}">
-                          <a class="menu__child-title" href="{{ child_link.url }}">{{ child_link.title }}</a>
+                      {% for menu_child in menu_parent.links %}
+                        <div class="menu__child {% if menu_child.links.size > 0 %}filled{% endif %}">
+                          {% for block in section.blocks %}
+                            {% if block.settings.tab_title == menu_child.title %}
+                              <div class="menu__child-icon">
+                                {% if block.settings.tab_icon_type == 'svg' %}
+                                  {% if block.settings.tab_icon_svg == blank %}
+                                    {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
+                                  {% else %}
+                                    {{ block.settings.tab_icon_svg }}
+                                  {% endif %}
+                                {% elsif block.settings.tab_icon_type == 'image' %}
+                                  {% if block.settings.tab_icon_image == blank %}
+                                    {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
+                                  {% else %}
+                                    <img
+                                      srcset="{{ block.settings.tab_icon_image | image_url }}"
+                                      loading="lazy"
+                                      alt="{{ block.settings.tab_icon_image | escape }}"
+                                      width="{{ block.settings.tab_icon_image.width }}"
+                                      height="{{ block.settings.tab_icon_image.height }}"
+                                      class="full"
+                                    >
+                                  {% endif %}
+                                {% endif %}
+                              </div>
+                            {% endif %}
+                          {% endfor %}
+                          <a class="menu__child-title" href="{{ menu_child.url }}">{{ menu_child.title }}</a>
 
-                          {% if child_link.links.size > 0 %}
+                          {% if menu_child.links.size > 0 %}
                             <div class="menu__grandchilds">
-                              {% for grandchild_link in child_link.links %}
-                                <a class="menu__grandchild" href="{{ grandchild_link.url }}">
-                                  {{- grandchild_link.title -}}
+                              {% for grandmenu_child in menu_child.links %}
+                                <a class="menu__grandchild" href="{{ grandmenu_child.url }}">
+                                  {{- grandmenu_child.title -}}
                                 </a>
                               {% endfor %}
                             </div>
+                            {% for block in section.blocks %}
+                              {% if block.settings.tab_title == menu_child.title %}
+                                <div class="menu__content">
+                                  <div class="menu__picture media">
+                                    {% if block.settings.tab_content_type == 'svg' %}
+                                      {% if block.settings.tab_content_svg == blank %}
+                                        {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
+                                      {% else %}
+                                        {{ block.settings.tab_content_svg }}
+                                      {% endif %}
+                                    {% elsif block.settings.tab_content_type == 'image' %}
+                                      {% if block.settings.tab_content_image == blank %}
+                                        {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
+                                      {% else %}
+                                        <img
+                                          srcset="{{ block.settings.tab_content_image | image_url }}"
+                                          loading="lazy"
+                                          alt="{{ block.settings.tab_content_image | escape }}"
+                                          width="{{ block.settings.tab_content_image.width }}"
+                                          height="{{ block.settings.tab_content_image.height }}"
+                                          class="full"
+                                        >
+                                      {% endif %}
+                                    {% endif %}
+                                  </div>
+                                  <p class="menu__description">
+                                    {{ block.settings.tab_description }}
+                                  </p>
+                                </div>
+                              {% endif %}
+                            {% endfor %}
                           {% endif %}
                         </div>
                       {% endfor %}
@@ -251,6 +311,86 @@
       "default": "#fff"
     }
   ],
-  "blocks": []
+  "blocks": [
+    {
+      "type": "tab",
+      "name": "Tab",
+      "settings": [
+        {
+          "type": "text",
+          "id": "tab_title",
+          "label": "Tab title",
+          "info": "Put the title of the tab here, exactly like it's shown in the menu. Respect the uppercase, lowercase and spaces"
+        },
+        {
+          "type": "select",
+          "id": "tab_icon_type",
+          "label": "Tab icon/image type",
+          "options": [
+            {
+              "value": "svg",
+              "label": "svg"
+            },
+            {
+              "value": "image",
+              "label": "Image"
+            }
+          ],
+          "default": "svg",
+          "info": "It is recommended to use svg icons instead of jpeg/png to get the best quality"
+        },
+        {
+          "type": "liquid",
+          "id": "tab_icon_svg",
+          "label": "Tab icon - svg",
+          "info": "Applicable only if icon type is svg"
+        },
+        {
+          "type": "image_picker",
+          "id": "tab_icon_image",
+          "label": "Tab icon - image",
+          "info": "Applicable only if icon type is image"
+        },
+        {
+          "type": "header",
+          "content": "Tab content"
+        },
+        {
+          "type": "select",
+          "id": "tab_content_type",
+          "label": "Tab content image type",
+          "options": [
+            {
+              "value": "svg",
+              "label": "svg"
+            },
+            {
+              "value": "image",
+              "label": "Image"
+            }
+          ],
+          "default": "svg"
+        },
+        {
+          "type": "liquid",
+          "id": "tab_content_svg",
+          "label": "Tab content image - svg",
+          "info": "Applicable only if image type is svg"
+        },
+        {
+          "type": "image_picker",
+          "id": "tab_content_image",
+          "label": "Tab content image - image",
+          "info": "Applicable only if image type is image"
+        },
+        {
+          "type": "text",
+          "id": "tab_description",
+          "label": "Tab description",
+          "default": "Tab description"
+        }
+      ]
+    }
+  ]
 }
 {% endschema %}

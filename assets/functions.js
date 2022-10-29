@@ -55,11 +55,27 @@ window.addEventListener("resize", () => {
 // ANCHOR: Menu drawer
 
 let extraPadding = document.querySelector(".header-section").classList.contains("boxed") ? 15 : 0;
+let announcementHeight = document.querySelector(".announcement") ? document.querySelector(".announcement").offsetHeight : 0;
 
 window.addEventListener("load", () => {
-        document.querySelector(".menu__dropdown-wrapper").style.paddingTop = `calc(${document.querySelector(".announcement").offsetHeight}px + ${extraPadding}px)`;
+        document.querySelector(".menu__dropdown-wrapper").style.paddingTop = `calc(${announcementHeight}px + ${extraPadding}px)`;
 });
 
 window.addEventListener("resize", () => {
-        document.querySelector(".menu__dropdown-wrapper").style.paddingTop = `calc(${document.querySelector(".announcement").offsetHeight}px + ${extraPadding}px)`;
+        document.querySelector(".menu__dropdown-wrapper").style.paddingTop = `calc(${announcementHeight}px + ${extraPadding}px)`;
 });
+
+let menuGrandchilds = [];
+let height = 0;
+let margin = 32;
+
+document.querySelectorAll(".menu__grandchilds").forEach((grandchild) => {
+        height = grandchild.offsetHeight;
+        menuGrandchilds.push(height);
+        grandchild.style.height = "100%";
+});
+
+menuGrandchilds.push(document.querySelector(".menu__childs").offsetHeight);
+
+document.querySelector(".menu__childs").style.height = `${Math.max.apply(Math, menuGrandchilds) + margin}px`;
+document.querySelector(".menu__childs").style.minHeight = "300px";

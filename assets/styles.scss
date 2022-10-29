@@ -2727,16 +2727,17 @@ $indicator-width: 40px;
                 position: absolute;
                 top: 100%;
                 left: 50%;
-                width: 800px;
+                width: 1200px;
                 pointer-events: none;
                 transition: all 0.2s cubic-bezier(0.75, 0, 0.175, 1);
 
                 &-content {
                         display: flex;
-                        flex-direction: column;
+                        flex-direction: row;
                         align-items: flex-start;
                         background-color: black;
                         border: 2px solid white;
+                        height: auto;
                 }
         }
 
@@ -2747,12 +2748,25 @@ $indicator-width: 40px;
                 position: relative;
                 // padding-left: 2rem;
                 margin: 1rem 0;
+                height: 100%;
+        }
+
+        &__child-icon {
+                height: 60px;
+                width: 60px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
         }
 
         &__child {
+                display: flex;
+                align-items: center;
+                gap: 0.6rem;
                 width: 100%;
-                padding: 1rem 2rem;
-                min-width: 200px;
+                height: 66.4px;
+                padding: 0rem 1rem;
+                min-width: 300px;
 
                 &:hover {
                         background-color: #222;
@@ -2766,21 +2780,47 @@ $indicator-width: 40px;
                 }
         }
 
-        &__grandchilds {
-                // opacity: 1;
+        &__content {
+                position: absolute;
+                top: 0;
+                right: 0;
+                transform: translateX(150%);
+                width: 600px;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                padding: 1rem;
+                gap: 1rem;
                 opacity: 0;
+                pointer-events: none;
 
+                .menu__picture {
+                        height: 150px;
+                        width: 200px;
+                }
+
+                .menu__description {
+                        text-align: center;
+                }
+        }
+
+        &__grandchilds {
+                opacity: 0;
                 position: absolute;
                 pointer-events: none;
                 top: 0;
                 left: 100%;
-                height: 100%;
+                height: auto;
                 display: flex;
                 flex-direction: column;
                 justify-content: flex-start;
                 align-items: flex-start;
-                padding: 1rem 0rem 0rem 2rem;
                 gap: 0.5rem;
+                width: 100%;
+                padding: 1rem 2rem;
+                min-width: 300px;
         }
 
         &__childs,
@@ -2789,8 +2829,8 @@ $indicator-width: 40px;
         }
 
         &__grandchild {
-                min-width: 200px;
                 font-size: 0.9rem;
+                font-weight: 100;
                 opacity: 1;
                 transition: opacity 0.1s ease;
 
@@ -2801,7 +2841,8 @@ $indicator-width: 40px;
 }
 
 .menu__child:hover {
-        .menu__grandchilds {
+        .menu__grandchilds,
+        .menu__content {
                 pointer-events: all;
                 opacity: 1;
         }
@@ -2824,7 +2865,8 @@ $indicator-width: 40px;
         }
         .menu__childs:not(:hover) {
                 .menu__child.filled:nth-child(1) {
-                        .menu__grandchilds {
+                        .menu__grandchilds,
+                        .menu__content {
                                 pointer-events: all;
                                 opacity: 1;
                         }
