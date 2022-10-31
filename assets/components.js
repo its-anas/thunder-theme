@@ -1059,23 +1059,20 @@ class OpenableElement extends HTMLElement {
                 document.querySelector(`openable-element:has(${selector})`).classList.remove("hidden");
                 document.querySelector(`openable-element:has(${selector})`).classList.add("active");
                 document.querySelector(".theme-overlay").style.zIndex = "99";
-                lockPage();
-
-                // document.querySelector(".header-section").style.zIndex = "100";
+                document.querySelector(".header-section").style.zIndex = "100";
                 this.style.zIndex = "100";
+                lockPage();
         }
 
         hideDrawer() {
                 this.classList.remove("active");
                 this.classList.add("hidden");
-                unlockPage();
-
                 setTimeout(() => {
                         this.style.zIndex = "98";
                         document.querySelector(".theme-overlay").style.zIndex = "-1";
+                        document.querySelector(".header-section").style.zIndex = "98";
                 }, 300);
-
-                // document.querySelector(".header-section").style.zIndex = "98";
+                unlockPage();
         }
 
         decideDrawerAction() {
@@ -1171,7 +1168,7 @@ class MenuMobile extends HTMLElement {
                         });
 
                         parent.querySelectorAll(".menu-mobile__child").forEach((child) => {
-                                let grandchildsHeight = parent.querySelector(".menu-mobile__child-childs").scrollHeight;
+                                let grandchildsHeight = child.querySelector(".menu-mobile__child-childs").scrollHeight;
                                 child.querySelector(".menu-mobile__child-title").addEventListener("click", () => {
                                         if (!child.querySelector(".menu-mobile__child-childs").classList.contains("active")) {
                                                 parent.querySelector(".menu-mobile__parent-childs").style.height = `${childsHeight + grandchildsHeight}px`;

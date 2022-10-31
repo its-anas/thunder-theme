@@ -2976,9 +2976,11 @@ openable-element:has(.menu-mobile) {
                         align-items: center;
                         padding: 0.5rem;
                         cursor: pointer;
+                        position: relative;
 
                         h6 {
                                 font-size: 1rem;
+                                flex-grow: 1;
                         }
 
                         .svg {
@@ -3012,13 +3014,13 @@ openable-element:has(.menu-mobile) {
                         flex-direction: row;
                         justify-content: space-between;
                         align-items: center;
+
                         padding: 0.7rem 0.7rem 0.7rem 1rem;
-                        margin-left: 0.5rem;
                         font-weight: 600;
                         cursor: pointer;
+                        position: relative;
 
                         .text {
-                                padding-left: 1rem;
                                 flex-grow: 1;
                         }
 
@@ -3030,9 +3032,14 @@ openable-element:has(.menu-mobile) {
 
                 &-childs {
                         height: 0;
-                        margin-left: 1rem;
                         transition: height 0.2s cubic-bezier(0.75, 0, 0.175, 1);
                         overflow: hidden;
+                        display: flex;
+                        flex-direction: column;
+
+                        .text {
+                                margin-left: 1rem;
+                        }
 
                         &.active {
                                 // height: auto;
@@ -3050,6 +3057,25 @@ openable-element:has(.menu-mobile) {
 
                 &-title {
                         padding: 0.5rem 0.5rem 0.5rem 1rem;
+                }
+        }
+
+        &__picture-container {
+                display: flex;
+                flex-direction: column;
+                padding: 1rem 0;
+                gap: 0.5rem;
+        }
+
+        &__picture {
+                height: 150px;
+
+                &-description {
+                        text-align: center;
+                }
+
+                > * {
+                        width: 80%;
                 }
         }
 }

@@ -93,7 +93,7 @@
     </div>
     <div class="header__menu">
       <menu-mobile>
-        <openable-element class="active">
+        <openable-element class="hidden">
           <div class="menu-mobile">
             <div class="menu-mobile__container">
               <div class="menu-mobile__head">
@@ -107,10 +107,48 @@
               <div class="menu-mobile__content">
                 <div class="menu-mobile__parents">
                   {% for menu_parent in section.settings.menu.links %}
-                    <div class="menu-mobile__parent">
-                      <div class="menu-mobile__parent-title">
+                    {% assign menu_parent_title = menu_parent.title
+                      | downcase
+                      | remove: ' '
+                      | remove: '\'
+                      | remove: '!'
+                      | remove: '@'
+                      | remove: '£'
+                      | remove: '$'
+                      | remove: '%'
+                      | remove: '^'
+                      | remove: '&'
+                      | remove: '*'
+                      | remove: '('
+                      | remove: ')'
+                      | remove: '-'
+                      | remove: '+'
+                      | remove: '='
+                      | remove: '{'
+                      | remove: '}'
+                      | remove: ':'
+                      | remove: '|'
+                      | remove: '\'
+                      | remove: '<'
+                      | remove: '>'
+                      | remove: ','
+                      | remove: '.'
+                      | remove: '?'
+                      | remove: '~'
+                      | remove: '`'
+                      | remove: '\'
+                      | remove: '/'
+                    -%}
+                    <div class="menu-mobile__parent {{ menu_parent_title }}">
+                      <div class="menu-mobile__parent-title {{ menu_parent_title }}">
                         <h6>
-                          {{ menu_parent.title }}
+                          <a
+                            {% if menu_parent.links.size == 0 %}
+                              href="{{ menu_parent.url }}"
+                            {% endif %}
+                          >
+                            {{- menu_parent.title -}}
+                          </a>
                         </h6>
                         {% if menu_parent.links.size > 0 %}
                           <div class="svg">
@@ -160,47 +198,83 @@
                             | remove: '\'
                             | remove: '/'
                           -%}
-                          {% for block in section.blocks %}
-                            {% if block.settings.tab_title == menu_child_title %}
-                              <div class="menu__child-icon media">
-                                {% if block.settings.tab_icon_type == 'svg' %}
-                                  {% if block.settings.tab_icon_svg == blank %}
-                                    {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
-                                  {% else %}
-                                    {{ block.settings.tab_icon_svg }}
-                                  {% endif %}
-                                {% elsif block.settings.tab_icon_type == 'image' %}
-                                  {% if block.settings.tab_icon_image == blank %}
-                                    {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
-                                  {% else %}
-                                    <img
-                                      srcset="{{ block.settings.tab_icon_image | image_url }}"
-                                      loading="lazy"
-                                      alt="{{ block.settings.tab_icon_image | escape }}"
-                                      width="{{ block.settings.tab_icon_image.width }}"
-                                      height="{{ block.settings.tab_icon_image.height }}"
-                                      class="full"
-                                    >
-                                  {% endif %}
-                                {% endif %}
-                              </div>
-                            {% endif %}
-                          {% endfor %}
 
                           <div class="menu-mobile__child">
-                            <div class="menu-mobile__child-title">
-                              {% comment %}
-                                 <svg
-                                  width="64"
-                                  height="65"
-                                  viewBox="0 0 64 65"
-                                  fill="none"
-                                  xmlns="http://www.w3.org/2000/svg"
+                            <div class="menu-mobile__child-title {{ menu_child_title }}">
+                              {% for block in section.blocks %}
+                                {% if block.settings.tab_title == menu_child.title %}
+                                  <div class="menu__child-icon media">
+                                    {% style %}
+                                      {% if block.settings.tab_icon_svg != blank or block.settings.tab_icon_image != blank %}
+                                          .menu-mobile__child-title.{{ menu_child_title }} {
+                                            padding: 0rem 0.7rem 0rem 0.7rem;
+                                          }
+                                      {% endif %}
+                                    {% endstyle %}
+                                    {% if block.settings.tab_icon_type == 'svg' %}
+                                      {% if block.settings.tab_icon_svg == blank %}
+                                        {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
+                                      {% else %}
+                                        {{ block.settings.tab_icon_svg }}
+                                      {% endif %}
+                                    {% elsif block.settings.tab_icon_type == 'image' %}
+                                      {% if block.settings.tab_icon_image == blank %}
+                                        {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
+                                      {% else %}
+                                        <img
+                                          srcset="{{ block.settings.tab_icon_image | image_url }}"
+                                          loading="lazy"
+                                          alt="{{ block.settings.tab_icon_image | escape }}"
+                                          width="{{ block.settings.tab_icon_image.width }}"
+                                          height="{{ block.settings.tab_icon_image.height }}"
+                                          class="full"
+                                        >
+                                      {% endif %}
+                                    {% endif %}
+                                  </div>
+                                {% endif %}
+                              {% endfor %}
+
+                              {% if menu_child.title contains '~' %}
+                                {% assign splittedChildTitle = menu_child.title | split: '~' %}
+                                {% style %}
+                                  .text--{{ menu_child_title }}.text.tag--animated-hover:after {
+                                    content: "{{ splittedChildTitle[1] | truncate: 10 }}";
+                                    color: var(--primary-button-background-color);
+                                  }
+
+                                  .menu-mobile__parent-title.{{ menu_parent_title }}:before {
+                                      content: " ";
+                                      background-color: var(--primary-button-background-color);
+                                      width: 7px;
+                                      height: 7px;
+                                      border-radius: 50%;
+                                      animation: blink 1s linear infinite;
+                                      color: var(--primary-button-background-color);
+                                      margin-bottom: 1rem;
+                                      margin-left: -5px;
+                                      position: absolute;
+                                  }
+                                {% endstyle %}
+
+                                <a
+                                  class="text--{{ menu_child_title }} text tag--animated-hover"
+                                  {% if menu_child.links.size == 0 %}
+                                    href="{{ menu_child.url }}"
+                                  {% endif %}
                                 >
-                                  <path fill-rule="evenodd" clip-rule="evenodd" d="M26.5203 15.3614C24.4492 15.3614 22.7703 17.0403 22.7703 19.1114V45.8887C22.7703 47.9597 24.4492 49.6387 26.5203 49.6387H37.4798C39.5509 49.6387 41.2298 47.9597 41.2298 45.8887V19.1114C41.2298 17.0403 39.5509 15.3614 37.4798 15.3614H26.5203ZM24.2703 19.1114C24.2703 17.8687 25.2776 16.8614 26.5203 16.8614H37.4798C38.7224 16.8614 39.7298 17.8687 39.7298 19.1114V45.8887C39.7298 47.1313 38.7224 48.1387 37.4798 48.1387H26.5203C25.2776 48.1387 24.2703 47.1313 24.2703 45.8887V19.1114ZM27.27 18.0279C26.3035 18.0279 25.52 18.8114 25.52 19.7779V23.7518C25.52 24.7183 26.3035 25.5018 27.27 25.5018H31.119C32.0855 25.5018 32.869 24.7183 32.869 23.7518V19.7779C32.869 18.8114 32.0855 18.0279 31.119 18.0279H27.27ZM27.02 19.7779C27.02 19.6398 27.1319 19.5279 27.27 19.5279H31.119C31.257 19.5279 31.369 19.6398 31.369 19.7779V23.7518C31.369 23.8899 31.257 24.0018 31.119 24.0018H27.27C27.1319 24.0018 27.02 23.8899 27.02 23.7518V19.7779Z" fill="white"/>
-                                </svg>
-                              {% endcomment %}
-                              <p class="text">{{ menu_child.title }}</p>
+                                  {{ splittedChildTitle[0] }}
+                                </a>
+                              {% else %}
+                                <a
+                                  class="text--{{ menu_child_title }} text"
+                                  {% if menu_child.links.size == 0 %}
+                                    href="{{ menu_child.url }}"
+                                  {% endif %}
+                                >
+                                  {{ menu_child.title }}
+                                </a>
+                              {% endif %}
                               {% if menu_child.links.size > 0 %}
                                 <svg
                                   width="8"
@@ -217,9 +291,74 @@
                             </div>
                             <div class="menu-mobile__child-childs {% if menu_child.links.size > 0 %}border{% endif %}">
                               {% for menu_grandchild in menu_child.links %}
-                                <p class="menu-mobile__grandchild-title">
-                                  {{ menu_grandchild.title }}
-                                </p>
+                                {% if menu_grandchild.title contains '~' %}
+                                  {% assign splittedGrandChildTitle = menu_grandchild.title | split: '~' %}
+                                  {% style %}
+                                    .menu-mobile__child-childs .text--{{ menu_child_title }}.text.tag--animated-hover:after {
+                                      content: "{{ splittedGrandChildTitle[1] | truncate: 10 }}";
+                                      color: var(--primary-button-background-color);
+                                    }
+
+                                    .menu-mobile__parent-title.{{ menu_parent_title }}:before, .menu-mobile__child-title.{{ menu_child_title }}:before {
+                                      content: " ";
+                                      background-color: var(--primary-button-background-color);
+                                      width: 7px;
+                                      height: 7px;
+                                      border-radius: 50%;
+                                      animation: blink 1s linear infinite;
+                                      color: var(--primary-button-background-color);
+                                      margin-bottom: 1rem;
+                                      margin-left: -5px;
+                                      position: absolute;
+                                    }
+                                  {% endstyle %}
+                                  <a
+                                    class="menu-mobile__grandchild-title text--{{ menu_child_title }} text tag--animated-hover"
+                                    href="{{ menu_grandchild.url }}"
+                                  >
+                                    {{ splittedGrandChildTitle[0] }}
+                                  </a>
+                                {% else %}
+                                  <a
+                                    class="menu-mobile__grandchild-title text--{{ menu_child_title }} text"
+                                    href="{{ menu_grandchild.url }}"
+                                  >
+                                    {{ menu_grandchild.title }}
+                                  </a>
+                                {% endif %}
+                              {% endfor %}
+                              {% for block in section.blocks %}
+                                {% if block.settings.tab_title == menu_child.title %}
+                                  <div class="menu-mobile__picture-container">
+                                    {% if block.settings.show_tab_picture == true %}
+                                      <div class="menu-mobile__picture media">
+                                        {% if block.settings.tab_content_type == 'svg' %}
+                                          {% if block.settings.tab_content_svg == blank %}
+                                            {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
+                                          {% else %}
+                                            {{ block.settings.tab_content_svg }}
+                                          {% endif %}
+                                        {% elsif block.settings.tab_content_type == 'image' %}
+                                          {% if block.settings.tab_content_image == blank %}
+                                            {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
+                                          {% else %}
+                                            <img
+                                              srcset="{{ block.settings.tab_content_image | image_url }}"
+                                              loading="lazy"
+                                              alt="{{ block.settings.tab_content_image | escape }}"
+                                              width="{{ block.settings.tab_content_image.width }}"
+                                              height="{{ block.settings.tab_content_image.height }}"
+                                              class="full"
+                                            >
+                                          {% endif %}
+                                        {% endif %}
+                                      </div>
+                                      <p class="menu-mobile__picture-description">
+                                        {{ block.settings.tab_description }}
+                                      </p>
+                                    {% endif %}
+                                  </div>
+                                {% endif %}
                               {% endfor %}
                             </div>
                           </div>
@@ -359,7 +498,7 @@
                             {% endstyle %}
                           {% endif %}
                           {% for block in section.blocks %}
-                            {% if block.settings.tab_title == menu_child_title %}
+                            {% if block.settings.tab_title == menu_child.title %}
                               <div class="menu__child-icon media">
                                 {% if block.settings.tab_icon_type == 'svg' %}
                                   {% if block.settings.tab_icon_svg == blank %}

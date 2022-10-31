@@ -2725,9 +2725,11 @@ openable-element:has(.menu-mobile).hidden {
   align-items: center;
   padding: 0.5rem;
   cursor: pointer;
+  position: relative;
 }
 .menu-mobile__parent-title h6 {
   font-size: 1rem;
+  flex-grow: 1;
 }
 .menu-mobile__parent-title .svg {
   transition: all 0.2s ease-in-out;
@@ -2755,12 +2757,11 @@ openable-element:has(.menu-mobile).hidden {
   justify-content: space-between;
   align-items: center;
   padding: 0.7rem 0.7rem 0.7rem 1rem;
-  margin-left: 0.5rem;
   font-weight: 600;
   cursor: pointer;
+  position: relative;
 }
 .menu-mobile__child-title .text {
-  padding-left: 1rem;
   flex-grow: 1;
 }
 .menu-mobile__child-title .svg {
@@ -2769,9 +2770,13 @@ openable-element:has(.menu-mobile).hidden {
 }
 .menu-mobile__child-childs {
   height: 0;
-  margin-left: 1rem;
   transition: height 0.2s cubic-bezier(0.75, 0, 0.175, 1);
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.menu-mobile__child-childs .text {
+  margin-left: 1rem;
 }
 .menu-mobile__child-childs.active {
   transition: height 0.2s cubic-bezier(0.75, 0, 0.175, 1);
@@ -2784,6 +2789,21 @@ openable-element:has(.menu-mobile).hidden {
 }
 .menu-mobile__grandchild-title {
   padding: 0.5rem 0.5rem 0.5rem 1rem;
+}
+.menu-mobile__picture-container {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 0;
+  gap: 0.5rem;
+}
+.menu-mobile__picture {
+  height: 150px;
+}
+.menu-mobile__picture-description {
+  text-align: center;
+}
+.menu-mobile__picture > * {
+  width: 80%;
 }
 
 .menu-mobile__parent:has(.menu-mobile__parent-childs.active) .menu-mobile__parent-title .svg {
