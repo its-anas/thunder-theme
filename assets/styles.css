@@ -2805,6 +2805,17 @@ openable-element:has(.menu-mobile).hidden {
 .menu-mobile__picture > * {
   width: 80%;
 }
+.menu-mobile__account-container {
+  padding: 1rem;
+}
+.menu-mobile__account {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  align-items: center;
+  border-top: 1px solid white;
+  padding-top: 1rem;
+}
 
 .menu-mobile__parent:has(.menu-mobile__parent-childs.active) .menu-mobile__parent-title .svg {
   transition: all 0.2s ease-in-out;

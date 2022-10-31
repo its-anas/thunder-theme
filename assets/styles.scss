@@ -3078,6 +3078,19 @@ openable-element:has(.menu-mobile) {
                         width: 80%;
                 }
         }
+
+        &__account-container {
+                padding: 1rem;
+        }
+
+        &__account {
+                display: flex;
+                flex-direction: row;
+                gap: 0.5rem;
+                align-items: center;
+                border-top: 1px solid white;
+                padding-top: 1rem;
+        }
 }
 
 .menu-mobile__parent:has(.menu-mobile__parent-childs.active) .menu-mobile__parent-title .svg {
