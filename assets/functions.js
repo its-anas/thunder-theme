@@ -65,19 +65,19 @@ function setDropdownPadding() {
         document.querySelectorAll(".menu__dropdown-wrapper").forEach((dropdown) => {
                 dropdown.style.paddingTop = `calc(${announcementHeight}px + ${extraPadding}px)`;
         });
+
+        document.querySelectorAll(".menu__grandchilds").forEach((grandchild) => {
+                height = grandchild.offsetHeight;
+                allChildHeights.push(height);
+                grandchild.style.height = "100%";
+        });
+
+        menuChildContainer.forEach((ChildContainer) => {
+                allChildHeights.push(ChildContainer.offsetHeight);
+                ChildContainer.style.height = `${Math.max.apply(Math, allChildHeights) + margin}px`;
+                ChildContainer.style.minHeight = "300px";
+        });
 }
-
-document.querySelectorAll(".menu__grandchilds").forEach((grandchild) => {
-        height = grandchild.offsetHeight;
-        allChildHeights.push(height);
-        grandchild.style.height = "100%";
-});
-
-menuChildContainer.forEach((ChildContainer) => {
-        allChildHeights.push(ChildContainer.offsetHeight);
-        ChildContainer.style.height = `${Math.max.apply(Math, allChildHeights) + margin}px`;
-        ChildContainer.style.minHeight = "300px";
-});
 
 window.addEventListener("load", () => {
         setDropdownPadding();
@@ -86,3 +86,17 @@ window.addEventListener("load", () => {
 window.addEventListener("resize", () => {
         setDropdownPadding();
 });
+
+if (Shopify.designMode) {
+        document.addEventListener("shopify:section:load", (event) => {
+                setDropdownPadding();
+        });
+
+        document.addEventListener("shopify:section:select", (event) => {
+                setDropdownPadding();
+        });
+
+        document.addEventListener("shopify:section:deselect", (event) => {
+                setDropdownPadding();
+        });
+}

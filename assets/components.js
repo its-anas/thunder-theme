@@ -23,8 +23,8 @@ class FaqSection extends HTMLElement {
                         const answerHeight = answer.scrollHeight;
                         tab.addEventListener("click", () => {
                                 if (!tab.classList.contains("active")) {
-                                        this.tabs.forEach((tb) => {
-                                                hideTab(tb);
+                                        this.tabs.forEach((tab) => {
+                                                hideTab(tab);
                                         });
                                         tab.classList.add("active");
                                         // answer.style.height = answerHeight + 20 + "px";
@@ -384,7 +384,7 @@ class Slideshow extends HTMLElement {
                         loop(false);
                 });
                 this.addEventListener("mouseout", () => {
-                        if (this.autoPlay === "true") { 
+                        if (this.autoPlay === "true") {
                                 loop(true);
                         }
                 });
@@ -1055,20 +1055,27 @@ class OpenableElement extends HTMLElement {
                 this.decideDrawerAction();
         }
 
-        showDrawer() {
-                this.classList.remove("hidden");
-                this.classList.add("active");
+        showDrawer(selector) {
+                document.querySelector(`openable-element:has(${selector})`).classList.remove("hidden");
+                document.querySelector(`openable-element:has(${selector})`).classList.add("active");
                 document.querySelector(".theme-overlay").style.zIndex = "99";
-                this.style.zIndex = "100";
                 lockPage();
+
+                // document.querySelector(".header-section").style.zIndex = "100";
+                this.style.zIndex = "100";
         }
 
         hideDrawer() {
                 this.classList.remove("active");
                 this.classList.add("hidden");
-                this.style.zIndex = "98";
                 unlockPage();
-                document.querySelector(".theme-overlay").style.zIndex = "-1";
+
+                setTimeout(() => {
+                        this.style.zIndex = "98";
+                        document.querySelector(".theme-overlay").style.zIndex = "-1";
+                }, 300);
+
+                // document.querySelector(".header-section").style.zIndex = "98";
         }
 
         decideDrawerAction() {
@@ -1086,8 +1093,10 @@ class OpenableElement extends HTMLElement {
                 });
 
                 document.addEventListener("click", (event) => {
-                        if (document.querySelector(".header__icons-cart").contains(event.target)) {
-                                this.showDrawer();
+                        if (document.querySelector(".header__icons-drawer").contains(event.target)) {
+                                this.showDrawer(".menu-mobile");
+                        } else if (document.querySelector(".header__icons-cart").contains(event.target)) {
+                                this.showDrawer(".cart-drawer");
 
                                 if (this.querySelector(".recommended-products.desktop-only")) {
                                         setTimeout(() => {
@@ -1097,9 +1106,7 @@ class OpenableElement extends HTMLElement {
                         } else if (!this.contains(event.target) && document.querySelector(".popup__container").classList.contains("hidden")) {
                                 this.hideDrawer();
 
-                                if (!this.contains(event.target) && document.querySelector(".popup__container").classList.contains("hidden")) {
-                                        this.querySelector(".recommended-products.desktop-only").classList.remove("active");
-                                }
+                                this.querySelector(".recommended-products.desktop-only").classList.remove("active");
                         }
                 });
 
@@ -1139,15 +1146,46 @@ class OpenableElement extends HTMLElement {
 
 customElements.define("openable-element", OpenableElement);
 
-// class CartDrawer extends OpenableElement {
-//         connectedCallback() {
-//                 document.addEventListener("click", (event) => {
-//                         if (document.querySelector(".header__icons-cart").contains(event.target)) {
-//                                 this.querySelector(".recommended-products.desktop-only").classList.add("active");
-//                         } else if (!this.contains(event.target) && document.querySelector(".popup__container").classList.contains("hidden")) {
-//                                 this.querySelector(".recommended-products.desktop-only").classList.remove("active");
-//                         }
-//                 });
-//         }
-// }
-// customElements.define("cart-drawer", CartDrawer);
+// ANCHOR:  Menu mobile
+class MenuMobile extends HTMLElement {
+        constructor() {
+                super();
+        }
+        connectedCallback() {
+                // this.attachShadow({ mode: "open" });
+                // this.shadowRoot.innerHTML = "<slot></slot>";
+                this.showHide();
+        }
+        showHide() {
+                this.querySelectorAll(".menu-mobile__parent").forEach((parent) => {
+                        let childsHeight = parent.querySelector(".menu-mobile__parent-childs").scrollHeight;
+
+                        parent.querySelector(".menu-mobile__parent-title").addEventListener("click", () => {
+                                if (!parent.querySelector(".menu-mobile__parent-childs").classList.contains("active")) {
+                                        parent.querySelector(".menu-mobile__parent-childs").classList.add("active");
+                                        parent.querySelector(".menu-mobile__parent-childs").style.height = `${childsHeight}px`;
+                                } else {
+                                        parent.querySelector(".menu-mobile__parent-childs").classList.remove("active");
+                                        parent.querySelector(".menu-mobile__parent-childs").style.height = "0px";
+                                }
+                        });
+
+                        parent.querySelectorAll(".menu-mobile__child").forEach((child) => {
+                                let grandchildsHeight = parent.querySelector(".menu-mobile__child-childs").scrollHeight;
+                                child.querySelector(".menu-mobile__child-title").addEventListener("click", () => {
+                                        if (!child.querySelector(".menu-mobile__child-childs").classList.contains("active")) {
+                                                parent.querySelector(".menu-mobile__parent-childs").style.height = `${childsHeight + grandchildsHeight}px`;
+                                                child.querySelector(".menu-mobile__child-childs").classList.add("active");
+                                                child.querySelector(".menu-mobile__child-childs").style.height = `${grandchildsHeight}px`;
+                                        } else {
+                                                parent.querySelector(".menu-mobile__parent-childs").style.height = `${childsHeight}px`;
+                                                child.querySelector(".menu-mobile__child-childs").classList.remove("active");
+                                                child.querySelector(".menu-mobile__child-childs").style.height = "0px";
+                                        }
+                                });
+                        });
+                });
+        }
+}
+
+customElements.define("menu-mobile", MenuMobile);
