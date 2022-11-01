@@ -25,27 +25,20 @@
 <section class="{{ section.id }} video-hero {{ section.settings.section_style }}">
   <div class="{{ section.id }} video-hero__media">
     <div class="video-hero">
-      {% if section.settings.video_url == blank %}
-        <video
-          id="video"
-          class="video"
+      <video
+        id="video"
+        class="video"
+        {% if section.settings.video_url == blank %}
           src="https://cdn.shopify.com/videos/c/o/v/e69e4ca2a06b40febbc187a80c979079.mp4"
-          autoplay
-          muted
-          loop
-          playsinline
-        ></video>
-      {% else %}
-        <video
-          id="video"
-          class="video"
+        {% else %}
           src="{{ section.settings.video_url }}"
-          autoplay
-          muted
-          loop
-          playsinline
-        ></video>
-      {% endif %}
+        {% endif %}
+        autoplay
+        muted
+        nofullscreen
+        loop
+        playsinline
+      ></video>
     </div>
   </div>
 
