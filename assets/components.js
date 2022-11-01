@@ -1036,7 +1036,7 @@ class PopupComponent extends HTMLElement {
                                         this.hidePopupDrawer();
                                 }
                         });
-                }, this.delayTime + 3000);
+                }, this.delayTime);
         }
 }
 
@@ -1159,11 +1159,11 @@ class MenuMobile extends HTMLElement {
 
                         parent.querySelector(".menu-mobile__parent-title").addEventListener("click", () => {
                                 if (!parent.querySelector(".menu-mobile__parent-childs").classList.contains("active")) {
-                                        parent.querySelector(".menu-mobile__parent-childs").classList.add("active");
                                         parent.querySelector(".menu-mobile__parent-childs").style.height = `${childsHeight}px`;
+                                        parent.querySelector(".menu-mobile__parent-childs").classList.add("active");
                                 } else {
-                                        parent.querySelector(".menu-mobile__parent-childs").classList.remove("active");
                                         parent.querySelector(".menu-mobile__parent-childs").style.height = "0px";
+                                        parent.querySelector(".menu-mobile__parent-childs").classList.remove("active");
                                 }
                         });
 
@@ -1172,12 +1172,12 @@ class MenuMobile extends HTMLElement {
                                 child.querySelector(".menu-mobile__child-title").addEventListener("click", () => {
                                         if (!child.querySelector(".menu-mobile__child-childs").classList.contains("active")) {
                                                 parent.querySelector(".menu-mobile__parent-childs").style.height = `${childsHeight + grandchildsHeight}px`;
-                                                child.querySelector(".menu-mobile__child-childs").classList.add("active");
                                                 child.querySelector(".menu-mobile__child-childs").style.height = `${grandchildsHeight}px`;
+                                                child.querySelector(".menu-mobile__child-childs").classList.add("active");
                                         } else {
                                                 parent.querySelector(".menu-mobile__parent-childs").style.height = `${childsHeight}px`;
-                                                child.querySelector(".menu-mobile__child-childs").classList.remove("active");
                                                 child.querySelector(".menu-mobile__child-childs").style.height = "0px";
+                                                child.querySelector(".menu-mobile__child-childs").classList.remove("active");
                                         }
                                 });
                         });
@@ -1186,3 +1186,52 @@ class MenuMobile extends HTMLElement {
 }
 
 customElements.define("menu-mobile", MenuMobile);
+
+// class MenuMobile extends HTMLElement {
+//         constructor() {
+//                 super();
+//         }
+//         connectedCallback() {
+//                 // this.attachShadow({ mode: "open" });
+//                 // this.shadowRoot.innerHTML = "<slot></slot>";
+//                 this.showHide();
+//         }
+//         showHide() {
+//                 this.querySelectorAll(".menu-mobile__parent").forEach((parent) => {
+
+//                         function setHeight() {
+//                                 let childsHeight = parent.querySelector(".menu-mobile__parent-childs").scrollHeight;
+//                                 parent.querySelector(".menu-mobile__parent-childs").style.height = `${childsHeight}px`;
+//                         }
+
+//                         async function asyncCall() {
+//                                 await setHeight();
+//                                 parent.querySelector(".menu-mobile__parent-childs").classList.add("active");
+//                         }
+
+//                         parent.querySelector(".menu-mobile__parent-title").addEventListener("click", () => {
+//                                 if (!parent.querySelector(".menu-mobile__parent-childs").classList.contains("active")) {
+//                                         asyncCall();
+//                                 } else {
+//                                         parent.querySelector(".menu-mobile__parent-childs").style.height = "0px";
+//                                         parent.querySelector(".menu-mobile__parent-childs").classList.remove("active");
+//                                 }
+//                         });
+
+//                         parent.querySelectorAll(".menu-mobile__child").forEach((child) => {
+//                                 let grandchildsHeight = child.querySelector(".menu-mobile__child-childs").scrollHeight;
+//                                 child.querySelector(".menu-mobile__child-title").addEventListener("click", () => {
+//                                         if (!child.querySelector(".menu-mobile__child-childs").classList.contains("active")) {
+//                                                 parent.querySelector(".menu-mobile__parent-childs").style.height = `${childsHeight + grandchildsHeight}px`;
+//                                                 child.querySelector(".menu-mobile__child-childs").style.height = `${grandchildsHeight}px`;
+//                                                 child.querySelector(".menu-mobile__child-childs").classList.add("active");
+//                                         } else {
+//                                                 parent.querySelector(".menu-mobile__parent-childs").style.height = `${childsHeight}px`;
+//                                                 child.querySelector(".menu-mobile__child-childs").style.height = "0px";
+//                                                 child.querySelector(".menu-mobile__child-childs").classList.remove("active");
+//                                         }
+//                                 });
+//                         });
+//                 });
+//         }
+// }

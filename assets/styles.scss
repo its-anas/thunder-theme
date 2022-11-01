@@ -2934,7 +2934,7 @@ openable-element:has(.menu-mobile) {
                 display: flex;
                 justify-content: space-between;
                 flex-direction: column;
-                // overflow-x: auto;
+                padding: 0rem 1rem 1rem 1rem;
         }
 
         &__head {
@@ -2943,9 +2943,6 @@ openable-element:has(.menu-mobile) {
                 justify-content: space-between;
                 align-items: center;
                 padding: 0.5rem;
-                // position: absolute;
-                // top: 5px;
-                // width: 92%;
                 background-color: black;
         }
 
@@ -2998,7 +2995,6 @@ openable-element:has(.menu-mobile) {
                         transition: height 0.2s cubic-bezier(0.75, 0, 0.175, 1);
 
                         &.active {
-                                // height: auto;
                                 transition: height 0.2s cubic-bezier(0.75, 0, 0.175, 1);
 
                                 &.border {

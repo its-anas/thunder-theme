@@ -164,7 +164,7 @@
                           </div>
                         {% endif %}
                       </div>
-                      <div class="menu-mobile__parent-childs {% if menu_parent.links.size > 0 %}border{% endif %}">
+                      <div class="menu-mobile__parent-childs menu-mobile__parent-childs--active {% if menu_parent.links.size > 0 %}border{% endif %}">
                         {% for menu_child in menu_parent.links %}
                           {% assign menu_child_title = menu_child.title
                             | downcase
