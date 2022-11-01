@@ -2693,7 +2693,6 @@ openable-element:has(.menu-mobile).hidden {
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  padding: 0rem 1rem 1rem 1rem;
 }
 .menu-mobile__head {
   display: flex;
