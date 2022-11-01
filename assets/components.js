@@ -772,160 +772,6 @@ class RecentlyViewedComponent extends SliderComponent {
 
 customElements.define("recently-viewed-component", RecentlyViewedComponent);
 
-// ANCHOR: Predictive search
-
-// class PredictiveSearch extends HTMLElement {
-//         constructor() {
-//                 super();
-
-//                 this.input = this.querySelector('input[type="search"]');
-//                 this.icon = this.querySelector(".search-section__icon");
-//                 this.predictiveSearchResults = this.querySelector("#predictive-search");
-
-//                 this.input.addEventListener(
-//                         "input",
-//                         this.debounce((event) => {
-//                                 this.onChange(event);
-//                         }, 300).bind(this)
-//                 );
-
-//                 if (this.icon !== null) {
-//                         this.icon.addEventListener("click", () => {
-//                                 window.location.href = "/search?q=" + this.input.value;
-//                         });
-//                 }
-
-//                 this.searchDrawer = this.querySelector(".search-drawer");
-//                 this.closeIcon = this.searchDrawer.querySelector(".search-section__close");
-//                 this.inputField = this.searchDrawer.querySelector(".search-section__input");
-
-//                 this.decideDrawerAction();
-//         }
-
-//         onChange() {
-//                 const searchTerm = this.input.value.trim();
-//                 if (!searchTerm.length) {
-//                         this.close();
-//                         return;
-//                 }
-
-//                 this.getSearchResults(searchTerm);
-//         }
-
-//         getSearchResults(searchTerm) {
-//                 fetch(`/search/suggest?q=${searchTerm}&resources[type]=product&resources[limit]=8&section_id=predictive-search`)
-//                         .then((response) => {
-//                                 if (!response.ok) {
-//                                         var error = new Error(response.status);
-//                                         this.close();
-//                                         throw error;
-//                                 }
-
-//                                 return response.text();
-//                         })
-//                         .then((text) => {
-//                                 const resultsMarkup = new DOMParser().parseFromString(text, "text/html").querySelector("#shopify-section-predictive-search").innerHTML;
-//                                 this.predictiveSearchResults.innerHTML = resultsMarkup;
-//                                 this.open();
-//                         })
-//                         .catch((error) => {
-//                                 this.close();
-//                                 throw error;
-//                         });
-//         }
-
-//         open() {
-//                 this.querySelector(".search-section__results").classList.remove("hidden");
-//         }
-
-//         close() {
-//                 this.querySelector(".search-section__results").classList.add("hidden");
-//         }
-
-//         debounce(fn, wait) {
-//                 let t;
-//                 return (...args) => {
-//                         clearTimeout(t);
-//                         t = setTimeout(() => fn.apply(this, args), wait);
-//                 };
-//         }
-
-//         showSearchDrawer() {
-//                 this.searchDrawer.classList.remove("hidden");
-//                 this.searchDrawer.classList.add("active");
-//                 document.querySelector(".theme-overlay").style.zIndex = "99";
-//                 this.searchDrawer.style.zIndex = "100";
-//                 lockPage();
-//         }
-
-//         hideSearchDrawer() {
-//                 this.searchDrawer.classList.remove("active");
-//                 this.searchDrawer.classList.add("hidden");
-//                 this.searchDrawer.style.zIndex = "98";
-//                 unlockPage();
-//                 document.querySelector(".theme-overlay").style.zIndex = "-1";
-//         }
-
-//         resetSearch() {
-//                 this.inputField.value = "";
-//                 this.searchDrawer.querySelector(".search-section__results").classList.add("hidden");
-//         }
-
-//         decideDrawerAction() {
-//                 document.addEventListener("click", (event) => {
-//                         if (document.querySelector("#header__search-icon").contains(event.target)) {
-//                                 this.showSearchDrawer();
-//                         } else if (!this.searchDrawer.querySelector(".search-drawer__container").contains(event.target) && document.querySelector(".popup__container").classList.contains("hidden")) {
-//                                 this.hideSearchDrawer();
-//                                 this.resetSearch();
-//                         }
-//                 });
-
-//                 this.closeIcon.addEventListener("click", () => {
-//                         this.hideSearchDrawer();
-//                         this.resetSearch();
-//                 });
-
-//                 this.inputField.addEventListener("input", (event) => {
-//                         if (event.target.value.length > 0) {
-//                                 this.searchDrawer.querySelector(".preload").classList.add("hidden");
-//                         } else {
-//                                 this.searchDrawer.querySelector(".preload").classList.remove("hidden");
-//                         }
-//                 });
-
-//                 if (Shopify.designMode) {
-//                         document.addEventListener("shopify:section:load", (event) => {
-//                                 event.target.classList.forEach((i) => {
-//                                         if (i === "section-search-drawer") {
-//                                                 this.searchDrawer.style.height = `calc(100% - ${document.querySelector(".header-section").offsetHeight}px + 15px)`;
-//                                                 this.showSearchDrawer();
-//                                         }
-//                                 });
-//                         });
-
-//                         document.addEventListener("shopify:section:select", (event) => {
-//                                 event.target.classList.forEach((i) => {
-//                                         if (i === "section-search-drawer") {
-//                                                 this.searchDrawer.style.height = `calc(100% - ${document.querySelector(".header-section").offsetHeight}px + 15px)`;
-//                                                 this.showSearchDrawer();
-//                                         }
-//                                 });
-//                         });
-
-//                         document.addEventListener("shopify:section:deselect", (event) => {
-//                                 event.target.classList.forEach((i) => {
-//                                         if (i === "section-search-drawer") {
-//                                                 this.hideSearchDrawer();
-//                                         }
-//                                 });
-//                         });
-//                 }
-//         }
-// }
-
-// customElements.define("predictive-search", PredictiveSearch);
-
 // ANCHOR:  Popup component
 
 class PopupComponent extends HTMLElement {
@@ -1042,9 +888,163 @@ class PopupComponent extends HTMLElement {
 
 customElements.define("popup-component", PopupComponent);
 
-// ANCHOR:  Openable element
+// ANCHOR: Predictive search
 
-class OpenableElement extends HTMLElement {
+class PredictiveSearch extends HTMLElement {
+        constructor() {
+                super();
+
+                this.input = this.querySelector('input[type="search"]');
+                this.icon = this.querySelector(".search-section__icon");
+                this.predictiveSearchResults = this.querySelector("#predictive-search");
+
+                this.input.addEventListener(
+                        "input",
+                        this.debounce((event) => {
+                                this.onChange(event);
+                        }, 300).bind(this)
+                );
+
+                if (this.icon !== null) {
+                        this.icon.addEventListener("click", () => {
+                                window.location.href = "/search?q=" + this.input.value;
+                        });
+                }
+
+                this.searchDrawer = this.querySelector(".search-drawer");
+                this.closeIcon = this.searchDrawer.querySelector(".search-section__close");
+                this.inputField = this.searchDrawer.querySelector(".search-section__input");
+
+                this.decideDrawerAction();
+        }
+
+        onChange() {
+                const searchTerm = this.input.value.trim();
+                if (!searchTerm.length) {
+                        this.close();
+                        return;
+                }
+
+                this.getSearchResults(searchTerm);
+        }
+
+        getSearchResults(searchTerm) {
+                fetch(`/search/suggest?q=${searchTerm}&resources[type]=product&resources[limit]=8&section_id=predictive-search`)
+                        .then((response) => {
+                                if (!response.ok) {
+                                        var error = new Error(response.status);
+                                        this.close();
+                                        throw error;
+                                }
+
+                                return response.text();
+                        })
+                        .then((text) => {
+                                const resultsMarkup = new DOMParser().parseFromString(text, "text/html").querySelector("#shopify-section-predictive-search").innerHTML;
+                                this.predictiveSearchResults.innerHTML = resultsMarkup;
+                                this.open();
+                        })
+                        .catch((error) => {
+                                this.close();
+                                throw error;
+                        });
+        }
+
+        open() {
+                this.querySelector(".search-section__results").classList.remove("hidden");
+        }
+
+        close() {
+                this.querySelector(".search-section__results").classList.add("hidden");
+        }
+
+        debounce(fn, wait) {
+                let t;
+                return (...args) => {
+                        clearTimeout(t);
+                        t = setTimeout(() => fn.apply(this, args), wait);
+                };
+        }
+
+        showSearchDrawer() {
+                this.searchDrawer.classList.remove("hidden");
+                this.searchDrawer.classList.add("active");
+                document.querySelector(".theme-overlay").style.zIndex = "99";
+                this.searchDrawer.style.zIndex = "100";
+                lockPage();
+        }
+
+        hideSearchDrawer() {
+                this.searchDrawer.classList.remove("active");
+                this.searchDrawer.classList.add("hidden");
+                this.searchDrawer.style.zIndex = "98";
+                unlockPage();
+                document.querySelector(".theme-overlay").style.zIndex = "-1";
+        }
+
+        resetSearch() {
+                this.inputField.value = "";
+                this.searchDrawer.querySelector(".search-section__results").classList.add("hidden");
+        }
+
+        decideDrawerAction() {
+                document.addEventListener("click", (event) => {
+                        if (document.querySelector("#header__search-icon").contains(event.target)) {
+                                this.showSearchDrawer();
+                        } else if (!this.searchDrawer.querySelector(".search-drawer__container").contains(event.target) && document.querySelector(".popup__container").classList.contains("hidden")) {
+                                this.hideSearchDrawer();
+                                this.resetSearch();
+                        }
+                });
+
+                this.closeIcon.addEventListener("click", () => {
+                        this.hideSearchDrawer();
+                        this.resetSearch();
+                });
+
+                this.inputField.addEventListener("input", (event) => {
+                        if (event.target.value.length > 0) {
+                                this.searchDrawer.querySelector(".preload").classList.add("hidden");
+                        } else {
+                                this.searchDrawer.querySelector(".preload").classList.remove("hidden");
+                        }
+                });
+
+                if (Shopify.designMode) {
+                        document.addEventListener("shopify:section:load", (event) => {
+                                event.target.classList.forEach((i) => {
+                                        if (i === "section-search-drawer") {
+                                                this.searchDrawer.style.height = `calc(100% - ${document.querySelector(".header-section").offsetHeight}px + 15px)`;
+                                                this.showSearchDrawer();
+                                        }
+                                });
+                        });
+
+                        document.addEventListener("shopify:section:select", (event) => {
+                                event.target.classList.forEach((i) => {
+                                        if (i === "section-search-drawer") {
+                                                this.searchDrawer.style.height = `calc(100% - ${document.querySelector(".header-section").offsetHeight}px + 15px)`;
+                                                this.showSearchDrawer();
+                                        }
+                                });
+                        });
+
+                        document.addEventListener("shopify:section:deselect", (event) => {
+                                event.target.classList.forEach((i) => {
+                                        if (i === "section-search-drawer") {
+                                                this.hideSearchDrawer();
+                                        }
+                                });
+                        });
+                }
+        }
+}
+
+customElements.define("predictive-search", PredictiveSearch);
+
+// ANCHOR: Cart drawer
+
+class CartComponent extends HTMLElement {
         constructor() {
                 super();
         }
@@ -1055,24 +1055,117 @@ class OpenableElement extends HTMLElement {
                 this.decideDrawerAction();
         }
 
-        showDrawer(selector) {
-                document.querySelector(`openable-element:has(${selector})`).classList.remove("hidden");
-                document.querySelector(`openable-element:has(${selector})`).classList.add("active");
-                document.querySelector(".theme-overlay").style.zIndex = "99";
-                document.querySelector(".header-section").style.zIndex = "100";
-                this.style.zIndex = "100";
+        showDrawer() {
+                lockPage();
+                document.querySelector("cart-component").classList.remove("hidden");
+                document.querySelector("cart-component").classList.add("active");
+                if (this.querySelector(".recommended-products.desktop-only")) {
+                        setTimeout(() => {
+                                this.querySelector(".recommended-products.desktop-only").classList.add("active");
+                        }, 800);
+                }
+        }
+
+        hideDrawer() {
+                this.classList.remove("active");
+                this.classList.add("hidden");
+                if (this.querySelector(".recommended-products.desktop-only")) {
+                        this.querySelector(".recommended-products.desktop-only").classList.remove("active");
+                }
+        }
+
+        decideDrawerAction() {
+                this.closeIcon = this.querySelector("#close-icon");
+                this.header = document.querySelector(".header-section");
+
+                let extraPadding = this.header.classList.contains("boxed") ? 15 : 0;
+
+                window.addEventListener("load", () => {
+                        this.style.height = `calc(100% - ${document.querySelector(".header-section").offsetHeight}px + ${extraPadding}px)`;
+                });
+
+                window.addEventListener("resize", () => {
+                        this.style.height = `calc(100% - ${document.querySelector(".header-section").offsetHeight}px + ${extraPadding}px)`;
+                });
+
+                document.addEventListener("click", (event) => {
+                        if (document.querySelector(".header__icons-cart").contains(event.target)) {
+                                if (document.querySelector("cart-component").classList.contains("hidden")) {
+                                        this.showDrawer();
+                                } else if (document.querySelector("cart-component").classList.contains("active")) {
+                                        this.hideDrawer();
+                                        unlockPage();
+                                }
+                        } else if (document.querySelector(".header__icons-search").contains(event.target) || document.querySelector(".header__icons-account").contains(event.target) || document.querySelector(".header__icons-drawer").contains(event.target)) {
+                                this.hideDrawer();
+                        } else if (!document.querySelector(".header__icons-cart").contains(event.target) && document.querySelector(".popup__container").classList.contains("hidden")) {
+                                this.hideDrawer();
+                                unlockPage();
+                        }
+                });
+
+                this.closeIcon.addEventListener("click", () => {
+                        this.hideDrawer();
+                        unlockPage();
+                });
+
+                if (Shopify.designMode) {
+                        document.addEventListener("shopify:section:load", (event) => {
+                                event.target.classList.forEach((i) => {
+                                        this.style.height = `calc(100% - ${document.querySelector(".header-section").offsetHeight}px + 15px)`;
+
+                                        if (i === "section-cart-drawer") {
+                                                this.showDrawer();
+                                        }
+                                });
+                        });
+
+                        document.addEventListener("shopify:section:select", (event) => {
+                                event.target.classList.forEach((i) => {
+                                        this.style.height = `calc(100% - ${document.querySelector(".header-section").offsetHeight}px + 15px)`;
+
+                                        if (i === "section-cart-drawer") {
+                                                this.showDrawer();
+                                        }
+                                });
+                        });
+
+                        document.addEventListener("shopify:section:deselect", (event) => {
+                                event.target.classList.forEach((i) => {
+                                        if (i === "section-cart-drawer") {
+                                                this.hideDrawer();
+                                                unlockPage();
+                                        }
+                                });
+                        });
+                }
+        }
+}
+
+customElements.define("cart-component", CartComponent);
+
+// ANCHOR: Menu drawer
+
+class MenuDrawerComponent extends HTMLElement {
+        constructor() {
+                super();
+        }
+
+        connectedCallback() {
+                this.attachShadow({ mode: "open" });
+                this.shadowRoot.innerHTML = "<slot></slot>";
+                this.decideDrawerAction();
+        }
+
+        showDrawer() {
+                document.querySelector("menu-drawer-component").classList.remove("hidden");
+                document.querySelector("menu-drawer-component").classList.add("active");
                 lockPage();
         }
 
         hideDrawer() {
                 this.classList.remove("active");
                 this.classList.add("hidden");
-                setTimeout(() => {
-                        this.style.zIndex = "98";
-                        document.querySelector(".theme-overlay").style.zIndex = "-1";
-                        document.querySelector(".header-section").style.zIndex = "98";
-                }, 300);
-                unlockPage();
         }
 
         decideDrawerAction() {
@@ -1091,73 +1184,57 @@ class OpenableElement extends HTMLElement {
 
                 document.addEventListener("click", (event) => {
                         if (document.querySelector(".header__icons-drawer").contains(event.target)) {
-                                this.showDrawer(".menu-mobile");
-                        } else if (document.querySelector(".header__icons-cart").contains(event.target)) {
-                                this.showDrawer(".cart-drawer");
-
-                                if (this.querySelector(".recommended-products.desktop-only")) {
-                                        setTimeout(() => {
-                                                this.querySelector(".recommended-products.desktop-only").classList.add("active");
-                                        }, 800);
+                                if (document.querySelector("menu-drawer-component").classList.contains("hidden")) {
+                                        this.showDrawer();
+                                } else if (document.querySelector("menu-drawer-component").classList.contains("active")) {
+                                        this.hideDrawer();
+                                        unlockPage();
                                 }
-                        } else if (!this.contains(event.target) && document.querySelector(".popup__container").classList.contains("hidden")) {
+                        } else if (document.querySelector(".header__icons-search").contains(event.target) || document.querySelector(".header__icons-account").contains(event.target) || document.querySelector(".header__icons-cart").contains(event.target)) {
                                 this.hideDrawer();
-
-                                this.querySelector(".recommended-products.desktop-only").classList.remove("active");
+                        } else if (!document.querySelector(".header__icons-drawer").contains(event.target) && document.querySelector(".popup__container").classList.contains("hidden")) {
+                                this.hideDrawer();
+                                unlockPage();
                         }
                 });
 
                 this.closeIcon.addEventListener("click", () => {
                         this.hideDrawer();
+                        unlockPage();
                 });
 
-                // if (Shopify.designMode) {
-                //         document.addEventListener("shopify:section:load", (event) => {
-                //                 event.target.classList.forEach((i) => {
-                //                         this.style.height = `calc(100% - ${document.querySelector(".header-section").offsetHeight}px + 15px)`;
+                if (Shopify.designMode) {
+                        document.addEventListener("shopify:section:load", (event) => {
+                                event.target.classList.forEach((i) => {
+                                        this.style.height = `calc(100% - ${document.querySelector(".header-section").offsetHeight}px + 15px)`;
+                                        if (i === "section-header") {
+                                                this.showDrawer();
+                                        }
+                                });
+                        });
 
-                //                         if (i === "section-header") {
-                //                                 this.showDrawer(".menu-mobile");
-                //                         } else if (i === "section-cart-drawer") {
-                //                                 this.showDrawer(".cart-drawer");
-                //                                 if (this.querySelector(".recommended-products.desktop-only")) {
-                //                                         setTimeout(() => {
-                //                                                 this.querySelector(".recommended-products.desktop-only").classList.add("active");
-                //                                         }, 800);
-                //                                 }
-                //                         }
-                //                 });
-                //         });
+                        document.addEventListener("shopify:section:select", (event) => {
+                                event.target.classList.forEach((i) => {
+                                        this.style.height = `calc(100% - ${document.querySelector(".header-section").offsetHeight}px + 15px)`;
+                                        if (i === "section-header") {
+                                                this.showDrawer();
+                                        }
+                                });
+                        });
 
-                //         document.addEventListener("shopify:section:select", (event) => {
-                //                 event.target.classList.forEach((i) => {
-                //                         this.style.height = `calc(100% - ${document.querySelector(".header-section").offsetHeight}px + 15px)`;
-
-                //                         if (i === "section-header") {
-                //                                 this.showDrawer(".menu-mobile");
-                //                         } else if (i === "section-cart-drawer") {
-                //                                 this.showDrawer(".cart-drawer");
-                //                                 if (this.querySelector(".recommended-products.desktop-only")) {
-                //                                         setTimeout(() => {
-                //                                                 this.querySelector(".recommended-products.desktop-only").classList.add("active");
-                //                                         }, 800);
-                //                                 }
-                //                         }
-                //                 });
-                //         });
-
-                //         document.addEventListener("shopify:section:deselect", (event) => {
-                //                 event.target.classList.forEach((i) => {
-                //                         if (i === "openable-element") {
-                //                                 this.hideDrawer();
-                //                         }
-                //                 });
-                //         });
-                // }
+                        document.addEventListener("shopify:section:deselect", (event) => {
+                                event.target.classList.forEach((i) => {
+                                        if (i === "section-header") {
+                                                this.hideDrawer();
+                                                unlockPage();
+                                        }
+                                });
+                        });
+                }
         }
 }
 
-customElements.define("openable-element", OpenableElement);
+customElements.define("menu-drawer-component", MenuDrawerComponent);
 
 // ANCHOR:  Menu mobile
 class MenuMobile extends HTMLElement {

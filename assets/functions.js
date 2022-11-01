@@ -34,11 +34,13 @@ document.addEventListener("click", (event) => {
 function lockPage() {
         document.querySelector("html").classList.add("lock");
         document.querySelector(".theme-overlay").classList.remove("hidden");
+        document.querySelector(".theme-overlay").style.zIndex = "99";
 }
 
 function unlockPage() {
         document.querySelector("html").classList.remove("lock");
         document.querySelector(".theme-overlay").classList.add("hidden");
+        document.querySelector(".theme-overlay").style.zIndex = "-1";
 }
 
 // ANCHOR: Search drawer

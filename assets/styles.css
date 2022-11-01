@@ -2360,7 +2360,7 @@ slider-component .slider-component .slides-container .slide .item > * {
 
 .header-section {
   width: 100%;
-  z-index: 10;
+  z-index: 100;
 }
 .header-section.boxed {
   padding: 15px;
@@ -2656,14 +2656,6 @@ slider-component .slider-component .slides-container .slide .item > * {
   opacity: 1;
 }
 
-openable-element:has(.menu-mobile) {
-  transform: translateX(0%);
-  left: 0;
-}
-openable-element:has(.menu-mobile).hidden {
-  transform: translateX(-120%);
-}
-
 .menu-mobile {
   width: 100%;
   height: 100%;
@@ -2814,15 +2806,24 @@ openable-element:has(.menu-mobile).hidden {
   transform: rotate(180deg);
 }
 
-openable-element:has(.cart-drawer) {
+cart-component {
   transform: translateX(120%);
   right: 0px;
 }
-openable-element:has(.cart-drawer).hidden {
+cart-component.hidden {
   transform: translateX(120%);
 }
 
-openable-element {
+menu-drawer-component {
+  transform: translateX(0%);
+  left: 0;
+}
+menu-drawer-component.hidden {
+  transform: translateX(-120%);
+}
+
+cart-component,
+menu-drawer-component {
   position: fixed;
   width: 100%;
   bottom: 0px;
@@ -2831,20 +2832,25 @@ openable-element {
   justify-content: center;
   align-items: center;
   padding: 1rem;
+  z-index: 100;
 }
 @media screen and (min-width: 751px) {
-  openable-element {
+  cart-component,
+menu-drawer-component {
     max-width: 500px;
   }
 }
-openable-element.active {
+cart-component.active,
+menu-drawer-component.active {
   transform: translateX(0);
   transition: transform 0.8s cubic-bezier(0.75, 0, 0.175, 1);
 }
-openable-element.hidden {
+cart-component.hidden,
+menu-drawer-component.hidden {
   transition: transform 0.5s cubic-bezier(0.75, 0, 0.175, 1);
 }
-openable-element__container {
+cart-component__container,
+menu-drawer-component__container {
   width: 100%;
   height: 100%;
   z-index: 100;
@@ -2856,7 +2862,8 @@ openable-element__container {
   display: flex;
   justify-content: space-between;
 }
-openable-element #close-icon {
+cart-component #close-icon,
+menu-drawer-component #close-icon {
   cursor: pointer;
 }
 

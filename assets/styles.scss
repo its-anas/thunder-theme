@@ -2532,7 +2532,7 @@ $indicator-width: 40px;
 .header {
         &-section {
                 width: 100%;
-                z-index: 10;
+                z-index: 100;
                 &.boxed {
                         padding: 15px;
                         position: absolute;
@@ -2893,14 +2893,6 @@ $indicator-width: 40px;
 }
 
 // SECTION: Menu mobile
-openable-element:has(.menu-mobile) {
-        transform: translateX(0%);
-        left: 0;
-
-        &.hidden {
-                transform: translateX(-120%);
-        }
-}
 
 .menu-mobile {
         width: 100%;
@@ -3078,7 +3070,7 @@ openable-element:has(.menu-mobile) {
 }
 
 // ANCHOR: Openable element
-openable-element:has(.cart-drawer) {
+cart-component {
         transform: translateX(120%);
         right: 0px;
 
@@ -3087,7 +3079,17 @@ openable-element:has(.cart-drawer) {
         }
 }
 
-openable-element {
+menu-drawer-component {
+        transform: translateX(0%);
+        left: 0;
+
+        &.hidden {
+                transform: translateX(-120%);
+        }
+}
+
+cart-component,
+menu-drawer-component {
         position: fixed;
         width: 100%;
         bottom: 0px;
@@ -3096,6 +3098,7 @@ openable-element {
         justify-content: center;
         align-items: center;
         padding: 1rem;
+        z-index: 100;
 
         @media screen and (min-width: 751px) {
                 max-width: 500px;
