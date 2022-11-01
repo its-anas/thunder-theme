@@ -687,8 +687,12 @@ slider-component .slider-component .slides-container .slide .item > * {
   color: var(--text-color);
   padding: 0.05rem 0.15rem;
   pointer-events: none;
-  -webkit-animation: blink 1s linear infinite;
-          animation: blink 1s linear infinite;
+}
+@media screen and (min-width: 1025px) {
+  .tag--animated, .tag--animated-hover:after {
+    -webkit-animation: blink 1s linear infinite;
+            animation: blink 1s linear infinite;
+  }
 }
 .tag--normal, .tag--animated, .tag--animated-hover:after {
   border: 1px solid;

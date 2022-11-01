@@ -769,7 +769,9 @@ slider-component {
                 color: var(--text-color);
                 padding: 0.05rem 0.15rem;
                 pointer-events: none;
-                animation: blink 1s linear infinite;
+                @media screen and (min-width: 1025px) {
+                        animation: blink 1s linear infinite;
+                }
         }
         &--normal,
         &--animated,
