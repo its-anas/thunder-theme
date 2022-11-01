@@ -814,7 +814,6 @@ class PopupComponent extends HTMLElement {
 
                         setTimeout(() => {
                                 lockPage();
-
                                 document.querySelector(".theme-overlay").style.zIndex = "101";
                                 this.drawer.classList.remove("hidden");
                                 this.drawer.classList.add("active");
@@ -878,7 +877,12 @@ class PopupComponent extends HTMLElement {
                 }
                 setTimeout(() => {
                         document.addEventListener("click", (event) => {
-                                if ((!this.drawer.contains(event.target) && this.drawer.classList.contains("active")) || this.drawer.querySelector(".popup__link").contains(event.target) || this.drawer.querySelector(".popup__close").contains(event.target)) {
+                                if (
+                                        (!this.drawer.contains(event.target) && this.drawer.classList.contains("active")) ||
+                                        this.drawer.querySelector(".popup__link").contains(event.target) ||
+                                        this.drawer.querySelector(".popup__close").contains(event.target) ||
+                                        this.drawer.querySelector(".newsletter__button").contains(event.target)
+                                ) {
                                         this.hidePopupDrawer();
                                 }
                         });
