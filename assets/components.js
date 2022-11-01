@@ -1242,8 +1242,6 @@ class MenuMobile extends HTMLElement {
                 super();
         }
         connectedCallback() {
-                // this.attachShadow({ mode: "open" });
-                // this.shadowRoot.innerHTML = "<slot></slot>";
                 this.showHide();
         }
         showHide() {
