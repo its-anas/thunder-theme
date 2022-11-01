@@ -1111,33 +1111,49 @@ class OpenableElement extends HTMLElement {
                         this.hideDrawer();
                 });
 
-                if (Shopify.designMode) {
-                        document.addEventListener("shopify:section:load", (event) => {
-                                event.target.classList.forEach((i) => {
-                                        if (i === "openable-element") {
-                                                this.style.height = `calc(100% - ${document.querySelector(".header-section").offsetHeight}px + 15px)`;
-                                                this.showDrawer();
-                                        }
-                                });
-                        });
+                // if (Shopify.designMode) {
+                //         document.addEventListener("shopify:section:load", (event) => {
+                //                 event.target.classList.forEach((i) => {
+                //                         this.style.height = `calc(100% - ${document.querySelector(".header-section").offsetHeight}px + 15px)`;
 
-                        document.addEventListener("shopify:section:select", (event) => {
-                                event.target.classList.forEach((i) => {
-                                        if (i === "openable-element") {
-                                                this.style.height = `calc(100% - ${document.querySelector(".header-section").offsetHeight}px + 15px)`;
-                                                this.showDrawer();
-                                        }
-                                });
-                        });
+                //                         if (i === "section-header") {
+                //                                 this.showDrawer(".menu-mobile");
+                //                         } else if (i === "section-cart-drawer") {
+                //                                 this.showDrawer(".cart-drawer");
+                //                                 if (this.querySelector(".recommended-products.desktop-only")) {
+                //                                         setTimeout(() => {
+                //                                                 this.querySelector(".recommended-products.desktop-only").classList.add("active");
+                //                                         }, 800);
+                //                                 }
+                //                         }
+                //                 });
+                //         });
 
-                        document.addEventListener("shopify:section:deselect", (event) => {
-                                event.target.classList.forEach((i) => {
-                                        if (i === "openable-element") {
-                                                this.hideDrawer();
-                                        }
-                                });
-                        });
-                }
+                //         document.addEventListener("shopify:section:select", (event) => {
+                //                 event.target.classList.forEach((i) => {
+                //                         this.style.height = `calc(100% - ${document.querySelector(".header-section").offsetHeight}px + 15px)`;
+
+                //                         if (i === "section-header") {
+                //                                 this.showDrawer(".menu-mobile");
+                //                         } else if (i === "section-cart-drawer") {
+                //                                 this.showDrawer(".cart-drawer");
+                //                                 if (this.querySelector(".recommended-products.desktop-only")) {
+                //                                         setTimeout(() => {
+                //                                                 this.querySelector(".recommended-products.desktop-only").classList.add("active");
+                //                                         }, 800);
+                //                                 }
+                //                         }
+                //                 });
+                //         });
+
+                //         document.addEventListener("shopify:section:deselect", (event) => {
+                //                 event.target.classList.forEach((i) => {
+                //                         if (i === "openable-element") {
+                //                                 this.hideDrawer();
+                //                         }
+                //                 });
+                //         });
+                // }
         }
 }
 
