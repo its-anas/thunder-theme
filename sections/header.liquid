@@ -205,11 +205,9 @@
                                 {% if block.settings.tab_title == menu_child.title %}
                                   <div class="menu__child-icon media">
                                     {% style %}
-                                      {% if block.settings.tab_icon_svg != blank or block.settings.tab_icon_image != blank %}
-                                          .menu-mobile__child-title.{{ menu_child_title }} {
-                                            padding: 0rem 0.7rem 0rem 0.7rem;
-                                          }
-                                      {% endif %}
+                                      .menu-mobile__child-title.{{ menu_child_title }} {
+                                        padding: 0rem 0.7rem 0rem 0.7rem;
+                                      }
                                     {% endstyle %}
                                     {% if block.settings.tab_icon_type == 'svg' %}
                                       {% if block.settings.tab_icon_svg == blank %}

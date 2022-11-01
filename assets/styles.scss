@@ -3018,6 +3018,7 @@ openable-element:has(.menu-mobile) {
 
                         .text {
                                 flex-grow: 1;
+                                padding-left: 0.5rem;
                         }
 
                         .svg {
@@ -3033,10 +3034,7 @@ openable-element:has(.menu-mobile) {
                         display: flex;
                         flex-direction: column;
                         background-color: #000;
-
-                        .text {
-                                margin-left: 1rem;
-                        }
+                        margin-left: 1rem;
 
                         &.active {
                                 transition: height 0.2s cubic-bezier(0.75, 0, 0.175, 1);
