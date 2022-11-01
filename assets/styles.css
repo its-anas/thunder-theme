@@ -2718,19 +2718,18 @@ openable-element:has(.menu-mobile).hidden {
 .menu-mobile__parent {
   width: 100%;
   overflow: hidden;
-  padding: 0.5rem 0;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
 }
 .menu-mobile__parent-title {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 0.5rem;
+  padding: 1rem;
   cursor: pointer;
   position: relative;
+  background-color: #000;
 }
 .menu-mobile__parent-title h6 {
   font-size: 1rem;
@@ -2744,7 +2743,6 @@ openable-element:has(.menu-mobile).hidden {
   height: 0;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
   transition: height 0.2s cubic-bezier(0.75, 0, 0.175, 1);
 }
 .menu-mobile__parent-childs.active {
@@ -2765,6 +2763,7 @@ openable-element:has(.menu-mobile).hidden {
   font-weight: 600;
   cursor: pointer;
   position: relative;
+  background-color: #000;
 }
 .menu-mobile__child-title .text {
   flex-grow: 1;
@@ -2779,6 +2778,7 @@ openable-element:has(.menu-mobile).hidden {
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  background-color: #000;
 }
 .menu-mobile__child-childs .text {
   margin-left: 1rem;

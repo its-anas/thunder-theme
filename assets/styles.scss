@@ -2963,19 +2963,18 @@ openable-element:has(.menu-mobile) {
         &__parent {
                 width: 100%;
                 overflow: hidden;
-                padding: 0.5rem 0;
                 display: flex;
                 flex-direction: column;
-                gap: 0.5rem;
 
                 &-title {
                         display: flex;
                         flex-direction: row;
                         justify-content: space-between;
                         align-items: center;
-                        padding: 0.5rem;
+                        padding: 1rem;
                         cursor: pointer;
                         position: relative;
+                        background-color: #000;
 
                         h6 {
                                 font-size: 1rem;
@@ -2991,7 +2990,6 @@ openable-element:has(.menu-mobile) {
                         height: 0;
                         display: flex;
                         flex-direction: column;
-                        gap: 0.5rem;
                         transition: height 0.2s cubic-bezier(0.75, 0, 0.175, 1);
 
                         &.active {
@@ -3012,11 +3010,11 @@ openable-element:has(.menu-mobile) {
                         flex-direction: row;
                         justify-content: space-between;
                         align-items: center;
-
                         padding: 0.7rem 0.7rem 0.7rem 1rem;
                         font-weight: 600;
                         cursor: pointer;
                         position: relative;
+                        background-color: #000;
 
                         .text {
                                 flex-grow: 1;
@@ -3034,13 +3032,13 @@ openable-element:has(.menu-mobile) {
                         overflow: hidden;
                         display: flex;
                         flex-direction: column;
+                        background-color: #000;
 
                         .text {
                                 margin-left: 1rem;
                         }
 
                         &.active {
-                                // height: auto;
                                 transition: height 0.2s cubic-bezier(0.75, 0, 0.175, 1);
 
                                 &.border {
