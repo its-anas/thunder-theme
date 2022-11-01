@@ -2169,13 +2169,14 @@ $indicator-width: 40px;
                 align-items: center;
                 height: 80px;
                 width: 80px;
-                backdrop-filter: blur(2px);
+                // backdrop-filter: blur(2px);
                 cursor: pointer;
                 border-radius: 50%;
                 transition-duration: 0.25s;
 
                 &-center,
-                &-edge {
+                &-edge,
+                &-edge-background {
                         grid-column: 1;
                         grid-row: 1;
                 }
@@ -2209,6 +2210,19 @@ $indicator-width: 40px;
                         align-items: center;
                         animation: grow 3s cubic-bezier(0.68, -0.6, 0.32, 1.6) infinite;
                         z-index: 1;
+
+                        &-background {
+                                height: 100%;
+                                width: 100%;
+                                border-radius: 50%;
+                                opacity: 1;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                animation: grow 3s cubic-bezier(0.68, -0.6, 0.32, 1.6) infinite;
+                                backdrop-filter: blur(2px);
+                                z-index: 1;
+                        }
                 }
 
                 &-rotate {
