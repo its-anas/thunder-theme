@@ -2755,8 +2755,6 @@ $indicator-width: 40px;
                         display: flex;
                         flex-direction: row;
                         align-items: flex-start;
-                        background-color: black;
-                        border: 2px solid white;
                         height: auto;
                 }
         }
@@ -2902,8 +2900,6 @@ $indicator-width: 40px;
         &__container {
                 width: inherit;
                 height: inherit;
-                background-color: black;
-                border: 2px solid white;
                 display: flex;
                 justify-content: space-between;
                 flex-direction: column;
@@ -2915,7 +2911,6 @@ $indicator-width: 40px;
                 justify-content: space-between;
                 align-items: center;
                 padding: 0.5rem;
-                background-color: black;
         }
 
         &__content {
@@ -2946,7 +2941,6 @@ $indicator-width: 40px;
                         padding: 1rem;
                         cursor: pointer;
                         position: relative;
-                        background-color: #000;
 
                         h6 {
                                 font-size: 1rem;
@@ -2968,7 +2962,6 @@ $indicator-width: 40px;
                                 transition: height 0.2s cubic-bezier(0.75, 0, 0.175, 1);
 
                                 &.border {
-                                        border-top: 0.5px solid #fff;
                                 }
                         }
                 }
@@ -2986,7 +2979,6 @@ $indicator-width: 40px;
                         font-weight: 600;
                         cursor: pointer;
                         position: relative;
-                        background-color: #000;
 
                         .text {
                                 flex-grow: 1;
@@ -3005,14 +2997,12 @@ $indicator-width: 40px;
                         overflow: hidden;
                         display: flex;
                         flex-direction: column;
-                        background-color: #000;
                         margin-left: 1rem;
 
                         &.active {
                                 transition: height 0.2s cubic-bezier(0.75, 0, 0.175, 1);
 
                                 &.border {
-                                        border-top: 0.5px solid #fff;
                                 }
                         }
                 }
@@ -3054,7 +3044,6 @@ $indicator-width: 40px;
                 flex-direction: row;
                 gap: 0.5rem;
                 align-items: center;
-                border-top: 1px solid white;
                 padding-top: 1rem;
         }
 }
@@ -3517,7 +3506,7 @@ menu-drawer-component {
         width: 100%;
         bottom: 0px;
         right: 0px;
-        z-index: 98;
+        z-index: 100;
         display: flex;
         justify-content: center;
         align-items: center;

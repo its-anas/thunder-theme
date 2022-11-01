@@ -1,9 +1,18 @@
 {% style %}
-  .header__content {
+  .header-section.boxed .header-container .section-header .header .header__content, .menu-mobile__container, .menu__dropdown-content {
+    border-radius: {{ section.settings.border_radius }}px;
+    border: {{ section.settings.border_width }}px solid {{ section.settings.border_color }};
+  }
+
+  .menu-mobile__parent-childs.active.border, .menu-mobile__child-childs.active.border, .menu-mobile__account {
+    border-top: 1px solid {{ section.settings.border_color }};
+  }
+
+  .header__content, .menu-mobile__container, .menu-mobile__headr, .menu-mobile__parent-title, .menu-mobile__child-title, .menu-mobile__child-childs, .menu__dropdown-content {
     background-color: {{ section.settings.header_background_color }};
    }
 
-  .menu__parent-title {
+  .menu__parent-title, .menu__child-title, .menu__grandchild, .menu__child.filled::after, .menu-mobile__parent-title h6 a, .menu-mobile__child-title .text,  .menu-mobile__grandchild-title, .menu-mobile__title h6, .menu-mobile__account a {
     color: {{ section.settings.content_color }};
   }
 
@@ -67,7 +76,7 @@
       <a href="/" class="header__logo-container">
         {% if section.settings.logo_type == 'svg' %}
           {% if section.settings.logo_svg == blank %}
-            <p style="text-transform: uppercase; font-size: 1.2rem; font-weight: bold; text-align: center;">
+            <p style="text-transform: uppercase; font-size: 1.2rem; font-weight: bold; text-align: center; color: {{ section.settings.content_color }};">
               {{ shop.name }}
             </p>
           {% else %}
@@ -75,7 +84,7 @@
           {% endif %}
         {% elsif section.settings.logo_type == 'image' %}
           {% if section.settings.logo_image == blank %}
-            <p style="text-transform: uppercase; font-size: 1.2rem; font-weight: bold; text-align: center;">
+            <p style="text-transform: uppercase; font-size: 1.2rem; font-weight: bold; text-align: center; color: {{ section.settings.content_color }};">
               {{ shop.name }}
             </p>
           {% else %}
@@ -101,7 +110,10 @@
                   <h6>Menu</h6>
                 </div>
                 <div id="close-icon">
-                  {% render 'icons', icon: 'close' %}
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M6 18L18 6" stroke="{{ section.settings.content_color }}" stroke-width="1.5"/>
+                    <path d="M6 6L18 18" stroke="{{ section.settings.content_color }}" stroke-width="1.5"/>
+                  </svg>
                 </div>
               </div>
               <div class="menu-mobile__content">
@@ -367,8 +379,8 @@
               <div class="menu-mobile__account-container">
                 <div class="menu-mobile__account">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="12" cy="7.25574" r="2.5" stroke="white" stroke-width="1.5"/>
-                    <path d="M4.75 13.75H19.25V19.25H4.75V13.75Z" stroke="white" stroke-width="1.5"/>
+                    <circle cx="12" cy="7.25574" r="2.5" stroke="{{ section.settings.content_color }}" stroke-width="1.5"/>
+                    <path d="M4.75 13.75H19.25V19.25H4.75V13.75Z" stroke="{{ section.settings.content_color }}" stroke-width="1.5"/>
                   </svg>
 
                   <a href="/account/login">Account</a>
@@ -467,7 +479,7 @@
                                 width: 600px;
                               }
                               .menu__childs.menu_parent_title--{{ menu_parent_title }} {
-                                border-right: 1px solid white;
+                                border-right: 1px solid  {{ section.settings.border_color }};
                               }
                               {% if section.settings.menu_layout == 'navigation_first' %}
                                 @media screen and (max-width: 1440px) {
@@ -611,14 +623,14 @@
                               {% if block.settings.show_tab_picture == true %}
                                 {% style %}
                                     .menu__childs.menu_parent_title--{{ menu_parent_title }} {
-                                      border-right: 1px solid white;
+                                      border-right: 1px solid  {{ section.settings.border_color }};
                                     }
                                   {% if menu_child.links.size > 0 %}
                                     .menu__dropdown.menu_parent_title--{{ menu_parent_title }} {
                                       width: 1200px !important;
                                     }
                                     .menu__grandchilds.menu_parent_title--{{ menu_parent_title }} {
-                                      border-right: 1px solid white;
+                                      border-right: 1px solid  {{ section.settings.border_color }};
                                     }
                                     .menu__content.menu_parent_title--{{ menu_parent_title }} {
                                       transform: translateX(150%);
@@ -804,14 +816,45 @@
     },
     {
       "type": "color",
+      "id": "content_color",
+      "label": "Content color",
+      "default": "#fff"
+    },
+    {
+      "type": "color",
       "id": "header_background_color",
       "label": "Background color",
       "default": "#000"
     },
     {
+      "type": "header",
+      "content": "Border",
+      "info": "Border settings are applied only if 'Full width header' is disabled"
+    },
+    {
+      "type": "range",
+      "id": "border_width",
+      "min": 0,
+      "max": 3,
+      "step": 1,
+      "unit": "px",
+      "label": "Border width",
+      "default": 2
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Border corners radius",
+      "default": 0
+    },
+    {
       "type": "color",
-      "id": "content_color",
-      "label": "Content color",
+      "id": "border_color",
+      "label": "Border color",
       "default": "#fff"
     }
   ],

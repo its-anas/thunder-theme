@@ -2541,8 +2541,6 @@ slider-component .slider-component .slides-container .slide .item > * {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  background-color: black;
-  border: 2px solid white;
   height: auto;
 }
 .menu__childs {
@@ -2664,8 +2662,6 @@ slider-component .slider-component .slides-container .slide .item > * {
 .menu-mobile__container {
   width: inherit;
   height: inherit;
-  background-color: black;
-  border: 2px solid white;
   display: flex;
   justify-content: space-between;
   flex-direction: column;
@@ -2676,7 +2672,6 @@ slider-component .slider-component .slides-container .slide .item > * {
   justify-content: space-between;
   align-items: center;
   padding: 0.5rem;
-  background-color: black;
 }
 .menu-mobile__content {
   height: 100%;
@@ -2704,7 +2699,6 @@ slider-component .slider-component .slides-container .slide .item > * {
   padding: 1rem;
   cursor: pointer;
   position: relative;
-  background-color: #000;
 }
 .menu-mobile__parent-title h6 {
   font-size: 1rem;
@@ -2723,9 +2717,6 @@ slider-component .slider-component .slides-container .slide .item > * {
 .menu-mobile__parent-childs.active {
   transition: height 0.2s cubic-bezier(0.75, 0, 0.175, 1);
 }
-.menu-mobile__parent-childs.active.border {
-  border-top: 0.5px solid #fff;
-}
 .menu-mobile__child {
   width: 100%;
 }
@@ -2738,7 +2729,6 @@ slider-component .slider-component .slides-container .slide .item > * {
   font-weight: 600;
   cursor: pointer;
   position: relative;
-  background-color: #000;
 }
 .menu-mobile__child-title .text {
   flex-grow: 1;
@@ -2754,14 +2744,10 @@ slider-component .slider-component .slides-container .slide .item > * {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  background-color: #000;
   margin-left: 1rem;
 }
 .menu-mobile__child-childs.active {
   transition: height 0.2s cubic-bezier(0.75, 0, 0.175, 1);
-}
-.menu-mobile__child-childs.active.border {
-  border-top: 0.5px solid #fff;
 }
 .menu-mobile__grandchild {
   width: 100%;
@@ -2792,7 +2778,6 @@ slider-component .slider-component .slides-container .slide .item > * {
   flex-direction: row;
   gap: 0.5rem;
   align-items: center;
-  border-top: 1px solid white;
   padding-top: 1rem;
 }
 
@@ -3222,7 +3207,7 @@ menu-drawer-component #close-icon {
   width: 100%;
   bottom: 0px;
   right: 0px;
-  z-index: 98;
+  z-index: 100;
   display: flex;
   justify-content: center;
   align-items: center;

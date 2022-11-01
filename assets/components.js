@@ -973,17 +973,13 @@ class PredictiveSearch extends HTMLElement {
         showSearchDrawer() {
                 this.searchDrawer.classList.remove("hidden");
                 this.searchDrawer.classList.add("active");
-                document.querySelector(".theme-overlay").style.zIndex = "99";
-                this.searchDrawer.style.zIndex = "100";
                 lockPage();
         }
 
         hideSearchDrawer() {
                 this.searchDrawer.classList.remove("active");
                 this.searchDrawer.classList.add("hidden");
-                this.searchDrawer.style.zIndex = "98";
                 unlockPage();
-                document.querySelector(".theme-overlay").style.zIndex = "-1";
         }
 
         resetSearch() {
@@ -999,6 +995,13 @@ class PredictiveSearch extends HTMLElement {
                                 this.hideSearchDrawer();
                                 this.resetSearch();
                         }
+                });
+
+                document.querySelectorAll(".header__menu__content div").forEach((div) => {
+                        div.addEventListener("mouseover", () => {
+                                this.hideSearchDrawer();
+                                unlockPage();
+                        });
                 });
 
                 this.closeIcon.addEventListener("click", () => {
@@ -1102,10 +1105,17 @@ class CartComponent extends HTMLElement {
                                 }
                         } else if (document.querySelector(".header__icons-search").contains(event.target) || document.querySelector(".header__icons-account").contains(event.target) || document.querySelector(".header__icons-drawer").contains(event.target)) {
                                 this.hideDrawer();
-                        } else if (!document.querySelector(".header__icons-cart").contains(event.target) && document.querySelector(".popup__container").classList.contains("hidden")) {
+                        } else if (!this.contains(event.target) && !document.querySelector(".header__icons-cart").contains(event.target) && document.querySelector(".popup__container").classList.contains("hidden")) {
                                 this.hideDrawer();
                                 unlockPage();
                         }
+                });
+
+                document.querySelectorAll(".header__menu__content div").forEach((div) => {
+                        div.addEventListener("mouseover", () => {
+                                this.hideDrawer();
+                                unlockPage();
+                        });
                 });
 
                 this.closeIcon.addEventListener("click", () => {
@@ -1196,10 +1206,17 @@ class MenuDrawerComponent extends HTMLElement {
                                 }
                         } else if (document.querySelector(".header__icons-search").contains(event.target) || document.querySelector(".header__icons-account").contains(event.target) || document.querySelector(".header__icons-cart").contains(event.target)) {
                                 this.hideDrawer();
-                        } else if (!document.querySelector(".header__icons-drawer").contains(event.target) && document.querySelector(".popup__container").classList.contains("hidden")) {
+                        } else if (!this.contains(event.target) && !document.querySelector(".header__icons-drawer").contains(event.target) && document.querySelector(".popup__container").classList.contains("hidden")) {
                                 this.hideDrawer();
                                 unlockPage();
                         }
+                });
+
+                document.querySelectorAll(".header__menu__content div").forEach((div) => {
+                        div.addEventListener("mouseover", () => {
+                                this.hideDrawer();
+                                unlockPage();
+                        });
                 });
 
                 this.closeIcon.addEventListener("click", () => {
