@@ -1,5 +1,3 @@
-<section id="product-template" data-product="{{ product.id }}"></section>
-
 <script defer>
   function updateRecentlyViewedProductsCookie() {
       let recentlyViewedProducts = [];
@@ -35,3 +33,291 @@
   }
   updateRecentlyViewedProductsCookie();
 </script>
+
+{% liquid
+  assign mobile_items = 1
+  assign tablet_items = 1
+  assign desktop_items = 1
+  assign desktop_section_width = 100
+%}
+
+{%- style -%}
+   .slides-container {
+    --mobile-items: {{ mobile_items }};
+    --tablet-items: {{ tablet_items }};
+    --desktop-items: {{ desktop_items }};
+  }
+
+  @media screen and (min-width: 1025px) {
+     .slides-container {
+      --container-width: calc(var(--section-width) * {{ desktop_section_width | divided_by: 100.00 }} );
+    }
+     .prev,
+     .next {
+      width: {{ 100 | minus: desktop_section_width | divided_by: 2 }}%;
+    }
+  }
+
+   .item {
+    aspect-ratio: 1;
+    }
+{%- endstyle -%}
+
+<section id="product-page" data-product="{{ product.id }}">
+  <div class="product-page__container">
+    <div class="product-page__content">
+      <div class="product-page__pictures">
+        <product-page-slider
+          data-mobile-items="{{ mobile_items }}"
+          data-tablet-items="{{ tablet_items }}"
+          data-desktop-items="{{ desktop_items }}"
+          class="{{ section.id }}"
+        >
+          <div class="slider-component">
+            <div class="prev">
+              {% render 'icons', icon: 'chevron-prev' -%}
+            </div>
+            <div class="slides-container">
+              <div class="slide">
+                {% if product.images.size == 0 %}
+                  <div class="item">
+                    <div class="item-picture">{{ 'product-1' | placeholder_svg_tag: 'placeholder' }}</div>
+                  </div>
+                {% else %}
+                  {% for image in product.images %}
+                    <div class="item">
+                      <div class="item-picture">
+                        <img
+                          srcset="{{ image | image_url }}"
+                          loading="lazy"
+                          alt="{{ image.alt | escape }}"
+                          width="{{ image.width }}"
+                          height="{{ image.height }}"
+                          class="fit"
+                        >
+                      </div>
+                    </div>
+                  {% endfor %}
+                {% endif %}
+              </div>
+            </div>
+            <div class="next">
+              {% render 'icons', icon: 'chevron-next' -%}
+            </div>
+          </div>
+          <div class="slider-component__indicators"></div>
+          <div class="slider-component__thumbnails-container ">
+            <div class="slider-component__thumbnails">
+              {% if product.images.size > 0 %}
+                {% for image in product.images %}
+                  <div data-slide-to="{{ forloop.index0 }}" class="thumbnail">
+                    <div class="thumbnail-picture media">
+                      <img
+                        srcset="{{ image | image_url }}"
+                        loading="lazy"
+                        alt="{{ image.alt | escape }}"
+                        width="{{ image.width }}"
+                        height="{{ image.height }}"
+                        class="fit"
+                      >
+                    </div>
+                  </div>
+                {% endfor %}
+              {% endif %}
+            </div>
+          </div>
+        </product-page-slider>
+      </div>
+      <div class="product-page__info">
+        <div class="product-page__vendor"></div>
+        <div class="product-page__name"></div>
+        <div class="product-page__reviews">
+          <div class="product-page__reviews-stars"></div>
+          <div class="product-page__reviews-text"></div>
+        </div>
+        <div class="product-page__colors"></div>
+        <div class="product-page__variants"></div>
+        <div class="product-page__quantity"></div>
+        <div class="product-page__stock-disclaimer"></div>
+        <div class="product-page__countdown-timer"></div>
+        <div class="product-page__buttons"></div>
+        <div class="product-page__trust-list"></div>
+        <div class="product-page__bundle"></div>
+      </div>
+    </div>
+    <div class="product-page__details">
+      <div class="product-page__tabs">
+        <div class="product-page__description"></div>
+        <div class="product-page__features"></div>
+        <div class="product-page__reviews"></div>
+      </div>
+    </div>
+    <div class="product-page__share-buttons"></div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product page",
+  "class": "product-page",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_autoplay",
+      "label": "Enable autoplay",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "autoplay_delay_time",
+      "min": 3,
+      "max": 10,
+      "step": 1,
+      "unit": "s",
+      "label": "Delay time",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "image_height",
+      "min": 500,
+      "max": 1000,
+      "step": 100,
+      "unit": "px",
+      "label": "Height",
+      "default": 500
+    },
+    {
+      "type": "header",
+      "content": "Text style"
+    },
+    {
+      "type": "select",
+      "id": "vertical_position",
+      "label": "Text position - Vertical",
+      "options": [
+        {
+          "value": "top",
+          "label": "Top"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "bottom",
+          "label": "Bottom"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "horizontal_position",
+      "label": "Text position - Horizonal",
+      "info": "Desktop only",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text alignment",
+      "info": "Desktop only",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "text_width",
+      "label": "Text width",
+      "info": "Desktop only",
+      "min": 40,
+      "max": 90,
+      "step": 10,
+      "unit": "%",
+      "default": 50
+    },
+    {
+      "type": "header",
+      "content": "Section style"
+    },
+    {
+      "type": "range",
+      "id": "space_between_elements",
+      "label": "Space between elements",
+      "min": 1,
+      "max": 3,
+      "step": 0.5,
+      "unit": "rem",
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "space_outside",
+      "label": "Space outside section",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "select",
+      "id": "section_style",
+      "label": "Section width",
+      "info": "Desktop only",
+      "options": [
+        {
+          "value": "full-width",
+          "label": "Full width"
+        },
+        {
+          "value": "wrapped",
+          "label": "Wrapped"
+        }
+      ],
+      "default": "full-width"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -348,7 +348,6 @@ class Slideshow extends HTMLElement {
                 let indicator = slideshow.querySelectorAll(".slideshow__indicators span");
                 indicator.forEach((item) => {
                         item.addEventListener("click", (e) => {
-                                console.log("clicked");
                                 let slideTo = parseInt(e.target.dataset.slideTo);
                                 indicator.forEach((item, index) => {
                                         if (item.classList.contains("active")) {
@@ -547,7 +546,7 @@ customElements.define("announcement-bar", Announcement);
 
 // ANCHOR: Slider component
 /* Here is the explanation for the code above:
-1. The first function (setMaxScroll) is called when the page loads and then every time the window is resized or the media queries are changed. It sets the maxSliderScroll variable which is used to calculate the maximum scroll amount for the slider. It also sets the visibility of the next/prev buttons depending on the number of items found and the number of items displayed. 
+1. The first function (setMaxScroll) is called when the page loads and then every time the window is resized or the media queries are changed. It sets the maxSliderScroll variable which is used to calculate the maximum scroll amount for the slider. It also sets the visibility of the next/prev buttons depending on the number of items found and the number of items displayed.
 2. The getTranslateX function calculates the new translateX value for the slider depending on the type of action (next or prev). This is used in the moveNext and movePrev functions. These functions also hide and show the next/prev buttons depending on the new translateX value.
 3. The event listeners for the next/prev buttons and the media queries call the setMaxScroll function. */
 
@@ -660,6 +659,28 @@ class SliderComponent extends HTMLElement {
                                 let movement = currentPosition - startPos;
                                 if (movement > 50 || movement < -50) {
                                         slide.style.transform = `translateX(${nextTranslate}px)`;
+                                }
+
+                                actualTranslate = parseInt(slide.style.transform == "translateX(0px)" ? 0 : slide.style.transform.match(/[-]{0,1}[\d]*[.]{0,1}[\d]+/g)[0]);
+                                newTranslate = 0;
+
+                                if (movement > 50) {
+                                        newTranslate = Math.max(actualTranslate - itemWidth * itemsDisplayed, maxSliderScroll);
+                                } else if (movement < -50) {
+                                        newTranslate = Math.min(actualTranslate + itemWidth * itemsDisplayed, 0);
+                                }
+
+                                if (actualTranslate === 0) {
+                                        prev.style.visibility = "hidden";
+                                }
+                                if (actualTranslate < 0) {
+                                        prev.style.visibility = "visible";
+                                }
+                                if (actualTranslate > maxSliderScroll) {
+                                        next.style.visibility = "visible";
+                                }
+                                if (actualTranslate <= maxSliderScroll) {
+                                        next.style.visibility = "hidden";
                                 }
                         }
                 }
@@ -1298,3 +1319,351 @@ class MenuMobile extends HTMLElement {
 }
 
 customElements.define("menu-mobile", MenuMobile);
+
+// SECTION: Product page slider
+
+class ProductPageSlider extends HTMLElement {
+        constructor() {
+                super();
+        }
+
+        connectedCallback() {
+                this.attachShadow({ mode: "open" });
+                this.shadowRoot.innerHTML = "<slot></slot>";
+                this.loadSlider();
+        }
+
+        loadSlider() {
+                let slidesContainer = this.querySelector(".slides-container");
+                let slide = this.querySelector(".slide");
+                let item = this.querySelector(".item");
+                let items = this.querySelectorAll(".item");
+                let prev = this.querySelector(".prev");
+                let next = this.querySelector(".next");
+                let maxSliderScroll;
+                let itemsDisplayed;
+                let itemWidth;
+                let itemHeight;
+                let itemsFound;
+                let isDragging = false;
+                let startPos = 0;
+                let actual = 0;
+                let nextTranslate = 0;
+                let maxNext = 0;
+                let maxPrev = 0;
+                let currentTranslate = 0;
+                let currentPosition = 0;
+                let actualTranslate;
+                let newTranslate;
+                let activeIndicator = 0;
+                let activeThumbnail = 0;
+                let jump = 1;
+                let totalSlides = items.length;
+                let step;
+
+                let thumbnails = document.querySelectorAll(".slider-component__thumbnails .thumbnail");
+                thumbnails[0].classList.add("active");
+
+                function loadIndicators() {
+                        items.forEach((item, index) => {
+                                let indicators = document.querySelector(".slider-component__indicators");
+
+                                if (index === 0) {
+                                        indicators.innerHTML += `<span data-slide-to="${index}" class="active"></span>`;
+                                } else {
+                                        indicators.innerHTML += `<span data-slide-to="${index}"></span>`;
+                                }
+                        });
+
+                        items[0].classList.add("active");
+                }
+                loadIndicators();
+
+                let indicators = document.querySelectorAll(".slider-component__indicators span");
+
+                function getActualIndicator() {
+                        indicators.forEach((indicator, index) => {
+                                if (indicator.classList.contains("active")) {
+                                        activeIndicator = index;
+                                        return activeIndicator;
+                                }
+                        });
+                }
+
+                indicators.forEach((indicator) => {
+                        indicator.addEventListener("click", (e) => {
+                                getActualIndicator();
+                                let slideTo = parseInt(e.target.dataset.slideTo);
+                                step = activeIndicator - slideTo;
+
+                                document.querySelector(".slider-component__indicators span.active").classList.remove("active");
+
+                                for (let i = 0; i < Math.abs(step); i++) {
+                                        if (step < 0) {
+                                                let translateNext = getTranslateX("next");
+                                                slide.style.transform = `translateX(${translateNext}px)`;
+
+                                                let activeSlide = document.querySelector(".slides-container .slide .item.active");
+                                                activeSlide.classList.remove("active");
+                                                activeSlide.nextElementSibling.classList.add("active");
+
+                                                let activeThumbnail = document.querySelector(".slider-component__thumbnails .thumbnail.active");
+                                                activeThumbnail.classList.remove("active");
+                                                activeThumbnail.nextElementSibling.classList.add("active");
+                                        } else if (step > 0) {
+                                                let translatePrev = getTranslateX("prev");
+                                                slide.style.transform = `translateX(${translatePrev}px)`;
+
+                                                let activeSlide = document.querySelector(".slides-container .slide .item.active");
+                                                activeSlide.classList.remove("active");
+                                                activeSlide.previousElementSibling.classList.add("active");
+
+                                                let activeThumbnail = document.querySelector(".slider-component__thumbnails .thumbnail.active");
+                                                activeThumbnail.classList.remove("active");
+                                                activeThumbnail.previousElementSibling.classList.add("active");
+                                        }
+                                }
+
+                                indicator.classList.add("active");
+                        });
+                });
+
+                thumbnails = document.querySelectorAll(".slider-component__thumbnails .thumbnail");
+
+                function getActualThumbnail() {
+                        thumbnails.forEach((thumbnail, index) => {
+                                if (thumbnail.classList.contains("active")) {
+                                        activeThumbnail = index;
+                                        return activeThumbnail;
+                                }
+                        });
+                }
+
+                thumbnails.forEach((thumbnail) => {
+                        thumbnail.addEventListener("click", (e) => {
+                                getActualThumbnail();
+                                let slideTo = thumbnail.getAttribute("data-slide-to");
+
+                                step = activeThumbnail - slideTo;
+
+                                document.querySelector(".slider-component__thumbnails .thumbnail.active").classList.remove("active");
+
+                                for (let i = 0; i < Math.abs(step); i++) {
+                                        if (step < 0) {
+                                                let translateNext = getTranslateX("next");
+                                                slide.style.transform = `translateX(${translateNext}px)`;
+
+                                                let activeIndic = document.querySelector(".slides-container .slide .item.active");
+
+                                                let activeSlide = document.querySelector(".slider-component__indicators span.active");
+
+                                                if (activeSlide.nextElementSibling) {
+                                                        activeIndic.classList.remove("active");
+                                                        activeSlide.classList.remove("active");
+
+                                                        activeIndic.nextElementSibling.classList.add("active");
+                                                        activeSlide.nextElementSibling.classList.add("active");
+                                                }
+                                        } else if (step > 0) {
+                                                let translatePrev = getTranslateX("prev");
+                                                slide.style.transform = `translateX(${translatePrev}px)`;
+
+                                                let activeIndic = document.querySelector(".slides-container .slide .item.active");
+
+                                                let activeSlide = document.querySelector(".slider-component__indicators span.active");
+
+                                                if (activeSlide.previousElementSibling) {
+                                                        activeIndic.classList.remove("active");
+                                                        activeSlide.classList.remove("active");
+
+                                                        activeIndic.previousElementSibling.classList.add("active");
+                                                        activeSlide.previousElementSibling.classList.add("active");
+                                                }
+                                        }
+                                }
+
+                                thumbnail.classList.add("active");
+                        });
+                });
+
+                function setMaxScroll() {
+                        itemsDisplayed = getComputedStyle(slidesContainer).getPropertyValue("--slider-items");
+                        itemsFound = items.length;
+                        itemWidth = item.offsetWidth;
+                        itemHeight = item.offsetHeight;
+                        slide.style.transform = "translateX(0px)";
+                        prev.style.visibility = "hidden";
+                        prev.style.height = itemHeight + "px";
+                        next.style.height = itemHeight + "px";
+
+                        if (itemsFound >= itemsDisplayed) {
+                                maxSliderScroll = -itemWidth * (itemsFound - itemsDisplayed);
+                                if (itemsFound > itemsDisplayed) {
+                                        next.style.visibility = "visible";
+                                }
+                                slide.style.justifyContent = "flex-start";
+                        } else {
+                                maxSliderScroll = -itemWidth * itemsFound;
+                                slide.style.justifyContent = "center";
+                                next.style.visibility = "hidden";
+                        }
+                }
+                setMaxScroll();
+
+                function getTranslateX(type) {
+                        actualTranslate = parseInt(slide.style.transform == "translateX(0px)" ? 0 : slide.style.transform.match(/[-]{0,1}[\d]*[.]{0,1}[\d]+/g)[0]);
+                        newTranslate = 0;
+
+                        if (type === "next") {
+                                newTranslate = Math.max(actualTranslate - itemWidth * itemsDisplayed, maxSliderScroll);
+                        } else if (type === "prev") {
+                                newTranslate = Math.min(actualTranslate + itemWidth * itemsDisplayed, 0);
+                        }
+
+                        if (newTranslate === 0) {
+                                prev.style.visibility = "hidden";
+                        }
+                        if (newTranslate < 0) {
+                                prev.style.visibility = "visible";
+                        }
+                        if (newTranslate > maxSliderScroll) {
+                                next.style.visibility = "visible";
+                        }
+                        if (newTranslate <= maxSliderScroll) {
+                                next.style.visibility = "hidden";
+                        }
+
+                        return newTranslate;
+                }
+
+                function moveNext() {
+                        let translateNext = getTranslateX("next");
+                        slide.style.transform = `translateX(${translateNext}px)`;
+
+                        let activeIndic = document.querySelector(".slides-container .slide .item.active");
+
+                        let activeSlide = document.querySelector(".slider-component__indicators span.active");
+
+                        let activeThumbnail = document.querySelector(".slider-component__thumbnails .thumbnail.active");
+
+                        if (activeSlide.nextElementSibling) {
+                                activeIndic.classList.remove("active");
+                                activeSlide.classList.remove("active");
+                                activeThumbnail.classList.remove("active");
+
+                                activeIndic.nextElementSibling.classList.add("active");
+                                activeSlide.nextElementSibling.classList.add("active");
+                                activeThumbnail.nextElementSibling.classList.add("active");
+                        }
+                }
+
+                function movePrev() {
+                        let translatePrev = getTranslateX("prev");
+                        slide.style.transform = `translateX(${translatePrev}px)`;
+
+                        let activeIndic = document.querySelector(".slides-container .slide .item.active");
+
+                        let activeSlide = document.querySelector(".slider-component__indicators span.active");
+
+                        let activeThumbnail = document.querySelector(".slider-component__thumbnails .thumbnail.active");
+
+                        if (activeSlide.previousElementSibling) {
+                                activeIndic.classList.remove("active");
+                                activeSlide.classList.remove("active");
+                                activeThumbnail.classList.remove("active");
+
+                                activeIndic.previousElementSibling.classList.add("active");
+                                activeSlide.previousElementSibling.classList.add("active");
+                                activeThumbnail.previousElementSibling.classList.add("active");
+                        }
+                }
+
+                function touchStart() {
+                        return function (event) {
+                                isDragging = true;
+                                startPos = event.touches[0].clientX;
+                                actual = parseInt(slide.style.transform == "translateX(0px)" ? 0 : slide.style.transform.match(/[-]{0,1}[\d]*[.]{0,1}[\d]+/g)[0]);
+                                maxNext = getTranslateX("next");
+                                maxPrev = getTranslateX("prev");
+                        };
+                }
+
+                function touchEnd() {
+                        return function (event) {
+                                isDragging = false;
+                                currentPosition = event.changedTouches[0].clientX;
+                                currentTranslate = actual + currentPosition - startPos;
+                                nextTranslate = currentPosition > startPos ? maxPrev : maxNext;
+                                let movement = currentPosition - startPos;
+                                if (movement > 50 || movement < -50) {
+                                        slide.style.transform = `translateX(${nextTranslate}px)`;
+                                }
+
+                                actualTranslate = parseInt(slide.style.transform == "translateX(0px)" ? 0 : slide.style.transform.match(/[-]{0,1}[\d]*[.]{0,1}[\d]+/g)[0]);
+                                newTranslate = 0;
+
+                                if (movement > 50) {
+                                        newTranslate = Math.max(actualTranslate - itemWidth * itemsDisplayed, maxSliderScroll);
+
+                                        let activeIndic = document.querySelector(".slides-container .slide .item.active");
+
+                                        let activeSlide = document.querySelector(".slider-component__indicators span.active");
+
+                                        let activeThumbnail = document.querySelector(".slider-component__thumbnails .thumbnail.active");
+
+                                        if (activeSlide.previousElementSibling) {
+                                                activeIndic.classList.remove("active");
+                                                activeSlide.classList.remove("active");
+                                                activeThumbnail.classList.remove("active");
+
+                                                activeIndic.previousElementSibling.classList.add("active");
+                                                activeSlide.previousElementSibling.classList.add("active");
+                                                activeThumbnail.previousElementSibling.classList.add("active");
+                                        }
+                                } else if (movement < -50) {
+                                        newTranslate = Math.min(actualTranslate + itemWidth * itemsDisplayed, 0);
+
+                                        let activeIndic = document.querySelector(".slides-container .slide .item.active");
+
+                                        let activeSlide = document.querySelector(".slider-component__indicators span.active");
+
+                                        let activeThumbnail = document.querySelector(".slider-component__thumbnails .thumbnail.active");
+
+                                        if (activeSlide.nextElementSibling) {
+                                                activeIndic.classList.remove("active");
+                                                activeSlide.classList.remove("active");
+                                                activeThumbnail.classList.remove("active");
+
+                                                activeIndic.nextElementSibling.classList.add("active");
+                                                activeSlide.nextElementSibling.classList.add("active");
+                                                activeThumbnail.nextElementSibling.classList.add("active");
+                                        }
+                                }
+
+                                if (actualTranslate === 0) {
+                                        prev.style.visibility = "hidden";
+                                }
+                                if (actualTranslate < 0) {
+                                        prev.style.visibility = "visible";
+                                }
+                                if (actualTranslate > maxSliderScroll) {
+                                        next.style.visibility = "visible";
+                                }
+                                if (actualTranslate <= maxSliderScroll) {
+                                        next.style.visibility = "hidden";
+                                }
+                        };
+                }
+
+                window.addEventListener("resize", setMaxScroll);
+                next.addEventListener("click", moveNext);
+                prev.addEventListener("click", movePrev);
+
+                items.forEach((slide) => {
+                        slide.addEventListener("touchstart", touchStart());
+                        slide.addEventListener("touchend", touchEnd());
+                });
+        }
+}
+
+customElements.define("product-page-slider", ProductPageSlider);
