@@ -73,14 +73,14 @@
           data-desktop-items="{{ desktop_items }}"
           class="{{ section.id }}"
         >
-          <div class="slider-component">
+          <div class="product-page-slider">
             <div class="prev">
               {% render 'icons', icon: 'chevron-prev' -%}
             </div>
             <div class="slides-container">
               <div class="slide">
                 {% if product.images.size == 0 %}
-                  <div class="item">
+                  <div class="item"
                     <div class="item-picture">{{ 'product-1' | placeholder_svg_tag: 'placeholder' }}</div>
                   </div>
                 {% else %}
@@ -89,7 +89,6 @@
                       <div class="item-picture">
                         <img
                           srcset="{{ image | image_url }}"
-                          loading="lazy"
                           alt="{{ image.alt | escape }}"
                           width="{{ image.width }}"
                           height="{{ image.height }}"
@@ -105,9 +104,9 @@
               {% render 'icons', icon: 'chevron-next' -%}
             </div>
           </div>
-          <div class="slider-component__indicators"></div>
-          <div class="slider-component__thumbnails-container ">
-            <div class="slider-component__thumbnails">
+          <div class="product-page-slider__indicators"></div>
+          <div class="product-page-slider__thumbnails-container ">
+            <div class="product-page-slider__thumbnails">
               {% if product.images.size > 0 %}
                 {% for image in product.images %}
                   <div data-slide-to="{{ forloop.index0 }}" class="thumbnail">

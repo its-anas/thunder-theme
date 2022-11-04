@@ -1345,146 +1345,45 @@ class ProductPageSlider extends HTMLElement {
                 let itemWidth;
                 let itemHeight;
                 let itemsFound;
-                let isDragging = false;
-                let startPos = 0;
-                let actual = 0;
-                let nextTranslate = 0;
-                let maxNext = 0;
-                let maxPrev = 0;
-                let currentTranslate = 0;
-                let currentPosition = 0;
                 let actualTranslate;
                 let newTranslate;
-                let activeIndicator = 0;
-                let activeThumbnail = 0;
-                let jump = 1;
-                let totalSlides = items.length;
                 let step;
 
-                let thumbnails = document.querySelectorAll(".slider-component__thumbnails .thumbnail");
+                loadIndicators();
+                let indicators = this.querySelectorAll(".product-page-slider__indicators span");
+                let thumbnails = this.querySelectorAll(".product-page-slider__thumbnails .thumbnail");
                 thumbnails[0].classList.add("active");
+
+                travelToItem(indicators, ".product-page-slider__indicators span", ".product-page-slider__thumbnails .thumbnail");
+                travelToItem(thumbnails, ".product-page-slider__thumbnails .thumbnail", ".product-page-slider__indicators span");
+
+                setMaxScroll();
 
                 function loadIndicators() {
                         items.forEach((item, index) => {
-                                let indicators = document.querySelector(".slider-component__indicators");
+                                let indicatorsContainer = document.querySelector(".product-page-slider__indicators");
 
                                 if (index === 0) {
-                                        indicators.innerHTML += `<span data-slide-to="${index}" class="active"></span>`;
+                                        indicatorsContainer.innerHTML += `<span data-slide-to="${index}" class="active"></span>`;
                                 } else {
-                                        indicators.innerHTML += `<span data-slide-to="${index}"></span>`;
+                                        indicatorsContainer.innerHTML += `<span data-slide-to="${index}"></span>`;
                                 }
                         });
 
                         items[0].classList.add("active");
                 }
-                loadIndicators();
 
-                let indicators = document.querySelectorAll(".slider-component__indicators span");
+                function pushActiveClass(className, direction) {
+                        let activeELement = document.querySelector(`${className}.active`);
 
-                function getActualIndicator() {
-                        indicators.forEach((indicator, index) => {
-                                if (indicator.classList.contains("active")) {
-                                        activeIndicator = index;
-                                        return activeIndicator;
-                                }
-                        });
+                        if (direction === "next" && activeELement.nextElementSibling) {
+                                activeELement.classList.remove("active");
+                                activeELement.nextElementSibling.classList.add("active");
+                        } else if (direction === "prev" && activeELement.previousElementSibling) {
+                                activeELement.classList.remove("active");
+                                activeELement.previousElementSibling.classList.add("active");
+                        }
                 }
-
-                indicators.forEach((indicator) => {
-                        indicator.addEventListener("click", (e) => {
-                                getActualIndicator();
-                                let slideTo = parseInt(e.target.dataset.slideTo);
-                                step = activeIndicator - slideTo;
-
-                                document.querySelector(".slider-component__indicators span.active").classList.remove("active");
-
-                                for (let i = 0; i < Math.abs(step); i++) {
-                                        if (step < 0) {
-                                                let translateNext = getTranslateX("next");
-                                                slide.style.transform = `translateX(${translateNext}px)`;
-
-                                                let activeSlide = document.querySelector(".slides-container .slide .item.active");
-                                                activeSlide.classList.remove("active");
-                                                activeSlide.nextElementSibling.classList.add("active");
-
-                                                let activeThumbnail = document.querySelector(".slider-component__thumbnails .thumbnail.active");
-                                                activeThumbnail.classList.remove("active");
-                                                activeThumbnail.nextElementSibling.classList.add("active");
-                                        } else if (step > 0) {
-                                                let translatePrev = getTranslateX("prev");
-                                                slide.style.transform = `translateX(${translatePrev}px)`;
-
-                                                let activeSlide = document.querySelector(".slides-container .slide .item.active");
-                                                activeSlide.classList.remove("active");
-                                                activeSlide.previousElementSibling.classList.add("active");
-
-                                                let activeThumbnail = document.querySelector(".slider-component__thumbnails .thumbnail.active");
-                                                activeThumbnail.classList.remove("active");
-                                                activeThumbnail.previousElementSibling.classList.add("active");
-                                        }
-                                }
-
-                                indicator.classList.add("active");
-                        });
-                });
-
-                thumbnails = document.querySelectorAll(".slider-component__thumbnails .thumbnail");
-
-                function getActualThumbnail() {
-                        thumbnails.forEach((thumbnail, index) => {
-                                if (thumbnail.classList.contains("active")) {
-                                        activeThumbnail = index;
-                                        return activeThumbnail;
-                                }
-                        });
-                }
-
-                thumbnails.forEach((thumbnail) => {
-                        thumbnail.addEventListener("click", (e) => {
-                                getActualThumbnail();
-                                let slideTo = thumbnail.getAttribute("data-slide-to");
-
-                                step = activeThumbnail - slideTo;
-
-                                document.querySelector(".slider-component__thumbnails .thumbnail.active").classList.remove("active");
-
-                                for (let i = 0; i < Math.abs(step); i++) {
-                                        if (step < 0) {
-                                                let translateNext = getTranslateX("next");
-                                                slide.style.transform = `translateX(${translateNext}px)`;
-
-                                                let activeIndic = document.querySelector(".slides-container .slide .item.active");
-
-                                                let activeSlide = document.querySelector(".slider-component__indicators span.active");
-
-                                                if (activeSlide.nextElementSibling) {
-                                                        activeIndic.classList.remove("active");
-                                                        activeSlide.classList.remove("active");
-
-                                                        activeIndic.nextElementSibling.classList.add("active");
-                                                        activeSlide.nextElementSibling.classList.add("active");
-                                                }
-                                        } else if (step > 0) {
-                                                let translatePrev = getTranslateX("prev");
-                                                slide.style.transform = `translateX(${translatePrev}px)`;
-
-                                                let activeIndic = document.querySelector(".slides-container .slide .item.active");
-
-                                                let activeSlide = document.querySelector(".slider-component__indicators span.active");
-
-                                                if (activeSlide.previousElementSibling) {
-                                                        activeIndic.classList.remove("active");
-                                                        activeSlide.classList.remove("active");
-
-                                                        activeIndic.previousElementSibling.classList.add("active");
-                                                        activeSlide.previousElementSibling.classList.add("active");
-                                                }
-                                        }
-                                }
-
-                                thumbnail.classList.add("active");
-                        });
-                });
 
                 function setMaxScroll() {
                         itemsDisplayed = getComputedStyle(slidesContainer).getPropertyValue("--slider-items");
@@ -1508,7 +1407,6 @@ class ProductPageSlider extends HTMLElement {
                                 next.style.visibility = "hidden";
                         }
                 }
-                setMaxScroll();
 
                 function getTranslateX(type) {
                         actualTranslate = parseInt(slide.style.transform == "translateX(0px)" ? 0 : slide.style.transform.match(/[-]{0,1}[\d]*[.]{0,1}[\d]+/g)[0]);
@@ -1540,129 +1438,59 @@ class ProductPageSlider extends HTMLElement {
                         let translateNext = getTranslateX("next");
                         slide.style.transform = `translateX(${translateNext}px)`;
 
-                        let activeIndic = document.querySelector(".slides-container .slide .item.active");
-
-                        let activeSlide = document.querySelector(".slider-component__indicators span.active");
-
-                        let activeThumbnail = document.querySelector(".slider-component__thumbnails .thumbnail.active");
-
-                        if (activeSlide.nextElementSibling) {
-                                activeIndic.classList.remove("active");
-                                activeSlide.classList.remove("active");
-                                activeThumbnail.classList.remove("active");
-
-                                activeIndic.nextElementSibling.classList.add("active");
-                                activeSlide.nextElementSibling.classList.add("active");
-                                activeThumbnail.nextElementSibling.classList.add("active");
-                        }
+                        pushActiveClass(".slides-container .slide .item", "next");
+                        pushActiveClass(".product-page-slider__indicators span", "next");
+                        pushActiveClass(".product-page-slider__thumbnails .thumbnail", "next");
                 }
 
                 function movePrev() {
                         let translatePrev = getTranslateX("prev");
                         slide.style.transform = `translateX(${translatePrev}px)`;
 
-                        let activeIndic = document.querySelector(".slides-container .slide .item.active");
-
-                        let activeSlide = document.querySelector(".slider-component__indicators span.active");
-
-                        let activeThumbnail = document.querySelector(".slider-component__thumbnails .thumbnail.active");
-
-                        if (activeSlide.previousElementSibling) {
-                                activeIndic.classList.remove("active");
-                                activeSlide.classList.remove("active");
-                                activeThumbnail.classList.remove("active");
-
-                                activeIndic.previousElementSibling.classList.add("active");
-                                activeSlide.previousElementSibling.classList.add("active");
-                                activeThumbnail.previousElementSibling.classList.add("active");
-                        }
+                        pushActiveClass(".slides-container .slide .item", "prev");
+                        pushActiveClass(".product-page-slider__indicators span", "prev");
+                        pushActiveClass(".product-page-slider__thumbnails .thumbnail", "prev");
                 }
 
-                function touchStart() {
-                        return function (event) {
-                                isDragging = true;
-                                startPos = event.touches[0].clientX;
-                                actual = parseInt(slide.style.transform == "translateX(0px)" ? 0 : slide.style.transform.match(/[-]{0,1}[\d]*[.]{0,1}[\d]+/g)[0]);
-                                maxNext = getTranslateX("next");
-                                maxPrev = getTranslateX("prev");
-                        };
-                }
+                function travelToItem(AllItems, actualItem, follower) {
+                        AllItems.forEach((item) => {
+                                item.addEventListener("click", (e) => {
+                                        let activeItem = 0;
+                                        AllItems.forEach((item, index) => {
+                                                if (item.classList.contains("active")) {
+                                                        activeItem = index;
+                                                        return activeItem;
+                                                }
+                                        });
+                                        let slideTo = AllItems === indicators ? parseInt(e.target.dataset.slideTo) : parseInt(item.getAttribute("data-slide-to"));
+                                        step = activeItem - slideTo;
 
-                function touchEnd() {
-                        return function (event) {
-                                isDragging = false;
-                                currentPosition = event.changedTouches[0].clientX;
-                                currentTranslate = actual + currentPosition - startPos;
-                                nextTranslate = currentPosition > startPos ? maxPrev : maxNext;
-                                let movement = currentPosition - startPos;
-                                if (movement > 50 || movement < -50) {
-                                        slide.style.transform = `translateX(${nextTranslate}px)`;
-                                }
+                                        document.querySelector(`${actualItem}.active`).classList.remove("active");
 
-                                actualTranslate = parseInt(slide.style.transform == "translateX(0px)" ? 0 : slide.style.transform.match(/[-]{0,1}[\d]*[.]{0,1}[\d]+/g)[0]);
-                                newTranslate = 0;
+                                        for (let i = 0; i < Math.abs(step); i++) {
+                                                if (step < 0) {
+                                                        let translateNext = getTranslateX("next");
+                                                        slide.style.transform = `translateX(${translateNext}px)`;
 
-                                if (movement > 50) {
-                                        newTranslate = Math.max(actualTranslate - itemWidth * itemsDisplayed, maxSliderScroll);
+                                                        pushActiveClass(".slides-container .slide .item", "next");
+                                                        pushActiveClass(`${follower}`, "next");
+                                                } else if (step > 0) {
+                                                        let translatePrev = getTranslateX("prev");
+                                                        slide.style.transform = `translateX(${translatePrev}px)`;
 
-                                        let activeIndic = document.querySelector(".slides-container .slide .item.active");
-
-                                        let activeSlide = document.querySelector(".slider-component__indicators span.active");
-
-                                        let activeThumbnail = document.querySelector(".slider-component__thumbnails .thumbnail.active");
-
-                                        if (activeSlide.previousElementSibling) {
-                                                activeIndic.classList.remove("active");
-                                                activeSlide.classList.remove("active");
-                                                activeThumbnail.classList.remove("active");
-
-                                                activeIndic.previousElementSibling.classList.add("active");
-                                                activeSlide.previousElementSibling.classList.add("active");
-                                                activeThumbnail.previousElementSibling.classList.add("active");
+                                                        pushActiveClass(".slides-container .slide .item", "prev");
+                                                        pushActiveClass(`${follower}`, "prev");
+                                                }
                                         }
-                                } else if (movement < -50) {
-                                        newTranslate = Math.min(actualTranslate + itemWidth * itemsDisplayed, 0);
 
-                                        let activeIndic = document.querySelector(".slides-container .slide .item.active");
-
-                                        let activeSlide = document.querySelector(".slider-component__indicators span.active");
-
-                                        let activeThumbnail = document.querySelector(".slider-component__thumbnails .thumbnail.active");
-
-                                        if (activeSlide.nextElementSibling) {
-                                                activeIndic.classList.remove("active");
-                                                activeSlide.classList.remove("active");
-                                                activeThumbnail.classList.remove("active");
-
-                                                activeIndic.nextElementSibling.classList.add("active");
-                                                activeSlide.nextElementSibling.classList.add("active");
-                                                activeThumbnail.nextElementSibling.classList.add("active");
-                                        }
-                                }
-
-                                if (actualTranslate === 0) {
-                                        prev.style.visibility = "hidden";
-                                }
-                                if (actualTranslate < 0) {
-                                        prev.style.visibility = "visible";
-                                }
-                                if (actualTranslate > maxSliderScroll) {
-                                        next.style.visibility = "visible";
-                                }
-                                if (actualTranslate <= maxSliderScroll) {
-                                        next.style.visibility = "hidden";
-                                }
-                        };
+                                        item.classList.add("active");
+                                });
+                        });
                 }
 
                 window.addEventListener("resize", setMaxScroll);
                 next.addEventListener("click", moveNext);
                 prev.addEventListener("click", movePrev);
-
-                items.forEach((slide) => {
-                        slide.addEventListener("touchstart", touchStart());
-                        slide.addEventListener("touchend", touchEnd());
-                });
         }
 }
 
