@@ -134,14 +134,14 @@
                     {% endif %}
                   </p>
                   <div class="shop-the-look__product-price">
-                    <p class="price--sale">
+                    <p class="price--compare-at">
                       {% if block.settings.product.compare_at_price == blank %}
                         $00.00
                       {% elsif block.settings.product.compare_at_price != blank %}
                         {{ block.settings.product.compare_at_price | money }}
                       {% endif %}
                     </p>
-                    <p class="price--normal">
+                    <p class="price--actual">
                       {% if block.settings.product.price == blank %}
                         $00.00
                       {% elsif block.settings.product.price != blank %}
