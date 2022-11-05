@@ -37,7 +37,8 @@ var(--font-type-scale)) / var(--font-type-scale)) / var(--font-type-scale) * 1px
 .button--primary.border:after, .button--secondary.border:after, .button--primary:not(.border):after,
 .button--secondary:not(.border):after { content: " {{ settings.button_symbol | truncate: 2 }}"; }
 
-.button--link:after { content: " {{ settings.button_symbol | truncate: 2 }}"; }
+.button--link:after { content: " {{ settings.button_symbol | truncate: 2 }}"; } .shopify-payment-button__button:after {
+content: " {{ settings.button_symbol | truncate: 2 }}"; }
 
 @media screen and (min-width: 751px) { :root{ --font-size: {{ settings.size }}px; --font-size-type-scale:
 {{ settings.size }}; --font-type-scale: {{ settings.type_scale }}; } }
