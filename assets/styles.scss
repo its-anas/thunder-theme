@@ -4065,7 +4065,6 @@ menu-drawer-component {
 					}
 
 					@media screen and (min-width: 1025px) {
-						// display: none;
 					}
 
 					&:hover {
@@ -4165,13 +4164,14 @@ menu-drawer-component {
 				}
 
 				&__indicators {
-					text-align: center;
+					display: flex;
+					justify-content: center;
 					height: auto;
 					width: 100%;
 
 					@media screen and (min-width: 1025px) {
-						height: 0;
-						visibility: hidden;
+						// height: 0;
+						// visibility: hidden;
 					}
 
 					span {
@@ -4196,12 +4196,12 @@ menu-drawer-component {
 					cursor: pointer;
 
 					@media screen and (max-width: 750px) {
-						height: 0;
-						visibility: hidden;
+						// height: 0;
+						// visibility: hidden;
 					}
 					@media screen and (min-width: 751px) and (max-width: 1024px) {
-						height: 0;
-						visibility: hidden;
+						// height: 0;
+						// visibility: hidden;
 					}
 
 					.thumbnail {

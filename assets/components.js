@@ -1325,7 +1325,13 @@ class ProductPageSlider extends HTMLElement {
 	connectedCallback() {
 		this.attachShadow({ mode: "open" });
 		this.shadowRoot.innerHTML = "<slot></slot>";
-		this.loadSlider();
+
+		window.addEventListener("load", () => {
+			this.loadSlider();
+		});
+		document.querySelector("select").addEventListener("change", () => {
+			this.loadSlider();
+		});
 	}
 
 	loadSlider() {
@@ -1348,6 +1354,9 @@ class ProductPageSlider extends HTMLElement {
 		let indicators = this.querySelectorAll(".product-page-slider__indicators span");
 		let thumbnails = this.querySelectorAll(".product-page-slider__thumbnails .thumbnail");
 		thumbnails[0].classList.add("active");
+		thumbnails.forEach((thumbnail, index) => {
+			thumbnail.setAttribute("data-slide-to", index);
+		});
 
 		travelToItem(indicators, ".product-page-slider__indicators span", ".product-page-slider__thumbnails .thumbnail");
 		travelToItem(thumbnails, ".product-page-slider__thumbnails .thumbnail", ".product-page-slider__indicators span");
@@ -1484,6 +1493,11 @@ class ProductPageSlider extends HTMLElement {
 		window.addEventListener("resize", setMaxScroll);
 		next.addEventListener("click", moveNext);
 		prev.addEventListener("click", movePrev);
+
+		document.querySelector("select").addEventListener("change", () => {
+			next.removeEventListener("click", moveNext);
+			prev.removeEventListener("click", movePrev);
+		});
 	}
 }
 
