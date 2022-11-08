@@ -3742,6 +3742,12 @@ menu-drawer-component #close-icon {
   height: auto;
   width: 100%;
 }
+@media screen and (min-width: 1025px) {
+  .product-page__pictures product-page-slider .product-page-slider__indicators {
+    height: 0;
+    visibility: hidden;
+  }
+}
 .product-page__pictures product-page-slider .product-page-slider__indicators span {
   display: inline-block;
   background-color: #fff;
@@ -3759,6 +3765,18 @@ menu-drawer-component #close-icon {
   height: auto;
   flex-wrap: wrap;
   cursor: pointer;
+}
+@media screen and (max-width: 750px) {
+  .product-page__pictures product-page-slider .product-page-slider__thumbnails {
+    height: 0;
+    visibility: hidden;
+  }
+}
+@media screen and (min-width: 751px) and (max-width: 1024px) {
+  .product-page__pictures product-page-slider .product-page-slider__thumbnails {
+    height: 0;
+    visibility: hidden;
+  }
 }
 .product-page__pictures product-page-slider .product-page-slider__thumbnails .thumbnail {
   width: 84px;

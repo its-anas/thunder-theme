@@ -68,7 +68,13 @@
 <div class="product-hidden-images" style="display: none;">
   {% if product.images.size > 0 %}
     {% for image in product.images %}
-      <div class="item" data-variant-color="{{ image.alt }}">
+      <div
+        class="item"
+        {% if image.alt contains '#color:' -%}
+          {% assign image_alt = image.alt | split: '#color:' %}
+          data-variant-color="{{ image_alt }}"
+        {% endif %}
+      >
         <div class="item-picture">
           <img
             srcset="{{ image | image_url }}"
@@ -89,15 +95,21 @@
 
 <div class="product-hidden-thumbnails" style="display: none;">
   {% if product.images.size > 0 %}
-    {% for image in product.images %}
-      <div class="thumbnail" data-variant-color="{{ image.alt }}">
+    {% for thumbnail in product.images %}
+      <div
+        class="thumbnail"
+        {% if thumbnail.alt contains '#color:' -%}
+          {% assign thumbnail_alt = thumbnail.alt | split: '#color:' %}
+          data-variant-color="{{ thumbnail_alt }}"
+        {% endif %}
+      >
         <div class="thumbnail-picture media">
           <img
-            srcset="{{ image | image_url }}"
+            srcset="{{ thumbnail | image_url }}"
             loading="lazy"
-            alt="{{ image.alt | escape }}"
-            width="{{ image.width }}"
-            height="{{ image.height }}"
+            alt="{{ thumbnail.alt | escape }}"
+            width="{{ thumbnail.width }}"
+            height="{{ thumbnail.height }}"
             class="fit"
           >
         </div>
@@ -130,29 +142,7 @@
             </div>
             <div class="product-page-slider__slides-container">
               <div class="zoom-icon"></div>
-              <div class="slide">
-                {% comment %}
-                   {% if product.images.size > 0 %}
-                    {% for image in product.images %}
-                      <div class="item" data-variant-color="{{ image.alt }}">
-                        <div class="item-picture">
-                          <img
-                            srcset="{{ image | image_url }}"
-                            alt="{{ image.alt | escape }}"
-                            width="{{ image.width }}"
-                            height="{{ image.height }}"
-                            class="fit"
-                          >
-                        </div>
-                      </div>
-                    {% endfor %}
-                  {% else %}
-                    <div class="item">
-                      <div class="item-picture">{{ 'product-1' | placeholder_svg_tag: 'placeholder' }}</div>
-                    </div>
-                  {% endif %}
-                {% endcomment %}
-              </div>
+              <div class="slide"></div>
             </div>
             <div class="next">
               {% render 'icons', icon: 'chevron-next' -%}
@@ -160,32 +150,7 @@
           </div>
           <div class="product-page-slider__indicators"></div>
           <div class="product-page-slider__thumbnails-container ">
-            <div class="product-page-slider__thumbnails">
-              {% comment %}
-                 {% if product.images.size > 0 %}
-                  {% for image in product.images %}
-                    <div data-slide-to="{{ forloop.index0 }}" class="thumbnail" data-variant-color="{{ image.alt }}">
-                      <div class="thumbnail-picture media">
-                        <img
-                          srcset="{{ image | image_url }}"
-                          loading="lazy"
-                          alt="{{ image.alt | escape }}"
-                          width="{{ image.width }}"
-                          height="{{ image.height }}"
-                          class="fit"
-                        >
-                      </div>
-                    </div>
-                  {% endfor %}
-                {% else %}
-                  <div class="thumbnail">
-                    <div class="thumbnail-picture">
-                      {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
-                    </div>
-                  </div>
-                {% endif %}
-              {% endcomment %}
-            </div>
+            <div class="product-page-slider__thumbnails"></div>
           </div>
         </product-page-slider>
       </div>
@@ -217,37 +182,13 @@
         </div>
 
         {% form 'product', product, class: 'product-page__form' %}
-          <div class="product-page__variants">
-            {% comment %}
-               {% for option in product.options_with_values %}
-                <div class="product-page__variant">
-                  <label for="product-page__label">
-                    <p>{{ option.name }}</p>
-                  </label>
-                  <select name="product-page__select">
-                    {% for value in option.values %}
-                      <option {{ value | escape }}>
-                        {{ value }}
-                        {%- if variant.available == false %} - sold out {% endif %}
-                      </option>
-                    {% endfor %}
-                  </select>
-                </div>
-              {% endfor %}
-            {% endcomment %}
-            <select id="product-select" name="id">
-              {% for variant in product.variants %}
-                <option
-                  value="{{ variant.id }}"
-                  {% if variant == product.selected_or_first_available_variant %}
-                    selected="selected"
-                  {% endif %}
-                >
-                  {{ variant.title }} - {{ variant.price | money }}
-                </option>
-              {% endfor %}
-            </select>
-          </div>
+          {% if product.has_only_default_variant %}
+          {% else %}
+            <div class="product-page__variants">
+              <select id="product-select" name="id"></select>
+            </div>
+          {% endif %}
+
           <div class="product-page__quantity">
             <label for="product-page__quantity-text"><p>Quantity</p></label>
             <div class="product-page__quantity-selector">
@@ -464,102 +405,70 @@
     return formatString.replace(placeholderRegex, value);
   }
 
-  {% comment %} function loadIndicators() {
-    let items = document.querySelectorAll(".product-page-slider__slides-container .slide .item");
-    items.forEach((index) => {
-      let indicatorsContainer = document.querySelector(".product-page-slider__indicators");
-      indicatorsContainer.innerHTML += `<span></span>`;
-    });
+  let productJson = {{ product | json }};
 
-    {% comment %} items[0].classList.add("active"); {% endcomment %}
-  }
+  if (productJson.variants.length > 1) {
 
-  function updateIndicator() {
-    let indicators = document.querySelectorAll(".product-page-slider__indicators span");
-     indicators.forEach((indicator, index) => {
-      let indicatorsContainer = document.querySelector(".product-page-slider__indicators");
-      indicator.setAttribute("data-slide-to", index);
-      if (index === 0) {
-        indicators.forEach((indicator) => {
-          indicator.classList.remove("active");
+        function selectCallback(variant, selector) {
+          let priceDifference = variant.compare_at_price - variant.price;
+
+          if (priceDifference > 0) {
+            document.querySelector(".product-page__tag p").innerHTML = "SAVE " + formatMoney(priceDifference, "{{ shop.money_format }}");
+          }
+          document.querySelector(".product-page__price--actual").innerHTML = formatMoney(variant.price,"{{ shop.money_format }}");
+          document.querySelector(".product-page__price--compare-at").innerHTML = formatMoney(variant.compare_at_price,"{{ shop.money_format }}")
+
+          for (var key in variantsInventory) {
+            if (key == variant.title) {
+              if (document.querySelector(".product-page__stock-disclaimer__text")) {
+               document.querySelector(".product-page__stock-disclaimer__text").innerHTML =  `Only ${variantsInventory[key]} left in stock`;}
+            }
+          }
+
+          document.querySelector(".product-page-slider__slides-container .slide").innerHTML = "";
+          document.querySelector(".product-page-slider__thumbnails").innerHTML = "";
+          document.querySelector(".product-page-slider__indicators").innerHTML = "";
+
+          document.querySelectorAll(".product-hidden-images .item").forEach((item)=>{
+            if (item.getAttribute("data-variant-color") && variant.featured_media) {
+              if (item.getAttribute("data-variant-color") === variant.featured_media.alt.split("#color:")[1] ) {
+                let itemClone = item.cloneNode(true);
+                document.querySelector(".product-page-slider__slides-container .slide").appendChild(itemClone);
+              }
+            } else {
+                let itemClone = item.cloneNode(true);
+                document.querySelector(".product-page-slider__slides-container .slide").appendChild(itemClone);}
+          })
+
+          document.querySelectorAll(".product-hidden-thumbnails .thumbnail").forEach((thumbnail)=>{
+            if (thumbnail.getAttribute("data-variant-color") && variant.featured_media) {
+              if (thumbnail.querySelector(".thumbnail-picture img").alt === variant.featured_media.alt ) {
+                let thumbnailClone = thumbnail.cloneNode(true);
+                document.querySelector(".product-page-slider__thumbnails").appendChild(thumbnailClone);
+              }
+            } else {
+                let itemClone = thumbnail.cloneNode(true);
+                document.querySelector(".product-page-slider__thumbnails").appendChild(itemClone);
+           }
+          })
+      }
+
+        new Shopify.OptionSelectors('product-select', {
+          product: {{ product | json }},
+          onVariantSelected: selectCallback,
+          enableHistoryState: true
         });
-        indicator.classList.add("active");
-      }
-    });
+  } else {
+          document.querySelectorAll(".product-hidden-images .item").forEach((item)=>{
+              let itemClone = item.cloneNode(true);
+              document.querySelector(".product-page-slider__slides-container .slide").appendChild(itemClone);
+          })
+
+          document.querySelectorAll(".product-hidden-thumbnails .thumbnail").forEach((thumbnail)=>{
+              let thumbnailClone = thumbnail.cloneNode(true);
+              document.querySelector(".product-page-slider__thumbnails").appendChild(thumbnailClone);
+          })
   }
-
-  loadIndicators();
-  updateIndicator() {% endcomment %}
-
-  function selectCallback(variant, selector) {
-      let priceDifference = variant.compare_at_price - variant.price;
-
-      if (priceDifference > 0) {
-        document.querySelector(".product-page__tag p").innerHTML = "SAVE " + formatMoney(priceDifference, "{{ shop.money_format }}");
-      }
-      document.querySelector(".product-page__price--actual").innerHTML = formatMoney(variant.price,"{{ shop.money_format }}");
-      document.querySelector(".product-page__price--compare-at").innerHTML = formatMoney(variant.compare_at_price,"{{ shop.money_format }}")
-
-      for (var key in variantsInventory) {
-        if (key == variant.title) {
-          document.querySelector(".product-page__stock-disclaimer__text").innerHTML =  `Only ${variantsInventory[key]} left in stock`;
-        }
-      }
-
-      document.querySelector(".product-page-slider__slides-container .slide").innerHTML = "";
-      document.querySelector(".product-page-slider__thumbnails").innerHTML = "";
-      document.querySelector(".product-page-slider__indicators").innerHTML = "";
-
-      document.querySelectorAll(".product-hidden-images .item").forEach((item)=>{
-        if (item.querySelector(".item-picture img").alt === variant.featured_media.alt ) {
-          let itemClone = item.cloneNode(true);
-          document.querySelector(".product-page-slider__slides-container .slide").appendChild(itemClone);
-        }
-      })
-
-      document.querySelectorAll(".product-hidden-thumbnails .thumbnail").forEach((thumbnail)=>{
-        if (thumbnail.querySelector(".thumbnail-picture img").alt === variant.featured_media.alt ) {
-          let thumbnailClone = thumbnail.cloneNode(true);
-          document.querySelector(".product-page-slider__thumbnails").appendChild(thumbnailClone);
-        }
-      })
-
-      {% comment %} let items = document.querySelectorAll(".product-page-slider__slides-container .slide .item");
-      let thumbnails = document.querySelectorAll(".product-page-slider__thumbnails .thumbnail");
-      let indicators = document.querySelectorAll(".product-page-slider__indicators span");
-
-      items.forEach((item, index) => {
-          item.classList.remove("active");
-
-          if (item.getAttribute("data-variant-color") === variant.featured_media.alt) {
-            item.style.display = "block";
-            thumbnails[index].style.display = "block";
-            indicators[index].style.display = "block";
-          } else {
-            document.querySelector(".product-page-slider__slides-container .slide").appendChild(item);
-            document.querySelector(".product-page-slider__thumbnails").appendChild(thumbnails[index]);
-            document.querySelector(".product-page-slider__indicators").appendChild(indicators[index]);
-            item.style.display = "none";
-            thumbnails[index].style.display = "none";
-            indicators[index].style.display = "none";
-         }
-      })
-
-    document.querySelectorAll(".product-page-slider__slides-container .slide .item").forEach((item, index) => {
-        if (index === 0) {
-          item.classList.add("active");
-        }
-    })
-
-     updateIndicator() {% endcomment %}
-
-  }
-
-  new Shopify.OptionSelectors('product-select', {
-    product: {{ product | json }},
-    onVariantSelected: selectCallback,
-    enableHistoryState: true
-  });
 </script>
 
 {% schema %}

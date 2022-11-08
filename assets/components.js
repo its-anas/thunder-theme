@@ -1329,9 +1329,14 @@ class ProductPageSlider extends HTMLElement {
 		window.addEventListener("load", () => {
 			this.loadSlider();
 		});
-		document.querySelector("select").addEventListener("change", () => {
-			this.loadSlider();
-		});
+
+		if (document.querySelector(".product-page__variants .selector-wrapper select")) {
+			document.querySelectorAll(".product-page__variants .selector-wrapper select").forEach((select) => {
+				select.addEventListener("change", () => {
+					this.loadSlider();
+				});
+			});
+		}
 	}
 
 	loadSlider() {
@@ -1494,10 +1499,14 @@ class ProductPageSlider extends HTMLElement {
 		next.addEventListener("click", moveNext);
 		prev.addEventListener("click", movePrev);
 
-		document.querySelector("select").addEventListener("change", () => {
-			next.removeEventListener("click", moveNext);
-			prev.removeEventListener("click", movePrev);
-		});
+		if (document.querySelector(".product-page__variants .selector-wrapper select")) {
+			document.querySelectorAll(".product-page__variants .selector-wrapper select").forEach((select) => {
+				select.addEventListener("change", () => {
+					next.removeEventListener("click", moveNext);
+					prev.removeEventListener("click", movePrev);
+				});
+			});
+		}
 	}
 }
 
