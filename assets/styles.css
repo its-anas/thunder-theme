@@ -3577,6 +3577,12 @@ menu-drawer-component #close-icon {
     justify-content: space-around;
   }
 }
+.product-page__payment-methods {
+  padding: 0.5rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
 .product-page__pictures {
   display: flex;
   justify-content: center;

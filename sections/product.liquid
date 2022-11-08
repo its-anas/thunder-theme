@@ -73,6 +73,8 @@
         {% if image.alt contains '#color:' -%}
           {% assign image_alt = image.alt | split: '#color:' %}
           data-variant-color="{{ image_alt }}"
+        {% elsif image.attached_to_variant? %}
+          data-attached-to-variant="{{ image.variants[0].title }}"
         {% endif %}
       >
         <div class="item-picture">
@@ -101,6 +103,8 @@
         {% if thumbnail.alt contains '#color:' -%}
           {% assign thumbnail_alt = thumbnail.alt | split: '#color:' %}
           data-variant-color="{{ thumbnail_alt }}"
+        {% elsif thumbnail.attached_to_variant? %}
+          data-attached-to-variant="{{ thumbnail.variants[0].title }}"
         {% endif %}
       >
         <div class="thumbnail-picture media">
@@ -167,7 +171,8 @@
           {% if price_difference > 0 %}
             <div class="product-page__tag">
               <p class="tag--animated tag-text">
-                SAVE {{ current_variant.compare_at_price | minus: current_variant.price | money }}
+                {{ section.settings.price_difference_text }}
+                {{ current_variant.compare_at_price | minus: current_variant.price | money }}
               </p>
             </div>
           {% endif %}
@@ -279,34 +284,41 @@
           </a>
         </div>
 
-        <div class="product-page__recommended-products-section">
-          <h6 class="product-page__recommended-products-section-title">Buy it with</h6>
-          <div class="product-page__recommended-product-list">
-            {% for bundled_product in product.metafields.custom.bundles.value limit: 3 %}
-              <div class="product-page__recommended-product-container">
-                <a href="{{ bundled_product.url }}" class="product-page__recommended-product media">
-                  <img
-                    srcset="{{ bundled_product.featured_image | image_url }}"
-                    loading="lazy"
-                    alt="{{ bundled_product.featured_image | escape }}"
-                    width="{{ bundled_product.featured_image.width }}"
-                    height="{{ bundled_product.featured_image.height }}"
-                    class="full"
-                  >
-                  <div class="quick-add-icon">
-                    {% render 'icons', icon: 'quick-add' -%}
-                  </div>
-                </a>
-                <a href="{{ bundled_product.url }}" class="product-page__recommended-product-title">
-                  {{ bundled_product.title }}
-                </a>
-              </div>
-            {% endfor %}
+        {% if product.metafields.custom.recommended_products %}
+          <div class="product-page__recommended-products-section">
+            <h6 class="product-page__recommended-products-section-title">Buy it with</h6>
+            <div class="product-page__recommended-product-list">
+              {% for bundled_product in product.metafields.custom.recommended_products.value limit: 3 %}
+                <div class="product-page__recommended-product-container">
+                  <a href="{{ bundled_product.url }}" class="product-page__recommended-product media">
+                    <img
+                      srcset="{{ bundled_product.featured_image | image_url }}"
+                      loading="lazy"
+                      alt="{{ bundled_product.featured_image | escape }}"
+                      width="{{ bundled_product.featured_image.width }}"
+                      height="{{ bundled_product.featured_image.height }}"
+                      class="full"
+                    >
+                    <div class="quick-add-icon">
+                      {% render 'icons', icon: 'quick-add' -%}
+                    </div>
+                  </a>
+                  <a href="{{ bundled_product.url }}" class="product-page__recommended-product-title">
+                    {{ bundled_product.title }}
+                  </a>
+                </div>
+              {% endfor %}
+            </div>
           </div>
-        </div>
+        {% endif %}
 
-        <div class="product-page__payment-methods" style="padding: 0.5rem;">
-          <p>VISA PAYPAL STRIPE</p>
+        <div class="product-page__payment-methods">
+          {% if section.settings.show_payment_methods == true %}
+            {% assign enabled_payment_types = section.settings.chosen_payment_methods | remove: ' ' | split: ',' %}
+            {% for type in enabled_payment_types %}
+              {{ type | payment_type_svg_tag: class: 'icon' }}
+            {% endfor %}
+          {% endif %}
         </div>
       </div>
     </div>
@@ -408,15 +420,24 @@
   let productJson = {{ product | json }};
 
   if (productJson.variants.length > 1) {
-
         function selectCallback(variant, selector) {
+          if (document.querySelector(".product-page__tag")) {
+            document.querySelector(".product-page__tag").innerHTML = "";
+         }
+          document.querySelector(".product-page__price--compare-at").innerHTML = "";
+
+
           let priceDifference = variant.compare_at_price - variant.price;
 
           if (priceDifference > 0) {
-            document.querySelector(".product-page__tag p").innerHTML = "SAVE " + formatMoney(priceDifference, "{{ shop.money_format }}");
+            if (document.querySelector(".product-page__tag")) {
+              document.querySelector(".product-page__tag").innerHTML = "<p class='tag--animated tag-text'>{{ section.settings.price_difference_text }} " + formatMoney(priceDifference, "{{ shop.money_format }}</p>");
+            }
+          }
+          if (variant.compare_at_price > 0) {
+            document.querySelector(".product-page__price--compare-at").innerHTML = formatMoney(variant.compare_at_price,"{{ shop.money_format }}")
           }
           document.querySelector(".product-page__price--actual").innerHTML = formatMoney(variant.price,"{{ shop.money_format }}");
-          document.querySelector(".product-page__price--compare-at").innerHTML = formatMoney(variant.compare_at_price,"{{ shop.money_format }}")
 
           for (var key in variantsInventory) {
             if (key == variant.title) {
@@ -430,7 +451,11 @@
           document.querySelector(".product-page-slider__indicators").innerHTML = "";
 
           document.querySelectorAll(".product-hidden-images .item").forEach((item)=>{
-            if (item.getAttribute("data-variant-color") && variant.featured_media) {
+            if (item.getAttribute("data-attached-to-variant")) {
+              if (item.getAttribute("data-attached-to-variant") === variant.title) {
+                let itemClone = item.cloneNode(true);
+                document.querySelector(".product-page-slider__slides-container .slide").appendChild(itemClone);}
+            } else if (item.getAttribute("data-variant-color") && variant.featured_media) {
               if (item.getAttribute("data-variant-color") === variant.featured_media.alt.split("#color:")[1] ) {
                 let itemClone = item.cloneNode(true);
                 document.querySelector(".product-page-slider__slides-container .slide").appendChild(itemClone);
@@ -441,7 +466,11 @@
           })
 
           document.querySelectorAll(".product-hidden-thumbnails .thumbnail").forEach((thumbnail)=>{
-            if (thumbnail.getAttribute("data-variant-color") && variant.featured_media) {
+            if (thumbnail.getAttribute("data-attached-to-variant")) {
+              if (thumbnail.getAttribute("data-attached-to-variant") === variant.title) {
+                let thumbnailClone = thumbnail.cloneNode(true);
+                document.querySelector(".product-page-slider__thumbnails").appendChild(thumbnailClone);}
+            } else if (thumbnail.getAttribute("data-variant-color") && variant.featured_media) {
               if (thumbnail.querySelector(".thumbnail-picture img").alt === variant.featured_media.alt ) {
                 let thumbnailClone = thumbnail.cloneNode(true);
                 document.querySelector(".product-page-slider__thumbnails").appendChild(thumbnailClone);
@@ -475,7 +504,27 @@
 {
   "name": "Product page",
   "class": "page-product",
-  "settings": [],
+  "settings": [
+    {
+      "type": "text",
+      "id": "price_difference_text",
+      "label": "Price difference disclaimer text",
+      "default": "SAVE"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_payment_methods",
+      "label": "Show payment methods",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "chosen_payment_methods",
+      "label": "Option 2: Pick which payment methods to show",
+      "default": "paypal,visa,master,american_express,discover,shopify_pay",
+      "info": "All available payment methods: afterpay,american_express,apple_pay,bitcoin,dankort,diners_club,discover,dogecoin,dwolla,facebook_pay,forbrugsforeningen,google_pay,ideal,jcb,klarna,klarna-pay-later,litecoin,maestro,master,paypal,shopify_pay,sofort,visa"
+    }
+  ],
   "blocks": []
 }
 {% endschema %}
