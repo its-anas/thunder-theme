@@ -1554,3 +1554,34 @@ class ProductPageTabs extends HTMLElement {
 }
 
 customElements.define("product-page-tabs", ProductPageTabs);
+
+// ANCHOR: Quantity field
+
+class QuantityField extends HTMLElement {
+	constructor() {
+		super();
+	}
+	connectedCallback() {
+		this.attachShadow({ mode: "open" });
+		this.shadowRoot.innerHTML = "<slot></slot>";
+		this.quantityField();
+	}
+	quantityField() {
+		let quantityField = this.querySelector("#quantity-field");
+		let quantityFieldInput = quantityField.querySelector("#quantity-field__input");
+		let quantityFieldPlus = quantityField.querySelector("#quantity-field__plus");
+		let quantityFieldMinus = quantityField.querySelector("#quantity-field__minus");
+
+		quantityFieldPlus.addEventListener("click", () => {
+			quantityFieldInput.value = parseInt(quantityFieldInput.value) + 1;
+		});
+
+		quantityFieldMinus.addEventListener("click", () => {
+			if (parseInt(quantityFieldInput.value) > 1) {
+				quantityFieldInput.value = parseInt(quantityFieldInput.value) - 1;
+			}
+		});
+	}
+}
+
+customElements.define("quantity-field", QuantityField);

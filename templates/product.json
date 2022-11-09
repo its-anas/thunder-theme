@@ -3,7 +3,14 @@
     "main": {
       "type": "product",
       "settings": {}
+    },
+    "product-tabs": {
+      "type": "product-tabs",
+      "settings": {}
     }
   },
-  "order": ["main"]
+  "order": [
+    "main",
+    "product-tabs"
+  ]
 }
