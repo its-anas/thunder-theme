@@ -8,27 +8,35 @@ let icons = document.querySelectorAll(".shop-the-look__icon");
 document.addEventListener("click", (event) => {
 	icons.forEach((icon) => {
 		if (!icon.contains(event.target)) {
-			icon.classList.remove("shop-the-look__icon-rotate");
-			if (icon.nextElementSibling) {
-				icon.nextElementSibling.classList.remove("clicked");
-			}
+			handleUnselectedIcon(icon);
 		} else if (icon.contains(event.target)) {
-			if (!icon.classList.contains("shop-the-look__icon-rotate")) {
-				icons.forEach((i) => {
-					i.classList.remove("shop-the-look__icon-rotate");
-					if (i.nextElementSibling) {
-						i.nextElementSibling.classList.remove("clicked");
-					}
-				});
-				icon.classList.add("shop-the-look__icon-rotate");
-				icon.nextElementSibling.classList.add("clicked");
-			} else {
-				icon.classList.remove("shop-the-look__icon-rotate");
-				icon.nextElementSibling.classList.remove("clicked");
-			}
+			handleSelectedIcon(icon);
 		}
 	});
 });
+
+function handleUnselectedIcon(icon) {
+	icon.classList.remove("shop-the-look__icon-rotate");
+	if (icon.nextElementSibling) {
+		icon.nextElementSibling.classList.remove("clicked");
+	}
+}
+
+function handleSelectedIcon(icon) {
+	if (!icon.classList.contains("shop-the-look__icon-rotate")) {
+		icons.forEach((i) => {
+			i.classList.remove("shop-the-look__icon-rotate");
+			if (i.nextElementSibling) {
+				i.nextElementSibling.classList.remove("clicked");
+			}
+		});
+		icon.classList.add("shop-the-look__icon-rotate");
+		icon.nextElementSibling.classList.add("clicked");
+	} else {
+		icon.classList.remove("shop-the-look__icon-rotate");
+		icon.nextElementSibling.classList.remove("clicked");
+	}
+}
 
 // ANCHOR: lock page
 function lockPage() {

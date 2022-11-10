@@ -110,7 +110,8 @@ h6 {
 	line-height: 0.9;
 }
 
-p {
+p,
+label {
 	color: var(--text-color);
 }
 
@@ -700,11 +701,11 @@ slider-component {
 
 			@media screen and (max-width: 750px) {
 				width: 10%;
-				// display: none;
+				display: none;
 			}
 			@media screen and (min-width: 751px) and (max-width: 1024px) {
 				width: 10%;
-				// display: none;
+				display: none;
 			}
 
 			&:hover {
@@ -762,14 +763,10 @@ slider-component {
 				justify-content: flex-start;
 				align-items: flex-start;
 				z-index: 1;
-				transition: all 0.5s cubic-bezier(0.75, 0, 0.175, 1);
+				transition: all 0.5s cubic-bezier(0.45, 0.05, 0.55, 0.95);
 
 				@media screen and (min-width: 751px) {
-					transition: all 0.7s cubic-bezier(0.75, 0, 0.175, 1);
-				}
-
-				&.grabbing {
-					cursor: grabbing;
+					transition: all 0.7s cubic-bezier(0.45, 0.05, 0.55, 0.95);
 				}
 
 				.item {
@@ -1746,7 +1743,7 @@ $indicator-width: 40px;
 	&__container {
 		height: 100%;
 		display: flex;
-		transition: all 0.8s cubic-bezier(0.75, 0, 0.175, 1);
+		transition: all 0.8s cubic-bezier(0.45, 0.05, 0.55, 0.95);
 	}
 
 	&__slide {
@@ -4022,10 +4019,12 @@ menu-drawer-component {
 		justify-content: center;
 		align-items: flex-start;
 		height: 100%;
+		padding: 1rem 0rem;
 
 		@media screen and (min-width: 1025px) {
 			max-width: 650px;
 			width: 50%;
+			padding: 0rem;
 		}
 
 		product-page-slider {
@@ -4083,7 +4082,6 @@ menu-drawer-component {
 
 				.prev {
 					visibility: hidden;
-
 					left: 12px;
 
 					@media screen and (min-width: 1025px) {
@@ -4138,7 +4136,7 @@ menu-drawer-component {
 						z-index: 1;
 
 						@media screen and (max-width: 1024px) {
-							transition: all 0.5s cubic-bezier(0.75, 0, 0.175, 1);
+							transition: all 0.5s cubic-bezier(0.45, 0.05, 0.55, 0.95);
 						}
 
 						.item {
@@ -4153,10 +4151,10 @@ menu-drawer-component {
 
 							@media screen and (max-width: 1024px) {
 								opacity: 0.2;
-								transition: opacity 0.3s cubic-bezier(0.75, 0, 0.175, 1);
+								transition: opacity 0.3s cubic-bezier(0.45, 0.05, 0.55, 0.95);
 								&.active {
 									opacity: 1;
-									transition: opacity 0.3s cubic-bezier(0.75, 0, 0.175, 1);
+									transition: opacity 0.3s cubic-bezier(0.45, 0.05, 0.55, 0.95);
 								}
 							}
 
@@ -4179,11 +4177,6 @@ menu-drawer-component {
 					height: auto;
 					width: 100%;
 
-					@media screen and (min-width: 1025px) {
-						height: 0;
-						visibility: hidden;
-					}
-
 					span {
 						display: inline-block;
 						background-color: #fff;
@@ -4205,17 +4198,14 @@ menu-drawer-component {
 					flex-wrap: wrap;
 					cursor: pointer;
 
-					@media screen and (max-width: 750px) {
-						height: 0;
-						visibility: hidden;
-					}
-					@media screen and (min-width: 751px) and (max-width: 1024px) {
-						height: 0;
-						visibility: hidden;
-					}
-
 					.thumbnail {
-						width: calc(420px / 5);
+						width: calc(100% / 4);
+						@media screen and (min-width: 750px) and (max-width: 1024px) {
+							width: calc(100% / 5);
+						}
+						@media screen and (min-width: 1025px) {
+							width: calc(100% / 6);
+						}
 
 						img {
 							width: 95%;
@@ -4233,7 +4223,7 @@ menu-drawer-component {
 					.active {
 						box-sizing: border-box;
 						border: 2px solid white;
-						transition: all 0.1s cubic-bezier(0.75, 0, 0.175, 1);
+						transition: all 0.1s cubic-bezier(0.45, 0.05, 0.55, 0.95);
 					}
 				}
 			}
@@ -4298,9 +4288,20 @@ menu-drawer-component {
 	&__variants {
 		display: flex;
 		flex-direction: column;
-		justify-content: center;
-		align-items: center;
 		gap: 1rem;
+		&--pill {
+			display: flex;
+			flex-direction: column;
+			&-container {
+				display: flex;
+				flex-wrap: wrap;
+				&-input {
+					display: flex;
+					justify-content: center;
+					align-items: center;
+				}
+			}
+		}
 	}
 
 	.selector-wrapper {

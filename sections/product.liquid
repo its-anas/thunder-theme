@@ -63,6 +63,27 @@
   .item {
   aspect-ratio: 1;
   }
+
+  {% if section.settings.thumbnails_on_mobile == false %}
+    @media screen and (max-width: 1024px) {
+      .product-page-slider__thumbnails {
+          height: 0 !important;
+          visibility: hidden;
+      }
+    }
+  {% else %}
+    .product-page-slider__indicators {
+        height: 0 !important;
+        visibility: hidden;
+    }
+    .product-page-slider .prev, .product-page-slider .next {
+      opacity: 0 !important;
+    }
+    .product-page-slider__slides-container .slide, .product-page-slider__slides-container .slide .item {
+      transition: none !important;
+      opacity: 1 !important;
+    }
+  {% endif %}
 {% endstyle %}
 
 <div class="product-hidden-images" style="display: none;">
@@ -193,23 +214,35 @@
                   </div>
                 </div>
               {% when 'variants_selector' %}
-                {% if product.has_only_default_variant %}
-                {% else %}
-                  <div class="product-page__variants">
-                    <select id="product-select" name="id">
-                      {% for variant in product.variants %}
-                        <option
-                          value="{{ variant.id }}"
-                          {% if variant == product.selected_or_first_available_variant %}
-                            selected="selected"
-                          {% endif %}
-                        >
-                          {{ variant.title }} - {{ variant.price | money }}
-                        </option>
-                      {% endfor %}
-                    </select>
-                  </div>
-                {% endif %}
+                <div class="product-page__variants">
+                  {% unless product.has_only_default_variant %}
+                    {% for option in product.options_with_values %}
+                      <div class="product-page__variants--pill">
+                        <label>{{ option.name }}</label>
+                        <div class="product-page__variants--pill-container">
+                          {% assign index = forloop.index %}
+                          {% for value in option.values %}
+                            <div class="product-page__variants--pill-input">
+                              <input
+                                class="single-option-selector-{{ section.id }}"
+                                id="option-{{ value }}-{{ forloop.index }}"
+                                type="radio"
+                                name="option"
+                                value="{{ value | escape}}"
+                                data-index="option{{ index }}"
+                              >
+                              <label for="option-{{ value }}-{{ forloop.index }}">{{ value }}</label>
+                            </div>
+                          {% endfor %}
+                        </div>
+                      </div>
+                    {% endfor %}
+
+                    <div class="product-page__variants">
+                      <div id="product-select" name="id"></div>
+                    </div>
+                  {% endunless %}
+                </div>
               {% when 'quantity' %}
                 <quantity-field class="quantity">
                   <label for="quantity-text"><p>Quantity</p></label>
@@ -243,8 +276,85 @@
                   <p class="product-page__stock-disclaimer__text"></p>
                 </div>
               {% when 'countdown_timer' %}
-                <div class="product-page__countdown-timer">
-                  <p>Countdown timer</p>
+                <div class="product-page__countdown-timer {{ section.id }}">
+                  {% style %}
+                    .{{ block.id }}.countdown-timer {
+                      gap: {{ block.settings.space_between_elements }}rem;
+                      margin-top: {{ block.settings.space_outside | divided_by: 2 }}rem;
+                      margin-bottom: {{ block.settings.space_outside | divided_by: 2 }}rem;
+                    }
+                    .{{ block.id }}--color {
+                      background-color: {{ block.settings.background_color }};
+                    }
+
+                    .{{ block.id }}.countdown-timer > .countdown-timer__timers > .countdown-timer__container {
+                      background-color: {{ block.settings.digits_background_color }};
+                      border-radius: {{ block.settings.digits_container_border }}%;
+                    }
+
+                    .{{ block.id }}.countdown-timer > .countdown-timer__timers > .countdown-timer__container > p {
+                      color: {{ block.settings.digits_color }};
+                    }
+                  {% endstyle %}
+
+                  {% liquid
+                    assign days = block.settings.time_days | times: 24.00 | times: 60.00
+                    assign hours = block.settings.time_hours | times: 60.00
+                    assign mins = block.settings.time_mins
+                    assign secs = block.settings.time_secs | divided_by: 60.00
+                    assign timeInMinutes = days | plus: hours | plus: mins | plus: secs
+
+                    assign year = block.settings.date_year
+                    assign month = block.settings.date_month | prepend: '00' | slice: -2, 2
+                    assign day = block.settings.date_day | prepend: '00' | slice: -2, 2
+                    assign hour = block.settings.date_hour | prepend: '00' | slice: -2, 2
+                    assign min = block.settings.date_min | prepend: '00' | slice: -2, 2
+                    assign sec = block.settings.date_sec | prepend: '00' | slice: -2, 2
+                  %}
+
+                  {% capture timeInDate -%}
+                    {{- year }}-{{ month }}-{{ day }}T{{ hour }}:{{ min }}:{{ sec -}}
+                  {%- endcapture %}
+                  {% capture countdownType %}{{ block.settings.countdown_timer_type }}{% endcapture %}
+                  {% capture afterExpirationTimeOnly %}{{ block.settings.afterExpirationTimeOnly }}{% endcapture %}
+
+                  <div
+                    id="countdown-timer-{{ block.id }}"
+                    class="{{ block.id }} countdown-timer"
+                  >
+                    <div class="countdown-timer__text">
+                      <p>{{ block.settings.text }}</p>
+                    </div>
+                    <countdown-timer
+                      countdown-type="{{ countdownType }}"
+                      time-in-date="{{ timeInDate }}"
+                      time-in-minutes="{{ timeInMinutes }}"
+                      after-expiration="{{ afterExpirationTimeOnly }}"
+                      section-id="countdown-timer-{{ block.id }}"
+                      cookie-name="countdown-timer-cookie-{{ block.id }}"
+                      class="countdown-timer__timers"
+                    >
+                      <div class="countdown-timer__container">
+                        <p class="days digits--{{ block.settings.digits_size }}"></p>
+                        <p class="label">Days</p>
+                      </div>
+                      <div class="countdown-timer__container">
+                        <p class="hours digits--{{ block.settings.digits_size }}"></p>
+                        <p class="label">Hours</p>
+                      </div>
+                      <div class="countdown-timer__container">
+                        <p class="minutes digits--{{ block.settings.digits_size }}"></p>
+                        <p class="label">Mins</p>
+                      </div>
+                      <div class="countdown-timer__container">
+                        <p class="seconds digits--{{ block.settings.digits_size }}"></p>
+                        <p class="label">Secs</p>
+                      </div>
+                    </countdown-timer>
+                    <div class="countdown-timer__message">
+                      <h6>{{ block.settings.message }}</h6>
+                    </div>
+                  </div>
                 </div>
               {% when 'buttons' %}
                 <div class="product-page__buttons buttons buttons--center">
@@ -429,8 +539,6 @@
       observer.observe(targetNode, config);
     }
 
-
-
     {% comment %} {% if product.images.size > 0 %}
       let productWithNoVariants = [];
       let productWithNoFeaturedImage = [];
@@ -475,6 +583,14 @@
     {% endif %} {% endcomment %}
 
     let productJson = {{ product | json }};
+    {% comment %} UNFINISHED: Continue here {% endcomment %}
+    document.querySelectorAll('input[type=radio]').forEach( (radio) => { radio.addEventListener("click", () => {
+        document.querySelectorAll('.selector-wrapper select option').forEach( (option) => {
+            if ( option.label === radio.value) {
+                option.parentNode.value = radio.value;
+            }
+        } )
+    })})
 
     if (document.querySelector(".product-page__variants") && productJson.variants.length > 1) {
           function selectCallback(variant, selector) {
@@ -588,7 +704,14 @@
 {
   "name": "Product page",
   "class": "page-product",
-  "settings": [],
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "thumbnails_on_mobile",
+      "label": "Show product thumbnails on mobile instead of indicators",
+      "default": false
+    }
+  ],
   "blocks": [
     { "type": "vendor", "name": "Vendor", "limit": 1, "settings": [] },
     { "type": "name", "name": "Product name", "limit": 1, "settings": [] },
@@ -627,7 +750,205 @@
         }
       ]
     },
-    { "type": "countdown_timer", "name": "Countdown timer", "limit": 1, "settings": [] },
+    {
+      "type": "countdown_timer",
+      "name": "Countdown timer",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "header",
+          "content": "Style"
+        },
+        {
+          "type": "select",
+          "id": "digits_size",
+          "label": "Digits size",
+          "options": [
+            {
+              "value": "small",
+              "label": "Small"
+            },
+            {
+              "value": "big",
+              "label": "Big"
+            }
+          ],
+          "default": "small"
+        },
+        {
+          "type": "range",
+          "id": "digits_container_border",
+          "min": 0,
+          "max": 30,
+          "step": 1,
+          "unit": "%",
+          "label": "Digits container border radius",
+          "default": 10
+        },
+        {
+          "type": "color",
+          "id": "digits_color",
+          "label": "Digits color",
+          "default": "#000000"
+        },
+        {
+          "type": "color",
+          "id": "digits_background_color",
+          "label": "Digits background color",
+          "default": "#fcdb33"
+        },
+        {
+          "type": "header",
+          "content": "Countdown timer settings"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Hurry Up! Offer ends in:"
+        },
+        {
+          "type": "text",
+          "id": "message",
+          "label": "After expiration message",
+          "default": "Offer has expired",
+          "info": "It is optional for Option 1 but required for Option 2"
+        },
+        {
+          "type": "select",
+          "id": "countdown_timer_type",
+          "label": "Countdown timer type",
+          "options": [
+            {
+              "value": "time",
+              "label": "Option 1: Based on user cookies"
+            },
+            {
+              "value": "date",
+              "label": "Option 2: Based on a date"
+            }
+          ],
+          "default": "time"
+        },
+        {
+          "type": "header",
+          "content": "Option 1: Based on user cookies",
+          "info": "⚠️ Remember that this option also saves your browser cookies. So if your new settings aren't taking effect immediately, simply clear the cookies and refresh the page."
+        },
+        {
+          "type": "range",
+          "id": "time_days",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "d",
+          "label": "Days",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "time_hours",
+          "min": 0,
+          "max": 24,
+          "step": 1,
+          "unit": "h",
+          "label": "Hours",
+          "default": 6
+        },
+        {
+          "type": "range",
+          "id": "time_mins",
+          "min": 0,
+          "max": 60,
+          "step": 1,
+          "unit": "m",
+          "label": "Minutes",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "time_secs",
+          "min": 0,
+          "max": 60,
+          "step": 1,
+          "unit": "s",
+          "label": "Seconds",
+          "default": 0
+        },
+        {
+          "type": "select",
+          "id": "afterExpirationTimeOnly",
+          "label": "After countdown expires",
+          "options": [
+            {
+              "value": "repeatCountdown",
+              "label": "Repeat countdown"
+            },
+            {
+              "value": "showMessage",
+              "label": "Show message"
+            }
+          ],
+          "default": "repeatCountdown",
+          "info": "This applied only to Option 1."
+        },
+        {
+          "type": "header",
+          "content": "Option 2: Based on a date"
+        },
+        {
+          "type": "range",
+          "id": "date_year",
+          "min": 2022,
+          "max": 2032,
+          "step": 1,
+          "unit": "y",
+          "label": "Year",
+          "default": 2023
+        },
+        {
+          "type": "range",
+          "id": "date_month",
+          "min": 1,
+          "max": 12,
+          "step": 1,
+          "unit": "m",
+          "label": "Month",
+          "default": 1
+        },
+        {
+          "type": "range",
+          "id": "date_day",
+          "min": 1,
+          "max": 31,
+          "step": 1,
+          "unit": "d",
+          "label": "Day",
+          "default": 1,
+          "info": "⚠️ Pay attention: If you put 31 to a month that ends with 30 or 28 days, it will result in an error in calculation."
+        },
+        {
+          "type": "range",
+          "id": "date_hour",
+          "min": 0,
+          "max": 24,
+          "step": 1,
+          "unit": "h",
+          "label": "Hour",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "date_min",
+          "min": 0,
+          "max": 60,
+          "step": 1,
+          "unit": "m",
+          "label": "Minute",
+          "default": 0
+        }
+      ]
+    },
     {
       "type": "buttons",
       "name": "Buttons",

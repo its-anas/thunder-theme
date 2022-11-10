@@ -496,9 +496,9 @@
                ],
                "settings": {
                     "aspect_ratio": 0.6,
-                    "mobile_items": 2,
-                    "tablet_items": 3,
-                    "desktop_items": 4,
+                    "mobile_items": 3,
+                    "tablet_items": 4,
+                    "desktop_items": 5,
                     "heading": "Featured collections",
                     "heading_size": "h6",
                     "background_type": "just-color",

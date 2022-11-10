@@ -2,6 +2,9 @@
   "sections": {
     "main": {
       "type": "product",
+      "settings": {
+        "thumbnails_on_mobile": false
+      },
       "blocks": {
         "vendor": {
           "type": "vendor"
@@ -34,7 +37,26 @@
           }
         },
         "countdown_timer": {
-          "type": "countdown_timer"
+          "type": "countdown_timer",
+          "settings": {
+            "Digits size": "small",
+            "digits_container_border": 10,
+            "digits_color": "#fff",
+            "digits_background_color": "transparent",
+            "text": "Hurry Up! Offer ends in:",
+            "message": "Offer has expired",
+            "countdown_timer_type": "time",
+            "time_days": 0,
+            "time_hours": 6,
+            "time_mins": 0,
+            "time_secs": 0,
+            "afterExpirationTimeOnly": "repeatCountdown",
+            "date_year": 2023,
+            "date_month": 1,
+            "date_day": 1,
+            "date_hour": 0,
+            "date_min": 0
+          }
         },
         "buttons": {
           "type": "buttons",
