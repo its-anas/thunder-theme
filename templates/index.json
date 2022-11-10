@@ -124,7 +124,7 @@
                     "mobile_items": 3,
                     "tablet_items": 5,
                     "desktop_items": 6,
-                    "background_color": "transparent",
+                    "background_color": "rgba(0,0,0,0)",
                     "space_between_elements": 1,
                     "space_outside_elements": 0,
                     "row_width": 40,
@@ -245,7 +245,7 @@
                     "heading": "Featured collection",
                     "heading_size": "h6",
                     "background_type": "just-color",
-                    "background_color": "transparent",
+                    "background_color": "rgba(0,0,0,0)",
                     "space_between_elements": 1,
                     "space_outside_elements": 0,
                     "row_width": 80,
@@ -283,8 +283,8 @@
                               "product": "",
                               "desktop_vertical_position": 30,
                               "desktop_horizontal_position": 28,
-                              "mobile_vertical_position": 50,
-                              "mobile_horizontal_position": 50
+                              "mobile_vertical_position": 30,
+                              "mobile_horizontal_position": 29
                          }
                     },
                     "product2": {
@@ -293,7 +293,7 @@
                               "product": "",
                               "desktop_vertical_position": 77,
                               "desktop_horizontal_position": 50,
-                              "mobile_vertical_position": 50,
+                              "mobile_vertical_position": 77,
                               "mobile_horizontal_position": 50
                          }
                     },
@@ -303,8 +303,8 @@
                               "product": "",
                               "desktop_vertical_position": 19,
                               "desktop_horizontal_position": 70,
-                              "mobile_vertical_position": 50,
-                              "mobile_horizontal_position": 50
+                              "mobile_vertical_position": 19,
+                              "mobile_horizontal_position": 77
                          }
                     }
                },
@@ -318,7 +318,7 @@
                     "mobile_aspect_ratio": 1,
                     "selector_color": "#000000",
                     "selector_background_color": "#ffffff",
-                    "openable_background_color": "#000",
+                    "openable_background_color": "#000000",
                     "heading": "Shop our look",
                     "heading_size": "h6",
                     "space_outside_elements": 0,
@@ -404,7 +404,7 @@
                "settings": {
                     "section_style": "full-width",
                     "space_outside": 0,
-                    "background_color": "transparent",
+                    "background_color": "rgba(0,0,0,0)",
                     "image_size": "large",
                     "image_style": "fit",
                     "heading": "Compare our products",
@@ -502,7 +502,7 @@
                     "heading": "Featured collections",
                     "heading_size": "h6",
                     "background_type": "just-color",
-                    "background_color": "transparent",
+                    "background_color": "rgba(0,0,0,0)",
                     "collection_height": 350,
                     "space_between_elements": 1,
                     "space_outside": 0,
@@ -684,7 +684,7 @@
                     "animated": true,
                     "animation_speed": 40,
                     "background_type": "just-color",
-                    "background_color": "transparent",
+                    "background_color": "rgba(0,0,0,0)",
                     "heading": "Hear from our customers",
                     "heading_size": "h6",
                     "space_outside": 0,
@@ -693,8 +693,69 @@
                     "review_width": 250,
                     "review_height": 150,
                     "review_background_color": "#222222",
-                    "review_border_color": "#fff",
+                    "review_border_color": "#ffffff",
                     "review_border_width": 2
+               }
+          },
+          "gallery2": {
+               "type": "gallery",
+               "blocks": {
+                    "template--14285318160433__bf25c28c-3d03-4371-8a92-4e2dc8b83f80-16681014416a8c0f4a-0": {
+                         "type": "image",
+                         "settings": {
+                              "heading": "Heading",
+                              "heading_size": "h4",
+                              "text": "This should be a place to put a text",
+                              "button_text": "Button",
+                              "button_link": ""
+                         }
+                    },
+                    "image2": {
+                         "type": "image",
+                         "settings": {
+                              "heading": "Heading",
+                              "heading_size": "h4",
+                              "text": "This should be a place to put a text",
+                              "button_text": "Button",
+                              "button_link": ""
+                         }
+                    },
+                    "image3": {
+                         "type": "image",
+                         "settings": {
+                              "heading": "Heading",
+                              "heading_size": "h4",
+                              "text": "This should be a place to put a text",
+                              "button_text": "Button",
+                              "button_link": ""
+                         }
+                    },
+                    "image4": {
+                         "type": "image",
+                         "settings": {
+                              "heading": "Heading",
+                              "heading_size": "h4",
+                              "text": "This should be a place to put a text",
+                              "button_text": "Button",
+                              "button_link": ""
+                         }
+                    }
+               },
+               "block_order": [
+                    "template--14285318160433__bf25c28c-3d03-4371-8a92-4e2dc8b83f80-16681014416a8c0f4a-0",
+                    "template--14285318160433__bf25c28c-3d03-4371-8a92-4e2dc8b83f80-16681014416a8c0f4a-1",
+                    "template--14285318160433__bf25c28c-3d03-4371-8a92-4e2dc8b83f80-16681014416a8c0f4a-2",
+                    "dfba6eb7-609a-4b79-810a-e32b44ae64a1"
+               ],
+               "settings": {
+                    "gallery_style": "all_in_one",
+                    "section_style": "full-width",
+                    "overlay_color": "#000000",
+                    "overlay_opacity": 10,
+                    "vertical_position": "center",
+                    "horizontal_position": "center",
+                    "deskop_image_height": 350,
+                    "mobile_image_height": 300
                }
           },
           "text-with-icon": {
@@ -752,6 +813,67 @@
                     "section_style": "full-width"
                }
           },
+          "faq": {
+               "type": "faq",
+               "blocks": {
+                    "text": {
+                         "type": "text",
+                         "settings": {
+                              "question": "Put your question here",
+                              "answer": "Put the answer here."
+                         }
+                    },
+                    "text2": {
+                         "type": "text",
+                         "settings": {
+                              "question": "Put your question here",
+                              "answer": "Put the answer here."
+                         }
+                    },
+                    "text3": {
+                         "type": "text",
+                         "settings": {
+                              "question": "Put your question here",
+                              "answer": "Put the answer here."
+                         }
+                    },
+                    "text4": {
+                         "type": "text",
+                         "settings": {
+                              "question": "Put your question here",
+                              "answer": "Put the answer here."
+                         }
+                    },
+                    "text5": {
+                         "type": "text",
+                         "settings": {
+                              "question": "Put your question here",
+                              "answer": "Put the answer here."
+                         }
+                    }
+               },
+               "block_order": [
+                    "text",
+                    "text2",
+                    "text3",
+                    "text4",
+                    "text5"
+               ],
+               "settings": {
+                    "heading": "FAQ",
+                    "heading_size": "h6",
+                    "show_image": true,
+                    "image_style": "fit",
+                    "background_color": "transparent",
+                    "space_outside": 0,
+                    "space_between_elements": 1,
+                    "section_style": "full-width",
+                    "tabs_width": 1000,
+                    "image_height": 300,
+                    "question_background_color": "#222222",
+                    "answer_background_color": "#101010"
+               }
+          },
           "logo-list": {
                "type": "logo-list",
                "blocks": {
@@ -796,7 +918,7 @@
                     "logo_height": 80,
                     "space_between_elements": 1,
                     "space_outside": 0,
-                    "background_color": "transparent"
+                    "background_color": "rgba(0,0,0,0)"
                }
           }
      },
@@ -814,7 +936,9 @@
           "video-with-text",
           "animated-rich-text",
           "testimonials",
+          "gallery2",
           "text-with-icon",
+          "faq",
           "logo-list"
      ]
 }
