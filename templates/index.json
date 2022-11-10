@@ -1,4 +1,14 @@
 {
-     "sections": {},
-     "order": []
+     "sections": {
+          "slideshow": {
+               "type": "slideshow"
+          },
+          "multi-icon": {
+               "type": "multi-icon"
+          }
+     },
+     "order": [
+          "slideshow",
+          "multi-icon"
+     ]
 }

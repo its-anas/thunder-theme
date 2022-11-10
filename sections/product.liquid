@@ -476,118 +476,101 @@
 
     let productJson = {{ product | json }};
 
-    if (document.querySelector(".product-page__variants")) {
-        if (productJson.variants.length > 1) {
-              function selectCallback(variant, selector) {
-                document.querySelector(".product-page__price--compare-at").innerHTML = "";
+    if (document.querySelector(".product-page__variants") && productJson.variants.length > 1) {
+          function selectCallback(variant, selector) {
+            document.querySelector(".product-page__price--compare-at").innerHTML = "";
 
-                let priceDifference = variant.compare_at_price - variant.price;
+            let priceDifference = variant.compare_at_price - variant.price;
 
-                if (priceDifference > 0) {
-                    if (document.querySelector(".product-page__tag")) {
-                      document.querySelector(".product-page__tag").classList.remove("hidden");
-                      document.querySelector(".product-page__tag").innerHTML = "<p class='tag--animated tag-text'> {{ price_difference_text }} " + formatMoney(priceDifference, "{{ shop.money_format }}</p>");
-                    }
-                } else {
-                    if (document.querySelector(".product-page__tag")) {
-                      document.querySelector(".product-page__tag").classList.add("hidden");
-                   }
+            if (priceDifference > 0) {
+                if (document.querySelector(".product-page__tag")) {
+                  document.querySelector(".product-page__tag").classList.remove("hidden");
+                  document.querySelector(".product-page__tag").innerHTML = "<p class='tag--animated tag-text'> {{ price_difference_text }} " + formatMoney(priceDifference, "{{ shop.money_format }}</p>");
                 }
-                if (variant.compare_at_price > 0) {
-                  document.querySelector(".product-page__price--compare-at").innerHTML = formatMoney(variant.compare_at_price,"{{ shop.money_format }}")
+            } else {
+                if (document.querySelector(".product-page__tag")) {
+                  document.querySelector(".product-page__tag").classList.add("hidden");
                 }
-                document.querySelector(".product-page__price--actual").innerHTML = formatMoney(variant.price,"{{ shop.money_format }}");
-                for (var key in variantsInventory) {
-                  if (key == variant.title) {
-                    if (variantsInventory[key] > 0 && variantsInventory[key] < {{ stock_alert_threshold }} ) {
-                      if (document.querySelector(".product-page__stock-disclaimer__text")) {
-                        document.querySelector(".product-page__stock-disclaimer__text").innerHTML =  `Only ${variantsInventory[key]} left in stock`;
-                      }
-                    }
-                    if (variantsInventory[key] > 0) {
-                      if (document.getElementById("dynamic-buy-button").classList.contains("sold-out")) {
-                        document.getElementById("add-to-cart-button").classList.remove("sold-out");
-                        document.getElementById("add-to-cart-button").innerHTML = "ADD TO CART";
-
-                        document.getElementById("dynamic-buy-button").classList.remove("sold-out");
-                      }
-                    } else if (variantsInventory[key] === 0) {
-                      if (document.querySelector(".product-page__stock-disclaimer__text")) {
-                        document.querySelector(".product-page__stock-disclaimer__text").innerHTML =  `Out of stock`;
-                      }
-                      document.getElementById("add-to-cart-button").classList.add("sold-out");
-                      document.getElementById("add-to-cart-button").innerHTML = "SOLD OUT";
-
-                      document.getElementById("dynamic-buy-button").classList.add("sold-out");
-                    }
+            }
+            if (variant.compare_at_price > 0) {
+              document.querySelector(".product-page__price--compare-at").innerHTML = formatMoney(variant.compare_at_price,"{{ shop.money_format }}")
+            }
+            document.querySelector(".product-page__price--actual").innerHTML = formatMoney(variant.price,"{{ shop.money_format }}");
+            for (var key in variantsInventory) {
+              if (key == variant.title) {
+                if (variantsInventory[key] > 0 && variantsInventory[key] < {{ stock_alert_threshold }} ) {
+                  if (document.querySelector(".product-page__stock-disclaimer__text")) {
+                    document.querySelector(".product-page__stock-disclaimer__text").innerHTML =  `Only ${variantsInventory[key]} left in stock`;
                   }
                 }
+                if (variantsInventory[key] > 0) {
+                  if (document.getElementById("dynamic-buy-button").classList.contains("sold-out")) {
+                    document.getElementById("add-to-cart-button").classList.remove("sold-out");
+                    document.getElementById("add-to-cart-button").innerHTML = "ADD TO CART";
 
-                document.querySelector(".product-page-slider__slides-container .slide").innerHTML = "";
-                document.querySelector(".product-page-slider__thumbnails").innerHTML = "";
-                document.querySelector(".product-page-slider__indicators").innerHTML = "";
-
-                {% comment %} storedProductImages.forEach((array) => {
-                    if (variant.title.includes("no variant") ) {
-                      document.querySelector(".product-page-slider__slides-container .slide").innerHTML += array.picture;
-                    }
+                    document.getElementById("dynamic-buy-button").classList.remove("sold-out");
                   }
-                ); {% endcomment %}
+                } else if (variantsInventory[key] === 0) {
+                  if (document.querySelector(".product-page__stock-disclaimer__text")) {
+                    document.querySelector(".product-page__stock-disclaimer__text").innerHTML =  `Out of stock`;
+                  }
+                  document.getElementById("add-to-cart-button").classList.add("sold-out");
+                  document.getElementById("add-to-cart-button").innerHTML = "SOLD OUT";
 
-                document.querySelector(".product-page-slider__slides-container .slide").innerHTML = "";
-                document.querySelector(".product-page-slider__thumbnails").innerHTML = "";
-                document.querySelector(".product-page-slider__indicators").innerHTML = "";
-
-                document.querySelectorAll(".product-hidden-images .item").forEach((item)=>{
-                  if (item.getAttribute("data-attached-to-variant")) {
-                    if (item.getAttribute("data-attached-to-variant") === variant.title) {
-                      let itemClone = item.cloneNode(true);
-                      document.querySelector(".product-page-slider__slides-container .slide").appendChild(itemClone);}
-                  } else if (item.getAttribute("data-variant-color") && variant.featured_media) {
-                    if (item.getAttribute("data-variant-color") === variant.featured_media.alt.split("#color:")[1] ) {
-                      let itemClone = item.cloneNode(true);
-                      document.querySelector(".product-page-slider__slides-container .slide").appendChild(itemClone);
-                    }
-                  } else {
-                      let itemClone = item.cloneNode(true);
-                      document.querySelector(".product-page-slider__slides-container .slide").appendChild(itemClone);}
-                })
-
-                document.querySelectorAll(".product-hidden-thumbnails .thumbnail").forEach((thumbnail)=>{
-                  if (thumbnail.getAttribute("data-attached-to-variant")) {
-                    if (thumbnail.getAttribute("data-attached-to-variant") === variant.title) {
-                      let thumbnailClone = thumbnail.cloneNode(true);
-                      document.querySelector(".product-page-slider__thumbnails").appendChild(thumbnailClone);}
-                  } else if (thumbnail.getAttribute("data-variant-color") && variant.featured_media) {
-                    if (thumbnail.querySelector(".thumbnail-picture img").alt === variant.featured_media.alt ) {
-                      let thumbnailClone = thumbnail.cloneNode(true);
-                      document.querySelector(".product-page-slider__thumbnails").appendChild(thumbnailClone);
-                    }
-                  } else {
-                      let itemClone = thumbnail.cloneNode(true);
-                      document.querySelector(".product-page-slider__thumbnails").appendChild(itemClone);
+                  document.getElementById("dynamic-buy-button").classList.add("sold-out");
                 }
-                })
+              }
             }
 
-            if (document.querySelector(".product-page__variants")) {
-                new Shopify.OptionSelectors('product-select', {
-                product: {{ product | json }},
-                onVariantSelected: selectCallback,
-                enableHistoryState: true
-              });}
+            {% comment %} storedProductImages.forEach((array) => {
+                if (variant.title.includes("no variant") ) {
+                  document.querySelector(".product-page-slider__slides-container .slide").innerHTML += array.picture;
+                }
+              }
+            ); {% endcomment %}
 
-        } else {
-                document.querySelectorAll(".product-hidden-images .item").forEach((item)=>{
-                    let itemClone = item.cloneNode(true);
-                    document.querySelector(".product-page-slider__slides-container .slide").appendChild(itemClone);
-                })
+            document.querySelector(".product-page-slider__slides-container .slide").innerHTML = "";
+            document.querySelector(".product-page-slider__thumbnails").innerHTML = "";
+            document.querySelector(".product-page-slider__indicators").innerHTML = "";
 
-                document.querySelectorAll(".product-hidden-thumbnails .thumbnail").forEach((thumbnail)=>{
-                    let thumbnailClone = thumbnail.cloneNode(true);
-                    document.querySelector(".product-page-slider__thumbnails").appendChild(thumbnailClone);
-                })
+            document.querySelectorAll(".product-hidden-images .item").forEach((item)=>{
+              if (item.getAttribute("data-attached-to-variant")) {
+                if (item.getAttribute("data-attached-to-variant") === variant.title) {
+                  let itemClone = item.cloneNode(true);
+                  document.querySelector(".product-page-slider__slides-container .slide").prepend(itemClone);}
+              } else if (item.getAttribute("data-variant-color") && variant.featured_media) {
+                if (item.getAttribute("data-variant-color") === variant.featured_media.alt.split("#color:")[1] ) {
+                  let itemClone = item.cloneNode(true);
+                  document.querySelector(".product-page-slider__slides-container .slide").appendChild(itemClone);
+                }
+              } else {
+                  let itemClone = item.cloneNode(true);
+                  document.querySelector(".product-page-slider__slides-container .slide").appendChild(itemClone);}
+            })
+
+            document.querySelectorAll(".product-hidden-thumbnails .thumbnail").forEach((thumbnail)=>{
+              if (thumbnail.getAttribute("data-attached-to-variant")) {
+                if (thumbnail.getAttribute("data-attached-to-variant") === variant.title) {
+                  let thumbnailClone = thumbnail.cloneNode(true);
+                  document.querySelector(".product-page-slider__thumbnails").prepend(thumbnailClone);}
+              } else if (thumbnail.getAttribute("data-variant-color") && variant.featured_media) {
+                if (thumbnail.querySelector(".thumbnail-picture img").alt === variant.featured_media.alt ) {
+                  let thumbnailClone = thumbnail.cloneNode(true);
+                  document.querySelector(".product-page-slider__thumbnails").appendChild(thumbnailClone);
+                }
+              } else {
+                  let itemClone = thumbnail.cloneNode(true);
+                  document.querySelector(".product-page-slider__thumbnails").appendChild(itemClone);
+            }
+            })
         }
+
+        if (document.querySelector(".product-page__variants")) {
+            new Shopify.OptionSelectors('product-select', {
+            product: {{ product | json }},
+            onVariantSelected: selectCallback,
+            enableHistoryState: true
+          });}
   } else {
           document.querySelectorAll(".product-hidden-images .item").forEach((item)=>{
               let itemClone = item.cloneNode(true);
@@ -707,7 +690,7 @@
           "type": "text",
           "id": "trust_icon_2_text",
           "label": "Second trust icon text",
-          "default": "Money back guarantee"
+          "default": "30-day money back guarantee"
         },
         {
           "type": "url",
@@ -723,7 +706,7 @@
           "type": "text",
           "id": "trust_icon_3_text",
           "label": "Third trust icon text",
-          "default": "Online support 24/7"
+          "default": "24/7 customer support"
         },
         {
           "type": "url",
@@ -743,6 +726,11 @@
           "info": "Make sure you have created a custom [metafield](https://help.shopify.com/en/manual/metafields) in [admin settings](/admin/metafields) named \"custom.recommended_products\" and went to the product page and selected the products you want to recommend in the metafields section. Otherwise the recommended products section will not show."
         }
       ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product page"
     }
   ]
 }

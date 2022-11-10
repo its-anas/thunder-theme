@@ -2,6 +2,24 @@
 {%- endstyle -%}
 {% for block in section.blocks %}
   {% case block.type %}
+    {% when 'product_description_tab' %}
+      <div class="product-page__tabs">
+        <product-page-tabs data-set-initial-state="expanded" class="product-page__tabs">
+          <div class="product-page__tab">
+            <div class="product-page__tab-title">
+              <h6 class="product-page__tab-title-text">Product description</h6>
+              <div class="product-page__tab-title-svg">
+                <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M7 10.5L12 15.5L17 10.5" stroke="white" stroke-width="1.5"/>
+                </svg>
+              </div>
+            </div>
+            <div class="product-page__tab-content">
+              <p>{{ product.description }}</p>
+            </div>
+          </div>
+        </product-page-tabs>
+      </div>
     {% when 'tab' %}
       <div class="product-page__tabs">
         <product-page-tabs data-set-initial-state="expanded" class="product-page__tabs">
@@ -15,12 +33,12 @@
               </div>
             </div>
             <div class="product-page__tab-content">
-              <p>{{ product.description }}</p>
+              <p>{{ block.settings.tab_content }}</p>
             </div>
           </div>
         </product-page-tabs>
       </div>
-    {% when 'reviews' %}
+    {% when 'reviews_tab' %}
       <div class="product-page__tabs">
         <product-page-tabs data-set-initial-state="expanded" class="product-page__tabs">
           <div class="product-page__tab product-page__reviews">
@@ -56,6 +74,7 @@
   "class": "section-product-tabs",
   "settings": [],
   "blocks": [
+    { "type": "product_description_tab", "limit": 1, "name": "Product description", "limit": 1, "settings": [] },
     {
       "type": "tab",
       "name": "Tab",
@@ -65,11 +84,17 @@
           "id": "tab_title",
           "label": "Tab title",
           "default": "Tab title"
+        },
+        {
+          "type": "richtext",
+          "id": "tab_content",
+          "label": "Tab content",
+          "default": "<p>Tab content to be inserted here</p>"
         }
       ]
     },
-    { "type": "reviews", "limit": 1, "name": "Reviews", "settings": [] },
-    { "type": "share_buttons", "limit": 1, "name": "Share buttons", "settings": [] }
+    { "type": "reviews_tab", "limit": 1, "name": "Reviews", "limit": 1, "settings": [] },
+    { "type": "share_buttons", "limit": 1, "name": "Share buttons", "limit": 1, "settings": [] }
   ],
   "presets": []
 }
