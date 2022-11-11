@@ -214,9 +214,9 @@
                   </div>
                 </div>
               {% when 'variants_selector' %}
-                <div class="product-page__variants">
-                  {% unless product.has_only_default_variant %}
-                    {% for option in product.options_with_values %}
+                {% unless product.has_only_default_variant %}
+                  {% comment %}
+                     {% for option in product.options_with_values %}
                       <div class="product-page__variants--pill">
                         <label>{{ option.name }}</label>
                         <div class="product-page__variants--pill-container">
@@ -225,24 +225,56 @@
                             <div class="product-page__variants--pill-input">
                               <input
                                 class="single-option-selector-{{ section.id }}"
-                                id="option-{{ value }}-{{ forloop.index }}"
+                                id="option-{{ value }}-{{ index }}"
                                 type="radio"
                                 name="option"
                                 value="{{ value | escape}}"
-                                data-index="option{{ index }}"
+                                checked
                               >
-                              <label for="option-{{ value }}-{{ forloop.index }}">{{ value }}</label>
+                              <label for="option-{{ value }}-{{ index }}">{{ value }}</label>
                             </div>
                           {% endfor %}
                         </div>
                       </div>
                     {% endfor %}
+                  {% endcomment %}
+                  <div class="product-option">
+                    {% for option in product.options_with_values %}
+                      <fieldset>
+                        <legend>{{ option.name }}</legend>
+                        {% for value in option.values %}
+                          <div>
+                            <input
+                              {% if option.selected_value == value %}
+                                checked
+                              {% endif %}
+                              type="radio"
+                              name="{{ option.name }}"
+                              value="{{ value }}"
+                              id="{{ option.name | handlieze }}-{{ value | handlieze }}"
+                            >
+                            <label for="{{ option.name | handlieze }}-{{ value | handlieze }}"> {{ value }}</label>
+                          </div>
+                        {% endfor %}
+                      </fieldset>
+                    {% endfor %}
+                  </div>
 
-                    <div class="product-page__variants">
-                      <div id="product-select" name="id"></div>
-                    </div>
-                  {% endunless %}
-                </div>
+                  <div class="product-page__variants">
+                    <select id="product-select" name="id">
+                      {% for variant in product.variants %}
+                        <option
+                          value="{{ variant.id }}"
+                          {% if variant == product.selected_or_first_available_variant %}
+                            selected="selected"
+                          {% endif %}
+                        >
+                          {{ variant.title }} - {{ variant.price | money }}
+                        </option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                {% endunless %}
               {% when 'quantity' %}
                 <quantity-field class="quantity">
                   <label for="quantity-text"><p>Quantity</p></label>
@@ -583,18 +615,28 @@
     {% endif %} {% endcomment %}
 
     let productJson = {{ product | json }};
-    {% comment %} UNFINISHED: Continue here {% endcomment %}
+
     document.querySelectorAll('input[type=radio]').forEach( (radio) => { radio.addEventListener("click", () => {
         document.querySelectorAll('.selector-wrapper select option').forEach( (option) => {
             if ( option.label === radio.value) {
-                option.parentNode.value = radio.value;
+              option.parentNode.value = radio.value;
+              option.parentNode.dispatchEvent(new Event('change'));
             }
         } )
     })})
 
+
+
     if (document.querySelector(".product-page__variants") && productJson.variants.length > 1) {
-          function selectCallback(variant, selector) {
+        function selectCallback(variant, selector) {
             document.querySelector(".product-page__price--compare-at").innerHTML = "";
+
+            {% comment %} let productIDs = [];
+            productJson.variants.forEach((v) => {
+               productIDs.push(v.id);
+            })
+
+            document.querySelector(".product-page__variants--pill").innerHTML = `<p>All variants: ${productIDs} - Actual variant: ${variant.id}</p>`; {% endcomment %}
 
             let priceDifference = variant.compare_at_price - variant.price;
 
@@ -681,12 +723,12 @@
             })
         }
 
-        if (document.querySelector(".product-page__variants")) {
-            new Shopify.OptionSelectors('product-select', {
-            product: {{ product | json }},
-            onVariantSelected: selectCallback,
-            enableHistoryState: true
-          });}
+        new Shopify.OptionSelectors('product-select', {
+          product: {{ product | json }},
+          onVariantSelected: selectCallback,
+          enableHistoryState: true
+        });
+
   } else {
           document.querySelectorAll(".product-hidden-images .item").forEach((item)=>{
               let itemClone = item.cloneNode(true);

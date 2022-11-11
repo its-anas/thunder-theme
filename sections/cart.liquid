@@ -1,1 +1,16 @@
 <p>This is the cart section.</p>
+<div class="space" style="padding-bottom: 12rem;"></div>
+{% for item in cart.items %}
+  <div class="product" style="padding: 2rem 0rem;">
+    <p>{{ item.title }}</p>
+    {% for option in item.options_with_values %}
+      <div class="variant" style="display: flex; flex-direction: row; gap: 1rem;">
+        <p>{{ option.name }}:</p>
+        <p>{{ option.value }}</p>
+      </div>
+    {% endfor %}
+    <p>{{ item.variant.id }}</p>
+    <p>{{ item.quantity }}</p>
+    <p>{{ item.final_price }}</p>
+  </div>
+{% endfor %}
