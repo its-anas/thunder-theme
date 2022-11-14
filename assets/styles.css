@@ -3973,7 +3973,7 @@ menu-drawer-component #close-icon {
   gap: 1rem;
 }
 .product-page__hidden-variants {
-  display: none;
+  display: flex;
   flex-direction: column;
   gap: 1rem;
 }

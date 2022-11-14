@@ -757,26 +757,25 @@
           content.querySelector(".product-page__radio__label.checked").classList.remove("checked");
           radio.parentNode.classList.add("checked");
 
-          document.querySelectorAll('.selector-wrapper select option').forEach( (option) => {
-              if ( option.label === radio.value) {
-                option.parentNode.value = radio.value;
-                option.parentNode.dispatchEvent(new Event('change'));
-              }
-          } )
+          syncSelect(content.querySelector('select'), radio.value);
       })})
     })
 
     document.querySelectorAll(".product-page__color-select-content").forEach((content) => {
           content.querySelector('select').addEventListener("change", () => {
               let selectValue = content.querySelector('select').value;
-              document.querySelectorAll('.selector-wrapper select option').forEach( (option) => {
-                  if ( option.label === selectValue) {
-                    option.parentNode.value = selectValue;
-                    option.parentNode.dispatchEvent(new Event('change'));
-                  }
-              })
+              syncSelect(content.querySelector('select'), selectValue);
       })
     })
+
+    function syncSelect(select, value) {
+      document.querySelectorAll('.selector-wrapper select option').forEach( (option) => {
+          if ( option.label === value) {
+            option.parentNode.value = value;
+            option.parentNode.dispatchEvent(new Event('change'));
+          }
+      })
+    }
 
 
 
@@ -806,6 +805,7 @@
               document.querySelector(".product-page__price--compare-at").innerHTML = formatMoney(variant.compare_at_price,"{{ shop.money_format }}")
             }
             document.querySelector(".product-page__price--actual").innerHTML = formatMoney(variant.price,"{{ shop.money_format }}");
+
             for (var key in variantsInventory) {
               if (key == variant.title) {
                 if (variantsInventory[key] > 0 && variantsInventory[key] < {{ stock_alert_threshold }} ) {
@@ -872,7 +872,7 @@
               } else {
                   let itemClone = thumbnail.cloneNode(true);
                   document.querySelector(".product-page-slider__thumbnails").appendChild(itemClone);
-            }
+              }
             })
         }
 
