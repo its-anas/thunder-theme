@@ -11,10 +11,10 @@
           id: "{{ product.id }}",
           title: "{{ product.title }}",
           url: "{{ product.url }}",
-          image: "{{ product.featured_image | image_url }}",
-          image_alt: "{{ product.featured_image.alt }}",
-          image_width: "{{ product.featured_image.width }}",
-          image_height: "{{ product.featured_image.height }}",
+          image: "{{ variant.featured_image | image_url }}",
+          image_alt: "{{ variant.featured_image.alt }}",
+          image_width: "{{ variant.featured_image.width }}",
+          image_height: "{{ variant.featured_image.height }}",
           price: "{{ product.price | money }}",
           compare_at_price: "{{ product.compare_at_price | money }}",
           price_difference: "{{ product.compare_at_price | minus: product.price }}",
@@ -98,13 +98,13 @@
           data-attached-to-variant="{{ image.variants[0].title }}"
         {% endif %}
       >
-        <div class="item-picture">
+        <div class="item-picture media">
           <img
             srcset="{{ image | image_url }}"
             alt="{{ image.alt | escape }}"
             width="{{ image.width }}"
             height="{{ image.height }}"
-            class="fit"
+            class="full"
           >
         </div>
       </div>
@@ -135,7 +135,7 @@
             alt="{{ thumbnail.alt | escape }}"
             width="{{ thumbnail.width }}"
             height="{{ thumbnail.height }}"
-            class="fit"
+            class="full"
           >
         </div>
       </div>
@@ -215,52 +215,182 @@
                 </div>
               {% when 'variants_selector' %}
                 {% unless product.has_only_default_variant %}
-                  {% comment %}
-                     {% for option in product.options_with_values %}
-                      <div class="product-page__variants--pill">
-                        <label>{{ option.name }}</label>
-                        <div class="product-page__variants--pill-container">
-                          {% assign index = forloop.index %}
-                          {% for value in option.values %}
-                            <div class="product-page__variants--pill-input">
-                              <input
-                                class="single-option-selector-{{ section.id }}"
-                                id="option-{{ value }}-{{ index }}"
-                                type="radio"
-                                name="option"
-                                value="{{ value | escape}}"
-                                checked
-                              >
-                              <label for="option-{{ value }}-{{ index }}">{{ value }}</label>
+                  {% comment %} ANCHOR: Radios {% endcomment %}
+                  <div class="product-page__variants">
+                    {% for option in product.options_with_values %}
+                      <div class="product-page__radios-container">
+                        {% if option.name != 'Color' %}
+                          <p class="product-page__radio__title">{{ option.name }}</p>
+                          {% if block.settings.variant_selector_type == 'block' %}
+                            <div class="product-page__radio__content">
+                              {% for value in option.values %}
+                                <label
+                                  class="
+                                    product-page__radio__label
+                                    {% if option.selected_value == value %}
+                                      checked
+                                    {% endif %}
+                                  "
+                                  for="{{ option.name | handle }}-{{ value | handle }}"
+                                >
+                                  <input
+                                    {% if option.selected_value == value %}
+                                      checked
+                                    {% endif %}
+                                    type="radio"
+                                    name="{{ option.name }}"
+                                    value="{{ value }}"
+                                    id="{{ option.name | handle }}-{{ value | handle }}"
+                                    class="product-page__radio__input"
+                                  >
+                                  {{ value }}
+                                </label>
+                              {% endfor %}
                             </div>
-                          {% endfor %}
-                        </div>
+                          {% elsif block.settings.variant_selector_type == 'dropdown' %}
+                            <select name="{{ option.name }}">
+                              {% for value in option.values %}
+                                <option
+                                  value="{{ value }}"
+                                  type="radio"
+                                >
+                                  {{ value }}
+                                </option>
+                              {% endfor %}
+                            </select>
+                          {% endif %}
+                        {% elsif option.name == 'Color' %}
+                          <p class="product-page__radio__title">{{ option.name }}</p>
+                          {% if block.settings.color_selector_type == 'block' %}
+                            <div class="product-page__radio__content">
+                              {% for value in option.values %}
+                                <label
+                                  class="
+                                    product-page__radio__label {% if option.selected_value == value %}
+                                      checked
+                                    {% endif %}
+                                  "
+                                  for="{{ option.name | handle }}-{{ value | handle }}"
+                                >
+                                  <input
+                                    {% if option.selected_value == value %}
+                                      checked
+                                    {% endif %}
+                                    type="radio"
+                                    name="{{ option.name }}"
+                                    value="{{ value }}"
+                                    id="{{ option.name | handle }}-{{ value | handle }}"
+                                    class="product-page__radio__input"
+                                  >
+                                  {{ value }}
+                                </label>
+                              {% endfor %}
+                            </div>
+                          {% elsif block.settings.color_selector_type == 'dropdown' %}
+                            <select name="{{ option.name }}">
+                              {% for value in option.values %}
+                                <option
+                                  value="{{ value }}"
+                                  type="radio"
+                                >
+                                  {{ value }}
+                                </option>
+                              {% endfor %}
+                            </select>
+                          {% elsif block.settings.color_selector_type == 'variant_image' %}
+                            <div class="product-page__radio__content">
+                              {% for value in option.values %}
+                                <label
+                                  class="
+                                    product-page__radio__label media
+                                    {% if option.selected_value == value %}
+                                      checked
+                                    {% endif %}
+                                  "
+                                  style="height: 80px; width: 80px; overflow: hidden; padding: 0;"
+                                  for="{{ option.name | handle }}-{{ value | handle }}"
+                                >
+                                  <input
+                                    {% if option.selected_value == value %}
+                                      checked
+                                    {% endif %}
+                                    type="radio"
+                                    name="{{ option.name }}"
+                                    value="{{ value }}"
+                                    id="{{ option.name | handle }}-{{ value | handle }}"
+                                    class="product-page__radio__input"
+                                  >
+                                  {% for variant in product.variants %}
+                                    {% if variant.title contains value %}
+                                      <img
+                                        srcset="
+                                          {%- if variant.featured_image.width >= 165 -%}{{ variant.featured_image | image_url: width: 165 }} 165w,{%- endif -%}
+                                          {%- if variant.featured_image.width >= 360 -%}{{ variant.featured_image | image_url: width: 360 }} 360w,{%- endif -%}
+                                          {%- if variant.featured_image.width >= 533 -%}{{ variant.featured_image | image_url: width: 533 }} 533w,{%- endif -%}
+                                          {%- if variant.featured_image.width >= 720 -%}{{ variant.featured_image | image_url: width: 720 }} 720w,{%- endif -%}
+                                          {%- if variant.featured_image.width >= 940 -%}{{ variant.featured_image | image_url: width: 940 }} 940w,{%- endif -%}
+                                          {%- if variant.featured_image.width >= 1066 -%}{{ variant.featured_image | image_url: width: 1066 }} 1066w,{%- endif -%}
+                                          {{ variant.featured_image | image_url }} {{ variant.featured_image.width }}w
+                                        "
+                                        src="{{ variant.featured_image | image_url: width: 300 }}"
+                                        sizes="300px"
+                                        loading="lazy"
+                                        alt="{{ variant.featured_image.alt | escape }}"
+                                        width="{{ variant.featured_image.width }}"
+                                        height="{{ variant.featured_image.height }}"
+                                        class="full"
+                                      >
+                                      {% break %}
+                                    {% endif %}
+                                  {% endfor %}
+                                </label>
+                              {% endfor %}
+                            </div>
+                          {% elsif block.settings.color_selector_type == 'color_swatch' %}
+                            <div class="product-page__radio__content">
+                              {% for value in option.values %}
+                                <label
+                                  class="
+                                    product-page__radio__label {% if option.selected_value == value %}
+                                      checked
+                                    {% endif %}
+                                  "
+                                  style="
+                                    {%- assign color_swatch_list = settings.color_swatch_list | split: ','-%}
+                                    {%- for color_swatch in color_swatch_list -%}
+                                      {%- assign color_swatch_parts = color_swatch | split: ':' -%}
+                                      {%- assign color_swatch_name = color_swatch_parts.first | strip -%}
+                                      {%- if color_swatch_name == value -%}
+                                        {%- assign color_swatch_value = color_swatch_parts.last | strip -%}
+                                        {%- if color_swatch_value contains '#' -%}
+                                          background-color: {{ color_swatch_value }};
+                                        {%- endif -%}
+                                        {%- break -%}
+                                      {%- endif -%}
+                                    {%- endfor -%}
+                                  "
+                                  for="{{ option.name | handle }}-{{ value | handle }}"
+                                >
+                                  <input
+                                    {% if option.selected_value == value %}
+                                      checked
+                                    {% endif %}
+                                    type="radio"
+                                    name="{{ option.name }}"
+                                    value="{{ value }}"
+                                    id="{{ option.name | handle }}-{{ value | handle }}"
+                                    class="product-page__radio__input"
+                                  >
+                                </label>
+                              {% endfor %}
+                            </div>
+                          {% endif %}
+                        {% endif %}
                       </div>
                     {% endfor %}
-                  {% endcomment %}
-                  <div class="product-option">
-                    {% for option in product.options_with_values %}
-                      <fieldset>
-                        <legend>{{ option.name }}</legend>
-                        {% for value in option.values %}
-                          <div>
-                            <input
-                              {% if option.selected_value == value %}
-                                checked
-                              {% endif %}
-                              type="radio"
-                              name="{{ option.name }}"
-                              value="{{ value }}"
-                              id="{{ option.name | handlieze }}-{{ value | handlieze }}"
-                            >
-                            <label for="{{ option.name | handlieze }}-{{ value | handlieze }}"> {{ value }}</label>
-                          </div>
-                        {% endfor %}
-                      </fieldset>
-                    {% endfor %}
                   </div>
-
-                  <div class="product-page__variants">
+                  {% comment %} ANCHOR: TO HIDE {% endcomment %}
+                  <div class="product-page__hidden-variants">
                     <select id="product-select" name="id">
                       {% for variant in product.variants %}
                         <option
@@ -453,11 +583,11 @@
                         <div class="product-page__recommended-product-container">
                           <a href="{{ bundled_product.url }}" class="product-page__recommended-product media">
                             <img
-                              srcset="{{ bundled_product.featured_image | image_url }}"
+                              srcset="{{ bundled_variant.featured_image | image_url }}"
                               loading="lazy"
-                              alt="{{ bundled_product.featured_image | escape }}"
-                              width="{{ bundled_product.featured_image.width }}"
-                              height="{{ bundled_product.featured_image.height }}"
+                              alt="{{ bundled_variant.featured_image | escape }}"
+                              width="{{ bundled_variant.featured_image.width }}"
+                              height="{{ bundled_variant.featured_image.height }}"
                               class="full"
                             >
                             <div class="quick-add-icon">
@@ -571,6 +701,7 @@
       observer.observe(targetNode, config);
     }
 
+    {% comment %} To store pictures in JS variable instead of HTML  {% endcomment %}
     {% comment %} {% if product.images.size > 0 %}
       let productWithNoVariants = [];
       let productWithNoFeaturedImage = [];
@@ -616,18 +747,24 @@
 
     let productJson = {{ product | json }};
 
-    document.querySelectorAll('input[type=radio]').forEach( (radio) => { radio.addEventListener("click", () => {
-        document.querySelectorAll('.selector-wrapper select option').forEach( (option) => {
-            if ( option.label === radio.value) {
-              option.parentNode.value = radio.value;
-              option.parentNode.dispatchEvent(new Event('change'));
-            }
-        } )
-    })})
+    document.querySelectorAll(".product-page__radio__content").forEach((content) => {
+
+      content.querySelectorAll('input.product-page__radio__input').forEach( (radio) => { radio.addEventListener("click", () => {
+          content.querySelector(".product-page__radio__label.checked").classList.remove("checked");
+          radio.parentNode.classList.add("checked");
+
+          document.querySelectorAll('.selector-wrapper select option').forEach( (option) => {
+              if ( option.label === radio.value) {
+                option.parentNode.value = radio.value;
+                option.parentNode.dispatchEvent(new Event('change'));
+              }
+          } )
+      })})
+    })
 
 
 
-    if (document.querySelector(".product-page__variants") && productJson.variants.length > 1) {
+    if (document.querySelector(".product-page__hidden-variants") && productJson.variants.length > 1) {
         function selectCallback(variant, selector) {
             document.querySelector(".product-page__price--compare-at").innerHTML = "";
 
@@ -635,7 +772,6 @@
             productJson.variants.forEach((v) => {
                productIDs.push(v.id);
             })
-
             document.querySelector(".product-page__variants--pill").innerHTML = `<p>All variants: ${productIDs} - Actual variant: ${variant.id}</p>`; {% endcomment %}
 
             let priceDifference = variant.compare_at_price - variant.price;
@@ -680,6 +816,7 @@
               }
             }
 
+            {% comment %} To store pictures in JS variable instead of HTML  {% endcomment %}
             {% comment %} storedProductImages.forEach((array) => {
                 if (variant.title.includes("no variant") ) {
                   document.querySelector(".product-page-slider__slides-container .slide").innerHTML += array.picture;
@@ -773,7 +910,53 @@
       ]
     },
     { "type": "price", "name": "Price", "limit": 1, "settings": [] },
-    { "type": "variants_selector", "name": "Variants selector", "limit": 1, "settings": [] },
+    {
+      "type": "variants_selector",
+      "name": "Variants selector",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "select",
+          "id": "variant_selector_type",
+          "label": "Variant selector type",
+          "options": [
+            {
+              "value": "block",
+              "label": "Block"
+            },
+            {
+              "value": "dropdown",
+              "label": "Dropdown"
+            }
+          ],
+          "default": "block"
+        },
+        {
+          "type": "select",
+          "id": "color_selector_type",
+          "label": "Color selector type",
+          "options": [
+            {
+              "value": "block",
+              "label": "Block"
+            },
+            {
+              "value": "dropdown",
+              "label": "Dropdown"
+            },
+            {
+              "value": "color_swatch",
+              "label": "Color swatch"
+            },
+            {
+              "value": "variant_image",
+              "label": "Variant image"
+            }
+          ],
+          "default": "block"
+        }
+      ]
+    },
     { "type": "quantity", "name": "Quantity", "limit": 1, "settings": [] },
     {
       "type": "stock_alert",

@@ -4201,6 +4201,7 @@ menu-drawer-component {
 
 					.thumbnail {
 						width: calc(100% / 4);
+						aspect-ratio: 1 / 1;
 						@media screen and (min-width: 750px) and (max-width: 1024px) {
 							width: calc(100% / 5);
 						}
@@ -4287,6 +4288,12 @@ menu-drawer-component {
 	}
 
 	&__variants {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+	}
+
+	&__hidden-variants {
 		display: flex;
 		flex-direction: column;
 		gap: 1rem;
@@ -4465,6 +4472,40 @@ menu-drawer-component {
 			text-align: center;
 		}
 	}
+
+	&__radios {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+		&-container {
+			display: flex;
+			flex-direction: column;
+			gap: 0.5rem;
+			border: 0px;
+			padding: 0px;
+		}
+	}
+
+	&__radio {
+		&__title {
+		}
+		&__content {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 0.5rem;
+		}
+		&__label {
+			cursor: pointer;
+			padding: 1rem;
+			border: 1px solid #333333;
+			&.checked {
+				border: 2px solid #ffffff;
+			}
+		}
+		&__input {
+			display: none;
+		}
+	}
 }
 
 .section-product-tabs {
@@ -4548,11 +4589,6 @@ menu-drawer-component {
 		height: 44px;
 		align-items: center;
 
-		&__minus {
-			color: white;
-			width: 33%;
-		}
-
 		&__input {
 			width: 33%;
 			background-color: transparent;
@@ -4563,9 +4599,11 @@ menu-drawer-component {
 			padding: 0;
 		}
 
+		&__minus,
 		&__plus {
 			color: white;
 			width: 33%;
+			height: 100%;
 		}
 	}
 }

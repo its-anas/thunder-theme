@@ -181,6 +181,17 @@
           ]
      },
      {
+          "name": "Color swatch",
+          "settings": [
+               {
+                    "type": "textarea",
+                    "id": "color_swatch_list",
+                    "label": "List of colors and their hex codes",
+                    "default": "Red:#ff0000, Green:#00ff00, Blue:#0000ff"
+               }
+          ]
+     },
+     {
           "name": "Appearance",
           "settings": [
                {
