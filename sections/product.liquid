@@ -182,6 +182,9 @@
             <div class="product-page-slider__thumbnails"></div>
           </div>
         </product-page-slider>
+        <div
+          class="product-page__pictures-place-protector"
+        ></div>
       </div>
       <div class="product-page__info">
         {% form 'product', product, class: 'product-page__form' %}
@@ -287,27 +290,29 @@
                               {% endfor %}
                             </div>
                           {% elsif block.settings.color_selector_type == 'dropdown' %}
-                            <select name="{{ option.name }}">
-                              {% for value in option.values %}
-                                <option
-                                  value="{{ value }}"
-                                  type="radio"
-                                >
-                                  {{ value }}
-                                </option>
-                              {% endfor %}
-                            </select>
+                            <div class="product-page__color-select-content">
+                              <select name="{{ option.name }}">
+                                {% for value in option.values %}
+                                  <option
+                                    value="{{ value }}"
+                                    type="radio"
+                                  >
+                                    {{ value }}
+                                  </option>
+                                {% endfor %}
+                              </select>
+                            </div>
                           {% elsif block.settings.color_selector_type == 'variant_image' %}
                             <div class="product-page__radio__content">
                               {% for value in option.values %}
                                 <label
                                   class="
-                                    product-page__radio__label media
+                                    product-page__radio__label media swatch
                                     {% if option.selected_value == value %}
                                       checked
                                     {% endif %}
                                   "
-                                  style="height: 80px; width: 80px; overflow: hidden; padding: 0;"
+                                  style=""
                                   for="{{ option.name | handle }}-{{ value | handle }}"
                                 >
                                   <input
@@ -583,11 +588,11 @@
                         <div class="product-page__recommended-product-container">
                           <a href="{{ bundled_product.url }}" class="product-page__recommended-product media">
                             <img
-                              srcset="{{ bundled_variant.featured_image | image_url }}"
+                              srcset="{{ bundled_product.featured_image | image_url }}"
                               loading="lazy"
-                              alt="{{ bundled_variant.featured_image | escape }}"
-                              width="{{ bundled_variant.featured_image.width }}"
-                              height="{{ bundled_variant.featured_image.height }}"
+                              alt="{{ bundled_product.featured_image | escape }}"
+                              width="{{ bundled_product.featured_image.width }}"
+                              height="{{ bundled_product.featured_image.height }}"
                               class="full"
                             >
                             <div class="quick-add-icon">
@@ -748,7 +753,6 @@
     let productJson = {{ product | json }};
 
     document.querySelectorAll(".product-page__radio__content").forEach((content) => {
-
       content.querySelectorAll('input.product-page__radio__input').forEach( (radio) => { radio.addEventListener("click", () => {
           content.querySelector(".product-page__radio__label.checked").classList.remove("checked");
           radio.parentNode.classList.add("checked");
@@ -760,6 +764,18 @@
               }
           } )
       })})
+    })
+
+    document.querySelectorAll(".product-page__color-select-content").forEach((content) => {
+          content.querySelector('select').addEventListener("change", () => {
+              let selectValue = content.querySelector('select').value;
+              document.querySelectorAll('.selector-wrapper select option').forEach( (option) => {
+                  if ( option.label === selectValue) {
+                    option.parentNode.value = selectValue;
+                    option.parentNode.dispatchEvent(new Event('change'));
+                  }
+              })
+      })
     })
 
 
