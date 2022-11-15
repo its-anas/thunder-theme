@@ -3903,7 +3903,6 @@ menu-drawer-component #close-icon {
 .product-page__pictures product-page-slider .product-page-slider__thumbnails .active {
   box-sizing: border-box;
   border: 2px solid white;
-  transition: all 0.1s cubic-bezier(0.45, 0.05, 0.55, 0.95);
 }
 .product-page product-page-slider,
 .product-page .product-page__pictures-place-protector {
