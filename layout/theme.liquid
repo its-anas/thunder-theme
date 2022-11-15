@@ -14,7 +14,7 @@
     <script src="{{ 'functions.js' | asset_url }}" defer></script>
     <script src="{{ 'components.js' | asset_url }}" defer></script>
 
-    {% render 'social-media-tags' %}
+    {%- render 'social-meta-tags' -%}
 
     {% style %}
       {{ settings.font_type | font_face: font_display: 'swap' }}

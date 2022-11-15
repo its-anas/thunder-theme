@@ -71,8 +71,9 @@
                 <div class="quick-add-icon">
                   {% render 'icons', icon: 'quick-add' -%}
                 </div>
-                {% if product.featured_image != blank %}
-                  <a href="{{ product.url }}" class="media">
+
+                <a href="{{ product.url }}" class="media">
+                  {% if product.featured_image != blank %}
                     <img
                       srcset="
                         {%- if product.featured_image.width >= 165 -%}{{ product.featured_image | image_url: width: 165 }} 165w,{%- endif -%}
@@ -91,10 +92,10 @@
                       height="{{ product.featured_image.height }}"
                       class="{{ section.settings.image_style }}"
                     >
-                  </a>
-                {% else %}
-                  {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
-                {% endif %}
+                  {% else %}
+                    {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
+                  {% endif %}
+                </a>
               </div>
               <div class="featured-collection__container">
                 <div class="featured-collection__name">
