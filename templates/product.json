@@ -12,9 +12,6 @@
         "name": {
           "type": "name"
         },
-        "reviews": {
-          "type": "reviews"
-        },
         "sale_tag": {
           "type": "sale_tag",
           "settings": {
@@ -85,7 +82,6 @@
       "block_order": [
         "vendor",
         "name",
-        "reviews",
         "sale_tag",
         "price",
         "variants_selector",
@@ -109,9 +105,6 @@
             "tab_title": "Tab title"
           }
         },
-        "reviews_tab": {
-          "type": "reviews_tab"
-        },
         "share_buttons": {
           "type": "share_buttons"
         }
@@ -119,7 +112,6 @@
       "block_order": [
         "product_description_tab",
         "tab",
-        "reviews_tab",
         "share_buttons"
       ]
     }

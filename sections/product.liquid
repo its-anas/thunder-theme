@@ -203,8 +203,6 @@
                 <div class="product-page__name" {{ block.shopify_attributes }}>
                   <h3>{{ product.title }}</h3>
                 </div>
-              {% when 'reviews' %}
-                <div class="product-page__reviews-stars" {{ block.shopify_attributes }}><p>******** stars</p></div>
               {% when 'sale_tag' %}
                 <div class="product-page__prices" {{ block.shopify_attributes }}>
                   {% assign price_difference_text = block.settings.price_difference_text %}
@@ -731,7 +729,6 @@
                     }
                 }
 
-
                 document.querySelectorAll(".product-hidden-images .item").forEach((item)=>{
                   if (item.getAttribute("data-attached-to-variant")) {
                       if (item.getAttribute("data-attached-to-variant") === variant.title) {
@@ -747,6 +744,7 @@
                         document.querySelector(".product-page-slider__slides-container .slide").appendChild(item.cloneNode(true));
                     }
                 })
+
                 document.querySelectorAll(".product-hidden-thumbnails .thumbnail").forEach((thumbnail)=>{
                   if (thumbnail.getAttribute("data-attached-to-variant")) {
                       if (thumbnail.getAttribute("data-attached-to-variant") === variant.title) {
@@ -763,6 +761,7 @@
                     }
                 })
                 }
+
                 new Shopify.OptionSelectors('product-select', {
                     product: {{ product | json }},
                     onVariantSelected: selectCallback,
@@ -915,7 +914,7 @@
       "max": 400,
       "step": 10,
       "unit": "px",
-      "default": 0
+      "default": 160
     },
     {
       "type": "range",
@@ -931,7 +930,6 @@
   "blocks": [
     { "type": "vendor", "name": "Vendor", "limit": 1, "settings": [] },
     { "type": "name", "name": "Product name", "limit": 1, "settings": [] },
-    { "type": "reviews", "name": "Reviews", "limit": 1, "settings": [] },
     {
       "type": "sale_tag",
       "name": "Sale tag",
