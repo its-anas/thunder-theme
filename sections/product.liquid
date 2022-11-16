@@ -230,7 +230,6 @@
                 </div>
               {% when 'variants_selector' %}
                 {% unless product.has_only_default_variant %}
-                  {% comment %} ANCHOR: Radios {% endcomment %}
                   <div class="product-page__variants" {{ block.shopify_attributes }}>
                     {% for option in product.options_with_values %}
                       <div class="product-page__radios-container">
@@ -403,7 +402,7 @@
                       </div>
                     {% endfor %}
                   </div>
-                  <div class="product-page__hidden-variants">
+                  <div class="product-page__hidden-variants" style="display: none;">
                     <select id="product-select" name="id">
                       {% for variant in product.variants %}
                         <option
@@ -539,13 +538,18 @@
                 </div>
               {% when 'buttons' %}
                 <div class="product-page__buttons buttons buttons--center" {{ block.shopify_attributes }}>
-                  <button
-                    type="submit"
+                  <a
+                    {% comment %}
+                       button
+                      type="submit"
+                      name="add"
+                      value="Add to cart"
+                    {% endcomment %}
                     class="button button--primary border add-to-cart-button"
                     id="add-to-cart-button"
                   >
                     ADD TO CART
-                  </button>
+                  </a>
 
                   <div class="dynamic-buy-button" id="dynamic-buy-button">
                     {{ form | payment_button }}
@@ -702,7 +706,7 @@
                 if (priceDifference > 0) {
                     if (document.querySelector(".product-page__tag")) {
                         document.querySelector(".product-page__tag").classList.remove("hidden");
-                        document.querySelector(".product-page__tag").innerHTML = "<p class='tag--animated tag-text'> {{ price_difference_text }} " + formatMoney(priceDifference, "{{ shop.money_format }}</p>");
+                        document.querySelector(".product-page__tag").innerHTML = `<p class='tag--animated tag-text'> {{ price_difference_text }} ${formatMoney(priceDifference)} </p>`;
                     }
                 } else {
                     if (document.querySelector(".product-page__tag")) {
@@ -710,9 +714,9 @@
                     }
                 }
                 if (variant.compare_at_price > 0) {
-                    document.querySelector(".product-page__price--compare-at").innerHTML = formatMoney(variant.compare_at_price, "{{ shop.money_format }}")
+                    document.querySelector(".product-page__price--compare-at").innerHTML = formatMoney(variant.compare_at_price)
                 }
-                document.querySelector(".product-page__price--actual").innerHTML = formatMoney(variant.price, "{{ shop.money_format }}");
+                document.querySelector(".product-page__price--actual").innerHTML = formatMoney(variant.price);
 
                 for (var key in variantsInventory) {
                     document.querySelector(".product-page-slider__slides-container .slide").innerHTML = "";
@@ -760,7 +764,15 @@
                         document.querySelector(".product-page-slider__thumbnails").appendChild(thumbnail.cloneNode(true));
                     }
                 })
-                }
+
+
+                document.querySelectorAll(".product-page__hidden-variants #product-select option").forEach((option)=>{
+                    if (parseInt(option.value) === parseInt(variant.id)) {
+                        document.querySelector(".product-page__hidden-variants #product-select option[selected]").removeAttribute("selected");
+                        option.setAttribute("selected", "selected");
+                    }
+                })
+               }
 
                 new Shopify.OptionSelectors('product-select', {
                     product: {{ product | json }},
@@ -771,6 +783,110 @@
           } else {
             cloneImages(".product-hidden-images .item", ".product-page-slider__slides-container .slide");
             cloneImages(".product-hidden-thumbnails .thumbnail", ".product-page-slider__thumbnails");
+          }
+
+          if (cartType === "drawer") {
+            document.querySelector("#add-to-cart-button").addEventListener("click", () => {
+              sendToCart();
+
+              function sendToCart() {
+                let variantId = document.querySelector(".product-page__hidden-variants #product-select option[selected]").value;
+                let quantity = document.querySelector(".product-page__form .quantity-field__input").value;
+                let formData = {
+                items: [ { id: variantId, quantity: quantity, } ] };
+
+                fetch(window.Shopify.routes.root + "cart/add.js", {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify(formData),
+                })
+                  .then((response) => {
+                    updateCartDrawer();
+                    lockPage();
+                    document.querySelector("cart-component").classList.remove("hidden");
+                    document.querySelector("cart-component").classList.add("active");
+                    if (document.querySelector(".recommended-products.desktop-only")) {
+                      setTimeout(() => {
+                        document.querySelector(".recommended-products.desktop-only").classList.add("active");
+                      }, 800);
+                    }
+                    return response.json();
+                  })
+                  .catch((error) => {
+                    console.error("Error:", error);
+                  });
+              }
+
+              function updateCartDrawer() {
+                fetch("/cart.js")
+                  .then((resp) => resp.json())
+                  .then((data) => {
+                    document.getElementById("header__icons-cart__item-count").innerHTML = data.item_count;
+                    let itemList = [];
+                    document.querySelector(".cart-drawer__products-list").innerHTML = "";
+                    data.items.forEach((item) => {
+                      itemList.push(`
+                                        <div class="cart-drawer__product" data-variant="${item.variant_id}">
+                                          <a href="${item.url}" class="cart-drawer__product__image">
+                                          <img
+                                          srcset="${item.featured_image.url}"
+                                          loading="lazy"
+                                          alt="${item.featured_image.alt}"
+                                          width="${item.featured_image.width}"
+                                          height="${item.featured_image.height}"
+                                          class="full"
+                                          >
+                                          </a>
+                                          <div class="cart-drawer__product__details-middle">
+                                            <a href="${item.url}" class="product-name">${item.product_title}</a>
+                                            <div class="product-variants">
+                                            <p class="product-variant">${item.variant_title}</p>
+                                            </div>
+                                            <div class="quantity">
+                                            <quantity-field class="quantity">
+                                              <div class="quantity-field cart" id="quantity-field">
+                                              <button type="button" class="quantity-field__minus" id="quantity-field__minus">-</button>
+                                              <input
+                                                type="quantity"
+                                                class="quantity-field__input"
+                                                id="quantity-field__input"
+                                                name="quantity"
+                                                min="1"
+                                                value="${item.quantity}"
+                                              >
+                                              <button type="button" class="quantity-field__plus" id="quantity-field__plus">+</button>
+                                              </div>
+                                            </quantity-field>
+                                            </div>
+                                          </div>
+                                          <div class="cart-drawer__product__details-side">
+                                            <p class="price--actual">${formatMoney(item.final_line_price)}</p>
+                                            <a onclick="removeItem(${item.variant_id})" class="remove">
+                                            <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                              <path d="M8.71678 7.78444V18.6032L17.0342 18.6137V7.7832M8.71678 7.78444H6.21533M8.71678 7.78444H11.0416L13.0369 7.7832L17.0342 7.7832M17.0342 7.7832H19.5292" stroke="white"/>
+                                              <path d="M9.53809 6.79688H16.2578" stroke="white"/>
+                                              <path d="M14.3414 16.6045L14.3414 9.88672M11.3965 16.6045L11.3965 9.88672" stroke="white"/>
+                                            </svg>
+                                            </a>
+                                          </div>
+                                            </div>`);
+                    });
+                    itemList.forEach((item) => {
+                      document.querySelector(".cart-drawer__products-list").innerHTML += item;
+                    });
+                    document.querySelectorAll(".cart-drawer__interaction .buttons .button").forEach((button, index)=>{
+                      let buttonText = button.innerHTML.includes("- ") ? button.innerHTML.split("- ")[0] : button.innerHTML;
+                      if (index === 0) {
+                        button.innerHTML = `${buttonText} - ${data.item_count} ITEMS`;
+                      } else if (index ===1) {
+                        button.innerHTML = `${buttonText} - ${formatMoney(data.total_price)}`;
+                      }
+                    })
+                  });
+              }
+            });
           }
 
           function announceSoldout(inventory) {
@@ -820,53 +936,6 @@
                 });
           };
 
-          function formatMoney(cents, format) {
-              if (typeof cents == "string") {
-                  cents = cents.replace(".", "");
-              }
-              var value = "";
-              var placeholderRegex = /\{\{\s*(\w+)\s*\}\}/;
-              var formatString = format || this.money_format;
-
-              function defaultOption(opt, def) {
-                  return typeof opt == "undefined" ? def : opt;
-              }
-
-              function formatWithDelimiters(number, precision, thousands, decimal) {
-                  precision = defaultOption(precision, 2);
-                  thousands = defaultOption(thousands, ",");
-                  decimal = defaultOption(decimal, ".");
-
-                  if (isNaN(number) || number == null) {
-                      return 0;
-                  }
-
-                  number = (number / 100.0).toFixed(precision);
-
-                  var parts = number.split("."),
-                      dollars = parts[0].replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1" + thousands),
-                      cents = parts[1] ? decimal + parts[1] : "";
-
-                  return dollars + cents;
-              }
-
-              switch (formatString.match(placeholderRegex)[1]) {
-                  case "amount":
-                      value = formatWithDelimiters(cents, 2);
-                      break;
-                  case "amount_no_decimals":
-                      value = formatWithDelimiters(cents, 0);
-                      break;
-                  case "amount_with_comma_separator":
-                      value = formatWithDelimiters(cents, 2, ".", ",");
-                      break;
-                  case "amount_no_decimals_with_comma_separator":
-                      value = formatWithDelimiters(cents, 0, ".", ",");
-                      break;
-              }
-              return formatString.replace(placeholderRegex, value);
-          }
-
           function syncSelect(select, value) {
               document.querySelectorAll('.selector-wrapper select option').forEach((option) => {
                   if (option.label === value) {
@@ -888,6 +957,7 @@
                   }
               }
           }
+
 
   	}
   }

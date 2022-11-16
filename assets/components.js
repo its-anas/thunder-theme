@@ -1079,6 +1079,7 @@ class CartComponent extends HTMLElement {
 	}
 
 	showDrawer() {
+		updateCartDrawer();
 		lockPage();
 		document.querySelector("cart-component").classList.remove("hidden");
 		document.querySelector("cart-component").classList.add("active");
@@ -1112,18 +1113,20 @@ class CartComponent extends HTMLElement {
 		});
 
 		document.addEventListener("click", (event) => {
-			if (document.querySelector(".header__icons-cart").contains(event.target)) {
-				if (document.querySelector("cart-component").classList.contains("hidden")) {
-					this.showDrawer();
-				} else if (document.querySelector("cart-component").classList.contains("active")) {
+			if (document.querySelector(".header__icons-cart").getAttribute("for") === "drawer") {
+				if (document.querySelector(".header__icons-cart").contains(event.target)) {
+					if (document.querySelector("cart-component").classList.contains("hidden")) {
+						this.showDrawer();
+					} else if (document.querySelector("cart-component").classList.contains("active")) {
+						this.hideDrawer();
+						unlockPage();
+					}
+				} else if (document.querySelector(".header__icons-search").contains(event.target) || document.querySelector(".header__icons-account").contains(event.target) || document.querySelector(".header__icons-drawer").contains(event.target)) {
+					this.hideDrawer();
+				} else if (!this.contains(event.target) && !document.querySelector(".header__icons-cart").contains(event.target) && document.querySelector(".popup__container").classList.contains("hidden")) {
 					this.hideDrawer();
 					unlockPage();
 				}
-			} else if (document.querySelector(".header__icons-search").contains(event.target) || document.querySelector(".header__icons-account").contains(event.target) || document.querySelector(".header__icons-drawer").contains(event.target)) {
-				this.hideDrawer();
-			} else if (!this.contains(event.target) && !document.querySelector(".header__icons-cart").contains(event.target) && document.querySelector(".popup__container").classList.contains("hidden")) {
-				this.hideDrawer();
-				unlockPage();
 			}
 		});
 

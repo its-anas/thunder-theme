@@ -355,6 +355,22 @@
           "name": "Cart",
           "settings": [
                {
+                    "type": "select",
+                    "id": "cart_type",
+                    "label": "Cart type",
+                    "options": [
+                         {
+                              "value": "cart_page",
+                              "label": "Page"
+                         },
+                         {
+                              "value": "drawer",
+                              "label": "Drawer"
+                         }
+                    ],
+                    "default": "drawer"
+               },
+               {
                     "type": "text",
                     "id": "free_shipping_threshold",
                     "label": "Free shipping minimum order value",

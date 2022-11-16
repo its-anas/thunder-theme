@@ -19,7 +19,7 @@
 
 <cart-component class="hidden">
   <div class="cart-drawer">
-    {%- if cart.item_count == 0 -%}
+    {% comment %}
       <div class="cart-drawer__content--empty">
         <div class="cart-drawer__head">
           <div class="cart-drawer__title">
@@ -40,40 +40,104 @@
           </a>
         </div>
       </div>
-    {% else %}
-      <div class="cart-drawer__content--filled">
-        <div class="cart-drawer__container">
-          <div class="cart-drawer__head">
-            <div class="cart-drawer__title">
-              <h6>Cart</h6>
-            </div>
-            <div id="close-icon">
-              {% render 'icons', icon: 'close' %}
-            </div>
+    {% endcomment %}
+    <div class="cart-drawer__content--filled">
+      <div class="cart-drawer__container">
+        <div class="cart-drawer__head">
+          <div class="cart-drawer__title">
+            <h6>Cart</h6>
           </div>
+          <div id="close-icon">
+            {% render 'icons', icon: 'close' %}
+          </div>
+        </div>
 
-          <div class="free-shipping-reminder">
-            {% comment %}  UNFINISHED: Need to replace cart total with real one  {% endcomment %}
-            {% assign free_shipping_threshold = settings.free_shipping_threshold | times: 1 %}
-            {% assign cart_total = 24.00 %}
-            <p class="free-shipping-reminder__text">
-              {% if cart_total < free_shipping_threshold %}
-                Spend {{ free_shipping_threshold | minus: cart_total | times: 100 | money }} more and get free shipping
-              {% else %}
-                Congratulations! You have qualified for free shipping
-              {% endif %}
-            </p>
-            <div class="free-shipping-reminder__bar">
-              <div
-                class="free-shipping-reminder__bar__inside {% if cart_total < free_shipping_threshold %}not-enough{% endif %}"
-              ></div>
+        <div class="free-shipping-reminder">
+          {% comment %}  UNFINISHED: Need to replace cart total with real one  {% endcomment %}
+          {% assign free_shipping_threshold = settings.free_shipping_threshold | times: 1 %}
+          {% assign cart_total = 24.00 %}
+          <p class="free-shipping-reminder__text">
+            {% if cart_total < free_shipping_threshold %}
+              Spend {{ free_shipping_threshold | minus: cart_total | times: 100 | money }} more and get free shipping
+            {% else %}
+              Congratulations! You have qualified for free shipping
+            {% endif %}
+          </p>
+          <div class="free-shipping-reminder__bar">
+            <div
+              class="free-shipping-reminder__bar__inside {% if cart_total < free_shipping_threshold %}not-enough{% endif %}"
+            ></div>
+          </div>
+        </div>
+        <div class="cart-drawer__products">
+          {% comment %}  UNFINISHED: Need to replace products with real ones  {% endcomment %}
+          <div class="cart-drawer__products-list"></div>
+          <div class="recommended-products mobile-only">
+            <p class="recommended-products__title">You may also like</p>
+            <div class="recommended-products__list">
+              <div class="recommended-products__list-container">
+                {% for recommended-product in (1..10) %}
+                  <div class="recommended-product">
+                    <div class="recommended-product__image">
+                      <svg
+                        width="65"
+                        height="65"
+                        viewBox="0 0 65 65"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                      >
+                        <rect width="64" height="64" transform="translate(0.868164 0.561523)" fill="url(#pattern0)"/>
+                        <defs>
+                        <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
+                        <use xlink:href="#image0_1212_33917" transform="scale(0.0015625)"/>
+                        </pattern>
+                        <image id="image0_1212_33917" width="640" height="640" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAoAAAAKACAIAAACDr150AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3ggRDR0jaeYi+QAACfpJREFUeNrt19GpWDEMRMEkuAKrnbz+q5FrSAv3YwkSzBRgBPtx8O+fn7+/orpf8LWqO/m8+IXDz7Ovfe1rX/um/PkFAPx3AgwAAgwAAgwACDAACDAAIMAAIMAAgAADgAADAAIMAAIMAAIMAAgwAAgwACDAACDAAIAAA4AAAwACDAACDAACDAAIMAAIMAAgwAAgwADAJ6f7ZV+susHXhp8Xv3D4efa1r33ta18/YABYTIABQIABQIABAAEGAAEGAAQYAAQYABBgABBgAECAAUCAAUCAAQABBgABBgAEGAAEGAAQYAAQYABAgAFAgAFAgAEAAQYAAQYABBgANjpVN/ti9wu+Nvy8+IXDz7Ovfe1rX/v6AQPAYgIMAAIMAAIMAAgwAAgwACDAACDAAIAAA4AAAwACDAACDAACDAAIMAAIMAAgwAAgwACAAAOAAAMAAgwAAgwAAgwACDAACDAAIMAAIMAAwCen+2VfrLrB14afF79w+Hn2ta997WtfP2AAWEyAAUCAAUCAAQABBgABBgAEGAAEGAAQYAAQYABAgAFAgAFAgAEAAQYAAQYABBgABBgAEGAAEGAAQIABQIABQIABAAEGAAEGAAQYAAQYAPjkVN3si90v+Nrw8+IXDj/Pvva1r33t6wcMAIsJMAAIMAAIMAAgwAAgwACAAAOAAAMAAgwAAgwACDAACDAACDAAIMAAIMAAgAADgAADAAIMAAIMAAgwAAgwAAgwACDAACDAAIAAA8BGp/tlX6y6wdeGnxe/cPh59rWvfe1rXz9gAFhMgAFAgAFAgAEAAQYAAQYABBgABBgAEGAAEGAAQIABQIABQIABAAEGAAEGAAQYAAQYABBgABBgAECAAUCAAUCAAQABBgABBgAEGAAEGAD45FTd7IvdL/ja8PPiFw4/z772ta997esHDACLCTAACDAACDAAIMAAIMAAgAADgAADAAIMAAIMAAgwAAgwAAgwACDAACDAAIAAA4AAAwACDAACDAAIMAAIMAAIMAAgwAAgwACAAAOAAAMAn5zul32x6gZfG35e/MLh59nXvva1r339gAFgMQEGAAEGAAEGAAQYAAQYABBgABBgAECAAUCAAQABBgABBgABBgAEGAAEGAAQYAAQYABAgAFAgAEAAQYAAQYAAQYABBgABBgAEGAA2OhU3eyL3S/42vDz4hcOP8++9rWvfe3rBwwAiwkwAAgwAAgwACDAACDAAIAAA4AAAwACDAACDAAIMAAIMAAIMAAgwAAgwACAAAOAAAMAAgwAAgwACDAACDAACDAAIMAAIMAAgAADgAADAJ+c7pd9seoGXxt+XvzC4efZ1772ta99/YABYDEBBgABBgABBgAEGAAEGAAQYAAQYABAgAFAgAEAAQYAAQYAAQYABBgABBgAEGAAEGAAQIABQIABAAEGAAEGAAEGAAQYAAQYABBgABBgAOCTU3WzL3a/4GvDz4tfOPw8+9rXvva1rx8wACwmwAAgwAAgwACAAAOAAAMAAgwAAgwACDAACDAAIMAAIMAAIMAAgAADgAADAAIMAAIMAAgwAAgwACDAACDAACDAAIAAA4AAAwACDAAbne6XfbHqBl8bfl78wuHn2de+9rWvff2AAWAxAQYAAQYAAQYABBgABBgAEGAAEGAAQIABQIABAAEGAAEGAAEGAAQYAAQYABBgABBgAECAAUCAAQABBgABBgABBgAEGAAEGAAQYAAQYADgk1N1sy92v+Brw8+LXzj8PPva1772ta8fMAAsJsAAIMAAIMAAgAADgAADAAIMAAIMAAgwAAgwACDAACDAACDAAIAAA4AAAwACDAACDAAIMAAIMAAgwAAgwAAgwACAAAOAAAMAAgwAAgwAfHK6X/bFqht8bfh58QuHn2df+9rXvvb1AwaAxQQYAAQYAAQYABBgABBgAECAAUCAAQABBgABBgAEGAAEGAAEGAAQYAAQYABAgAFAgAEAAQYAAQYABBgABBgABBgAEGAAEGAAQIABYKNTdbMvdr/ga8PPi184/Dz72te+9rWvHzAALCbAACDAACDAAIAAA4AAAwACDAACDAAIMAAIMAAgwAAgwAAgwACAAAOAAAMAAgwAAgwACDAACDAAIMAAIMAAIMAAgAADgAADAAIMAAIMAHxyul/2xaobfG34efELh59nX/va17729QMGgMUEGAAEGAAEGAAQYAAQYABAgAFAgAEAAQYAAQYABBgABBgABBgAEGAAEGAAQIABQIABAAEGAAEGAAQYAAQYAAQYABBgABBgAECAAUCAAYBPTtXNvtj9gq8NPy9+4fDz7Gtf+9rXvn7AALCYAAOAAAOAAAMAAgwAAgwACDAACDAAIMAAIMAAgAADgAADgAADAAIMAAIMAAgwAAgwACDAACDAAIAAA4AAA4AAAwACDAACDAAIMABsdLpf9sWqG3xt+HnxC4efZ1/72te+9vUDBoDFBBgABBgABBgAEGAAEGAAQIABQIABAAEGAAEGAAQYAAQYAAQYABBgABBgAECAAUCAAQABBgABBgAEGAAEGAAEGAAQYAAQYABAgAFAgAGAT07Vzb7Y/YKvDT8vfuHw8+xrX/va175+wACwmAADgAADgAADAAIMAAIMAAgwAAgwACDAACDAAIAAA4AAA4AAAwACDAACDAAIMAAIMAAgwAAgwACAAAOAAAOAAAMAAgwAAgwACDAACDAA8MnpftkXq27wteHnxS8cfp597Wtf+9rXDxgAFhNgABBgABBgAECAAUCAAQABBgABBgAEGAAEGAAQYAAQYAAQYABAgAFAgAEAAQYAAQYABBgABBgAEGAAEGAAEGAAQIABQIABAAEGgI1O1c2+2P2Crw0/L37h8PPsa1/72te+fsAAsJgAA4AAA4AAAwACDAACDAAIMAAIMAAgwAAgwACAAAOAAAOAAAMAAgwAAgwACDAACDAAIMAAIMAAgAADgAADgAADAAIMAAIMAAgwAAgwAPDJ6X7ZF6tu8LXh58UvHH6efe1rX/va1w8YABYTYAAQYAAQYABAgAFAgAEAAQYAAQYABBgABBgAEGAAEGAAEGAAQIABQIABAAEGAAEGAAQYAAQYABBgABBgABBgAECAAUCAAQABBgABBgA+OVU3+2L3C742/Lz4hcPPs6997Wtf+/oBA8BiAgwAAgwAAgwACDAACDAAIMAAIMAAgAADgAADAAIMAAIMAAIMAAgwAAgwACDAACDAAIAAA4AAAwACDAACDAACDAAIMAAIMAAgwACw0el+2RerbvC14efFLxx+nn3ta1/72tcPGAAWE2AAEGAAEGAAQIABQIABAAEGAAEGAAQYAAQYABBgABBgABBgAECAAUCAAQABBgABBgAEGAAEGAAQYAAQYAAQYABAgAFAgAEAAQYAAQYAPvkH5ZJl2bB1ZOQAAAAASUVORK5CYII="/>
+                        </defs>
+                      </svg>
+                    </div>
+                    <div class="recommended-product__details">
+                      {% assign recommended_product_name = 'Product very long name one very long name one' %}
+                      <p class="product-name">{{ recommended_product_name | truncate: 20 }}</p>
+                      <p class="price--actual">$39.99</p>
+                      <a href="" class="button--link">VIEW PRODUCT</a>
+                    </div>
+                  </div>
+                {% endfor %}
+              </div>
             </div>
           </div>
-          <div class="cart-drawer__products-list">
-            {% comment %}  UNFINISHED: Need to replace products with real ones  {% endcomment %}
-            {% for product in (1..8) %}
-              <div class="cart-drawer__product">
-                <div class="cart-drawer__product__image">
+        </div>
+        <div class="cart-drawer__interaction">
+          <div class="shadow-divider"></div>
+          <div class="buttons">
+            <a
+              class="button button--primary border border"
+              href=""
+            >
+              <span></span> <span></span> <span></span> <span></span>VIEW CART
+            </a>
+            <a
+              class="button button--primary border border"
+              href=""
+            >
+              <span></span> <span></span> <span></span> <span></span> CHECKOUT
+            </a>
+          </div>
+          <div class="bottom">
+            <a href="" class="order-note link">Add order note</a>
+            <p class="disclaimer">Shipping & taxes calculated at checkout</p>
+          </div>
+        </div>
+      </div>
+      <div class="recommended-products desktop-only">
+        <p class="recommended-products__title">You may also like</p>
+        <div class="recommended-products__list">
+          <div class="recommended-products__list-container">
+            {% comment %}  UNFINISHED: Need to replace recommended products with real ones  {% endcomment %}
+            {% for recommended-product in (1..5) %}
+              <div class="recommended-product">
+                <div class="recommended-product__image">
                   <svg
                     width="65"
                     height="65"
@@ -91,137 +155,20 @@
                     </defs>
                   </svg>
                 </div>
-                <div class="cart-drawer__product__details-middle">
-                  {% assign product_name = 'Product name' %}
-                  <p class="product-name">{{ product_name | truncate: 60 }}</p>
-                  <div class="product-variants">
-                    <p class="product-variant">Color: Green</p>
-                    <p class="product-variant">Size: Small</p>
+                <div class="recommended-product__details">
+                  <div class="details">
+                    {% assign product_name = 'Product very' %}
+                    <p class="product-name">{{ product_name | truncate: 40 }}</p>
+                    <p class="price--actual">$39.99</p>
                   </div>
-                  <div class="quantity">
-                    <svg width="79" height="25" viewBox="0 0 79 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M11.3682 12.5615H18.3682" stroke="white" stroke-width="1.5"/>
-                      <path d="M39.6755 16.0615V9.38892L40.1102 9.86409H38.0781V8.98452H40.6764V16.0615H39.6755Z" fill="white"/>
-                      <path d="M64.8682 16.0615L64.8682 9.06152" stroke="white" stroke-width="1.5"/>
-                      <path d="M61.3682 12.5615H68.3682" stroke="white" stroke-width="1.5"/>
-                      <rect x="1.86816" y="3.06152" width="76" height="19" stroke="white" stroke-width="2"/>
-                    </svg>
-                  </div>
-                </div>
-                <div class="cart-drawer__product__details-side">
-                  <p class="price--actual">$39.99</p>
-                  <a href="" class="remove">
-                    <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M8.71678 7.78444V18.6032L17.0342 18.6137V7.7832M8.71678 7.78444H6.21533M8.71678 7.78444H11.0416L13.0369 7.7832L17.0342 7.7832M17.0342 7.7832H19.5292" stroke="white"/>
-                      <path d="M9.53809 6.79688H16.2578" stroke="white"/>
-                      <path d="M14.3414 16.6045L14.3414 9.88672M11.3965 16.6045L11.3965 9.88672" stroke="white"/>
-                    </svg>
-                  </a>
+                  <a href="" class="button--link">VIEW PRODUCT</a>
                 </div>
               </div>
             {% endfor %}
-
-            <div class="recommended-products mobile-only">
-              <p class="recommended-products__title">You may also like</p>
-              <div class="recommended-products__list">
-                <div class="recommended-products__list-container">
-                  {% for recommended-product in (1..10) %}
-                    <div class="recommended-product">
-                      <div class="recommended-product__image">
-                        <svg
-                          width="65"
-                          height="65"
-                          viewBox="0 0 65 65"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                          xmlns:xlink="http://www.w3.org/1999/xlink"
-                        >
-                          <rect width="64" height="64" transform="translate(0.868164 0.561523)" fill="url(#pattern0)"/>
-                          <defs>
-                          <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
-                          <use xlink:href="#image0_1212_33917" transform="scale(0.0015625)"/>
-                          </pattern>
-                          <image id="image0_1212_33917" width="640" height="640" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAoAAAAKACAIAAACDr150AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3ggRDR0jaeYi+QAACfpJREFUeNrt19GpWDEMRMEkuAKrnbz+q5FrSAv3YwkSzBRgBPtx8O+fn7+/orpf8LWqO/m8+IXDz7Ovfe1rX/um/PkFAPx3AgwAAgwAAgwACDAACDAAIMAAIMAAgAADgAADAAIMAAIMAAIMAAgwAAgwACDAACDAAIAAA4AAAwACDAACDAACDAAIMAAIMAAgwAAgwADAJ6f7ZV+susHXhp8Xv3D4efa1r33ta18/YABYTIABQIABQIABAAEGAAEGAAQYAAQYABBgABBgAECAAUCAAUCAAQABBgABBgAEGAAEGAAQYAAQYABAgAFAgAFAgAEAAQYAAQYABBgANjpVN/ti9wu+Nvy8+IXDz7Ovfe1rX/v6AQPAYgIMAAIMAAIMAAgwAAgwACDAACDAAIAAA4AAAwACDAACDAACDAAIMAAIMAAgwAAgwACAAAOAAAMAAgwAAgwAAgwACDAACDAAIMAAIMAAwCen+2VfrLrB14afF79w+Hn2ta997WtfP2AAWEyAAUCAAUCAAQABBgABBgAEGAAEGAAQYAAQYABAgAFAgAFAgAEAAQYAAQYABBgABBgAEGAAEGAAQIABQIABQIABAAEGAAEGAAQYAAQYAPjkVN3si90v+Nrw8+IXDj/Pvva1r33t6wcMAIsJMAAIMAAIMAAgwAAgwACAAAOAAAMAAgwAAgwACDAACDAACDAAIMAAIMAAgAADgAADAAIMAAIMAAgwAAgwAAgwACDAACDAAIAAA8BGp/tlX6y6wdeGnxe/cPh59rWvfe1rXz9gAFhMgAFAgAFAgAEAAQYAAQYABBgABBgAEGAAEGAAQIABQIABQIABAAEGAAEGAAQYAAQYABBgABBgAECAAUCAAUCAAQABBgABBgAEGAAEGAD45FTd7IvdL/ja8PPiFw4/z772ta997esHDACLCTAACDAACDAAIMAAIMAAgAADgAADAAIMAAIMAAgwAAgwAAgwACDAACDAAIAAA4AAAwACDAACDAAIMAAIMAAIMAAgwAAgwACAAAOAAAMAn5zul32x6gZfG35e/MLh59nXvva1r339gAFgMQEGAAEGAAEGAAQYAAQYABBgABBgAECAAUCAAQABBgABBgABBgAEGAAEGAAQYAAQYABAgAFAgAEAAQYAAQYAAQYABBgABBgAEGAA2OhU3eyL3S/42vDz4hcOP8++9rWvfe3rBwwAiwkwAAgwAAgwACDAACDAAIAAA4AAAwACDAACDAAIMAAIMAAIMAAgwAAgwACAAAOAAAMAAgwAAgwACDAACDAACDAAIMAAIMAAgAADgAADAJ+c7pd9seoGXxt+XvzC4efZ1772ta99/YABYDEBBgABBgABBgAEGAAEGAAQYAAQYABAgAFAgAEAAQYAAQYAAQYABBgABBgAEGAAEGAAQIABQIABAAEGAAEGAAEGAAQYAAQYABBgABBgAOCTU3WzL3a/4GvDz4tfOPw8+9rXvva1rx8wACwmwAAgwAAgwACAAAOAAAMAAgwAAgwACDAACDAAIMAAIMAAIMAAgAADgAADAAIMAAIMAAgwAAgwACDAACDAACDAAIAAA4AAAwACDAAbne6XfbHqBl8bfl78wuHn2de+9rWvff2AAWAxAQYAAQYAAQYABBgABBgAEGAAEGAAQIABQIABAAEGAAEGAAEGAAQYAAQYABBgABBgAECAAUCAAQABBgABBgABBgAEGAAEGAAQYAAQYADgk1N1sy92v+Brw8+LXzj8PPva1772ta8fMAAsJsAAIMAAIMAAgAADgAADAAIMAAIMAAgwAAgwACDAACDAACDAAIAAA4AAAwACDAACDAAIMAAIMAAgwAAgwAAgwACAAAOAAAMAAgwAAgwAfHK6X/bFqht8bfh58QuHn2df+9rXvvb1AwaAxQQYAAQYAAQYABBgABBgAECAAUCAAQABBgABBgAEGAAEGAAEGAAQYAAQYABAgAFAgAEAAQYAAQYABBgABBgABBgAEGAAEGAAQIABYKNTdbMvdr/ga8PPi184/Dz72te+9rWvHzAALCbAACDAACDAAIAAA4AAAwACDAACDAAIMAAIMAAgwAAgwAAgwACAAAOAAAMAAgwAAgwACDAACDAAIMAAIMAAIMAAgAADgAADAAIMAAIMAHxyul/2xaobfG34efELh59nX/va17729QMGgMUEGAAEGAAEGAAQYAAQYABAgAFAgAEAAQYAAQYABBgABBgABBgAEGAAEGAAQIABQIABAAEGAAEGAAQYAAQYAAQYABBgABBgAECAAUCAAYBPTtXNvtj9gq8NPy9+4fDz7Gtf+9rXvn7AALCYAAOAAAOAAAMAAgwAAgwACDAACDAAIMAAIMAAgAADgAADgAADAAIMAAIMAAgwAAgwACDAACDAAIAAA4AAA4AAAwACDAACDAAIMABsdLpf9sWqG3xt+HnxC4efZ1/72te+9vUDBoDFBBgABBgABBgAEGAAEGAAQIABQIABAAEGAAEGAAQYAAQYAAQYABBgABBgAECAAUCAAQABBgABBgAEGAAEGAAEGAAQYAAQYABAgAFAgAGAT07Vzb7Y/YKvDT8vfuHw8+xrX/va175+wACwmAADgAADgAADAAIMAAIMAAgwAAgwACDAACDAAIAAA4AAA4AAAwACDAACDAAIMAAIMAAgwAAgwACAAAOAAAOAAAMAAgwAAgwACDAACDAA8MnpftkXq27wteHnxS8cfp597Wtf+9rXDxgAFhNgABBgABBgAECAAUCAAQABBgABBgAEGAAEGAAQYAAQYAAQYABAgAFAgAEAAQYAAQYABBgABBgAEGAAEGAAEGAAQIABQIABAAEGgI1O1c2+2P2Crw0/L37h8PPsa1/72te+fsAAsJgAA4AAA4AAAwACDAACDAAIMAAIMAAgwAAgwACAAAOAAAOAAAMAAgwAAgwACDAACDAAIMAAIMAAgAADgAADgAADAAIMAAIMAAgwAAgwAPDJ6X7ZF6tu8LXh58UvHH6efe1rX/va1w8YABYTYAAQYAAQYABAgAFAgAEAAQYAAQYABBgABBgAEGAAEGAAEGAAQIABQIABAAEGAAEGAAQYAAQYABBgABBgABBgAECAAUCAAQABBgABBgA+OVU3+2L3C742/Lz4hcPPs6997Wtf+/oBA8BiAgwAAgwAAgwACDAACDAAIMAAIMAAgAADgAADAAIMAAIMAAIMAAgwAAgwACDAACDAAIAAA4AAAwACDAACDAACDAAIMAAIMAAgwACw0el+2RerbvC14efFLxx+nn3ta1/72tcPGAAWE2AAEGAAEGAAQIABQIABAAEGAAEGAAQYAAQYABBgABBgABBgAECAAUCAAQABBgABBgAEGAAEGAAQYAAQYAAQYABAgAFAgAEAAQYAAQYAPvkH5ZJl2bB1ZOQAAAAASUVORK5CYII="/>
-                          </defs>
-                        </svg>
-                      </div>
-                      <div class="recommended-product__details">
-                        {% assign recommended_product_name = 'Product very long name one very long name one' %}
-                        <p class="product-name">{{ recommended_product_name | truncate: 20 }}</p>
-                        <p class="price--actual">$39.99</p>
-                        <a href="" class="button--link">VIEW PRODUCT</a>
-                      </div>
-                    </div>
-                  {% endfor %}
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="cart-drawer__interaction">
-            <div class="shadow-divider"></div>
-            <div class="buttons">
-              <a
-                class="button button--primary border border"
-                href=""
-              >
-                <span></span> <span></span> <span></span> <span></span>
-                VIEW CART - 1 ITEM
-              </a>
-              <a
-                class="button button--primary border border"
-                href=""
-              >
-                <span></span> <span></span> <span></span> <span></span>
-                CHECKOUT - $39.99
-              </a>
-            </div>
-            <div class="bottom">
-              <a href="" class="order-note link">Add order note</a>
-              <p class="disclaimer">Shipping & taxes calculated at checkout</p>
-            </div>
-          </div>
-        </div>
-        <div class="recommended-products desktop-only">
-          <p class="recommended-products__title">You may also like</p>
-          <div class="recommended-products__list">
-            <div class="recommended-products__list-container">
-              {% comment %}  UNFINISHED: Need to replace recommended products with real ones  {% endcomment %}
-              {% for recommended-product in (1..5) %}
-                <div class="recommended-product">
-                  <div class="recommended-product__image">
-                    <svg
-                      width="65"
-                      height="65"
-                      viewBox="0 0 65 65"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                      xmlns:xlink="http://www.w3.org/1999/xlink"
-                    >
-                      <rect width="64" height="64" transform="translate(0.868164 0.561523)" fill="url(#pattern0)"/>
-                      <defs>
-                      <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
-                      <use xlink:href="#image0_1212_33917" transform="scale(0.0015625)"/>
-                      </pattern>
-                      <image id="image0_1212_33917" width="640" height="640" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAoAAAAKACAIAAACDr150AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3ggRDR0jaeYi+QAACfpJREFUeNrt19GpWDEMRMEkuAKrnbz+q5FrSAv3YwkSzBRgBPtx8O+fn7+/orpf8LWqO/m8+IXDz7Ovfe1rX/um/PkFAPx3AgwAAgwAAgwACDAACDAAIMAAIMAAgAADgAADAAIMAAIMAAIMAAgwAAgwACDAACDAAIAAA4AAAwACDAACDAACDAAIMAAIMAAgwAAgwADAJ6f7ZV+susHXhp8Xv3D4efa1r33ta18/YABYTIABQIABQIABAAEGAAEGAAQYAAQYABBgABBgAECAAUCAAUCAAQABBgABBgAEGAAEGAAQYAAQYABAgAFAgAFAgAEAAQYAAQYABBgANjpVN/ti9wu+Nvy8+IXDz7Ovfe1rX/v6AQPAYgIMAAIMAAIMAAgwAAgwACDAACDAAIAAA4AAAwACDAACDAACDAAIMAAIMAAgwAAgwACAAAOAAAMAAgwAAgwAAgwACDAACDAAIMAAIMAAwCen+2VfrLrB14afF79w+Hn2ta997WtfP2AAWEyAAUCAAUCAAQABBgABBgAEGAAEGAAQYAAQYABAgAFAgAFAgAEAAQYAAQYABBgABBgAEGAAEGAAQIABQIABQIABAAEGAAEGAAQYAAQYAPjkVN3si90v+Nrw8+IXDj/Pvva1r33t6wcMAIsJMAAIMAAIMAAgwAAgwACAAAOAAAMAAgwAAgwACDAACDAACDAAIMAAIMAAgAADgAADAAIMAAIMAAgwAAgwAAgwACDAACDAAIAAA8BGp/tlX6y6wdeGnxe/cPh59rWvfe1rXz9gAFhMgAFAgAFAgAEAAQYAAQYABBgABBgAEGAAEGAAQIABQIABQIABAAEGAAEGAAQYAAQYABBgABBgAECAAUCAAUCAAQABBgABBgAEGAAEGAD45FTd7IvdL/ja8PPiFw4/z772ta997esHDACLCTAACDAACDAAIMAAIMAAgAADgAADAAIMAAIMAAgwAAgwAAgwACDAACDAAIAAA4AAAwACDAACDAAIMAAIMAAIMAAgwAAgwACAAAOAAAMAn5zul32x6gZfG35e/MLh59nXvva1r339gAFgMQEGAAEGAAEGAAQYAAQYABBgABBgAECAAUCAAQABBgABBgABBgAEGAAEGAAQYAAQYABAgAFAgAEAAQYAAQYAAQYABBgABBgAEGAA2OhU3eyL3S/42vDz4hcOP8++9rWvfe3rBwwAiwkwAAgwAAgwACDAACDAAIAAA4AAAwACDAACDAAIMAAIMAAIMAAgwAAgwACAAAOAAAMAAgwAAgwACDAACDAACDAAIMAAIMAAgAADgAADAJ+c7pd9seoGXxt+XvzC4efZ1772ta99/YABYDEBBgABBgABBgAEGAAEGAAQYAAQYABAgAFAgAEAAQYAAQYAAQYABBgABBgAEGAAEGAAQIABQIABAAEGAAEGAAEGAAQYAAQYABBgABBgAOCTU3WzL3a/4GvDz4tfOPw8+9rXvva1rx8wACwmwAAgwAAgwACAAAOAAAMAAgwAAgwACDAACDAAIMAAIMAAIMAAgAADgAADAAIMAAIMAAgwAAgwACDAACDAACDAAIAAA4AAAwACDAAbne6XfbHqBl8bfl78wuHn2de+9rWvff2AAWAxAQYAAQYAAQYABBgABBgAEGAAEGAAQIABQIABAAEGAAEGAAEGAAQYAAQYABBgABBgAECAAUCAAQABBgABBgABBgAEGAAEGAAQYAAQYADgk1N1sy92v+Brw8+LXzj8PPva1772ta8fMAAsJsAAIMAAIMAAgAADgAADAAIMAAIMAAgwAAgwACDAACDAACDAAIAAA4AAAwACDAACDAAIMAAIMAAgwAAgwAAgwACAAAOAAAMAAgwAAgwAfHK6X/bFqht8bfh58QuHn2df+9rXvvb1AwaAxQQYAAQYAAQYABBgABBgAECAAUCAAQABBgABBgAEGAAEGAAEGAAQYAAQYABAgAFAgAEAAQYAAQYABBgABBgABBgAEGAAEGAAQIABYKNTdbMvdr/ga8PPi184/Dz72te+9rWvHzAALCbAACDAACDAAIAAA4AAAwACDAACDAAIMAAIMAAgwAAgwAAgwACAAAOAAAMAAgwAAgwACDAACDAAIMAAIMAAIMAAgAADgAADAAIMAAIMAHxyul/2xaobfG34efELh59nX/va17729QMGgMUEGAAEGAAEGAAQYAAQYABAgAFAgAEAAQYAAQYABBgABBgABBgAEGAAEGAAQIABQIABAAEGAAEGAAQYAAQYAAQYABBgABBgAECAAUCAAYBPTtXNvtj9gq8NPy9+4fDz7Gtf+9rXvn7AALCYAAOAAAOAAAMAAgwAAgwACDAACDAAIMAAIMAAgAADgAADgAADAAIMAAIMAAgwAAgwACDAACDAAIAAA4AAA4AAAwACDAACDAAIMABsdLpf9sWqG3xt+HnxC4efZ1/72te+9vUDBoDFBBgABBgABBgAEGAAEGAAQIABQIABAAEGAAEGAAQYAAQYAAQYABBgABBgAECAAUCAAQABBgABBgAEGAAEGAAEGAAQYAAQYABAgAFAgAGAT07Vzb7Y/YKvDT8vfuHw8+xrX/va175+wACwmAADgAADgAADAAIMAAIMAAgwAAgwACDAACDAAIAAA4AAA4AAAwACDAACDAAIMAAIMAAgwAAgwACAAAOAAAOAAAMAAgwAAgwACDAACDAA8MnpftkXq27wteHnxS8cfp597Wtf+9rXDxgAFhNgABBgABBgAECAAUCAAQABBgABBgAEGAAEGAAQYAAQYAAQYABAgAFAgAEAAQYAAQYABBgABBgAEGAAEGAAEGAAQIABQIABAAEGgI1O1c2+2P2Crw0/L37h8PPsa1/72te+fsAAsJgAA4AAA4AAAwACDAACDAAIMAAIMAAgwAAgwACAAAOAAAOAAAMAAgwAAgwACDAACDAAIMAAIMAAgAADgAADgAADAAIMAAIMAAgwAAgwAPDJ6X7ZF6tu8LXh58UvHH6efe1rX/va1w8YABYTYAAQYAAQYABAgAFAgAEAAQYAAQYABBgABBgAEGAAEGAAEGAAQIABQIABAAEGAAEGAAQYAAQYABBgABBgABBgAECAAUCAAQABBgABBgA+OVU3+2L3C742/Lz4hcPPs6997Wtf+/oBA8BiAgwAAgwAAgwACDAACDAAIMAAIMAAgAADgAADAAIMAAIMAAIMAAgwAAgwACDAACDAAIAAA4AAAwACDAACDAACDAAIMAAIMAAgwACw0el+2RerbvC14efFLxx+nn3ta1/72tcPGAAWE2AAEGAAEGAAQIABQIABAAEGAAEGAAQYAAQYABBgABBgABBgAECAAUCAAQABBgABBgAEGAAEGAAQYAAQYAAQYABAgAFAgAEAAQYAAQYAPvkH5ZJl2bB1ZOQAAAAASUVORK5CYII="/>
-                      </defs>
-                    </svg>
-                  </div>
-                  <div class="recommended-product__details">
-                    <div class="details">
-                      {% assign product_name = 'Product very' %}
-                      <p class="product-name">{{ product_name | truncate: 40 }}</p>
-                      <p class="price--actual">$39.99</p>
-                    </div>
-
-                    <a href="" class="button--link">VIEW PRODUCT</a>
-                  </div>
-                </div>
-              {% endfor %}
-            </div>
           </div>
         </div>
       </div>
-    {% endif %}
+    </div>
   </div>
 </cart-component>
 
