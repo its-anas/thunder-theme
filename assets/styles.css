@@ -598,6 +598,39 @@ button.button:hover span:nth-child(4) {
   }
 }
 
+.reveal {
+  transform: translate(50%, 0);
+  -webkit-animation: reveal 600ms;
+          animation: reveal 600ms;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+}
+
+@-webkit-keyframes reveal {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0%, 0);
+  }
+}
+
+@keyframes reveal {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0%, 0);
+  }
+}
 slider-component {
   display: flex;
   flex-direction: column;
@@ -3024,13 +3057,38 @@ menu-drawer-component #close-icon {
 .cart-drawer .free-shipping-bar > * {
   width: 90%;
 }
+.cart-drawer__interaction--filled, .cart-drawer__interaction--empty,
+.cart-drawer .cart-drawer__products,
+.cart-drawer .free-shipping-reminder {
+  opacity: 0;
+}
+.cart-drawer__interaction--filled.hide, .cart-drawer__interaction--empty.hide,
+.cart-drawer .cart-drawer__products.hide,
+.cart-drawer .free-shipping-reminder.hide {
+  opacity: 0;
+  transition: all 0.2s ease-in-out;
+  pointer-events: none;
+}
+.cart-drawer__interaction--filled.show, .cart-drawer__interaction--empty.show,
+.cart-drawer .cart-drawer__products.show,
+.cart-drawer .free-shipping-reminder.show {
+  opacity: 1;
+  transition: all 0.2s ease-in-out;
+  pointer-events: all;
+}
 .cart-drawer__interaction {
   position: relative;
+  display: grid;
+}
+.cart-drawer__interaction--filled, .cart-drawer__interaction--empty {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   padding: 1rem;
   gap: 0.8rem;
+  grid-column: 1;
+  grid-row: 1;
 }
 @media screen and (min-width: 1025px) {
   .cart-drawer__interaction {
@@ -3076,10 +3134,6 @@ menu-drawer-component #close-icon {
   display: flex;
   flex-direction: column;
   gap: 2rem;
-}
-.cart-drawer .recommended-products.desktop-only.active {
-  transform: translateX(-99%);
-  transition: transform 0.8s cubic-bezier(0.75, 0, 0.175, 1);
 }
 .cart-drawer .recommended-products.desktop-only .recommended-products__list-container {
   flex-direction: column;

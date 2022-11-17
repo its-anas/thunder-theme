@@ -15,32 +15,20 @@
     border: 2px solid white;
     border-radius: 0px;
   }
+  {% if section.settings. show_cart_recommended_products == true %}
+    .recommended-products.desktop-only.active {
+      transform: translateX(-99%);
+      transition: transform 0.8s cubic-bezier(0.75, 0, 0.175, 1);
+    }
+  {% else %}
+    .recommended-products.mobile-only {
+      display: none;
+    }
+  {% endif %}
 {%- endstyle -%}
 
 <cart-component class="hidden">
   <div class="cart-drawer">
-    {% comment %}
-      <div class="cart-drawer__content--empty">
-        <div class="cart-drawer__head">
-          <div class="cart-drawer__title">
-            <h6>Cart</h6>
-          </div>
-          <div id="close-icon">
-            {% render 'icons', icon: 'close' %}
-          </div>
-        </div>
-        <p class="cart-drawer__empty-message">Your cart is empty</p>
-        <div class="buttons">
-          <a
-            class="button button--primary border"
-            href="/collections/all"
-          >
-            <span></span> <span></span> <span></span> <span></span>
-            SHOP NOW
-          </a>
-        </div>
-      </div>
-    {% endcomment %}
     <div class="cart-drawer__content--filled">
       <div class="cart-drawer__container">
         <div class="cart-drawer__head">
@@ -51,7 +39,6 @@
             {% render 'icons', icon: 'close' %}
           </div>
         </div>
-
         <div class="free-shipping-reminder">
           {% comment %}  UNFINISHED: Need to replace cart total with real one  {% endcomment %}
           {% assign free_shipping_threshold = settings.free_shipping_threshold | times: 1 %}
@@ -109,24 +96,38 @@
           </div>
         </div>
         <div class="cart-drawer__interaction">
-          <div class="shadow-divider"></div>
-          <div class="buttons">
-            <a
-              class="button button--primary border border"
-              href=""
-            >
-              <span></span> <span></span> <span></span> <span></span>VIEW CART
-            </a>
-            <a
-              class="button button--primary border border"
-              href=""
-            >
-              <span></span> <span></span> <span></span> <span></span> CHECKOUT
-            </a>
+          <div class="cart-drawer__interaction--empty">
+            <p class="cart-drawer__empty-message">Your cart is empty</p>
+            <div class="buttons">
+              <a
+                class="button button--primary border"
+                href="/collections/all"
+              >
+                <span></span> <span></span> <span></span> <span></span>
+                SHOP NOW
+              </a>
+            </div>
           </div>
-          <div class="bottom">
-            <a href="" class="order-note link">Add order note</a>
-            <p class="disclaimer">Shipping & taxes calculated at checkout</p>
+          <div class="cart-drawer__interaction--filled">
+            <div class="shadow-divider"></div>
+            <div class="buttons">
+              <a
+                class="button button--primary border border"
+                href=""
+              >
+                <span></span> <span></span> <span></span> <span></span>VIEW CART
+              </a>
+              <a
+                class="button button--primary border border"
+                href=""
+              >
+                <span></span> <span></span> <span></span> <span></span> CHECKOUT
+              </a>
+            </div>
+            <div class="bottom">
+              <a href="" class="order-note link">Add order note</a>
+              <p class="disclaimer">Shipping & taxes calculated at checkout</p>
+            </div>
           </div>
         </div>
       </div>
@@ -176,7 +177,14 @@
 {
   "name": "Cart drawer",
   "class": "section-cart-drawer openable-element",
-  "settings": [],
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_cart_recommended_products",
+      "label": "Show recommended products on cart drawer",
+      "default": true
+    }
+  ],
   "blocks": []
 }
 {% endschema %}

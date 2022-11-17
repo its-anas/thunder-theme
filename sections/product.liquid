@@ -855,15 +855,16 @@
                                                 name="quantity"
                                                 min="1"
                                                 value="${item.quantity}"
+                                                data-variant-id="${item.variant_id}"
                                               >
                                               <button type="button" class="quantity-field__plus" id="quantity-field__plus">+</button>
                                               </div>
                                             </quantity-field>
                                             </div>
                                           </div>
-                                          <div class="cart-drawer__product__details-side">
+                                          <div class="cart-drawer__product__details-side" data-variant-id="${item.variant_id}">
                                             <p class="price--actual">${formatMoney(item.final_line_price)}</p>
-                                            <a onclick="removeItem(${item.variant_id})" class="remove">
+                                            <a class="remove">
                                             <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                                               <path d="M8.71678 7.78444V18.6032L17.0342 18.6137V7.7832M8.71678 7.78444H6.21533M8.71678 7.78444H11.0416L13.0369 7.7832L17.0342 7.7832M17.0342 7.7832H19.5292" stroke="white"/>
                                               <path d="M9.53809 6.79688H16.2578" stroke="white"/>
@@ -871,12 +872,12 @@
                                             </svg>
                                             </a>
                                           </div>
-                                            </div>`);
+                                        </div>`);
                     });
                     itemList.forEach((item) => {
                       document.querySelector(".cart-drawer__products-list").innerHTML += item;
                     });
-                    document.querySelectorAll(".cart-drawer__interaction .buttons .button").forEach((button, index)=>{
+                    document.querySelectorAll(".cart-drawer__interaction .cart-drawer__interaction--filled .buttons .button").forEach((button, index)=>{
                       let buttonText = button.innerHTML.includes("- ") ? button.innerHTML.split("- ")[0] : button.innerHTML;
                       if (index === 0) {
                         button.innerHTML = `${buttonText} - ${data.item_count} ITEMS`;
@@ -884,6 +885,20 @@
                         button.innerHTML = `${buttonText} - ${formatMoney(data.total_price)}`;
                       }
                     })
+                    document.querySelectorAll(".cart-drawer__product__details-side .remove").forEach((icon) => {
+                      let variantId = icon.parentNode.getAttribute("data-variant-id");
+                      icon.addEventListener("click", () => {
+                        updateCartQuantity(variantId, 0);
+                      });
+                    });
+                    document.querySelectorAll(".quantity-field.cart").forEach((field) => {
+                      field.addEventListener("click", () => {
+                        let input = field.querySelector("input");
+                        let variantId = input.getAttribute("data-variant-id");
+                        let quantity = input.value;
+                        updateCartQuantity(variantId, quantity);
+                      });
+                    });
                   });
               }
             });
@@ -957,7 +972,6 @@
                   }
               }
           }
-
 
   	}
   }

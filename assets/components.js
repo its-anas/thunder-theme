@@ -1079,22 +1079,18 @@ class CartComponent extends HTMLElement {
 	}
 
 	showDrawer() {
-		updateCartDrawer();
-		lockPage();
-		document.querySelector("cart-component").classList.remove("hidden");
-		document.querySelector("cart-component").classList.add("active");
-		if (this.querySelector(".recommended-products.desktop-only")) {
-			setTimeout(() => {
-				this.querySelector(".recommended-products.desktop-only").classList.add("active");
-			}, 800);
-		}
+		updateCartDrawer().then(() => {
+			lockPage();
+			document.querySelector("cart-component").classList.remove("hidden");
+			document.querySelector("cart-component").classList.add("active");
+		});
 	}
 
 	hideDrawer() {
 		this.classList.remove("active");
 		this.classList.add("hidden");
-		if (this.querySelector(".recommended-products.desktop-only")) {
-			this.querySelector(".recommended-products.desktop-only").classList.remove("active");
+		if (document.querySelector(".recommended-products.desktop-only")) {
+			document.querySelector(".recommended-products.desktop-only").classList.remove("active");
 		}
 	}
 
