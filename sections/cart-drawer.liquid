@@ -26,6 +26,18 @@
 <cart-component class="hidden">
   <div class="cart-drawer">
     <div class="cart-drawer__content--filled">
+      <div class="cart-drawer__note-popup fade">
+        <div class="cart-drawer__note-popup__content">
+          <div id="note-close-icon">
+            {% render 'icons', icon: 'close' %}
+          </div>
+          <label for="cart-note">Add an note to your order</label>
+          <textarea name="cart-note" id="cart-note" rows="3" placeholder=""></textarea>
+          <div class="buttons">
+            <a id="cart-note-send" class="button button--primary border"> SAVE </a>
+          </div>
+        </div>
+      </div>
       <div class="cart-drawer__container">
         <div class="cart-drawer__head">
           <div class="cart-drawer__title">
@@ -76,7 +88,7 @@
               </a>
             </div>
             <div class="bottom">
-              <a href="" class="order-note link">Add order note</a>
+              <a class="order-note link">Add order note</a>
               <p class="disclaimer">Shipping & taxes calculated at checkout</p>
             </div>
           </div>

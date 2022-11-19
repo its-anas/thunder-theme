@@ -599,23 +599,21 @@ button.button:hover span:nth-child(4) {
 }
 
 .reveal {
-  transform: translate(50%, 0);
-  -webkit-animation: reveal 600ms;
-          animation: reveal 600ms;
+  transform: translate(0, 100%);
+  -webkit-animation: reveal 500ms;
+          animation: reveal 500ms;
   -webkit-animation-fill-mode: forwards;
           animation-fill-mode: forwards;
+  pointer-events: all;
 }
 
 @-webkit-keyframes reveal {
   0% {
     opacity: 0;
   }
-  50% {
-    opacity: 0;
-  }
   100% {
     opacity: 1;
-    transform: translate(0%, 0);
+    transform: translate(0, 0);
   }
 }
 
@@ -623,12 +621,37 @@ button.button:hover span:nth-child(4) {
   0% {
     opacity: 0;
   }
-  50% {
-    opacity: 0;
-  }
   100% {
     opacity: 1;
-    transform: translate(0%, 0);
+    transform: translate(0, 0);
+  }
+}
+.fade {
+  pointer-events: none;
+  transform: translate(0, 0);
+  -webkit-animation: fade 500ms;
+          animation: fade 500ms;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+}
+
+@-webkit-keyframes fade {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(0, 100%);
+  }
+}
+
+@keyframes fade {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(0, 100%);
   }
 }
 slider-component {
@@ -3124,6 +3147,7 @@ menu-drawer-component #close-icon {
   width: 100%;
 }
 .cart-drawer__interaction .bottom .order-note {
+  cursor: pointer;
   font-size: 0.7rem;
 }
 .cart-drawer__interaction .bottom .disclaimer {
@@ -3219,6 +3243,43 @@ menu-drawer-component #close-icon {
 }
 .cart-drawer .recommended-product__details .button--link {
   font-size: 0.6rem;
+}
+.cart-drawer__note-popup {
+  position: absolute;
+  bottom: 0;
+  z-index: 3;
+  width: 100%;
+  height: auto;
+  border: 2px solid #fff;
+  background: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 0rem;
+}
+.cart-drawer__note-popup__content {
+  width: 90%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 1rem;
+}
+.cart-drawer__note-popup__content #note-close-icon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0.5rem;
+  cursor: pointer;
+}
+.cart-drawer__note-popup__content textarea {
+  width: 95%;
+  height: 100px;
+}
+.cart-drawer__note-popup__content .buttons #cart-note-send {
+  cursor: pointer;
+  width: 100%;
 }
 
 .free-shipping-reminder {
