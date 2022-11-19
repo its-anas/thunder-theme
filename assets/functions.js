@@ -45,6 +45,12 @@ function lockPage() {
 	document.querySelector(".theme-overlay").style.zIndex = "99";
 }
 
+function unlockPage() {
+	document.querySelector("html").classList.remove("lock");
+	document.querySelector(".theme-overlay").classList.add("hidden");
+	document.querySelector(".theme-overlay").style.zIndex = "-1";
+}
+
 // ANCHOR: Search drawer
 let searchDrawer = document.querySelector(".search-drawer");
 

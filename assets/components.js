@@ -1867,6 +1867,7 @@ async function updateCartDrawer() {
 	await fetch("/cart.js")
 		.then((resp) => resp.json())
 		.then((data) => {
+			setCartState();
 			let itemList = [];
 			document.getElementById("header__icons-cart__item-count").innerHTML = data.item_count;
 			document.querySelector(".cart-drawer__products-list").innerHTML = "";
@@ -1932,8 +1933,7 @@ async function updateCartDrawer() {
 			document.querySelectorAll(".cart-drawer__product__details-side .remove").forEach((icon) => {
 				let variantId = icon.parentNode.getAttribute("data-variant-id");
 				icon.addEventListener("click", () => {
-					updateCartQuantity(variantId, 0);
-					setCartState();
+					updateCartQuantity(variantId, 0).then(updateCartDrawer);
 				});
 			});
 			document.querySelectorAll(".quantity-field.cart").forEach((field) => {
@@ -1941,7 +1941,8 @@ async function updateCartDrawer() {
 					let input = field.querySelector("input");
 					let variantId = input.getAttribute("data-variant-id");
 					let quantity = input.value;
-					updateCartQuantity(variantId, quantity);
+
+					updateCartQuantity(variantId, quantity).then(updateCartDrawer);
 				});
 			});
 			setTimeout(() => {
@@ -1951,7 +1952,7 @@ async function updateCartDrawer() {
 		});
 }
 
-function updateCartQuantity(variantId, qty) {
+async function updateCartQuantity(variantId, qty) {
 	let variant = variantId.toString();
 
 	let data = {
@@ -1959,7 +1960,7 @@ function updateCartQuantity(variantId, qty) {
 		quantity: qty,
 	};
 
-	fetch(window.Shopify.routes.root + "cart/change.js", {
+	await fetch(window.Shopify.routes.root + "cart/change.js", {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
