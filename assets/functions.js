@@ -55,11 +55,11 @@ function unlockPage() {
 let searchDrawer = document.querySelector(".search-drawer");
 
 window.addEventListener("load", () => {
-	document.querySelector(".search-drawer").style.height = `calc(100% - ${document.querySelector(".header-section").offsetHeight}px + 15px)`;
+	document.querySelector(".search-drawer").style.height = `calc(100% - ${document.querySelector(".header-section").offsetHeight}px + 8px)`;
 });
 
 window.addEventListener("resize", () => {
-	document.querySelector(".search-drawer").style.height = `calc(100% - ${document.querySelector(".header-section").offsetHeight}px + 15px)`;
+	document.querySelector(".search-drawer").style.height = `calc(100% - ${document.querySelector(".header-section").offsetHeight}px + 8px)`;
 });
 
 // ANCHOR: Menu drawer - height and padding

@@ -2454,7 +2454,7 @@ slider-component .slider-component .slides-container .slide .item > * {
   z-index: 100;
 }
 .header-section.boxed {
-  padding: 15px;
+  padding: 8px;
   position: absolute;
 }
 .header-section.sticky {
@@ -2755,6 +2755,12 @@ slider-component .slider-component .slides-container .slide .item > * {
   width: 100%;
   height: 100%;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2px;
+  overflow: hidden;
 }
 .menu-mobile__container {
   width: inherit;
@@ -2913,7 +2919,7 @@ menu-drawer-component {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1rem;
+  padding: 8px;
   z-index: 100;
 }
 @media screen and (min-width: 751px) {
@@ -3355,7 +3361,7 @@ menu-drawer-component #close-icon {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1rem;
+  padding: 8px;
   transform: translateX(120%);
 }
 @media screen and (min-width: 1025px) {
