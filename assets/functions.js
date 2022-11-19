@@ -117,7 +117,7 @@ function setCartState() {
 	fetch("/cart.js")
 		.then((resp) => resp.json())
 		.then((data) => {
-			let cartItemsCount = data.item_count;
+			let cartItemsCount = data.items.length;
 			if (cartItemsCount === 0) {
 				if (document.querySelector(".recommended-products.desktop-only")) {
 					document.querySelector(".recommended-products.desktop-only").classList.remove("active");
@@ -268,6 +268,7 @@ async function updateCartDrawer() {
 				let variantId = icon.parentNode.getAttribute("data-variant-id");
 				icon.addEventListener("click", () => {
 					updateCartQuantity(variantId, 0);
+					setCartState();
 				});
 			});
 			document.querySelectorAll(".quantity-field.cart").forEach((field) => {
@@ -301,7 +302,6 @@ function updateCartQuantity(variantId, qty) {
 		body: JSON.stringify(data),
 	})
 		.then((response) => {
-			updateCartDrawer();
 			return response.json();
 		})
 
@@ -343,8 +343,7 @@ function updateFreeShippingBar(cartAmount) {
 
 function addCartRecommendedProducts(cartProducts) {
 	let recommendedProducts = [];
-	document.querySelector(".recommended-products.desktop-only .recommended-products__list-container").innerHTML = "";
-	document.querySelector(".recommended-products.mobile-only .recommended-products__list-container").innerHTML = "";
+
 	cartProducts.forEach((cartProduct) => {
 		fetch(window.Shopify.routes.root + `recommendations/products.json?product_id=${cartProduct.product_id}&limit=5&intent=related`)
 			.then((response) => response.json())
@@ -355,7 +354,13 @@ function addCartRecommendedProducts(cartProducts) {
 							const index = recommendedProducts.findIndex((object) => object.id === product.id);
 
 							if (index === -1) {
-								document.querySelector(".recommended-products.desktop-only .recommended-products__list-container").innerHTML += `
+								recommendedProducts.push(product);
+							}
+						});
+						document.querySelector(".recommended-products.desktop-only .recommended-products__list-container").innerHTML = "";
+						document.querySelector(".recommended-products.mobile-only .recommended-products__list-container").innerHTML = "";
+						recommendedProducts.forEach((product) => {
+							document.querySelector(".recommended-products.desktop-only .recommended-products__list-container").innerHTML += `
 									<div class="recommended-product">
 										<div class="recommended-product__image media">
 											<img
@@ -375,7 +380,7 @@ function addCartRecommendedProducts(cartProducts) {
 										</div>
 									</div>
 								`;
-								document.querySelector(".recommended-products.mobile-only .recommended-products__list-container").innerHTML += `
+							document.querySelector(".recommended-products.mobile-only .recommended-products__list-container").innerHTML += `
 									<div class="recommended-product">
 										<div class="recommended-product__image media">
 											<img
@@ -393,9 +398,6 @@ function addCartRecommendedProducts(cartProducts) {
 										</div>
 									</div>
 								`;
-							}
-
-							recommendedProducts.push(product);
 						});
 					}
 				}
