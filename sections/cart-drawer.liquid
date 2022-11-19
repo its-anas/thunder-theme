@@ -1,8 +1,4 @@
 {%- style -%}
-  :root {
-    {% comment %}  UNFINISHED: Need to replace cart total with real one  {% endcomment %}
-    --cart-total: 24;
-  }
   .cart-drawer__container, .cart-drawer__content--empty {
     background-color: black;
     border: 2px solid white;
@@ -39,59 +35,14 @@
             {% render 'icons', icon: 'close' %}
           </div>
         </div>
-        <div class="free-shipping-reminder">
-          {% comment %}  UNFINISHED: Need to replace cart total with real one  {% endcomment %}
-          {% assign free_shipping_threshold = settings.free_shipping_threshold | times: 1 %}
-          {% assign cart_total = 24.00 %}
-          <p class="free-shipping-reminder__text">
-            {% if cart_total < free_shipping_threshold %}
-              Spend {{ free_shipping_threshold | minus: cart_total | times: 100 | money }} more and get free shipping
-            {% else %}
-              Congratulations! You have qualified for free shipping
-            {% endif %}
-          </p>
-          <div class="free-shipping-reminder__bar">
-            <div
-              class="free-shipping-reminder__bar__inside {% if cart_total < free_shipping_threshold %}not-enough{% endif %}"
-            ></div>
-          </div>
-        </div>
+        <div class="free-shipping-reminder"></div>
+
         <div class="cart-drawer__products">
-          {% comment %}  UNFINISHED: Need to replace products with real ones  {% endcomment %}
           <div class="cart-drawer__products-list"></div>
           <div class="recommended-products mobile-only">
             <p class="recommended-products__title">You may also like</p>
             <div class="recommended-products__list">
-              <div class="recommended-products__list-container">
-                {% for recommended-product in (1..10) %}
-                  <div class="recommended-product">
-                    <div class="recommended-product__image">
-                      <svg
-                        width="65"
-                        height="65"
-                        viewBox="0 0 65 65"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                        xmlns:xlink="http://www.w3.org/1999/xlink"
-                      >
-                        <rect width="64" height="64" transform="translate(0.868164 0.561523)" fill="url(#pattern0)"/>
-                        <defs>
-                        <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
-                        <use xlink:href="#image0_1212_33917" transform="scale(0.0015625)"/>
-                        </pattern>
-                        <image id="image0_1212_33917" width="640" height="640" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAoAAAAKACAIAAACDr150AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3ggRDR0jaeYi+QAACfpJREFUeNrt19GpWDEMRMEkuAKrnbz+q5FrSAv3YwkSzBRgBPtx8O+fn7+/orpf8LWqO/m8+IXDz7Ovfe1rX/um/PkFAPx3AgwAAgwAAgwACDAACDAAIMAAIMAAgAADgAADAAIMAAIMAAIMAAgwAAgwACDAACDAAIAAA4AAAwACDAACDAACDAAIMAAIMAAgwAAgwADAJ6f7ZV+susHXhp8Xv3D4efa1r33ta18/YABYTIABQIABQIABAAEGAAEGAAQYAAQYABBgABBgAECAAUCAAUCAAQABBgABBgAEGAAEGAAQYAAQYABAgAFAgAFAgAEAAQYAAQYABBgANjpVN/ti9wu+Nvy8+IXDz7Ovfe1rX/v6AQPAYgIMAAIMAAIMAAgwAAgwACDAACDAAIAAA4AAAwACDAACDAACDAAIMAAIMAAgwAAgwACAAAOAAAMAAgwAAgwAAgwACDAACDAAIMAAIMAAwCen+2VfrLrB14afF79w+Hn2ta997WtfP2AAWEyAAUCAAUCAAQABBgABBgAEGAAEGAAQYAAQYABAgAFAgAFAgAEAAQYAAQYABBgABBgAEGAAEGAAQIABQIABQIABAAEGAAEGAAQYAAQYAPjkVN3si90v+Nrw8+IXDj/Pvva1r33t6wcMAIsJMAAIMAAIMAAgwAAgwACAAAOAAAMAAgwAAgwACDAACDAACDAAIMAAIMAAgAADgAADAAIMAAIMAAgwAAgwAAgwACDAACDAAIAAA8BGp/tlX6y6wdeGnxe/cPh59rWvfe1rXz9gAFhMgAFAgAFAgAEAAQYAAQYABBgABBgAEGAAEGAAQIABQIABQIABAAEGAAEGAAQYAAQYABBgABBgAECAAUCAAUCAAQABBgABBgAEGAAEGAD45FTd7IvdL/ja8PPiFw4/z772ta997esHDACLCTAACDAACDAAIMAAIMAAgAADgAADAAIMAAIMAAgwAAgwAAgwACDAACDAAIAAA4AAAwACDAACDAAIMAAIMAAIMAAgwAAgwACAAAOAAAMAn5zul32x6gZfG35e/MLh59nXvva1r339gAFgMQEGAAEGAAEGAAQYAAQYABBgABBgAECAAUCAAQABBgABBgABBgAEGAAEGAAQYAAQYABAgAFAgAEAAQYAAQYAAQYABBgABBgAEGAA2OhU3eyL3S/42vDz4hcOP8++9rWvfe3rBwwAiwkwAAgwAAgwACDAACDAAIAAA4AAAwACDAACDAAIMAAIMAAIMAAgwAAgwACAAAOAAAMAAgwAAgwACDAACDAACDAAIMAAIMAAgAADgAADAJ+c7pd9seoGXxt+XvzC4efZ1772ta99/YABYDEBBgABBgABBgAEGAAEGAAQYAAQYABAgAFAgAEAAQYAAQYAAQYABBgABBgAEGAAEGAAQIABQIABAAEGAAEGAAEGAAQYAAQYABBgABBgAOCTU3WzL3a/4GvDz4tfOPw8+9rXvva1rx8wACwmwAAgwAAgwACAAAOAAAMAAgwAAgwACDAACDAAIMAAIMAAIMAAgAADgAADAAIMAAIMAAgwAAgwACDAACDAACDAAIAAA4AAAwACDAAbne6XfbHqBl8bfl78wuHn2de+9rWvff2AAWAxAQYAAQYAAQYABBgABBgAEGAAEGAAQIABQIABAAEGAAEGAAEGAAQYAAQYABBgABBgAECAAUCAAQABBgABBgABBgAEGAAEGAAQYAAQYADgk1N1sy92v+Brw8+LXzj8PPva1772ta8fMAAsJsAAIMAAIMAAgAADgAADAAIMAAIMAAgwAAgwACDAACDAACDAAIAAA4AAAwACDAACDAAIMAAIMAAgwAAgwAAgwACAAAOAAAMAAgwAAgwAfHK6X/bFqht8bfh58QuHn2df+9rXvvb1AwaAxQQYAAQYAAQYABBgABBgAECAAUCAAQABBgABBgAEGAAEGAAEGAAQYAAQYABAgAFAgAEAAQYAAQYABBgABBgABBgAEGAAEGAAQIABYKNTdbMvdr/ga8PPi184/Dz72te+9rWvHzAALCbAACDAACDAAIAAA4AAAwACDAACDAAIMAAIMAAgwAAgwAAgwACAAAOAAAMAAgwAAgwACDAACDAAIMAAIMAAIMAAgAADgAADAAIMAAIMAHxyul/2xaobfG34efELh59nX/va17729QMGgMUEGAAEGAAEGAAQYAAQYABAgAFAgAEAAQYAAQYABBgABBgABBgAEGAAEGAAQIABQIABAAEGAAEGAAQYAAQYAAQYABBgABBgAECAAUCAAYBPTtXNvtj9gq8NPy9+4fDz7Gtf+9rXvn7AALCYAAOAAAOAAAMAAgwAAgwACDAACDAAIMAAIMAAgAADgAADgAADAAIMAAIMAAgwAAgwACDAACDAAIAAA4AAA4AAAwACDAACDAAIMABsdLpf9sWqG3xt+HnxC4efZ1/72te+9vUDBoDFBBgABBgABBgAEGAAEGAAQIABQIABAAEGAAEGAAQYAAQYAAQYABBgABBgAECAAUCAAQABBgABBgAEGAAEGAAEGAAQYAAQYABAgAFAgAGAT07Vzb7Y/YKvDT8vfuHw8+xrX/va175+wACwmAADgAADgAADAAIMAAIMAAgwAAgwACDAACDAAIAAA4AAA4AAAwACDAACDAAIMAAIMAAgwAAgwACAAAOAAAOAAAMAAgwAAgwACDAACDAA8MnpftkXq27wteHnxS8cfp597Wtf+9rXDxgAFhNgABBgABBgAECAAUCAAQABBgABBgAEGAAEGAAQYAAQYAAQYABAgAFAgAEAAQYAAQYABBgABBgAEGAAEGAAEGAAQIABQIABAAEGgI1O1c2+2P2Crw0/L37h8PPsa1/72te+fsAAsJgAA4AAA4AAAwACDAACDAAIMAAIMAAgwAAgwACAAAOAAAOAAAMAAgwAAgwACDAACDAAIMAAIMAAgAADgAADgAADAAIMAAIMAAgwAAgwAPDJ6X7ZF6tu8LXh58UvHH6efe1rX/va1w8YABYTYAAQYAAQYABAgAFAgAEAAQYAAQYABBgABBgAEGAAEGAAEGAAQIABQIABAAEGAAEGAAQYAAQYABBgABBgABBgAECAAUCAAQABBgABBgA+OVU3+2L3C742/Lz4hcPPs6997Wtf+/oBA8BiAgwAAgwAAgwACDAACDAAIMAAIMAAgAADgAADAAIMAAIMAAIMAAgwAAgwACDAACDAAIAAA4AAAwACDAACDAACDAAIMAAIMAAgwACw0el+2RerbvC14efFLxx+nn3ta1/72tcPGAAWE2AAEGAAEGAAQIABQIABAAEGAAEGAAQYAAQYABBgABBgABBgAECAAUCAAQABBgABBgAEGAAEGAAQYAAQYAAQYABAgAFAgAEAAQYAAQYAPvkH5ZJl2bB1ZOQAAAAASUVORK5CYII="/>
-                        </defs>
-                      </svg>
-                    </div>
-                    <div class="recommended-product__details">
-                      {% assign recommended_product_name = 'Product very long name one very long name one' %}
-                      <p class="product-name">{{ recommended_product_name | truncate: 20 }}</p>
-                      <p class="price--actual">$39.99</p>
-                      <a href="" class="button--link">VIEW PRODUCT</a>
-                    </div>
-                  </div>
-                {% endfor %}
-              </div>
+              <div class="recommended-products__list-container"></div>
             </div>
           </div>
         </div>
@@ -136,36 +87,6 @@
         <div class="recommended-products__list">
           <div class="recommended-products__list-container">
             {% comment %}  UNFINISHED: Need to replace recommended products with real ones  {% endcomment %}
-            {% for recommended-product in (1..5) %}
-              <div class="recommended-product">
-                <div class="recommended-product__image">
-                  <svg
-                    width="65"
-                    height="65"
-                    viewBox="0 0 65 65"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    xmlns:xlink="http://www.w3.org/1999/xlink"
-                  >
-                    <rect width="64" height="64" transform="translate(0.868164 0.561523)" fill="url(#pattern0)"/>
-                    <defs>
-                    <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
-                    <use xlink:href="#image0_1212_33917" transform="scale(0.0015625)"/>
-                    </pattern>
-                    <image id="image0_1212_33917" width="640" height="640" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAoAAAAKACAIAAACDr150AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3ggRDR0jaeYi+QAACfpJREFUeNrt19GpWDEMRMEkuAKrnbz+q5FrSAv3YwkSzBRgBPtx8O+fn7+/orpf8LWqO/m8+IXDz7Ovfe1rX/um/PkFAPx3AgwAAgwAAgwACDAACDAAIMAAIMAAgAADgAADAAIMAAIMAAIMAAgwAAgwACDAACDAAIAAA4AAAwACDAACDAACDAAIMAAIMAAgwAAgwADAJ6f7ZV+susHXhp8Xv3D4efa1r33ta18/YABYTIABQIABQIABAAEGAAEGAAQYAAQYABBgABBgAECAAUCAAUCAAQABBgABBgAEGAAEGAAQYAAQYABAgAFAgAFAgAEAAQYAAQYABBgANjpVN/ti9wu+Nvy8+IXDz7Ovfe1rX/v6AQPAYgIMAAIMAAIMAAgwAAgwACDAACDAAIAAA4AAAwACDAACDAACDAAIMAAIMAAgwAAgwACAAAOAAAMAAgwAAgwAAgwACDAACDAAIMAAIMAAwCen+2VfrLrB14afF79w+Hn2ta997WtfP2AAWEyAAUCAAUCAAQABBgABBgAEGAAEGAAQYAAQYABAgAFAgAFAgAEAAQYAAQYABBgABBgAEGAAEGAAQIABQIABQIABAAEGAAEGAAQYAAQYAPjkVN3si90v+Nrw8+IXDj/Pvva1r33t6wcMAIsJMAAIMAAIMAAgwAAgwACAAAOAAAMAAgwAAgwACDAACDAACDAAIMAAIMAAgAADgAADAAIMAAIMAAgwAAgwAAgwACDAACDAAIAAA8BGp/tlX6y6wdeGnxe/cPh59rWvfe1rXz9gAFhMgAFAgAFAgAEAAQYAAQYABBgABBgAEGAAEGAAQIABQIABQIABAAEGAAEGAAQYAAQYABBgABBgAECAAUCAAUCAAQABBgABBgAEGAAEGAD45FTd7IvdL/ja8PPiFw4/z772ta997esHDACLCTAACDAACDAAIMAAIMAAgAADgAADAAIMAAIMAAgwAAgwAAgwACDAACDAAIAAA4AAAwACDAACDAAIMAAIMAAIMAAgwAAgwACAAAOAAAMAn5zul32x6gZfG35e/MLh59nXvva1r339gAFgMQEGAAEGAAEGAAQYAAQYABBgABBgAECAAUCAAQABBgABBgABBgAEGAAEGAAQYAAQYABAgAFAgAEAAQYAAQYAAQYABBgABBgAEGAA2OhU3eyL3S/42vDz4hcOP8++9rWvfe3rBwwAiwkwAAgwAAgwACDAACDAAIAAA4AAAwACDAACDAAIMAAIMAAIMAAgwAAgwACAAAOAAAMAAgwAAgwACDAACDAACDAAIMAAIMAAgAADgAADAJ+c7pd9seoGXxt+XvzC4efZ1772ta99/YABYDEBBgABBgABBgAEGAAEGAAQYAAQYABAgAFAgAEAAQYAAQYAAQYABBgABBgAEGAAEGAAQIABQIABAAEGAAEGAAEGAAQYAAQYABBgABBgAOCTU3WzL3a/4GvDz4tfOPw8+9rXvva1rx8wACwmwAAgwAAgwACAAAOAAAMAAgwAAgwACDAACDAAIMAAIMAAIMAAgAADgAADAAIMAAIMAAgwAAgwACDAACDAACDAAIAAA4AAAwACDAAbne6XfbHqBl8bfl78wuHn2de+9rWvff2AAWAxAQYAAQYAAQYABBgABBgAEGAAEGAAQIABQIABAAEGAAEGAAEGAAQYAAQYABBgABBgAECAAUCAAQABBgABBgABBgAEGAAEGAAQYAAQYADgk1N1sy92v+Brw8+LXzj8PPva1772ta8fMAAsJsAAIMAAIMAAgAADgAADAAIMAAIMAAgwAAgwACDAACDAACDAAIAAA4AAAwACDAACDAAIMAAIMAAgwAAgwAAgwACAAAOAAAMAAgwAAgwAfHK6X/bFqht8bfh58QuHn2df+9rXvvb1AwaAxQQYAAQYAAQYABBgABBgAECAAUCAAQABBgABBgAEGAAEGAAEGAAQYAAQYABAgAFAgAEAAQYAAQYABBgABBgABBgAEGAAEGAAQIABYKNTdbMvdr/ga8PPi184/Dz72te+9rWvHzAALCbAACDAACDAAIAAA4AAAwACDAACDAAIMAAIMAAgwAAgwAAgwACAAAOAAAMAAgwAAgwACDAACDAAIMAAIMAAIMAAgAADgAADAAIMAAIMAHxyul/2xaobfG34efELh59nX/va17729QMGgMUEGAAEGAAEGAAQYAAQYABAgAFAgAEAAQYAAQYABBgABBgABBgAEGAAEGAAQIABQIABAAEGAAEGAAQYAAQYAAQYABBgABBgAECAAUCAAYBPTtXNvtj9gq8NPy9+4fDz7Gtf+9rXvn7AALCYAAOAAAOAAAMAAgwAAgwACDAACDAAIMAAIMAAgAADgAADgAADAAIMAAIMAAgwAAgwACDAACDAAIAAA4AAA4AAAwACDAACDAAIMABsdLpf9sWqG3xt+HnxC4efZ1/72te+9vUDBoDFBBgABBgABBgAEGAAEGAAQIABQIABAAEGAAEGAAQYAAQYAAQYABBgABBgAECAAUCAAQABBgABBgAEGAAEGAAEGAAQYAAQYABAgAFAgAGAT07Vzb7Y/YKvDT8vfuHw8+xrX/va175+wACwmAADgAADgAADAAIMAAIMAAgwAAgwACDAACDAAIAAA4AAA4AAAwACDAACDAAIMAAIMAAgwAAgwACAAAOAAAOAAAMAAgwAAgwACDAACDAA8MnpftkXq27wteHnxS8cfp597Wtf+9rXDxgAFhNgABBgABBgAECAAUCAAQABBgABBgAEGAAEGAAQYAAQYAAQYABAgAFAgAEAAQYAAQYABBgABBgAEGAAEGAAEGAAQIABQIABAAEGgI1O1c2+2P2Crw0/L37h8PPsa1/72te+fsAAsJgAA4AAA4AAAwACDAACDAAIMAAIMAAgwAAgwACAAAOAAAOAAAMAAgwAAgwACDAACDAAIMAAIMAAgAADgAADgAADAAIMAAIMAAgwAAgwAPDJ6X7ZF6tu8LXh58UvHH6efe1rX/va1w8YABYTYAAQYAAQYABAgAFAgAEAAQYAAQYABBgABBgAEGAAEGAAEGAAQIABQIABAAEGAAEGAAQYAAQYABBgABBgABBgAECAAUCAAQABBgABBgA+OVU3+2L3C742/Lz4hcPPs6997Wtf+/oBA8BiAgwAAgwAAgwACDAACDAAIMAAIMAAgAADgAADAAIMAAIMAAIMAAgwAAgwACDAACDAAIAAA4AAAwACDAACDAACDAAIMAAIMAAgwACw0el+2RerbvC14efFLxx+nn3ta1/72tcPGAAWE2AAEGAAEGAAQIABQIABAAEGAAEGAAQYAAQYABBgABBgABBgAECAAUCAAQABBgABBgAEGAAEGAAQYAAQYAAQYABAgAFAgAEAAQYAAQYAPvkH5ZJl2bB1ZOQAAAAASUVORK5CYII="/>
-                    </defs>
-                  </svg>
-                </div>
-                <div class="recommended-product__details">
-                  <div class="details">
-                    {% assign product_name = 'Product very' %}
-                    <p class="product-name">{{ product_name | truncate: 40 }}</p>
-                    <p class="price--actual">$39.99</p>
-                  </div>
-                  <a href="" class="button--link">VIEW PRODUCT</a>
-                </div>
-              </div>
-            {% endfor %}
           </div>
         </div>
       </div>
@@ -182,7 +103,8 @@
       "type": "checkbox",
       "id": "show_cart_recommended_products",
       "label": "Show recommended products on cart drawer",
-      "default": true
+      "default": true,
+      "info": "If the product in the cart is in a collection when there is no other products, the recommendations may not show up. Also products that are out of stock, or set to a price of 0, and gift cards, aren't included in recommendations. Learn more [here](https://help.shopify.com/en/manual/online-store/search-and-discovery/product-recommendations)."
     }
   ],
   "blocks": []

@@ -3226,6 +3226,9 @@ menu-drawer-component {
 	&__products {
 		flex-grow: 1;
 		overflow-x: auto;
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
 	}
 
 	&__product {
@@ -3377,7 +3380,7 @@ menu-drawer-component {
 
 		.recommended-products__list-container {
 			flex-direction: column;
-			gap: 1rem;
+			gap: 2rem;
 		}
 		.recommended-products__list {
 			overflow-y: auto;
@@ -3414,30 +3417,38 @@ menu-drawer-component {
 	}
 
 	.recommended-product {
-		width: 200px;
+		width: 180px;
 		display: flex;
 		flex-direction: row;
 		gap: 0.3rem;
 		padding-left: 0.5rem;
 
 		@media screen and (min-width: 751px) {
-			width: 220px;
+			width: 200px;
 		}
 
 		&__image {
+			width: 100px;
+			aspect-ratio: 1;
+
+			@media screen and (max-width: 1024px) {
+				width: 64px;
+				height: 64px;
+				aspect-ratio: 1;
+			}
 		}
 
 		&__details {
 			padding: 0.2rem;
 			display: flex;
 			flex-direction: column;
-			justify-content: space-between;
 			width: 100%;
+			gap: 0.3rem;
 
 			.details {
 				display: flex;
 				flex-direction: column;
-				gap: 0.1rem;
+				gap: 0.3rem;
 			}
 
 			.product-name,
@@ -3471,7 +3482,6 @@ menu-drawer-component {
 
 		&__inside {
 			height: 100%;
-			width: calc(var(--cart-total) / var(--free-shipping-threshold) * 100%);
 			background-color: white;
 			&.not-enough {
 				animation: glow 1s ease-in-out infinite alternate;

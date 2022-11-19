@@ -112,57 +112,53 @@ if (Shopify.designMode) {
 }
 
 // ANCHOR: Cart item
-const targetNode = document.querySelector(".cart-drawer");
-const config = { childList: true, subtree: true };
-const observer = new MutationObserver(callback);
-observer.observe(targetNode, config);
-
-function callback(mutationList, observer) {
-	for (const mutation of mutationList) {
-		if (mutation.target.className === "cart-drawer__products-list") {
-			setCartState();
-		}
-	}
-}
-
-setCartState();
 
 function setCartState() {
-	let cartProducts = document.querySelector(".cart-drawer__products-list").childElementCount;
-	if (cartProducts === 0) {
-		if (document.querySelector(".recommended-products.desktop-only")) {
-			document.querySelector(".recommended-products.desktop-only").classList.remove("active");
-		}
-		document.querySelector(".cart-drawer__products").classList.remove("show");
-		document.querySelector(".cart-drawer__products").classList.add("hide");
-		document.querySelector(".cart-drawer__interaction--filled").classList.remove("show");
-		document.querySelector(".cart-drawer__interaction--filled").classList.add("hide");
-		document.querySelector(".free-shipping-reminder").classList.remove("show");
-		document.querySelector(".free-shipping-reminder").classList.add("hide");
+	fetch("/cart.js")
+		.then((resp) => resp.json())
+		.then((data) => {
+			let cartItemsCount = data.item_count;
+			if (cartItemsCount === 0) {
+				if (document.querySelector(".recommended-products.desktop-only")) {
+					document.querySelector(".recommended-products.desktop-only").classList.remove("active");
+				}
+				document.querySelector(".cart-drawer__products").classList.remove("show");
+				document.querySelector(".cart-drawer__products").classList.add("hide");
+				document.querySelector(".cart-drawer__interaction--filled").classList.remove("show");
+				document.querySelector(".cart-drawer__interaction--filled").classList.add("hide");
+				document.querySelector(".free-shipping-reminder").classList.remove("show");
+				document.querySelector(".free-shipping-reminder").classList.add("hide");
 
-		setTimeout(() => {
-			document.querySelector(".cart-drawer__interaction--empty").classList.remove("hide");
-			document.querySelector(".cart-drawer__interaction--empty").classList.add("show");
-		}, 300);
-	} else if (cartProducts === 1) {
-		if (document.querySelector(".recommended-products.desktop-only")) {
-			setTimeout(() => {
-				document.querySelector(".recommended-products.desktop-only").classList.add("active");
-			}, 500);
-		}
+				setTimeout(() => {
+					document.querySelector(".cart-drawer__interaction--empty").classList.remove("hide");
+					document.querySelector(".cart-drawer__interaction--empty").classList.add("show");
+				}, 300);
+			} else if (cartItemsCount > 0) {
+				if (document.querySelector(".recommended-products.desktop-only")) {
+					setTimeout(() => {
+						document.querySelector(".recommended-products.desktop-only").classList.add("active");
+					}, 500);
+				}
 
-		document.querySelector(".cart-drawer__interaction--empty").classList.remove("show");
-		document.querySelector(".cart-drawer__interaction--empty").classList.add("hide");
+				document.querySelector(".cart-drawer__interaction--empty").classList.remove("show");
+				document.querySelector(".cart-drawer__interaction--empty").classList.add("hide");
 
-		setTimeout(() => {
-			document.querySelector(".cart-drawer__products").classList.remove("hide");
-			document.querySelector(".cart-drawer__products").classList.add("show");
-			document.querySelector(".cart-drawer__interaction--filled").classList.remove("hide");
-			document.querySelector(".cart-drawer__interaction--filled").classList.add("show");
-			document.querySelector(".free-shipping-reminder").classList.remove("hide");
-			document.querySelector(".free-shipping-reminder").classList.add("show");
-		}, 300);
-	}
+				setTimeout(() => {
+					document.querySelector(".cart-drawer__products").classList.remove("hide");
+					document.querySelector(".cart-drawer__products").classList.add("show");
+					document.querySelector(".cart-drawer__interaction--filled").classList.remove("hide");
+					document.querySelector(".cart-drawer__interaction--filled").classList.add("show");
+					document.querySelector(".free-shipping-reminder").classList.remove("hide");
+					document.querySelector(".free-shipping-reminder").classList.add("show");
+				}, 300);
+			}
+		});
+}
+
+if (cartType === "drawer") {
+	document.querySelector("#add-to-cart-button").addEventListener("click", () => {
+		sendToCart();
+	});
 }
 
 function sendToCart() {
@@ -185,6 +181,7 @@ function sendToCart() {
 		body: JSON.stringify(formData),
 	})
 		.then((response) => {
+			setCartState();
 			updateCartDrawer();
 			lockPage();
 			document.querySelector("cart-component").classList.remove("hidden");
@@ -205,8 +202,8 @@ async function updateCartDrawer() {
 	await fetch("/cart.js")
 		.then((resp) => resp.json())
 		.then((data) => {
-			document.getElementById("header__icons-cart__item-count").innerHTML = data.item_count;
 			let itemList = [];
+			document.getElementById("header__icons-cart__item-count").innerHTML = data.item_count;
 			document.querySelector(".cart-drawer__products-list").innerHTML = "";
 			data.items.forEach((item) => {
 				itemList.push(`
@@ -281,6 +278,10 @@ async function updateCartDrawer() {
 					updateCartQuantity(variantId, quantity);
 				});
 			});
+			setTimeout(() => {
+				updateFreeShippingBar(data.total_price);
+				addCartRecommendedProducts(data.items);
+			}, 200);
 		});
 }
 
@@ -307,4 +308,97 @@ function updateCartQuantity(variantId, qty) {
 		.catch((error) => {
 			console.error("Error:", error);
 		});
+}
+
+function updateFreeShippingBar(cartAmount) {
+	let firstMessage = `Spend ${formatMoney(freeShippingThreshold - cartAmount)} more and get free shipping`;
+	let secondMessage = `Congratulations 🎉 You have qualified for free shipping`;
+
+	let freeShippingMessage = cartAmount < freeShippingThreshold ? firstMessage : secondMessage;
+
+	let barCssClass = cartAmount < freeShippingThreshold ? "not-enough" : "";
+
+	let barLoadingPercentage = (cartAmount / freeShippingThreshold) * 100;
+
+	let barCssWidth = barLoadingPercentage > 100 ? "100%" : `${barLoadingPercentage}%`;
+
+	if (document.querySelector(".free-shipping-reminder")) {
+		document.querySelector(".free-shipping-reminder").innerHTML = `        
+		<style>
+		.free-shipping-reminder__bar__inside {
+			width: ${barCssWidth};
+		}
+		</style>
+
+		<p class="free-shipping-reminder__text">
+			${freeShippingMessage}
+		</p>
+
+		<div class="free-shipping-reminder__bar">
+			<div class="free-shipping-reminder__bar__inside ${barCssClass}" > </div>
+		</div>
+	`;
+	}
+}
+
+function addCartRecommendedProducts(cartProducts) {
+	let recommendedProducts = [];
+	document.querySelector(".recommended-products.desktop-only .recommended-products__list-container").innerHTML = "";
+	document.querySelector(".recommended-products.mobile-only .recommended-products__list-container").innerHTML = "";
+	cartProducts.forEach((cartProduct) => {
+		fetch(window.Shopify.routes.root + `recommendations/products.json?product_id=${cartProduct.product_id}&limit=5&intent=related`)
+			.then((response) => response.json())
+			.then(({ products }) => {
+				if (products) {
+					if (products.length > 0) {
+						products.forEach((product) => {
+							const index = recommendedProducts.findIndex((object) => object.id === product.id);
+
+							if (index === -1) {
+								document.querySelector(".recommended-products.desktop-only .recommended-products__list-container").innerHTML += `
+									<div class="recommended-product">
+										<div class="recommended-product__image media">
+											<img
+												srcset="${product.media[0].src}"
+												alt="${product.media[0].alt}"
+												width="${product.media[0].width}"
+												height="${product.media[0].height}"
+												class="fit"
+											>
+										</div>
+										<div class="recommended-product__details">
+										<div class="details">
+											<p class="product-name">${product.title.substring(15, length)}...</p>
+											<p class="price--actual">${formatMoney(product.price)}</p>
+										</div>
+										<a href="${product.url}" class="button--link">VIEW PRODUCT</a>
+										</div>
+									</div>
+								`;
+								document.querySelector(".recommended-products.mobile-only .recommended-products__list-container").innerHTML += `
+									<div class="recommended-product">
+										<div class="recommended-product__image media">
+											<img
+												srcset="${product.media[0].src}"
+												alt="${product.media[0].alt}"
+												width="${product.media[0].width}"
+												height="${product.media[0].height}"
+												class="fit"
+											>
+										</div>
+										<div class="recommended-product__details">
+											<p class="product-name">${product.title.substring(15, length)}...</p>
+											<p class="price--actual">${formatMoney(product.price)}</p>
+										<a href="${product.url}" class="button--link">VIEW PRODUCT</a>
+										</div>
+									</div>
+								`;
+							}
+
+							recommendedProducts.push(product);
+						});
+					}
+				}
+			});
+	});
 }
