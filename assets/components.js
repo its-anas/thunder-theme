@@ -1535,9 +1535,11 @@ class ProductPage extends HTMLElement {
 						document.querySelector(".product-page__tag").classList.add("hidden");
 					}
 				}
+
 				if (variant.compare_at_price > 0) {
 					document.querySelector(".product-page__price--compare-at").innerHTML = formatMoney(variant.compare_at_price);
 				}
+
 				document.querySelector(".product-page__price--actual").innerHTML = formatMoney(variant.price);
 
 				for (var key in variantsInventory) {
@@ -1554,6 +1556,11 @@ class ProductPage extends HTMLElement {
 						announceSoldout(variantsInventory[key]);
 					}
 				}
+
+				document.querySelector(".product-page-slider__slides-container").classList.add("reveal");
+				setTimeout(() => {
+					document.querySelector(".product-page-slider__slides-container").classList.remove("reveal");
+				}, 200);
 
 				document.querySelectorAll(".product-hidden-images .item").forEach((item) => {
 					if (item.getAttribute("data-attached-to-variant")) {

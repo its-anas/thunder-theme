@@ -163,7 +163,7 @@
 <product-page class="product-page" data-product="{{ product.id }}">
   <div class="product-page__container">
     <div class="product-page__content">
-      <div class="product-page__pictures">
+      <div class="product-page__pictures reveal">
         <product-page-slider
           data-mobile-items="{{ mobile_items }}"
           data-tablet-items="{{ tablet_items }}"
@@ -627,9 +627,10 @@
 
 <script>
   let variantsInventory = {};
-          {% for variant in product.variants %}
-            variantsInventory["{{ variant.title }}"] = {{ variant.inventory_quantity }};
-          {% endfor %}
+  {% for variant in product.variants %}
+    variantsInventory["{{ variant.title }}"] = {{ variant.inventory_quantity }};
+  {% endfor %}
+ 
 
   let paymentMethods = `
       <div class="product-page__payment-methods">
@@ -672,7 +673,7 @@
       "max": 400,
       "step": 10,
       "unit": "px",
-      "default": 160
+      "default": 100
     },
     {
       "type": "range",

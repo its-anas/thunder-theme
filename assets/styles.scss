@@ -652,7 +652,7 @@ slider-component.multi-icon .slider-component .slides-container {
 // h6,
 // a,
 .reveal {
-	transform: translate(0, 100%);
+	transform: translate(0, 5%);
 	animation: reveal 500ms;
 	animation-fill-mode: forwards;
 	pointer-events: all;
@@ -681,7 +681,7 @@ slider-component.multi-icon .slider-component .slides-container {
 	}
 	100% {
 		opacity: 0;
-		transform: translate(0, 100%);
+		transform: translate(0, 5%);
 	}
 }
 
@@ -4086,7 +4086,8 @@ menu-drawer-component {
 // SECTION: Product page
 
 .product-page {
-	padding: 7rem 1rem 0rem 1rem;
+	padding-right: 1rem;
+	padding-left: 1rem;
 	display: flex;
 	justify-content: center;
 
@@ -4145,10 +4146,7 @@ menu-drawer-component {
 			justify-content: center;
 			align-items: center;
 			gap: 0.5rem;
-
-			@media screen and (min-width: 1025px) {
-				width: 650px;
-			}
+			width: 100%;
 
 			.product-page-slider {
 				height: auto;
@@ -4533,6 +4531,7 @@ menu-drawer-component {
 		justify-content: center;
 		align-items: center;
 		gap: 0.2rem;
+		width: 33%;
 	}
 
 	&__trust-icon {
@@ -4660,6 +4659,7 @@ menu-drawer-component {
 			flex-direction: column;
 			gap: 0.2rem;
 			padding: 0.03rem;
+			max-width: 100%;
 
 			@media screen and (min-width: 1025px) {
 				width: 1600px;
