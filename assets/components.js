@@ -1477,8 +1477,6 @@ class QuantityField extends HTMLElement {
 
 customElements.define("quantity-field", QuantityField);
 
-// ANCHOR: Product page
-
 // ANCHOR: Cart drawer
 
 function showDrawer() {
@@ -1840,24 +1838,4 @@ function addCartRecommendedProducts(cartProducts) {
 				}
 			});
 	});
-}
-
-function sendNote() {
-	let noteMessage = {
-		note: "This is a test note",
-	};
-
-	fetch(window.Shopify.routes.root + "cart/update.js", {
-		method: "POST",
-		headers: {
-			"Content-Type": "application/json",
-		},
-		body: JSON.stringify(noteMessage),
-	})
-		.then((response) => {
-			return response.json();
-		})
-		.catch((error) => {
-			console.error("Error:", error);
-		});
 }
