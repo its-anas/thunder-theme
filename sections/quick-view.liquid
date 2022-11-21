@@ -1,0 +1,38 @@
+<quick-view-component>
+  <div class="quick-view-container">
+    <p class="quick-view__vendor"></p>
+    <p class="quick-view__title"></p>
+    <div class="quick-view__image">
+      <div class="quick-view__image-box"></div>
+    </div>
+    <div class="quick-view__options"></div>
+    <div class="quick-view__quantity-field">
+      <quantity-field class="quantity">
+        <label for="quantity-text"><p>Quantity</p></label>
+        <div class="quantity-field" id="quantity-field">
+          <button type="button" class="quantity-field__minus" id="quantity-field__minus">-</button>
+          <input
+            type="quantity"
+            class="quantity-field__input"
+            id="quantity-field__input"
+            name="quantity"
+            min="1"
+            value="1"
+          >
+          <button type="button" class="quantity-field__plus" id="quantity-field__plus">+</button>
+        </div>
+      </quantity-field>
+    </div>
+
+    <div class="quick-view__buttons buttons buttons--center">
+      <a class="button button--primary border">ADD TO CART</a>
+      <a class="button button--secondary border">BUY NOW</a>
+    </div>
+    <a href="" class="quick-view__product-url button--link">View details</a>
+  </div>
+</quick-view-component>
+
+<script>
+  let quickViewVariantSelectorType = 'dropdown';
+  let quickViewColorSelectorType = 'image_variant';
+</script>

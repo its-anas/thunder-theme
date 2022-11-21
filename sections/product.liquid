@@ -76,6 +76,12 @@
           visibility: hidden;
       }
     }
+    @media screen and (min-width: 1024px) {
+      .product-page-slider__indicators {
+          height: 0 !important;
+          visibility: hidden;
+      }
+    }
   {% else %}
     .product-page-slider__indicators {
         height: 0 !important;
@@ -415,7 +421,7 @@
                         </option>
                       {% endfor %}
                     </select>
-                  </div>
+                  </div> 
                 {% endunless %}
               {% when 'quantity' %}
                 <quantity-field class="quantity" {{ block.shopify_attributes }}>

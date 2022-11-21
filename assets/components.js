@@ -1839,3 +1839,171 @@ function addCartRecommendedProducts(cartProducts) {
 			});
 	});
 }
+
+document.querySelectorAll("#quick-add-icon").forEach((icon) => {
+	icon.addEventListener("click", () => {
+		if (icon.dataset.productVariants === "without") {
+			// send to cart and go to cart page
+		} else if (icon.dataset.productVariants === "with") {
+			fetch(`products/${icon.dataset.productHandle}/product.json`)
+				.then((resp) => resp.json())
+				.then((data) => {
+					let productVendor = data.product.vendor;
+					let productTitle = data.product.title;
+					let productFeaturedImage = data.product.image;
+					let productUrl = `/products/${data.product.handle}`;
+					let productOptions = {};
+					let productVariantsImages = {};
+
+					document.querySelector(".quick-view__image-box").innerHTML = "";
+					document.querySelector(".quick-view__options").innerHTML = "";
+
+					data.product.images.forEach((image) => {
+						if (image.variant_ids.length > 0) {
+							productVariantsImages[image.position] = image;
+							document.querySelector(".quick-view__image-box").innerHTML += `
+							<div class="media">
+								<img
+									srcset="${image.src}"
+									alt="${image.alt}"
+									width="${image.width}"
+									height="${image.height}"
+									class="fit"
+								>
+							</div>
+							`;
+						}
+					});
+
+					if (data.product.variants.length > 1) {
+						data.product.options.forEach((option) => {
+							let optionValues = [];
+							option.values.forEach((value) => {
+								optionValues.push(value);
+							});
+							productOptions[option.name] = optionValues;
+						});
+					}
+
+					for (var key in productOptions) {
+						document.querySelector(".quick-view__options").innerHTML += `
+							<div class="quick-view__radios-container quick-view__radios-container--${key}">
+								<p class="quick-view__radio__title">${key}</p>
+							</div>
+						`;
+
+						if (key !== "Color") {
+							if (quickViewVariantSelectorType === "block") {
+								document.querySelector(`.quick-view__radios-container--${key}`).innerHTML = `
+									<div class="quick-view__radio__content quick-view__radio__content--${key}"></div>
+							`;
+							} else if (quickViewVariantSelectorType === "dropdown") {
+								document.querySelector(`.quick-view__radios-container--${key}`).innerHTML = `
+									<select name="${key}"></select>
+							`;
+							}
+						} else if (key === "Color") {
+							if (quickViewColorSelectorType === "block" || quickViewColorSelectorType === "image_variant") {
+								document.querySelector(`.quick-view__radios-container--${key}`).innerHTML = `
+									<div class="quick-view__radio__content quick-view__radio__content--${key}"></div>
+							`;
+							} else if (quickViewColorSelectorType === "dropdown") {
+								document.querySelector(`.quick-view__radios-container--${key}`).innerHTML = `
+									<select name="${key}"></select>
+							`;
+							}
+						}
+
+						productOptions[key].forEach((value, index) => {
+							let checkedClass = index === 0 ? "checked" : "";
+							if (key !== "Color") {
+								if (quickViewVariantSelectorType === "block") {
+									document.querySelector(`.quick-view__radio__content--${key}`).innerHTML += `
+											<label
+											class="quick-view__radio__label ${checkedClass}"
+											for="${handleize(key)}-${handleize(value)}"
+											>
+												<input
+													type="radio"
+													name="${key}"
+													value="${value}"
+													id="${handleize(key)}-${handleize(value)}"
+													class="quick-view__radio__input"
+												>
+												${value}
+											</label>
+										`;
+								} else if (quickViewVariantSelectorType === "dropdown") {
+									document.querySelector(`.quick-view__radios-container--${key} select`).innerHTML += `
+										<option value="${value}" type="radio">
+											${value}
+										</option>
+									`;
+								}
+							} else if (key === "Color") {
+								if (quickViewColorSelectorType === "block") {
+									document.querySelector(`.quick-view__radio__content--${key}`).innerHTML += `
+											<label
+											class="quick-view__radio__label ${checkedClass}"
+											for="${handleize(key)}-${handleize(value)}"
+											>
+												<input
+													type="radio"
+													name="${key}"
+													value="${value}"
+													id="${handleize(key)}-${handleize(value)}"
+													class="quick-view__radio__input"
+												>
+												${value}
+											</label>
+										`;
+								} else if (quickViewColorSelectorType === "dropdown") {
+									document.querySelector(`.quick-view__radios-container--${key} select`).innerHTML += `
+										<option value="${value}" type="radio">
+											${value}
+										</option>
+									`;
+								} else if (quickViewColorSelectorType === "image_variant") {
+									document.querySelector(`.quick-view__radio__content--${key}`).innerHTML += `
+											<label
+												class="quick-view__radio__label  media swatch ${handleize(value)} ${checkedClass} "
+												style=""
+												for="${handleize(key)}-${handleize(value)}"
+											>
+												<input checked="" type="radio" name="${key}" value="${value}" id="${handleize(key)}-${handleize(value)}" class="quick-view__radio__input">
+											</label>
+										`;
+									for (vkey in productVariantsImages) {
+										if (productVariantsImages[vkey].alt) {
+											if (productVariantsImages[vkey].alt.includes("#color:")) {
+												let altLastPart = productVariantsImages[vkey].alt.split("#color:")[1];
+												if (altLastPart === value) {
+													document.querySelector(`.quick-view__radio__content--${key} label.${handleize(value)}`).innerHTML += `
+															<img
+															src="${productVariantsImages[vkey].src}"
+															loading="lazy"
+															alt="${productVariantsImages[vkey].alt}"
+															width="${productVariantsImages[vkey].width}"
+															height="${productVariantsImages[vkey].height}"
+															class="fit"
+															>
+													`;
+												}
+											}
+										}
+									}
+								} else if (quickViewColorSelectorType === "color_swatch") {
+								}
+							}
+						});
+						// document.querySelector(`.quick-view__radio__content--${key}`);
+					}
+
+					// inject in the quick-view popup and show it
+					document.querySelector(".quick-view__vendor").innerHTML = `${productVendor}`;
+					document.querySelector(".quick-view__title").innerHTML = `${productTitle}`;
+					document.querySelector(".quick-view__product-url").href = `${productUrl}`;
+				});
+		}
+	});
+});

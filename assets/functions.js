@@ -2,6 +2,17 @@ let mediaQueries = [window.matchMedia("screen and (max-width: 750px)"), window.m
 let domainName = window.location.hostname;
 let actualDate = new Date().getTime();
 
+function handleize(text) {
+	return text
+		.toString()
+		.toLowerCase()
+		.replace(/\s+/g, "-")
+		.replace(/[^\w\-]+/g, "")
+		.replace(/\-\-+/g, "-")
+		.replace(/^-+/, "")
+		.replace(/-+$/, "");
+}
+
 // ANCHOR: Shop the look
 let icons = document.querySelectorAll(".shop-the-look__icon");
 

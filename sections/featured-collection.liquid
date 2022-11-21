@@ -68,7 +68,12 @@
                 {% if price_difference > 0 %}
                   <p class="tag--normal tag-text">SAVE {{ product.compare_at_price | minus: product.price | money }}</p>
                 {% endif %}
-                <div class="quick-add-icon">
+                <div
+                  class="quick-add-icon"
+                  id="quick-add-icon"
+                  data-product-handle="{{ product.handle }}"
+                  data-product-variants="{% if product.variants.size > 1 %}with{% else %}without{% endif %}"
+                >
                   {% render 'icons', icon: 'quick-add' -%}
                 </div>
 
@@ -121,7 +126,12 @@
             <div class="item">
               <div class="featured-collection__image">
                 <p class="tag--normal tag-text">SAVE {{ product.compare_at_price | minus: product.price | money }}</p>
-                <div class="quick-add-icon">
+                <div
+                  class="quick-add-icon"
+                  id="quick-add-icon"
+                  data-product-handle="{{ product.handle }}"
+                  data-product-variants="{% if product.variants.size > 1 %}with{% else %}without{% endif %}"
+                >
                   {% render 'icons', icon: 'quick-add' -%}
                 </div>
                 {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
