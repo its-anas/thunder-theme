@@ -792,11 +792,13 @@
 			cloneImages(".product-hidden-thumbnails .thumbnail", ".product-page-slider__thumbnails");
 		}
 
-		if (cartType === "drawer") {
-			document.querySelector("#add-to-cart-button").addEventListener("click", () => {
-				sendToCart();
-			});
-		}
+
+    document.querySelector("#add-to-cart-button").addEventListener("click", () => {
+        let variantId = document.querySelector(".product-page__hidden-variants #product-select option[selected]").value;
+        let quantity = document.querySelector(".product-page__form .quantity-field__input").value;
+      sendToCart(variantId, quantity);
+    });
+
 
 		function announceSoldout(inventory) {
 			if (inventory > 0) {
@@ -866,34 +868,6 @@
 					}, 500);
 				}
 			}
-		}
-
-		function sendToCart() {
-			let variantId = document.querySelector(".product-page__hidden-variants #product-select option[selected]").value;
-			let quantity = document.querySelector(".product-page__form .quantity-field__input").value;
-			let formData = {
-				items: [
-					{
-						id: variantId,
-						quantity: quantity,
-					},
-				],
-			};
-
-			fetch(window.Shopify.routes.root + "cart/add.js", {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify(formData),
-			})
-				.then((response) => {
-					showDrawer();
-					return response.json();
-				})
-				.catch((error) => {
-					console.error("Error:", error);
-				});
 		}
 	}
 }

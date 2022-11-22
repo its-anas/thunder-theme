@@ -1,38 +1,76 @@
 <quick-view-component>
-  <div class="quick-view-container">
-    <p class="quick-view__vendor"></p>
-    <p class="quick-view__title"></p>
-    <div class="quick-view__image">
-      <div class="quick-view__image-box"></div>
-    </div>
-    <div class="quick-view__options"></div>
-    <div class="quick-view__quantity-field">
-      <quantity-field class="quantity">
-        <label for="quantity-text"><p>Quantity</p></label>
-        <div class="quantity-field" id="quantity-field">
-          <button type="button" class="quantity-field__minus" id="quantity-field__minus">-</button>
-          <input
-            type="quantity"
-            class="quantity-field__input"
-            id="quantity-field__input"
-            name="quantity"
-            min="1"
-            value="1"
-          >
-          <button type="button" class="quantity-field__plus" id="quantity-field__plus">+</button>
-        </div>
-      </quantity-field>
-    </div>
+  <div class="quick-view hidden">
+    <div class="quick-view-container">
+      <div class="quick-view__close">
+        {% render 'icons', icon: 'close' %}
+      </div>
+      <p class="quick-view__vendor"></p>
+      <h4 class="quick-view__title"></h4>
+      <div class="quick-view__image">
+        <div class="quick-view__image-box"></div>
+      </div>
+      <div class="quick-view__options"></div>
+      <div class="quick-view__quantity-field">
+        <quantity-field class="quantity">
+          <label for="quantity-text"><p>Quantity</p></label>
+          <div class="quantity-field" id="quantity-field">
+            <button type="button" class="quantity-field__minus" id="quantity-field__minus">-</button>
+            <input
+              type="quantity"
+              class="quantity-field__input"
+              id="quantity-field__input"
+              name="quantity"
+              min="1"
+              value="1"
+            >
+            <button type="button" class="quantity-field__plus" id="quantity-field__plus">+</button>
+          </div>
+        </quantity-field>
+      </div>
 
-    <div class="quick-view__buttons buttons buttons--center">
-      <a class="button button--primary border">ADD TO CART</a>
-      <a class="button button--secondary border">BUY NOW</a>
+      <div class="quick-view__buttons buttons buttons--center">
+        <a class="button button--primary border quick-view-add-to-cart" id="quick-view-add-to-cart">ADD TO CART</a>
+        <a class="button button--secondary border quick-view-buy-now" id="quick-view-buy-now">BUY NOW</a>
+      </div>
+      <a href="" class="quick-view__product-url button--link">View details</a>
     </div>
-    <a href="" class="quick-view__product-url button--link">View details</a>
   </div>
 </quick-view-component>
 
 <script>
   let quickViewVariantSelectorType = 'dropdown';
-  let quickViewColorSelectorType = 'image_variant';
+  let quickViewColorSelectorType = '{{ section.settings.color_selector_type }}';
 </script>
+
+{% schema %}
+{
+  "name": "Quick view",
+  "settings": [
+    {
+      "type": "select",
+      "id": "color_selector_type",
+      "label": "Color selector type",
+      "options": [
+        {
+          "value": "dropdown",
+          "label": "Dropdown"
+        },
+        {
+          "value": "color_swatch",
+          "label": "Color swatch"
+        },
+        {
+          "value": "variant_image",
+          "label": "Variant image"
+        }
+      ],
+      "default": "dropdown"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Quick view"
+    }
+  ]
+}
+{% endschema %}

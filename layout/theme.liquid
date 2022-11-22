@@ -14,6 +14,14 @@
     <script>
       let cartType = '{{ settings.cart_type }}';
       let freeShippingThreshold = {{ settings.free_shipping_threshold | times: 100 }};
+      let colorSwatchList = {};
+      {%- assign color_swatch_list = settings.color_swatch_list | split: ','-%}
+      {%- for color_swatch in color_swatch_list -%}
+        {%- assign color_swatch_parts = color_swatch | split: ':' -%}
+        {%- assign color_swatch_name = color_swatch_parts.first | strip -%}
+        {%- assign color_swatch_value = color_swatch_parts.last | strip -%}
+        colorSwatchList['{{ color_swatch_name }}'] = '{{ color_swatch_value }}';
+      {%- endfor -%}
 
       function formatMoney(cents) {
         if (typeof cents == 'string') {
@@ -94,7 +102,7 @@
       }
     {% endstyle %}
 
-    <title> 
+    <title>
       {{ page_title }}
     </title>
 

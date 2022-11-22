@@ -1479,15 +1479,6 @@ customElements.define("quantity-field", QuantityField);
 
 // ANCHOR: Cart drawer
 
-function showDrawer() {
-	updateCartDrawer().then(() => {
-		setCartState();
-		lockPage();
-		document.querySelector("cart-component").classList.remove("hidden");
-		document.querySelector("cart-component").classList.add("active");
-	});
-}
-
 class CartComponent extends HTMLElement {
 	constructor() {
 		super();
@@ -1586,268 +1577,52 @@ class CartComponent extends HTMLElement {
 
 customElements.define("cart-component", CartComponent);
 
-function setCartState() {
-	fetch("/cart.js")
-		.then((resp) => resp.json())
-		.then((data) => {
-			let cartItemsCount = data.items.length;
-			if (cartItemsCount === 0) {
-				if (document.querySelector(".recommended-products.desktop-only")) {
-					document.querySelector(".recommended-products.desktop-only").classList.remove("active");
-				}
-				document.querySelector(".cart-drawer__products").classList.remove("show");
-				document.querySelector(".cart-drawer__products").classList.add("hide");
-				document.querySelector(".cart-drawer__interaction--filled").classList.remove("show");
-				document.querySelector(".cart-drawer__interaction--filled").classList.add("hide");
-				document.querySelector(".free-shipping-reminder").classList.remove("show");
-				document.querySelector(".free-shipping-reminder").classList.add("hide");
+// ANCHOR: Quick add popup
 
-				setTimeout(() => {
-					document.querySelector(".cart-drawer__interaction--empty").classList.remove("hide");
-					document.querySelector(".cart-drawer__interaction--empty").classList.add("show");
-				}, 300);
+window.quickViewVariants;
 
-				setTimeout(() => {
-					updateFreeShippingBar(data.total_price);
-					addCartRecommendedProducts(data.items);
-				}, 500);
-			} else if (cartItemsCount > 0) {
-				updateFreeShippingBar(data.total_price);
-				addCartRecommendedProducts(data.items);
-
-				if (document.querySelector(".recommended-products.desktop-only")) {
-					setTimeout(() => {
-						document.querySelector(".recommended-products.desktop-only").classList.add("active");
-					}, 500);
-				}
-
-				document.querySelector(".cart-drawer__interaction--empty").classList.remove("show");
-				document.querySelector(".cart-drawer__interaction--empty").classList.add("hide");
-
-				setTimeout(() => {
-					document.querySelector(".cart-drawer__products").classList.remove("hide");
-					document.querySelector(".cart-drawer__products").classList.add("show");
-					document.querySelector(".cart-drawer__interaction--filled").classList.remove("hide");
-					document.querySelector(".cart-drawer__interaction--filled").classList.add("show");
-					document.querySelector(".free-shipping-reminder").classList.remove("hide");
-					document.querySelector(".free-shipping-reminder").classList.add("show");
-				}, 300);
-			}
-		});
-}
-
-async function updateCartDrawer() {
-	await fetch("/cart.js")
-		.then((resp) => resp.json())
-		.then((data) => {
-			setCartState();
-			let itemList = [];
-			document.getElementById("header__icons-cart__item-count").innerHTML = data.item_count;
-			document.querySelector(".cart-drawer__products-list").innerHTML = "";
-			data.items.forEach((item) => {
-				itemList.push(`
-					<div class="cart-drawer__product" data-variant="${item.variant_id}">
-						<a href="${item.url}" class="cart-drawer__product__image">
-						<img
-						srcset="${item.featured_image.url}"
-						loading="lazy"
-						alt="${item.featured_image.alt}"
-						width="${item.featured_image.width}"
-						height="${item.featured_image.height}"
-						class="full"
-						>
-						</a>
-						<div class="cart-drawer__product__details-middle">
-						<a href="${item.url}" class="product-name">${item.product_title}</a>
-						<div class="product-variants">
-						<p class="product-variant">${item.variant_title}</p>
-						</div>
-						<div class="quantity">
-						<quantity-field class="quantity">
-							<div class="quantity-field cart" id="quantity-field">
-							<button type="button" class="quantity-field__minus" id="quantity-field__minus">-</button>
-							<input
-							type="quantity"
-							class="quantity-field__input"
-							id="quantity-field__input"
-							name="quantity"
-							min="1"
-							value="${item.quantity}"
-							data-variant-id="${item.variant_id}"
-							>
-							<button type="button" class="quantity-field__plus" id="quantity-field__plus">+</button>
-							</div>
-						</quantity-field>
-						</div>
-						</div>
-						<div class="cart-drawer__product__details-side" data-variant-id="${item.variant_id}">
-						<p class="price--actual">${formatMoney(item.final_line_price)}</p>
-						<a class="remove">
-						<svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-							<path d="M8.71678 7.78444V18.6032L17.0342 18.6137V7.7832M8.71678 7.78444H6.21533M8.71678 7.78444H11.0416L13.0369 7.7832L17.0342 7.7832M17.0342 7.7832H19.5292" stroke="white"/>
-							<path d="M9.53809 6.79688H16.2578" stroke="white"/>
-							<path d="M14.3414 16.6045L14.3414 9.88672M11.3965 16.6045L11.3965 9.88672" stroke="white"/>
-						</svg>
-						</a>
-						</div>
-						</div>`);
-			});
-			itemList.forEach((item) => {
-				document.querySelector(".cart-drawer__products-list").innerHTML += item;
-			});
-			document.querySelectorAll(".cart-drawer__interaction .cart-drawer__interaction--filled .buttons .button").forEach((button, index) => {
-				let buttonText = button.innerHTML.includes("- ") ? button.innerHTML.split("- ")[0] : button.innerHTML;
-				if (index === 0) {
-					button.innerHTML = `${buttonText} - ${data.item_count} ITEMS`;
-				} else if (index === 1) {
-					button.innerHTML = `${buttonText} - ${formatMoney(data.total_price)}`;
-				}
-			});
-			document.querySelectorAll(".cart-drawer__product__details-side .remove").forEach((icon) => {
-				let variantId = icon.parentNode.getAttribute("data-variant-id");
-				icon.addEventListener("click", () => {
-					updateCartQuantity(variantId, 0).then(updateCartDrawer);
-				});
-			});
-			document.querySelectorAll(".quantity-field.cart").forEach((field) => {
-				field.addEventListener("click", () => {
-					let input = field.querySelector("input");
-					let variantId = input.getAttribute("data-variant-id");
-					let quantity = input.value;
-
-					updateCartQuantity(variantId, quantity).then(updateCartDrawer);
-				});
-			});
-		});
-}
-
-async function updateCartQuantity(variantId, qty) {
-	let variant = variantId.toString();
-
-	let data = {
-		id: variant,
-		quantity: qty,
-	};
-
-	await fetch(window.Shopify.routes.root + "cart/change.js", {
-		method: "POST",
-		headers: {
-			"Content-Type": "application/json",
-		},
-		body: JSON.stringify(data),
-	})
-		.then((response) => {
-			return response.json();
-		})
-
-		.catch((error) => {
-			console.error("Error:", error);
-		});
-}
-
-function updateFreeShippingBar(cartAmount) {
-	let firstMessage = `Spend ${formatMoney(freeShippingThreshold - cartAmount)} more and get free shipping`;
-	let secondMessage = `Congratulations 🎉 You have qualified for free shipping`;
-
-	let freeShippingMessage = cartAmount < freeShippingThreshold ? firstMessage : secondMessage;
-
-	let barCssClass = cartAmount < freeShippingThreshold ? "not-enough" : "";
-
-	let barLoadingPercentage = (cartAmount / freeShippingThreshold) * 100;
-
-	let barCssWidth = barLoadingPercentage > 100 ? "100%" : `${barLoadingPercentage}%`;
-
-	if (document.querySelector(".free-shipping-reminder")) {
-		document.querySelector(".free-shipping-reminder").innerHTML = `        
-		<style>
-		.free-shipping-reminder__bar__inside {
-			width: ${barCssWidth};
-		}
-		</style>
-
-		<p class="free-shipping-reminder__text">
-			${freeShippingMessage}
-		</p>
-
-		<div class="free-shipping-reminder__bar">
-			<div class="free-shipping-reminder__bar__inside ${barCssClass}" > </div>
-		</div>
-	`;
+class QuickView extends HTMLElement {
+	constructor() {
+		super();
 	}
-}
 
-function addCartRecommendedProducts(cartProducts) {
-	let recommendedProducts = [];
-
-	cartProducts.forEach((cartProduct) => {
-		fetch(window.Shopify.routes.root + `recommendations/products.json?product_id=${cartProduct.product_id}&limit=5&intent=related`)
-			.then((response) => response.json())
-			.then(({ products }) => {
-				if (products) {
-					if (products.length > 0) {
-						products.forEach((product) => {
-							const index = recommendedProducts.findIndex((object) => object.id === product.id);
-
-							if (index === -1) {
-								recommendedProducts.push(product);
-							}
-						});
-						document.querySelector(".recommended-products.desktop-only .recommended-products__list-container").innerHTML = "";
-						document.querySelector(".recommended-products.mobile-only .recommended-products__list-container").innerHTML = "";
-						recommendedProducts.forEach((product) => {
-							document.querySelector(".recommended-products.desktop-only .recommended-products__list-container").innerHTML += `
-									<div class="recommended-product">
-										<div class="recommended-product__image media">
-											<img
-												srcset="${product.media[0].src}"
-												alt="${product.media[0].alt}"
-												width="${product.media[0].width}"
-												height="${product.media[0].height}"
-												class="fit"
-											>
-										</div>
-										<div class="recommended-product__details">
-										<div class="details">
-											<p class="product-name">${product.title.substring(15, length)}...</p>
-											<p class="price--actual">${formatMoney(product.price)}</p>
-										</div>
-										<a href="${product.url}" class="button--link">VIEW PRODUCT</a>
-										</div>
-									</div>
-								`;
-							document.querySelector(".recommended-products.mobile-only .recommended-products__list-container").innerHTML += `
-									<div class="recommended-product">
-										<div class="recommended-product__image media">
-											<img
-												srcset="${product.media[0].src}"
-												alt="${product.media[0].alt}"
-												width="${product.media[0].width}"
-												height="${product.media[0].height}"
-												class="fit"
-											>
-										</div>
-										<div class="recommended-product__details">
-											<p class="product-name">${product.title.substring(15, length)}...</p>
-											<p class="price--actual">${formatMoney(product.price)}</p>
-										<a href="${product.url}" class="button--link">VIEW PRODUCT</a>
-										</div>
-									</div>
-								`;
-						});
-					}
-				}
+	connectedCallback() {
+		this.attachShadow({ mode: "open" });
+		this.shadowRoot.innerHTML = "<slot></slot>";
+		document.querySelectorAll("#quick-add-icon").forEach((icon) => {
+			icon.addEventListener("click", () => {
+				this.runQuickView(icon);
 			});
-	});
-}
+		});
 
-document.querySelectorAll("#quick-add-icon").forEach((icon) => {
-	icon.addEventListener("click", () => {
+		this.listenToQuickView();
+	}
+
+	showQuickView() {
+		lockPage();
+		this.style.zIndex = 105;
+		this.querySelector(".quick-view").classList.remove("hidden");
+		this.querySelector(".quick-view").classList.add("active");
+	}
+
+	hideQuickView() {
+		unlockPage();
+		this.querySelector(".quick-view").classList.add("hidden");
+		this.querySelector(".quick-view").classList.remove("active");
+		setTimeout(() => {
+			this.style.zIndex = -1;
+		}, 300);
+	}
+
+	runQuickView(icon) {
 		if (icon.dataset.productVariants === "without") {
-			// send to cart and go to cart page
+			let variantId = icon.dataset.firstAvailableVariantId;
+			sendToCart(variantId, 1);
 		} else if (icon.dataset.productVariants === "with") {
 			fetch(`products/${icon.dataset.productHandle}/product.json`)
 				.then((resp) => resp.json())
 				.then((data) => {
+					window.quickViewVariants = data.product.variants;
 					let productVendor = data.product.vendor;
 					let productTitle = data.product.title;
 					let productFeaturedImage = data.product.image;
@@ -1855,19 +1630,22 @@ document.querySelectorAll("#quick-add-icon").forEach((icon) => {
 					let productOptions = {};
 					let productVariantsImages = {};
 
-					document.querySelector(".quick-view__image-box").innerHTML = "";
-					document.querySelector(".quick-view__options").innerHTML = "";
+					this.querySelector(".quick-view__image-box").innerHTML = "";
+					this.querySelector(".quick-view__options").innerHTML = "";
 
-					data.product.images.forEach((image) => {
+					data.product.images.forEach((image, index) => {
 						if (image.variant_ids.length > 0) {
+							let style = index === 0 ? "style='opacity: 1;'" : "";
 							productVariantsImages[image.position] = image;
-							document.querySelector(".quick-view__image-box").innerHTML += `
+							this.querySelector(".quick-view__image-box").innerHTML += `
 							<div class="media">
 								<img
 									srcset="${image.src}"
 									alt="${image.alt}"
 									width="${image.width}"
 									height="${image.height}"
+									id="${image.id}"
+									${style}		
 									class="fit"
 								>
 							</div>
@@ -1886,29 +1664,30 @@ document.querySelectorAll("#quick-add-icon").forEach((icon) => {
 					}
 
 					for (var key in productOptions) {
-						document.querySelector(".quick-view__options").innerHTML += `
+						this.querySelector(".quick-view__options").innerHTML += `
 							<div class="quick-view__radios-container quick-view__radios-container--${key}">
 								<p class="quick-view__radio__title">${key}</p>
 							</div>
 						`;
 
 						if (key !== "Color") {
-							if (quickViewVariantSelectorType === "block") {
-								document.querySelector(`.quick-view__radios-container--${key}`).innerHTML = `
-									<div class="quick-view__radio__content quick-view__radio__content--${key}"></div>
-							`;
-							} else if (quickViewVariantSelectorType === "dropdown") {
-								document.querySelector(`.quick-view__radios-container--${key}`).innerHTML = `
+							// if (quickViewVariantSelectorType === "block") {
+							// 	this.querySelector(`.quick-view__radios-container--${key}`).innerHTML = `
+							// 		<div class="quick-view__radio__content quick-view__radio__content--${key}"></div>
+							// `;
+							// } else
+							if (quickViewVariantSelectorType === "dropdown") {
+								this.querySelector(`.quick-view__radios-container--${key}`).innerHTML += `
 									<select name="${key}"></select>
 							`;
 							}
 						} else if (key === "Color") {
-							if (quickViewColorSelectorType === "block" || quickViewColorSelectorType === "image_variant") {
-								document.querySelector(`.quick-view__radios-container--${key}`).innerHTML = `
+							if (quickViewColorSelectorType === "block" || quickViewColorSelectorType === "image_variant" || quickViewColorSelectorType === "color_swatch") {
+								this.querySelector(`.quick-view__radios-container--${key}`).innerHTML += `
 									<div class="quick-view__radio__content quick-view__radio__content--${key}"></div>
 							`;
 							} else if (quickViewColorSelectorType === "dropdown") {
-								document.querySelector(`.quick-view__radios-container--${key}`).innerHTML = `
+								this.querySelector(`.quick-view__radios-container--${key}`).innerHTML += `
 									<select name="${key}"></select>
 							`;
 							}
@@ -1917,68 +1696,72 @@ document.querySelectorAll("#quick-add-icon").forEach((icon) => {
 						productOptions[key].forEach((value, index) => {
 							let checkedClass = index === 0 ? "checked" : "";
 							if (key !== "Color") {
-								if (quickViewVariantSelectorType === "block") {
-									document.querySelector(`.quick-view__radio__content--${key}`).innerHTML += `
-											<label
-											class="quick-view__radio__label ${checkedClass}"
-											for="${handleize(key)}-${handleize(value)}"
-											>
-												<input
-													type="radio"
-													name="${key}"
-													value="${value}"
-													id="${handleize(key)}-${handleize(value)}"
-													class="quick-view__radio__input"
-												>
-												${value}
-											</label>
-										`;
-								} else if (quickViewVariantSelectorType === "dropdown") {
-									document.querySelector(`.quick-view__radios-container--${key} select`).innerHTML += `
+								// if (quickViewVariantSelectorType === "block") {
+								// 	this.querySelector(`.quick-view__radio__content--${key}`).innerHTML += `
+								// 			<label
+								// 			class="quick-view__radio__label ${checkedClass}"
+								// 			for="${handleize(key)}-${handleize(value)}"
+								// 			>
+								// 				<input
+								// 					type="radio"
+								// 					name="${key}"
+								// 					value="${value}"
+								// 					id="${handleize(key)}-${handleize(value)}"
+								// 					class="quick-view__radio__input"
+								// 				>
+								// 				${value}
+								// 			</label>
+								// 		`;
+								// } else
+								if (quickViewVariantSelectorType === "dropdown") {
+									this.querySelector(`.quick-view__radios-container--${key} select`).innerHTML += `
 										<option value="${value}" type="radio">
 											${value}
 										</option>
 									`;
 								}
 							} else if (key === "Color") {
-								if (quickViewColorSelectorType === "block") {
-									document.querySelector(`.quick-view__radio__content--${key}`).innerHTML += `
-											<label
-											class="quick-view__radio__label ${checkedClass}"
-											for="${handleize(key)}-${handleize(value)}"
-											>
-												<input
-													type="radio"
-													name="${key}"
-													value="${value}"
-													id="${handleize(key)}-${handleize(value)}"
-													class="quick-view__radio__input"
-												>
-												${value}
-											</label>
-										`;
-								} else if (quickViewColorSelectorType === "dropdown") {
-									document.querySelector(`.quick-view__radios-container--${key} select`).innerHTML += `
+								// if (quickViewColorSelectorType === "block") {
+								// 	this.querySelector(`.quick-view__radio__content--${key}`).innerHTML += `
+								// 			<label
+								// 			class="quick-view__radio__label ${checkedClass}"
+								// 			for="${handleize(key)}-${handleize(value)}"
+								// 			>
+								// 				<input
+								// 					type="radio"
+								// 					name="${key}"
+								// 					value="${value}"
+								// 					id="${handleize(key)}-${handleize(value)}"
+								// 					class="quick-view__radio__input"
+								// 				>
+								// 				${value}
+								// 			</label>
+								// 		`;
+								// } else
+
+								if (quickViewColorSelectorType === "dropdown") {
+									this.querySelector(`.quick-view__radios-container--${key} select`).innerHTML += `
 										<option value="${value}" type="radio">
 											${value}
 										</option>
 									`;
 								} else if (quickViewColorSelectorType === "image_variant") {
-									document.querySelector(`.quick-view__radio__content--${key}`).innerHTML += `
-											<label
-												class="quick-view__radio__label  media swatch ${handleize(value)} ${checkedClass} "
-												style=""
-												for="${handleize(key)}-${handleize(value)}"
-											>
-												<input checked="" type="radio" name="${key}" value="${value}" id="${handleize(key)}-${handleize(value)}" class="quick-view__radio__input">
-											</label>
-										`;
+									let done;
 									for (vkey in productVariantsImages) {
 										if (productVariantsImages[vkey].alt) {
 											if (productVariantsImages[vkey].alt.includes("#color:")) {
 												let altLastPart = productVariantsImages[vkey].alt.split("#color:")[1];
 												if (altLastPart === value) {
-													document.querySelector(`.quick-view__radio__content--${key} label.${handleize(value)}`).innerHTML += `
+													this.querySelector(`.quick-view__radio__content--${key}`).innerHTML += `
+															<label
+																class="quick-view__radio__label  media swatch ${handleize(value)} ${checkedClass} "
+																style=""
+																for="${handleize(key)}-${handleize(value)}"
+															>
+																<input ${checkedClass} type="radio" name="${key}" value="${value}" id="${handleize(key)}-${handleize(value)}" class="quick-view__radio__input">
+															</label>
+														`;
+													this.querySelector(`.quick-view__radio__content--${key} label.${handleize(value)}`).innerHTML += `
 															<img
 															src="${productVariantsImages[vkey].src}"
 															loading="lazy"
@@ -1988,22 +1771,120 @@ document.querySelectorAll("#quick-add-icon").forEach((icon) => {
 															class="fit"
 															>
 													`;
+													done = true;
 												}
 											}
 										}
 									}
+									if (done !== true) {
+										this.querySelector(`.quick-view__radios-container--${key} select`).innerHTML += `
+											<option value="${value}" type="radio">
+												${value}
+											</option>
+										`;
+									}
 								} else if (quickViewColorSelectorType === "color_swatch") {
+									let done;
+
+									for (var color in colorSwatchList) {
+										if (value === color) {
+											this.querySelector(`.quick-view__radio__content--${key}`).innerHTML += `
+													<label
+													class=" product-page__radio__label ${checkedClass} "
+													style="background-color: ${color};"
+													id="${handleize(key)}-${handleize(value)}"
+													>
+													<input ${checkedClass} type="radio" name="${key}" value="${value}" id="${handleize(key)}-${handleize(value)}" class="product-page__radio__input">
+													</label>
+												`;
+											done = true;
+										}
+									}
+
+									if (done !== true) {
+										this.querySelector(`.quick-view__radios-container--${key} select`).innerHTML += `
+											<option value="${value}" type="radio">
+												${value}
+											</option>
+										`;
+									}
 								}
 							}
 						});
-						// document.querySelector(`.quick-view__radio__content--${key}`);
 					}
 
-					// inject in the quick-view popup and show it
-					document.querySelector(".quick-view__vendor").innerHTML = `${productVendor}`;
-					document.querySelector(".quick-view__title").innerHTML = `${productTitle}`;
-					document.querySelector(".quick-view__product-url").href = `${productUrl}`;
+					this.querySelector(".quick-view__vendor").innerHTML = `${productVendor}`;
+					this.querySelector(".quick-view__title").innerHTML = `${productTitle}`;
+					this.querySelector(".quick-view__product-url").href = `${productUrl}`;
+				})
+				.then(() => {
+					this.showQuickView();
+					this.setVariant();
+
+					this.querySelectorAll(".quick-view__radios-container select").forEach((radioContainerSelect) => {
+						radioContainerSelect.addEventListener("change", () => {
+							this.setVariant();
+						});
+					});
 				});
 		}
-	});
-});
+	}
+
+	setVariant() {
+		let productVariants = window.quickViewVariants;
+		let quickViewSelects = this.querySelectorAll(".quick-view__radios-container select");
+		let variantsNames = [];
+		let selectedVariant = {};
+
+		if (quickViewSelects.length === 1) {
+			variantsNames = [`${quickViewSelects[0].value}`];
+		} else if (quickViewSelects.length === 2) {
+			variantsNames = [`${quickViewSelects[0].value} / ${quickViewSelects[1].value}`, `${quickViewSelects[1].value} / ${quickViewSelects[0].value}`];
+		} else if (quickViewSelects.length === 3) {
+			variantsNames = [
+				`${quickViewSelects[0].value} / ${quickViewSelects[1].value} / ${quickViewSelects[2].value}`,
+				`${quickViewSelects[0].value} / ${quickViewSelects[2].value} / ${quickViewSelects[1].value}`,
+				`${quickViewSelects[1].value} / ${quickViewSelects[0].value} / ${quickViewSelects[2].value}`,
+				`${quickViewSelects[1].value} / ${quickViewSelects[2].value} / ${quickViewSelects[0].value}`,
+				`${quickViewSelects[2].value} / ${quickViewSelects[0].value} / ${quickViewSelects[1].value}`,
+				`${quickViewSelects[2].value} / ${quickViewSelects[1].value} / ${quickViewSelects[0].value}`,
+			];
+		}
+
+		for (var key in productVariants) {
+			variantsNames.forEach((variantName) => {
+				if (productVariants[key].title === variantName) {
+					selectedVariant = productVariants[key];
+				}
+			});
+		}
+
+		let quantity = document.querySelector(".quick-view__quantity-field .quantity-field__input").value;
+		document.getElementById("quick-view-buy-now").href = `/cart/${selectedVariant.id}:${quantity}`;
+
+		this.querySelectorAll(".quick-view__image-box img").forEach((image) => {
+			if (image.id.toString() === selectedVariant.image_id.toString()) {
+				image.style.zIndex = 2;
+				image.style.opacity = 1;
+			} else {
+				image.style.zIndex = 1;
+				image.style.opacity = 0;
+			}
+		});
+
+		document.getElementById("quick-view-add-to-cart").addEventListener("click", () => {
+			this.hideQuickView();
+			sendToCart(selectedVariant.id, quantity);
+		});
+	}
+
+	listenToQuickView() {
+		document.addEventListener("click", (event) => {
+			if ((this.querySelector(".quick-view").classList.contains("active") && !this.contains(event.target)) || this.querySelector(".quick-view__close").contains(event.target)) {
+				this.hideQuickView();
+			}
+		});
+	}
+}
+
+customElements.define("quick-view-component", QuickView);

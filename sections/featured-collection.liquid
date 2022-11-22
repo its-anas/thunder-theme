@@ -63,7 +63,7 @@
         {% if section.settings.collection != blank %}
           {% for product in section.settings.collection.products limit: section.settings.items_limit %}
             <div class="item">
-              <div class="featured-collection__image">
+              <div class="featured-collection__image corner-border">
                 {% assign price_difference = product.compare_at_price | minus: product.price %}
                 {% if price_difference > 0 %}
                   <p class="tag--normal tag-text">SAVE {{ product.compare_at_price | minus: product.price | money }}</p>
@@ -71,13 +71,14 @@
                 <div
                   class="quick-add-icon"
                   id="quick-add-icon"
+                  data-first-available-variant-id="{{ product.variants.first.id }}"
                   data-product-handle="{{ product.handle }}"
                   data-product-variants="{% if product.variants.size > 1 %}with{% else %}without{% endif %}"
                 >
                   {% render 'icons', icon: 'quick-add' -%}
                 </div>
 
-                <a href="{{ product.url }}" class="media">
+                <a href="{{ product.url }}" class="media corner-border-target">
                   {% if product.featured_image != blank %}
                     <img
                       srcset="
@@ -129,6 +130,7 @@
                 <div
                   class="quick-add-icon"
                   id="quick-add-icon"
+                  data-first-available-variant-id="{{ product.variants.first.id }}"
                   data-product-handle="{{ product.handle }}"
                   data-product-variants="{% if product.variants.size > 1 %}with{% else %}without{% endif %}"
                 >
