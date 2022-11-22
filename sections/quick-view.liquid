@@ -38,7 +38,7 @@
 </quick-view-component>
 
 <script>
-  let quickViewVariantSelectorType = 'dropdown';
+  let quickViewVariantSelectorType = '{{ section.settings.variant_selector_type }}';
   let quickViewColorSelectorType = '{{ section.settings.color_selector_type }}';
 </script>
 
@@ -48,9 +48,29 @@
   "settings": [
     {
       "type": "select",
+      "id": "variant_selector_type",
+      "label": "Variant selector type",
+      "options": [
+        {
+          "value": "block",
+          "label": "Block"
+        },
+        {
+          "value": "dropdown",
+          "label": "Dropdown"
+        }
+      ],
+      "default": "dropdown"
+    },
+    {
+      "type": "select",
       "id": "color_selector_type",
       "label": "Color selector type",
       "options": [
+        {
+          "value": "block",
+          "label": "Block"
+        },
         {
           "value": "dropdown",
           "label": "Dropdown"
@@ -61,7 +81,7 @@
         },
         {
           "value": "variant_image",
-          "label": "Variant image"
+          "label": "Image variant"
         }
       ],
       "default": "dropdown"
