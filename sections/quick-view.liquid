@@ -4,35 +4,43 @@
       <div class="quick-view__close">
         {% render 'icons', icon: 'close' %}
       </div>
-      <p class="quick-view__vendor"></p>
-      <h4 class="quick-view__title"></h4>
-      <div class="quick-view__image">
-        <div class="quick-view__image-box"></div>
+      <div class="quick-view__top">
+        <div class="quick-view__image">
+          <div class="quick-view__image-box"></div>
+        </div>
+        <div class="quick-view__details">
+          <p class="quick-view__vendor"></p>
+          <h6 class="quick-view__title"></h6>
+          <p class="quick-view__price price--actual">$39.99</p>
+          <a href="" class="quick-view__product-url button--link">View details</a>
+        </div>
       </div>
-      <div class="quick-view__options"></div>
-      <div class="quick-view__quantity-field">
-        <quantity-field class="quantity">
-          <label for="quantity-text"><p>Quantity</p></label>
-          <div class="quantity-field" id="quantity-field">
-            <button type="button" class="quantity-field__minus" id="quantity-field__minus">-</button>
-            <input
-              type="quantity"
-              class="quantity-field__input"
-              id="quantity-field__input"
-              name="quantity"
-              min="1"
-              value="1"
-            >
-            <button type="button" class="quantity-field__plus" id="quantity-field__plus">+</button>
-          </div>
-        </quantity-field>
+      <div class="quick-view__content">
+        <div class="quick-view__options"></div>
+        <div class="quick-view__quantity-field">
+          <quantity-field class="quantity">
+            <label for="quantity-text"><p>Quantity</p></label>
+            <div class="quantity-field" id="quantity-field">
+              <button type="button" class="quantity-field__minus" id="quantity-field__minus">-</button>
+              <input
+                type="quantity"
+                class="quantity-field__input"
+                id="quantity-field__input"
+                name="quantity"
+                min="1"
+                value="1"
+              >
+              <button type="button" class="quantity-field__plus" id="quantity-field__plus">+</button>
+            </div>
+          </quantity-field>
+        </div>
       </div>
 
-      <div class="quick-view__buttons buttons buttons--center">
+      <div class="quick-view__bottom buttons buttons--center">
+        <div class="shadow-divider"></div>
         <a class="button button--primary border quick-view-add-to-cart" id="quick-view-add-to-cart">ADD TO CART</a>
         <a class="button button--secondary border quick-view-buy-now" id="quick-view-buy-now">BUY NOW</a>
       </div>
-      <a href="" class="quick-view__product-url button--link">View details</a>
     </div>
   </div>
 </quick-view-component>

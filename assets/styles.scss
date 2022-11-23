@@ -108,7 +108,7 @@ h5,
 h6 {
 	text-transform: var(--headings-style);
 	color: var(--headings-color);
-	line-height: 0.9;
+	line-height: 1;
 }
 
 p,
@@ -638,6 +638,16 @@ button.border.button {
 		margin-left: auto;
 		margin-right: auto;
 	}
+}
+
+.shadow-divider {
+	width: 100%;
+	height: 40px;
+	background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgb(0, 0, 0) 100%);
+	position: absolute;
+	top: 0;
+	right: 0;
+	transform: translateY(-98%);
 }
 
 slider-component.multi-icon .slider-component .slides-container {
@@ -3366,15 +3376,6 @@ menu-drawer-component {
 		@media screen and (min-width: 1025px) {
 			gap: 1rem;
 		}
-		.shadow-divider {
-			width: 100%;
-			height: 40px;
-			background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgb(0, 0, 0) 100%);
-			position: absolute;
-			top: 0;
-			right: 0;
-			transform: translateY(-100%);
-		}
 
 		.buttons {
 			display: flex;
@@ -4766,19 +4767,34 @@ menu-drawer-component {
 // ANCHOR: Quick view
 
 quick-view-component {
-	height: auto;
-	width: 550px;
+	height: 100%;
+	width: 100%;
 	position: fixed;
 	z-index: -1;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
+	padding: 0.5rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	@media screen and (max-width: 1024px) {
+		margin-top: 0 !important;
+		padding-bottom: 0 !important;
+		align-items: flex-end;
+	}
 
 	.quick-view {
 		background-color: #000;
 		border: 2px solid #fff;
-		padding: 2rem;
 		position: relative;
+		padding: 1rem;
+		max-height: 100%;
+		margin-bottom: 0.5rem;
+
+		@media screen and (min-width: 1025px) {
+			height: auto !important;
+			width: 550px;
+			padding: 2rem;
+		}
 
 		&.active {
 			cursor: all;
@@ -4809,7 +4825,6 @@ quick-view-component {
 			flex-direction: column;
 			justify-content: center;
 			align-items: center;
-			gap: 1.5rem;
 			.quantity-text {
 				width: 100%;
 				text-align: center;
@@ -4828,12 +4843,15 @@ quick-view-component {
 		}
 
 		&__title {
-			text-align: center;
 		}
 
 		&__image {
-			height: 150px;
-			width: 150px;
+			height: 120px;
+			aspect-ratio: 1;
+
+			@media screen and (min-width: 1025px) {
+				height: 150px;
+			}
 
 			&-box {
 				height: 100%;
@@ -4870,6 +4888,7 @@ quick-view-component {
 			&-container {
 				display: flex;
 				flex-direction: column;
+				align-items: flex-start;
 				gap: 0.5rem;
 				border: 0px;
 				padding: 0px;
@@ -4890,8 +4909,7 @@ quick-view-component {
 			}
 			&__content {
 				display: flex;
-				justify-content: center;
-				align-items: center;
+				justify-content: flex-start;
 				flex-wrap: wrap;
 				gap: 0.5rem;
 			}
@@ -4899,6 +4917,12 @@ quick-view-component {
 				cursor: pointer;
 				padding: 1rem;
 				border: 1px solid #333333;
+
+				@media screen and (max-width: 1024px) {
+					font-size: 0.8rem;
+					padding: 0.8rem;
+				}
+
 				&.checked {
 					border: 2px solid #ffffff;
 				}
@@ -4907,6 +4931,11 @@ quick-view-component {
 					height: 80px;
 					overflow: hidden;
 					padding: 0;
+
+					@media screen and (max-width: 1024px) {
+						width: 60px;
+						height: 60px;
+					}
 				}
 			}
 			&__input {
@@ -4914,9 +4943,52 @@ quick-view-component {
 			}
 		}
 
-		&__buttons {
+		&__quantity-field {
+			.quantity {
+				justify-content: center;
+				align-items: center;
+			}
+		}
+
+		&__top {
+			display: flex;
+			flex-direction: row;
+			justify-content: center;
+			align-items: flex-start;
+			gap: 0.5rem;
+		}
+
+		&__details {
 			display: flex;
 			flex-direction: column;
+			justify-content: space-around;
+			align-items: flex-start;
+			height: 120px;
+
+			@media screen and (min-width: 1025px) {
+				height: 150px;
+			}
+		}
+
+		&__product-url {
+			font-size: 0.8rem;
+		}
+
+		&__content {
+			width: 100%;
+			display: flex;
+			flex-direction: column;
+			justify-content: flex-start;
+			align-items: flex-start;
+			gap: 1rem;
+			overflow: auto;
+			padding: 1.5rem 0rem;
+		}
+
+		&__bottom {
+			display: flex;
+			flex-direction: column !important;
+			position: relative;
 		}
 	}
 }

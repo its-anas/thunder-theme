@@ -1623,6 +1623,9 @@ class QuickView extends HTMLElement {
 	}
 
 	showQuickView() {
+		this.querySelector(".quick-view").style.height = `calc(100% - ${document.querySelector(".header-section").offsetHeight}px - 2.5rem)`;
+		this.style.marginTop = `calc(${document.querySelector(".header-section").offsetHeight}px + 2rem)`;
+		this.style.paddingBottom = `calc(${document.querySelector(".header-section").offsetHeight}px + 2rem)`;
 		lockPage();
 		this.style.zIndex = 105;
 		this.querySelector(".quick-view").classList.remove("hidden");
@@ -1652,6 +1655,7 @@ class QuickView extends HTMLElement {
 					let productVendor = data.product.vendor;
 					let productTitle = data.product.title;
 					let productFeaturedImage = data.product.image;
+					let productPrice = data.product.price;
 					let productUrl = `/products/${data.product.handle}`;
 					let productOptions = {};
 					let productVariantsImages = {};
@@ -1698,7 +1702,7 @@ class QuickView extends HTMLElement {
 
 						if (key !== "Color") {
 							if (quickViewVariantSelectorType === "block") {
-								this.querySelector(`.quick-view__radios-container--${key}`).innerHTML = `
+								this.querySelector(`.quick-view__radios-container--${key}`).innerHTML += `
 									<div class="quick-view__radio__content quick-view__radio__content--${key}"></div>
 							`;
 							} else if (quickViewVariantSelectorType === "dropdown") {
@@ -1773,7 +1777,7 @@ class QuickView extends HTMLElement {
 									`;
 								} else if (quickViewColorSelectorType === "variant_image") {
 									this.querySelector(`.quick-view__radios-container--${key}`).setAttribute("data-selector-type", quickViewColorSelectorType);
-
+									let done;
 									for (var vkey in productVariantsImages) {
 										if (productVariantsImages[vkey].alt) {
 											if (productVariantsImages[vkey].alt.includes("#color:")) {
@@ -1798,13 +1802,34 @@ class QuickView extends HTMLElement {
 															class="fit"
 															>
 													`;
+													done = true;
 												}
 											}
 										}
 									}
+
+									if (!done) {
+										this.querySelector(`.quick-view__radios-container--${key}`).setAttribute("data-selector-type", quickViewColorSelectorType);
+										this.querySelector(`.quick-view__radio__content--${key}`).innerHTML += `
+											<label
+											class="quick-view__radio__label "
+											for="${handleize(key)}-${handleize(value)}"
+											>
+												<input
+												    
+													type="radio"
+													name="${key}"
+													value="${value}"
+													id="${handleize(key)}-${handleize(value)}"
+													class="quick-view__radio__input"
+												>
+												${value}
+											</label>
+										`;
+									}
 								} else if (quickViewColorSelectorType === "color_swatch") {
 									this.querySelector(`.quick-view__radios-container--${key}`).setAttribute("data-selector-type", quickViewColorSelectorType);
-
+									let done;
 									for (var color in colorSwatchList) {
 										console.log(value, color);
 										if (value === color) {
@@ -1817,31 +1842,49 @@ class QuickView extends HTMLElement {
 													<input  type="radio" name="${key}" value="${value}" id="${handleize(key)}-${handleize(value)}" class="product-page__radio__input">
 													</label>
 												`;
+											done = true;
 										}
+									}
+									if (!done) {
+										this.querySelector(`.quick-view__radios-container--${key}`).setAttribute("data-selector-type", quickViewColorSelectorType);
+										this.querySelector(`.quick-view__radio__content--${key}`).innerHTML += `
+											<label
+											class="quick-view__radio__label "
+											for="${handleize(key)}-${handleize(value)}"
+											>
+												<input
+												    
+													type="radio"
+													name="${key}"
+													value="${value}"
+													id="${handleize(key)}-${handleize(value)}"
+													class="quick-view__radio__input"
+												>
+												${value}
+											</label>
+										`;
 									}
 								}
 							}
-						});
-
-						this.querySelectorAll(".quick-view__radios-container").forEach((selector) => {
-							selector.querySelector("input").checked = true;
-							selector.querySelector("input").parentNode.classList.add("checked");
 						});
 					}
 
 					this.querySelector(".quick-view__vendor").innerHTML = `${productVendor}`;
 					this.querySelector(".quick-view__title").innerHTML = `${productTitle}`;
 					this.querySelector(".quick-view__product-url").href = `${productUrl}`;
+					this.querySelector(".quick-view__price").innerHTML = `${formatMoney(productPrice)}`;
 				})
 				.then(() => {
-					this.showQuickView();
-					this.setVariant();
-
 					this.querySelectorAll(".quick-view__radios-container").forEach((selectorContainer) => {
+						selectorContainer.querySelector("input").checked = true;
+						selectorContainer.querySelector("input").parentNode.classList.add("checked");
 						selectorContainer.addEventListener("change", () => {
 							this.setVariant();
 						});
 					});
+
+					this.showQuickView();
+					this.setVariant();
 
 					this.querySelectorAll(".quick-view__radios-container").forEach((selector) => {
 						if (selector.dataset.selectorType === "block" || selector.dataset.selectorType === "variant_image" || selector.dataset.selectorType === "color_swatch") {
@@ -1858,6 +1901,7 @@ class QuickView extends HTMLElement {
 							});
 						}
 					});
+					``;
 				});
 		}
 	}
@@ -1950,6 +1994,10 @@ class QuickView extends HTMLElement {
 				}
 			});
 		}
+
+		let selectedVariantPrice = selectedVariant.price;
+
+		this.querySelector(".quick-view__price").innerHTML = `${formatMoney(selectedVariantPrice)}`;
 
 		quantity = document.querySelector(".quick-view__quantity-field .quantity-field__input").value;
 		document.getElementById("quick-view-buy-now").href = `/cart/${selectedVariant.id}:${quantity}`;
