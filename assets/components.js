@@ -1719,17 +1719,16 @@ class QuickView extends HTMLElement {
 						}
 
 						productOptions[key].forEach((value, index) => {
-							let checkedClass = index === 0 ? "checked" : "";
 							if (key !== "Color") {
 								this.querySelector(`.quick-view__radios-container--${key}`).setAttribute("data-selector-type", quickViewVariantSelectorType);
 								if (quickViewVariantSelectorType === "block") {
 									this.querySelector(`.quick-view__radio__content--${key}`).innerHTML += `
 											<label
-											class="quick-view__radio__label ${checkedClass}"
+											class="quick-view__radio__label "
 											for="${handleize(key)}-${handleize(value)}"
 											>
 												<input
-											    	${checkedClass}
+											    	
 													type="radio"
 													name="${key}"
 													value="${value}"
@@ -1751,11 +1750,11 @@ class QuickView extends HTMLElement {
 									this.querySelector(`.quick-view__radios-container--${key}`).setAttribute("data-selector-type", quickViewColorSelectorType);
 									this.querySelector(`.quick-view__radio__content--${key}`).innerHTML += `
 											<label
-											class="quick-view__radio__label ${checkedClass}"
+											class="quick-view__radio__label "
 											for="${handleize(key)}-${handleize(value)}"
 											>
 												<input
-												    ${checkedClass}
+												    
 													type="radio"
 													name="${key}"
 													value="${value}"
@@ -1773,7 +1772,8 @@ class QuickView extends HTMLElement {
 										</option>
 									`;
 								} else if (quickViewColorSelectorType === "variant_image") {
-									let done;
+									this.querySelector(`.quick-view__radios-container--${key}`).setAttribute("data-selector-type", quickViewColorSelectorType);
+
 									for (var vkey in productVariantsImages) {
 										if (productVariantsImages[vkey].alt) {
 											if (productVariantsImages[vkey].alt.includes("#color:")) {
@@ -1781,11 +1781,11 @@ class QuickView extends HTMLElement {
 												if (altLastPart === value) {
 													this.querySelector(`.quick-view__radio__content--${key}`).innerHTML += `
 															<label
-																class="quick-view__radio__label  media swatch ${handleize(value)} ${checkedClass} "
+																class="quick-view__radio__label  media swatch ${handleize(value)}  "
 																style=""
 																for="${handleize(key)}-${handleize(value)}"
 															>
-																<input ${checkedClass} type="radio" name="${key}" value="${value}" id="${handleize(key)}-${handleize(value)}" class="quick-view__radio__input">
+																<input  type="radio" name="${key}" value="${value}" id="${handleize(key)}-${handleize(value)}" class="quick-view__radio__input">
 															</label>
 														`;
 													this.querySelector(`.quick-view__radio__content--${key} label.${handleize(value)}`).innerHTML += `
@@ -1798,73 +1798,34 @@ class QuickView extends HTMLElement {
 															class="fit"
 															>
 													`;
-													done = true;
 												}
 											}
 										}
 									}
-									if (done == true) {
-										this.querySelector(`.quick-view__radios-container--${key}`).setAttribute("data-selector-type", quickViewColorSelectorType);
-									} else if (done !== true) {
-										this.querySelector(`.quick-view__radios-container--${key}`).setAttribute("data-selector-type", "block");
-										this.querySelector(`.quick-view__radio__content--${key}`).innerHTML += `
-													<label
-													class="quick-view__radio__label ${checkedClass}"
-													for="${handleize(key)}-${handleize(value)}"
-													>
-														<input
-															${checkedClass}
-															type="radio"
-															name="${key}"
-															value="${value}"
-															id="${handleize(key)}-${handleize(value)}"
-															class="quick-view__radio__input"
-														>
-														${value}
-													</label>
-												`;
-									}
 								} else if (quickViewColorSelectorType === "color_swatch") {
-									let done;
+									this.querySelector(`.quick-view__radios-container--${key}`).setAttribute("data-selector-type", quickViewColorSelectorType);
 
 									for (var color in colorSwatchList) {
+										console.log(value, color);
 										if (value === color) {
 											this.querySelector(`.quick-view__radio__content--${key}`).innerHTML += `
 													<label
-													class=" product-page__radio__label ${checkedClass} "
+													class=" product-page__radio__label  "
 													style="background-color: ${color};"
 													id="${handleize(key)}-${handleize(value)}"
 													>
-													<input ${checkedClass} type="radio" name="${key}" value="${value}" id="${handleize(key)}-${handleize(value)}" class="product-page__radio__input">
+													<input  type="radio" name="${key}" value="${value}" id="${handleize(key)}-${handleize(value)}" class="product-page__radio__input">
 													</label>
 												`;
-											done = true;
 										}
-									}
-
-									if (done == true) {
-										this.querySelector(`.quick-view__radios-container--${key}`).setAttribute("data-selector-type", quickViewColorSelectorType);
-									} else if (done !== true) {
-										this.querySelector(`.quick-view__radios-container--${key}`).setAttribute("data-selector-type", "block");
-										this.querySelector(`.quick-view__radio__content--${key}`).innerHTML += `
-												<label
-												class="quick-view__radio__label ${checkedClass}"
-												for="${handleize(key)}-${handleize(value)}"
-												>
-													<input
-														${checkedClass}
-														type="radio"
-														name="${key}"
-														value="${value}"
-														id="${handleize(key)}-${handleize(value)}"
-														class="quick-view__radio__input"
-													>
-													${value}
-												</label>
-											`;
 									}
 								}
 							}
+						});
+
+						this.querySelectorAll(".quick-view__radios-container").forEach((selector) => {
+							selector.querySelector("input").checked = true;
+							selector.querySelector("input").parentNode.classList.add("checked");
 						});
 					}
 
@@ -1876,16 +1837,26 @@ class QuickView extends HTMLElement {
 					this.showQuickView();
 					this.setVariant();
 
-					this.querySelectorAll(".quick-view__radios-container select").forEach((radioContainerSelect) => {
-						radioContainerSelect.addEventListener("change", () => {
-							this.setVariant();
-						});
-					});
-
 					this.querySelectorAll(".quick-view__radios-container").forEach((selectorContainer) => {
 						selectorContainer.addEventListener("change", () => {
 							this.setVariant();
 						});
+					});
+
+					this.querySelectorAll(".quick-view__radios-container").forEach((selector) => {
+						if (selector.dataset.selectorType === "block" || selector.dataset.selectorType === "variant_image" || selector.dataset.selectorType === "color_swatch") {
+							selector.querySelectorAll("input").forEach((input) => {
+								input.addEventListener("click", () => {
+									selector.querySelectorAll("input").forEach((inp) => {
+										inp.removeAttribute("checked");
+										inp.parentNode.classList.remove("checked");
+									});
+
+									input.setAttribute("checked", "checked");
+									input.parentNode.classList.add("checked");
+								});
+							});
+						}
 					});
 				});
 		}
@@ -1896,7 +1867,6 @@ class QuickView extends HTMLElement {
 		let variantsNames = [];
 		let selectedVariant = {};
 		let quantity;
-
 		let quickViewSelectors = this.querySelectorAll(".quick-view__radios-container");
 
 		if (quickViewSelectors.length === 1) {
