@@ -70,7 +70,7 @@
                 {% endif %}
                 <div
                   class="quick-add-icon"
-                  id="quick-add-icon"
+                  id="quick-add-button"
                   data-first-available-variant-id="{{ product.variants.first.id }}"
                   data-product-handle="{{ product.handle }}"
                   data-product-variants="{% if product.variants.size > 1 %}with{% else %}without{% endif %}"
@@ -129,7 +129,7 @@
                 <p class="tag--normal tag-text">SAVE {{ product.compare_at_price | minus: product.price | money }}</p>
                 <div
                   class="quick-add-icon"
-                  id="quick-add-icon"
+                  id="quick-add-button"
                   data-first-available-variant-id="{{ product.variants.first.id }}"
                   data-product-handle="{{ product.handle }}"
                   data-product-variants="{% if product.variants.size > 1 %}with{% else %}without{% endif %}"

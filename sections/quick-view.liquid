@@ -6,12 +6,14 @@
       </div>
       <div class="quick-view__top">
         <div class="quick-view__image">
-          <div class="quick-view__image-box"></div>
+          <div class="quick-view__image-box">
+            {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
+          </div>
         </div>
         <div class="quick-view__details">
-          <p class="quick-view__vendor"></p>
-          <h6 class="quick-view__title"></h6>
-          <p class="quick-view__price price--actual">$39.99</p>
+          <p class="quick-view__vendor">Vendor</p>
+          <h6 class="quick-view__title">Product title</h6>
+          <p class="quick-view__price price--actual">Price</p>
           <a href="" class="quick-view__product-url button--link">View details</a>
         </div>
       </div>
@@ -46,13 +48,14 @@
 </quick-view-component>
 
 <script>
-  let quickViewVariantSelectorType = '{{ section.settings.variant_selector_type }}';
-  let quickViewColorSelectorType = '{{ section.settings.color_selector_type }}';
+  let quickViewVariantSelectorType = '{{ settings.variant_selector_type }}';
+  let quickViewColorSelectorType = '{{ settings.color_selector_type }}';
 </script>
 
 {% schema %}
 {
   "name": "Quick view",
+  "class": "section-quick-view",
   "settings": [
     {
       "type": "select",
@@ -74,6 +77,7 @@
       "type": "select",
       "id": "color_selector_type",
       "label": "Color selector type",
+      "info": "For the color swatch to work properly, the product must have variants, every variant must have an image attached to it, every image alt must be written in the format #color:Name, and the color and it's hex must be added in Color swatch tab in theme settings.",
       "options": [
         {
           "value": "block",

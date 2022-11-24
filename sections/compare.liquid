@@ -46,21 +46,29 @@
                       {{ 'product-1' | placeholder_svg_tag: 'placeholder compare-image large' }}
                     {% endif %}
                   {%- elsif block.settings.product != blank -%}
-                    <a href="{{ block.settings.product.url }}">
-                      <div class="media compare-image {{ section.settings.image_size }}">
-                        <img
-                          srcset="{{ block.settings.product.featured_image | image_url }}"
-                          loading="lazy"
-                          alt="{{ block.settings.product.featured_image.alt | escape }}"
-                          width="{{ block.settings.product.featured_image.width }}"
-                          height="{{ block.settings.product.featured_image.height }}"
-                          class="{{ section.settings.image_style }}"
+                    <div>
+                      <div class="compare-image {{ section.settings.image_size }}">
+                        <a href="{{ block.settings.product.url }}" class="media">
+                          <img
+                            srcset="{{ block.settings.product.featured_image | image_url }}"
+                            loading="lazy"
+                            alt="{{ block.settings.product.featured_image.alt | escape }}"
+                            width="{{ block.settings.product.featured_image.width }}"
+                            height="{{ block.settings.product.featured_image.height }}"
+                            class="{{ section.settings.image_style }}"
+                        ></a>
+
+                        <div
+                          class="quick-add-icon"
+                          id="quick-add-button"
+                          data-first-available-variant-id="{{ block.settings.product.variants.first.id }}"
+                          data-product-handle="{{ block.settings.product.handle }}"
+                          data-product-variants="{% if  block.settings.product.variants.size > 1 %}with{% else %}without{% endif %}"
                         >
-                        <div class="quick-add-icon">
-                          {% render 'icons', icon: 'quick-add' -%}
+                          {% render 'icons', icon: 'quick-add' %}
                         </div>
                       </div>
-                    </a>
+                    </div>
                   {%- endif -%}
                   <a
                     {% if block.settings.product.url != blank %}

@@ -150,12 +150,18 @@
                     </p>
                   </div>
                   <a
-                    {% if block.settings.product != blank %}
-                      href="{{ block.settings.product.url }}"
-                    {% endif %}
                     class="button--link"
-                    >View product</a
+                    id="quick-add-button"
+                    data-first-available-variant-id="{{ block.settings.product.variants.first.id }}"
+                    data-product-handle="{{ block.settings.product.handle }}"
+                    data-product-variants="{% if block.settings.product.variants.size > 1 %}with{% else %}without{% endif %}"
                   >
+                    {%- if block.settings.product.variants.size == 1 -%}
+                      Add to cart
+                    {%- elsif block.settings.product.variants.size > 1 -%}
+                      Quick view
+                    {%- endif -%}
+                  </a>
                 </div>
               {%- when 'feature' -%}
                 <div class="shop-the-look__feature">

@@ -11,15 +11,18 @@
           id: "{{ product.id }}",
           title: "{{ product.title }}",
           url: "{{ product.url }}",
-          image: "{{ variant.featured_image | image_url }}",
-          image_alt: "{{ variant.featured_image.alt }}",
-          image_width: "{{ variant.featured_image.width }}",
-          image_height: "{{ variant.featured_image.height }}",
+          image: "{{ product.featured_image | image_url }}",
+          image_alt: "{{ product.featured_image.alt }}",
+          image_width: "{{ product.featured_image.width }}",
+          image_height: "{{ product.featured_image.height }}",
           price: "{{ product.price | money }}",
           compare_at_price: "{{ product.compare_at_price | money }}",
           price_difference: "{{ product.compare_at_price | minus: product.price }}",
           price_difference_with_currency: "{{ product.compare_at_price | minus: product.price | money }}",
-          date_difference: "{{ 'now' | date: "%d" | minus: product.published_at | date: "%d" }}"
+          date_difference: "{{ 'now' | date: "%d" | minus: product.published_at | date: "%d" }}",
+          variant_first_id: "{{ product.variants.first.id }}",
+          handle: "{{ product.handle }}",
+          variants_size: "{{ product.variants.size }}"
       };
 
       for (product = 0; product < recentlyViewedProductsCookie.length; product++) {
@@ -35,6 +38,7 @@
   }
   updateRecentlyViewedProductsCookie();
 </script>
+
 
 {% liquid
   assign mobile_items = 1
@@ -545,9 +549,7 @@
               {% when 'buttons' %}
                 <div class="product-page__buttons buttons buttons--center" {{ block.shopify_attributes }}>
 
-                  <{% if settings.cart_type == "drawer" %}a {% else %}button type="submit" name="add" value="Add to cart" {% endif %} class="button button--primary border add-to-cart-button" id="add-to-cart-button" >
-                    ADD TO CART
-                  </{% if settings.cart_type == "drawer" %}a {% else %}button {% endif %} >
+                  <{% if settings.cart_type == "drawer" %}a{% else %}button type='submit' name='add' value='Add to cart'{% endif %} class='button button--primary border add-to-cart-button' id='add-to-cart-button'> ADD TO CART </{% if settings.cart_type == "drawer" %}a{% else %}button{% endif %}>
 
                   <div class="dynamic-buy-button" id="dynamic-buy-button">
                     {{ form | payment_button }}
@@ -602,8 +604,9 @@
                     <div class="product-page__recommended-product-list">
                       {% for bundled_product in product.metafields.custom.recommended_products.value limit: 3 %}
                         <div class="product-page__recommended-product-container">
-                          <a href="{{ bundled_product.url }}" class="product-page__recommended-product media">
-                            <img
+                          <div class="product-page__recommended-product">
+                            <a href="{{ bundled_product.url }}" class="media">
+                              <img
                               srcset="{{ bundled_product.featured_image | image_url }}"
                               loading="lazy"
                               alt="{{ bundled_product.featured_image | escape }}"
@@ -611,10 +614,16 @@
                               height="{{ bundled_product.featured_image.height }}"
                               class="full"
                             >
-                            <div class="quick-add-icon">
+                            </a>
+                            <div class="quick-add-icon"
+                              id="quick-add-button"
+                              data-first-available-variant-id="{{ bundled_product.variants.first.id }}"
+                              data-product-handle="{{ bundled_product.handle }}"
+                              data-product-variants="{% if  bundled_product.variants.size > 1 %}with{% else %}without{% endif %}"
+                              >
                               {% render 'icons', icon: 'quick-add' %}
-                            </div>
-                          </a>
+                              </div>
+                          </div>
                           <a href="{{ bundled_product.url }}" class="product-page__recommended-product-title">
                             {{ bundled_product.title }}
                           </a>
@@ -968,6 +977,7 @@ customElements.define("product-page", ProductPage);
               "label": "Variant image"
             }
           ],
+                "info": "For the color swatch to work properly, the product must have variants, every variant must have an image attached to it, every image alt must be written in the format #color:Name, and the color and it's hex must be added in Color swatch tab in theme settings.",
           "default": "block"
         }
       ]
