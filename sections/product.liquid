@@ -604,8 +604,8 @@
                     <div class="product-page__recommended-product-list">
                       {% for bundled_product in product.metafields.custom.recommended_products.value limit: 3 %}
                         <div class="product-page__recommended-product-container">
-                          <div class="product-page__recommended-product">
-                            <a href="{{ bundled_product.url }}" class="media">
+                          <div class="product-page__recommended-product corner-border">
+                            <a href="{{ bundled_product.url }}" class="media corner-border-target">
                               <img
                               srcset="{{ bundled_product.featured_image | image_url }}"
                               loading="lazy"

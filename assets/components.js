@@ -1632,9 +1632,16 @@ class QuickView extends HTMLElement {
 	}
 
 	showQuickView() {
-		document.querySelector(".quick-view").style.height = `calc(100% - ${document.querySelector(".header-section").offsetHeight}px - 2.5rem)`;
-		document.querySelector("quick-view-component").style.marginTop = `calc(${document.querySelector(".header-section").offsetHeight}px + 2rem)`;
-		document.querySelector("quick-view-component").style.paddingBottom = `calc(${document.querySelector(".header-section").offsetHeight}px + 2rem)`;
+		document.querySelector("quick-view-component").style.height = `calc(100% - ${document.querySelector(".header-section").offsetHeight}px +  0.5rem)`;
+		document.querySelector("quick-view-component").style.marginTop = `calc(${document.querySelector(".header-section").offsetHeight}px -  0.5rem)`;
+		let headerSize = document.querySelector(".header-section").offsetHeight;
+		let viewportHeight = window.innerHeight;
+		let spaceLeft = viewportHeight - headerSize;
+		let halfOfSpaceLeft = spaceLeft / 2;
+		let newTop = 100 - (halfOfSpaceLeft / viewportHeight) * 100;
+
+		document.querySelector("quick-view-component").style.top = `${newTop}%`;
+
 		lockPage();
 
 		document.querySelector("quick-view-component").style.zIndex = 105;
@@ -2041,11 +2048,35 @@ class QuickView extends HTMLElement {
 	listenToQuickView() {
 		document.querySelector(".quick-view__close").addEventListener("click", () => {
 			this.hideQuickView();
+			if (document.querySelector(".theme-overlay").classList.contains("higher-layer") && document.querySelector(".header-section").classList.contains("higher-layer")) {
+				document.querySelector(".theme-overlay").classList.remove("higher-layer");
+				setTimeout(() => {
+					document.querySelector(".header-section").classList.remove("higher-layer");
+				}, 500);
+			}
+		});
+
+		document.querySelector(".header-section").addEventListener("click", () => {
+			if (document.querySelector(".quick-view").classList.contains("active")) {
+				this.hideQuickView();
+				if (document.querySelector(".theme-overlay").classList.contains("higher-layer") && document.querySelector(".header-section").classList.contains("higher-layer")) {
+					document.querySelector(".theme-overlay").classList.remove("higher-layer");
+					setTimeout(() => {
+						document.querySelector(".header-section").classList.remove("higher-layer");
+					}, 500);
+				}
+			}
 		});
 
 		document.querySelector(".theme-overlay").addEventListener("click", () => {
 			if (document.querySelector(".quick-view").classList.contains("active")) {
 				this.hideQuickView();
+				if (document.querySelector(".theme-overlay").classList.contains("higher-layer") && document.querySelector(".header-section").classList.contains("higher-layer")) {
+					document.querySelector(".theme-overlay").classList.remove("higher-layer");
+					setTimeout(() => {
+						document.querySelector(".header-section").classList.remove("higher-layer");
+					}, 500);
+				}
 			}
 		});
 
@@ -2086,7 +2117,10 @@ class QuickViewButton extends QuickView {
 			this.icon = this.querySelector("#quick-add-button");
 			this.runQuickView(this.icon);
 			if (document.querySelector("cart-component").classList.contains("active") && this.icon.dataset.productVariants === "with") {
-				document.querySelector(".theme-overlay").classList.add("higher-layer");
+				document.querySelector(".header-section").classList.add("higher-layer");
+				setTimeout(() => {
+					document.querySelector(".theme-overlay").classList.add("higher-layer");
+				}, 500);
 			}
 		});
 	}

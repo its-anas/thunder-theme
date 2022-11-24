@@ -190,8 +190,11 @@ function showDrawer() {
 	updateCartDrawer()
 		.then(() => {
 			setCartState().then(() => {
-				injectCartDrawerRecommendedProducts();
-				lockPage();
+				if (document.querySelector("cart-component").classList.contains("hidden")) {
+					injectCartDrawerRecommendedProducts();
+					lockPage();
+				}
+
 				document.querySelector("cart-component").classList.remove("hidden");
 				document.querySelector("cart-component").classList.add("active");
 			});
@@ -492,6 +495,9 @@ function fromQuickViewToCart(selectedVariant, quantity) {
 
 	if (document.querySelector("cart-component").classList.contains("active")) {
 		document.querySelector(".theme-overlay").classList.remove("higher-layer");
+		setTimeout(() => {
+			document.querySelector(".header-section").classList.remove("higher-layer");
+		}, 500);
 	}
 
 	document.querySelector(".quick-view").classList.add("hidden");
