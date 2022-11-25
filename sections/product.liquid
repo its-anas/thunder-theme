@@ -549,13 +549,15 @@
               {% when 'buttons' %}
                 <div class="product-page__buttons buttons buttons--center" {{ block.shopify_attributes }}>
 
-                  <{% if settings.cart_type == "drawer" %}a{% else %}button type='submit' name='add' value='Add to cart'{% endif %} class='button button--primary border add-to-cart-button' id='add-to-cart-button'> 
+                  <{% if settings.cart_type == "drawer" %}a{% else %}button type='submit' name='add' value='Add to cart'{% endif %} class='button button--primary border add-to-cart-button' id='add-to-cart-button' data-variants-number="{{ product.variants.size }}" data-actual-variant="{{ product.selected_or_first_available_variant.id }}"> 
                   <span></span> <span></span> <span></span> <span></span>
                   ADD TO CART </{% if settings.cart_type == "drawer" %}a{% else %}button{% endif %}>
 
+                  {% if block.settings.show_buy_now == true %}
                   <div class="dynamic-buy-button" id="dynamic-buy-button">
                     {{ form | payment_button }}
                   </div>
+                {% endif %}
                 </div>
               {% when 'trust_bar' %}
                 <div class="product-page__trust-bar" {{ block.shopify_attributes }}>
@@ -675,11 +677,13 @@
 	constructor() {
 		super();
 	}
+  
 	connectedCallback() {
 		this.attachShadow({ mode: "open" });
 		this.shadowRoot.innerHTML = "<slot></slot>";
 		this.runProductPage();
 	}
+
 	runProductPage() {
 		if (document.querySelector(".product-page__buttons")) {
 			const targetNode = document.querySelector(".product-page__buttons");
@@ -803,32 +807,38 @@
 			cloneImages(".product-hidden-thumbnails .thumbnail", ".product-page-slider__thumbnails");
 		}
 
-
-    document.querySelector("#add-to-cart-button").addEventListener("click", () => {
-        let variantId = document.querySelector(".product-page__hidden-variants #product-select option[selected]").value;
+    let addToCartButton = document.querySelector("#add-to-cart-button")
+    let pageProductVariantsNumber = parseInt(addToCartButton.dataset.variantsNumber);
+    addToCartButton.addEventListener("click", () => {
+        let variantId = pageProductVariantsNumber > 1 ? document.querySelector(".product-page__hidden-variants #product-select option[selected]").value : addToCartButton.dataset.actualVariant;
         let quantity = document.querySelector(".product-page__form .quantity-field__input").value;
       sendToCart(variantId, quantity);
     });
 
 
 		function announceSoldout(inventory) {
+      console.log(inventory);
 			if (inventory > 0) {
-				if (document.getElementById("dynamic-buy-button").classList.contains("sold-out")) {
-					document.getElementById("add-to-cart-button").classList.remove("sold-out");
-					document.getElementById("add-to-cart-button").innerHTML = "ADD TO CART";
-
-					document.getElementById("dynamic-buy-button").classList.remove("sold-out");
-				}
+        console.log("in stock")
+        if (document.getElementById("dynamic-buy-button")) {
+          if (document.getElementById("dynamic-buy-button").classList.contains("sold-out")) {
+            document.getElementById("add-to-cart-button").classList.remove("sold-out");
+            document.getElementById("add-to-cart-button").innerHTML = "ADD TO CART";
+            document.getElementById("dynamic-buy-button").classList.remove("sold-out");
+          }
 			} else if (inventory === 0) {
+        console.log("out of stock")
 				if (document.querySelector(".product-page__stock-disclaimer__text")) {
 					document.querySelector(".product-page__stock-disclaimer__text").innerHTML = `Out of stock`;
 				}
 				document.getElementById("add-to-cart-button").classList.add("sold-out");
 				document.getElementById("add-to-cart-button").innerHTML = "SOLD OUT";
-
-				document.getElementById("dynamic-buy-button").classList.add("sold-out");
+        if (document.getElementById("dynamic-buy-button")) {
+           document.getElementById("dynamic-buy-button").classList.add("sold-out");
+        }
 			}
 		}
+  }
 
 		function cloneAllImages(variant, originalImagesSelector, cloneImagesSelector) {
 			document.querySelectorAll(".product-hidden-images .item").forEach((item) => {
@@ -1210,12 +1220,6 @@ customElements.define("product-page", ProductPage);
       "settings": [
         {
           "type": "checkbox",
-          "id": "show_add_to_cart",
-          "label": "Show add to cart button",
-          "default": true
-        },
-        {
-          "type": "checkbox",
           "id": "show_buy_now",
           "label": "Show buy now button",
           "default": true
@@ -1223,7 +1227,7 @@ customElements.define("product-page", ProductPage);
         {
           "type": "checkbox",
           "id": "show_payment_methods",
-          "label": "Show payment methods icons",
+          "label": "Show payment methods icons with buy now button",
           "default": true
         },
         {

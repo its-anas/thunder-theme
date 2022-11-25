@@ -159,6 +159,10 @@ document.addEventListener("click", (event) => {
 });
 
 function sendToCart(itemId, quantity) {
+	if (document.querySelector("#add-to-cart-button")) {
+		document.querySelector("#add-to-cart-button").classList.add("loading");
+	}
+
 	let formData = {
 		items: [
 			{
@@ -191,7 +195,6 @@ function sendToCart(itemId, quantity) {
 }
 
 function showDrawer() {
-	// UNFINISHED: Add a loading animation to the add to cart button
 	updateCartDrawer()
 		.then(() => {
 			setCartState().then(() => {
@@ -205,12 +208,14 @@ function showDrawer() {
 			});
 		})
 		.then(() => {
-			// UNFINISHED: Remove loading animation
+			// if (document.querySelector("#add-to-cart-button")) {
+			// 	document.querySelector("#add-to-cart-button").classList.remove("loading");
+			// 	document.querySelector("#add-to-cart-button").classList.add("finished");
+			// }
 		});
 }
 
 async function updateCartDrawer() {
-	// UNFINISHED: Add a loading animation to cart drawer when it's updating
 	await fetch("/cart.js")
 		.then((resp) => resp.json())
 		.then((data) => {
@@ -408,9 +413,7 @@ function callback(mutationList, observer) {
 	for (const mutation of mutationList) {
 		if (mutation.addedNodes.length > 0) {
 			if (document.querySelector(".recommended-products.desktop-only")) {
-				setTimeout(() => {
-					document.querySelector(".recommended-products.desktop-only").classList.add("active");
-				}, 500);
+				document.querySelector(".recommended-products.desktop-only").classList.add("active");
 			}
 		}
 	}
@@ -532,3 +535,16 @@ function fromQuickViewToCart(selectedVariant, quantity) {
 		document.querySelector("quick-view-component").style.zIndex = -1;
 	}, 300);
 }
+
+// ANCHOR: Dynamic buy now button
+// document.querySelector(".dynamic-buy-button").addEventListener("click", () => {
+// 	document.querySelector(".product-page__buttons .shopify-payment-button__button").classList.add("loading");
+// });
+
+// document.addEventListener("click", (e) => {
+// 	if (document.querySelector(".product-page__buttons #add-to-cart-button.finished")) {
+// 		if (!e.target.classList.contains("add-to-cart-button")) {
+// 			document.querySelector(".product-page__buttons #add-to-cart-button").classList.remove("finished");
+// 		}
+// 	}
+// });
