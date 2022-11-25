@@ -4695,11 +4695,12 @@ menu-drawer-component {
 			gap: 0.5rem;
 			border: 0px;
 			padding: 0px;
-
-			.product-page__color-select-content select {
-				width: 100%;
-			}
 		}
+	}
+
+	&__color-select-content {
+		display: flex;
+		flex-direction: column;
 	}
 
 	&__radio {

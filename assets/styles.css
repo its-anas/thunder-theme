@@ -4381,8 +4381,9 @@ menu-drawer-component #close-icon {
   border: 0px;
   padding: 0px;
 }
-.product-page__radios-container .product-page__color-select-content select {
-  width: 100%;
+.product-page__color-select-content {
+  display: flex;
+  flex-direction: column;
 }
 .product-page__radio__content {
   display: flex;
