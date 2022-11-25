@@ -816,29 +816,22 @@
     });
 
 
-		function announceSoldout(inventory) {
-      console.log(inventory);
+function announceSoldout(inventory) {
 			if (inventory > 0) {
-        console.log("in stock")
-        if (document.getElementById("dynamic-buy-button")) {
-          if (document.getElementById("dynamic-buy-button").classList.contains("sold-out")) {
-            document.getElementById("add-to-cart-button").classList.remove("sold-out");
-            document.getElementById("add-to-cart-button").innerHTML = "ADD TO CART";
-            document.getElementById("dynamic-buy-button").classList.remove("sold-out");
-          }
+				if (document.getElementById("dynamic-buy-button").classList.contains("sold-out")) {
+					document.getElementById("add-to-cart-button").classList.remove("sold-out");
+					document.getElementById("add-to-cart-button").innerHTML = "ADD TO CART";
+					document.getElementById("dynamic-buy-button").classList.remove("sold-out");
+				}
 			} else if (inventory === 0) {
-        console.log("out of stock")
 				if (document.querySelector(".product-page__stock-disclaimer__text")) {
 					document.querySelector(".product-page__stock-disclaimer__text").innerHTML = `Out of stock`;
 				}
 				document.getElementById("add-to-cart-button").classList.add("sold-out");
 				document.getElementById("add-to-cart-button").innerHTML = "SOLD OUT";
-        if (document.getElementById("dynamic-buy-button")) {
-           document.getElementById("dynamic-buy-button").classList.add("sold-out");
-        }
+				document.getElementById("dynamic-buy-button").classList.add("sold-out");
 			}
 		}
-  }
 
 		function cloneAllImages(variant, originalImagesSelector, cloneImagesSelector) {
 			document.querySelectorAll(".product-hidden-images .item").forEach((item) => {
