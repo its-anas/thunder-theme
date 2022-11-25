@@ -549,7 +549,9 @@
               {% when 'buttons' %}
                 <div class="product-page__buttons buttons buttons--center" {{ block.shopify_attributes }}>
 
-                  <{% if settings.cart_type == "drawer" %}a{% else %}button type='submit' name='add' value='Add to cart'{% endif %} class='button button--primary border add-to-cart-button' id='add-to-cart-button'> ADD TO CART </{% if settings.cart_type == "drawer" %}a{% else %}button{% endif %}>
+                  <{% if settings.cart_type == "drawer" %}a{% else %}button type='submit' name='add' value='Add to cart'{% endif %} class='button button--primary border add-to-cart-button' id='add-to-cart-button'> 
+                  <span></span> <span></span> <span></span> <span></span>
+                  ADD TO CART </{% if settings.cart_type == "drawer" %}a{% else %}button{% endif %}>
 
                   <div class="dynamic-buy-button" id="dynamic-buy-button">
                     {{ form | payment_button }}
@@ -873,6 +875,8 @@
 						document.querySelector(".shopify-payment-button__more-options").innerHTML = `${document.querySelector(".shopify-payment-button__more-options").innerHTML} ${paymentMethods}`;
 						document.querySelector(".dynamic-buy-button").style.height = `${document.querySelector(".dynamic-buy-button").scrollHeight}px`;
 						document.querySelector(".dynamic-buy-button").classList.add("loaded");
+            document.querySelector(".shopify-payment-button__button").classList.add("button","button--secondary","border");
+            document.querySelector(".shopify-payment-button__button").innerHTML += "<span></span> <span></span> <span></span> <span></span>";
 						observer.disconnect();
 					}, 500);
 				}

@@ -31,7 +31,8 @@ calc(var(--font-size-type-scale) * (var(--font-type-scale) * var(--font-type-sca
 calc(var(--font-size-type-scale) * var(--font-type-scale) * 1px); --tag-font-size: calc(((var(--font-size-type-scale) /
 var(--font-type-scale)) / var(--font-type-scale)) / var(--font-type-scale) * 1px);
 
---button_symbol : " {{ settings.button_symbol | truncate: 2 }}" ;
+--button_symbol : " {{ settings.button_symbol | truncate: 2 }}" ; --free-shipping-threshold :
+{{ settings.free_shipping_threshold }} ; }
 
 .button--primary.border:after, .button--secondary.border:after, .button--primary:not(.border):after,
 .button--secondary:not(.border):after { content: " {{ settings.button_symbol | truncate: 2 }}"; }
