@@ -4512,7 +4512,6 @@ quick-view-component {
   z-index: -1;
   display: flex;
   justify-content: center;
-  overflow: hidden;
 }
 @media screen and (max-width: 750px) {
   quick-view-component {
@@ -4615,7 +4614,6 @@ quick-view-component .quick-view__radios {
 quick-view-component .quick-view__radios-container {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   gap: 0.5rem;
   border: 0px;
   padding: 0px;
@@ -4627,7 +4625,7 @@ quick-view-component .quick-view__radios-container .product-page__color-select-c
   width: 100%;
 }
 quick-view-component .quick-view__radio__title {
-  text-align: center;
+  text-align: left;
 }
 quick-view-component .quick-view__radio__content {
   display: flex;
