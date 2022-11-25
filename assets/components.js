@@ -1041,12 +1041,6 @@ class PredictiveSearch extends HTMLElement {
 			}
 		});
 
-		document.querySelectorAll(".header__menu__content div").forEach((div) => {
-			div.addEventListener("mouseover", () => {
-				this.hideSearchDrawer();
-			});
-		});
-
 		this.closeIcon.addEventListener("click", () => {
 			this.hideSearchDrawer();
 			this.resetSearch();
@@ -1151,12 +1145,6 @@ class MenuDrawerComponent extends HTMLElement {
 			if (this.classList.contains("active")) {
 				this.hideDrawer();
 			}
-		});
-
-		document.querySelectorAll(".header__menu__content div").forEach((div) => {
-			div.addEventListener("mouseover", () => {
-				this.hideDrawer();
-			});
 		});
 
 		this.closeIcon.addEventListener("click", () => {
@@ -1570,12 +1558,6 @@ class CartComponent extends HTMLElement {
 				if (this.classList.contains("active")) {
 					this.hideDrawer();
 				}
-			});
-
-			document.querySelectorAll(".header__menu__content div").forEach((div) => {
-				div.addEventListener("mouseover", () => {
-					this.hideDrawer();
-				});
 			});
 
 			this.closeIcon.addEventListener("click", () => {

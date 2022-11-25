@@ -2563,7 +2563,7 @@ slider-component .slider-component .slides-container .slide .item > * {
 
 .header-section {
   width: 100%;
-  z-index: 100;
+  z-index: 110;
 }
 .header-section.boxed {
   padding: 8px;
