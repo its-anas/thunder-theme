@@ -14,6 +14,7 @@ function handleize(text) {
 }
 
 // ANCHOR: Shop the look
+// UNFINISHED: Make product/feature box show up on theme editor select and add
 let icons = document.querySelectorAll(".shop-the-look__icon");
 
 document.addEventListener("click", (event) => {
@@ -42,10 +43,14 @@ function handleSelectedIcon(icon) {
 			}
 		});
 		icon.classList.add("shop-the-look__icon-rotate");
-		icon.nextElementSibling.classList.add("clicked");
+		if (icon.nextElementSibling) {
+			icon.nextElementSibling.classList.add("clicked");
+		}
 	} else {
 		icon.classList.remove("shop-the-look__icon-rotate");
-		icon.nextElementSibling.classList.remove("clicked");
+		if (icon.nextElementSibling) {
+			icon.nextElementSibling.classList.remove("clicked");
+		}
 	}
 }
 
@@ -387,13 +392,28 @@ function injectCartDrawerRecommendedProducts() {
 	fetch("/cart.js")
 		.then((resp) => resp.json())
 		.then((data) => {
+			// UNFINISHED:
 			addCartRecommendedProducts(data.items);
+
+			// UNFINISHED: show and hide recommended products container on mobile too
+		});
+}
+
+const targetNode = document.querySelector(".recommended-products.desktop-only");
+const config = { childList: true, subtree: true };
+const observer = new MutationObserver(callback);
+observer.observe(targetNode, config);
+
+function callback(mutationList, observer) {
+	for (const mutation of mutationList) {
+		if (mutation.addedNodes.length > 0) {
 			if (document.querySelector(".recommended-products.desktop-only")) {
 				setTimeout(() => {
 					document.querySelector(".recommended-products.desktop-only").classList.add("active");
 				}, 500);
 			}
-		});
+		}
+	}
 }
 
 function addCartRecommendedProducts(cartProducts) {
@@ -417,12 +437,14 @@ function addCartRecommendedProducts(cartProducts) {
 
 						recommendedProducts.forEach((product) => {
 							let variant_first_id = parseInt(product.variants[0].id);
-							let handle = product.handle;
-							let variants_size = parseInt(product.variants.length);
-							let productWithVariants = variants_size > 1 ? "with" : "without";
-							let quickAddButtonText = variants_size > 1 ? "Quick view" : "Add to Cart";
 
-							document.querySelector(".recommended-products.desktop-only .recommended-products__list-container").innerHTML += `
+							if (!cartProducts.some((cartProduct) => cartProduct.variant_id === variant_first_id)) {
+								let handle = product.handle;
+								let variants_size = parseInt(product.variants.length);
+								let productWithVariants = variants_size > 1 ? "with" : "without";
+								let quickAddButtonText = variants_size > 1 ? "Quick view" : "Add to Cart";
+
+								document.querySelector(".recommended-products.desktop-only .recommended-products__list-container").innerHTML += `
 									<div class="recommended-product">
 										<div class="recommended-product__image media">
 											<img
@@ -452,7 +474,7 @@ function addCartRecommendedProducts(cartProducts) {
 										</div>
 									</div>
 								`;
-							document.querySelector(".recommended-products.mobile-only .recommended-products__list-container").innerHTML += `
+								document.querySelector(".recommended-products.mobile-only .recommended-products__list-container").innerHTML += `
 									<div class="recommended-product">
 										<div class="recommended-product__image media">
 											<img
@@ -479,6 +501,7 @@ function addCartRecommendedProducts(cartProducts) {
 										</quick-view-button>
 									</div>
 								`;
+							}
 						});
 					}
 				}

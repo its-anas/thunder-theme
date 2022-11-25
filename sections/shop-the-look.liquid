@@ -173,28 +173,36 @@
             {%- endcase -%}
           </div>
         </div>
-
-        <div
-          style="
-            {%- if block.settings.mobile_vertical_position <= 50 -%}
-              bottom: {{ block.settings.mobile_vertical_position }}%;
-            {%- else -%}
-              bottom: calc({{ block.settings.mobile_vertical_position }}% - 80px);
-            {%- endif -%}
-            {%- if block.settings.mobile_horizontal_position <= 50 -%}
-              left: {{ block.settings.mobile_horizontal_position }}%;
-            {%- else -%}
-              left: calc({{ block.settings.mobile_horizontal_position }}% - 80px);
-            {%- endif -%}
-          "
-          class="shop-the-look__box mobile-only"
-        >
-          <div class="shop-the-look__icon">
-            <div class="shop-the-look__icon-edge"></div>
-            <div class="shop-the-look__icon-edge-background"></div>
-            <div class="shop-the-look__icon-center"></div>
-          </div>
-        </div>
+        {%- case block.type -%}
+          {%- when 'product' -%}
+            <div
+              style="
+                {%- if block.settings.mobile_vertical_position <= 50 -%}
+                  bottom: {{ block.settings.mobile_vertical_position }}%;
+                {%- else -%}
+                  bottom: calc({{ block.settings.mobile_vertical_position }}% - 80px);
+                {%- endif -%}
+                {%- if block.settings.mobile_horizontal_position <= 50 -%}
+                  left: {{ block.settings.mobile_horizontal_position }}%;
+                {%- else -%}
+                  left: calc({{ block.settings.mobile_horizontal_position }}% - 80px);
+                {%- endif -%}
+              "
+              class="shop-the-look__box mobile-only"
+            >
+              <div
+                class="shop-the-look__icon"
+                id="quick-add-button"
+                data-first-available-variant-id="{{ block.settings.product.variants.first.id }}"
+                data-product-handle="{{ block.settings.product.handle }}"
+                data-product-variants="{% if block.settings.product.variants.size > 1 %}with{% else %}without{% endif %}"
+              >
+                <div class="shop-the-look__icon-edge"></div>
+                <div class="shop-the-look__icon-edge-background"></div>
+                <div class="shop-the-look__icon-center"></div>
+              </div>
+            </div>
+        {%- endcase -%}
       {% endfor %}
     </div>
   </div>

@@ -803,7 +803,7 @@ class RecentlyViewedComponent extends SliderComponent {
 
 customElements.define("recently-viewed-component", RecentlyViewedComponent);
 
-// ANCHOR:  Popup component
+// ANCHOR: Newsletter popup component
 
 class PopupComponent extends HTMLElement {
 	constructor() {
@@ -905,6 +905,12 @@ class PopupComponent extends HTMLElement {
 				});
 			});
 		}
+
+		document.querySelector(".popup__close").addEventListener("click", () => {
+			if (this.drawer.classList.contains("active")) {
+				this.hidePopupDrawer();
+			}
+		});
 
 		document.querySelector(".theme-overlay").addEventListener("click", () => {
 			if (this.drawer.classList.contains("active")) {
