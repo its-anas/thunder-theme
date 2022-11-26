@@ -728,7 +728,14 @@ class SliderComponent extends HTMLElement {
 	connectedCallback() {
 		this.attachShadow({ mode: "open" });
 		this.shadowRoot.innerHTML = "<slot></slot>";
-		this.loadSlider();
+		if (this.querySelector("recently-viewed-component")) {
+			setTimeout(() => {
+				// to wait for the recently viewed component to load
+				this.loadSlider();
+			}, 500);
+		} else {
+			this.loadSlider();
+		}
 	}
 
 	loadSlider() {
@@ -1755,5 +1762,3 @@ class QuickViewButton extends QuickView {
 }
 
 customElements.define("quick-view-button", QuickViewButton);
-
-// ANCHOR: Product page recently viewed function

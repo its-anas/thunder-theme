@@ -16,7 +16,7 @@ class RecentlyViewedComponent extends SliderComponent {
 							.join("=")
 				  )
 				: [];
-
+ 
 		if (products.length > 0) {
 			products = products.reverse();
 			let itemsLimits = parseInt(this.querySelector(".slides-container").getAttribute("data-items-limit"));
