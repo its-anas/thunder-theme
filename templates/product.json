@@ -93,8 +93,8 @@
         "trust_bar"
       ]
     },
-    "product-tabs": {
-      "type": "product-tabs",
+    "product-page-tabs": {
+      "type": "product-page-tabs",
       "blocks": {
         "product_description_tab": {
           "type": "product_description_tab"
@@ -118,6 +118,6 @@
   },
   "order": [
     "main",
-    "product-tabs"
+    "product-page-tabs"
   ]
 }

@@ -9,75 +9,83 @@
       <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
     {%- endunless -%}
 
-    <link href="{{ 'root.css' | asset_url }}" rel="stylesheet" type="text/css" media="all">
-    {{ 'styles.css' | asset_url | stylesheet_tag }}
+    {{ 'global-css-variables.css' | asset_url | stylesheet_tag }}
+    {{ 'global-styles.css' | asset_url | stylesheet_tag }}
+
     <script>
       let cartType = '{{ settings.cart_type }}';
       let freeShippingThreshold = {{ settings.free_shipping_threshold | times: 100 }};
       let colorSwatchList = {};
-      {%- assign color_swatch_list = settings.color_swatch_list | split: ','-%}
-      {%- for color_swatch in color_swatch_list -%}
-        {%- assign color_swatch_parts = color_swatch | split: ':' -%}
-        {%- assign color_swatch_name = color_swatch_parts.first | strip -%}
-        {%- assign color_swatch_value = color_swatch_parts.last | strip -%}
-        colorSwatchList['{{ color_swatch_name }}'] = '{{ color_swatch_value }}';
-      {%- endfor -%}
+
+      {% liquid
+        assign color_swatch_list = settings.color_swatch_list | split: ','
+        for color_swatch in color_swatch_list
+          assign color_swatch_parts = color_swatch | split: ':'
+          assign color_swatch_name = color_swatch_parts.first | strip
+          assign color_swatch_value = color_swatch_parts.last | strip
+          echo "colorSwatchList['"
+          echo color_swatch_name
+          echo "'] = '"
+          echo color_swatch_value
+          echo "';"
+        endfor
+      %}
 
       function formatMoney(cents) {
-        if (typeof cents == 'string') {
-          cents = cents.replace('.', '');
-        }
-        var value = '';
-        var placeholderRegex = /\{\{\s*(\w+)\s*\}\}/;
-        var formatString = '{{ shop.money_format }}' || this.money_format;
+          if (typeof cents == 'string') {
+            cents = cents.replace('.', '');
+          }
+          var value = '';
+          var placeholderRegex = /\{\{\s*(\w+)\s*\}\}/;
+          var formatString = '{{ shop.money_format }}' || this.money_format;
 
-        function defaultOption(opt, def) {
-          return typeof opt == 'undefined' ? def : opt;
-        }
-
-        function formatWithDelimiters(number, precision, thousands, decimal) {
-          precision = defaultOption(precision, 2);
-          thousands = defaultOption(thousands, ',');
-          decimal = defaultOption(decimal, '.');
-
-          if (isNaN(number) || number == null) {
-            return 0;
+          function defaultOption(opt, def) {
+            return typeof opt == 'undefined' ? def : opt;
           }
 
-          number = (number / 100.0).toFixed(precision);
+          function formatWithDelimiters(number, precision, thousands, decimal) {
+            precision = defaultOption(precision, 2);
+            thousands = defaultOption(thousands, ',');
+            decimal = defaultOption(decimal, '.');
 
-          var parts = number.split('.'),
-            dollars = parts[0].replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1' + thousands),
-            cents = parts[1] ? decimal + parts[1] : '';
+            if (isNaN(number) || number == null) {
+              return 0;
+            }
 
-          return dollars + cents;
+            number = (number / 100.0).toFixed(precision);
+
+            var parts = number.split('.'),
+              dollars = parts[0].replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1' + thousands),
+              cents = parts[1] ? decimal + parts[1] : '';
+
+            return dollars + cents;
+          }
+
+          switch (formatString.match(placeholderRegex)[1]) {
+            case 'amount':
+              value = formatWithDelimiters(cents, 2);
+              break;
+            case 'amount_no_decimals':
+              value = formatWithDelimiters(cents, 0);
+              break;
+            case 'amount_with_comma_separator':
+              value = formatWithDelimiters(cents, 2, '.', ',');
+              break;
+            case 'amount_no_decimals_with_comma_separator':
+              value = formatWithDelimiters(cents, 0, '.', ',');
+              break;
+          }
+          return formatString.replace(placeholderRegex, value);
         }
-
-        switch (formatString.match(placeholderRegex)[1]) {
-          case 'amount':
-            value = formatWithDelimiters(cents, 2);
-            break;
-          case 'amount_no_decimals':
-            value = formatWithDelimiters(cents, 0);
-            break;
-          case 'amount_with_comma_separator':
-            value = formatWithDelimiters(cents, 2, '.', ',');
-            break;
-          case 'amount_no_decimals_with_comma_separator':
-            value = formatWithDelimiters(cents, 0, '.', ',');
-            break;
-        }
-        return formatString.replace(placeholderRegex, value);
-      }
     </script>
-    <script src="{{ 'functions.js' | asset_url }}" defer></script>
-    <script src="{{ 'components.js' | asset_url }}" defer></script>
+
+    <script src="{{ 'global-scripts.js' | asset_url }}" defer></script>
 
     {%- render 'social-meta-tags' -%}
 
     {% style %}
       {{ settings.font_type | font_face: font_display: 'swap' }}
-      /* --text-font-weight: {{ settings.font_type.weight | default: '700'  }}; */
+      /* --text-font-weight: {{ settings.font_type.weight | default: '700' }}; */
 
       {%- if settings.header_layout == "header_first" -%}
           #shopify-section-announcement-bar {
@@ -113,15 +121,19 @@
     <div class="theme-overlay hidden"></div>
     <div class="header-section {% if settings.header_full_width == false %}boxed{% endif %} {% if settings.header_sticky == true %}sticky{% endif %}">
       <div class="header-container">
-        {% section 'header' %}
-        {% section 'announcement-bar' %}
+        {% liquid
+          section 'header'
+          section 'announcement-bar'
+        %}
       </div>
     </div>
-    {% section 'search-drawer' %}
-    {% section 'cart-drawer' %}
-    {% section 'newsletter-popup' %}
-    {% section 'quick-view' %}
-    {{ content_for_layout }}
-    {% section 'footer' %}
+    {% liquid
+      section 'search-drawer'
+      section 'cart-drawer'
+      section 'newsletter-popup'
+      section 'quick-view'
+      echo content_for_layout
+      section 'footer'
+    %}
   </body>
 </html>

@@ -1,0 +1,125 @@
+{{ 'product-page-tabs.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'product-page-tabs.js' | asset_url }}" defer></script>
+
+{% for block in section.blocks %}
+  {% case block.type %}
+    {% when 'product_description_tab' %}
+      <div class="product-page__tabs">
+        <product-page-tabs data-set-initial-state="expanded" class="product-page__tabs">
+          <div class="product-page__tab">
+            <div class="product-page__tab-title">
+              <h6 class="product-page__tab-title-text">Product description</h6>
+              <div class="product-page__tab-title-svg">
+                <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M7 10.5L12 15.5L17 10.5" stroke="white" stroke-width="1.5"/>
+                </svg>
+              </div>
+            </div>
+            <div class="product-page__tab-content">
+              <p>{{ product.description }}</p>
+            </div>
+          </div>
+        </product-page-tabs>
+      </div>
+    {% when 'tab' %}
+      <div class="product-page__tabs">
+        <product-page-tabs data-set-initial-state="expanded" class="product-page__tabs">
+          <div class="product-page__tab">
+            <div class="product-page__tab-title">
+              <h6 class="product-page__tab-title-text">{{ block.settings.tab_title }}</h6>
+              <div class="product-page__tab-title-svg">
+                <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M7 10.5L12 15.5L17 10.5" stroke="white" stroke-width="1.5"/>
+                </svg>
+              </div>
+            </div>
+            <div class="product-page__tab-content">
+              <p>{{ block.settings.tab_content }}</p>
+            </div>
+          </div>
+        </product-page-tabs>
+      </div>
+    {% when 'share_buttons' %}
+      <div class="product-page__share-buttons">
+        {%- assign share_url = shop.url | append: product.url -%}
+        {%- assign twitter_text = product.title | url_param_escape | strip -%}
+        {%- assign pinterest_description = product.description | strip | truncatewords: 15 | url_param_escape -%}
+        {%- assign pinterest_image = product.featured_image | img_url: '800x' | prepend: 'https:' -%}
+
+        <p>Share</p>
+        <a
+          href="https://www.facebook.com/sharer.php?u={{ share_url }}"
+          target="_blank"
+        >
+          <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M18.1019 7.19249H16.0785C15.3041 7.19249 14.6421 7.46792 14.0925 8.01878C13.5679 8.56964 13.3056 9.23318 13.3056 10.0094V12H11.6944V14.4038H13.3056V20H15.7037V14.4038H18.1019V12H15.7037V10.385C15.7037 10.1847 15.7787 10.0094 15.9286 9.85915C16.0785 9.68388 16.2658 9.59624 16.4906 9.59624H18.1019V7.19249ZM4.5 5C4.5 4.44772 4.94772 4 5.5 4H19.5C20.0523 4 20.5 4.44772 20.5 5V19C20.5 19.5523 20.0523 20 19.5 20H5.5C4.94772 20 4.5 19.5523 4.5 19V5Z" fill="white"/>
+          </svg>
+        </a>
+
+        <a
+          href="https://pinterest.com/pin/create/button/?url={{ share_url }}{% if pinterest_image != blank %}&media={{ pinterest_image }}{% endif %}&description={{ pinterest_description }}"
+          target="_blank"
+        >
+          <svg width="26" height="24" viewBox="0 0 26 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M16.9437 5.63961C15.8927 4.58232 14.4383 4 12.8484 4C10.4197 4 8.926 5.04329 8.10059 5.91845C7.08331 6.99699 6.5 8.4291 6.5 9.84761C6.5 11.6287 7.21088 12.9957 8.40132 13.5042C8.48124 13.5385 8.56166 13.5558 8.64051 13.5558C8.89165 13.5558 9.09064 13.3836 9.15958 13.1074C9.19978 12.9489 9.29288 12.5579 9.33337 12.3882C9.42003 12.0531 9.35001 11.8918 9.16101 11.6584C8.81671 11.2315 8.65637 10.7266 8.65637 10.0696C8.65637 8.118 10.0431 6.04386 12.6132 6.04386C14.6524 6.04386 15.9192 7.25849 15.9192 9.2137C15.9192 10.4475 15.6656 11.5902 15.205 12.4313C14.8849 13.0157 14.322 13.7124 13.458 13.7124C13.0843 13.7124 12.7487 13.5515 12.5369 13.2711C12.3368 13.006 12.2708 12.6635 12.3513 12.3066C12.4422 11.9034 12.5662 11.4827 12.6862 11.0761C12.9049 10.3334 13.1118 9.63195 13.1118 9.07229C13.1118 8.11503 12.5502 7.47181 11.7145 7.47181C10.6524 7.47181 9.82036 8.60225 9.82036 10.0454C9.82036 10.7531 9.99985 11.2825 10.0811 11.4858C9.94731 12.0798 9.15213 15.6117 9.0013 16.2777C8.91408 16.6665 8.38871 19.7373 9.25829 19.9822C10.2353 20.2572 11.1086 17.2665 11.1975 16.9286C11.2696 16.6538 11.5217 15.6145 11.6761 14.9756C12.1478 15.4517 12.9072 15.7736 13.6461 15.7736C15.0392 15.7736 16.292 15.1166 17.1738 13.9239C18.029 12.767 18.5 11.1546 18.5 9.38382C18.4999 7.9995 17.9326 6.63474 16.9437 5.63961Z" fill="white"/>
+          </svg>
+        </a>
+
+        <a
+          href="https://twitter.com/share?{% if twitter_text != blank %}text={{ twitter_text }}&{% endif %}url={{ share_url }}"
+          target="_blank"
+        >
+          <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M18.8513 9.74006C18.8513 9.88994 18.8513 10.0273 18.8513 10.1522C18.8513 11.2764 18.639 12.388 18.2143 13.4871C17.8146 14.5613 17.2276 15.548 16.4532 16.4473C15.7037 17.3466 14.717 18.0835 13.493 18.6581C12.2939 19.2077 10.9699 19.4824 9.52108 19.4824C7.6975 19.4824 6.02381 18.9953 4.5 18.0211C4.7498 18.0461 5.0121 18.0586 5.28689 18.0586C6.81069 18.0586 8.17213 17.5964 9.37119 16.6721C8.64676 16.6472 7.99727 16.4223 7.42272 15.9977C6.87315 15.573 6.49844 15.0359 6.29859 14.3864C6.49844 14.4364 6.69828 14.4614 6.89813 14.4614C7.19789 14.4614 7.48517 14.4114 7.75995 14.3115C7.01054 14.1616 6.38603 13.7869 5.88642 13.1874C5.38681 12.5878 5.137 11.9009 5.137 11.1265C5.137 11.1015 5.137 11.089 5.137 11.089C5.61163 11.3388 6.11124 11.4762 6.63583 11.5012C5.66159 10.8267 5.17447 9.91492 5.17447 8.76582C5.17447 8.16629 5.32436 7.61672 5.62412 7.11711C6.44848 8.11633 7.43521 8.9157 8.58431 9.51524C9.75839 10.1148 11.0199 10.452 12.3689 10.5269C12.3189 10.2771 12.2939 10.0273 12.2939 9.77753C12.2939 8.87823 12.6062 8.11633 13.2307 7.49182C13.8802 6.84232 14.6546 6.51758 15.5539 6.51758C16.5031 6.51758 17.3025 6.85481 17.952 7.52929C18.7014 7.3794 19.4009 7.11711 20.0504 6.7424C19.8005 7.5168 19.3134 8.11633 18.589 8.541C19.2635 8.46606 19.9005 8.30368 20.5 8.05388C20.0504 8.70337 19.5008 9.26543 18.8513 9.74006Z" fill="white"/>
+          </svg>
+        </a>
+
+        <a href="mailto:?&subject={{ product.title | escape }}&body={{ share_url }}">
+          <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g clip-path="url(#clip0_254_8150)">
+            <path d="M18.8098 6.4566H5.19023C4.75347 6.4566 4.39941 6.86139 4.39941 7.36071V16.6393C4.39941 17.1386 4.75347 17.5434 5.19023 17.5434H18.8098C19.2466 17.5434 19.6006 17.1386 19.6006 16.6393V7.36071C19.6006 6.86139 19.2466 6.4566 18.8098 6.4566Z" stroke="white" stroke-miterlimit="10"/>
+            <path d="M4.48727 6.52057L12.004 14.1644L19.6485 6.52057" stroke="white" stroke-miterlimit="10"/>
+            <path d="M4.48727 17.1872L9.77534 11.8995" stroke="white" stroke-miterlimit="10"/>
+            <path d="M14.3525 11.8082L19.6485 17.3333" stroke="white" stroke-miterlimit="10"/>
+            </g>
+            <defs>
+            <clipPath id="clip0_254_8150">
+            <rect width="16" height="12" fill="white" transform="translate(4 6)"/>
+            </clipPath>
+            </defs>
+          </svg>
+        </a>
+      </div>
+  {% endcase %}
+{% endfor %}
+
+{% schema %}
+{
+  "name": "Product tabs",
+  "class": "section-product-page-tabs",
+  "settings": [],
+  "blocks": [
+    { "type": "product_description_tab", "limit": 1, "name": "Product description", "limit": 1, "settings": [] },
+    {
+      "type": "tab",
+      "name": "Tab",
+      "settings": [
+        {
+          "type": "text",
+          "id": "tab_title",
+          "label": "Tab title",
+          "default": "Tab title"
+        },
+        {
+          "type": "richtext",
+          "id": "tab_content",
+          "label": "Tab content",
+          "default": "<p>Tab content to be inserted here</p>"
+        }
+      ]
+    },
+    { "type": "share_buttons", "limit": 1, "name": "Share buttons", "limit": 1, "settings": [] }
+  ],
+  "presets": []
+}
+{% endschema %}
