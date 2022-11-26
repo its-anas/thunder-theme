@@ -455,12 +455,6 @@ class PredictiveSearch extends HTMLElement {
 				window.location.href = "/search?q=" + this.input.value;
 			});
 		}
-
-		this.searchDrawer = this.querySelector(".search-drawer");
-		this.closeIcon = this.searchDrawer.querySelector(".search-section__close");
-		this.inputField = this.searchDrawer.querySelector(".search-section__input");
-
-		this.decideDrawerAction();
 	}
 
 	onChange() {
@@ -510,6 +504,21 @@ class PredictiveSearch extends HTMLElement {
 			t = setTimeout(() => fn.apply(this, args), wait);
 		};
 	}
+}
+
+customElements.define("predictive-search", PredictiveSearch);
+
+// ANCHOR: Search drawer
+class SearchDrawer extends PredictiveSearch {
+	constructor() {
+		super();
+
+		this.searchDrawer = this.querySelector(".search-drawer");
+		this.closeIcon = this.searchDrawer.querySelector(".search-section__close");
+		this.inputField = this.searchDrawer.querySelector(".search-section__input");
+
+		this.decideDrawerAction();
+	}
 
 	showSearchDrawer() {
 		this.searchDrawer.classList.remove("hidden");
@@ -557,13 +566,17 @@ class PredictiveSearch extends HTMLElement {
 			this.resetSearch();
 		});
 
-		this.inputField.addEventListener("input", (event) => {
-			if (event.target.value.length > 0) {
-				this.searchDrawer.querySelector(".preload").classList.add("hidden");
-			} else {
-				this.searchDrawer.querySelector(".preload").classList.remove("hidden");
-			}
-		});
+		if (this.inputField) {
+			this.inputField.addEventListener("input", (event) => {
+				if (this.searchDrawer.querySelector(".preload")) {
+					if (event.target.value.length > 0) {
+						this.searchDrawer.querySelector(".preload").classList.add("hidden");
+					} else {
+						this.searchDrawer.querySelector(".preload").classList.remove("hidden");
+					}
+				}
+			});
+		}
 
 		if (Shopify.designMode) {
 			document.addEventListener("shopify:section:load", (event) => {
@@ -595,7 +608,7 @@ class PredictiveSearch extends HTMLElement {
 	}
 }
 
-customElements.define("predictive-search", PredictiveSearch);
+customElements.define("search-drawer", SearchDrawer);
 
 // ANCHOR: Dynamic buy now button
 // document.querySelector(".dynamic-buy-button").addEventListener("click", () => {

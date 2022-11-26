@@ -1,5 +1,5 @@
 {{ 'search-drawer.css' | asset_url | stylesheet_tag }}
- 
+
 {% style %}
   .search-drawer__container {
     background-color: {{ section.settings.background_color }};
@@ -7,90 +7,92 @@
     border-radius: {{ section.settings.border_radius }}px;
   }
 {% endstyle %}
-<predictive-search>
-  <div class="search-drawer hidden">
-    <div class="search-drawer__container">
-      <div class="search-section__container">
-        <form action="{{ routes.search_url }}" method="get" class="search-section__form">
-          <input type="hidden" name="contact[tags]" value="newsletter">
-          <input
-            id="Search"
-            class="search-section__input"
-            type="search"
-            name="q"
-            value="{{ search.terms | escape }}"
-            placeholder="Search..."
+<search-drawer>
+  <predictive-search>
+    <div class="search-drawer hidden">
+      <div class="search-drawer__container">
+        <div class="search-section__container">
+          <form action="{{ routes.search_url }}" method="get" class="search-section__form">
+            <input type="hidden" name="contact[tags]" value="newsletter">
+            <input
+              id="Search"
+              class="search-section__input"
+              type="search"
+              name="q"
+              value="{{ search.terms | escape }}"
+              placeholder="Search..."
+              {%- if settings.predictive_search_enabled -%}
+                autocorrect="off"
+                autocomplete="off"
+                autocapitalize="off"
+                spellcheck="false"
+              {%- endif -%}
+            >
             {%- if settings.predictive_search_enabled -%}
-              autocorrect="off"
-              autocomplete="off"
-              autocapitalize="off"
-              spellcheck="false"
+              <div class="search-section__results" id="predictive-search" tabindex="-1"></div>
             {%- endif -%}
-          >
-          {%- if settings.predictive_search_enabled -%}
-            <div class="search-section__results" id="predictive-search" tabindex="-1"></div>
-          {%- endif -%}
-          <div class="search-section__close">
-            {% render 'icons', icon: 'close' %}
-          </div>
-        </form>
-      </div>
-      {% if section.blocks.size > 0 %}
-        <div class="preload">
-          {% for block in section.blocks %}
-            {% case block.type %}
-              {% when 'products' %}
-                <div class="group" {{ block.shopify_attributes }}>
-                  {% if block.settings.product_1 != blank
-                    or block.settings.product_2 != blank
-                    or block.settings.product_3 != blank
-                  %}
-                    <h6>{{ block.settings.group_name }}</h6>
-                    {% if block.settings.product_1 != blank -%}
-                      <a href="{{ block.settings.product_1.url }}">{{ block.settings.product_1 }}</a>
-                    {%- endif %}
-                    {% if block.settings.product_2 != blank -%}
-                      <a href="{{ block.settings.product_2.url }}">{{ block.settings.product_2 }}</a>
-                    {%- endif %}
-                    {% if block.settings.product_3 != blank -%}
-                      <a href="{{ block.settings.product_3.url }}">{{ block.settings.product_3 }}</a>
-                    {%- endif %}
-                  {% endif %}
-                </div>
-              {% when 'collections' %}
-                <div class="group" {{ block.shopify_attributes }}>
-                  {% if block.settings.collection_1 != blank
-                    or block.settings.collection_2 != blank
-                    or block.settings.collection_3 != blank
-                  %}
-                    <h6>{{ block.settings.group_name }}</h6>
-                    {% if block.settings.collection_1 != blank -%}
-                      <a href="{{ block.settings.collection_1.url }}">{{ block.settings.collection_1 }}</a>
-                    {%- endif %}
-                    {% if block.settings.collection_2 != blank -%}
-                      <a href="{{ block.settings.collection_1.url }}">{{ block.settings.collection_2 }}</a>
-                    {%- endif %}
-                    {% if block.settings.collection_3 != blank -%}
-                      <a href="{{ block.settings.collection_1.url }}">{{ block.settings.collection_3 }}</a>
-                    {%- endif %}
-                  {% endif %}
-                </div>
-              {% when 'menu' %}
-                {% if block.settings.menu.links.size > 0 %}
-                  <div class="group" {{ block.shopify_attributes }}>
-                    <h6>{{ block.settings.group_name }}</h6>
-                    {% for item in block.settings.menu.links %}
-                      <a href="{{ item.url }}">{{ item.title }}</a>
-                    {% endfor %}
-                  </div>
-                {% endif %}
-            {% endcase %}
-          {% endfor %}
+            <div class="search-section__close">
+              {% render 'icons', icon: 'close' %}
+            </div>
+          </form>
         </div>
-      {% endif %}
+        {% if section.blocks.size > 0 %}
+          <div class="preload">
+            {% for block in section.blocks %}
+              {% case block.type %}
+                {% when 'products' %}
+                  <div class="group" {{ block.shopify_attributes }}>
+                    {% if block.settings.product_1 != blank
+                      or block.settings.product_2 != blank
+                      or block.settings.product_3 != blank
+                    %}
+                      <h6>{{ block.settings.group_name }}</h6>
+                      {% if block.settings.product_1 != blank -%}
+                        <a href="{{ block.settings.product_1.url }}">{{ block.settings.product_1 }}</a>
+                      {%- endif %}
+                      {% if block.settings.product_2 != blank -%}
+                        <a href="{{ block.settings.product_2.url }}">{{ block.settings.product_2 }}</a>
+                      {%- endif %}
+                      {% if block.settings.product_3 != blank -%}
+                        <a href="{{ block.settings.product_3.url }}">{{ block.settings.product_3 }}</a>
+                      {%- endif %}
+                    {% endif %}
+                  </div>
+                {% when 'collections' %}
+                  <div class="group" {{ block.shopify_attributes }}>
+                    {% if block.settings.collection_1 != blank
+                      or block.settings.collection_2 != blank
+                      or block.settings.collection_3 != blank
+                    %}
+                      <h6>{{ block.settings.group_name }}</h6>
+                      {% if block.settings.collection_1 != blank -%}
+                        <a href="{{ block.settings.collection_1.url }}">{{ block.settings.collection_1 }}</a>
+                      {%- endif %}
+                      {% if block.settings.collection_2 != blank -%}
+                        <a href="{{ block.settings.collection_1.url }}">{{ block.settings.collection_2 }}</a>
+                      {%- endif %}
+                      {% if block.settings.collection_3 != blank -%}
+                        <a href="{{ block.settings.collection_1.url }}">{{ block.settings.collection_3 }}</a>
+                      {%- endif %}
+                    {% endif %}
+                  </div>
+                {% when 'menu' %}
+                  {% if block.settings.menu.links.size > 0 %}
+                    <div class="group" {{ block.shopify_attributes }}>
+                      <h6>{{ block.settings.group_name }}</h6>
+                      {% for item in block.settings.menu.links %}
+                        <a href="{{ item.url }}">{{ item.title }}</a>
+                      {% endfor %}
+                    </div>
+                  {% endif %}
+              {% endcase %}
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
     </div>
-  </div>
-</predictive-search>
+  </predictive-search>
+</search-drawer>
 
 {% schema %}
 {
