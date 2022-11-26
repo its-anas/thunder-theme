@@ -1,0 +1,66 @@
+.countdown-timer {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+	&__text {
+		text-align: center;
+	}
+
+	&__timers {
+		display: none;
+		gap: 0.5rem;
+
+		&.shown {
+			display: flex;
+		}
+	}
+
+	&__container {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		padding: 0.3rem 0.6rem;
+
+		p {
+			font-weight: bold;
+		}
+		&:has(.digits--small) {
+			min-width: 2.5rem;
+		}
+
+		&:has(.digits--big) {
+			min-width: 4rem;
+		}
+
+		.digits--small {
+			font-size: 1.4rem;
+		}
+
+		.digits--big {
+			font-size: 2rem;
+		}
+
+		.label {
+			font-size: 0.7rem;
+		}
+	}
+
+	&__message {
+		animation: 5s fadeIn;
+		&.hidden {
+			display: none;
+		}
+	}
+}
+
+@keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}

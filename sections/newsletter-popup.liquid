@@ -1,3 +1,5 @@
+{{ 'newsletter-popup.css' | asset_url | stylesheet_tag }}
+
 {%- style -%}
   {% if section.settings.show_image == true and section.settings.image != blank %}
     @media screen and (max-width: 1025px) {

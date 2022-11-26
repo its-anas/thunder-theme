@@ -1,3 +1,5 @@
+{{ 'testimonials.css' | asset_url | stylesheet_tag }}
+
 {%- style -%}
   .{{ section.id }}.testimonials {
     margin-top: {{ section.settings.space_outside | divided_by: 2 }}px;

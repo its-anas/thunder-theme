@@ -1,3 +1,5 @@
+{{ 'header.css' | asset_url | stylesheet_tag }}
+
 {% style %}
   .header-section.boxed .header-container .section-header .header .header__content, .menu-mobile__container, .menu__dropdown-content {
     border-radius: {{ section.settings.border_radius }}px;

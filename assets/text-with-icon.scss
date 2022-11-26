@@ -1,0 +1,58 @@
+.text-with-icon {
+	height: auto;
+	display: flex;
+	justify-content: center;
+	padding: 2rem 0;
+	@media screen and (max-width: 750px) {
+		padding: 4rem 0;
+	}
+
+	&__container {
+		width: 90%;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		@media screen and (max-width: 750px) {
+			gap: 4rem;
+		}
+		@media screen and (min-width: 751px) {
+			flex-direction: row;
+		}
+		@media screen and (min-width: 1025px) {
+		}
+	}
+	&__column {
+		display: flex;
+		justify-content: center;
+		align-items: flex-start;
+		height: 100%;
+		width: 100%;
+		@media screen and (min-width: 751px) {
+		}
+		@media screen and (min-width: 1025px) {
+			width: 25%;
+		}
+	}
+	&__content-box {
+		max-width: 100%;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		width: 90%;
+
+		.icon {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			> * {
+				width: 90%;
+				height: 90%;
+			}
+		}
+		.text {
+			text-align: center;
+		}
+	}
+}

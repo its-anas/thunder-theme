@@ -1,0 +1,84 @@
+.faq {
+	height: auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+
+	&__container {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		height: auto;
+		gap: 1rem;
+		width: 100%;
+
+		@media screen and (min-width: 1025px) {
+			flex-direction: row;
+		}
+	}
+
+	&__content {
+		width: 90%;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+
+		@media screen and (min-width: 751px) and (max-width: 1024px) {
+			width: 80%;
+		}
+		@media screen and (min-width: 1025px) {
+			width: 100%;
+		}
+	}
+
+	&__tab {
+		cursor: pointer;
+		width: 100%;
+		&:hover {
+			border: 2px #fff solid;
+			@media screen and (min-width: 751px) {
+				transform: scale(1.02);
+			}
+		}
+	}
+
+	&__question {
+		height: 2.5rem;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+
+		&-text {
+			padding-left: 0.5rem;
+		}
+		&-svg {
+			transition: all 0.2s ease-in-out;
+			transform: rotate(360deg);
+		}
+	}
+
+	&__answer {
+		overflow: hidden;
+		height: 0;
+		padding-top: 0;
+		padding-bottom: 0;
+		padding-left: 1rem;
+		padding-right: 1rem;
+		transition: all 0.2s ease-in-out;
+	}
+}
+
+.faq__tab.active {
+	.faq__answer {
+		// These padding values shouldn't exceed 20px.
+		// if you want to increase that make sure it's increased in the function faqSections too.
+		padding-top: 10px;
+		padding-bottom: 10px;
+	}
+	.faq__question-svg {
+		transform: rotate(180deg);
+	}
+}

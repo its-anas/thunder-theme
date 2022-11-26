@@ -1,3 +1,5 @@
+{{ 'gallery.css' | asset_url | stylesheet_tag }}
+
 {%- style -%}
   .{{ section.id }}.gallery__image {
     height: {{ section.settings.mobile_image_height }}px;

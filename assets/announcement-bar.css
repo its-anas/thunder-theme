@@ -1,0 +1,83 @@
+.announcement {
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: auto;
+  min-height: 45px;
+}
+@media screen and (max-width: 750px) {
+  .announcement {
+    height: auto;
+    min-height: 40px;
+  }
+}
+.announcement__container {
+  height: 100%;
+  display: flex;
+  transition: all 1s ease;
+}
+.announcement__slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding-right: 2rem;
+  padding-left: 2rem;
+  gap: 0.5rem;
+}
+@media screen and (max-width: 750px) {
+  .announcement__slide {
+    padding-right: 1rem;
+    padding-left: 1rem;
+  }
+}
+.announcement__slide .coupon {
+  padding: 0 0.2rem;
+  border: 1px dashed;
+  border-radius: 5px;
+  font-size: 0.8rem;
+}
+.announcement__content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 0.5rem;
+  text-align: center;
+}
+@media screen and (max-width: 750px) {
+  .announcement__content {
+    font-size: 0.8rem;
+    gap: 0.2rem;
+    flex-direction: column;
+    padding-top: 0.3rem;
+    padding-bottom: 0.3rem;
+  }
+}
+.announcement .chevrons .prev {
+  left: 0.1rem;
+}
+@media screen and (min-width: 751px) {
+  .announcement .chevrons .prev {
+    left: 0.5rem;
+  }
+}
+.announcement .chevrons .next {
+  right: 0.1rem;
+}
+@media screen and (min-width: 751px) {
+  .announcement .chevrons .next {
+    right: 0.5rem;
+  }
+}
+.announcement .chevrons .prev,
+.announcement .chevrons .next {
+  display: inline-block;
+  height: 25px;
+  width: 25px;
+  cursor: pointer;
+  position: absolute;
+  top: calc(50% - 12.5px);
+}

@@ -1,0 +1,65 @@
+.promotional-banner {
+  height: auto;
+  position: relative;
+  display: flex;
+  --gap: 2.5rem;
+  gap: var(--gap);
+  align-items: center;
+  overflow: hidden;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  width: 100%;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+.promotional-banner__content--style-1 {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: space-around;
+  gap: var(--gap);
+  min-width: 100%;
+}
+.promotional-banner__content--style-1 > * {
+  flex: 0 0 auto;
+  color: white;
+  text-align: center;
+}
+.promotional-banner__content--style-2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-width: 100%;
+  padding: 0 1rem;
+  gap: 0.8rem;
+}
+@media screen and (min-width: 751px) {
+  .promotional-banner__content--style-2 {
+    flex-direction: row;
+    gap: var(--gap);
+    padding: 0 10rem;
+  }
+}
+.promotional-banner__content--style-2 p {
+  text-align: center;
+}
+
+@-webkit-keyframes banner-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-100% - var(--gap)));
+  }
+}
+
+@keyframes banner-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-100% - var(--gap)));
+  }
+}

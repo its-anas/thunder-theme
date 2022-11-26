@@ -1,3 +1,5 @@
+{{ 'text-with-icon.css' | asset_url | stylesheet_tag }}
+
 {%- style -%}
    .{{ section.id }}.text-with-icon {
      background-color: {{ section.settings.background_color }};

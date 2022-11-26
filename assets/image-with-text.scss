@@ -1,0 +1,60 @@
+// SECTION: Image with text
+.image-with-text {
+	display: flex;
+	align-items: center;
+	overflow: hidden;
+
+	&--first {
+		flex-direction: column;
+	}
+
+	&--second {
+		flex-direction: column-reverse;
+	}
+
+	@media screen and (min-width: 751px) {
+		height: auto;
+
+		&--first {
+			flex-direction: row;
+		}
+
+		&--second {
+			flex-direction: row-reverse;
+		}
+	}
+
+	&__image {
+		height: 50%;
+		width: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		@media screen and (min-width: 751px) {
+			height: 100%;
+			width: 50%;
+		}
+
+		&--fit {
+			height: 100%;
+			width: 100%;
+		}
+
+		&--full {
+			height: 80%;
+			width: auto;
+			max-width: 80%;
+		}
+	}
+
+	&__content {
+		height: 50%;
+		width: 100%;
+
+		@media screen and (min-width: 751px) {
+			height: 100%;
+			width: 50%;
+		}
+	}
+}
