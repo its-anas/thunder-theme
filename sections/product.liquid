@@ -611,48 +611,60 @@
   </div>
 </product-page>
 
+
 <script defer>
-  function updateRecentlyViewedProductsCookie() {
+    updateRecentlyViewedProductsCookie("{{ product.id }}", "{{ product.title }}", "{{ product.url }}", "{{ product.featured_image | image_url }}", "{{ product.featured_image.alt }}", "{{ product.featured_image.width }}", "{{ product.featured_image.height }}", "{{ product.price | money }}", "{{ product.compare_at_price | money }}", "{{ product.compare_at_price | minus: product.price }}", "{{ product.compare_at_price | minus: product.price | money }}", "{{ 'now' | date: "%d" | minus: product.published_at | date: "%d" }}", "{{ product.variants.first.id }}", "{{ product.handle }}", "{{ product.variants.size }}");
+    function updateRecentlyViewedProductsCookie(productId, productTitle, productUrl, productImage, productImageAlt, productImageWidth, productImageHeight, productPrice, productCompareAtPrice, productPriceDifference, productPriceDifferenceWithCurrency, productDateDifference, productVariantFirstId, productHandle, productVariantsSize) {
       let recentlyViewedProducts = [];
 
-      let recentlyViewedProductsCookie = document.cookie.indexOf('recentlyViewedProducts=') !== -1  ? JSON.parse(document.cookie.split("; ").find((row) => row.startsWith("recentlyViewedProducts")).split('=').slice(1).join('=')) : [];
-       let expiry = new Date(400 * 24 * 60 * 60 * 1000 + Date.parse(new Date()));
+      let recentlyViewedProductsCookie =
+        document.cookie.indexOf("recentlyViewedProducts=") !== -1
+          ? JSON.parse(
+              document.cookie
+                .split("; ")
+                .find((row) => row.startsWith("recentlyViewedProducts"))
+                .split("=")
+                .slice(1)
+                .join("=")
+            )
+          : [];
+      let expiry = new Date(400 * 24 * 60 * 60 * 1000 + Date.parse(new Date()));
 
       let productData = {
-          id: "{{ product.id }}",
-          title: "{{ product.title }}",
-          url: "{{ product.url }}",
-          image: "{{ product.featured_image | image_url }}",
-          image_alt: "{{ product.featured_image.alt }}",
-          image_width: "{{ product.featured_image.width }}",
-          image_height: "{{ product.featured_image.height }}",
-          price: "{{ product.price | money }}",
-          compare_at_price: "{{ product.compare_at_price | money }}",
-          price_difference: "{{ product.compare_at_price | minus: product.price }}",
-          price_difference_with_currency: "{{ product.compare_at_price | minus: product.price | money }}",
-          date_difference: "{{ 'now' | date: "%d" | minus: product.published_at | date: "%d" }}",
-          variant_first_id: "{{ product.variants.first.id }}",
-          handle: "{{ product.handle }}",
-          variants_size: "{{ product.variants.size }}"
+        id: productId,
+        title: productTitle,
+        url: productUrl,
+        image: productImage,
+        image_alt: productImageAlt,
+        image_width: productImageWidth,
+        image_height: productImageHeight,
+        price: productPrice,
+        compare_at_price: productCompareAtPrice,
+        price_difference: productPriceDifference,
+        price_difference_with_currency: productPriceDifferenceWithCurrency,
+        date_difference: productDateDifference,
+        variant_first_id: productVariantFirstId,
+        handle: productHandle,
+        variants_size: productVariantsSize,
       };
 
       for (product = 0; product < recentlyViewedProductsCookie.length; product++) {
-          if (recentlyViewedProductsCookie[product].id === productData.id) {
-              recentlyViewedProductsCookie.splice(product, 1);
-          }
+        if (recentlyViewedProductsCookie[product].id === productData.id) {
+          recentlyViewedProductsCookie.splice(product, 1);
+        }
       }
 
       recentlyViewedProductsCookie.push(productData);
       let newList = JSON.stringify(recentlyViewedProductsCookie);
 
       document.cookie = "recentlyViewedProducts" + "=" + newList + "; expires=" + expiry + "; path=/; domain=." + window.location.hostname;
-  }
-  updateRecentlyViewedProductsCookie();
+    }
 </script>
 
 {{ 'option_selection.js' | shopify_asset_url | script_tag }}
 
 <script>
+
   let variantsInventory = {};
   {% for variant in product.variants %}
   variantsInventory["{{ variant.title }}"] = {{ variant.inventory_quantity }};
@@ -897,6 +909,7 @@
   }
 
   customElements.define("product-page", ProductPage);
+  
 </script>
 
 {% schema %}

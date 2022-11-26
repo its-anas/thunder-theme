@@ -1755,3 +1755,5 @@ class QuickViewButton extends QuickView {
 }
 
 customElements.define("quick-view-button", QuickViewButton);
+
+// ANCHOR: Product page recently viewed function
