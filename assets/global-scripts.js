@@ -1309,7 +1309,6 @@ class QuickView extends HTMLElement {
 					window.quickViewVariants = data.product.variants;
 					let productVendor = data.product.vendor;
 					let productTitle = data.product.title;
-					let productFeaturedImage = data.product.image;
 					let productPrice = data.product.price;
 					let productUrl = `/products/${data.product.handle}`;
 					let productOptions = {};
@@ -1558,7 +1557,6 @@ class QuickView extends HTMLElement {
 							});
 						}
 					});
-					``;
 				});
 		}
 	}
@@ -1566,91 +1564,11 @@ class QuickView extends HTMLElement {
 	setVariant() {
 		let productVariants = window.quickViewVariants;
 		let variantsNames = [];
-		let selectedVariant = {};
+
 		let quantity;
 		let quickViewSelectors = document.querySelectorAll(".quick-view__radios-container");
 
-		if (quickViewSelectors.length === 1) {
-			let variantValue;
-			if (quickViewSelectors[0].dataset.selectorType === "block") {
-				variantValue = quickViewSelectors[0].querySelector("input:checked").value;
-			} else if (quickViewSelectors[0].dataset.selectorType === "dropdown") {
-				variantValue = quickViewSelectors[0].querySelector("select").value;
-			} else if (quickViewSelectors[0].dataset.selectorType === "variant_image") {
-				variantValue = quickViewSelectors[0].querySelector("input:checked").value;
-			} else if (quickViewSelectors[0].dataset.selectorType === "color_swatch") {
-				variantValue = quickViewSelectors[0].querySelector("input:checked").value;
-			}
-
-			variantsNames = [`${variantValue}`];
-		} else if (quickViewSelectors.length === 2) {
-			let variantValue1;
-			let variantValue2;
-			if (quickViewSelectors[0].dataset.selectorType === "block") {
-				variantValue1 = quickViewSelectors[0].querySelector("input:checked").value;
-			} else if (quickViewSelectors[0].dataset.selectorType === "dropdown") {
-				variantValue1 = quickViewSelectors[0].querySelector("select").value;
-			} else if (quickViewSelectors[0].dataset.selectorType === "variant_image") {
-				variantValue1 = quickViewSelectors[0].querySelector("input:checked").value;
-			} else if (quickViewSelectors[0].dataset.selectorType === "color_swatch") {
-				variantValue1 = quickViewSelectors[0].querySelector("input:checked").value;
-			}
-
-			if (quickViewSelectors[1].dataset.selectorType === "block") {
-				variantValue2 = quickViewSelectors[1].querySelector("input:checked").value;
-			} else if (quickViewSelectors[1].dataset.selectorType === "dropdown") {
-				variantValue2 = quickViewSelectors[1].querySelector("select").value;
-			} else if (quickViewSelectors[1].dataset.selectorType === "variant_image") {
-				variantValue2 = quickViewSelectors[1].querySelector("input:checked").value;
-			} else if (quickViewSelectors[1].dataset.selectorType === "color_swatch") {
-				variantValue2 = quickViewSelectors[1].querySelector("input:checked").value;
-			}
-
-			variantsNames = [`${variantValue1} / ${variantValue2}`, `${variantValue2} / ${variantValue1}`];
-		} else if (quickViewSelectors.length === 3) {
-			let variantValue1;
-			let variantValue2;
-			let variantValue3;
-			if (quickViewSelectors[0].dataset.selectorType === "block") {
-				variantValue1 = quickViewSelectors[0].querySelector("input:checked").value;
-			} else if (quickViewSelectors[0].dataset.selectorType === "dropdown") {
-				variantValue1 = quickViewSelectors[0].querySelector("select").value;
-			} else if (quickViewSelectors[0].dataset.selectorType === "variant_image") {
-				variantValue1 = quickViewSelectors[0].querySelector("input:checked").value;
-			} else if (quickViewSelectors[0].dataset.selectorType === "color_swatch") {
-				variantValue1 = quickViewSelectors[0].querySelector("input:checked").value;
-			}
-
-			if (quickViewSelectors[1].dataset.selectorType === "block") {
-				variantValue2 = quickViewSelectors[1].querySelector("input:checked").value;
-			} else if (quickViewSelectors[1].dataset.selectorType === "dropdown") {
-				variantValue2 = quickViewSelectors[1].querySelector("select").value;
-			} else if (quickViewSelectors[1].dataset.selectorType === "variant_image") {
-				variantValue2 = quickViewSelectors[1].querySelector("input:checked").value;
-			} else if (quickViewSelectors[1].dataset.selectorType === "color_swatch") {
-				variantValue2 = quickViewSelectors[1].querySelector("input:checked").value;
-			}
-
-			if (quickViewSelectors[2].dataset.selectorType === "block") {
-				variantValue3 = quickViewSelectors[2].querySelector("input:checked").value;
-			} else if (quickViewSelectors[2].dataset.selectorType === "dropdown") {
-				variantValue3 = quickViewSelectors[2].querySelector("select").value;
-			} else if (quickViewSelectors[2].dataset.selectorType === "variant_image") {
-				variantValue3 = quickViewSelectors[2].querySelector("input:checked").value;
-			} else if (quickViewSelectors[2].dataset.selectorType === "color_swatch") {
-				variantValue3 = quickViewSelectors[2].querySelector("input:checked").value;
-			}
-
-			variantsNames = [`${variantValue1} / ${variantValue2} / ${variantValue3}`, `${variantValue1} / ${variantValue3} / ${variantValue2}`, `${variantValue2} / ${variantValue1} / ${variantValue3}`, `${variantValue2} / ${variantValue3} / ${variantValue1}`, `${variantValue3} / ${variantValue1} / ${variantValue2}`, `${variantValue3} / ${variantValue2} / ${variantValue1}`];
-		}
-
-		for (var key in productVariants) {
-			variantsNames.forEach((variantName) => {
-				if (productVariants[key].title === variantName) {
-					selectedVariant = productVariants[key];
-				}
-			});
-		}
+		let selectedVariant = matchVariant(quickViewSelectors, productVariants);
 
 		let selectedVariantPrice = selectedVariant.price;
 
@@ -1762,3 +1680,674 @@ class QuickViewButton extends QuickView {
 }
 
 customElements.define("quick-view-button", QuickViewButton);
+
+// Function to match variant with selected options
+function matchVariant(allSelectedVariants, allAvailableVariants) {
+	let variantsNames = [];
+	let matchedVariant;
+
+	if (allSelectedVariants.length === 1) {
+		let variantValue;
+		if (allSelectedVariants[0].dataset.selectorType === "block") {
+			variantValue = allSelectedVariants[0].querySelector("input:checked").value;
+		} else if (allSelectedVariants[0].dataset.selectorType === "dropdown") {
+			variantValue = allSelectedVariants[0].querySelector("select").value;
+		} else if (allSelectedVariants[0].dataset.selectorType === "variant_image") {
+			variantValue = allSelectedVariants[0].querySelector("input:checked").value;
+		} else if (allSelectedVariants[0].dataset.selectorType === "color_swatch") {
+			variantValue = allSelectedVariants[0].querySelector("input:checked").value;
+		}
+
+		variantsNames = [`${variantValue}`];
+	} else if (allSelectedVariants.length === 2) {
+		let variantValue1;
+		let variantValue2;
+		if (allSelectedVariants[0].dataset.selectorType === "block") {
+			variantValue1 = allSelectedVariants[0].querySelector("input:checked").value;
+		} else if (allSelectedVariants[0].dataset.selectorType === "dropdown") {
+			variantValue1 = allSelectedVariants[0].querySelector("select").value;
+		} else if (allSelectedVariants[0].dataset.selectorType === "variant_image") {
+			variantValue1 = allSelectedVariants[0].querySelector("input:checked").value;
+		} else if (allSelectedVariants[0].dataset.selectorType === "color_swatch") {
+			variantValue1 = allSelectedVariants[0].querySelector("input:checked").value;
+		}
+
+		if (allSelectedVariants[1].dataset.selectorType === "block") {
+			variantValue2 = allSelectedVariants[1].querySelector("input:checked").value;
+		} else if (allSelectedVariants[1].dataset.selectorType === "dropdown") {
+			variantValue2 = allSelectedVariants[1].querySelector("select").value;
+		} else if (allSelectedVariants[1].dataset.selectorType === "variant_image") {
+			variantValue2 = allSelectedVariants[1].querySelector("input:checked").value;
+		} else if (allSelectedVariants[1].dataset.selectorType === "color_swatch") {
+			variantValue2 = allSelectedVariants[1].querySelector("input:checked").value;
+		}
+
+		variantsNames = [`${variantValue1} / ${variantValue2}`, `${variantValue2} / ${variantValue1}`];
+	} else if (allSelectedVariants.length === 3) {
+		let variantValue1;
+		let variantValue2;
+		let variantValue3;
+		if (allSelectedVariants[0].dataset.selectorType === "block") {
+			variantValue1 = allSelectedVariants[0].querySelector("input:checked").value;
+		} else if (allSelectedVariants[0].dataset.selectorType === "dropdown") {
+			variantValue1 = allSelectedVariants[0].querySelector("select").value;
+		} else if (allSelectedVariants[0].dataset.selectorType === "variant_image") {
+			variantValue1 = allSelectedVariants[0].querySelector("input:checked").value;
+		} else if (allSelectedVariants[0].dataset.selectorType === "color_swatch") {
+			variantValue1 = allSelectedVariants[0].querySelector("input:checked").value;
+		}
+
+		if (allSelectedVariants[1].dataset.selectorType === "block") {
+			variantValue2 = allSelectedVariants[1].querySelector("input:checked").value;
+		} else if (allSelectedVariants[1].dataset.selectorType === "dropdown") {
+			variantValue2 = allSelectedVariants[1].querySelector("select").value;
+		} else if (allSelectedVariants[1].dataset.selectorType === "variant_image") {
+			variantValue2 = allSelectedVariants[1].querySelector("input:checked").value;
+		} else if (allSelectedVariants[1].dataset.selectorType === "color_swatch") {
+			variantValue2 = allSelectedVariants[1].querySelector("input:checked").value;
+		}
+
+		if (allSelectedVariants[2].dataset.selectorType === "block") {
+			variantValue3 = allSelectedVariants[2].querySelector("input:checked").value;
+		} else if (allSelectedVariants[2].dataset.selectorType === "dropdown") {
+			variantValue3 = allSelectedVariants[2].querySelector("select").value;
+		} else if (allSelectedVariants[2].dataset.selectorType === "variant_image") {
+			variantValue3 = allSelectedVariants[2].querySelector("input:checked").value;
+		} else if (allSelectedVariants[2].dataset.selectorType === "color_swatch") {
+			variantValue3 = allSelectedVariants[2].querySelector("input:checked").value;
+		}
+
+		variantsNames = [`${variantValue1} / ${variantValue2} / ${variantValue3}`, `${variantValue1} / ${variantValue3} / ${variantValue2}`, `${variantValue2} / ${variantValue1} / ${variantValue3}`, `${variantValue2} / ${variantValue3} / ${variantValue1}`, `${variantValue3} / ${variantValue1} / ${variantValue2}`, `${variantValue3} / ${variantValue2} / ${variantValue1}`];
+	}
+
+	for (var key in allAvailableVariants) {
+		variantsNames.forEach((variantName) => {
+			if (allAvailableVariants[key].title === variantName) {
+				matchedVariant = allAvailableVariants[key];
+			}
+		});
+	}
+
+	return matchedVariant;
+}
+
+// ANCHOR: Featured product
+
+class FeaturedProduct extends HTMLElement {
+	constructor() {
+		super();
+	}
+
+	connectedCallback() {
+		this.attachShadow({ mode: "open" });
+		this.shadowRoot.innerHTML = "<slot></slot>";
+
+		if (Object.keys(featuredProductVariants).length > 1) {
+			console.log("Featured product has more than one variant");
+			this.addOptions();
+			this.runVariant();
+		} else if (Object.keys(featuredProductVariants).length === 1) {
+			console.log("Featured product has only one variant");
+			this.setVariant();
+		}
+	}
+
+	addOptions() {
+		for (var key in featuredProductOptions) {
+			this.querySelector(".featured-product__options").innerHTML += `
+							<div class="featured-product__radios-container featured-product__radios-container--${key}">
+								<p class="featured-product__radio__title">${key}</p>
+							</div>
+			`;
+
+			if (key !== "Color") {
+				if (featuredProductVariantSelectorType === "block") {
+					this.querySelector(`.featured-product__radios-container--${key}`).innerHTML += `
+									<div class="featured-product__radio__content featured-product__radio__content--${key}"></div>
+							`;
+				} else if (featuredProductVariantSelectorType === "dropdown") {
+					this.querySelector(`.featured-product__radios-container--${key}`).innerHTML += `
+									<select name="${key}"></select>
+							`;
+				}
+			} else if (key === "Color") {
+				if (featuredProductColorSelectorType === "block" || featuredProductColorSelectorType === "variant_image" || featuredProductColorSelectorType === "color_swatch") {
+					this.querySelector(`.featured-product__radios-container--${key}`).innerHTML += `
+									<div class="featured-product__radio__content featured-product__radio__content--${key}"></div>
+							`;
+				} else if (featuredProductColorSelectorType === "dropdown") {
+					this.querySelector(`.featured-product__radios-container--${key}`).innerHTML += `
+									<select name="${key}"></select>
+							`;
+				}
+			}
+
+			featuredProductOptions[key].forEach((value, index) => {
+				if (key !== "Color") {
+					this.querySelector(`.featured-product__radios-container--${key}`).setAttribute("data-selector-type", featuredProductVariantSelectorType);
+					if (featuredProductVariantSelectorType === "block") {
+						this.querySelector(`.featured-product__radio__content--${key}`).innerHTML += `
+											<label
+												class="featured-product__radio__label "
+												for="${handleize(key)}-${handleize(value)}"
+												>
+												<input
+
+													type="radio"
+													name="${key}"
+													value="${value}"
+													id="${handleize(key)}-${handleize(value)}"
+													class="featured-product__radio__input"
+												>
+												${value}
+											</label>
+										`;
+					} else if (featuredProductVariantSelectorType === "dropdown") {
+						this.querySelector(`.featured-product__radios-container--${key} select`).innerHTML += `
+										<option value="${value}" type="radio">
+											${value}
+										</option>
+									`;
+					}
+				} else if (key === "Color") {
+					if (featuredProductColorSelectorType === "block") {
+						this.querySelector(`.featured-product__radios-container--${key}`).setAttribute("data-selector-type", featuredProductColorSelectorType);
+						this.querySelector(`.featured-product__radio__content--${key}`).innerHTML += `
+											<label
+												class="featured-product__radio__label "
+												for="${handleize(key)}-${handleize(value)}"
+												>
+												<input
+													type="radio"
+													name="${key}"
+													value="${value}"
+													id="${handleize(key)}-${handleize(value)}"
+													class="featured-product__radio__input"
+												>
+												${value}
+											</label>
+										`;
+					} else if (featuredProductColorSelectorType === "dropdown") {
+						this.querySelector(`.featured-product__radios-container--${key}`).setAttribute("data-selector-type", featuredProductColorSelectorType);
+						this.querySelector(`.featured-product__radios-container--${key} select`).innerHTML += `
+										<option value="${value}" type="radio">
+											${value}
+										</option>
+									`;
+					} else if (featuredProductColorSelectorType === "variant_image") {
+						this.querySelector(`.featured-product__radios-container--${key}`).setAttribute("data-selector-type", featuredProductColorSelectorType);
+						let done;
+						for (var vkey in featuredProductImages) {
+							if (featuredProductImages[vkey].alt) {
+								if (featuredProductImages[vkey].alt.includes("#color:")) {
+									let altLastPart = featuredProductImages[vkey].alt.split("#color:")[1];
+									if (altLastPart === value) {
+										this.querySelector(`.featured-product__radio__content--${key}`).innerHTML += `
+															<label
+																class="featured-product__radio__label media variant_image ${handleize(value)}  "
+																style=""
+																for="${handleize(key)}-${handleize(value)}"
+															>
+																<input  type="radio" name="${key}" value="${value}" id="${handleize(key)}-${handleize(value)}" class="featured-product__radio__input">
+															</label>
+														`;
+										this.querySelector(`.featured-product__radio__content--${key} label.${handleize(value)}`).innerHTML += `
+															<img
+																src="${featuredProductImages[vkey].src}"
+																loading="lazy"
+																alt="${featuredProductImages[vkey].alt}"
+																width="${featuredProductImages[vkey].width}"
+																height="${featuredProductImages[vkey].height}"
+																class="fit"
+															>
+													`;
+										done = true;
+										break;
+									}
+								}
+							}
+						}
+
+						if (!done) {
+							this.querySelector(`.featured-product__radios-container--${key}`).setAttribute("data-selector-type", featuredProductColorSelectorType);
+							this.querySelector(`.featured-product__radio__content--${key}`).innerHTML += `
+											<label
+											class="featured-product__radio__label "
+											for="${handleize(key)}-${handleize(value)}"
+											>
+												<input
+													type="radio"
+													name="${key}"
+													value="${value}"
+													id="${handleize(key)}-${handleize(value)}"
+													class="featured-product__radio__input"
+												>
+												${value}
+											</label>
+										`;
+						}
+					} else if (featuredProductColorSelectorType === "color_swatch") {
+						this.querySelector(`.featured-product__radios-container--${key}`).setAttribute("data-selector-type", featuredProductColorSelectorType);
+						let done;
+						for (var color in colorSwatchList) {
+							if (value === color) {
+								this.querySelector(`.featured-product__radio__content--${key}`).innerHTML += `
+													<label
+														class="featured-product__radio__label color_swatch"
+														style="background-color: ${color};"
+														id="${handleize(key)}-${handleize(value)}"
+													>
+													<input  type="radio" name="${key}" value="${value}" id="${handleize(key)}-${handleize(value)}" class="featured-product__radio__input">
+													</label>
+												`;
+								done = true;
+							}
+						}
+						if (!done) {
+							this.querySelector(`.featured-product__radios-container--${key}`).setAttribute("data-selector-type", featuredProductColorSelectorType);
+							this.querySelector(`.featured-product__radio__content--${key}`).innerHTML += `
+											<label
+											class="featured-product__radio__label "
+											for="${handleize(key)}-${handleize(value)}"
+											>
+												<input
+													type="radio"
+													name="${key}"
+													value="${value}"
+													id="${handleize(key)}-${handleize(value)}"
+													class="featured-product__radio__input"
+												>
+												${value}
+											</label>
+										`;
+						}
+					}
+				}
+			});
+		}
+	}
+
+	runVariant() {
+		this.querySelectorAll(".featured-product__radios-container").forEach((selectorContainer) => {
+			if (selectorContainer.querySelector("input")) {
+				selectorContainer.querySelector("input").setAttribute("checked", "checked");
+				selectorContainer.querySelector("input").parentNode.classList.add("checked");
+			}
+		});
+
+		this.setVariant();
+
+		this.querySelectorAll(".featured-product__radios-container").forEach((selectorContainer) => {
+			selectorContainer.addEventListener("change", () => {
+				this.setVariant();
+			});
+		});
+
+		this.querySelectorAll(".featured-product__radios-container").forEach((selector) => {
+			if (selector.dataset.selectorType === "block" || selector.dataset.selectorType === "variant_image" || selector.dataset.selectorType === "color_swatch") {
+				selector.querySelectorAll("input").forEach((input) => {
+					input.addEventListener("click", () => {
+						selector.querySelectorAll("input").forEach((inp) => {
+							inp.removeAttribute("checked");
+							inp.parentNode.classList.remove("checked");
+						});
+
+						input.setAttribute("checked", "checked");
+						input.parentNode.classList.add("checked");
+					});
+				});
+			}
+		});
+	}
+
+	setVariant() {
+		let quantity;
+		let selectedVariant;
+		quantity = this.querySelector(".featured-product__quantity-field .quantity-field__input").value;
+
+		if (Object.keys(featuredProductVariants).length > 1) {
+			console.log("multiple variants");
+			let selectedValues = this.querySelectorAll(".featured-product__radios-container");
+
+			selectedVariant = matchVariant(selectedValues, featuredProductVariants);
+
+			this.querySelector(".featured-product__price").innerHTML = `<p class="price--actual">${selectedVariant.price}</p>`;
+
+			if (Object.keys(featuredProductImages).length > 1) {
+				this.querySelector(".slide").innerHTML = "";
+				this.querySelector(".featured-product-slider__thumbnails").innerHTML = "";
+				for (var vkey in featuredProductImages) {
+					if (featuredProductImages[vkey].alt) {
+						if (featuredProductImages[vkey].alt.includes("#color:")) {
+							let altLastPart = featuredProductImages[vkey].alt.split("#color:")[1];
+							if (selectedVariant.title.includes(altLastPart)) {
+								this.querySelector(".slide").innerHTML += `
+									<div class="item reveal">
+										<div class="item-picture media">
+											<img
+												srcset="${featuredProductImages[vkey].src}"
+												alt=""${featuredProductImages[vkey].alt}"
+												width="${featuredProductImages[vkey].with}"
+												height="${featuredProductImages[vkey].alt}"
+												class="full"
+												loading="lazy"
+											>
+										</div>
+									</div>
+									`;
+								this.querySelector(".featured-product-slider__thumbnails").innerHTML += `
+										<div class="thumbnail">
+											<div class="thumbnail-picture media">
+												<img
+													srcset="${featuredProductImages[vkey].src}"
+													alt=""${featuredProductImages[vkey].alt}"
+													width="${featuredProductImages[vkey].with}"
+													height="${featuredProductImages[vkey].alt}"
+													class="full"
+													loading="lazy"
+												>
+											</div>
+										</div>
+									`;
+							}
+						}
+						// UNFINISHED: Make it here inject the featured image first just to stimulate the variant change even no alts are there -- Test on (MULTI PICTURES + VARIANTS + IMAGES ATTACHED BUT NO ALTS) only Last fully product is left to test
+					} else {
+						this.querySelector(".slide").innerHTML += `
+							<div class="item reveal">
+								<div class="item-picture media">
+									<img
+										srcset="${featuredProductImages[vkey].src}"
+										alt=""${featuredProductImages[vkey].alt}"
+										width="${featuredProductImages[vkey].with}"
+										height="${featuredProductImages[vkey].alt}"
+										class="full"
+										loading="lazy"
+									>
+								</div>
+							</div>
+							`;
+						this.querySelector(".featured-product-slider__thumbnails").innerHTML += `
+								<div class="thumbnail">
+									<div class="thumbnail-picture media">
+										<img
+											srcset="${featuredProductImages[vkey].src}"
+											alt=""${featuredProductImages[vkey].alt}"
+											width="${featuredProductImages[vkey].with}"
+											height="${featuredProductImages[vkey].alt}"
+											class="full"
+											loading="lazy"
+										>
+									</div>
+								</div>
+							`;
+					}
+				}
+			} else {
+			}
+
+			this.querySelector("#featured-product-buy-now").href = `/cart/${selectedVariant.id}:${quantity}`;
+
+			let injectedFunction = `sendToCart(${selectedVariant.id},${quantity})`;
+			this.querySelector("#featured-product-add-to-cart").setAttribute("onclick", injectedFunction);
+
+			this.querySelector(".featured-product__quantity-field #quantity-field").addEventListener("click", () => {
+				quantity = this.querySelector(".featured-product__quantity-field .quantity-field__input").value;
+				this.querySelector("#featured-product-buy-now").href = `/cart/${selectedVariant.id}:${quantity}`;
+				let injectedFunction = `sendToCart(${selectedVariant.id},${quantity})`;
+				this.querySelector("#featured-product-add-to-cart").setAttribute("onclick", injectedFunction);
+			});
+		} else if (Object.keys(featuredProductVariants).length === 1) {
+			console.log("single variant");
+			selectedVariant = Object.keys(featuredProductVariants)[0];
+
+			if (Object.keys(featuredProductImages).length > 0) {
+				this.querySelector(".slide").innerHTML = "";
+				this.querySelector(".featured-product-slider__thumbnails").innerHTML = "";
+				for (var vkey in featuredProductImages) {
+					this.querySelector(".slide").innerHTML += `
+									<div class="item reveal">
+										<div class="item-picture media">
+											<img
+												srcset="${featuredProductImages[vkey].src}"
+												alt=""${featuredProductImages[vkey].alt}"
+												width="${featuredProductImages[vkey].with}"
+												height="${featuredProductImages[vkey].alt}"
+												class="full"
+												loading="lazy"
+											>
+										</div>
+									</div>
+									`;
+					this.querySelector(".featured-product-slider__thumbnails").innerHTML += `
+										<div class="thumbnail">
+											<div class="thumbnail-picture media">
+												<img
+													srcset="${featuredProductImages[vkey].src}"
+													alt=""${featuredProductImages[vkey].alt}"
+													width="${featuredProductImages[vkey].with}"
+													height="${featuredProductImages[vkey].alt}"
+													class="full"
+													loading="lazy"
+												>
+											</div>
+										</div>
+									`;
+				}
+			}
+			this.querySelector("#featured-product-buy-now").href = `/cart/${selectedVariant}:${quantity}`;
+
+			let injectedFunction = `sendToCart(${selectedVariant},${quantity})`;
+			this.querySelector("#featured-product-add-to-cart").setAttribute("onclick", injectedFunction);
+
+			this.querySelector(".featured-product__quantity-field #quantity-field").addEventListener("click", () => {
+				quantity = this.querySelector(".featured-product__quantity-field .quantity-field__input").value;
+				this.querySelector("#featured-product-buy-now").href = `/cart/${selectedVariant}:${quantity}`;
+				let injectedFunction = `sendToCart(${selectedVariant},${quantity})`;
+				this.querySelector("#featured-product-add-to-cart").setAttribute("onclick", injectedFunction);
+			});
+		}
+	}
+}
+
+customElements.define("featured-product", FeaturedProduct);
+
+class FeaturedProductSlider extends FeaturedProduct {
+	constructor() {
+		super();
+	}
+
+	connectedCallback() {
+		this.attachShadow({ mode: "open" });
+		this.shadowRoot.innerHTML = "<slot></slot>";
+
+		window.addEventListener("load", () => {
+			if (Object.keys(featuredProductImages).length > 0) {
+				this.loadSlider();
+			}
+		});
+
+		if (Object.keys(featuredProductImages).length > 0) {
+			let component = document.querySelector(`featured-product.${this.querySelector(".featured-product-slider").dataset.sectionId}`);
+			component.querySelectorAll(".featured-product__radios-container").forEach((selectorContainer) => {
+				selectorContainer.addEventListener("change", () => {
+					this.loadSlider();
+				});
+			});
+		}
+	}
+
+	loadSlider() {
+		let section = document.querySelector(`featured-product.${this.querySelector(".featured-product-slider").dataset.sectionId}`);
+		let slidesContainer = this.querySelector(".featured-product-slider__slides-container");
+		let slide = this.querySelector(".slide");
+		let item = this.querySelector(".item");
+		let items = this.querySelectorAll(".item");
+		let prev = this.querySelector(".prev");
+		let next = this.querySelector(".next");
+		let maxSliderScroll;
+		let itemsDisplayed;
+		let itemWidth;
+		let itemHeight;
+		let itemsFound;
+		let actualTranslate;
+		let newTranslate;
+		let step;
+
+		loadIndicators();
+
+		let indicators = this.querySelectorAll(".featured-product-slider__indicators span");
+		let thumbnails = this.querySelectorAll(".featured-product-slider__thumbnails .thumbnail");
+		thumbnails[0].classList.add("active");
+		thumbnails.forEach((thumbnail, index) => {
+			thumbnail.setAttribute("data-slide-to", index);
+		});
+
+		travelToItem(indicators, ".featured-product-slider__indicators span", ".featured-product-slider__thumbnails .thumbnail");
+		travelToItem(thumbnails, ".featured-product-slider__thumbnails .thumbnail", ".featured-product-slider__indicators span");
+
+		setMaxScroll();
+
+		function loadIndicators() {
+			let indicatorsContainer = section.querySelector(".featured-product-slider__indicators");
+			indicatorsContainer.innerHTML = "";
+			items.forEach((item, index) => {
+				if (index === 0) {
+					indicatorsContainer.innerHTML += `<span data-slide-to="${index}" class="active"></span>`;
+				} else {
+					indicatorsContainer.innerHTML += `<span data-slide-to="${index}"></span>`;
+				}
+			});
+
+			items[0].classList.add("active");
+		}
+
+		function pushActiveClass(className, direction) {
+			let activeELement = section.querySelector(`${className}.active`);
+
+			if (direction === "next" && activeELement.nextElementSibling) {
+				activeELement.classList.remove("active");
+				activeELement.nextElementSibling.classList.add("active");
+			} else if (direction === "prev" && activeELement.previousElementSibling) {
+				activeELement.classList.remove("active");
+				activeELement.previousElementSibling.classList.add("active");
+			}
+		}
+
+		function setMaxScroll() {
+			itemsDisplayed = getComputedStyle(slidesContainer).getPropertyValue("--slider-items");
+			itemsFound = items.length;
+			itemWidth = item.offsetWidth;
+			itemHeight = item.offsetHeight;
+			slide.style.transform = "translateX(0px)";
+			prev.style.visibility = "hidden";
+
+			if (itemsFound >= itemsDisplayed) {
+				maxSliderScroll = -itemWidth * (itemsFound - itemsDisplayed);
+				if (itemsFound > itemsDisplayed) {
+					next.style.visibility = "visible";
+				}
+				slide.style.justifyContent = "flex-start";
+			} else {
+				maxSliderScroll = -itemWidth * itemsFound;
+				slide.style.justifyContent = "center";
+				next.style.visibility = "hidden";
+			}
+		}
+
+		function getTranslateX(type) {
+			actualTranslate = parseInt(slide.style.transform == "translateX(0px)" ? 0 : slide.style.transform.match(/[-]{0,1}[\d]*[.]{0,1}[\d]+/g)[0]);
+			newTranslate = 0;
+
+			if (type === "next") {
+				newTranslate = Math.max(actualTranslate - itemWidth * itemsDisplayed, maxSliderScroll);
+			} else if (type === "prev") {
+				newTranslate = Math.min(actualTranslate + itemWidth * itemsDisplayed, 0);
+			}
+
+			if (newTranslate === 0) {
+				prev.style.visibility = "hidden";
+			}
+			if (newTranslate < 0) {
+				prev.style.visibility = "visible";
+			}
+			if (newTranslate > maxSliderScroll) {
+				next.style.visibility = "visible";
+			}
+			if (newTranslate <= maxSliderScroll) {
+				next.style.visibility = "hidden";
+			}
+
+			return newTranslate;
+		}
+
+		function moveNext() {
+			console.log("click");
+			let translateNext = getTranslateX("next");
+			slide.style.transform = `translateX(${translateNext}px)`;
+
+			pushActiveClass(".featured-product-slider__slides-container .slide .item", "next");
+			pushActiveClass(".featured-product-slider__indicators span", "next");
+			pushActiveClass(".featured-product-slider__thumbnails .thumbnail", "next");
+		}
+
+		function movePrev() {
+			let translatePrev = getTranslateX("prev");
+			slide.style.transform = `translateX(${translatePrev}px)`;
+
+			pushActiveClass(".featured-product-slider__slides-container .slide .item", "prev");
+			pushActiveClass(".featured-product-slider__indicators span", "prev");
+			pushActiveClass(".featured-product-slider__thumbnails .thumbnail", "prev");
+		}
+
+		function travelToItem(AllItems, actualItem, follower) {
+			AllItems.forEach((item) => {
+				item.addEventListener("click", (e) => {
+					let activeItem = 0;
+					AllItems.forEach((item, index) => {
+						if (item.classList.contains("active")) {
+							activeItem = index;
+							return activeItem;
+						}
+					});
+					let slideTo = AllItems === indicators ? parseInt(e.target.dataset.slideTo) : parseInt(item.getAttribute("data-slide-to"));
+					step = activeItem - slideTo;
+
+					section.querySelector(`${actualItem}.active`).classList.remove("active");
+
+					for (let i = 0; i < Math.abs(step); i++) {
+						if (step < 0) {
+							let translateNext = getTranslateX("next");
+							slide.style.transform = `translateX(${translateNext}px)`;
+
+							pushActiveClass(".featured-product-slider__slides-container .slide .item", "next");
+							pushActiveClass(`${follower}`, "next");
+						} else if (step > 0) {
+							let translatePrev = getTranslateX("prev");
+							slide.style.transform = `translateX(${translatePrev}px)`;
+
+							pushActiveClass(".featured-product-slider__slides-container .slide .item", "prev");
+							pushActiveClass(`${follower}`, "prev");
+						}
+					}
+
+					item.classList.add("active");
+				});
+			});
+		}
+
+		window.addEventListener("resize", setMaxScroll);
+		next.addEventListener("click", moveNext);
+		prev.addEventListener("click", movePrev);
+
+		section.querySelectorAll(".featured-product__radios-container").forEach((selectorContainer) => {
+			selectorContainer.addEventListener("change", () => {
+				console.log("change");
+				next.removeEventListener("click", moveNext);
+				prev.removeEventListener("click", movePrev);
+			});
+		});
+	}
+}
+
+customElements.define("featured-product-slider", FeaturedProductSlider);

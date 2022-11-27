@@ -487,7 +487,7 @@ p[data-spam-detection-disclaimer]>a {
 
 /*  ANCHOR: Form */
 input {
-  height: 44px;
+  height: 30px;
 }
 
 input,
@@ -499,7 +499,7 @@ select {
   border: 1px solid rgb(144, 144, 144);
   padding: 0.5rem;
   outline: none;
-  height: 44px;
+  height: 30px;
 }
 
 @media screen and (min-width: 1025px) {
@@ -507,7 +507,7 @@ select {
   input,
   textarea,
   select {
-    height: 50px;
+    height: 30px;
   }
 }
 
@@ -1356,14 +1356,6 @@ cart-component.hidden {
   font-weight: bold;
 }
 
-.countdown-timer__container:has(.digits--small) {
-  min-width: 2.5rem;
-}
-
-.countdown-timer__container:has(.digits--big) {
-  min-width: 4rem;
-}
-
 .countdown-timer__container .digits--small {
   font-size: 1.4rem;
 }
@@ -1406,7 +1398,6 @@ cart-component.hidden {
 }
 
 /* ANCHOR: Newsletter section (and popup too) */
-
 .newsletter {
   display: flex;
   flex-direction: column;
