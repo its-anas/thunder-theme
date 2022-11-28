@@ -70,6 +70,32 @@
       flex-direction: column;
   }
 
+
+  .featured-product__buttons #featured-product-add-to-cart.sold-out {
+      pointer-events: none !important;
+      background-color: #aaaaaa;
+      border-color: #aaaaaa;
+  }
+
+  .featured-product__buttons #featured-product-add-to-cart.sold-out :after {
+      content: "";
+  }
+
+  .product-page__buttons .dynamic-buy-button {
+      height: 0px;
+      opacity: 0;
+      transition: all 0.5s cubic-bezier(0.75, 0, 0.175, 1);
+  }
+
+  .product-page__buttons .dynamic-buy-button.sold-out {
+      height: 0px !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+  }
+
+  .featured-product__buttons #featured-product-buy-now {}
+
+
   .featured-product__options {
       display: flex;
       flex-direction: column;

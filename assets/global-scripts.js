@@ -2567,6 +2567,20 @@ class FeaturedProduct extends HTMLElement {
 				}
 			}
 
+			let inventory = selectedVariant.inventory;
+
+			if (inventory > 0) {
+				if (this.querySelector("#featured-product-add-to-cart").classList.contains("sold-out")) {
+					this.querySelector("#featured-product-add-to-cart").classList.remove("sold-out");
+					this.querySelector("#featured-product-add-to-cart").innerHTML = "ADD TO CART";
+					this.querySelector("#featured-product-buy-now").style.display = "block";
+				}
+			} else if (inventory === 0) {
+				this.querySelector("#featured-product-add-to-cart").classList.add("sold-out");
+				this.querySelector("#featured-product-add-to-cart").innerHTML = "SOLD OUT";
+				this.querySelector("#featured-product-buy-now").style.display = "none";
+			}
+
 			this.querySelector("#featured-product-buy-now").href = `/cart/${selectedVariant.id}:${quantity}`;
 
 			let injectedFunction = `sendToCart(${selectedVariant.id},${quantity})`;
@@ -2652,7 +2666,8 @@ class FeaturedProductSlider extends FeaturedProduct {
 		});
 
 		if (Object.keys(this.featuredProductImages).length > 0) {
-			this.querySelectorAll(".featured-product__radios-container").forEach((selectorContainer) => {
+			let component = document.querySelector(`featured-product.${this.querySelector(".featured-product-slider").dataset.sectionId}`);
+			component.querySelectorAll(".featured-product__radios-container").forEach((selectorContainer) => {
 				selectorContainer.addEventListener("change", () => {
 					this.loadSlider();
 				});
