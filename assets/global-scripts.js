@@ -2794,6 +2794,7 @@ class FeaturedProductSlider extends FeaturedProduct {
 
 			pushActiveClass(".featured-product-slider__slides-container .slide .item", "prev");
 			pushActiveClass(".featured-product-slider__indicators span", "prev");
+
 			pushActiveClass(".featured-product-slider__thumbnails .thumbnail", "prev");
 		}
 

@@ -12,9 +12,9 @@ html.lock {
 html,
 body {
   box-sizing: border-box;
+  background-color: var(--background-color);
   font-family: var(--font-family);
   font-style: var(--font-style);
-  background-color: var(--background-color);
 }
 
 h1,
@@ -44,19 +44,19 @@ img[loading=lazy] {
 }
 
 img {
-  user-select: none;
   -moz-user-select: none;
-  -webkit-user-drag: none;
   -webkit-user-select: none;
   -ms-user-select: none;
+  user-select: none;
+  -webkit-user-drag: none;
 }
 
 .media {
-  height: 100%;
-  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
+  height: 100%;
 }
 
 .media img {
@@ -96,10 +96,10 @@ img {
 }
 
 .placeholder {
-  height: 100%;
-  width: 100%;
   display: flex;
   justify-content: center;
+  width: 100%;
+  height: 100%;
   background-color: rgb(34, 34, 34);
   fill: rgb(142, 142, 142);
 }
@@ -115,10 +115,10 @@ img {
 }
 
 .box {
-  height: 100%;
-  width: 100%;
   display: flex;
   flex-direction: column;
+  width: 100%;
+  height: 100%;
   padding: 10px;
 }
 
@@ -135,22 +135,22 @@ img {
 
   .wrapped {
     max-width: var(--wrapped-content-width);
-    margin-left: auto;
     margin-right: auto;
+    margin-left: auto;
   }
 }
 
 /*  Theme overlay  */
 .theme-overlay {
   position: fixed;
-  width: 100%;
-  height: 100%;
+  z-index: 99;
   right: 0px;
   bottom: 0px;
-  z-index: 99;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
   -webkit-backdrop-filter: blur(4px);
   backdrop-filter: blur(4px);
-  background-color: rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease-in;
 }
 
@@ -176,12 +176,12 @@ img {
 
 /* Shadow divider*/
 .shadow-divider {
-  width: 100%;
-  height: 40px;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgb(0, 0, 0) 100%);
   position: absolute;
   top: 0;
   right: 0;
+  width: 100%;
+  height: 40px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgb(0, 0, 0) 100%);
   transform: translateY(-98%);
   pointer-events: none;
 }
@@ -201,13 +201,13 @@ img {
 .corner-border:after,
 .corner-border>.corner-border-target:before,
 .corner-border>.corner-border-target:after {
-  position: absolute;
   content: " ";
+  position: absolute;
+  z-index: 2;
   width: 10%;
   height: 10%;
   border-color: #fff;
   border-style: solid;
-  z-index: 2;
   transition: all 0.2s ease;
   pointer-events: none;
 }
@@ -237,8 +237,8 @@ img {
 }
 
 .corner-border>.corner-border-target:before {
-  bottom: 0;
   right: 0;
+  bottom: 0;
   border-width: 0 1px 1px 0;
 }
 
@@ -317,9 +317,9 @@ h3,
 h4,
 h5,
 h6 {
-  text-transform: var(--headings-style);
   color: var(--headings-color);
   line-height: 1;
+  text-transform: var(--headings-style);
 }
 
 p,
@@ -383,15 +383,15 @@ label {
 }
 
 a {
-  text-decoration: none;
   color: white;
+  text-decoration: none;
 }
 
 a.link {
-  text-decoration: underline;
   color: #aaaaaa;
-  text-align: center;
   font-size: 0.8rem;
+  text-align: center;
+  text-decoration: underline;
 }
 
 a.button {
@@ -404,10 +404,10 @@ a.button {
 }
 
 .price--compare-at {
+  color: #aaaaaa;
   font-size: var(--font-size);
   font-weight: lighter;
   text-decoration: line-through;
-  color: #aaaaaa;
 }
 
 .label-text {
@@ -421,8 +421,8 @@ a.button {
 p[data-spam-detection-disclaimer],
 p[data-spam-detection-disclaimer]>* {
   color: grey;
-  text-align: center;
   font-size: 0.8rem;
+  text-align: center;
 }
 
 p[data-spam-detection-disclaimer]>a {
@@ -493,13 +493,13 @@ input {
 input,
 textarea,
 select {
-  font-size: 1rem;
-  color: #fff;
-  background-color: #222;
-  border: 1px solid rgb(144, 144, 144);
-  padding: 0.5rem;
-  outline: none;
   height: 30px;
+  padding: 0.5rem;
+  border: 1px solid rgb(144, 144, 144);
+  background-color: #222;
+  color: #fff;
+  font-size: 1rem;
+  outline: none;
 }
 
 @media screen and (min-width: 1025px) {
@@ -533,24 +533,24 @@ input::-moz-placeholder,
 textarea::-moz-placeholder,
 select::-moz-placeholder {
   color: rgb(144, 144, 144);
-  font-size: 1rem;
   font-family: var(--font-family);
+  font-size: 1rem;
 }
 
 input:-ms-input-placeholder,
 textarea:-ms-input-placeholder,
 select:-ms-input-placeholder {
   color: rgb(144, 144, 144);
-  font-size: 1rem;
   font-family: var(--font-family);
+  font-size: 1rem;
 }
 
 input::placeholder,
 textarea::placeholder,
 select::placeholder {
   color: rgb(144, 144, 144);
-  font-size: 1rem;
   font-family: var(--font-family);
+  font-size: 1rem;
 }
 
 .form__error,
@@ -576,11 +576,11 @@ select::placeholder {
 
 /*  ANCHOR: Buttons */
 button {
-  background: none;
   border: none;
+  margin: 0;
+  background: none;
   cursor: pointer;
   outline: none;
-  margin: 0;
 }
 
 button,
@@ -589,15 +589,15 @@ button,
 }
 
 .shopify-payment-button__button {
-  color: var(--secondary-button-text-color) !important;
-  background-color: var(--secondary-button-background-color) !important;
-  border: var(--button-border-width) solid var(--primary-button-border-color) !important;
-  border-radius: var(--button-border-radius) !important;
-  transition: 1s !important;
   padding: 12.5px 0px !important;
+  border: var(--button-border-width) solid var(--primary-button-border-color) !important;
+  background-color: var(--secondary-button-background-color) !important;
+  color: var(--secondary-button-text-color) !important;
   font-size: calc(var(--font-size-type-scale) / var(--font-type-scale) * 1px) !important;
   font-weight: 700 !important;
   text-transform: uppercase !important;
+  border-radius: var(--button-border-radius) !important;
+  transition: 1s !important;
 }
 
 @media screen and (min-width: 1025px) {
@@ -614,10 +614,10 @@ button,
 }
 
 .shopify-payment-button__button:hover {
-  color: var(--button-text-border-hover-color) !important;
-  background-color: var(--button-background-hover-color) !important;
-  transition: 0.2s !important;
   border: var(--button-border-width) solid var(--button-text-border-hover-color) !important;
+  background-color: var(--button-background-hover-color) !important;
+  color: var(--button-text-border-hover-color) !important;
+  transition: 0.2s !important;
   border-radius: var(--button-border-radius-hover) !important;
   transition: 0.2s !important;
 }
@@ -628,20 +628,20 @@ button,
 }
 
 .button--primary {
-  color: var(--primary-button-text-color);
   background-color: var(--primary-button-background-color);
+  color: var(--primary-button-text-color);
 }
 
 .button--secondary {
-  color: var(--secondary-button-text-color);
   background-color: var(--secondary-button-background-color);
+  color: var(--secondary-button-text-color);
 }
 
 .button--primary,
 .button--secondary {
-  text-transform: uppercase;
-  text-align: center;
   padding: 12.5px 0px;
+  text-align: center;
+  text-transform: uppercase;
 }
 
 @media screen and (min-width: 1025px) {
@@ -669,8 +669,8 @@ button,
 
 .button--primary:hover,
 .button--secondary:hover {
-  color: var(--button-text-border-hover-color);
   background-color: var(--button-background-hover-color);
+  color: var(--button-text-border-hover-color);
   transition: 0.2s;
 }
 
@@ -702,8 +702,8 @@ a.border.button--primary:hover,
 a.border.button--secondary:hover,
 button.border.button--primary:hover,
 button.border.button--secondary:hover {
-  color: var(--button-text-border-hover-color);
   border: var(--button-border-width) solid var(--button-text-border-hover-color);
+  color: var(--button-text-border-hover-color);
   border-radius: var(--button-border-radius-hover);
   transition: 0.2s;
 }
@@ -718,16 +718,16 @@ button.border.button--secondary:hover {
 
 .buttons {
   display: flex;
+  flex-direction: column;
+  justify-content: center;
   width: 100%;
   gap: 10px;
-  justify-content: center;
-  flex-direction: column;
 }
 
 @media screen and (min-width: 751px) {
   .buttons {
-    flex-direction: row;
     flex-wrap: wrap;
+    flex-direction: row;
   }
 
   .buttons--left {
@@ -748,8 +748,8 @@ button.border.button--secondary:hover {
   a.button,
   button.button {
     position: relative;
-    text-decoration: none;
     overflow: hidden;
+    text-decoration: none;
     text-transform: uppercase;
   }
 
@@ -779,8 +779,8 @@ button.border.button--secondary:hover {
 
   a.button span:nth-child(3),
   button.button span:nth-child(3) {
-    bottom: 0;
     right: -100%;
+    bottom: 0;
     width: 100%;
     height: 2px;
     background: linear-gradient(270deg, transparent, var(--button-animation-color));
@@ -852,12 +852,12 @@ button.border.button--secondary:hover {
 }
 
 .quantity-field {
-  border: 2px solid white;
   display: flex;
   justify-content: center;
+  align-items: center;
   width: 150px;
   height: 44px;
-  align-items: center;
+  border: 2px solid white;
 }
 
 .quantity-field.cart {
@@ -867,19 +867,19 @@ button.border.button--secondary:hover {
 
 .quantity-field__input {
   width: 33%;
-  background-color: transparent;
-  border: none;
-  outline: none;
-  text-align: center;
   height: 100%;
   padding: 0;
+  border: none;
+  background-color: transparent;
+  text-align: center;
+  outline: none;
 }
 
 .quantity-field__minus,
 .quantity-field__plus {
-  color: white;
   width: 33%;
   height: 100%;
+  color: white;
 }
 
 /* ANCHOR: Slider component */
@@ -891,13 +891,13 @@ slider-component {
 }
 
 slider-component .slider-component {
-  height: auto;
-  width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   overflow: hidden;
+  width: 100%;
+  height: auto;
 }
 
 @media screen and (max-width: 750px) {
@@ -908,21 +908,21 @@ slider-component .slider-component {
 
 slider-component .slider-component .prev,
 slider-component .slider-component .next {
+  display: flex;
   justify-content: center;
-  visibility: hidden;
+  align-items: center;
   height: 100%;
+  visibility: hidden;
   cursor: pointer;
   opacity: 0.5;
-  display: flex;
-  align-items: center;
 }
 
 @media screen and (max-width: 750px) {
 
   slider-component .slider-component .prev,
   slider-component .slider-component .next {
-    width: 10%;
     display: none;
+    width: 10%;
   }
 }
 
@@ -930,8 +930,8 @@ slider-component .slider-component .next {
 
   slider-component .slider-component .prev,
   slider-component .slider-component .next {
-    width: 10%;
     display: none;
+    width: 10%;
   }
 }
 
@@ -952,8 +952,8 @@ slider-component .slider-component .prev {
 
 @media screen and (min-width: 1025px) {
   slider-component .slider-component .prev {
-    padding-right: 20px;
     justify-content: flex-end;
+    padding-right: 20px;
   }
 }
 
@@ -965,15 +965,15 @@ slider-component .slider-component .prev {
 
 @media screen and (min-width: 1025px) {
   slider-component .slider-component .next {
-    padding-left: 20px;
     justify-content: flex-start;
+    padding-left: 20px;
   }
 }
 
 slider-component .slider-component .slides-container {
-  width: var(--container-width);
   display: flex;
   justify-content: center;
+  width: var(--container-width);
   --section-width: 100%;
   --item-width: calc(var(--section-width) / var(--slider-items));
 }
@@ -1000,13 +1000,13 @@ slider-component .slider-component .slides-container {
 }
 
 slider-component .slider-component .slides-container .slide {
-  width: 100%;
-  height: auto;
+  z-index: 1;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
-  z-index: 1;
+  width: 100%;
+  height: auto;
   transition: all 0.5s cubic-bezier(0.45, 0.05, 0.55, 0.95);
 }
 
@@ -1017,16 +1017,16 @@ slider-component .slider-component .slides-container .slide {
 }
 
 slider-component .slider-component .slides-container .slide .item {
-  height: 100%;
+  overflow: hidden;
   width: var(--item-width);
   min-width: var(--item-width);
   max-width: var(--item-width);
-  overflow: hidden;
+  height: 100%;
 }
 
 slider-component .slider-component .slides-container .slide .item>* {
-  max-width: 95%;
   overflow: hidden;
+  max-width: 95%;
 }
 
 .tag--normal {
@@ -1053,9 +1053,9 @@ slider-component .slider-component .slides-container .slide .item>* {
 
 .tag--animated,
 .tag--animated-hover:after {
-  font-size: var(--tag-font-size);
-  color: var(--text-color);
   padding: 0.05rem 0.15rem;
+  color: var(--text-color);
+  font-size: var(--tag-font-size);
   pointer-events: none;
 }
 
@@ -1124,14 +1124,14 @@ slider-component .slider-component .slides-container .slide .item>* {
 cart-component,
 menu-drawer-component {
   position: fixed;
-  width: 100%;
-  bottom: 0px;
   z-index: 98;
+  z-index: 100;
+  bottom: 0px;
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
   padding: 8px;
-  z-index: 100;
 }
 
 @media screen and (min-width: 751px) {
@@ -1155,16 +1155,16 @@ menu-drawer-component.hidden {
 
 cart-component__container,
 menu-drawer-component__container {
-  width: 100%;
-  height: 100%;
   z-index: 100;
   display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  padding: 1rem;
-  overflow: auto;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
+  overflow: auto;
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
+  gap: 1.5rem;
 }
 
 cart-component #close-icon,
@@ -1218,8 +1218,8 @@ cart-component.hidden {
 
 .search-results__image {
   width: 60px;
-  height: 60px;
   min-width: 60px;
+  height: 60px;
   min-height: 60px;
 }
 
@@ -1236,8 +1236,8 @@ cart-component.hidden {
 }
 
 .search-results__item-heading {
-  font-size: 1rem;
   color: #fff;
+  font-size: 1rem;
 }
 
 .search-results__item-price {
@@ -1249,11 +1249,11 @@ cart-component.hidden {
 }
 
 .search-results__link {
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: #fcdb33;
   width: 100%;
+  border: none;
+  background: none;
+  color: #fcdb33;
+  cursor: pointer;
 }
 
 /* ANCHOR: Search section */
@@ -1262,14 +1262,14 @@ cart-component.hidden {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-left: auto;
   margin-right: auto;
+  margin-left: auto;
 }
 
 .search-section__container {
   display: flex;
-  justify-content: center;
   flex-direction: row;
+  justify-content: center;
   width: 100%;
 }
 
@@ -1301,8 +1301,8 @@ cart-component.hidden {
 
 .search-section__results {
   position: absolute;
-  background-color: rgb(0, 0, 0);
   width: 100%;
+  background-color: rgb(0, 0, 0);
 }
 
 .search-section__icon {
@@ -1417,11 +1417,11 @@ cart-component.hidden {
 }
 
 .newsletter__form {
-  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 100%;
 }
 
 @media screen and (max-width: 750px) {
@@ -1442,9 +1442,9 @@ cart-component.hidden {
 }
 
 .newsletter__button {
-  background: #fcdb33;
   display: grid;
   align-items: center;
+  background: #fcdb33;
 }
 
 .newsletter__button :nth-child(1),
