@@ -69,19 +69,23 @@
     <div class="featured-product__content">
       <div class="featured-product__pictures">
         <div class="featured-product__slider">
-          {% comment %} {{ 'product-1' | placeholder_svg_tag: 'placeholder' }} {% endcomment %}
           <featured-product-slider
             data-mobile-items="{{ mobile_items }}"
             data-tablet-items="{{ tablet_items }}"
             data-desktop-items="{{ desktop_items }}"
             class="{{ section.id }}"
-            data-section-id="{{ section.id }}"
           >
             <p id="imagesData-{{ section.id }}"></p>
             <p id="variantsData-{{ section.id }}"></p>
             <p id="optionsData-{{ section.id }}"></p>
 
-            <div class="featured-product-slider" data-section-id="{{ section.id }}">
+            <div
+              class="featured-product-slider"
+              data-section-id="{{ section.id }}"
+              data-section-id="{{ section.id }}"
+              data-featured-product-variant-selector-type="{{ section.settings.variant_selector_type }}"
+              data-featured-product-color-selector-type="{{ section.settings.color_selector_type }}"
+            >
               <div class="prev">
                 {% render 'icons', icon: 'chevron-prev' %}
               </div>
@@ -198,8 +202,6 @@
   localStorage.setItem("featuredProductImages-{{ section.id }}", JSON.stringify(featuredProductImages));
   localStorage.setItem("featuredProductVariants-{{ section.id }}", JSON.stringify(featuredProductVariants));
   localStorage.setItem("featuredProductOptions-{{ section.id }}", JSON.stringify(featuredProductOptions));
-  localStorage.setItem("featuredProductVariantSelectorType-{{ section.id }}", "{{ section.settings.variant_selector_type }}");
-  localStorage.setItem("featuredProductColorSelectorType-{{ section.id }}", "{{ section.settings.color_selector_type }}");
 </script>
 
 {% schema %}

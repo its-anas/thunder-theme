@@ -1195,14 +1195,14 @@ class QuickView extends HTMLElement {
 									document.querySelector(`.quick-view__radio__content--${key}`).innerHTML += `
 											<label
 												class="quick-view__radio__label "
-												for="${handleize(key)}-${handleize(value)}"
+												for="${handleize(key)}-${handleize(value)}-${this.sectionId}"
 												>
 												<input
 
 													type="radio"
 													name="${key}"
 													value="${value}"
-													id="${handleize(key)}-${handleize(value)}"
+													id="${handleize(key)}-${handleize(value)}-${this.sectionId}"
 													class="quick-view__radio__input"
 												>
 												${value}
@@ -1221,13 +1221,13 @@ class QuickView extends HTMLElement {
 									document.querySelector(`.quick-view__radio__content--${key}`).innerHTML += `
 											<label
 												class="quick-view__radio__label "
-												for="${handleize(key)}-${handleize(value)}"
+												for="${handleize(key)}-${handleize(value)}-${this.sectionId}"
 												>
 												<input
 													type="radio"
 													name="${key}"
 													value="${value}"
-													id="${handleize(key)}-${handleize(value)}"
+													id="${handleize(key)}-${handleize(value)}-${this.sectionId}"
 													class="quick-view__radio__input"
 												>
 												${value}
@@ -1252,9 +1252,9 @@ class QuickView extends HTMLElement {
 															<label
 																class="quick-view__radio__label media variant_image ${handleize(value)}  "
 																style=""
-																for="${handleize(key)}-${handleize(value)}"
+																for="${handleize(key)}-${handleize(value)}-${this.sectionId}"
 															>
-																<input  type="radio" name="${key}" value="${value}" id="${handleize(key)}-${handleize(value)}" class="quick-view__radio__input">
+																<input  type="radio" name="${key}" value="${value}" id="${handleize(key)}-${handleize(value)}-${this.sectionId}" class="quick-view__radio__input">
 															</label>
 														`;
 													document.querySelector(`.quick-view__radio__content--${key} label.${handleize(value)}`).innerHTML += `
@@ -1278,13 +1278,13 @@ class QuickView extends HTMLElement {
 										document.querySelector(`.quick-view__radio__content--${key}`).innerHTML += `
 											<label
 											class="quick-view__radio__label "
-											for="${handleize(key)}-${handleize(value)}"
+											for="${handleize(key)}-${handleize(value)}-${this.sectionId}"
 											>
 												<input
 													type="radio"
 													name="${key}"
 													value="${value}"
-													id="${handleize(key)}-${handleize(value)}"
+													id="${handleize(key)}-${handleize(value)}-${this.sectionId}"
 													class="quick-view__radio__input"
 												>
 												${value}
@@ -1300,9 +1300,9 @@ class QuickView extends HTMLElement {
 													<label
 														class="quick-view__radio__label color_swatch"
 														style="background-color: ${color};"
-														id="${handleize(key)}-${handleize(value)}"
+														id="${handleize(key)}-${handleize(value)}-${this.sectionId}"
 													>
-													<input  type="radio" name="${key}" value="${value}" id="${handleize(key)}-${handleize(value)}" class="quick-view__radio__input">
+													<input  type="radio" name="${key}" value="${value}" id="${handleize(key)}-${handleize(value)}-${this.sectionId}" class="quick-view__radio__input">
 													</label>
 												`;
 											done = true;
@@ -1313,13 +1313,13 @@ class QuickView extends HTMLElement {
 										document.querySelector(`.quick-view__radio__content--${key}`).innerHTML += `
 											<label
 											class="quick-view__radio__label "
-											for="${handleize(key)}-${handleize(value)}"
+											for="${handleize(key)}-${handleize(value)}-${this.sectionId}"
 											>
 												<input
 													type="radio"
 													name="${key}"
 													value="${value}"
-													id="${handleize(key)}-${handleize(value)}"
+													id="${handleize(key)}-${handleize(value)}-${this.sectionId}"
 													class="quick-view__radio__input"
 												>
 												${value}
@@ -2275,12 +2275,12 @@ class FeaturedProduct extends HTMLElement {
 		this.shadowRoot.innerHTML = "<slot></slot>";
 
 		this.sectionId = this.querySelector("[data-section-id]").dataset.sectionId;
+		this.featuredProductVariantSelectorType = this.querySelector("[data-featured-product-variant-selector-type]").dataset.featuredProductVariantSelectorType;
+		this.featuredProductColorSelectorType = this.querySelector("[data-featured-product-color-selector-type]").dataset.featuredProductColorSelectorType;
 
 		this.featuredProductImages = JSON.parse(localStorage.getItem(`featuredProductImages-${this.sectionId}`));
 		this.featuredProductVariants = JSON.parse(localStorage.getItem(`featuredProductVariants-${this.sectionId}`));
 		this.featuredProductOptions = JSON.parse(localStorage.getItem(`featuredProductOptions-${this.sectionId}`));
-		this.featuredProductVariantSelectorType = localStorage.getItem(`featuredProductVariantSelectorType-${this.sectionId}`);
-		this.featuredProductColorSelectorType = localStorage.getItem(`featuredProductColorSelectorType-${this.sectionId}`);
 
 		if (Object.keys(this.featuredProductVariants).length > 1) {
 			this.addOptions();
@@ -2327,13 +2327,13 @@ class FeaturedProduct extends HTMLElement {
 						this.querySelector(`.featured-product__radio__content--${key}`).innerHTML += `
 						<label
 							class="featured-product__radio__label "
-							for="${handleize(key)}-${handleize(value)}"
+							for="${handleize(key)}-${handleize(value)}-${this.sectionId}"
 							>
 							<input
 								type="radio"
 								name="${key}"
 								value="${value}"
-								id="${handleize(key)}-${handleize(value)}"
+								id="${handleize(key)}-${handleize(value)}-${this.sectionId}"
 								class="featured-product__radio__input"
 							>
 							${value}
@@ -2352,13 +2352,13 @@ class FeaturedProduct extends HTMLElement {
 						this.querySelector(`.featured-product__radio__content--${key}`).innerHTML += `
 											<label
 												class="featured-product__radio__label "
-												for="${handleize(key)}-${handleize(value)}"
+												for="${handleize(key)}-${handleize(value)}-${this.sectionId}"
 												>
 												<input
 													type="radio"
 													name="${key}"
 													value="${value}"
-													id="${handleize(key)}-${handleize(value)}"
+													id="${handleize(key)}-${handleize(value)}-${this.sectionId}"
 													class="featured-product__radio__input"
 												>
 												${value}
@@ -2383,9 +2383,9 @@ class FeaturedProduct extends HTMLElement {
 											<label
 												class="featured-product__radio__label media variant_image ${handleize(value)}  "
 												style=""
-												for="${handleize(key)}-${handleize(value)}"
+												for="${handleize(key)}-${handleize(value)}-${this.sectionId}"
 											>
-												<input  type="radio" name="${key}" value="${value}" id="${handleize(key)}-${handleize(value)}" class="featured-product__radio__input">
+												<input  type="radio" name="${key}" value="${value}" id="${handleize(key)}-${handleize(value)}-${this.sectionId}" class="featured-product__radio__input">
 											</label>
 										`;
 										this.querySelector(`.featured-product__radio__content--${key} label.${handleize(value)}`).innerHTML += `
@@ -2410,9 +2410,9 @@ class FeaturedProduct extends HTMLElement {
 								<label
 									class="featured-product__radio__label media variant_image ${handleize(value)}  "
 									style=""
-									for="${handleize(key)}-${handleize(value)}"
+									for="${handleize(key)}-${handleize(value)}-${this.sectionId}"
 								>
-									<input  type="radio" name="${key}" value="${value}" id="${handleize(key)}-${handleize(value)}" class="featured-product__radio__input">
+									<input  type="radio" name="${key}" value="${value}" id="${handleize(key)}-${handleize(value)}-${this.sectionId}" class="featured-product__radio__input">
 								</label>
 							`;
 							this.querySelector(`.featured-product__radio__content--${key} label.${handleize(value)}`).innerHTML += `
@@ -2428,9 +2428,9 @@ class FeaturedProduct extends HTMLElement {
 									<label
 										class="featured-product__radio__label color_swatch"
 										style="background-color: ${color};"
-										id="${handleize(key)}-${handleize(value)}"
+										id="${handleize(key)}-${handleize(value)}-${this.sectionId}"
 									>
-									<input  type="radio" name="${key}" value="${value}" id="${handleize(key)}-${handleize(value)}" class="featured-product__radio__input">
+									<input  type="radio" name="${key}" value="${value}" id="${handleize(key)}-${handleize(value)}-${this.sectionId}" class="featured-product__radio__input">
 									</label>
 								`;
 								done = true;
@@ -2440,9 +2440,9 @@ class FeaturedProduct extends HTMLElement {
 							this.querySelector(`.featured-product__radio__content--${key}`).innerHTML += `
 									<label
 										class="featured-product__radio__label color_swatch"
-										id="${handleize(key)}-${handleize(value)}"
+										id="${handleize(key)}-${handleize(value)}-${this.sectionId}"
 									>
-									<input  type="radio" name="${key}" value="${value}" id="${handleize(key)}-${handleize(value)}" class="featured-product__radio__input">
+									<input  type="radio" name="${key}" value="${value}" id="${handleize(key)}-${handleize(value)}-${this.sectionId}" class="featured-product__radio__input">
 									${value}
 									</label>
 								`;
@@ -2469,15 +2469,14 @@ class FeaturedProduct extends HTMLElement {
 			});
 		});
 
-		this.querySelectorAll(".featured-product__radios-container").forEach((selector) => {
+		this.querySelectorAll(`.featured-product__radios-container`).forEach((selector) => {
 			if (selector.dataset.selectorType === "block" || selector.dataset.selectorType === "variant_image" || selector.dataset.selectorType === "color_swatch") {
-				selector.querySelectorAll("input").forEach((input) => {
+				selector.querySelectorAll(`input`).forEach((input) => {
 					input.addEventListener("click", () => {
-						selector.querySelectorAll("input").forEach((inp) => {
+						selector.querySelectorAll(`input`).forEach((inp) => {
 							inp.removeAttribute("checked");
 							inp.parentNode.classList.remove("checked");
 						});
-
 						input.setAttribute("checked", "checked");
 						input.parentNode.classList.add("checked");
 					});
@@ -2639,12 +2638,12 @@ class FeaturedProductSlider extends FeaturedProduct {
 
 	connectedCallback() {
 		this.sectionId = this.querySelector("[data-section-id]").dataset.sectionId;
+		this.featuredProductVariantSelectorType = this.querySelector("[data-featured-product-variant-selector-type]").dataset.featuredProductVariantSelectorType;
+		this.featuredProductColorSelectorType = this.querySelector("[data-featured-product-color-selector-type]").dataset.featuredProductColorSelectorType;
 
 		this.featuredProductImages = JSON.parse(localStorage.getItem(`featuredProductImages-${this.sectionId}`));
 		this.featuredProductVariants = JSON.parse(localStorage.getItem(`featuredProductVariants-${this.sectionId}`));
 		this.featuredProductOptions = JSON.parse(localStorage.getItem(`featuredProductOptions-${this.sectionId}`));
-		this.featuredProductVariantSelectorType = localStorage.getItem(`featuredProductVariantSelectorType-${this.sectionId}`);
-		this.featuredProductColorSelectorType = localStorage.getItem(`featuredProductColorSelectorType-${this.sectionId}`);
 
 		window.addEventListener("load", () => {
 			if (Object.keys(this.featuredProductImages).length > 0) {
@@ -2653,8 +2652,7 @@ class FeaturedProductSlider extends FeaturedProduct {
 		});
 
 		if (Object.keys(this.featuredProductImages).length > 0) {
-			let component = document.querySelector(`featured-product.${this.querySelector(".featured-product-slider").dataset.sectionId}`);
-			component.querySelectorAll(".featured-product__radios-container").forEach((selectorContainer) => {
+			this.querySelectorAll(".featured-product__radios-container").forEach((selectorContainer) => {
 				selectorContainer.addEventListener("change", () => {
 					this.loadSlider();
 				});
@@ -2663,7 +2661,7 @@ class FeaturedProductSlider extends FeaturedProduct {
 	}
 
 	loadSlider() {
-		let section = document.querySelector(`featured-product.${this.querySelector(".featured-product-slider").dataset.sectionId}`);
+		let section = document.querySelector(`featured-product.${this.sectionId}`);
 		let slidesContainer = this.querySelector(".featured-product-slider__slides-container");
 		let slide = this.querySelector(".slide");
 		let item = this.querySelector(".item");
