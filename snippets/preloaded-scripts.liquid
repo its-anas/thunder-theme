@@ -2,6 +2,10 @@
   let cartType = '{{ settings.cart_type }}';
   let freeShippingThreshold = {{ settings.free_shipping_threshold | times: 100 }};
   let colorSwatchList = {};
+  let featuredProductImages = {};
+  let featuredProductVariants = {};
+  let featuredProductOptions = {};
+  let featuredProductvariantsAttached = [];
 
   {% liquid
     assign color_swatch_list = settings.color_swatch_list | split: ','

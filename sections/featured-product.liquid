@@ -1,8 +1,4 @@
 {{ 'featured-product.css' | asset_url | stylesheet_tag }}
-<script src="{{ 'featured-product.js' | asset_url }}" defer></script>
-
-{% style %}
-{% endstyle %}
 
 {% liquid
   assign mobile_items = 1
@@ -15,10 +11,11 @@
 {% assign current_variant = featured_product.selected_or_first_available_variant %}
 
 {% style %}
-   featured-product  {
+    .featured-product.{{ section.id }} {
+      background-color: {{ section.settings.background_color }};
       padding-top: {{ section.settings.padding_top }}px !important;
       padding-bottom: {{ section.settings.padding_bottom }}px !important;
-   }
+    }
 
    .featured-product-slider__slides-container {
     --mobile-items: {{ mobile_items }};
@@ -42,23 +39,23 @@
 
   {% if section.settings.thumbnails_on_mobile == false %}
     @media screen and (max-width: 1024px) {
-      .featured-product-slider__thumbnails {
+      .{{ section.id }} .featured-product-slider__thumbnails {
           height: 0 !important;
           visibility: hidden;
       }
     }
     @media screen and (min-width: 1024px) {
-      .featured-product-slider__indicators {
+      .{{ section.id }} .featured-product-slider__indicators {
           height: 0 !important;
           visibility: hidden;
       }
     }
   {% else %}
-    .featured-product-slider__indicators {
+    .{{ section.id }} .featured-product-slider__indicators {
         height: 0 !important;
         visibility: hidden;
     }
-    .featured-product-slider__slides-container .slide, .featured-product-slider__slides-container .slide .item {
+    .{{ section.id }} .featured-product-slider__slides-container .slide, .{{ section.id }} .featured-product-slider__slides-container .slide .item {
       transition: none !important;
       opacity: 1 !important;
     }
@@ -78,7 +75,12 @@
             data-tablet-items="{{ tablet_items }}"
             data-desktop-items="{{ desktop_items }}"
             class="{{ section.id }}"
+            data-section-id="{{ section.id }}"
           >
+            <p id="imagesData-{{ section.id }}"></p>
+            <p id="variantsData-{{ section.id }}"></p>
+            <p id="optionsData-{{ section.id }}"></p>
+
             <div class="featured-product-slider" data-section-id="{{ section.id }}">
               <div class="prev">
                 {% render 'icons', icon: 'chevron-prev' %}
@@ -165,27 +167,26 @@
 </featured-product>
 
 <script defer>
-  let featuredProductImages = {};
+  featuredProductImages = {};
   {% if featured_product.images.size > 0 %}
-  let variantsAttached = [];
     {% for image in featured_product.images %}
      {% for variant in image.variants %}
-       variantsAttached.push({{ variant.id }});
+       featuredProductvariantsAttached.push({{ variant.id }});
      {% endfor %}
-       featuredProductImages[{{ image.position }}] = {  position: {{ image.position }}, id: {{ image.id }}, variant_ids: variantsAttached, src: "{{ image | image_url }}" , alt: "{{ image.alt | escape }}" , width: "{{ image.width }}" , height: "{{ image.height }}"};
+       featuredProductImages[{{ image.position }}] = {  position: {{ image.position }}, id: {{ image.id }}, variant_ids: featuredProductvariantsAttached, src: "{{ image | image_url }}" , alt: "{{ image.alt | escape }}" , width: "{{ image.width }}" , height: "{{ image.height }}"};
     {% endfor %}
   {% endif %}
 
-  let featuredProductVariants = {};
+
+  featuredProductVariants = {};
   {% if featured_product.variants.size > 0 %}
       {% for variant in featured_product.variants %}
-        featuredProductVariants['{{ variant.id }}'] = { id: "{{ variant.id }}", title: "{{ variant.title }}", price: "{{ variant.price | money }}", compare_at_price: "{{ variant.compare_at_price | money }}", inventory: {{ variant.inventory_quantity }} };
+        featuredProductVariants['{{ variant.id }}'] = { id: "{{ variant.id }}", title: "{{ variant.title }}", price: "{{ variant.price | money }}", compare_at_price: "{{ variant.compare_at_price | money }}", inventory: {{ variant.inventory_quantity }}, featured_image: "{{ variant.featured_image.id }}" };
       {% endfor %}
     {% endif %}
 
-  let featuredProductOptions = {};
+  featuredProductOptions = {};
   {% if featured_product.options_with_values.size > 0 %}
-
     {% for option in featured_product.options_with_values %}
         optionValues = [];
       {% for value in option.values %} optionValues.push("{{ value }}");
@@ -194,8 +195,11 @@
     {% endfor %}
   {% endif %}
 
-  let featuredProductVariantSelectorType = "{{ section.settings.variant_selector_type }}";
-  let featuredProductColorSelectorType = "{{ section.settings.color_selector_type }}";
+  localStorage.setItem("featuredProductImages-{{ section.id }}", JSON.stringify(featuredProductImages));
+  localStorage.setItem("featuredProductVariants-{{ section.id }}", JSON.stringify(featuredProductVariants));
+  localStorage.setItem("featuredProductOptions-{{ section.id }}", JSON.stringify(featuredProductOptions));
+  localStorage.setItem("featuredProductVariantSelectorType-{{ section.id }}", "{{ section.settings.variant_selector_type }}");
+  localStorage.setItem("featuredProductColorSelectorType-{{ section.id }}", "{{ section.settings.color_selector_type }}");
 </script>
 
 {% schema %}
@@ -254,6 +258,32 @@
         }
       ],
       "default": "dropdown"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "transparent"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 400,
+      "step": 10,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Top bottom",
+      "min": 0,
+      "max": 400,
+      "step": 10,
+      "unit": "px",
+      "default": 0
     },
     {
       "type": "select",

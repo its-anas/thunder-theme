@@ -214,7 +214,6 @@ class ProductPage extends HTMLElement {
 
 customElements.define("product-page", ProductPage);
 
-// Product page slider
 class ProductPageSlider extends HTMLElement {
 	constructor() {
 		super();

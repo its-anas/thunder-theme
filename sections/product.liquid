@@ -338,7 +338,7 @@
                               {% for value in option.values %}
                                 <label
                                   class=" product-page__radio__label color_swatch {% if option.selected_value == value %}checked{% endif %}"
-                                  style=" background-color: 
+                                 
                                   {%- liquid 
                                     assign color_swatch_list = settings.color_swatch_list | split: ','
                                     for color_swatch in color_swatch_list
@@ -347,15 +347,18 @@
                                       if color_swatch_name == value
                                         assign color_swatch_value = color_swatch_parts.last | strip
                                          if color_swatch_value contains '#'
+                                         echo "style=' background-color:" 
                                           echo color_swatch_value
+                                          echo "; color: transparent;'"
                                          endif
                                          break
                                        endif
                                     endfor 
                                   -%}
-                                  "
+                               
                                   for="{{ option.name | handle }}-{{ value | handle }}"
                                 >
+                                    {{ value }}
                                   <input
                                     {% if option.selected_value == value %}
                                       checked
