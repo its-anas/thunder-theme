@@ -309,7 +309,7 @@
     position: absolute;
     bottom: 0;
     z-index: 3;
-    width: 100%;
+    width: calc(100% - 4px);
     height: auto;
     border: 2px solid #fff;
     background: #000;
@@ -317,6 +317,12 @@
     justify-content: center;
     align-items: center;
     padding: 1rem 0rem;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.cart-drawer__note-popup textarea {
+    resize: none;
 }
 
 .cart-drawer__note-popup__content {

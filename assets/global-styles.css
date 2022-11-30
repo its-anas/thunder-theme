@@ -152,12 +152,14 @@ img {
   -webkit-backdrop-filter: blur(4px);
   backdrop-filter: blur(4px);
   transition: all 0.3s ease-in;
+  pointer-events: all;
 }
 
 .theme-overlay.hidden {
   opacity: 0;
   z-index: -1;
   transition: all 0.3s ease-in;
+  pointer-events: none;
 }
 
 .theme-overlay.higher-layer {
@@ -254,7 +256,7 @@ img {
   animation: reveal 500ms;
   -webkit-animation-fill-mode: forwards;
   animation-fill-mode: forwards;
-  pointer-events: all;
+  pointer-events: all !important;
 }
 
 @-webkit-keyframes reveal {
@@ -379,7 +381,7 @@ label {
 }
 
 .price--actual {
-  font-size: 1rem;
+  font-size: calc(var(--font-size-type-scale) * var(--font-type-scale) * 1px);
 }
 
 a {
