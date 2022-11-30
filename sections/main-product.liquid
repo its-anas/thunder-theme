@@ -591,7 +591,7 @@
                             </a>
                             <div class="quick-add-icon"
                               id="quick-add-button"
-                              data-first-available-variant-id="{{ bundled_product.variants.first.id }}"
+                              data-first-available-variant-id="{{ bundled_product.first_available_variant.id }}"
                               data-product-handle="{{ bundled_product.handle }}"
                               data-product-variants="{% if  bundled_product.variants.size > 1 %}with{% else %}without{% endif %}"
                               >
@@ -616,7 +616,7 @@
 
 
 <script defer>
-    updateRecentlyViewedProductsCookie("{{ product.id }}", "{{ product.title }}", "{{ product.url }}", "{{ product.featured_image | image_url }}", "{{ product.featured_image.alt }}", "{{ product.featured_image.width }}", "{{ product.featured_image.height }}", "{{ product.price | money }}", "{{ product.compare_at_price | money }}", "{{ product.compare_at_price | minus: product.price }}", "{{ product.compare_at_price | minus: product.price | money }}", "{{ 'now' | date: "%d" | minus: product.published_at | date: "%d" }}", "{{ product.variants.first.id }}", "{{ product.handle }}", "{{ product.variants.size }}");
+    updateRecentlyViewedProductsCookie("{{ product.id }}", "{{ product.title }}", "{{ product.url }}", "{{ product.featured_image | image_url }}", "{{ product.featured_image.alt }}", "{{ product.featured_image.width }}", "{{ product.featured_image.height }}", "{{ product.price | money }}", "{{ product.compare_at_price | money }}", "{{ product.compare_at_price | minus: product.price }}", "{{ product.compare_at_price | minus: product.price | money }}", "{{ 'now' | date: "%d" | minus: product.published_at | date: "%d" }}", "{{ product.first_available_variant.id }}", "{{ product.handle }}", "{{ product.variants.size }}");
     function updateRecentlyViewedProductsCookie(productId, productTitle, productUrl, productImage, productImageAlt, productImageWidth, productImageHeight, productPrice, productCompareAtPrice, productPriceDifference, productPriceDifferenceWithCurrency, productDateDifference, productVariantFirstId, productHandle, productVariantsSize) {
       let recentlyViewedProducts = [];
 
