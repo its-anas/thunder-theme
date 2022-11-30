@@ -1,7 +1,7 @@
 {{ 'main-header.css' | asset_url | stylesheet_tag }}
 
 {% style %}
-  .header-section.boxed .header-container .section-header .header .header__content, .menu-mobile__container, .menu__dropdown-content {
+  .header-section.boxed .header-container .main-header .header .header__content, .menu-mobile__container, .menu__dropdown-content {
     border-radius: {{ section.settings.border_radius }}px;
     border: {{ section.settings.border_width }}px solid {{ section.settings.border_color }};
   }
@@ -760,7 +760,7 @@
 {% schema %}
 {
   "name": "Header",
-  "class": "section-header openable-element",
+  "class": "main-header",
   "settings": [
     {
       "type": "header",

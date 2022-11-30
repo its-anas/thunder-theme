@@ -62,17 +62,17 @@
   {{ settings.font_type | font_face: font_display: 'swap' }}
 
   {%- if settings.header_layout == "header_first" %}
-      #shopify-section-announcement-bar {
+      .main-announcement-bar {
               order: 2;
       }
-      #shopify-section-header {
+      .main-header {
               order: 1;
       }
   {% else %}
-      #shopify-section-announcement-bar {
+      .main-announcement-bar {
               order: 1;
       }
-      #shopify-section-header {
+      .main-header {
               order: 2;
       }
   {% endif %}

@@ -1,65 +1,65 @@
-.section-product-page-tabs {
-    padding: 1rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.main-product-page-tabs {
+	padding: 1rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
-.section-product-page-tabs .product-page__tabs {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 0.2rem;
-    padding: 0.03rem;
-    max-width: 100%;
+.main-product-page-tabs .product-page__tabs {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: 0.2rem;
+	padding: 0.03rem;
+	max-width: 100%;
 }
 
 @media screen and (min-width: 1025px) {
-    .section-product-page-tabs .product-page__tabs {
-        width: 1600px;
-    }
+	.main-product-page-tabs .product-page__tabs {
+		width: 1600px;
+	}
 }
 
-.section-product-page-tabs .product-page__tab {
-    cursor: pointer;
-    width: 100%;
+.main-product-page-tabs .product-page__tab {
+	cursor: pointer;
+	width: 100%;
 }
 
-.section-product-page-tabs .product-page__tab.active .product-page__title-svg {
-    transform: rotate(180deg);
+.main-product-page-tabs .product-page__tab.active .product-page__title-svg {
+	transform: rotate(180deg);
 }
 
-.section-product-page-tabs .product-page__tab-title {
-    height: 2.5rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #222;
+.main-product-page-tabs .product-page__tab-title {
+	height: 2.5rem;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background-color: #222;
 }
 
-.section-product-page-tabs .product-page__tab-title-text {
-    padding-left: 0.5rem;
-    font-size: 1rem;
+.main-product-page-tabs .product-page__tab-title-text {
+	padding-left: 0.5rem;
+	font-size: 1rem;
 }
 
-.section-product-page-tabs .product-page__tab-title-svg {
-    transition: all 0.2s ease-in-out;
-    transform: rotate(360deg);
+.main-product-page-tabs .product-page__tab-title-svg {
+	transition: all 0.2s ease-in-out;
+	transform: rotate(360deg);
 }
 
-.section-product-page-tabs .product-page__tab-content {
-    overflow: hidden;
-    transition: all 0.2s ease-in-out;
-    padding-left: 1rem;
-    padding-right: 1rem;
+.main-product-page-tabs .product-page__tab-content {
+	overflow: hidden;
+	transition: all 0.2s ease-in-out;
+	padding-left: 1rem;
+	padding-right: 1rem;
 }
 
-.section-product-page-tabs .product-page__share-buttons {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    height: auto;
-    padding: 1rem;
-    align-items: center;
-    gap: 0.5rem;
+.main-product-page-tabs .product-page__share-buttons {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	height: auto;
+	padding: 1rem;
+	align-items: center;
+	gap: 0.5rem;
 }

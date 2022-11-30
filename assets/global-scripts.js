@@ -213,7 +213,7 @@ class PredictiveSearch extends HTMLElement {
 	}
 
 	getSearchResults(searchTerm) {
-		fetch(`/search/suggest?q=${searchTerm}&resources[type]=product&resources[limit]=8&section_id=predictive-search`)
+		fetch(`/search/suggest?q=${searchTerm}&resources[type]=product&resources[limit]=8&section_id=section-predictive-search`)
 			.then((response) => {
 				if (!response.ok) {
 					var error = new Error(response.status);
@@ -224,7 +224,7 @@ class PredictiveSearch extends HTMLElement {
 				return response.text();
 			})
 			.then((text) => {
-				const resultsMarkup = new DOMParser().parseFromString(text, "text/html").querySelector("#shopify-section-predictive-search").innerHTML;
+				const resultsMarkup = new DOMParser().parseFromString(text, "text/html").querySelector("#shopify-section-section-predictive-search").innerHTML;
 				this.predictiveSearchResults.innerHTML = resultsMarkup;
 				this.open();
 			})
@@ -337,7 +337,7 @@ class SearchDrawer extends PredictiveSearch {
 		if (Shopify.designMode) {
 			document.addEventListener("shopify:section:load", (event) => {
 				event.target.classList.forEach((i) => {
-					if (i === "section-search-drawer") {
+					if (i === "main-search-drawer") {
 						this.searchDrawer.style.height = `calc(100% - ${document.querySelector(".header-section").offsetHeight}px + 8px)`;
 						this.showSearchDrawer();
 					}
@@ -346,7 +346,7 @@ class SearchDrawer extends PredictiveSearch {
 
 			document.addEventListener("shopify:section:select", (event) => {
 				event.target.classList.forEach((i) => {
-					if (i === "section-search-drawer") {
+					if (i === "main-search-drawer") {
 						this.searchDrawer.style.height = `calc(100% - ${document.querySelector(".header-section").offsetHeight}px + 8px)`;
 						this.showSearchDrawer();
 					}
@@ -355,7 +355,7 @@ class SearchDrawer extends PredictiveSearch {
 
 			document.addEventListener("shopify:section:deselect", (event) => {
 				event.target.classList.forEach((i) => {
-					if (i === "section-search-drawer") {
+					if (i === "main-search-drawer") {
 						this.hideSearchDrawer();
 					}
 				});
@@ -482,7 +482,7 @@ class MenuDrawerComponent extends HTMLElement {
 			document.addEventListener("shopify:section:load", (event) => {
 				event.target.classList.forEach((i) => {
 					this.style.height = `calc(100% - ${document.querySelector(".header-section").offsetHeight}px + 8px)`;
-					if (i === "section-header") {
+					if (i === "main-header") {
 						this.showDrawer();
 					}
 				});
@@ -491,7 +491,7 @@ class MenuDrawerComponent extends HTMLElement {
 			document.addEventListener("shopify:section:select", (event) => {
 				event.target.classList.forEach((i) => {
 					this.style.height = `calc(100% - ${document.querySelector(".header-section").offsetHeight}px + 8px)`;
-					if (i === "section-header") {
+					if (i === "main-header") {
 						this.showDrawer();
 					}
 				});
@@ -499,7 +499,7 @@ class MenuDrawerComponent extends HTMLElement {
 
 			document.addEventListener("shopify:section:deselect", (event) => {
 				event.target.classList.forEach((i) => {
-					if (i === "section-header") {
+					if (i === "main-header") {
 						this.hideDrawer();
 					}
 				});
@@ -1051,7 +1051,7 @@ class CartComponent extends HTMLElement {
 					event.target.classList.forEach((i) => {
 						this.style.height = `calc(100% - ${document.querySelector(".header-section").offsetHeight}px + 8px)`;
 
-						if (i === "section-cart-drawer") {
+						if (i === "main-cart-drawer") {
 							showDrawer();
 						}
 					});
@@ -1061,7 +1061,7 @@ class CartComponent extends HTMLElement {
 					event.target.classList.forEach((i) => {
 						this.style.height = `calc(100% - ${document.querySelector(".header-section").offsetHeight}px + 8px)`;
 
-						if (i === "section-cart-drawer") {
+						if (i === "main-cart-drawer") {
 							showDrawer();
 						}
 					});
@@ -1069,7 +1069,7 @@ class CartComponent extends HTMLElement {
 
 				document.addEventListener("shopify:section:deselect", (event) => {
 					event.target.classList.forEach((i) => {
-						if (i === "section-cart-drawer") {
+						if (i === "main-cart-drawer") {
 							this.hideDrawer();
 						}
 					});
@@ -1490,14 +1490,14 @@ class QuickView extends HTMLElement {
 		if (Shopify.designMode) {
 			document.addEventListener("shopify:section:select", (event) => {
 				event.target.classList.forEach((i) => {
-					if (i === "section-quick-view") {
+					if (i === "main-quick-view") {
 						this.showQuickView();
 					}
 				});
 			});
 			document.addEventListener("shopify:section:deselect", (event) => {
 				event.target.classList.forEach((i) => {
-					if (i === "section-quick-view") {
+					if (i === "main-quick-view") {
 						this.hideQuickView();
 					}
 				});
@@ -1934,14 +1934,14 @@ class PopupComponent extends HTMLElement {
 		if (Shopify.designMode) {
 			document.addEventListener("shopify:section:select", (event) => {
 				event.target.classList.forEach((i) => {
-					if (i === "section-popup") {
+					if (i === "main-popup") {
 						this.openPopupDrawer();
 					}
 				});
 			});
 			document.addEventListener("shopify:section:deselect", (event) => {
 				event.target.classList.forEach((i) => {
-					if (i === "section-popup") {
+					if (i === "main-popup") {
 						this.hidePopupDrawer();
 					}
 				});

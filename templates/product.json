@@ -1,6 +1,6 @@
 {
   "sections": {
-    "product": {
+    "main": {
       "type": "main-product",
       "settings": {
         "thumbnails_on_mobile": false
@@ -203,7 +203,7 @@
     }
   },
   "order": [
-    "product",
+    "main",
     "product-page-tabs",
     "compare",
     "promotional-banner",

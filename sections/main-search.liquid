@@ -1,0 +1,30 @@
+{{ 'main-search.css' | asset_url | stylesheet_tag }}
+
+{% style %}
+{% endstyle %}
+
+<div class="cart-page empty-state">
+  <div class="cart-page__container">
+    <div class="cart-page__head">
+      <h2 class="cart-page__title">Cart</h2>
+    </div>
+
+    <div class="cart-page__empty-state">
+      <p>You cart is empty</p>
+      <div class="buttons">
+        <a class="button button--primary border" href="/collections/all">
+          <span></span> <span></span> <span></span> <span></span>
+          SHOP NOW
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Search",
+  "class": "main-search",
+  "settings": []
+}
+{% endschema %}
