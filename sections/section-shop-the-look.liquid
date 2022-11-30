@@ -1,0 +1,454 @@
+{{ 'section-shop-the-look.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  @media screen and (max-width: 1024px) {
+    .{{ section.id }}.shop-the-look > .shop-the-look__wrapper, .{{ section.id }}.shop-the-look > .shop-the-look__wrapper > .shop-the-look__image {
+      aspect-ratio: {{ section.settings.mobile_aspect_ratio }};
+    }
+  }
+
+  @media screen and (min-width: 1025px) {
+    .{{ section.id }}.shop-the-look > .shop-the-look__wrapper, .{{ section.id }}.shop-the-look > .shop-the-look__wrapper > .shop-the-look__image {
+      aspect-ratio: {{ section.settings.desktop_aspect_ratio }};
+    }
+  }
+
+  .shop-the-look__product {
+    background-color: {{ section.settings.openable_background_color }};
+  }
+
+  .{{ section.id }}.shop-the-look {
+    padding: {{ section.settings.space_outside_elements | divided_by: 2 }}px 0;
+  }
+
+  .{{ section.id }}.shop-the-look > .shop-the-look__wrapper > .shop-the-look__container > .shop-the-look__box > .shop-the-look__icon > .shop-the-look__icon-center:after {
+    background: linear-gradient({{ section.settings.selector_color }} 0 0), linear-gradient({{ section.settings.selector_color }} 0 0);
+    background-position: center;
+    background-size: 30% 2px, 2px 30%;
+    background-repeat: no-repeat;
+  }
+
+  .{{ section.id }}.shop-the-look > .shop-the-look__wrapper > .shop-the-look__container > .shop-the-look__box > .shop-the-look__icon > .shop-the-look__icon-center {
+    background-color: {{ section.settings.selector_background_color }};
+  }
+
+  .{{ section.id }}.shop-the-look > .shop-the-look__wrapper > .shop-the-look__container > .shop-the-look__box > .shop-the-look__icon > .shop-the-look__icon-edge {
+    background-color: {{ section.settings.selector_background_color }};
+  }
+
+  .shop-the-look__icon {}
+  .shop-the-look__icon-edge {}
+  .shop-the-look__icon-center {}
+{%- endstyle -%}
+
+<section class="{{ section.id }} shop-the-look {{ section.settings.section_style }}">
+  {% if section.settings.heading != blank %}
+    <{{ section.settings.heading_size }} class="shop-the-look__heading">
+      {{ section.settings.heading }}
+    </{{ section.settings.heading_size }}>
+  {% endif %}
+
+  <div class="shop-the-look__wrapper">
+    <div class="shop-the-look__image">
+      {% if section.settings.image == blank %}
+        {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder' }}
+      {% elsif section.settings.image != blank %}
+        <div class="{{ section.id }} media">
+          <img
+            srcset="{{ section.settings.image | image_url }}"
+            loading="lazy"
+            alt="{{ section.settings.image.alt | escape }}"
+            width="{{ section.settings.image.width }}"
+            height="{{ section.settings.image.height }}"
+            class="fit {% if section.settings.mobile_image != blank %}desktop-only{% endif %}"
+          >
+          {% if section.settings.mobile_image != blank %}
+            <img
+              srcset="{{ section.settings.mobile_image | image_url }}"
+              loading="lazy"
+              alt="{{ section.settings.mobile_image.alt | escape }}"
+              width="{{ section.settings.mobile_image.width }}"
+              height="{{ section.settings.mobile_image.height }}"
+              class="fit mobile-only"
+            >
+          {% endif %}
+        </div>
+      {% endif %}
+    </div>
+    <div class="shop-the-look__container">
+      {% for block in section.blocks %}
+        <div
+          style="
+            {%- if block.settings.desktop_vertical_position <= 50 -%}
+              bottom: {{ block.settings.desktop_vertical_position }}%;
+            {%- else -%}
+              bottom: calc({{ block.settings.desktop_vertical_position }}% - 80px);
+            {%- endif -%}
+            {%- if block.settings.desktop_horizontal_position <= 50 -%}
+              left: {{ block.settings.desktop_horizontal_position }}%;
+            {%- else -%}
+              left: calc({{ block.settings.desktop_horizontal_position }}% - 380px);
+            {%- endif -%}
+            {%- if block.settings.desktop_horizontal_position > 50 -%}
+              flex-direction: row-reverse;
+            {%- endif -%}
+          "
+          class="shop-the-look__box desktop-only"
+        >
+          <div class="shop-the-look__icon" {{ block.shopify_attributes }}>
+            <div class="shop-the-look__icon-edge"></div>
+            <div class="shop-the-look__icon-edge-background"></div>
+            <div class="shop-the-look__icon-center"></div>
+          </div>
+
+          <div
+            class="shop-the-look__product"
+            style="
+                {%- if block.settings.desktop_horizontal_position <= 50 -%}
+                transform-origin: left;
+              {%- else -%}
+                transform-origin: right;
+              {%- endif -%}
+            "
+          >
+            {%- case block.type -%}
+              {%- when 'product' -%}
+                <div class="shop-the-look__product-image">
+                  {%- if block.settings.product == blank -%}
+                    {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
+                  {%- elsif block.settings.product != blank -%}
+                    <img
+                      srcset="{{ block.settings.product.featured_image | image_url }}"
+                      loading="lazy"
+                      alt="{{ block.settings.product.featured_image.alt | escape }}"
+                      width="{{ block.settings.product.featured_image.width }}"
+                      height="{{ block.settings.product.featured_image.height }}"
+                      class="fit"
+                    >
+                  {%- endif -%}
+                </div>
+                <div class="shop-the-look__content">
+                  <p class="shop-the-look__product-title">
+                    {% if block.settings.product.title == blank %}
+                      Product title
+                    {% elsif block.settings.product.title != blank %}
+                      {{ block.settings.product.title }}
+                    {% endif %}
+                  </p>
+                  <div class="shop-the-look__product-price">
+                    <p class="price--compare-at">
+                      {% if block.settings.product.compare_at_price == blank %}
+                        $00.00
+                      {% elsif block.settings.product.compare_at_price != blank %}
+                        {{ block.settings.product.compare_at_price | money }}
+                      {% endif %}
+                    </p>
+                    <p class="price--actual">
+                      {% if block.settings.product.price == blank %}
+                        $00.00
+                      {% elsif block.settings.product.price != blank %}
+                        {{ block.settings.product.price | money }}
+                      {% endif %}
+                    </p>
+                  </div>
+                  <a
+                    class="button--link"
+                    id="quick-add-button"
+                    data-first-available-variant-id="{{ block.settings.product.variants.first.id }}"
+                    data-product-handle="{{ block.settings.product.handle }}"
+                    data-product-variants="{% if block.settings.product.variants.size > 1 %}with{% else %}without{% endif %}"
+                  >
+                    {%- if block.settings.product.variants.size == 1 -%}
+                      Add to cart
+                    {%- elsif block.settings.product.variants.size > 1 -%}
+                      Quick view
+                    {%- endif -%}
+                  </a>
+                </div>
+              {%- when 'feature' -%}
+                <div class="shop-the-look__feature">
+                  <h6 class="shop-the-look__feature-title">{{ block.settings.feature_title }}</h6>
+                  <p class="shop-the-look__feature-text">
+                    {{ block.settings.feature_description }}
+                  </p>
+                </div>
+            {%- endcase -%}
+          </div>
+        </div>
+        {%- case block.type -%}
+          {%- when 'product' -%}
+            <div
+              style="
+                {%- if block.settings.mobile_vertical_position <= 50 -%}
+                  bottom: {{ block.settings.mobile_vertical_position }}%;
+                {%- else -%}
+                  bottom: calc({{ block.settings.mobile_vertical_position }}% - 80px);
+                {%- endif -%}
+                {%- if block.settings.mobile_horizontal_position <= 50 -%}
+                  left: {{ block.settings.mobile_horizontal_position }}%;
+                {%- else -%}
+                  left: calc({{ block.settings.mobile_horizontal_position }}% - 80px);
+                {%- endif -%}
+              "
+              class="shop-the-look__box mobile-only"
+            >
+              <div
+                class="shop-the-look__icon"
+                id="quick-add-button"
+                data-first-available-variant-id="{{ block.settings.product.variants.first.id }}"
+                data-product-handle="{{ block.settings.product.handle }}"
+                data-product-variants="{% if block.settings.product.variants.size > 1 %}with{% else %}without{% endif %}"
+              >
+                <div class="shop-the-look__icon-edge"></div>
+                <div class="shop-the-look__icon-edge-background"></div>
+                <div class="shop-the-look__icon-center"></div>
+              </div>
+            </div>
+        {%- endcase -%}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Shop the look",
+  "class": "section-shop-the-look",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "Mobile image"
+    },
+    {
+      "type": "range",
+      "id": "desktop_aspect_ratio",
+      "min": 2,
+      "max": 4,
+      "step": 0.1,
+      "unit": "a/r",
+      "label": "Desktop aspect ratio",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "mobile_aspect_ratio",
+      "min": 0.5,
+      "max": 2,
+      "step": 0.1,
+      "unit": "a/r",
+      "label": "Mobile aspect ratio",
+      "default": 1
+    },
+    {
+      "type": "color",
+      "id": "selector_color",
+      "label": "Selector color",
+      "default": "#fff"
+    },
+    {
+      "type": "color",
+      "id": "selector_background_color",
+      "label": "Selector background color",
+      "default": "#000"
+    },
+    {
+      "type": "color",
+      "id": "openable_background_color",
+      "label": "Openable element background color",
+      "default": "#000"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Shop our look"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "options": [
+        {
+          "value": "h1",
+          "label": "h1"
+        },
+        {
+          "value": "h2",
+          "label": "h2"
+        },
+        {
+          "value": "h3",
+          "label": "h3"
+        },
+        {
+          "value": "h4",
+          "label": "h4"
+        },
+        {
+          "value": "h5",
+          "label": "h5"
+        },
+        {
+          "value": "h6",
+          "label": "h6"
+        }
+      ],
+      "default": "h6"
+    },
+    {
+      "type": "range",
+      "id": "space_outside_elements",
+      "label": "Space outside elements",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "select",
+      "id": "section_style",
+      "label": "Section style",
+      "default": "full",
+      "options": [
+        {
+          "value": " ",
+          "label": "Full width"
+        },
+        {
+          "value": "wrapped",
+          "label": "Wrapped"
+        }
+      ],
+      "default": " "
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Product",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product"
+        },
+        {
+          "type": "range",
+          "id": "desktop_vertical_position",
+          "min": 10,
+          "max": 90,
+          "step": 1,
+          "unit": "%",
+          "label": "Desktop vertical position",
+          "default": 50
+        },
+        {
+          "type": "range",
+          "id": "desktop_horizontal_position",
+          "min": 5,
+          "max": 95,
+          "step": 1,
+          "unit": "%",
+          "label": "Desktop horizontal position",
+          "default": 50
+        },
+        {
+          "type": "range",
+          "id": "mobile_vertical_position",
+          "min": 5,
+          "max": 95,
+          "step": 1,
+          "unit": "%",
+          "label": "Mobile vertical position",
+          "default": 50
+        },
+        {
+          "type": "range",
+          "id": "mobile_horizontal_position",
+          "min": 5,
+          "max": 95,
+          "step": 1,
+          "unit": "%",
+          "label": "Mobile horizontal position",
+          "default": 50
+        }
+      ]
+    },
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        {
+          "type": "text",
+          "id": "feature_title",
+          "label": "Feature title",
+          "default": "Feature"
+        },
+        {
+          "type": "text",
+          "id": "feature_description",
+          "label": "Feature description",
+          "default": "Put a short description to highlight the feature of the product. For example the material or the color."
+        },
+        {
+          "type": "range",
+          "id": "desktop_vertical_position",
+          "min": 10,
+          "max": 90,
+          "step": 1,
+          "unit": "%",
+          "label": "Desktop vertical position",
+          "default": 50
+        },
+        {
+          "type": "range",
+          "id": "desktop_horizontal_position",
+          "min": 5,
+          "max": 95,
+          "step": 1,
+          "unit": "%",
+          "label": "Desktop horizontal position",
+          "default": 50
+        },
+        {
+          "type": "range",
+          "id": "mobile_vertical_position",
+          "min": 5,
+          "max": 95,
+          "step": 1,
+          "unit": "%",
+          "label": "Mobile vertical position",
+          "default": 50
+        },
+        {
+          "type": "range",
+          "id": "mobile_horizontal_position",
+          "min": 5,
+          "max": 95,
+          "step": 1,
+          "unit": "%",
+          "label": "Mobile horizontal position",
+          "default": 50
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Shop the look",
+      "blocks": [
+        {
+          "type": "product"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,229 @@
+{{ 'main-newsletter-popup.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  {% if section.settings.show_image == true and section.settings.image != blank %}
+    @media screen and (max-width: 1025px) {
+      .popup__content:before {
+        background-image: url({{ section.settings.image | image_url }});
+      }
+    }
+  {% endif %}
+
+  .popup__content {
+    background-color: {{ section.settings.background_color }};
+  }
+
+  {% if section.settings.border_width > 0%}
+    .popup__container.border {
+      border: {{ section.settings.border_width }}px solid {{ section.settings.border_color }} ;
+      border-radius: {{ section.settings.border_radius }}px;
+      background-color: {{ section.settings.background_color }};
+      overflow: hidden;
+    }
+  {% endif %}
+{%- endstyle -%}
+
+{% if section.settings.enable_popup == true %}
+  <popup-component>
+    <div class="popup">
+      <div
+        openable
+        data-delay-time="{{ section.settings.delay_time | times: 1000 }}"
+        class="popup__container media hidden"
+      >
+        {% if section.settings.show_image == true and section.settings.image != blank %}
+          <div class="popup__picture">
+            <img
+              srcset="{{ section.settings.image | image_url }}"
+              loading="lazy"
+              alt="{{ section.settings.image.alt | escape }}"
+              width="{{ section.settings.image.width }}"
+              height="{{ section.settings.image.height }}"
+              class="fit"
+            >
+          </div>
+        {% endif %}
+        <div class="popup__content">
+          <div class="popup__close"></div>
+          <div class="newsletter container">
+            {% if section.settings.heading != blank %}
+              <div class="newsletter__heading">
+                <h6>
+                  {{ section.settings.heading }}
+                </h6>
+              </div>
+            {% endif %}
+            {% if section.settings.text != blank %}
+              <p class="newsletter__text">{{ section.settings.text }}</p>
+            {% endif %}
+
+            {% form 'customer', class: 'newsletter__form' %}
+              <div class="newsletter__container">
+                <input type="hidden" name="contact[tags]" value="newsletter">
+
+                <input
+                  id=""
+                  type="email"
+                  name="contact[email]"
+                  class="newsletter__input"
+                  value="{{ form.email }}"
+                  autocorrect="off"
+                  autocapitalize="off"
+                  autocomplete="email"
+                  {% if form.errors %}
+                    autofocus
+                  {% endif %}
+                  placeholder="Type your email address"
+                  required
+                >
+
+                <button
+                  type="submit"
+                  class="newsletter__button"
+                  name="commit"
+                  id="subscribe"
+                >
+                  <p class="button">SUBSCRIBE</p>
+                  <p></p>
+                </button>
+              </div>
+
+              {%- if form.errors -%}
+                <p class="form__error">
+                  ⚠
+                  {{ form.errors.translated_fields.email | capitalize }}
+                  {{ form.errors.messages.email }}
+                </p>
+              {%- endif -%}
+
+              {%- if form.posted_successfully? -%}
+                <p
+                  class="form__success"
+                  tabindex="-1"
+                  autofocus
+                >
+                  ✓ Subscription confirmed
+                </p>
+              {%- endif -%}
+            {%- endform -%}
+            {% if section.settings.show_social_media_icons == true %}
+              <div class="popup__social-media">
+                {% render 'social-media-icons' %}
+              </div>
+            {% endif %}
+
+            <a class="popup__link link">{{ section.settings.reject_text }}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </popup-component>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Popup",
+  "class": "section-popup",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Settings",
+      "info": "Once the customer closes the popup, it will not show up again until next time they visit your store. The popup cookie expires when the browser session ends.)"
+    },
+
+    {
+      "type": "checkbox",
+      "id": "enable_popup",
+      "label": "Enable popup",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_social_media_icons",
+      "label": "Show social media icons",
+      "default": true,
+      "info": "Icons will be shown only if you have added at least one social media link in the theme settings."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_image",
+      "label": "Show image",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "delay_time",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "unit": "s",
+      "label": "Delay time",
+      "default": 5
+    },
+    {
+      "type": "header",
+      "content": "Text"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "GET 10% OFF"
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Text",
+      "default": "Subscribe to our newsletter and we’ll send you a 10% discount code towards your first purchase."
+    },
+    {
+      "type": "text",
+      "id": "reject_text",
+      "label": "Rejectal text",
+      "default": "No thanks, I prefer to pay full price"
+    },
+    {
+      "type": "header",
+      "content": "Design"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#222"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border color",
+      "default": "#fff"
+    },
+    {
+      "type": "range",
+      "id": "border_width",
+      "min": 0,
+      "max": 3,
+      "step": 1,
+      "unit": "px",
+      "label": "Border width",
+      "default": 2
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Border corners radius",
+      "default": 0
+    }
+  ],
+  "blocks": []
+}
+{% endschema %}

@@ -1,0 +1,114 @@
+{{ 'main-quick-view.css' | asset_url | stylesheet_tag }}
+
+<quick-view-component>
+  <div class="quick-view hidden">
+    <div class="quick-view-container">
+      <div class="quick-view__close">
+        {% render 'icons', icon: 'close' %}
+      </div>
+      <div class="quick-view__top">
+        <div class="quick-view__image">
+          <div class="quick-view__image-box">
+            {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
+          </div>
+        </div>
+        <div class="quick-view__details">
+          <p class="quick-view__vendor">Vendor</p>
+          <h6 class="quick-view__title">Product title</h6>
+          <p class="quick-view__price price--actual">Price</p>
+          <a href="" class="quick-view__product-url button--link">View details</a>
+        </div>
+      </div>
+      <div class="quick-view__content">
+        <div class="quick-view__options"></div>
+        <div class="quick-view__quantity-field">
+          <quantity-field class="quantity">
+            <label for="quantity-text"><p>Quantity</p></label>
+            <div class="quantity-field" id="quantity-field">
+              <button type="button" class="quantity-field__minus" id="quantity-field__minus">-</button>
+              <input
+                type="quantity"
+                class="quantity-field__input"
+                id="quantity-field__input"
+                name="quantity"
+                min="1"
+                value="1"
+              >
+              <button type="button" class="quantity-field__plus" id="quantity-field__plus">+</button>
+            </div>
+          </quantity-field>
+        </div>
+      </div>
+
+      <div class="quick-view__bottom buttons buttons--center">
+        <div class="shadow-divider"></div>
+        <a class="button button--primary border quick-view-add-to-cart" id="quick-view-add-to-cart">
+          <span></span> <span></span> <span></span> <span></span>ADD TO CART</a
+        >
+        <a class="button button--secondary border quick-view-buy-now" id="quick-view-buy-now">
+          <span></span> <span></span> <span></span> <span></span>BUY NOW</a
+        >
+      </div>
+    </div>
+  </div>
+</quick-view-component>
+
+<script>
+  let quickViewVariantSelectorType = '{{ section.settings.variant_selector_type }}';
+  let quickViewColorSelectorType = '{{ section.settings.color_selector_type }}';
+</script>
+
+{% schema %}
+{
+  "name": "Quick view",
+  "class": "section-quick-view",
+  "settings": [
+    {
+      "type": "select",
+      "id": "variant_selector_type",
+      "label": "Variant selector type",
+      "options": [
+        {
+          "value": "block",
+          "label": "Block"
+        },
+        {
+          "value": "dropdown",
+          "label": "Dropdown"
+        }
+      ],
+      "default": "dropdown"
+    },
+    {
+      "type": "select",
+      "id": "color_selector_type",
+      "label": "Color selector type",
+      "info": "For the color swatch to work properly, the product must have variants, every variant must have an image attached to it, every image alt must be written in the format #color:Name, and the color and it's hex must be added in Color swatch tab in theme settings.",
+      "options": [
+        {
+          "value": "block",
+          "label": "Block"
+        },
+        {
+          "value": "dropdown",
+          "label": "Dropdown"
+        },
+        {
+          "value": "color_swatch",
+          "label": "Color swatch"
+        },
+        {
+          "value": "variant_image",
+          "label": "Image variant"
+        }
+      ],
+      "default": "dropdown"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Quick view"
+    }
+  ]
+}
+{% endschema %}

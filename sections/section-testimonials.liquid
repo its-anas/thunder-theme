@@ -1,0 +1,409 @@
+{{ 'section-testimonials.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .{{ section.id }}.testimonials {
+    margin-top: {{ section.settings.space_outside | divided_by: 2 }}px;
+    margin-bottom: {{ section.settings.space_outside | divided_by: 2 }}px;
+  }
+
+  .{{ section.id }}.testimonials--just-color {
+    background-color: {{ section.settings.background_color }};
+   }
+
+   .{{ section.id }}.testimonials--image {
+       {% if section.settings.section_style == "wrapped" %}
+            background-image: url({{ section.settings.background_image | image_url: width: settings.wrapped_content_width }});
+            background-repeat: no-repeat;
+       {% endif %}
+       {% if section.settings.section_style == "full-width" %}
+            background-image: url({{ section.settings.background_image | image_url }});
+            background-size: cover;
+       {% endif %}
+       background-position: center;
+   }
+
+  .{{ section.id }}.testimonials__content,
+  .{{ section.id }}.testimonials__row,
+  .{{ section.id }}.testimonials__row--reversed,
+  .{{ section.id }}.testimonials__slide--right,
+  .{{ section.id }}.testimonials__slide--left {
+    gap: {{ section.settings.space_between_elements | divided_by: 2.0 }}rem;
+  }
+  .{{ section.id }}.testimonials__item {
+    min-height: {{ section.settings.review_height | times: 0.8 }}px;
+    width: {{ section.settings.review_width | times: 0.8 }}px;
+    background-color: {{ section.settings.review_background_color }};
+    border: {{ section.settings.review_border_width }}px {{ section.settings.review_border_color }} solid;
+  }
+  @media screen and (min-width: 751px) {
+    .{{ section.id }}.testimonials__content,
+    .{{ section.id }}.testimonials__row,
+    .{{ section.id }}.testimonials__row--reversed,
+    .{{ section.id }}.testimonials__slide--right,
+    .{{ section.id }}.testimonials__slide--left {
+      gap: {{ section.settings.space_between_elements }}rem;
+    }
+    .{{ section.id }}.testimonials__item {
+      min-height: {{ section.settings.review_height }}px;
+      width: {{ section.settings.review_width }}px;
+    }
+  }
+
+  .{{ section.id }}.testimonials__slide--right {
+    {% if section.settings.animated %}
+      animation: testimonials-slide--right {{ section.settings.animation_speed }}s linear infinite;
+    {% endif %}
+  }
+  .{{ section.id }}.testimonials__slide--left {
+    {% if section.settings.animated %}
+      animation: testimonials-slide--left {{ section.settings.animation_speed }}s linear infinite;
+    {% endif %}
+  }
+{%- endstyle -%}
+
+<section class="{{ section.id }} testimonials {% if section.settings.background_image == blank %}testimonials--just-color{% else %}testimonials--{{ section.settings.background_type }}{% endif %} {{ section.settings.section_style }}">
+  <div class="testimonials__heading">
+    <{{ section.settings.heading_size }}>
+      {{ section.settings.heading }}
+    </{{ section.settings.heading_size }}>
+  </div>
+  <div class="{{ section.id }} testimonials__content">
+    <div class="{{ section.id }} testimonials__row">
+      {%- capture testimonial_right -%}
+        <div class="{{ section.id }} testimonials__slide--right">
+          {% for block in section.blocks %}
+            {% assign num = forloop.index | modulo: 2 %}
+            {% if num != 0 %}
+              <div class="{{ section.id }} testimonials__item">
+                <div class="testimonials__reviewer">
+                  <div class="testimonials__reviewer-picture media">
+                    {%- if block.settings.reviewer_picture == blank -%}
+                      {{ 'product-3' | placeholder_svg_tag: 'placeholder' }}
+                    {%- elsif block.settings.reviewer_picture != blank -%}
+                      <img
+                        srcset="{{ block.settings.reviewer_picture | image_url }}"
+                        alt="{{ block.settings.reviewer_picture.alt | escape }}"
+                        width="{{ block.settings.reviewer_picture.width }}"
+                        height="{{ block.settings.reviewer_picture.height }}"
+                        loading="lazy"
+                        class="fit"
+                      >
+                    {% endif %}
+                  </div>
+                  <div class="testimonials__reviewer-info">
+                    <div class="testimonials__reviewer-stars">
+                      {% render 'icons', icon: block.settings.stars_count -%}
+                    </div>
+                    <p class="testimonials__reviewer-name">~{{ block.settings.reviewer_name }}</p>
+                  </div>
+                </div>
+                <div class="testimonials__review">
+                  <p>"{{ block.settings.review_text | truncate: 200 }}"</p>
+                </div>
+              </div>
+            {% endif %}
+          {% endfor -%}
+        </div>
+      {%- endcapture -%}
+      {% for testimonial in (1..15) %}
+        {{ testimonial_right }}
+      {% endfor %}
+    </div>
+    <div class="{{ section.id }} testimonials__row--reversed">
+      {%- capture testimonial_right -%}
+        <div class="{{ section.id }} testimonials__slide--left">
+          {% for block in section.blocks %}
+            {% assign num = forloop.index | modulo: 2 %}
+            {% if num == 0 %}
+              <div class="{{ section.id }} testimonials__item">
+                <div class="testimonials__reviewer">
+                  <div class="testimonials__reviewer-picture media">
+                    {%- if block.settings.reviewer_picture == blank -%}
+                      {{ 'product-3' | placeholder_svg_tag: 'placeholder' }}
+                    {%- elsif block.settings.reviewer_picture != blank -%}
+                      <img
+                        srcset="{{ block.settings.reviewer_picture | image_url }}"
+                        alt="{{ block.settings.reviewer_picture.alt | escape }}"
+                        width="{{ block.settings.reviewer_picture.width }}"
+                        height="{{ block.settings.reviewer_picture.height }}"
+                        loading="lazy"
+                        class="fit"
+                      >
+                    {% endif %}
+                  </div>
+                  <div class="testimonials__reviewer-info">
+                    <div class="testimonials__reviewer-stars">
+                      {% render 'icons', icon: block.settings.stars_count -%}
+                    </div>
+                    <p class="testimonials__reviewer-name">~{{ block.settings.reviewer_name }}</p>
+                  </div>
+                </div>
+                <div class="testimonials__review">
+                  <p>"{{ block.settings.review_text | truncate: 200 }}"</p>
+                </div>
+              </div>
+            {% endif %}
+          {% endfor -%}
+        </div>
+      {%- endcapture -%}
+      {% for testimonial in (1..15) %}
+        {{ testimonial_right }}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Testimonials",
+  "class": "section-testimonials",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Animation settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "animated",
+      "label": "Activate animation",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "animation_speed",
+      "min": 1,
+      "max": 100,
+      "step": 1,
+      "unit": "s",
+      "label": "Animation speed",
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Section settings"
+    },
+    {
+      "type": "select",
+      "id": "background_type",
+      "label": "Type",
+      "options": [
+        {
+          "value": "image",
+          "label": "Image"
+        },
+        {
+          "value": "just-color",
+          "label": "Color"
+        }
+      ],
+      "default": "just-color"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Image",
+      "info": "Applied only if Type is 'Image'"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "transparent",
+      "info": "Applied only if Type is 'Color'"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section heading",
+      "default": "Hear from our customers"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "options": [
+        {
+          "value": "h1",
+          "label": "h1"
+        },
+        {
+          "value": "h2",
+          "label": "h2"
+        },
+        {
+          "value": "h3",
+          "label": "h3"
+        },
+        {
+          "value": "h4",
+          "label": "h4"
+        },
+        {
+          "value": "h5",
+          "label": "h5"
+        },
+        {
+          "value": "h6",
+          "label": "h6"
+        }
+      ],
+      "default": "h6"
+    },
+
+    {
+      "type": "range",
+      "id": "space_outside",
+      "label": "Space outside section",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "space_between_elements",
+      "label": "Space between elements",
+      "min": 1,
+      "max": 3,
+      "step": 0.5,
+      "unit": "rem",
+      "default": 1
+    },
+    {
+      "type": "select",
+      "id": "section_style",
+      "label": "Section width",
+      "info": "Desktop only",
+      "options": [
+        {
+          "value": "full-width",
+          "label": "Full width"
+        },
+        {
+          "value": "wrapped",
+          "label": "Wrapped"
+        }
+      ],
+      "default": "full-width"
+    },
+    {
+      "type": "header",
+      "content": "Review settings"
+    },
+    {
+      "type": "range",
+      "id": "review_width",
+      "min": 250,
+      "max": 350,
+      "step": 1,
+      "unit": "px",
+      "label": "Review width",
+      "default": 250
+    },
+    {
+      "type": "range",
+      "id": "review_height",
+      "min": 150,
+      "max": 250,
+      "step": 1,
+      "unit": "px",
+      "label": "Review height",
+      "default": 150
+    },
+    {
+      "type": "color",
+      "id": "review_background_color",
+      "label": "Review background color",
+      "default": "#222222"
+    },
+    {
+      "type": "color",
+      "id": "review_border_color",
+      "label": "Review border color",
+      "default": "#fff"
+    },
+    {
+      "type": "range",
+      "id": "review_border_width",
+      "label": "Review border width",
+      "min": 0,
+      "max": 5,
+      "step": 1,
+      "unit": "px",
+      "default": 2
+    }
+  ],
+  "max_blocks": 20,
+  "blocks": [
+    {
+      "type": "text",
+      "name": "Review",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "reviewer_picture",
+          "label": "Reviewer picture"
+        },
+        {
+          "type": "select",
+          "id": "stars_count",
+          "label": "Number of stars",
+          "options": [
+            {
+              "value": "star-0",
+              "label": "0 stars"
+            },
+            {
+              "value": "star-1",
+              "label": "1 star"
+            },
+            {
+              "value": "star-2",
+              "label": "2 stars"
+            },
+            {
+              "value": "star-3",
+              "label": "3 stars"
+            },
+            {
+              "value": "star-4",
+              "label": "4 stars"
+            },
+            {
+              "value": "star-5",
+              "label": "5 stars"
+            }
+          ],
+          "default": "star-5"
+        },
+        {
+          "type": "text",
+          "id": "reviewer_name",
+          "label": "Reviewer name",
+          "default": "Name"
+        },
+        {
+          "type": "text",
+          "id": "review_text",
+          "label": "Review",
+          "default": "Put your customer review here"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Testimonials",
+      "blocks": [
+        {
+          "type": "text"
+        },
+        {
+          "type": "text"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,9 +1,86 @@
 {
   "sections": {
     "main": {
-      "type": "cart",
+      "type": "main-cart",
       "settings": {}
+    },
+    "recently-viewed-products": {
+      "type": "section-recently-viewed-products"
+    },
+    "featured-collections": {
+      "type": "section-featured-collections",
+      "blocks": {
+        "collection": {
+          "type": "collection",
+          "settings": {
+            "collection": "",
+            "replace_image": false
+          }
+        },
+        "collection2": {
+          "type": "collection",
+          "settings": {
+            "collection": "",
+            "replace_image": false
+          }
+        },
+        "collection3": {
+          "type": "collection",
+          "settings": {
+            "collection": "",
+            "replace_image": false
+          }
+        },
+        "collection4": {
+          "type": "collection",
+          "settings": {
+            "collection": "",
+            "replace_image": false
+          }
+        },
+        "collection5": {
+          "type": "collection",
+          "settings": {
+            "collection": "",
+            "replace_image": false
+          }
+        },
+        "collection6": {
+          "type": "collection",
+          "settings": {
+            "collection": "",
+            "replace_image": false
+          }
+        }
+      },
+      "block_order": [
+        "collection",
+        "collection2",
+        "collection3",
+        "collection4",
+        "collection5",
+        "collection6"
+      ],
+      "settings": {
+        "aspect_ratio": 0.6,
+        "mobile_items": 3,
+        "tablet_items": 4,
+        "desktop_items": 5,
+        "heading": "Featured collections",
+        "heading_size": "h6",
+        "background_type": "just-color",
+        "background_color": "rgba(0,0,0,0)",
+        "collection_height": 350,
+        "space_between_elements": 1,
+        "space_outside": 0,
+        "row_width": 80,
+        "section_style": "full-width"
+      }
     }
   },
-  "order": ["main"]
+  "order": [
+    "main",
+    "recently-viewed-products",
+    "featured-collections"
+  ]
 }

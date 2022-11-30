@@ -19,18 +19,18 @@
     <div class="header-section {% if settings.header_full_width == false %}boxed{% endif %} {% if settings.header_sticky == true %}sticky{% endif %}">
       <div class="header-container">
         {% liquid
-          section 'header'
-          section 'announcement-bar'
+          section 'main-header'
+          section 'main-announcement-bar'
         %}
       </div>
     </div>
     {%- liquid
-      section 'search-drawer'
-      section 'cart-drawer'
-      section 'newsletter-popup'
-      section 'quick-view'
+      section 'main-search-drawer'
+      section 'main-cart-drawer'
+      section 'main-newsletter-popup'
+      section 'main-quick-view'
       echo content_for_layout
-      section 'footer'
+      section 'main-footer'
     -%}
   </body>
 </html>

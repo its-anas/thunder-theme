@@ -1,0 +1,341 @@
+{{ 'main-footer.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}{%- endstyle -%}
+
+<section class="footer">
+  <div class="footer__container">
+    <div class="footer__content">
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'logo' -%}
+            <div class="footer__logo">
+              {% if block.settings.logo_type == 'svg' %}
+                {% if block.settings.logo_svg == blank %}
+                  <p style="text-transform: uppercase; font-size: 1.2rem; font-weight: bold;">
+                    {{ shop.name }}
+                  </p>
+                {% else %}
+                  {{ block.settings.logo_svg }}
+                {% endif %}
+              {% elsif block.settings.logo_type == 'image' %}
+                {% if block.settings.logo_image == blank %}
+                  <p style="text-transform: uppercase; font-size: 1.2rem; font-weight: bold;">
+                    {{ shop.name }}
+                  </p>
+                {% else %}
+                  <img
+                    srcset="{{ block.settings.logo_image | image_url }}"
+                    loading="lazy"
+                    alt="{{ block.settings.logo_image | escape }}"
+                    width="{{ block.settings.logo_image.width }}"
+                    height="{{ block.settings.logo_image.height }}"
+                    class="full"
+                  >
+                {% endif %}
+              {% endif %}
+            </div>
+          {%- when 'menu' -%}
+            {% if block.settings.menu != blank %}
+              <div class="footer__menu footer__item">
+                {% if block.settings.menu.links.size > 0 %}
+                  <h6 class="footer__heading">{{ block.settings.menu.title }}</h6>
+                  <div class="footer__menu-links footer__item-content">
+                    {% for item in block.settings.menu.links %}
+                      <a href="{{ item.url }}">{{ item.title }}</a>
+                    {% endfor %}
+                  </div>
+                {% endif %}
+              </div>
+            {% endif %}
+          {%- when 'information' -%}
+            <div class="footer__information footer__item">
+              <h6 class="footer__heading">{{ block.settings.information_heading }}</h6>
+              <div class="footer__item-content">
+                {% if block.settings.phone != blank %}
+                  <div class="footer__information-item">
+                    {% render 'icons', icon: 'footer-phone' -%}
+                    <p>{{ block.settings.phone }}</p>
+                  </div>
+                {% endif %}
+                {% if block.settings.email != blank %}
+                  <div class="footer__information-item">
+                    {% render 'icons', icon: 'footer-email' -%}
+                    <p>{{ block.settings.email }}</p>
+                  </div>
+                {% endif %}
+                {% if block.settings.address != blank %}
+                  <div class="footer__information-item">
+                    {% render 'icons', icon: 'footer-location' -%}
+                    <p>{{ block.settings.address }}</p>
+                  </div>
+                {% endif %}
+              </div>
+            </div>
+          {%- when 'social_media' -%}
+            <div class="footer__social-media footer__item">
+              <h6 class="footer__heading">{{ block.settings.social_media_heading }}</h6>
+              <div class="footer__social-media-icons">
+                {% render 'social-media-icons' %}
+              </div>
+            </div>
+          {%- when 'newsletter' -%}
+            <div class="footer__newsletter footer__item">
+              {% if block.settings.newsletter_heading != blank %}
+                <div class="newsletter__heading">
+                  <h6 class="footer__heading">
+                    {{ block.settings.newsletter_heading }}
+                  </h6>
+                </div>
+              {% endif %}
+              <div class="footer__item-content">
+                {% if block.settings.newsletter_text != blank %}
+                  <p class="newsletter__text">{{ block.settings.newsletter_text }}</p>
+                {% endif %}
+
+                {% form 'customer', class: 'newsletter__form' %}
+                  <div class="newsletter__container">
+                    <input type="hidden" name="contact[tags]" value="newsletter">
+                    <input
+                      id=""
+                      type="email"
+                      name="contact[email]"
+                      class="newsletter__input"
+                      value="{{ form.email }}"
+                      autocorrect="off"
+                      autocapitalize="off"
+                      autocomplete="email"
+                      {% if form.errors %}
+                        autofocus
+                      {% endif %}
+                      placeholder="Type your email address"
+                      required
+                    >
+                    <button
+                      type="submit"
+                      class="newsletter__button"
+                      name="commit"
+                      id="subscribe"
+                    >
+                      <p class="button">SUBSCRIBE</p>
+                      <p></p>
+                    </button>
+                  </div>
+                  {%- if form.errors -%}
+                    <p class="form__error">
+                      ⚠
+                      {{ form.errors.translated_fields.email | capitalize }}
+                      {{ form.errors.messages.email }}
+                    </p>
+                  {%- endif -%}
+                  {%- if form.posted_successfully? -%}
+                    <p
+                      class="form__success"
+                      tabindex="-1"
+                      autofocus
+                    >
+                      ✓ Subscription confirmed
+                    </p>
+                  {%- endif -%}
+                {%- endform -%}
+              </div>
+            </div>
+        {% endcase %}
+      {% endfor %}
+    </div>
+    <div class="footer__bottom">
+      <div class="footer__localization">
+        {% if section.settings.show_currency_selector == true %}
+          {%- form 'localization' -%}
+            <div class="">
+              <select
+                class=""
+                name="country_code"
+              >
+                {%- for country in localization.available_countries -%}
+                  <option
+                    value="{{ country.iso_code }}"
+                    {%- if country.iso_code == localization.country.iso_code %}
+                      selected
+                    {% endif %}
+                  >
+                    {{ country.name }} ({{ country.currency.iso_code }}
+                    {{ country.currency.symbol }})
+                  </option>
+                {%- endfor -%}
+              </select>
+            </div>
+          {%- endform -%}
+        {% endif %}
+      </div>
+
+      <div class="footer__payment-methods">
+        {% if section.settings.show_payment_methods == true %}
+          {% assign enabled_payment_types = section.settings.chosen_payment_methods | remove: ' ' | split: ',' %}
+          {% for type in enabled_payment_types %}
+            {{ type | payment_type_svg_tag: class: 'icon' }}
+          {% endfor %}
+        {% endif %}
+      </div>
+
+      <p class="footer__powered-by">
+        &copy; {{ 'now' | date: '%Y' }} - {{ shop.name | link_to: routes.root_url }} - {{ powered_by_link }}
+      </p>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_currency_selector",
+      "label": "Currency selector",
+      "default": false,
+      "info": "To add a currency, go to your [currency settings.](/admin/settings/payments)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_payment_methods",
+      "label": "Show payment methods",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "payment_methods_type",
+      "label": "Payment methods type",
+      "options": [
+        {
+          "value": "enabled",
+          "label": "Option 1: Show the enabled payment methods only"
+        },
+        {
+          "value": "chosen",
+          "label": "Option 2: Pick which payment methods to show"
+        }
+      ],
+      "default": "enabled"
+    },
+    {
+      "type": "text",
+      "id": "chosen_payment_methods",
+      "label": "Option 2: Pick which payment methods to show",
+      "default": "paypal,visa,master,american_express,discover,shopify_pay",
+      "info": "All available payment methods: afterpay,american_express,apple_pay,bitcoin,dankort,diners_club,discover,dogecoin,dwolla,facebook_pay,forbrugsforeningen,google_pay,ideal,jcb,klarna,klarna-pay-later,litecoin,maestro,master,paypal,shopify_pay,sofort,visa"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "logo",
+      "name": "Logo",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "select",
+          "id": "logo_type",
+          "label": "Logo type",
+          "options": [
+            {
+              "value": "svg",
+              "label": "Svg"
+            },
+            {
+              "value": "image",
+              "label": "Image"
+            }
+          ],
+          "default": "svg",
+          "info": "It is highly recommended to use svg logo instead of jpeg/png logo to get the best quality"
+        },
+        {
+          "type": "liquid",
+          "id": "logo_svg",
+          "label": "Logo - svg",
+          "info": "Applicable only if logo type is svg"
+        },
+        {
+          "type": "image_picker",
+          "id": "logo_image",
+          "label": "Logo - image",
+          "info": "Applicable only if logo type is image"
+        }
+      ]
+    },
+    {
+      "type": "menu",
+      "name": "Menu",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": "Menu",
+          "default": "main-menu"
+        }
+      ]
+    },
+    {
+      "type": "information",
+      "name": "Information",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "information_heading",
+          "label": "Heading",
+          "default": "Company"
+        },
+        {
+          "type": "text",
+          "id": "phone",
+          "label": "Phone"
+        },
+        {
+          "type": "text",
+          "id": "email",
+          "label": "Email"
+        },
+        {
+          "type": "text",
+          "id": "address",
+          "label": "Address"
+        }
+      ]
+    },
+    {
+      "type": "social_media",
+      "name": "Social media",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "social_media_heading",
+          "label": "Heading",
+          "default": "Follow",
+          "info": "Icons will be shown only if you have added at least one social media link in the theme settings."
+        }
+      ]
+    },
+    {
+      "type": "newsletter",
+      "name": "Newsletter",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "newsletter_heading",
+          "label": "Heading",
+          "default": "Newsletter"
+        },
+        {
+          "type": "text",
+          "id": "newsletter_text",
+          "label": "Text",
+          "default": "Subscribe to get special offers, free giveaways, and once in a lifetime deals."
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

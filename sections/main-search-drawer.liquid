@@ -1,0 +1,210 @@
+{{ 'main-search-drawer.css' | asset_url | stylesheet_tag }}
+
+{% style %}
+  .search-drawer__container {
+    background-color: {{ section.settings.background_color }};
+    border: {{ section.settings.border_width }}px solid {{ section.settings.border_color }};
+    border-radius: {{ section.settings.border_radius }}px;
+  }
+{% endstyle %}
+<search-drawer>
+  <predictive-search>
+    <div class="search-drawer hidden">
+      <div class="search-drawer__container">
+        <div class="search-section__container">
+          <form action="{{ routes.search_url }}" method="get" class="search-section__form">
+            <input type="hidden" name="contact[tags]" value="newsletter">
+            <input
+              id="Search"
+              class="search-section__input"
+              type="search"
+              name="q"
+              value="{{ search.terms | escape }}"
+              placeholder="Search..."
+              {%- if settings.predictive_search_enabled -%}
+                autocorrect="off"
+                autocomplete="off"
+                autocapitalize="off"
+                spellcheck="false"
+              {%- endif -%}
+            >
+            {%- if settings.predictive_search_enabled -%}
+              <div class="search-section__results" id="predictive-search" tabindex="-1"></div>
+            {%- endif -%}
+            <div class="search-section__close">
+              {% render 'icons', icon: 'close' %}
+            </div>
+          </form>
+        </div>
+        {% if section.blocks.size > 0 %}
+          <div class="preload">
+            {% for block in section.blocks %}
+              {% case block.type %}
+                {% when 'products' %}
+                  <div class="group" {{ block.shopify_attributes }}>
+                    {% if block.settings.product_1 != blank
+                      or block.settings.product_2 != blank
+                      or block.settings.product_3 != blank
+                    %}
+                      <h6>{{ block.settings.group_name }}</h6>
+                      {% if block.settings.product_1 != blank -%}
+                        <a href="{{ block.settings.product_1.url }}">{{ block.settings.product_1 }}</a>
+                      {%- endif %}
+                      {% if block.settings.product_2 != blank -%}
+                        <a href="{{ block.settings.product_2.url }}">{{ block.settings.product_2 }}</a>
+                      {%- endif %}
+                      {% if block.settings.product_3 != blank -%}
+                        <a href="{{ block.settings.product_3.url }}">{{ block.settings.product_3 }}</a>
+                      {%- endif %}
+                    {% endif %}
+                  </div>
+                {% when 'collections' %}
+                  <div class="group" {{ block.shopify_attributes }}>
+                    {% if block.settings.collection_1 != blank
+                      or block.settings.collection_2 != blank
+                      or block.settings.collection_3 != blank
+                    %}
+                      <h6>{{ block.settings.group_name }}</h6>
+                      {% if block.settings.collection_1 != blank -%}
+                        <a href="{{ block.settings.collection_1.url }}">{{ block.settings.collection_1 }}</a>
+                      {%- endif %}
+                      {% if block.settings.collection_2 != blank -%}
+                        <a href="{{ block.settings.collection_1.url }}">{{ block.settings.collection_2 }}</a>
+                      {%- endif %}
+                      {% if block.settings.collection_3 != blank -%}
+                        <a href="{{ block.settings.collection_1.url }}">{{ block.settings.collection_3 }}</a>
+                      {%- endif %}
+                    {% endif %}
+                  </div>
+                {% when 'menu' %}
+                  {% if block.settings.menu.links.size > 0 %}
+                    <div class="group" {{ block.shopify_attributes }}>
+                      <h6>{{ block.settings.group_name }}</h6>
+                      {% for item in block.settings.menu.links %}
+                        <a href="{{ item.url }}">{{ item.title }}</a>
+                      {% endfor %}
+                    </div>
+                  {% endif %}
+              {% endcase %}
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </predictive-search>
+</search-drawer>
+
+{% schema %}
+{
+  "name": "Search",
+  "class": "section-search-drawer",
+  "settings": [
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#000"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border color",
+      "default": "#fff"
+    },
+    {
+      "type": "range",
+      "id": "border_width",
+      "min": 0,
+      "max": 3,
+      "step": 1,
+      "unit": "px",
+      "label": "Border width",
+      "default": 2
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Border corners radius",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "products",
+      "name": "Products",
+      "settings": [
+        {
+          "type": "text",
+          "id": "group_name",
+          "label": "Text",
+          "default": "Popular products"
+        },
+        {
+          "type": "product",
+          "id": "product_1",
+          "label": "Product 1"
+        },
+        {
+          "type": "product",
+          "id": "product_2",
+          "label": "Product 2"
+        },
+        {
+          "type": "product",
+          "id": "product_3",
+          "label": "Product 3"
+        }
+      ]
+    },
+    {
+      "type": "collections",
+      "name": "Collections",
+      "settings": [
+        {
+          "type": "text",
+          "id": "group_name",
+          "label": "Text",
+          "default": "Popular collections"
+        },
+        {
+          "type": "collection",
+          "id": "collection_1",
+          "label": "Collection 1"
+        },
+        {
+          "type": "collection",
+          "id": "collection_2",
+          "label": "Collection 2"
+        },
+        {
+          "type": "collection",
+          "id": "collection_3",
+          "label": "Collection 3"
+        }
+      ]
+    },
+    {
+      "type": "menu",
+      "name": "Menu",
+      "settings": [
+        {
+          "type": "text",
+          "id": "group_name",
+          "label": "Text",
+          "default": "Menu"
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": "Menu",
+          "default": "main-menu"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

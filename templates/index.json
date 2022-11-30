@@ -1,7 +1,7 @@
 {
      "sections": {
           "slideshow": {
-               "type": "slideshow",
+               "type": "section-slideshow",
                "blocks": {
                     "slide": {
                          "type": "slide",
@@ -52,7 +52,7 @@
                }
           },
           "multi-icon": {
-               "type": "multi-icon",
+               "type": "section-multi-icon",
                "blocks": {
                     "image_picker": {
                          "type": "image_picker",
@@ -132,7 +132,7 @@
                }
           },
           "gallery": {
-               "type": "gallery",
+               "type": "section-gallery",
                "blocks": {
                     "image": {
                          "type": "image",
@@ -171,7 +171,7 @@
                }
           },
           "countdown-timer": {
-               "type": "countdown-timer",
+               "type": "section-countdown-timer",
                "blocks": {
                     "heading": {
                          "type": "heading",
@@ -231,7 +231,7 @@
                }
           },
           "featured-collection": {
-               "type": "featured-collection",
+               "type": "section-featured-collection",
                "settings": {
                     "collection": "",
                     "image_style": "fit",
@@ -253,7 +253,7 @@
                }
           },
           "promotional-banner": {
-               "type": "promotional-banner",
+               "type": "section-promotional-banner",
                "settings": {
                     "banner_style": "style-1",
                     "text_color": "#000000",
@@ -275,7 +275,7 @@
                }
           },
           "shop-the-look": {
-               "type": "shop-the-look",
+               "type": "section-shop-the-look",
                "blocks": {
                     "product": {
                          "type": "product",
@@ -326,7 +326,7 @@
                }
           },
           "compare": {
-               "type": "compare",
+               "type": "section-compare",
                "blocks": {
                     "product": {
                          "type": "product",
@@ -419,7 +419,7 @@
                }
           },
           "promotional-banner2": {
-               "type": "promotional-banner",
+               "type": "section-promotional-banner",
                "settings": {
                     "banner_style": "style-2",
                     "text_color": "#ffffff",
@@ -441,7 +441,7 @@
                }
           },
           "featured-collections": {
-               "type": "featured-collections",
+               "type": "section-featured-collections",
                "blocks": {
                     "collection": {
                          "type": "collection",
@@ -511,7 +511,7 @@
                }
           },
           "video-with-text": {
-               "type": "video-with-text",
+               "type": "section-video-with-text",
                "blocks": {
                     "subheading": {
                          "type": "subheading",
@@ -567,7 +567,7 @@
                }
           },
           "animated-rich-text": {
-               "type": "animated-rich-text",
+               "type": "section-animated-rich-text",
                "blocks": {
                     "subheading": {
                          "type": "subheading",
@@ -630,7 +630,7 @@
                }
           },
           "testimonials": {
-               "type": "testimonials",
+               "type": "section-testimonials",
                "blocks": {
                     "text": {
                          "type": "text",
@@ -698,7 +698,7 @@
                }
           },
           "gallery2": {
-               "type": "gallery",
+               "type": "section-gallery",
                "blocks": {
                     "template--14285318160433__bf25c28c-3d03-4371-8a92-4e2dc8b83f80-16681014416a8c0f4a-0": {
                          "type": "image",
@@ -759,7 +759,7 @@
                }
           },
           "text-with-icon": {
-               "type": "text-with-icon",
+               "type": "section-text-with-icon",
                "blocks": {
                     "text-with-icon": {
                          "type": "text-with-icon",
@@ -814,7 +814,7 @@
                }
           },
           "faq": {
-               "type": "faq",
+               "type": "section-faq",
                "blocks": {
                     "text": {
                          "type": "text",
@@ -875,7 +875,7 @@
                }
           },
           "logo-list": {
-               "type": "logo-list",
+               "type": "section-logo-list",
                "blocks": {
                     "image_picker": {
                          "type": "image_picker",

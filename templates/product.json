@@ -1,7 +1,7 @@
 {
   "sections": {
-    "main": {
-      "type": "product",
+    "product": {
+      "type": "main-product",
       "settings": {
         "thumbnails_on_mobile": false
       },
@@ -94,7 +94,7 @@
       ]
     },
     "product-page-tabs": {
-      "type": "product-page-tabs",
+      "type": "main-product-page-tabs",
       "blocks": {
         "product_description_tab": {
           "type": "product_description_tab"
@@ -114,10 +114,100 @@
         "tab",
         "share_buttons"
       ]
+    },
+    "compare": {
+      "type": "section-compare",
+      "blocks": {
+        "product1": {
+          "type": "product"
+        },
+        "product2": {
+          "type": "product"
+        },
+        "product3": {
+          "type": "product"
+        }
+      },
+      "block_order": [
+        "product1",
+        "product2",
+        "product3"
+      ]
+    },
+    "promotional-banner": {
+      "type": "section-promotional-banner"
+    },
+    "faq": {
+      "type": "section-faq",
+      "blocks": {
+        "text": {
+          "type": "text",
+          "settings": {
+            "question": "Put your question here",
+            "answer": "Put the answer here."
+          }
+        },
+        "text2": {
+          "type": "text",
+          "settings": {
+            "question": "Put your question here",
+            "answer": "Put the answer here."
+          }
+        },
+        "text3": {
+          "type": "text",
+          "settings": {
+            "question": "Put your question here",
+            "answer": "Put the answer here."
+          }
+        },
+        "text4": {
+          "type": "text",
+          "settings": {
+            "question": "Put your question here",
+            "answer": "Put the answer here."
+          }
+        },
+        "text5": {
+          "type": "text",
+          "settings": {
+            "question": "Put your question here",
+            "answer": "Put the answer here."
+          }
+        }
+      },
+      "block_order": [
+        "text",
+        "text2",
+        "text3",
+        "text4",
+        "text5"
+      ],
+      "settings": {
+        "heading": "FAQ",
+        "heading_size": "h6",
+        "show_image": true,
+        "image_style": "fit",
+        "background_color": "transparent",
+        "space_outside": 0,
+        "space_between_elements": 1,
+        "section_style": "full-width",
+        "tabs_width": 1000,
+        "image_height": 300,
+        "question_background_color": "#222222",
+        "answer_background_color": "#101010"
+      }
+    },
+    "recently-viewed-products": {
+      "type": "section-recently-viewed-products"
     }
   },
   "order": [
-    "main",
-    "product-page-tabs"
+    "product",
+    "product-page-tabs",
+    "compare",
+    "promotional-banner",
+    "faq",
+    "recently-viewed-products"
   ]
 }

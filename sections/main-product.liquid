@@ -1,0 +1,1110 @@
+{{ 'main-product.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'main-product.js' | asset_url }}" defer></script>
+
+{% liquid
+  assign mobile_items = 1
+  assign tablet_items = 1
+  assign desktop_items = 1
+  assign desktop_section_width = 100
+%}
+
+{% style %}
+   product-page  {
+      padding-top: {{ section.settings.padding_top }}px !important;
+      padding-bottom: {{ section.settings.padding_bottom }}px !important;
+   }
+
+   .product-page-slider__slides-container {
+    --mobile-items: {{ mobile_items }};
+    --tablet-items: {{ tablet_items }};
+    --desktop-items: {{ desktop_items }};
+  }
+
+  @media screen and (min-width: 1025px) {
+     .product-page-slider__slides-container {
+      --container-width: calc(var(--section-width) * {{ desktop_section_width | divided_by: 100.00 }} );
+    }
+     .prev,
+     .next {
+      width: {{ 100 | minus: desktop_section_width | divided_by: 2 }}%;
+    }
+  }
+
+  .product-page-slider__slides-container .item {
+  aspect-ratio: 1;
+  }
+
+  {% if section.settings.thumbnails_on_mobile == false %}
+    @media screen and (max-width: 1024px) {
+      .product-page-slider__thumbnails {
+          height: 0 !important;
+          visibility: hidden;
+      }
+    }
+    @media screen and (min-width: 1024px) {
+      .product-page-slider__indicators {
+          height: 0 !important;
+          visibility: hidden;
+      }
+    }
+  {% else %}
+    .product-page-slider__indicators {
+        height: 0 !important;
+        visibility: hidden;
+    }
+    .product-page-slider .prev, .product-page-slider .next {
+      opacity: 0 !important;
+    }
+    .product-page-slider__slides-container .slide, .product-page-slider__slides-container .slide .item {
+      transition: none !important;
+      opacity: 1 !important;
+    }
+  {% endif %}
+{% endstyle %}
+
+<div class="product-hidden-images" style="display: none;">
+  {% if product.images.size > 0 %}
+    {% for image in product.images %}
+      <div
+        class="item"
+        {% if image.alt contains '#color:' %}
+          {% assign image_alt = image.alt | split: '#color:' %}
+          data-variant-color="{{ image_alt }}"
+        {% elsif image.attached_to_variant? %}
+          data-attached-to-variant="{{ image.variants[0].title }}"
+        {% endif %}
+      >
+        <div class="item-picture media">
+          <img
+            srcset="{{ image | image_url }}"
+            alt="{{ image.alt | escape }}"
+            width="{{ image.width }}"
+            height="{{ image.height }}"
+            class="full" 
+            loading="lazy"
+          >
+        </div>
+      </div>
+    {% endfor %}
+  {% else %}
+    <div class="item">
+      <div class="item-picture">{{ 'product-1' | placeholder_svg_tag: 'placeholder' }}</div>
+    </div>
+  {% endif %}
+</div>
+
+<div class="product-hidden-thumbnails" style="display: none;">
+  {% if product.images.size > 0 %}
+    {% for thumbnail in product.images %}
+      <div
+        class="thumbnail"
+        {% if thumbnail.alt contains '#color:' %}
+          {% assign thumbnail_alt = thumbnail.alt | split: '#color:' %}
+          data-variant-color="{{ thumbnail_alt }}"
+        {% elsif thumbnail.attached_to_variant? %}
+          data-attached-to-variant="{{ thumbnail.variants[0].title }}"
+        {% endif %}
+      >
+        <div class="thumbnail-picture media">
+          <img
+            srcset="{{ thumbnail | image_url }}"
+            loading="lazy"
+            alt="{{ thumbnail.alt | escape }}"
+            width="{{ thumbnail.width }}"
+            height="{{ thumbnail.height }}"
+            class="full"
+          >
+        </div>
+      </div>
+    {% endfor %}
+  {% else %}
+    <div class="thumbnail">
+      <div class="thumbnail-picture">
+        {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
+      </div>
+    </div>
+  {% endif %}
+</div>
+
+<div class="product-hidden-payment-methods" style="display: none;">
+  <div class="product-page__payment-methods"></div>
+</div>
+
+{% assign current_variant = product.selected_or_first_available_variant %}
+
+<product-page class="product-page" data-product="{{ product.id }}">
+  <div class="product-page__container">
+    <div class="product-page__content">
+      <div class="product-page__pictures reveal">
+        <product-page-slider
+          data-mobile-items="{{ mobile_items }}"
+          data-tablet-items="{{ tablet_items }}"
+          data-desktop-items="{{ desktop_items }}"
+          class="{{ section.id }}"
+        >
+          <div class="product-page-slider">
+            <div class="prev">
+              {% render 'icons', icon: 'chevron-prev' %}
+            </div>
+            <div class="product-page-slider__slides-container">
+              <div class="zoom-icon"></div>
+              <div class="slide"></div>
+            </div>
+            <div class="next">
+              {% render 'icons', icon: 'chevron-next' %}
+            </div>
+          </div>
+          <div class="product-page-slider__indicators"></div>
+          <div class="product-page-slider__thumbnails-container ">
+            <div class="product-page-slider__thumbnails"></div>
+          </div>
+        </product-page-slider>
+        <div
+          class="product-page__pictures-place-protector"
+        ></div>
+      </div>
+      <div class="product-page__info">
+        {% form 'product', product, class: 'product-page__form' %}
+          {% for block in section.blocks %}
+            {% case block.type %}
+              {% when 'vendor' %}
+                <div class="product-page__vendor" {{ block.shopify_attributes }}>
+                  <p>{{ product.vendor }}</p>
+                </div>
+              {% when 'name' %}
+                <div class="product-page__name" {{ block.shopify_attributes }}>
+                  <h3>{{ product.title }}</h3>
+                </div>
+              {% when 'sale_tag' %}
+                <div class="product-page__prices" {{ block.shopify_attributes }}>
+                  {% assign price_difference_text = block.settings.price_difference_text %}
+                  {% assign price_difference = current_variant.compare_at_price | minus: product.price %}
+                  {% if price_difference > 0 %}
+                    <div class="product-page__tag">
+                      <p class="tag--animated tag-text">
+                        {{ price_difference_text }}
+                        {{ current_variant.compare_at_price | minus: current_variant.price | money }}
+                      </p>
+                    </div>
+                  {% endif %}
+                  <div class="product-page__tag"></div>
+                </div>
+              {% when 'price' %}
+                <div class="product-page__prices" {{ block.shopify_attributes }}>
+                  <div class="product-page__price">
+                    <p class="product-page__price--actual price--actual">
+                      {{ current_variant.price | money }}
+                    </p>
+                    <p class="product-page__price--compare-at price--compare-at">
+                      {{ current_variant.compare_at_price | money }}
+                    </p>
+                  </div>
+                </div>
+              {% when 'variants_selector' %}
+                {% unless product.has_only_default_variant %}
+                  <div class="product-page__variants" {{ block.shopify_attributes }}>
+                    {% for option in product.options_with_values %}
+                      <div class="product-page__radios-container">
+                        {% if option.name != 'Color' %}
+                          <p class="product-page__radio__title">{{ option.name }}</p>
+                          {% if block.settings.variant_selector_type == 'block' %}
+                            <div class="product-page__radio__content">
+                              {% for value in option.values %}
+                                <label
+                                  class="
+                                    product-page__radio__label
+                                    {% if option.selected_value == value %}
+                                      checked
+                                    {% endif %}
+                                  "
+                                  for="{{ option.name | handle }}-{{ value | handle }}"
+                                >
+                                  <input
+                                    {% if option.selected_value == value %}
+                                      checked
+                                    {% endif %}
+                                    type="radio"
+                                    name="{{ option.name }}"
+                                    value="{{ value }}"
+                                    id="{{ option.name | handle }}-{{ value | handle }}"
+                                    class="product-page__radio__input"
+                                  >
+                                  {{ value }}
+                                </label>
+                              {% endfor %}
+                            </div>
+                          {% elsif block.settings.variant_selector_type == 'dropdown' %}
+                            <select name="{{ option.name }}">
+                              {% for value in option.values %}
+                                <option
+                                  value="{{ value }}"
+                                  type="radio"
+                                >
+                                  {{ value }}
+                                </option>
+                              {% endfor %}
+                            </select>
+                          {% endif %}
+                        {% elsif option.name == 'Color' %}
+                          <p class="product-page__radio__title">{{ option.name }}</p>
+                          {% if block.settings.color_selector_type == 'block' %}
+                            <div class="product-page__radio__content">
+                              {% for value in option.values %}
+                                <label
+                                  class="
+                                    product-page__radio__label {% if option.selected_value == value %}
+                                      checked
+                                    {% endif %}
+                                  "
+                                  for="{{ option.name | handle }}-{{ value | handle }}"
+                                >
+                                  <input
+                                    {% if option.selected_value == value %}
+                                      checked
+                                    {% endif %}
+                                    type="radio"
+                                    name="{{ option.name }}"
+                                    value="{{ value }}"
+                                    id="{{ option.name | handle }}-{{ value | handle }}"
+                                    class="product-page__radio__input"
+                                  >
+                                  {{ value }}
+                                </label>
+                              {% endfor %}
+                            </div>
+                          {% elsif block.settings.color_selector_type == 'dropdown' %}
+                            <div class="product-page__color-select-content">
+                              <select name="{{ option.name }}">
+                                {% for value in option.values %}
+                                  <option
+                                    value="{{ value }}"
+                                    type="radio"
+                                  >
+                                    {{ value }}
+                                  </option>
+                                {% endfor %}
+                              </select>
+                            </div>
+                          {% elsif block.settings.color_selector_type == 'variant_image' %}
+                            <div class="product-page__radio__content">
+                              {% for value in option.values %}
+                                {% liquid 
+                                  for variant in product.variants 
+                                      if variant.title contains value
+                                        assign variant_image = variant.featured_image
+                                        break
+                                      endif
+                                  endfor
+                                %}
+
+                                <label
+                                  class="
+                                    product-page__radio__label media variant_image 
+                                    {% if option.selected_value == value %}
+                                      checked
+                                    {% endif %}
+                                  "
+                                  style=""
+                                  for="{{ option.name | handle }}-{{ value | handle }}"
+                                >
+                                  <input
+                                    {% if option.selected_value == value %}
+                                      checked
+                                    {% endif %}
+                                    type="radio"
+                                    name="{{ option.name }}"
+                                    value="{{ value }}"
+                                    id="{{ option.name | handle }}-{{ value | handle }}"
+                                    class="product-page__radio__input"
+                                  >
+                                  {% if variant_image != blank %}
+                                    <img
+                                      src="{{ variant_image | image_url: width: 300 }}"
+                                      sizes="300px"
+                                      loading="lazy"
+                                      alt="{{ variant_image.alt | escape }}"
+                                      width="{{ variant_image.width }}"
+                                      height="{{ variant_imageheight }}"
+                                      class="full"
+                                    >
+                                  {% else %}
+                                    {{ value }}
+                                  {% endif %}
+                                </label>
+                              {% endfor %}
+                            </div>
+                          {% elsif block.settings.color_selector_type == 'color_swatch' %}
+                            <div class="product-page__radio__content">
+                              {% for value in option.values %}
+                                <label
+                                  class=" product-page__radio__label color_swatch {% if option.selected_value == value %}checked{% endif %}"
+                                 
+                                  {%- liquid 
+                                    assign color_swatch_list = settings.color_swatch_list | split: ','
+                                    for color_swatch in color_swatch_list
+                                      assign color_swatch_parts = color_swatch | split: ':'
+                                      assign color_swatch_name = color_swatch_parts.first | strip
+                                      if color_swatch_name == value
+                                        assign color_swatch_value = color_swatch_parts.last | strip
+                                         if color_swatch_value contains '#'
+                                         echo "style=' background-color:" 
+                                          echo color_swatch_value
+                                          echo "; color: transparent;'"
+                                         endif
+                                         break
+                                       endif
+                                    endfor 
+                                  -%}
+                               
+                                  for="{{ option.name | handle }}-{{ value | handle }}"
+                                >
+                                    {{ value }}
+                                  <input
+                                    {% if option.selected_value == value %}
+                                      checked
+                                    {% endif %}
+                                    type="radio"
+                                    name="{{ option.name }}"
+                                    value="{{ value }}"
+                                    id="{{ option.name | handle }}-{{ value | handle }}"
+                                    class="product-page__radio__input"
+                                  >
+                                </label>
+                              {% endfor %}
+                            </div>
+                          {% endif %}
+                        {% endif %}
+                      </div>
+                    {% endfor %}
+                  </div>
+                  <div class="product-page__hidden-variants" style="display: none;">
+                    <select id="product-select" name="id">
+                      {% for variant in product.variants %}
+                        <option
+                          value="{{ variant.id }}"
+                          {% if variant == product.selected_or_first_available_variant %}
+                            selected="selected"
+                          {% endif %}
+                        >
+                          {{ variant.title }} - {{ variant.price | money }}
+                        </option>
+                      {% endfor %}
+                    </select>
+                  </div> 
+                {% endunless %}
+              {% when 'quantity' %}
+                <quantity-field class="quantity" {{ block.shopify_attributes }}>
+                  <label for="quantity-text"><p>Quantity</p></label>
+                  <div class="quantity-field" id="quantity-field">
+                    <button type="button" class="quantity-field__minus" id="quantity-field__minus">-</button>
+                    <input
+                      type="quantity"
+                      class="quantity-field__input"
+                      id="quantity-field__input"
+                      name="quantity"
+                      min="1"
+                      value="1"
+                    >
+                    <button type="button" class="quantity-field__plus" id="quantity-field__plus">+</button>
+                  </div>
+                </quantity-field>
+              {% when 'stock_alert' %}
+                {% assign stock_alert_threshold = block.settings.stock_alert_threshold %}
+                {% if current_variant.inventory_quantity > 0
+                  and current_variant.inventory_quantity < stock_alert_threshold
+                %}
+                  <div class="product-page__stock-disclaimer" {{ block.shopify_attributes }}>
+                    <svg
+                      class="product-page__stock-disclaimer__svg"
+                      width="25"
+                      height="24"
+                      viewBox="0 0 25 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path d="M19.6384 17.5H5.36159L12.5 5.00778L19.6384 17.5Z" stroke="#FB4343"/>
+                      <path d="M12.1297 13.6845L11.9497 8.89453H13.0797L12.8897 13.6845H12.1297ZM12.5197 15.9545C12.333 15.9545 12.1763 15.8912 12.0497 15.7645C11.923 15.6379 11.8597 15.4879 11.8597 15.3145C11.8597 15.1279 11.923 14.9745 12.0497 14.8545C12.1763 14.7345 12.333 14.6745 12.5197 14.6745C12.7063 14.6745 12.8597 14.7345 12.9797 14.8545C13.0997 14.9745 13.1597 15.1279 13.1597 15.3145C13.1597 15.4879 13.0997 15.6379 12.9797 15.7645C12.8597 15.8912 12.7063 15.9545 12.5197 15.9545Z" fill="#FB4343"/>
+                    </svg>
+                    <p class="product-page__stock-disclaimer__text">
+                      {{ current_variant.inventory_quantity }} left in stock
+                    </p>
+                  </div>
+                {% endif %}
+              {% when 'countdown_timer' %}
+                <div class="product-page__countdown-timer {{ section.id }}" {{ block.shopify_attributes }}>
+                  {% style %}
+                    .{{ block.id }}.countdown-timer {
+                      gap: {{ block.settings.space_between_elements }}rem;
+                      margin-top: {{ block.settings.space_outside | divided_by: 2 }}rem;
+                      margin-bottom: {{ block.settings.space_outside | divided_by: 2 }}rem;
+                    }
+                    .{{ block.id }}--color {
+                      background-color: {{ block.settings.background_color }};
+                    }
+
+                    .countdown-timer__timers {
+                      display: flex;
+                      justify-content: center;
+                    }
+
+                    .{{ block.id }}.countdown-timer > .countdown-timer__timers > .countdown-timer__container {
+                      background-color: {{ block.settings.digits_background_color }};
+                      border-radius: {{ block.settings.digits_container_border }}%;
+                    }
+
+                    .{{ block.id }}.countdown-timer > .countdown-timer__timers > .countdown-timer__container > p {
+                      color: {{ block.settings.digits_color }};
+                    }
+                  {% endstyle %}
+
+                  {% liquid
+                    assign days = block.settings.time_days | times: 24.00 | times: 60.00
+                    assign hours = block.settings.time_hours | times: 60.00
+                    assign mins = block.settings.time_mins
+                    assign secs = block.settings.time_secs | divided_by: 60.00
+                    assign timeInMinutes = days | plus: hours | plus: mins | plus: secs
+
+                    assign year = block.settings.date_year
+                    assign month = block.settings.date_month | prepend: '00' | slice: -2, 2
+                    assign day = block.settings.date_day | prepend: '00' | slice: -2, 2
+                    assign hour = block.settings.date_hour | prepend: '00' | slice: -2, 2
+                    assign min = block.settings.date_min | prepend: '00' | slice: -2, 2
+                    assign sec = block.settings.date_sec | prepend: '00' | slice: -2, 2
+                  %}
+
+                  {% capture timeInDate -%}
+                    {{- year }}-{{ month }}-{{ day }}T{{ hour }}:{{ min }}:{{ sec -}}
+                  {%- endcapture %}
+                  {% capture countdownType %}{{ block.settings.countdown_timer_type }}{% endcapture %}
+                  {% capture afterExpirationTimeOnly %}{{ block.settings.afterExpirationTimeOnly }}{% endcapture %}
+
+                  <div
+                    id="countdown-timer-{{ block.id }}"
+                    class="{{ block.id }} countdown-timer"
+                  >
+                    <div class="countdown-timer__text">
+                      <p>{{ block.settings.text }}</p>
+                    </div>
+                    <countdown-timer
+                      countdown-type="{{ countdownType }}"
+                      time-in-date="{{ timeInDate }}"
+                      time-in-minutes="{{ timeInMinutes }}"
+                      after-expiration="{{ afterExpirationTimeOnly }}"
+                      section-id="countdown-timer-{{ block.id }}"
+                      cookie-name="countdown-timer-cookie-{{ block.id }}"
+                      class="countdown-timer__timers"
+                    >
+                      <div class="countdown-timer__container">
+                        <p class="days digits--{{ block.settings.digits_size }}"></p>
+                        <p class="label">Days</p>
+                      </div>
+                      <div class="countdown-timer__container">
+                        <p class="hours digits--{{ block.settings.digits_size }}"></p>
+                        <p class="label">Hours</p>
+                      </div>
+                      <div class="countdown-timer__container">
+                        <p class="minutes digits--{{ block.settings.digits_size }}"></p>
+                        <p class="label">Mins</p>
+                      </div>
+                      <div class="countdown-timer__container">
+                        <p class="seconds digits--{{ block.settings.digits_size }}"></p>
+                        <p class="label">Secs</p>
+                      </div>
+                    </countdown-timer>
+                    <div class="countdown-timer__message">
+                      <h6>{{ block.settings.message }}</h6>
+                    </div>
+                  </div>
+                </div>
+              {% when 'buttons' %}
+                <div class="product-page__buttons buttons buttons--center" {{ block.shopify_attributes }}>
+
+                  <{% if settings.cart_type == "drawer" %}a{% else %}button type='submit' name='add' value='Add to cart'{% endif %} class='button button--primary border add-to-cart-button' id='add-to-cart-button' data-variants-number="{{ product.variants.size }}" data-actual-variant="{{ product.selected_or_first_available_variant.id }}"> 
+                  <span></span> <span></span> <span></span> <span></span>
+                  ADD TO CART </{% if settings.cart_type == "drawer" %}a{% else %}button{% endif %}>
+
+                  {% if block.settings.show_buy_now == true %}
+                  <div class="dynamic-buy-button" id="dynamic-buy-button">
+                    {{ form | payment_button }}
+                  </div>
+                {% endif %}
+                </div>
+              {% when 'trust_bar' %}
+                <div class="product-page__trust-bar" {{ block.shopify_attributes }}>
+                  <a
+                    {% if trust_icon_1_link != blank %}
+                      href="{{ trust_icon_1_link }}"
+                    {% endif %}
+                    class="product-page__trust-badge"
+                  >
+                    <div class="product-page__trust-icon">
+                      {{ block.settings.trust_icon_1_svg }}
+                    </div>
+                    <p class="product-page__trust-text {% if block.settings.trust_icon_1_link != blank %}underline{% endif %}">
+                      {{ block.settings.trust_icon_1_text }}
+                    </p>
+                  </a>
+                  <a
+                    {% if trust_icon_2_link != blank %}
+                      href="{{ trust_icon_2_link }}"
+                    {% endif %}
+                    class="product-page__trust-badge"
+                  >
+                    <div class="product-page__trust-icon">
+                      {{ block.settings.trust_icon_2_svg }}
+                    </div>
+                    <p class="product-page__trust-text {% if block.settings.trust_icon_2_link != blank %}underline{% endif %}">
+                      {{ block.settings.trust_icon_2_text }}
+                    </p>
+                  </a>
+                  <a
+                    {% if trust_icon_2_link != blank %}
+                      href="{{ trust_icon_2_link }}"
+                    {% endif %}
+                    class="product-page__trust-badge"
+                  >
+                    <div class="product-page__trust-icon">
+                      {{ block.settings.trust_icon_3_svg }}
+                    </div>
+                    <p class="product-page__trust-text {% if block.settings.trust_icon_3_link != blank %}underline{% endif %}">
+                      {{ block.settings.trust_icon_3_text }}
+                    </p>
+                  </a>
+                </div>
+              {% when 'recommended_products' %}
+                {% if product.metafields.custom.recommended_products %}
+                  <div class="product-page__recommended-products-section" {{ block.shopify_attributes }}>
+                    <h6 class="product-page__recommended-products-section-title">Buy it with</h6>
+                    <div class="product-page__recommended-product-list">
+                      {% for bundled_product in product.metafields.custom.recommended_products.value limit: 3 %}
+                        <div class="product-page__recommended-product-container">
+                          <div class="product-page__recommended-product corner-border">
+                            <a href="{{ bundled_product.url }}" class="media corner-border-target">
+                              <img
+                              srcset="{{ bundled_product.featured_image | image_url }}"
+                              loading="lazy"
+                              alt="{{ bundled_product.featured_image | escape }}"
+                              width="{{ bundled_product.featured_image.width }}"
+                              height="{{ bundled_product.featured_image.height }}"
+                              class="full"
+                            >
+                            </a>
+                            <div class="quick-add-icon"
+                              id="quick-add-button"
+                              data-first-available-variant-id="{{ bundled_product.variants.first.id }}"
+                              data-product-handle="{{ bundled_product.handle }}"
+                              data-product-variants="{% if  bundled_product.variants.size > 1 %}with{% else %}without{% endif %}"
+                              >
+                              {% render 'icons', icon: 'quick-add' %}
+                              </div>
+                          </div>
+                          <a href="{{ bundled_product.url }}" class="product-page__recommended-product-title">
+                            {{ bundled_product.title }}
+                          </a>
+                        </div>
+                      {% endfor %}
+                    </div>
+                  </div>
+                {% endif %}
+            {% endcase %}
+          {% endfor %}
+        {% endform %}
+      </div>
+    </div>
+  </div>
+</product-page>
+
+
+<script defer>
+    updateRecentlyViewedProductsCookie("{{ product.id }}", "{{ product.title }}", "{{ product.url }}", "{{ product.featured_image | image_url }}", "{{ product.featured_image.alt }}", "{{ product.featured_image.width }}", "{{ product.featured_image.height }}", "{{ product.price | money }}", "{{ product.compare_at_price | money }}", "{{ product.compare_at_price | minus: product.price }}", "{{ product.compare_at_price | minus: product.price | money }}", "{{ 'now' | date: "%d" | minus: product.published_at | date: "%d" }}", "{{ product.variants.first.id }}", "{{ product.handle }}", "{{ product.variants.size }}");
+    function updateRecentlyViewedProductsCookie(productId, productTitle, productUrl, productImage, productImageAlt, productImageWidth, productImageHeight, productPrice, productCompareAtPrice, productPriceDifference, productPriceDifferenceWithCurrency, productDateDifference, productVariantFirstId, productHandle, productVariantsSize) {
+      let recentlyViewedProducts = [];
+
+      let recentlyViewedProductsCookie =
+        document.cookie.indexOf("recentlyViewedProducts=") !== -1
+          ? JSON.parse(
+              document.cookie
+                .split("; ")
+                .find((row) => row.startsWith("recentlyViewedProducts"))
+                .split("=")
+                .slice(1)
+                .join("=")
+            )
+          : [];
+      let expiry = new Date(400 * 24 * 60 * 60 * 1000 + Date.parse(new Date()));
+
+      let productData = {
+        id: productId,
+        title: productTitle,
+        url: productUrl,
+        image: productImage,
+        image_alt: productImageAlt,
+        image_width: productImageWidth,
+        image_height: productImageHeight,
+        price: productPrice,
+        compare_at_price: productCompareAtPrice,
+        price_difference: productPriceDifference,
+        price_difference_with_currency: productPriceDifferenceWithCurrency,
+        date_difference: productDateDifference,
+        variant_first_id: productVariantFirstId,
+        handle: productHandle,
+        variants_size: productVariantsSize,
+      };
+
+      for (product = 0; product < recentlyViewedProductsCookie.length; product++) {
+        if (recentlyViewedProductsCookie[product].id === productData.id) {
+          recentlyViewedProductsCookie.splice(product, 1);
+        }
+      }
+
+      recentlyViewedProductsCookie.push(productData);
+      let newList = JSON.stringify(recentlyViewedProductsCookie);
+
+      document.cookie = "recentlyViewedProducts" + "=" + newList + "; expires=" + expiry + "; path=/; domain=." + window.location.hostname;
+    }
+</script>
+
+{{ 'option_selection.js' | shopify_asset_url | script_tag }}
+
+<script defer>
+
+  let variantsInventory = {};
+  {% for variant in product.variants %}
+  variantsInventory["{{ variant.title }}"] = {{ variant.inventory_quantity }};
+  {% endfor %}
+
+  let paymentMethods = `
+      <div class="product-page__payment-methods">
+          {%- liquid 
+            for block in section.blocks 
+                case block.type 
+                  when "buttons" 
+                    if block.settings.show_payment_methods == true 
+                        assign enabled_payment_types = block.settings.chosen_payment_methods | remove: ' ' | split: ',' 
+                        for type in enabled_payment_types 
+                          echo type | payment_type_svg_tag: class: 'icon'
+                        endfor 
+                    endif 
+                endcase
+            endfor 
+          -%}
+      </div>
+      `;
+
+  let productJson = {{ product | json }};
+  let currentVariantInventory = {{ current_variant.inventory_quantity }};
+  let stockAlertThreshold = {{ stock_alert_threshold }};
+  let priceDifferenceText= "{{ price_difference_text }}";
+</script>
+
+{% schema %}
+{
+  "name": "Product page",
+  "class": "page-product",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "thumbnails_on_mobile",
+      "label": "Show product thumbnails on mobile instead of indicators",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 400,
+      "step": 10,
+      "unit": "px",
+      "default": 180
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Top bottom",
+      "min": 0,
+      "max": 400,
+      "step": 10,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    { "type": "vendor", "name": "Vendor", "limit": 1, "settings": [] },
+    { "type": "name", "name": "Product name", "limit": 1, "settings": [] },
+    {
+      "type": "sale_tag",
+      "name": "Sale tag",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "price_difference_text",
+          "label": "Price difference disclaimer text",
+          "default": "SAVE",
+          "info": "Make sure the product compare at price is filled in and is greater than the price. Otherwise the sale tag will not show or will not work properly."
+        }
+      ]
+    },
+    { "type": "price", "name": "Price", "limit": 1, "settings": [] },
+    {
+      "type": "variants_selector",
+      "name": "Variants selector",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "select",
+          "id": "variant_selector_type",
+          "label": "Variant selector type",
+          "options": [
+            {
+              "value": "block",
+              "label": "Block"
+            },
+            {
+              "value": "dropdown",
+              "label": "Dropdown"
+            }
+          ],
+          "default": "block"
+        },
+        {
+          "type": "select",
+          "id": "color_selector_type",
+          "label": "Color selector type",
+          "options": [
+            {
+              "value": "block",
+              "label": "Block"
+            },
+            {
+              "value": "dropdown",
+              "label": "Dropdown"
+            },
+            {
+              "value": "color_swatch",
+              "label": "Color swatch"
+            },
+            {
+              "value": "variant_image",
+              "label": "Variant image"
+            }
+          ],
+                "info": "For the color swatch to work properly, the product must have variants, every variant must have an image attached to it, every image alt must be written in the format #color:Name, and the color and it's hex must be added in Color swatch tab in theme settings.",
+          "default": "block"
+        }
+      ]
+    },
+    { "type": "quantity", "name": "Quantity", "limit": 1, "settings": [] },
+    {
+      "type": "stock_alert",
+      "name": "Stock alert",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "range",
+          "id": "stock_alert_threshold",
+          "min": 1,
+          "max": 100,
+          "step": 1,
+          "unit": "pcs",
+          "label": "Stock alert threshold",
+          "default": 15
+        }
+      ]
+    },
+    {
+      "type": "countdown_timer",
+      "name": "Countdown timer",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "header",
+          "content": "Style"
+        },
+        {
+          "type": "select",
+          "id": "digits_size",
+          "label": "Digits size",
+          "options": [
+            {
+              "value": "small",
+              "label": "Small"
+            },
+            {
+              "value": "big",
+              "label": "Big"
+            }
+          ],
+          "default": "small"
+        },
+        {
+          "type": "range",
+          "id": "digits_container_border",
+          "min": 0,
+          "max": 30,
+          "step": 1,
+          "unit": "%",
+          "label": "Digits container border radius",
+          "default": 10
+        },
+        {
+          "type": "color",
+          "id": "digits_color",
+          "label": "Digits color",
+          "default": "#000000"
+        },
+        {
+          "type": "color",
+          "id": "digits_background_color",
+          "label": "Digits background color",
+          "default": "#fcdb33"
+        },
+        {
+          "type": "header",
+          "content": "Countdown timer settings"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Hurry Up! Offer ends in:"
+        },
+        {
+          "type": "text",
+          "id": "message",
+          "label": "After expiration message",
+          "default": "Offer has expired",
+          "info": "It is optional for Option 1 but required for Option 2"
+        },
+        {
+          "type": "select",
+          "id": "countdown_timer_type",
+          "label": "Countdown timer type",
+          "options": [
+            {
+              "value": "time",
+              "label": "Option 1: Based on user cookies"
+            },
+            {
+              "value": "date",
+              "label": "Option 2: Based on a date"
+            }
+          ],
+          "default": "time"
+        },
+        {
+          "type": "header",
+          "content": "Option 1: Based on user cookies",
+          "info": "⚠️ Remember that this option also saves your browser cookies. So if your new settings aren't taking effect immediately, simply clear the cookies and refresh the page."
+        },
+        {
+          "type": "range",
+          "id": "time_days",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "d",
+          "label": "Days",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "time_hours",
+          "min": 0,
+          "max": 24,
+          "step": 1,
+          "unit": "h",
+          "label": "Hours",
+          "default": 6
+        },
+        {
+          "type": "range",
+          "id": "time_mins",
+          "min": 0,
+          "max": 60,
+          "step": 1,
+          "unit": "m",
+          "label": "Minutes",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "time_secs",
+          "min": 0,
+          "max": 60,
+          "step": 1,
+          "unit": "s",
+          "label": "Seconds",
+          "default": 0
+        },
+        {
+          "type": "select",
+          "id": "afterExpirationTimeOnly",
+          "label": "After countdown expires",
+          "options": [
+            {
+              "value": "repeatCountdown",
+              "label": "Repeat countdown"
+            },
+            {
+              "value": "showMessage",
+              "label": "Show message"
+            }
+          ],
+          "default": "repeatCountdown",
+          "info": "This applied only to Option 1."
+        },
+        {
+          "type": "header",
+          "content": "Option 2: Based on a date"
+        },
+        {
+          "type": "range",
+          "id": "date_year",
+          "min": 2022,
+          "max": 2032,
+          "step": 1,
+          "unit": "y",
+          "label": "Year",
+          "default": 2023
+        },
+        {
+          "type": "range",
+          "id": "date_month",
+          "min": 1,
+          "max": 12,
+          "step": 1,
+          "unit": "m",
+          "label": "Month",
+          "default": 1
+        },
+        {
+          "type": "range",
+          "id": "date_day",
+          "min": 1,
+          "max": 31,
+          "step": 1,
+          "unit": "d",
+          "label": "Day",
+          "default": 1,
+          "info": "⚠️ Pay attention: If you put 31 to a month that ends with 30 or 28 days, it will result in an error in calculation."
+        },
+        {
+          "type": "range",
+          "id": "date_hour",
+          "min": 0,
+          "max": 24,
+          "step": 1,
+          "unit": "h",
+          "label": "Hour",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "date_min",
+          "min": 0,
+          "max": 60,
+          "step": 1,
+          "unit": "m",
+          "label": "Minute",
+          "default": 0
+        }
+      ]
+    },
+    {
+      "type": "buttons",
+      "name": "Buttons",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "show_buy_now",
+          "label": "Show buy now button",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_payment_methods",
+          "label": "Show payment methods icons with buy now button",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "chosen_payment_methods",
+          "label": "Pick which payment methods to show",
+          "default": "paypal,visa,master,american_express,discover,shopify_pay",
+          "info": "All available payment methods: afterpay,american_express,apple_pay,bitcoin,dankort,diners_club,discover,dogecoin,dwolla,facebook_pay,forbrugsforeningen,google_pay,ideal,jcb,klarna,klarna-pay-later,litecoin,maestro,master,paypal,shopify_pay,sofort,visa"
+        }
+      ]
+    },
+    {
+      "type": "trust_bar",
+      "name": "Trust bar",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "liquid",
+          "id": "trust_icon_1_svg",
+          "label": "First trust icon SVG"
+        },
+        {
+          "type": "text",
+          "id": "trust_icon_1_text",
+          "label": "First trust icon text",
+          "default": "Free shipping"
+        },
+        {
+          "type": "url",
+          "id": "trust_icon_1_link",
+          "label": "First trust icon link"
+        },
+        {
+          "type": "liquid",
+          "id": "trust_icon_2_svg",
+          "label": "Second trust icon SVG"
+        },
+        {
+          "type": "text",
+          "id": "trust_icon_2_text",
+          "label": "Second trust icon text",
+          "default": "30-day money back guarantee"
+        },
+        {
+          "type": "url",
+          "id": "trust_icon_2_link",
+          "label": "Second trust icon link"
+        },
+        {
+          "type": "liquid",
+          "id": "trust_icon_3_svg",
+          "label": "Third trust icon SVG"
+        },
+        {
+          "type": "text",
+          "id": "trust_icon_3_text",
+          "label": "Third trust icon text",
+          "default": "24/7 customer support"
+        },
+        {
+          "type": "url",
+          "id": "trust_icon_3_link",
+          "label": "Third trust icon link"
+        }
+      ]
+    },
+    {
+      "type": "recommended_products",
+      "name": "Recommended products",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "header",
+          "content": "Recommended products requirement",
+          "info": "Make sure you have created a custom [metafield](https://help.shopify.com/en/manual/metafields) in [admin settings](/admin/metafields) named \"custom.recommended_products\" and went to the product page and selected the products you want to recommend in the metafields section. Otherwise the recommended products section will not show."
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

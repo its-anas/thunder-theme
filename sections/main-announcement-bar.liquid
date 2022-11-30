@@ -1,0 +1,418 @@
+{{ 'main-announcement-bar.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'main-announcement-bar.js' | asset_url }}" defer></script>
+
+{%- style -%}
+  .announcement > .announcement__container {
+    min-width: {{ section.blocks.size | times: 100 }}%;
+  }
+  .announcement {
+    background-color: {{ section.settings.background_color }};
+   }
+  .announcement__content > p {
+    color: {{ section.settings.text_color }};
+  }
+  .announcement__content > p > .button-text, .announcement__content > p > .coupon {
+    color: {{ section.settings.button_and_coupon_color }};
+  }
+{%- endstyle -%}
+
+{% if section.settings.show_announcement_bar == true %}
+  <announcement-bar
+    data-autoplay="{{ section.settings.enable_autoplay }}"
+    data-delay-time="{{ section.settings.autoplay_delay_time | times: 1000 }}"
+  >
+    {% if section.blocks.size > 0 %}
+      <div class="announcement">
+        <div class="announcement__container">
+          {% for block in section.blocks %}
+            <div class="announcement__slide" {{ block.shopify_attributes }}>
+              <div class="announcement__content">
+                {%- case block.type -%}
+                  {%- when 'text_with_button' -%}
+                    <p>
+                      {{ block.settings.text }}
+                      {% if block.settings.button_text != blank %}
+                        <a
+                          class="button-text button--link"
+                          {% if block.settings.button_link != blank %}
+                            href="{{ block.settings.button_link }}"
+                          {% endif %}
+                        >
+                          {{ block.settings.button_text }}
+                        </a>
+                      {% endif %}
+                    </p>
+                  {%- when 'text_with_coupon' -%}
+                    <p>
+                      {{ block.settings.text }}
+                      {% if block.settings.coupon_text != blank %}
+                        <a class="coupon">{{ block.settings.coupon_text }}</a>
+                      {% endif %}
+                    </p>
+                  {%- when 'text_with_countdown' -%}
+                    {%- style -%}
+                      .countdown-timer__timers {
+                        gap: 0.3rem;
+                      }
+                      .countdown-timer__timers > .countdown-timer__container {
+                        background-color: {{ block.settings.digits_background_color }};
+                        border-radius: {{ block.settings.digits_container_border }}%;
+                        padding: 0.1rem 0.3rem;
+                        min-width: 1.5rem;
+                      }
+                      .countdown-timer__timers > .countdown-timer__container > p {
+                        color: {{ block.settings.digits_color }};
+                      }
+                      .countdown-timer__timers > .countdown-timer__container > .small {
+                        font-size: 1.2rem;
+                        line-height: 0.9;
+                      }
+                      .countdown-timer__timers > .countdown-timer__container > .label {
+                        font-size: 0.5rem;
+                      }
+                    {%- endstyle -%}
+
+                    {% liquid
+                      assign days = block.settings.time_days | times: 24.00 | times: 60.00
+                      assign hours = block.settings.time_hours | times: 60.00
+                      assign mins = block.settings.time_mins
+                      assign secs = block.settings.time_secs | divided_by: 60.00
+                      assign timeInMinutes = days | plus: hours | plus: mins | plus: secs
+                      assign year = block.settings.date_year
+                      assign month = block.settings.date_month | prepend: '00' | slice: -2, 2
+                      assign day = block.settings.date_day | prepend: '00' | slice: -2, 2
+                      assign hour = block.settings.date_hour | prepend: '00' | slice: -2, 2
+                      assign min = block.settings.date_min | prepend: '00' | slice: -2, 2
+                      assign sec = block.settings.date_sec | prepend: '00' | slice: -2, 2
+                    %}
+
+                    {% capture timeInDate -%}
+                      {{- year }}-{{ month }}-{{ day }}T{{ hour }}:{{ min }}:{{ sec -}}
+                    {%- endcapture %}
+                    {% capture countdownType %}{{ block.settings.countdown_timer_type }}{% endcapture %}
+                    {% capture afterExpirationTimeOnly %}{{ block.settings.afterExpirationTimeOnly }}{% endcapture %}
+
+                    <p>{{ block.settings.text }}</p>
+                    <div id="countdown-timer-{{ block.id }}">
+                      <countdown-timer
+                        countdown-type="{{ countdownType }}"
+                        time-in-date="{{ timeInDate }}"
+                        time-in-minutes="{{ timeInMinutes }}"
+                        after-expiration="{{ afterExpirationTimeOnly }}"
+                        section-id="countdown-timer-{{ block.id }}"
+                        cookie-name="countdown-timer-cookie-{{ block.id }}"
+                        class="countdown-timer__timers"
+                      >
+                        <div class="countdown-timer__container">
+                          <p class="days small"></p>
+                          <p class="label">Days</p>
+                        </div>
+                        <div class="countdown-timer__container">
+                          <p class="hours small"></p>
+                          <p class="label">Hours</p>
+                        </div>
+                        <div class="countdown-timer__container">
+                          <p class="minutes small"></p>
+                          <p class="label">Mins</p>
+                        </div>
+                        <div class="countdown-timer__container">
+                          <p class="seconds small"></p>
+                          <p class="label">Secs</p>
+                        </div>
+                      </countdown-timer>
+                      <div class="countdown-timer__message">
+                        <h6>{{ block.settings.message }}</h6>
+                      </div>
+                    </div>
+                {%- endcase -%}
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+        <div class="chevrons">
+          <span class="prev">
+            <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M14 17.854L9 12.854L14 7.85397" stroke="{{ section.settings.text_color }}" stroke-width="1.5"/>
+            </svg>
+          </span>
+          <span class="next">
+            <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M10 7.85397L15 12.854L10 17.854" stroke="{{ section.settings.text_color }}" stroke-width="1.5"/>
+            </svg>
+          </span>
+        </div>
+      </div>
+    {% endif %}
+  </announcement-bar>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Announcement bar",
+  "class": "section-announcement-bar",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_announcement_bar",
+      "label": "Show announcement bar",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_autoplay",
+      "label": "Enable autoplay",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "autoplay_delay_time",
+      "min": 3,
+      "max": 10,
+      "step": 1,
+      "unit": "s",
+      "label": "Delay time",
+      "default": 4
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#222"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#fff"
+    },
+    {
+      "type": "color",
+      "id": "button_and_coupon_color",
+      "label": "Button/Coupon color",
+      "default": "#fcdb33"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "text_with_button",
+      "name": "Text with button",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Put your text here"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button text",
+          "default": "Learn more"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button link"
+        }
+      ]
+    },
+    {
+      "type": "text_with_coupon",
+      "name": "Text with coupon",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Put your text here"
+        },
+        {
+          "type": "text",
+          "id": "coupon_text",
+          "label": "Coupon",
+          "default": "COUPON"
+        }
+      ]
+    },
+    {
+      "type": "text_with_countdown",
+      "name": "Text with countdown timer",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Put your text here"
+        },
+        {
+          "type": "range",
+          "id": "digits_container_border",
+          "min": 0,
+          "max": 30,
+          "step": 1,
+          "unit": "%",
+          "label": "Digits container border radius",
+          "default": 10
+        },
+        {
+          "type": "color",
+          "id": "digits_color",
+          "label": "Digits color",
+          "default": "#000000"
+        },
+        {
+          "type": "color",
+          "id": "digits_background_color",
+          "label": "Digits background color",
+          "default": "#fcdb33"
+        },
+        {
+          "type": "header",
+          "content": "Countdown timer settings"
+        },
+        {
+          "type": "text",
+          "id": "message",
+          "label": "After expiration message",
+          "default": "Offer ended",
+          "info": "It is optional for Option 1 but required for Option 2"
+        },
+        {
+          "type": "select",
+          "id": "countdown_timer_type",
+          "label": "Countdown timer type",
+          "options": [
+            {
+              "value": "time",
+              "label": "Option 1: Based on user cookies"
+            },
+            {
+              "value": "date",
+              "label": "Option 2: Based on a date"
+            }
+          ],
+          "default": "time"
+        },
+        {
+          "type": "header",
+          "content": "Option 1: Based on user cookies",
+          "info": "⚠️ Remember that this option also saves your browser cookies. So if your new settings aren't taking effect immediately, simply clear the cookies and refresh the page."
+        },
+        {
+          "type": "range",
+          "id": "time_days",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "d",
+          "label": "Days",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "time_hours",
+          "min": 0,
+          "max": 24,
+          "step": 1,
+          "unit": "h",
+          "label": "Hours",
+          "default": 6
+        },
+        {
+          "type": "range",
+          "id": "time_mins",
+          "min": 0,
+          "max": 60,
+          "step": 1,
+          "unit": "m",
+          "label": "Minutes",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "time_secs",
+          "min": 0,
+          "max": 60,
+          "step": 1,
+          "unit": "s",
+          "label": "Seconds",
+          "default": 0
+        },
+        {
+          "type": "select",
+          "id": "afterExpirationTimeOnly",
+          "label": "After countdown expires",
+          "options": [
+            {
+              "value": "repeatCountdown",
+              "label": "Repeat countdown"
+            },
+            {
+              "value": "showMessage",
+              "label": "Show message"
+            }
+          ],
+          "default": "repeatCountdown",
+          "info": "This applied only to Option 1."
+        },
+        {
+          "type": "header",
+          "content": "Option 2: Based on a date"
+        },
+        {
+          "type": "range",
+          "id": "date_year",
+          "min": 2022,
+          "max": 2032,
+          "step": 1,
+          "unit": "y",
+          "label": "Year",
+          "default": 2023
+        },
+        {
+          "type": "range",
+          "id": "date_month",
+          "min": 1,
+          "max": 12,
+          "step": 1,
+          "unit": "m",
+          "label": "Month",
+          "default": 1
+        },
+        {
+          "type": "range",
+          "id": "date_day",
+          "min": 1,
+          "max": 31,
+          "step": 1,
+          "unit": "d",
+          "label": "Day",
+          "default": 1,
+          "info": "⚠️ Pay attention: If you put 31 to a month that ends with 30 or 28 days, it will result in an error in calculation."
+        },
+        {
+          "type": "range",
+          "id": "date_hour",
+          "min": 0,
+          "max": 24,
+          "step": 1,
+          "unit": "h",
+          "label": "Hour",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "date_min",
+          "min": 0,
+          "max": 60,
+          "step": 1,
+          "unit": "m",
+          "label": "Minute",
+          "default": 0
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

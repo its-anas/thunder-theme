@@ -1,0 +1,315 @@
+{{ 'section-featured-product.css' | asset_url | stylesheet_tag }}
+
+{% liquid
+  assign mobile_items = 1
+  assign tablet_items = 1
+  assign desktop_items = 1
+  assign desktop_section_width = 100
+  assign featured_product = section.settings.product
+%}
+
+{% assign current_variant = featured_product.selected_or_first_available_variant %}
+
+{% style %}
+    .featured-product.{{ section.id }} {
+      background-color: {{ section.settings.background_color }};
+      padding-top: {{ section.settings.padding_top }}px !important;
+      padding-bottom: {{ section.settings.padding_bottom }}px !important;
+    }
+
+   .featured-product-slider__slides-container {
+    --mobile-items: {{ mobile_items }};
+    --tablet-items: {{ tablet_items }};
+    --desktop-items: {{ desktop_items }};
+  }
+
+  @media screen and (min-width: 1025px) {
+     .featured-product-slider__slides-container {
+      --container-width: calc(var(--section-width) * {{ desktop_section_width | divided_by: 100.00 }} );
+    }
+     .prev,
+     .next {
+      width: {{ 100 | minus: desktop_section_width | divided_by: 2 }}%;
+    }
+  }
+
+  .featured-product-slider__slides-container .item {
+  aspect-ratio: 1;
+  }
+
+  {% if section.settings.thumbnails_on_mobile == false %}
+    @media screen and (max-width: 1024px) {
+      .{{ section.id }} .featured-product-slider__thumbnails {
+          height: 0 !important;
+          visibility: hidden;
+      }
+    }
+    @media screen and (min-width: 1024px) {
+      .{{ section.id }} .featured-product-slider__indicators {
+          height: 0 !important;
+          visibility: hidden;
+      }
+    }
+  {% else %}
+    .{{ section.id }} .featured-product-slider__indicators {
+        height: 0 !important;
+        visibility: hidden;
+    }
+    .{{ section.id }} .featured-product-slider__slides-container .slide, .{{ section.id }} .featured-product-slider__slides-container .slide .item {
+      transition: none !important;
+      opacity: 1 !important;
+    }
+  {% endif %}
+{% endstyle %}
+
+<featured-product
+  class="featured-product {{ section.id }} {{ section.settings.section_style }}"
+>
+  <div class="featured-product__container">
+    <div class="featured-product__content">
+      <div class="featured-product__pictures">
+        <div class="featured-product__slider">
+          <featured-product-slider
+            data-mobile-items="{{ mobile_items }}"
+            data-tablet-items="{{ tablet_items }}"
+            data-desktop-items="{{ desktop_items }}"
+            class="{{ section.id }}"
+          >
+            <p id="imagesData-{{ section.id }}"></p>
+            <p id="variantsData-{{ section.id }}"></p>
+            <p id="optionsData-{{ section.id }}"></p>
+
+            <div
+              class="featured-product-slider"
+              data-section-id="{{ section.id }}"
+              data-section-id="{{ section.id }}"
+              data-featured-product-variant-selector-type="{{ section.settings.variant_selector_type }}"
+              data-featured-product-color-selector-type="{{ section.settings.color_selector_type }}"
+            >
+              <div class="prev">
+                {% render 'icons', icon: 'chevron-prev' %}
+              </div>
+              <div class="featured-product-slider__slides-container">
+                <div class="zoom-icon"></div>
+                <div class="slide">
+                  <div class="item">
+                    <div class="item-picture media">
+                      {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="next">
+                {% render 'icons', icon: 'chevron-next' %}
+              </div>
+            </div>
+            <div class="featured-product-slider__indicators"></div>
+            <div class="featured-product-slider__thumbnails-container ">
+              <div class="featured-product-slider__thumbnails">
+                <div class="thumbnail">
+                  <div class="thubmnail-picture media">
+                    {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </featured-product-slider>
+        </div>
+      </div>
+      <div class="featured-product__info">
+        <div class="featured-product__vendor">
+          <p>{{ featured_product.vendor }}</p>
+        </div>
+
+        <div class="featured-product__name">
+          <h3>{{ featured_product.title }}</h3>
+        </div>
+
+        <div class="featured-product__price">
+          <p>
+            {{ current_variant.price | money }}
+          </p>
+        </div>
+
+        <div class="featured-product__options"></div>
+
+        <div class="featured-product__quantity-field">
+          <quantity-field class="quantity">
+            <label for="quantity-text"><p>Quantity</p></label>
+            <div class="quantity-field" id="quantity-field">
+              <button type="button" class="quantity-field__minus" id="quantity-field__minus">-</button>
+              <input
+                type="quantity"
+                class="quantity-field__input"
+                id="quantity-field__input"
+                name="quantity"
+                min="1"
+                value="1"
+              >
+              <button type="button" class="quantity-field__plus" id="quantity-field__plus">+</button>
+            </div>
+          </quantity-field>
+        </div>
+
+        <div class="featured-product__buttons buttons">
+          <a class="button button--primary border" id="featured-product-add-to-cart">
+            <span></span> <span></span> <span></span> <span></span>ADD TO CART</a
+          >
+          <a
+            href="/cart/{{ current_variant.id}}:1"
+            class="button button--secondary border"
+            id="featured-product-buy-now"
+          >
+            <span></span> <span></span> <span></span> <span></span>BUY NOW</a
+          >
+        </div>
+
+        <a href="{{ current_variant.url}}" class="featured-product__url button--link"> View details </a>
+      </div>
+    </div>
+  </div>
+</featured-product>
+
+<script defer>
+  featuredProductImages = {};
+  {% if featured_product.images.size > 0 %}
+    {% for image in featured_product.images %}
+     {% for variant in image.variants %}
+       featuredProductvariantsAttached.push({{ variant.id }});
+     {% endfor %}
+       featuredProductImages[{{ image.position }}] = {  position: {{ image.position }}, id: {{ image.id }}, variant_ids: featuredProductvariantsAttached, src: "{{ image | image_url }}" , alt: "{{ image.alt | escape }}" , width: "{{ image.width }}" , height: "{{ image.height }}"};
+    {% endfor %}
+  {% endif %}
+
+
+  featuredProductVariants = {};
+  {% if featured_product.variants.size > 0 %}
+      {% for variant in featured_product.variants %}
+        featuredProductVariants['{{ variant.id }}'] = { id: "{{ variant.id }}", title: "{{ variant.title }}", price: "{{ variant.price | money }}", compare_at_price: "{{ variant.compare_at_price | money }}", inventory: {{ variant.inventory_quantity }}, featured_image: "{{ variant.featured_image.id }}" };
+      {% endfor %}
+    {% endif %}
+
+  featuredProductOptions = {};
+  {% if featured_product.options_with_values.size > 0 %}
+    {% for option in featured_product.options_with_values %}
+        optionValues = [];
+      {% for value in option.values %} optionValues.push("{{ value }}");
+      {% endfor %}
+      featuredProductOptions["{{ option.name }}"] = optionValues;
+    {% endfor %}
+  {% endif %}
+
+  localStorage.setItem("featuredProductImages-{{ section.id }}", JSON.stringify(featuredProductImages));
+  localStorage.setItem("featuredProductVariants-{{ section.id }}", JSON.stringify(featuredProductVariants));
+  localStorage.setItem("featuredProductOptions-{{ section.id }}", JSON.stringify(featuredProductOptions));
+</script>
+
+{% schema %}
+{
+  "name": "Featured product",
+  "class": "section-featured-product",
+  "settings": [
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Product"
+    },
+    {
+      "type": "checkbox",
+      "id": "thumbnails_on_mobile",
+      "label": "Show product thumbnails on mobile instead of indicators",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "variant_selector_type",
+      "label": "Variant selector type",
+      "options": [
+        {
+          "value": "block",
+          "label": "Block"
+        },
+        {
+          "value": "dropdown",
+          "label": "Dropdown"
+        }
+      ],
+      "default": "dropdown"
+    },
+    {
+      "type": "select",
+      "id": "color_selector_type",
+      "label": "Color selector type",
+      "info": "For the color swatch to work properly, the product must have variants, every variant must have an image attached to it, every image alt must be written in the format #color:Name, and the color and it's hex must be added in Color swatch tab in theme settings.",
+      "options": [
+        {
+          "value": "block",
+          "label": "Block"
+        },
+        {
+          "value": "dropdown",
+          "label": "Dropdown"
+        },
+        {
+          "value": "color_swatch",
+          "label": "Color swatch"
+        },
+        {
+          "value": "variant_image",
+          "label": "Image variant"
+        }
+      ],
+      "default": "dropdown"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "transparent"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 400,
+      "step": 10,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Top bottom",
+      "min": 0,
+      "max": 400,
+      "step": 10,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "select",
+      "id": "section_style",
+      "label": "Section width",
+      "default": "full",
+      "options": [
+        {
+          "value": "full-width",
+          "label": "Full width"
+        },
+        {
+          "value": "wrapped",
+          "label": "Wrapped"
+        }
+      ],
+      "default": "full-width"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured product",
+      "blocks": []
+    }
+  ]
+}
+{% endschema %}
