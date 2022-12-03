@@ -10,14 +10,14 @@ if (document.getElementById("search__results__filter-control")) {
 	});
 }
 
-if (document.querySelector(".search__results--head .sort-by__select")) {
-	document.querySelector(".search__results--head .sort-by__select").addEventListener("change", (e) => {
-		let value = e.target.value;
+// if (document.querySelector(".search__results--head .sort-by__select")) {
+// 	document.querySelector(".search__results--head .sort-by__select").addEventListener("change", (e) => {
+// 		let value = e.target.value;
 
-		if (window.location.href.includes("&sort_by")) {
-			window.location.href = window.location.href.split("&sort_by")[0] + "&sort_by=" + value;
-		} else {
-			window.location.href = window.location.href + "&sort_by=" + value;
-		}
-	});
-}
+// 		if (window.location.href.includes("&sort_by")) {
+// 			window.location.href = window.location.href.split("&sort_by")[0] + "&sort_by=" + value;
+// 		} else {
+// 			window.location.href = window.location.href + "&sort_by=" + value;
+// 		}
+// 	});
+// }

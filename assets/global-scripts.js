@@ -185,7 +185,7 @@ class PredictiveSearch extends HTMLElement {
 		super();
 
 		this.input = this.querySelector('input[type="search"]');
-		this.icon = this.querySelector(".search-section__icon");
+		this.icon = this.querySelector(".search__icon");
 		this.predictiveSearchResults = this.querySelector("#predictive-search");
 
 		this.input.addEventListener(

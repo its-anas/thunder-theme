@@ -14,8 +14,8 @@
       {% endif %}
     </div>
 
-    <predictive-search class="search-section__container">
-      <form action="{{ routes.search_url }}" method="get" class="search-section__form">
+    <div class="search-section__container">
+      <form action="{{ routes.search_url }}" method="get" class="search__form">
         <input
           id="Search"
           class="search-section__input"
@@ -30,32 +30,18 @@
             spellcheck="false"
           {%- endif -%}
         >
+        <button class="search__icon">
+          {% render 'icons', icon: 'search' %}
+        </button>
       </form>
-      <a class="search-section__icon">
-        {% render 'icons', icon: 'search' %}
-      </a>
-    </predictive-search>
+    </div>
 
     {% if search.performed %}
       {%- if search.results_count > 0 or search.filters != empty -%}
         <div class="search__content">
           <div class="search__content-container">
             <div class="search__content--side desktop-only">
-              <div class="search__filter">
-                <div class="search__filter-container">
-                  <h6 class="search__filter__tab">Color</h6>
-                  <div class="search__filter__color-content"></div>
-
-                  <h6 class="search__filter__tab">Price</h6>
-                  <div class="search__filter__price-content"></div>
-
-                  <h6 class="search__filter__tab">Product type</h6>
-                  <div class="search__filter__product-type-content"></div>
-
-                  <h6 class="search__filter__tab">Availability</h6>
-                  <div class="search__filter__availability-content"></div>
-                </div>
-              </div>
+              {% render 'search-filter' %}
             </div>
             <div class="search__content--middle">
               <div class="search__results">

@@ -339,6 +339,8 @@
                                 <label
                                   class=" product-page__radio__label color_swatch {% if option.selected_value == value %}checked{% endif %}"
                                  
+                                  {% comment %}  UNFINISHED: replace with color_swatch.liquid snippet {% endcomment %}
+                                  
                                   {%- liquid 
                                     assign color_swatch_list = settings.color_swatch_list | split: ','
                                     for color_swatch in color_swatch_list
