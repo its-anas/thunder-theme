@@ -1,0 +1,28 @@
+{% comment %} If color not found in settings.color_watch_list use this list https://www.december.com/html/spec/colorhex.html {% endcomment %}
+
+{%- liquid
+  assign target_color = actual_color | downcase
+  assign color_swatch_list = settings.color_swatch_list | split: ','
+
+  for color_swatch_item in color_swatch_list
+    assign color_swatch_parts = color_swatch_item | split: ':'
+    assign color_swatch_name = color_swatch_parts.first | downcase | strip
+
+    if color_swatch_name == target_color
+      assign color_swatch_value = color_swatch_parts.last | strip
+
+      if color_swatch_value contains '#'
+        assign color_swatch_style = 'background-color: ' | append: color_swatch_value
+        comment
+           elsif images[color_swatch_value] != blank
+          assign color_swatch_image = images[color_swatch_value] | img_url: '72x72'
+          assign color_swatch_style = 'background-image: url(' | append: color_swatch_image | append: ')'
+        endcomment
+      endif
+
+      break
+    endif
+  endfor
+
+  echo color_swatch_style
+-%}

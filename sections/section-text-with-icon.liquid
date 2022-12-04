@@ -41,7 +41,7 @@
           <div class="icon">
             {% if block.settings.icon_type == 'svg' %}
               {% if block.settings.svg == blank %}
-                {% render 'icons', icon: 'multi-icon' %}
+                {% render 'snippet-icons', icon: 'multi-icon' %}
               {% else %}
                 {{ block.settings.svg }}
               {% endif %}

@@ -51,7 +51,7 @@
   {% endif %}
   <div class="slider-component">
     <div class="prev">
-      {% render 'icons', icon: 'chevron-prev' -%}
+      {% render 'snippet-icons', icon: 'chevron-prev' -%}
     </div>
     <div class="slides-container">
       <div class="slide">
@@ -65,7 +65,7 @@
             >
               {% if block.settings.icon_type == 'svg' %}
                 {% if block.settings.svg == blank %}
-                  {% render 'icons', icon: 'multi-icon' %}
+                  {% render 'snippet-icons', icon: 'multi-icon' %}
                 {% else %}
                   {{ block.settings.svg }}
                 {% endif %}
@@ -92,7 +92,7 @@
       </div>
     </div>
     <div class="next">
-      {% render 'icons', icon: 'chevron-next' -%}
+      {% render 'snippet-icons', icon: 'chevron-next' -%}
     </div>
   </div>
 </slider-component>

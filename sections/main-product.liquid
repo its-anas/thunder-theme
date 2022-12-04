@@ -144,14 +144,14 @@
         >
           <div class="product-page-slider">
             <div class="prev">
-              {% render 'icons', icon: 'chevron-prev' %}
+              {% render 'snippet-icons', icon: 'chevron-prev' %}
             </div>
             <div class="product-page-slider__slides-container">
               <div class="zoom-icon"></div>
               <div class="slide"></div>
             </div>
             <div class="next">
-              {% render 'icons', icon: 'chevron-next' %}
+              {% render 'snippet-icons', icon: 'chevron-next' %}
             </div>
           </div>
           <div class="product-page-slider__indicators"></div>
@@ -597,7 +597,7 @@
                               data-product-handle="{{ bundled_product.handle }}"
                               data-product-variants="{% if  bundled_product.variants.size > 1 %}with{% else %}without{% endif %}"
                               >
-                              {% render 'icons', icon: 'quick-add' %}
+                              {% render 'snippet-icons', icon: 'quick-add' %}
                               </div>
                           </div>
                           <a href="{{ bundled_product.url }}" class="product-page__recommended-product-title">

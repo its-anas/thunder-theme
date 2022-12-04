@@ -201,8 +201,8 @@ img {
 
 .corner-border:before,
 .corner-border:after,
-.corner-border > .corner-border-target:before,
-.corner-border > .corner-border-target:after {
+.corner-border>.corner-border-target:before,
+.corner-border>.corner-border-target:after {
 	content: " ";
 	position: absolute;
 	z-index: 2;
@@ -215,6 +215,7 @@ img {
 }
 
 @media screen and (min-width: 1024px) {
+
 	.corner-border:hover:before,
 	.corner-border:hover:after,
 	.corner-border:hover .corner-border-target:before,
@@ -237,13 +238,13 @@ img {
 	border-width: 1px 1px 0 0;
 }
 
-.corner-border > .corner-border-target:before {
+.corner-border>.corner-border-target:before {
 	right: 0;
 	bottom: 0;
 	border-width: 0 1px 1px 0;
 }
 
-.corner-border > .corner-border-target:after {
+.corner-border>.corner-border-target:after {
 	bottom: 0;
 	left: 0;
 	border-width: 0 0 1px 1px;
@@ -421,13 +422,13 @@ a.button {
 }
 
 p[data-spam-detection-disclaimer],
-p[data-spam-detection-disclaimer] > * {
+p[data-spam-detection-disclaimer]>* {
 	color: grey;
 	font-size: 0.8rem;
 	text-align: center;
 }
 
-p[data-spam-detection-disclaimer] > a {
+p[data-spam-detection-disclaimer]>a {
 	text-decoration: underline;
 }
 
@@ -464,6 +465,7 @@ p[data-spam-detection-disclaimer] > a {
 }
 
 @media screen and (max-width: 750px) {
+
 	.vertical--top,
 	.vertical--center,
 	.vertical--bottom {
@@ -511,7 +513,7 @@ input[type="checkbox"] {
 	flex: none;
 	width: 14px;
 	height: 14px;
-	border: 0.5px solid rgb(149, 149, 149);
+	border: 0.5px solid white;
 	background-color: transparent;
 	border-radius: 0;
 	cursor: pointer;
@@ -521,7 +523,6 @@ input[type="checkbox"] {
 }
 
 input[type="checkbox"]:checked {
-	border-color: white;
 	background-color: transparent;
 	background-image: url("data:image/svg+xml,%3Csvg width='10' height='9' viewBox='0 0 10 9' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 4L4 7L9 1' stroke='white' stroke-width='1.5'/%3E%3C/svg%3E%0A");
 	background-position: center;
@@ -530,6 +531,7 @@ input[type="checkbox"]:checked {
 }
 
 @media screen and (min-width: 1025px) {
+
 	input,
 	textarea,
 	select {
@@ -686,6 +688,7 @@ button,
 }
 
 @media screen and (min-width: 1025px) {
+
 	.button--primary,
 	.button--secondary {
 		padding: 15px 0px;
@@ -749,6 +752,7 @@ button.border.button--secondary:hover {
 }
 
 @media screen and (min-width: 751px) {
+
 	.button--primary,
 	.button--secondary {
 		min-width: 200px;
@@ -783,6 +787,7 @@ button.border.button--secondary:hover {
 }
 
 @media screen and (min-width: 751px) {
+
 	a.button,
 	button.button {
 		position: relative;
@@ -956,6 +961,7 @@ slider-component .slider-component .next {
 }
 
 @media screen and (max-width: 750px) {
+
 	slider-component .slider-component .prev,
 	slider-component .slider-component .next {
 		display: none;
@@ -964,6 +970,7 @@ slider-component .slider-component .next {
 }
 
 @media screen and (min-width: 751px) and (max-width: 1024px) {
+
 	slider-component .slider-component .prev,
 	slider-component .slider-component .next {
 		display: none;
@@ -1060,7 +1067,7 @@ slider-component .slider-component .slides-container .slide .item {
 	height: 100%;
 }
 
-slider-component .slider-component .slides-container .slide .item > * {
+slider-component .slider-component .slides-container .slide .item>* {
 	overflow: hidden;
 	max-width: 95%;
 }
@@ -1097,6 +1104,7 @@ slider-component .slider-component .slides-container .slide .item > * {
 }
 
 @media screen and (min-width: 1025px) {
+
 	.tag--animated,
 	.tag--animated-hover:after {
 		-webkit-animation: blink 1s linear infinite;
@@ -1171,6 +1179,7 @@ menu-drawer-component {
 }
 
 @media screen and (min-width: 751px) {
+
 	cart-component,
 	menu-drawer-component {
 		max-width: 500px;
@@ -1352,7 +1361,7 @@ cart-component.hidden {
 	cursor: pointer;
 }
 
-.search__icon:hover > * {
+.search__icon:hover>* {
 	display: none;
 }
 

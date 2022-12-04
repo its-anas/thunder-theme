@@ -58,7 +58,7 @@
   </div>
   <div class="slider-component">
     <div class="prev">
-      {% render 'icons', icon: 'chevron-prev' -%}
+      {% render 'snippet-icons', icon: 'chevron-prev' -%}
     </div>
     <div class="slides-container">
       <div class="slide">
@@ -77,7 +77,7 @@
                   data-product-handle="{{ product.handle }}"
                   data-product-variants="{% if product.variants.size > 1 %}with{% else %}without{% endif %}"
                 >
-                  {% render 'icons', icon: 'quick-add' -%}
+                  {% render 'snippet-icons', icon: 'quick-add' -%}
                 </div>
 
                 <a href="{{ product.url }}" class="media corner-border-target">
@@ -136,7 +136,7 @@
                   data-product-handle="{{ product.handle }}"
                   data-product-variants="{% if product.variants.size > 1 %}with{% else %}without{% endif %}"
                 >
-                  {% render 'icons', icon: 'quick-add' -%}
+                  {% render 'snippet-icons', icon: 'quick-add' -%}
                 </div>
                 {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
               </div>
@@ -160,7 +160,7 @@
       </div>
     </div>
     <div class="next">
-      {% render 'icons', icon: 'chevron-next' -%}
+      {% render 'snippet-icons', icon: 'chevron-next' -%}
     </div>
   </div>
   <div class="featured-collection__link">

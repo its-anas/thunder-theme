@@ -31,7 +31,7 @@
           {%- endif -%}
         >
         <button class="search__icon">
-          {% render 'icons', icon: 'search' %}
+          {% render 'snippet-icons', icon: 'search' %}
         </button>
       </form>
     </div>
@@ -41,7 +41,7 @@
         <div class="search__content">
           <div class="search__content-container">
             <div class="search__content--side desktop-only">
-              {% render 'search-filter' %}
+              {% render 'snippet-search-filter' %}
             </div>
             <div class="search__content--middle">
               <div class="search__results">
@@ -105,7 +105,7 @@
                                   data-product-handle="{{ item.handle }}"
                                   data-product-variants="{% if item.variants.size > 1 %}with{% else %}without{% endif %}"
                                 >
-                                  {% render 'icons', icon: 'quick-add' -%}
+                                  {% render 'snippet-icons', icon: 'quick-add' -%}
                                 </div>
                                 {% if item.featured_image != blank %}
                                   <a href="{{ item.url }}" class="media corner-border-target">

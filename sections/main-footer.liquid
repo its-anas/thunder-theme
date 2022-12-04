@@ -53,19 +53,19 @@
               <div class="footer__item-content">
                 {% if block.settings.phone != blank %}
                   <div class="footer__information-item">
-                    {% render 'icons', icon: 'footer-phone' -%}
+                    {% render 'snippet-icons', icon: 'footer-phone' -%}
                     <p>{{ block.settings.phone }}</p>
                   </div>
                 {% endif %}
                 {% if block.settings.email != blank %}
                   <div class="footer__information-item">
-                    {% render 'icons', icon: 'footer-email' -%}
+                    {% render 'snippet-icons', icon: 'footer-email' -%}
                     <p>{{ block.settings.email }}</p>
                   </div>
                 {% endif %}
                 {% if block.settings.address != blank %}
                   <div class="footer__information-item">
-                    {% render 'icons', icon: 'footer-location' -%}
+                    {% render 'snippet-icons', icon: 'footer-location' -%}
                     <p>{{ block.settings.address }}</p>
                   </div>
                 {% endif %}

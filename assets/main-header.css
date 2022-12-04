@@ -1,3 +1,23 @@
+.loading-bar {
+	width: 0%;
+	height: 8px;
+	background-color: var(--primary-button-background-color);
+	position: fixed;
+	z-index: 200;
+	top: 0;
+	left: 0;
+}
+
+.loading-bar.show {
+	width: 80%;
+	transition: all 6s linear;
+}
+
+.loading-bar.end {
+	width: 100%;
+	transition: all 0.2s linear;
+}
+
 /* ANCHOR: HEADER  */
 .header-section {
 	width: 100%;
@@ -11,6 +31,7 @@
 
 .header-section.sticky {
 	position: fixed;
+	top: 0;
 }
 
 .header-section.higher-layer {
@@ -128,6 +149,7 @@
 }
 
 @media screen and (min-width: 1024px) {
+
 	.header__logo,
 	.header__icons,
 	.header__menu {
@@ -503,7 +525,7 @@
 	text-align: center;
 }
 
-.menu-mobile__picture > * {
+.menu-mobile__picture>* {
 	width: 80%;
 }
 
