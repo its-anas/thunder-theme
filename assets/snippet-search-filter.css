@@ -1,3 +1,16 @@
+.filter-head {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0.5rem;
+	border-bottom: 1px solid #fff;
+}
+
+.filter-title {
+	line-height: 2rem;
+}
+
 .filter-group__summary {
 	display: flex;
 	flex-direction: row;
@@ -30,6 +43,14 @@ details[open] svg {
 	padding: 0.5rem;
 	background: #222;
 	cursor: pointer;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+.filter-active-filters__remove svg {
+	pointer-events: none;
 }
 
 .filter-active-filters__remove:hover {
@@ -44,12 +65,14 @@ details[open] svg {
 .filter-active-filters__clear {
 	align-self: center;
 	cursor: pointer;
+	padding: 0.5rem;
 }
 
 .filter-active-filters {
 	display: flex;
 	flex-wrap: wrap;
 	gap: 0.5rem;
+	padding: 1rem;
 }
 
 .filter-group__list {
@@ -58,7 +81,21 @@ details[open] svg {
 	gap: 1rem;
 }
 
-.filter-group__list-item {}
+.filter-group__list-item input:disabled {
+	opacity: 0.5;
+}
+
+.filter-group__list-item label:has(input:disabled),
+.color-filter-group__list-item input:disabled {
+	opacity: 0.5;
+	pointer-events: none;
+}
+
+.color-filter-group__list-item input:disabled:before {
+	background: linear-gradient(to bottom right, transparent calc(50% - 1px), black calc(50% - 1px), black calc(50% + 1px), transparent calc(50% + 1px)) no-repeat;
+	position: absolute;
+	z-index: 2;
+}
 
 .filter-group__list-item label {
 	display: flex;
@@ -158,6 +195,11 @@ input::-webkit-inner-spin-button {
 	display: flex;
 	flex-wrap: wrap;
 	gap: 0.4rem;
+}
+
+.color-filter-group__list-item {
+	width: 35px;
+	height: 35px;
 }
 
 .color-filter-group__list-item input {

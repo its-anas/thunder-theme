@@ -201,8 +201,8 @@ img {
 
 .corner-border:before,
 .corner-border:after,
-.corner-border>.corner-border-target:before,
-.corner-border>.corner-border-target:after {
+.corner-border > .corner-border-target:before,
+.corner-border > .corner-border-target:after {
 	content: " ";
 	position: absolute;
 	z-index: 2;
@@ -215,7 +215,6 @@ img {
 }
 
 @media screen and (min-width: 1024px) {
-
 	.corner-border:hover:before,
 	.corner-border:hover:after,
 	.corner-border:hover .corner-border-target:before,
@@ -238,13 +237,13 @@ img {
 	border-width: 1px 1px 0 0;
 }
 
-.corner-border>.corner-border-target:before {
+.corner-border > .corner-border-target:before {
 	right: 0;
 	bottom: 0;
 	border-width: 0 1px 1px 0;
 }
 
-.corner-border>.corner-border-target:after {
+.corner-border > .corner-border-target:after {
 	bottom: 0;
 	left: 0;
 	border-width: 0 0 1px 1px;
@@ -283,7 +282,6 @@ img {
 
 .fade {
 	pointer-events: none;
-	transform: translate(0, 0);
 	-webkit-animation: fade 500ms;
 	animation: fade 500ms;
 	-webkit-animation-fill-mode: forwards;
@@ -297,7 +295,6 @@ img {
 
 	100% {
 		opacity: 0;
-		transform: translate(0, 5%);
 	}
 }
 
@@ -308,7 +305,6 @@ img {
 
 	100% {
 		opacity: 0;
-		transform: translate(0, 5%);
 	}
 }
 
@@ -363,15 +359,10 @@ p {
 	font-size: var(--font-size);
 }
 
-p.small,
-a.small,
+.small,
 label {
 	font-size: calc(var(--font-size-type-scale) / var(--font-type-scale) * 1px);
 	font-weight: 300;
-}
-
-.subheading {
-	font-size: calc(var(--font-size-type-scale) * var(--font-type-scale) * 1px);
 }
 
 .button-text,
@@ -422,13 +413,13 @@ a.button {
 }
 
 p[data-spam-detection-disclaimer],
-p[data-spam-detection-disclaimer]>* {
+p[data-spam-detection-disclaimer] > * {
 	color: grey;
 	font-size: 0.8rem;
 	text-align: center;
 }
 
-p[data-spam-detection-disclaimer]>a {
+p[data-spam-detection-disclaimer] > a {
 	text-decoration: underline;
 }
 
@@ -465,7 +456,6 @@ p[data-spam-detection-disclaimer]>a {
 }
 
 @media screen and (max-width: 750px) {
-
 	.vertical--top,
 	.vertical--center,
 	.vertical--bottom {
@@ -531,7 +521,6 @@ input[type="checkbox"]:checked {
 }
 
 @media screen and (min-width: 1025px) {
-
 	input,
 	textarea,
 	select {
@@ -581,7 +570,9 @@ select::placeholder {
 	font-size: 1rem;
 }
 
-.sort-by {
+.sort-by,
+.show-filter {
+	cursor: pointer;
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
@@ -688,7 +679,6 @@ button,
 }
 
 @media screen and (min-width: 1025px) {
-
 	.button--primary,
 	.button--secondary {
 		padding: 15px 0px;
@@ -752,7 +742,6 @@ button.border.button--secondary:hover {
 }
 
 @media screen and (min-width: 751px) {
-
 	.button--primary,
 	.button--secondary {
 		min-width: 200px;
@@ -787,7 +776,6 @@ button.border.button--secondary:hover {
 }
 
 @media screen and (min-width: 751px) {
-
 	a.button,
 	button.button {
 		position: relative;
@@ -961,7 +949,6 @@ slider-component .slider-component .next {
 }
 
 @media screen and (max-width: 750px) {
-
 	slider-component .slider-component .prev,
 	slider-component .slider-component .next {
 		display: none;
@@ -970,7 +957,6 @@ slider-component .slider-component .next {
 }
 
 @media screen and (min-width: 751px) and (max-width: 1024px) {
-
 	slider-component .slider-component .prev,
 	slider-component .slider-component .next {
 		display: none;
@@ -1067,7 +1053,7 @@ slider-component .slider-component .slides-container .slide .item {
 	height: 100%;
 }
 
-slider-component .slider-component .slides-container .slide .item>* {
+slider-component .slider-component .slides-container .slide .item > * {
 	overflow: hidden;
 	max-width: 95%;
 }
@@ -1104,7 +1090,6 @@ slider-component .slider-component .slides-container .slide .item>* {
 }
 
 @media screen and (min-width: 1025px) {
-
 	.tag--animated,
 	.tag--animated-hover:after {
 		-webkit-animation: blink 1s linear infinite;
@@ -1179,7 +1164,6 @@ menu-drawer-component {
 }
 
 @media screen and (min-width: 751px) {
-
 	cart-component,
 	menu-drawer-component {
 		max-width: 500px;
@@ -1361,7 +1345,7 @@ cart-component.hidden {
 	cursor: pointer;
 }
 
-.search__icon:hover>* {
+.search__icon:hover > * {
 	display: none;
 }
 

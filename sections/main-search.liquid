@@ -38,27 +38,31 @@
 
     {% if search.performed %}
       {%- if search.results_count > 0 or search.filters != empty -%}
+        <div class="search__content-head">
+          <search-page-tabs class="search__page-tabs">
+            <p class="search__page-tab selected" for="products">Products</p>
+            <p class="search__page-tab" for="articles">Articles</p>
+          </search-page-tabs>
+        </div>
         <div class="search__content">
-          <div class="search__content-container">
-            <div class="search__content--side desktop-only">
+          <div class="search__content-container tab active" type="products">
+            <div class="search__content--side">
               {% render 'snippet-search-filter' %}
             </div>
             <div class="search__content--middle">
               <div class="search__results">
                 {% paginate search.results by 24 %}
                   <div class="search__results--head">
-                    <div class="search__results__filter-control" id="search__results__filter-control">
-                      <div class="search__results__filter-button">
-                        <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M3.75318 16.0289C3.75112 12.0983 3.74905 8.16814 3.75046 4.23779H20.25V4.27077V4.30636V4.34195V4.37754V4.41313V4.44872V4.48431V4.5199V4.55549V4.59108V4.62667V4.66226V4.69785V4.73344V4.76903V4.80462V4.84021V4.8758V4.91139V4.94698V4.98257V5.01816V5.05375V5.08934V5.12493V5.16052V5.19611V5.2317V5.26729V5.30288V5.33847V5.37406V5.40965V5.44524V5.48083V5.51642V5.55201V5.5876V5.62319V5.65878V5.69437V5.72996V5.76555V5.80114V5.83673V5.87232V5.90791V5.9435V5.97909V6.01468V6.05027V6.08586V6.12145V6.15704V6.19263V6.22822V6.26381V6.2994V6.33499V6.37058V6.40617V6.44176V6.47735V6.51294V6.54853V6.58412V6.61971V6.6553V6.69089V6.72648V6.76207V6.79766V6.83325V6.86884V6.90443V6.94002V6.97561V7.0112V7.04679V7.08238V7.11797V7.15356V7.18915V7.22474V7.26033V7.29592V7.33151V7.3671V7.40269V7.43828V7.47387V7.50946V7.54505V7.58064V7.61623V7.65182V7.68741V7.723V7.75859V7.79418V7.82977V7.86536V7.90095V7.93654V7.97213V8.00772V8.04331V8.0789V8.11449V8.15008V8.18568V8.22126V8.25686V8.29245V8.32803V8.36363V8.39922V8.4348V8.4704V8.50599V8.54157V8.57717V8.61276V8.64834V8.68394V8.71953V8.75512V8.79071V8.8263V8.86189V8.89748V8.93307V8.96866V9.00425V9.03984V9.07543V9.11102V9.14661V9.1822V9.21779V9.25338V9.28897V9.32456V9.36015V9.39574V9.43133V9.46692V9.50251V9.5381V9.57369V9.60928V9.64487V9.68046V9.71605V9.75164V9.78723V9.82282V9.85841V9.894V9.92959V9.96518V10.0008V10.0364V10.0719V10.1075V10.1431V10.1787V10.2143V10.2499V10.2855V10.3211V10.3567V10.3923V10.4278V10.4634V10.499V10.5346V10.5702V10.6058V10.6414V10.677V10.7126V10.7482V10.7837V10.8193V10.8549V10.8905V10.9261V10.9617V10.9973V11.0329V11.0685V11.1041V11.1396V11.1752V11.2108V11.2464V11.282V11.3176V11.3532V11.3888V11.4244V11.46V11.4955V11.5311V11.5667V11.6023V11.6379V11.6735V11.7091V11.7447V11.7803V11.8159V11.8514V11.887V11.9226V11.9582V11.9938V12.0294V12.065V12.1006V12.1362V12.1718V12.2073V12.2429V12.2785V12.3141V12.3497V12.3853V12.4209V12.4565V12.4921V12.5277V12.5632V12.5988V12.6344V12.67V12.7056V12.7412V12.7768V12.8124V12.848V12.8836V12.9191V12.9547V12.9903V13.0259V13.0615V13.0971V13.1327V13.1683V13.2039V13.2395V13.275V13.3106V13.3462V13.3818V13.4174V13.453V13.4886V13.5242V13.5598V13.5954V13.6309V13.6665V13.7021V13.7377V13.7733V13.8089V13.8445V13.8801V13.9157V13.9513V13.9868V14.0224V14.058V14.0936V14.1292V14.1648V14.2004V14.236V14.2716V14.3072V14.3427V14.3783V14.4139V14.4495V14.4851V14.5207V14.5563V14.5919V14.6275V14.6631V14.6986V14.7342V14.7698V14.8054V14.841V14.8766V14.9122V14.9478V14.9834V15.019V15.0545V15.0901V15.1257V15.1613V15.1969V15.2325V15.2681V15.3037V15.3393V15.3749V15.4104V15.446V15.4816V15.5172V15.5528V15.5884V15.624V15.6596V15.6952V15.7308V15.7663V15.8019V15.8375V15.8731V15.9087V15.9443V15.9799V16.0155V16.0511V16.0867V16.1222V16.1578V16.1934V16.229V16.2646V16.3002V16.3358V16.3714V16.407V16.4426V16.4781V16.5137V16.5493V16.5849V16.6205V16.6561V16.6917V16.7273V16.7629V16.7985V16.834V16.8696V16.9052V16.9408V16.9764V17.012V17.0476V17.0832V17.1188V17.1544V17.1899V17.2255V17.2611V17.2967V17.3323V17.3679V17.4035V17.4391V17.4747V17.5103V17.5458V17.5814V17.617V17.6526V17.6882V17.7238V17.7594V17.795V17.8306V17.8662V17.9017V17.9373V17.9729V18.0085V18.0441V18.0797V18.1153V18.1509V18.1865V18.2221V18.2576V18.2932V18.3288V18.3644V18.4V18.4356V18.4712V18.5068V18.5424V18.578V18.6135V18.6491V18.6847V18.7203V18.7559V18.7915V18.8271V18.8627V18.8983V18.9339V18.9694V19.005V19.0406V19.0762V19.1118V19.1474V19.183V19.2186V19.2542V19.2898V19.3253V19.3609V19.3965V19.4321V19.4677V19.5033V19.5389V19.5745V19.6101V19.6457V19.6812V19.7168V19.7524V19.788V19.8236V19.8592V19.8948V19.9304V19.966V20.0016V20.0371V20.0727V20.1083V20.1439V20.1795V20.2151V20.2507V20.2863V20.3219V20.3575V20.3931V20.4286V20.4642V20.4998V20.5354V20.571V20.6066V20.6422V20.6778V20.7134V20.749V20.7845V20.8201V20.8557V20.8913V20.9269V20.9599H20.2268H20.1916H20.1565H20.1213H20.0862H20.051H20.0159H19.9808H19.9456H19.9105H19.8753H19.8402H19.805H19.7699H19.7347H19.6996H19.6645H19.6293H19.5942H19.559H19.5239H19.4887H19.4536H19.4184H19.3833H19.3481H19.313H19.2779H19.2427H19.2076H19.1724H19.1373H19.1021H19.067H19.0318H18.9967H18.9616H18.9264H18.8913H18.8561H18.821H18.7858H18.7507H18.7155H18.6804H18.6453H18.6101H18.575H18.5398H18.5047H18.4695H18.4344H18.3992H18.3641H18.3289H18.2938H18.2587H18.2235H18.1884H18.1532H18.1181H18.0829H18.0478H18.0126H17.9775H17.9424H17.9072H17.8721H17.8369H17.8018H17.7666H17.7315H17.6963H17.6612H17.626H17.5909H17.5558H17.5206H17.4855H17.4503H17.4152H17.38H17.3449H17.3097H17.2746H17.2395H17.2043H17.1692H17.134H17.0989H17.0637H17.0286H16.9934H16.9583H16.9232H16.888H16.8529H16.8177H16.7826H16.7474H16.7123H16.6771H16.642H16.6068H16.5717H16.5366H16.5014H16.4663H16.4311H16.396H16.3608H16.3257H16.2905H16.2554H16.2203H16.1851H16.15H16.1148H16.0797H16.0445H16.0094H15.9742H15.9391H15.9039H15.8688H15.8337H15.7985H15.7634H15.7282H15.6931H15.6579H15.6228H15.5876H15.5525H15.5174H15.4822H15.4471H15.4119H15.3768H15.3416H15.3065H15.2713H15.2362H15.2011H15.1659H15.1308H15.0956H15.0605H15.0253H14.9902H14.955H14.9199H14.8847H14.8496H14.8145H14.7793H14.7442H14.709H14.6739H14.6387H14.6036H14.5684H14.5333H14.4982H14.463H14.4279H14.3927H14.3576H14.3224H14.2873H14.2521H14.217H14.1819H14.1467H14.1116H14.0764H14.0413H14.0061H13.971H13.9358H13.9007H13.8655H13.8304H13.7953H13.7601H13.725H13.6898H13.6547H13.6195H13.5844H13.5492H13.5141H13.479H13.4438H13.4087H13.3735H13.3384H13.3032H13.2681H13.2329H13.1978H13.1626H13.1275H13.0924H13.0572H13.0221H12.9869H12.9518H12.9166H12.8815H12.8463H12.8112H12.7761H12.7409H12.7058H12.6706H12.6355H12.6003H12.5652H12.53H12.4949H12.4598H12.4246H12.3895H12.3543H12.3192H12.284H12.2489H12.2137H12.1786H12.1434H12.1083H12.0732H12.038H12.0029H11.9677H11.9326H11.8974H11.8623H11.8271H11.792H11.7569H11.7217H11.6866H11.6514H11.6163H11.5811H11.546H11.5108H11.4757H11.4405H11.4054H11.3703H11.3351H11.3H11.2648H11.2297H11.1945H11.1594H11.1242H11.0891H11.054H11.0188H10.9837H10.9485H10.9134H10.8782H10.8431H10.8079H10.7728H10.7377H10.7025H10.6674H10.6322H10.5971H10.5619H10.5268H10.4916H10.4565H10.4213H10.3862H10.3511H10.3159H10.2808H10.2456H10.2105H10.1753H10.1402H10.105H10.0699H10.0348H9.99961H9.96446H9.92932H9.89417H9.85903H9.82388H9.78874H9.75359H9.71845H9.6833H9.64816H9.61301H9.57787H9.54273H9.50758H9.47244H9.43729H9.40215H9.367H9.33186H9.29671H9.26157H9.22642H9.19128H9.15613H9.12099H9.08584H9.0507H9.01555H8.98041H8.94526H8.91012H8.87497H8.83983H8.80468H8.76954H8.73439H8.69925H8.6641H8.62896H8.59381H8.55867H8.52352H8.48838H8.45323H8.41809H8.38294H8.3478H8.31265H8.27751H8.24236H8.20722H8.17207H8.13693H8.10178H8.06664H8.0315H7.99635H7.96121H7.92606H7.89092H7.85577H7.82063H7.78548H7.75034H7.71519H7.68005H7.6449H7.60976H7.57461H7.53947H7.50432H7.46918H7.43403H7.39889H7.36374H7.3286H7.29345H7.25831H7.22316H7.18802H7.15287H7.11773H7.08258H7.04744H7.01229H6.97715H6.942H6.90686H6.87171H6.83657H6.80142H6.76628H6.73113H6.69599H6.66084H6.6257H6.59055H6.55541H6.52026H6.48512H6.44998H6.41483H6.37969H6.34454H6.3094H6.27425H6.23911H6.20396H6.16882H6.13367H6.09853H6.06338H6.02824H5.99309H5.95795H5.9228H5.88766H5.85251H5.81737H5.78222H5.74708H5.71193H5.67679H5.64164H5.6065H5.57135H5.53621H5.50106H5.46592H5.43077H5.39563H5.36048H5.32534H5.29019H5.25505H5.2199H5.18476H5.14961H5.11447H5.07932H5.04418H5.00903H4.97389H4.93874H4.9036H4.86846H4.83331H4.79817H4.76302H4.72788H4.69273H4.65759H4.62244H4.5873H4.55215H4.51701H4.48186H4.44672H4.41157H4.37643H4.34128H4.30614H4.27099H4.23585H4.2007H4.16556H4.13041H4.09527H4.06012H4.02498H3.98983H3.95469H3.91954H3.8844H3.84925H3.81411H3.77896H3.75552C3.75491 19.3161 3.75404 17.6725 3.75318 16.0289Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                          <path d="M10.1792 4.68506L10.1792 3.93506L8.6792 3.93506L8.6792 4.68506L10.1792 4.68506ZM8.6792 20.7367C8.6792 21.1509 9.01499 21.4867 9.4292 21.4867C9.84341 21.4867 10.1792 21.1509 10.1792 20.7367L8.6792 20.7367ZM8.6792 4.68506L8.6792 20.7367L10.1792 20.7367L10.1792 4.68506L8.6792 4.68506Z" fill="white"/>
-                        </svg>
-                      </div>
-                      <p class="search__results__filter-text">Hide filter</p>
+                    <!--
+                      UNFINISHED: Need to make it show only products_count not all results including articles and pages
+                    -->
+                    <p class="search-results-hidden" style="display: none;">({{ search.results_count }})</p>
+                    <div class="show-filter mobile-only">
+                      {% render 'snippet-icons', icon: 'search-filter' %}
+                      <span>Filter</span>
                     </div>
-                    {% comment %}  UNFINISHED: Need to make it show only products_count not all results including articles and pages {% endcomment %}
-                    <p>{{ search.results_count }} results</p>
-                    <div class="sort-by desktop-only">
+
+                    <div class="sort-by">
                       <p for="SortBy">Sort by:</p>
 
                       {%- assign sort_by = search.sort_by | default: search.default_sort_by -%}
@@ -84,7 +88,7 @@
                     {% for item in search.results %}
                       {%- case item.object_type -%}
                         {%- when 'product' -%}
-                          <div class="search__item">
+                          <div class="search__item reveal">
                             <div class="search__item-container">
                               <div class="search__item__picture  {% if item.featured_image != blank %}corner-border{% endif %}">
                                 {% assign price_difference_text = 'SAVE' %}
@@ -107,14 +111,14 @@
                                 >
                                   {% render 'snippet-icons', icon: 'quick-add' -%}
                                 </div>
-                                {% if item.featured_image != blank %}
+                                {% if item.featured_media != blank %}
                                   <a href="{{ item.url }}" class="media corner-border-target">
                                     <img
-                                      srcset="{{ item.featured_image | image_url }}"
+                                      srcset="{{ item.featured_media | image_url }}"
                                       loading="lazy"
-                                      alt="{{ item.featured_image.alt | escape }}"
-                                      width="{{ item.featured_image.width }}"
-                                      height="{{ item.featured_image.height }}"
+                                      alt="{{ item.featured_media.alt | escape }}"
+                                      width="{{ item.featured_media.width }}"
+                                      height="{{ item.featured_media.height }}"
                                       class="full"
                                     >
                                   </a>
@@ -152,6 +156,7 @@
                       {%- endcase -%}
                     {% endfor %}
                   </div>
+
                   {% if paginate.pages > 1 %}
                     {% if paginate.parts.size > 0 %}
                       <div class="search__results--pagination">
@@ -210,6 +215,37 @@
                 {% endpaginate %}
               </div>
             </div>
+          </div>
+
+          <div class="search__results--list tab" type="articles">
+            {% for item in search.results %}
+              {%- case item.object_type -%}
+                {%- when 'article' -%}
+                  <div class="search__item article">
+                    <div class="search__item-container">
+                      <div class="search__item__picture article {% if item.featured_image != blank %}corner-border{% endif %}">
+                        {% if item.image != blank %}
+                          <a href="{{ item.url }}" class="media corner-border-target">
+                            <img
+                              srcset="{{ item.image | image_url }}"
+                              loading="lazy"
+                              alt="{{ item.image.alt | escape }}"
+                              width="{{ item.image.width }}"
+                              height="{{ item.image.height }}"
+                              class="fit"
+                            >
+                          </a>
+                        {% else %}
+                          <a href="{{ item.url }}" class="media">
+                            {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder' }}
+                          </a>
+                        {% endif %}
+                      </div>
+                      <a href="{{ item.url }}">{{ item.title }}</a>
+                    </div>
+                  </div>
+              {%- endcase -%}
+            {% endfor %}
           </div>
         </div>
       {%- else -%}

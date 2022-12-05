@@ -15,7 +15,7 @@
 
 .loading-bar.end {
 	width: 100%;
-	transition: all 0.2s linear;
+	transition: all 0.5s linear;
 }
 
 /* ANCHOR: HEADER  */
@@ -149,7 +149,6 @@
 }
 
 @media screen and (min-width: 1024px) {
-
 	.header__logo,
 	.header__icons,
 	.header__menu {
@@ -525,7 +524,7 @@
 	text-align: center;
 }
 
-.menu-mobile__picture>* {
+.menu-mobile__picture > * {
 	width: 80%;
 }
 

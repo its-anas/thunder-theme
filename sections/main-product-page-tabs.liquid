@@ -1,5 +1,5 @@
-{{ 'main-product-page-tabs.css' | asset_url | stylesheet_tag }}
-<script src="{{ 'main-product-page-tabs.js' | asset_url }}" defer></script>
+{{ 'main-product-tabs.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'main-product-tabs.js' | asset_url }}" defer></script>
 
 {% for block in section.blocks %}
   {% case block.type %}
@@ -96,7 +96,7 @@
 {% schema %}
 {
   "name": "Product tabs",
-  "class": "main-product-page-tabs",
+  "class": "main-product-tabs",
   "settings": [],
   "blocks": [
     { "type": "product_description_tab", "limit": 1, "name": "Product description", "limit": 1, "settings": [] },

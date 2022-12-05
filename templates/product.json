@@ -94,7 +94,7 @@
       ]
     },
     "product-page-tabs": {
-      "type": "main-product-page-tabs",
+      "type": "main-product-tabs",
       "blocks": {
         "product_description_tab": {
           "type": "product_description_tab"
