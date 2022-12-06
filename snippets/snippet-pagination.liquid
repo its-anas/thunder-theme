@@ -1,0 +1,55 @@
+{% if paginate.pages > 1 %}
+  {% if paginate.parts.size > 0 %}
+    <div class="pagination">
+      {% if paginate.previous %}
+        <a href="{{ paginate.previous.url }}{{ anchor }}">
+          <svg
+            class="pagination--arrow-left"
+            width="24"
+            height="25"
+            viewBox="0 0 24 25"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path d="M16.75 7.25L11.75 12.25L16.75 17.25" stroke="white" stroke-width="1.5"/>
+            <path d="M12.25 7.25L7.25 12.25L12.25 17.25" stroke="white" stroke-width="1.5"/>
+          </svg>
+        </a>
+      {% endif %}
+
+      {%- for part in paginate.parts -%}
+        {%- if part.is_link -%}
+          <a
+            href="{{ part.url }}{{ anchor }}"
+          >
+            {{- part.title -}}
+          </a>
+        {%- else -%}
+          {%- if part.title == paginate.current_page -%}
+            <a style="background-color: #0a0a0a; font-weight: bolder;">
+              {{- part.title -}}
+            </a>
+          {%- else -%}
+            <span class="pagination__item">{{ part.title }}</span>
+          {%- endif -%}
+        {%- endif -%}
+      {%- endfor -%}
+
+      {% if paginate.next %}
+        <a href="{{ paginate.next.url }}{{ anchor }}">
+          <svg
+            class="pagination--arrow-right"
+            width="24"
+            height="25"
+            viewBox="0 0 24 25"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path d="M11.75 17.25L16.75 12.25L11.75 7.25" stroke="white" stroke-width="1.5"/>
+            <path d="M7.25 17.25L12.25 12.25L7.25 7.25" stroke="white" stroke-width="1.5"/>
+          </svg>
+        </a>
+      {% endif %}
+    </div>
+  {% endif %}
+{% endif %}

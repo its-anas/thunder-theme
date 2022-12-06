@@ -2909,7 +2909,7 @@ class FeaturedProductSlider extends FeaturedProduct {
 
 customElements.define("featured-product-slider", FeaturedProductSlider);
 
-// ANCHOR: Search filter
+// ANCHOR: Filter
 class FilterComponent extends HTMLElement {
 	constructor() {
 		super();
@@ -3060,5 +3060,5 @@ class FilterPriceRange extends HTMLElement {
 customElements.define("filter-price-range", FilterPriceRange);
 
 window.addEventListener("load", () => {
-	document.querySelector(".search__content--side").style.height = `calc(100% - ${document.querySelector(".header-section").offsetHeight}px + 8px)`;
+	document.querySelector(".filter__box").style.height = `calc(100% - ${document.querySelector(".header-section").offsetHeight}px + 8px)`;
 });

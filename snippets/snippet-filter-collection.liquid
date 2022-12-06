@@ -1,0 +1,218 @@
+{{ 'snippet-filter.css' | asset_url | stylesheet_tag }}
+
+<filter-component>
+  <div class="filter-head">
+    <h6 class="filter-title">Filters</h6>
+    <div class="filter-close mobile-only">
+      {% render 'snippet-icons', icon: 'close' %}
+    </div>
+  </div>
+
+  <form class="filter" id="filterForm">
+    <input type="hidden" name="q" value="{{ search.terms }}">
+
+    <div class="filter-active-filters">
+      {%- for filter in filters -%}
+        {%- if filter.type == 'price_range' -%}
+          {%- if filter.min_value.value != null or filter.max_value.value != null -%}
+            <span class="filter-active-filters__remove small" data-url="{{ filter.url_to_remove }}">
+              {%- assign min_value = filter.min_value.value | default: 0 -%}
+              {%- assign max_value = filter.max_value.value | default: filter.range_max -%}
+              {{ min_value | money }} - {{ max_value | money }}
+              {% render 'snippet-icons', icon: 'close--small' %}
+            </span>
+          {%- endif -%}
+        {%- else -%}
+          {%- for filter_value in filter.active_values -%}
+            <span class="filter-active-filters__remove small" data-url="{{ filter_value.url_to_remove }}">
+              {{ filter_value.label }}
+              {% render 'snippet-icons', icon: 'close--small' %}
+            </span>
+          {%- endfor -%}
+        {% endif %}
+      {%- endfor -%}
+      <span
+        data-url="{{ routes.search_url }}?q={{ search.terms }}&sort_by={{ search.sort_by }}"
+        class="filter-active-filters__clear small underline"
+      >
+        Clear all
+      </span>
+    </div>
+
+    {%- for filter in filters -%}
+      <details
+        class="filter-group"
+        {% if state == true %}
+          open
+        {% endif %}
+      >
+        <summary class="filter-group__summary">
+          <div class="filter-label">
+            <p>{{ filter.label }}</p>
+
+            {%- if filter.active_values.size > 0 -%}
+              <p>({{ filter.active_values.size }})</p>
+            {%- endif -%}
+          </div>
+          <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M7 10.5L12 15.5L17 10.5" stroke="white" stroke-width="1.5"/>
+          </svg>
+        </summary>
+
+        <div class="filter-group__container">
+          {% comment %}
+             <div class="filter-group__header">
+              {%- if filter.active_values.size > 0 -%}
+                <a href="{{ filter.url_to_remove }}" class="filter-group__header-reset">Reset</a>f
+              {%- endif -%}
+            </div>
+          {% endcomment %}
+
+          {%- case filter.type -%}
+            {%- when 'boolean', 'list' -%}
+              {% if filter.label == 'Color' %}
+                <div class="color-filter-group__list">
+                  {%- for filter_value in filter.values -%}
+                    <div class="color-filter-group__list-item">
+                      <label
+                        for="Filter-{{ filter.param_name }}-{{ forloop.index }}"
+                      >
+                        <input
+                          type="checkbox"
+                          name="{{ filter_value.param_name }}"
+                          value="{{ filter_value.value }}"
+                          id="Filter-{{ filter.param_name }}-{{ forloop.index }}"
+                          {% if filter_value.active -%}
+                            checked
+                          {%- endif %}
+                          {% if filter_value.count == 0 and filter_value.active == false -%}
+                            disabled
+                          {%- endif %}
+                          style="{% render 'snippet-color-swatch', actual_color: filter_value.value %}"
+                        >
+                      </label>
+                    </div>
+                  {%- endfor -%}
+                </div>
+              {% else %}
+                <div class="filter-group__list">
+                  {%- for filter_value in filter.values -%}
+                    <div class="filter-group__list-item">
+                      <label for="Filter-{{ filter.param_name }}-{{ forloop.index }}">
+                        <input
+                          type="checkbox"
+                          name="{{ filter_value.param_name }}"
+                          value="{{ filter_value.value }}"
+                          id="Filter-{{ filter.param_name }}-{{ forloop.index }}"
+                          {% if filter_value.active -%}
+                            checked
+                          {%- endif %}
+                          {% if filter_value.count == 0 and filter_value.active == false -%}
+                            disabled
+                          {%- endif %}
+                        >
+                        {{ filter_value.label }} ({{ filter_value.count }})
+                      </label>
+                    </div>
+                  {%- endfor -%}
+                </div>
+
+                <div class="filter-group__submit">
+                  <input type="submit" value="Apply" hidden>
+                </div>
+              {% endif %}
+            {%- when 'price_range' -%}
+              <filter-price-range class="filter-group__price-range">
+                {% liquid
+                  assign range_left_value = filter.min_value.value | times: 1.00
+                  assign range_left_max = filter.range_max | times: 1.00
+                  assign range_style_left = range_left_value | divided_by: range_left_max | times: 100
+
+                  assign range_right_value = filter.max_value.value | times: 1.00
+                  assign range_right_max = filter.range_max | times: 1.00
+                  assign range_style_right = range_right_value | divided_by: range_right_max | times: 100
+                  assign range_style_right_final = 100 | minus: range_style_right
+                %}
+                <div
+                  class="filter-group__price-range__slider"
+                >
+                  <div
+                    class="progress"
+                    style="left: {{ range_style_left }}%; right: {% if range_style_right_final != 100 %}{{ range_style_right_final }}{% else %}0{% endif %}%;"
+                  ></div>
+                  <input
+                    type="range"
+                    name="{{ filter.min_value.param_name }}"
+                    class="range-min"
+                    min="0"
+                    max="{{ filter.range_max | divided_by: 100 }}"
+                    {% if filter.min_value.value -%}
+                      value="{{ filter.min_value.value | divided_by: 100 }}"
+                    {%- else -%}
+                      value="{{ filter.range_min | divided_by: 100 }}"
+                    {%- endif %}
+                  >
+                  <input
+                    type="range"
+                    name="{{ filter.max_value.param_name }}"
+                    class="range-max"
+                    min="0"
+                    max="{{ filter.range_max | divided_by: 100 }}"
+                    {% if filter.max_value.value -%}
+                      value="{{ filter.max_value.value | divided_by: 100 }}"
+                    {%- else -%}
+                      value="{{ filter.range_max | divided_by: 100 }}"
+                    {%- endif %}
+                  >
+                </div>
+
+                <div class="filter-group__price-range__inputs">
+                  <div class="filter-group__price-range__from-input">
+                    <span class="filter-group__price-range__currency-symbol">{{ cart.currency.symbol }}</span>
+                    <input
+                      name="{{ filter.min_value.param_name }}"
+                      id="Filter-{{ filter.min_value.param_name }}"
+                      {% if filter.min_value.value -%}
+                        value="{{ filter.min_value.value | divided_by: 100  }}"
+                      {%- else -%}
+                        value="{{ filter.range_min | divided_by: 100 }}"
+                      {%- endif %}
+                      type="number"
+                      min="0"
+                      max="{{ filter.range_max | divided_by: 100 }}"
+                      class="input-min"
+                    >
+                  </div>
+                  <span class="filter-group__price-range__separator">to</span>
+                  <div class="filter-group__price-range__from-input">
+                    <span class="filter-group__price-range__currency-symbol">{{ cart.currency.symbol }}</span>
+                    <input
+                      name="{{ filter.max_value.param_name }}"
+                      id="Filter-{{ filter.max_value.param_name }}"
+                      {% if filter.max_value.value -%}
+                        value="{{ filter.max_value.value | divided_by: 100 }}"
+                      {%- else -%}
+                        value="{{ filter.range_max | divided_by: 100 }}"
+                      {%- endif %}
+                      type="number"
+                      min="0"
+                      max="{{ filter.range_max | divided_by: 100  }}"
+                      class="input-max"
+                    >
+                  </div>
+                </div>
+              </filter-price-range>
+
+              <div class="filter-group__submit">
+                <input type="submit" value="Apply" hidden>
+              </div>
+          {%- endcase -%}
+        </div>
+      </details>
+    {%- endfor -%}
+  </form>
+  <div class="filter-mobile__button buttons mobile-only">
+    <div class="shadow-divider"></div>
+    <a class="button button--primary border"> <span></span> <span></span> <span></span> <span></span>View results</a>
+  </div>
+</filter-component>

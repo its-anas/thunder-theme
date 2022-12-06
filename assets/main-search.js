@@ -43,14 +43,14 @@ class SearchPageTabs extends HTMLElement {
 customElements.define("search-page-tabs", SearchPageTabs);
 
 document.querySelector(".show-filter").addEventListener("click", (event) => {
-	let filter = document.querySelector(".search__content--side");
+	let filter = document.querySelector(".filter__box");
 	filter.classList.toggle("active");
 });
 document.querySelector(".filter-close").addEventListener("click", (event) => {
-	let filter = document.querySelector(".search__content--side");
+	let filter = document.querySelector(".filter__box");
 	filter.classList.remove("active");
 });
 document.querySelector(".filter-mobile__button").addEventListener("click", (event) => {
-	let filter = document.querySelector(".search__content--side");
+	let filter = document.querySelector(".filter__box");
 	filter.classList.remove("active");
 });
