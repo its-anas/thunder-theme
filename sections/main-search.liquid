@@ -61,24 +61,19 @@
                 style="display: none;"
               {% endif %}
             >
-              {% render 'snippet-search-filter' %}
+              {% render 'snippet-search-filter', state: section.settings.filters_expanded_at_start %}
             </div>
             <div class="search__content--middle">
               <div class="search__results">
                 {% paginate search.results by section.settings.product_per_page %}
                   <div class="search__results--head">
-                    <!--
-                      UNFINISHED: Need to make it show only products_count not all results including articles and pages
-                    -->
-                    <p class="search-results-hidden" style="display: none;">({{ search.results_count }})</p>
                     {% if section.settings.show_filter == true %}
                       <div class="show-filter mobile-only">
                         {% render 'snippet-icons', icon: 'search-filter' %}
                         <span>Filter</span>
                       </div>
-                    {% else %}
-                      <div></div>
                     {% endif %}
+                    <p class="search-results-hidden" style="opacity: 0;">({{ search.results_count }})</p>
 
                     <div class="sort-by">
                       <p for="SortBy">Sort by:</p>
@@ -328,6 +323,12 @@
       "type": "checkbox",
       "id": "show_filter",
       "label": "Show filter",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "filters_expanded_at_start",
+      "label": "Filters expanded at start",
       "default": true
     }
   ]

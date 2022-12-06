@@ -1132,17 +1132,10 @@ class QuickView extends HTMLElement {
 		this.attachShadow({ mode: "open" });
 		this.shadowRoot.innerHTML = "<slot></slot>";
 
-		// UNFINISHED: Change it to listen to all clicks and find add-to-cart icon. Turn svg to png so it triggers the click event. This way the new rendered product will also work.
-		// document.addEventListener("click", (event) => {
-		// 	if (event.target.className === "quick-add-icon") {
-		// 		console.log(event.target);
-		// 	}
-		// });
-
-		document.querySelectorAll("#quick-add-button").forEach((icon) => {
-			icon.addEventListener("click", () => {
-				this.runQuickView(icon);
-			});
+		document.addEventListener("click", (event) => {
+			if (event.target.className === "quick-add-icon") {
+				this.runQuickView(event.target);
+			}
 		});
 
 		this.listenToQuickView();

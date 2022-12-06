@@ -42,7 +42,9 @@
     {%- for filter in search.filters -%}
       <details
         class="filter-group"
-        open
+        {% if state == true %}
+          open
+        {% endif %}
       >
         <summary class="filter-group__summary">
           <div class="filter-label">
