@@ -2939,6 +2939,7 @@ class FilterComponent extends HTMLElement {
 
 		document.addEventListener("click", (event) => {
 			if (event.target.className === "filter-active-filters__remove small" || event.target.className === "filter-active-filters__clear small underline") {
+				this.injectSearchResults(this.buildUrl());
 				showLoadingBar();
 				this.getNewResults(event.target.dataset.url);
 			}

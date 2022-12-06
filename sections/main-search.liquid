@@ -2,6 +2,15 @@
 <script src="{{ 'main-search.js' | asset_url }}" defer></script>
 
 {% style %}
+  .search__item {
+    width: calc(100% / {{section.settings.product_per_row_desktop}});
+  }
+
+  @media screen and (max-width: 750px) {
+    .search__item {
+      width: calc(100% / {{section.settings.product_per_row_mobile}});
+    }
+  }
 {% endstyle %}
 
 <div class="search  {% if search.performed %}{% else %}empty-state{% endif %}">
@@ -46,21 +55,30 @@
         </div>
         <div class="search__content">
           <div class="search__content-container tab active" type="products">
-            <div class="search__content--side">
+            <div
+              class="search__content--side"
+              {% if section.settings.show_filter == false %}
+                style="display: none;"
+              {% endif %}
+            >
               {% render 'snippet-search-filter' %}
             </div>
             <div class="search__content--middle">
               <div class="search__results">
-                {% paginate search.results by 24 %}
+                {% paginate search.results by section.settings.product_per_page %}
                   <div class="search__results--head">
                     <!--
                       UNFINISHED: Need to make it show only products_count not all results including articles and pages
                     -->
                     <p class="search-results-hidden" style="display: none;">({{ search.results_count }})</p>
-                    <div class="show-filter mobile-only">
-                      {% render 'snippet-icons', icon: 'search-filter' %}
-                      <span>Filter</span>
-                    </div>
+                    {% if section.settings.show_filter == true %}
+                      <div class="show-filter mobile-only">
+                        {% render 'snippet-icons', icon: 'search-filter' %}
+                        <span>Filter</span>
+                      </div>
+                    {% else %}
+                      <div></div>
+                    {% endif %}
 
                     <div class="sort-by">
                       <p for="SortBy">Sort by:</p>
@@ -278,6 +296,39 @@
       "step": 1,
       "unit": "D",
       "default": 30
+    },
+    {
+      "type": "range",
+      "id": "product_per_page",
+      "min": 8,
+      "max": 50,
+      "step": 1,
+      "label": "Products per page",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "product_per_row_desktop",
+      "min": 3,
+      "max": 6,
+      "step": 1,
+      "label": "Products per row - desktop",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "product_per_row_mobile",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "label": "Products per row - mobile",
+      "default": 2
+    },
+    {
+      "type": "checkbox",
+      "id": "show_filter",
+      "label": "Show filter",
+      "default": true
     }
   ]
 }
