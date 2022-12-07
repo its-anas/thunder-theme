@@ -126,12 +126,12 @@
 	max-width: 1175px;
 }
 
-.search__results {
+.filter__results {
 	display: flex;
 	flex-direction: column;
 }
 
-.search__results--head {
+.filter__results--head {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
@@ -139,17 +139,17 @@
 }
 
 @media screen and (min-width: 1024px) {
-	.search__results--head {
+	.filter__results--head {
 		padding: 1rem;
 	}
 }
 
-.search__results--list {
+.filter__results--list {
 	display: flex;
 	flex-wrap: wrap;
 }
 
-.search__results--list[type="articles"] {
+.filter__results--list[type="articles"] {
 	position: absolute;
 	z-index: 10;
 	top: 0;
@@ -237,10 +237,6 @@
 	flex-direction: row;
 	align-items: flex-end;
 	gap: 0.5rem;
-}
-
-.filter-mobile__button {
-	position: relative;
 }
 
 .search__container .active {

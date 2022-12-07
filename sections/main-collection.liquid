@@ -1,49 +1,54 @@
-{{ 'main-search.css' | asset_url | stylesheet_tag }}
-{% comment %} <script src="{{ 'main-search.js' | asset_url }}" defer></script> {% endcomment %}
+{{ 'main-collection.css' | asset_url | stylesheet_tag }}
 
 {% style %}
-  .search__item {
+  .collection__item {
     width: calc(100% / {{section.settings.products_per_row_desktop}});
   }
 
   @media screen and (max-width: 750px) {
-    .search__item {
+    .collection__item {
       width: calc(100% / {{section.settings.products_per_row_mobile}});
     }
   }
 {% endstyle %}
 
-<div class="search  {% if collection.products_count == 0 %}empty-state{% endif %}">
-  <div class="search__container">
-    <div class="search__head">
-      <h2 class="search__title">{{ collection.title }}</h2>
+<div class="collection  {% if collection.products_count == 0 %}empty-state{% endif %}">
+  <div class="collection__container">
+    <div class="collection__head">
+      <h2 class="collection__title">{{ collection.title }}</h2>
     </div>
 
+    <p class="collection__page-tab selected results-count" style="text-align: center;">Products</p>
     {%- if collection.products_count > 0 -%}
-      <div class="search__content">
-        <div class="search__content-container tab active" type="products">
+      <div class="collection__content">
+        <div class="collection__content-container tab active" type="products">
           <div
             class="filter__box"
             {% if section.settings.show_filter == false %}
               style="display: none;"
             {% endif %}
           >
-            {% render 'snippet-filter-collection',
+            {% render 'snippet-filter',
               state: section.settings.filters_expanded_at_start,
               filters: collection.filters
             %}
           </div>
-          <div class="search__content--middle">
-            <div class="search__results">
+          <div class="collection__content--middle">
+            <div class="filter__results">
               {% paginate collection.products by section.settings.products_per_page %}
-                <div class="search__results--head">
-                  <span>Filters results </span>
-                  <p class="search-results-hidden" style="opacity: 0;">({{ search.results_count }})</p>
+                <div class="filter__results--head">
+                  {% if section.settings.show_filter == true %}
+                    <div class="show-filter mobile-only">
+                      {% render 'snippet-icons', icon: 'search-filter' %}
+                      <span>Filter</span>
+                    </div>
+                  {% endif %}
+
+                  <p class="results-count-hidden" style="opacity: 0;">({{ collection.products_count }})</p>
 
                   <div class="sort-by">
                     <p for="SortBy">Sort by:</p>
 
-                    {%- assign sort_by = search.sort_by | default: search.default_sort_by -%}
                     <select
                       name="sort_by"
                       id="SortBy"
@@ -62,15 +67,15 @@
                     </select>
                   </div>
                 </div>
-                <div class="search__results--list">
+                <div class="filter__results--list">
                   {% for item in collection.products %}
-                    <div class="search__item reveal">
-                      <div class="search__item-container">
-                        <div class="search__item__picture  {% if item.featured_image != blank %}corner-border{% endif %}">
+                    <div class="collection__item reveal">
+                      <div class="collection__item-container">
+                        <div class="collection__item__picture corner-border">
                           {% assign price_difference_text = 'SAVE' %}
                           {% assign price_difference = item.compare_at_price | minus: product.price %}
                           {% if price_difference > 0 %}
-                            <div class="search__item__tag">
+                            <div class="collection__item__tag">
                               <!-- Add in schema, tag--animated or tag--normal dropdown -->
                               <p class="tag--animated tag-text">
                                 {{ price_difference_text }}
@@ -99,7 +104,7 @@
                               >
                             </a>
                           {% else %}
-                            <a href="{{ item.url }}" class="media">
+                            <a href="{{ item.url }}" class="media corner-border-target">
                               {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
                             </a>
                           {% endif %}
@@ -113,12 +118,12 @@
 
                         <a
                           href="{{ item.url }}"
-                          class="search__item__name {% if section.settings.new_tag == true and difference_in_days < section.settings.new_tag_time %}tag--animated-hover{% endif %}"
+                          class="collection__item__name {% if section.settings.new_tag == true and difference_in_days < section.settings.new_tag_time %}tag--animated-hover{% endif %}"
                         >
                           {{- item.title -}}
                         </a>
 
-                        <div class="search__item__prices">
+                        <div class="collection__item__prices">
                           <p class="price--actual">{{ item.price | money }}</p>
                           {% if item.compare_at_price != 0 %}
                             <p class="price--compare-at">{{ item.compare_at_price | money }}</p>
@@ -132,37 +137,6 @@
               {% endpaginate %}
             </div>
           </div>
-        </div>
-
-        <div class="search__results--list tab" type="articles">
-          {% for item in search.results %}
-            {%- case item.object_type -%}
-              {%- when 'article' -%}
-                <div class="search__item article">
-                  <div class="search__item-container">
-                    <div class="search__item__picture article {% if item.featured_image != blank %}corner-border{% endif %}">
-                      {% if item.image != blank %}
-                        <a href="{{ item.url }}" class="media corner-border-target">
-                          <img
-                            srcset="{{ item.image | image_url }}"
-                            loading="lazy"
-                            alt="{{ item.image.alt | escape }}"
-                            width="{{ item.image.width }}"
-                            height="{{ item.image.height }}"
-                            class="fit"
-                          >
-                        </a>
-                      {% else %}
-                        <a href="{{ item.url }}" class="media">
-                          {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder' }}
-                        </a>
-                      {% endif %}
-                    </div>
-                    <a href="{{ item.url }}">{{ item.title }}</a>
-                  </div>
-                </div>
-            {%- endcase -%}
-          {% endfor %}
         </div>
       </div>
     {%- else -%}
@@ -182,8 +156,8 @@
 
 {% schema %}
 {
-  "name": "Search",
-  "class": "main-search",
+  "name": "collection",
+  "class": "main-collection",
   "settings": [
     {
       "type": "checkbox",

@@ -1147,6 +1147,13 @@ slider-component .slider-component .slides-container .slide .item > * {
 	z-index: 3;
 	width: 1.5rem;
 	height: 1.5rem;
+	transform: translate(-15%, -15%);
+	transition: all 0.2s ease;
+}
+
+.quick-add-icon:hover {
+	transform: scale(1.4) translate(-15%, -15%);
+	transition: all 0.5s ease;
 }
 
 .quick-add-icon svg {
@@ -1542,7 +1549,6 @@ cart-component.hidden {
 	}
 
 	.filter__box filter-component {
-		position: relative;
 		display: flex;
 		flex-direction: column;
 		width: 100%;

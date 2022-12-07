@@ -32,25 +32,12 @@ class SearchPageTabs extends HTMLElement {
 				const parser = new DOMParser();
 				const doc = parser.parseFromString(data, "text/html");
 
-				const searchResults = doc.querySelector(".search-results-hidden");
+				const searchResults = doc.querySelector(".results-count-hidden");
 				document.querySelector(".search__page-tab[for='articles']").innerHTML += ` ${searchResults.innerHTML}`;
 
-				const articles = doc.querySelector(".search__results--list[type='articles']");
-				document.querySelector(".search__results--list[type='articles']").innerHTML = `${articles.innerHTML}`;
+				const articles = doc.querySelector(".filter__results--list[type='articles']");
+				document.querySelector(".filter__results--list[type='articles']").innerHTML = `${articles.innerHTML}`;
 			});
 	}
 }
 customElements.define("search-page-tabs", SearchPageTabs);
-
-document.querySelector(".show-filter").addEventListener("click", (event) => {
-	let filter = document.querySelector(".filter__box");
-	filter.classList.toggle("active");
-});
-document.querySelector(".filter-close").addEventListener("click", (event) => {
-	let filter = document.querySelector(".filter__box");
-	filter.classList.remove("active");
-});
-document.querySelector(".filter-mobile__button").addEventListener("click", (event) => {
-	let filter = document.querySelector(".filter__box");
-	filter.classList.remove("active");
-});

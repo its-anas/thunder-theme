@@ -1,4 +1,5 @@
 {{ 'snippet-filter.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'snippet-filter.js' | asset_url }}" defer></script>
 
 <filter-component>
   <div class="filter-head">
@@ -9,10 +10,11 @@
   </div>
 
   <form class="filter" id="filterForm">
-    <input type="hidden" name="q" value="{{ search.terms }}">
-
+    {% if filters == search.filters %}
+      <input type="hidden" name="q" value="{{ search.terms }}">
+    {% endif %}
     <div class="filter-active-filters">
-      {%- for filter in search.filters -%}
+      {%- for filter in filters -%}
         {%- if filter.type == 'price_range' -%}
           {%- if filter.min_value.value != null or filter.max_value.value != null -%}
             <span class="filter-active-filters__remove small" data-url="{{ filter.url_to_remove }}">
@@ -32,14 +34,18 @@
         {% endif %}
       {%- endfor -%}
       <span
-        data-url="{{ routes.search_url }}?q={{ search.terms }}&sort_by={{ search.sort_by }}"
+        {% if filters == search.filters %}
+          data-url="{{ routes.search_url }}?q={{ search.terms }}&sort_by={{ search.sort_by }}"
+        {% elsif filters == collection.filters %}
+          data-url="{{ routes.collections_url }}/{{ collection.handle }}?sort_by={{ collection.sort_by }}"
+        {% endif %}
         class="filter-active-filters__clear small underline"
       >
         Clear all
       </span>
     </div>
 
-    {%- for filter in search.filters -%}
+    {%- for filter in filters -%}
       <details
         class="filter-group"
         {% if state == true %}

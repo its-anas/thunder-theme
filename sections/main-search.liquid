@@ -61,19 +61,19 @@
                 style="display: none;"
               {% endif %}
             >
-              {% render 'snippet-filter', state: section.settings.filters_expanded_at_start %}
+              {% render 'snippet-filter', state: section.settings.filters_expanded_at_start, filters: search.filters %}
             </div>
             <div class="search__content--middle">
-              <div class="search__results">
+              <div class="filter__results">
                 {% paginate search.results by section.settings.products_per_page %}
-                  <div class="search__results--head">
+                  <div class="filter__results--head">
                     {% if section.settings.show_filter == true %}
                       <div class="show-filter mobile-only">
                         {% render 'snippet-icons', icon: 'search-filter' %}
                         <span>Filter</span>
                       </div>
                     {% endif %}
-                    <p class="search-results-hidden" style="opacity: 0;">({{ search.results_count }})</p>
+                    <p class="results-count-hidden" style="opacity: 0;">({{ search.results_count }})</p>
 
                     <div class="sort-by">
                       <p for="SortBy">Sort by:</p>
@@ -97,13 +97,13 @@
                       </select>
                     </div>
                   </div>
-                  <div class="search__results--list">
+                  <div class="filter__results--list">
                     {% for item in search.results %}
                       {%- case item.object_type -%}
                         {%- when 'product' -%}
                           <div class="search__item reveal">
                             <div class="search__item-container">
-                              <div class="search__item__picture  {% if item.featured_image != blank %}corner-border{% endif %}">
+                              <div class="search__item__picture corner-border">
                                 {% assign price_difference_text = 'SAVE' %}
                                 {% assign price_difference = item.compare_at_price | minus: product.price %}
                                 {% if price_difference > 0 %}
@@ -136,7 +136,7 @@
                                     >
                                   </a>
                                 {% else %}
-                                  <a href="{{ item.url }}" class="media">
+                                  <a href="{{ item.url }}" class="media corner-border-target">
                                     {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
                                   </a>
                                 {% endif %}
@@ -176,7 +176,7 @@
             </div>
           </div>
 
-          <div class="search__results--list tab" type="articles">
+          <div class="filter__results--list tab" type="articles">
             {% for item in search.results %}
               {%- case item.object_type -%}
                 {%- when 'article' -%}

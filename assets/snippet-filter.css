@@ -225,3 +225,7 @@ input::-webkit-inner-spin-button {
 	background-image: none !important;
 	border-width: 3px;
 }
+
+.filter-mobile__button {
+	position: relative;
+}
