@@ -1,6 +1,18 @@
 {{ 'main-collection.css' | asset_url | stylesheet_tag }}
 
 {% style %}
+  {% if collection.featured_image != blank and section.settings.show_collection_image == true %}
+    .collection__head {
+      background-image: url({{collection.featured_image|img_url:'1920x'}});
+      height: 600px;
+    }
+  {% else %}
+    .collection__head {
+      margin-top: 130px;
+      padding: 3rem;
+    }
+  {% endif %}
+
   .collection__item {
     width: calc(100% / {{section.settings.products_per_row_desktop}});
   }
@@ -12,12 +24,13 @@
   }
 {% endstyle %}
 
+<div class="collection__head">
+  <h2 class="collection__title">{{ collection.title }}</h2>
+  <p>{{ collection.description }}</p>
+</div>
+
 <div class="collection  {% if collection.products_count == 0 %}empty-state{% endif %}">
   <div class="collection__container">
-    <div class="collection__head">
-      <h2 class="collection__title">{{ collection.title }}</h2>
-    </div>
-
     <p class="collection__page-tab selected results-count" style="text-align: center;">Products</p>
     {%- if collection.products_count > 0 -%}
       <div class="collection__content">
@@ -160,23 +173,6 @@
   "class": "main-collection",
   "settings": [
     {
-      "type": "checkbox",
-      "id": "new_tag",
-      "label": "Show 'NEW' tag",
-      "default": true
-    },
-    {
-      "type": "range",
-      "id": "new_tag_time",
-      "label": "'NEW' tag countback",
-      "info": "Show the 'NEW' tag if the product is published in the last X days",
-      "min": 0,
-      "max": 90,
-      "step": 1,
-      "unit": "D",
-      "default": 30
-    },
-    {
       "type": "range",
       "id": "products_per_page",
       "min": 8,
@@ -205,6 +201,12 @@
     },
     {
       "type": "checkbox",
+      "id": "show_collection_image",
+      "label": "Show collection image",
+      "default": true
+    },
+    {
+      "type": "checkbox",
       "id": "show_filter",
       "label": "Show filter",
       "default": true
@@ -214,6 +216,23 @@
       "id": "filters_expanded_at_start",
       "label": "Filters expanded at start",
       "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "new_tag",
+      "label": "Show 'NEW' tag",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "new_tag_time",
+      "label": "'NEW' tag countback",
+      "info": "Show the 'NEW' tag if the product is published in the last X days",
+      "min": 0,
+      "max": 90,
+      "step": 1,
+      "unit": "D",
+      "default": 30
     }
   ]
 }

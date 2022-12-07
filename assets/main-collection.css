@@ -7,14 +7,11 @@
 	height: auto;
 }
 
-.collection {
-	padding-top: 130px;
-}
-
-@media screen and (min-width: 750px) {
-	.collection {
-		padding-top: 140px;
-	}
+.collection__head {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .collection__form {
@@ -268,4 +265,15 @@
 .collection__page-tab.selected {
 	border-bottom: 3px solid #fff;
 	transition: all 0.1s ease-in-out;
+}
+
+.collection__head {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 1rem;
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
 }
