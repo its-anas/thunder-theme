@@ -1,0 +1,149 @@
+{{ 'main-blog.css' | asset_url | stylesheet_tag }}
+
+{% style %}
+  .blog__article__image img {
+    aspect-ratio: {{ section.settings.article_aspect_ratios }};
+  }
+
+  @media screen and (min-width: 750px) {
+    .collage .blog__article:first-of-type img {
+        aspect-ratio: {{ section.settings.first_article_aspect_ratio}};
+    }
+
+    .blog__article {
+      width: calc(100% / {{section.settings.articles_per_row}});
+    }
+  }
+{% endstyle %}
+
+<div class="blog">
+  <div class="blog__container">
+    <div class="blog__title">
+      <h2>{{ blog.title }}</h2>
+    </div>
+    <div class="blog__articles">
+      {%- paginate blog.articles by section.settings.articles_per_page -%}
+        <div class="blog__articles__container {{ section.settings.grid_style }}">
+          {%- for article in blog.articles -%}
+            <div class="blog__article">
+              {%- if article and article != empty -%}
+                <a class="blog__article__container" href="{{ article.url }}">
+                  <div class="blog__article__image media">
+                    {%- if article.image -%}
+                      <img
+                        srcset="
+                          {%- if article.image.src.width >= 165 -%}{{ article.image.src | image_url: width: 165 }} 165w,{%- endif -%}
+                          {%- if article.image.src.width >= 360 -%}{{ article.image.src | image_url: width: 360 }} 360w,{%- endif -%}
+                          {%- if article.image.src.width >= 533 -%}{{ article.image.src | image_url: width: 533 }} 533w,{%- endif -%}
+                          {%- if article.image.src.width >= 720 -%}{{ article.image.src | image_url: width: 720 }} 720w,{%- endif -%}
+                          {%- if article.image.src.width >= 1000 -%}{{ article.image.src | image_url: width: 1000 }} 1000w,{%- endif -%}
+                          {%- if article.image.src.width >= 1500 -%}{{ article.image.src | image_url: width: 1500 }} 1500w,{%- endif -%}
+                          {{ article.image.src | image_url }} {{ article.image.src.width }}w
+                        "
+                        src="{{ article.image.src | image_url: width: 533 }}"
+                        sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: 2 }}px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)"
+                        alt="{{ article.image.src.alt | escape }}"
+                        class="motion-reduce fit"
+                        {% unless lazy_load == false %}
+                          loading="lazy"
+                        {% endunless %}
+                        width="{{ article.image.width }}"
+                        height="{{ article.image.height }}"
+                      >
+                    {%- endif -%}
+                  </div>
+                  <h5 class="blog__article__title">{{ article.title }}</h5>
+                  <span class="blog__article__publication-date">
+                    {% if section.settings.show_publication_date == true %}
+                      {{ article.published_at | time_tag: format: 'date' }}
+                    {% endif %}
+                    {% if section.settings.show_author == true %} by {{ article.author }} {% endif %}
+                  </span>
+                </a>
+              {%- endif -%}
+            </div>
+          {%- endfor -%}
+        </div>
+
+        {%- if paginate.pages > 1 -%}
+          {%- render 'snippet-pagination', paginate: paginate -%}
+        {%- endif -%}
+      {%- endpaginate -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Blog",
+  "class": "main-blog",
+  "settings": [
+    {
+      "type": "select",
+      "id": "grid_style",
+      "label": "Grid style",
+      "options": [
+        {
+          "value": "collage",
+          "label": "Collage"
+        },
+        {
+          "value": "grid",
+          "label": "Grid"
+        }
+      ],
+      "default": "collage"
+    },
+    {
+      "type": "range",
+      "id": "articles_per_page",
+      "min": 8,
+      "max": 50,
+      "step": 1,
+      "label": "Articles per page",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "articles_per_row",
+      "min": 2,
+      "max": 5,
+      "step": 1,
+      "label": "Articles per row - desktop/tablet",
+      "default": 2
+    },
+
+    {
+      "type": "range",
+      "id": "article_aspect_ratios",
+      "min": 1,
+      "max": 3,
+      "step": 0.1,
+      "label": "Article aspect ratio",
+      "default": 1.4
+    },
+    {
+      "type": "range",
+      "id": "first_article_aspect_ratio",
+      "min": 1,
+      "max": 3,
+      "step": 0.1,
+      "label": "Collage first article aspect ratio",
+      "info": "Only applies to collage style",
+      "default": 2.5
+    },
+    {
+      "type": "checkbox",
+      "id": "show_publication_date",
+      "label": "Show publication date",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_author",
+      "label": "Show author",
+      "default": true
+    }
+  ]
+}
+{% endschema %}

@@ -265,6 +265,7 @@
 .collection__page-tab.selected {
 	border-bottom: 3px solid #fff;
 	transition: all 0.1s ease-in-out;
+	pointer-events: none;
 }
 
 .collection__head {

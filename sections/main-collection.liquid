@@ -4,7 +4,7 @@
   {% if collection.featured_image != blank and section.settings.show_collection_image == true %}
     .collection__head {
       background-image: url({{collection.featured_image|img_url:'1920x'}});
-      height: 600px;
+      height: {{ section.settings.section_height }}px;
     }
   {% else %}
     .collection__head {
@@ -169,9 +169,19 @@
 
 {% schema %}
 {
-  "name": "collection",
+  "name": "Collection",
   "class": "main-collection",
   "settings": [
+    {
+      "type": "range",
+      "id": "section_height",
+      "min": 300,
+      "max": 1000,
+      "step": 100,
+      "unit": "px",
+      "label": "Section height",
+      "default": 600
+    },
     {
       "type": "range",
       "id": "products_per_page",
@@ -187,7 +197,7 @@
       "min": 3,
       "max": 6,
       "step": 1,
-      "label": "Products per row - desktop",
+      "label": "Products per row - desktop/tablet",
       "default": 4
     },
     {
