@@ -25,11 +25,16 @@
         %}
       </div>
     </div>
+    <div class="drawers">
+      {%- liquid
+        section 'main-search-drawer'
+        section 'main-cart-drawer'
+        section 'main-newsletter-popup'
+        section 'main-quick-view'
+      -%}
+    </div>
+
     {%- liquid
-      section 'main-search-drawer'
-      section 'main-cart-drawer'
-      section 'main-newsletter-popup'
-      section 'main-quick-view'
       echo content_for_layout
       section 'main-footer'
     -%}

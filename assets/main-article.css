@@ -1,0 +1,157 @@
+.article {
+	margin-top: 130px;
+	width: 100%;
+	height: auto;
+}
+
+.article__head {
+	width: 100%;
+	height: auto;
+	display: flex;
+	flex-direction: column;
+}
+
+.article__publication-date,
+.article__author {
+	font-size: 0.8rem;
+	color: rgb(175, 175, 175);
+}
+
+.article__picture {
+	width: 100%;
+}
+
+.article__picture img {
+	width: 100%;
+}
+
+.article__tags {
+	display: flex;
+	flex-wrap: wrap;
+
+	gap: 0.5rem;
+}
+
+.article__tag {
+	padding: 0.3rem;
+	background-color: #0a0a0a;
+	font-size: 0.8rem;
+}
+
+.article__share {
+	display: flex;
+}
+
+.article__content,
+.article__comments,
+.article__head,
+.article__tags,
+.article__share,
+.article__back-button__container {
+	width: 100%;
+	max-width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 1rem;
+}
+
+@media screen and (min-width: 750px) {
+	.article__content,
+	.article__comments,
+	.article__head,
+	.article__tags,
+	.article__share,
+	.article__back-button__container {
+		width: 1000px;
+		padding: 1rem;
+	}
+}
+
+.article__comments__head {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+	padding: 1rem 0;
+}
+
+.article__comments__list {
+	display: flex;
+	flex-direction: column;
+
+	gap: 0.5rem;
+}
+
+.article__comments__container {
+	padding: 1rem 0;
+}
+.article__comments__container .pagination {
+	padding: 1rem 0;
+}
+
+.article__comments__container .pagination a {
+	border: 0px;
+}
+
+.article__comment {
+	background-color: #0a0a0a;
+	padding: 1rem;
+}
+.article__comment__author {
+	font-size: 0.8rem;
+	color: rgb(175, 175, 175);
+}
+
+.article__comment-form__container {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	margin-left: auto;
+	margin-right: auto;
+	gap: 1rem;
+	padding-top: 1rem;
+}
+
+.article__comment-form__title {
+	width: 100%;
+}
+
+.article__comment-form__name-field,
+.article__comment-form__email-field {
+	width: 100%;
+}
+
+@media screen and (min-width: 750px) {
+	.article__comment-form__name-field,
+	.article__comment-form__email-field {
+		width: calc(50% - 0.5rem);
+	}
+}
+
+.article__comment-form__name-field input,
+.article__comment-form__email-field input {
+	height: 44px;
+}
+
+.article__comment-form__name-field input,
+.article__comment-form__email-field input,
+.article__comment-form__message-field,
+.article__comment-form__message-field textarea {
+	width: 100%;
+}
+
+.article__comment-form__message-field textarea {
+	height: 120px;
+}
+
+.article__back-button__container {
+	text-align: center;
+}
+
+.article__back-button {
+	color: rgb(175, 175, 175);
+	font-size: 0.8rem;
+}
+
+.article__comment-form__button {
+	justify-content: flex-start;
+}

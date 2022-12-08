@@ -1,17 +1,17 @@
 {{ 'main-blog.css' | asset_url | stylesheet_tag }}
 
 {% style %}
-  .blog__article__image img {
+  .blog__article__image {
     aspect-ratio: {{ section.settings.article_aspect_ratios }};
   }
 
   @media screen and (min-width: 750px) {
-    .collage .blog__article:first-of-type img {
-        aspect-ratio: {{ section.settings.first_article_aspect_ratio}};
+    .collage .blog__article:first-of-type .blog__article__image {
+        aspect-ratio: {{ section.settings.first_article_aspect_ratio }};
     }
 
     .blog__article {
-      width: calc(100% / {{section.settings.articles_per_row}});
+      width: calc(100% / {{section.settings.articles_per_row }});
     }
   }
 {% endstyle %}
@@ -50,6 +50,8 @@
                         width="{{ article.image.width }}"
                         height="{{ article.image.height }}"
                       >
+                    {%- else -%}
+                      {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder' }}
                     {%- endif -%}
                   </div>
                   <h5 class="blog__article__title">{{ article.title }}</h5>

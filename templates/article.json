@@ -1,8 +1,35 @@
 {
   "sections": {
     "main": {
-      "type": "article"
+      "type": "main-article",
+      "settings": {},
+      "blocks": {
+        "title": {
+          "type": "title",
+          "settings": {
+            "show_author": false,
+            "show_date": true
+          }
+        },
+        "picture": {
+          "type": "picture"
+        },
+        "tags": {
+          "type": "tags"
+        },
+        "share": {
+          "type": "share"
+        },
+        "content": {
+          "type": "content"
+        },
+        "comments": {
+          "type": "comments"
+        }
+      }
     }
   },
-  "order": ["main"]
+  "order": [
+    "main"
+  ]
 }

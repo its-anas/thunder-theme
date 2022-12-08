@@ -3,7 +3,7 @@
 {% style %}
   {% if collection.featured_image != blank and section.settings.show_collection_image == true %}
     .collection__head {
-      background-image: url({{collection.featured_image|img_url:'1920x'}});
+      background-image: url({{ collection.featured_image | image_url :'1920x' }});
       height: {{ section.settings.section_height }}px;
     }
   {% else %}
