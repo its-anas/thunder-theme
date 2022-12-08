@@ -1,0 +1,40 @@
+.main-404 {
+	width: 100%;
+	height: auto;
+	margin-top: 130px;
+}
+
+.main-404__container {
+	width: 100%;
+	height: auto;
+	margin-left: auto;
+	margin-right: auto;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 2rem;
+	padding: 1rem;
+}
+
+@media screen and (min-width: 750px) {
+	.main-404__container {
+		width: 1600px;
+		max-width: 100%;
+		padding: 2rem;
+	}
+}
+
+.main-404__container .search-form__container {
+	width: 400px;
+}
+
+.main-404__container .buttons {
+	width: 200px;
+}
+
+@media screen and (min-width: 750px) {
+	.main-404__container .buttons {
+		width: 250px;
+	}
+}

@@ -22,7 +22,7 @@
    }
 
    @media screen and (min-width: 751px) {
-      .{{ section.id }}.search-section > .search-section__container  {
+      .{{ section.id }}.search-section > .search-form__container  {
           width: {{ section.settings.field_width }}px;
       }
    }
@@ -36,11 +36,11 @@
       </{{ section.settings.heading_size }}>
     </div>
   {% endif %}
-  <predictive-search class="search-section__container">
+  <predictive-search class="search-form__container">
     <form action="{{ routes.search_url }}" method="get" class="search-section__form">
       <input
         id="Search"
-        class="search-section__input"
+        class="search-form__input"
         type="search"
         name="q"
         value="{{ search.terms | escape }}"
@@ -53,7 +53,7 @@
         {%- endif -%}
       >
       {%- if settings.predictive_search_enabled -%}
-        <div class="search-section__results" id="predictive-search" tabindex="-1"></div>
+        <div class="search-form__results" id="predictive-search" tabindex="-1"></div>
       {%- endif -%}
     </form>
     <a class="search__icon">

@@ -23,7 +23,7 @@ class SearchPageTabs extends HTMLElement {
 
 	injectArticles() {
 		let windowLocation = window.location;
-		let searchTerm = `search?q=${document.querySelector(".search-section__input").value}`;
+		let searchTerm = `search?q=${document.querySelector(".search-form__input").value}`;
 		let articlesUrl = `${windowLocation.origin}/${searchTerm}&type=article`;
 
 		fetch(articlesUrl)

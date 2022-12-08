@@ -235,11 +235,11 @@ class PredictiveSearch extends HTMLElement {
 	}
 
 	open() {
-		this.querySelector(".search-section__results").classList.remove("hidden");
+		this.querySelector(".search-form__results").classList.remove("hidden");
 	}
 
 	close() {
-		this.querySelector(".search-section__results").classList.add("hidden");
+		this.querySelector(".search-form__results").classList.add("hidden");
 	}
 
 	debounce(fn, wait) {
@@ -284,7 +284,7 @@ class SearchDrawer extends PredictiveSearch {
 
 		this.searchDrawer = this.querySelector(".search-drawer");
 		this.closeIcon = this.searchDrawer.querySelector(".search-section__close");
-		this.inputField = this.searchDrawer.querySelector(".search-section__input");
+		this.inputField = this.searchDrawer.querySelector(".search-form__input");
 
 		this.decideDrawerAction();
 	}
@@ -304,7 +304,7 @@ class SearchDrawer extends PredictiveSearch {
 
 	resetSearch() {
 		this.inputField.value = "";
-		this.searchDrawer.querySelector(".search-section__results").classList.add("hidden");
+		this.searchDrawer.querySelector(".search-form__results").classList.add("hidden");
 	}
 
 	decideDrawerAction() {

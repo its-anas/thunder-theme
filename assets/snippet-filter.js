@@ -43,7 +43,7 @@ class FilterComponent extends HTMLElement {
 	buildUrl() {
 		let parameters = [];
 		let windowLocation = window.location;
-		let pathName = this.pageType === "search" ? `/search?q=${document.querySelector(".search-section__input").value}&type=product&` : `/${window.location.pathname.split("/")[1]}/${window.location.pathname.split("/")[2]}?`;
+		let pathName = this.pageType === "search" ? `/search?q=${document.querySelector(".search-form__input").value}&type=product&` : `/${window.location.pathname.split("/")[1]}/${window.location.pathname.split("/")[2]}?`;
 		let sortBy = `sort_by=${document.querySelector(".sort-by__select").value}`;
 		let url = `${windowLocation.origin + pathName + sortBy}`;
 

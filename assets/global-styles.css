@@ -1237,7 +1237,7 @@ cart-component.hidden {
 }
 
 /* ANCHOR: Search results (for section/drawer) */
-.search-section__results {
+.search-form__results {
 	z-index: 5;
 }
 
@@ -1311,7 +1311,7 @@ cart-component.hidden {
 	margin-left: auto;
 }
 
-.search-section__container {
+.search-form__container {
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
@@ -1319,7 +1319,7 @@ cart-component.hidden {
 }
 
 @media screen and (max-width: 750px) {
-	.search-section__container {
+	.search-form__container {
 		max-width: 90%;
 	}
 }
@@ -1329,28 +1329,28 @@ cart-component.hidden {
 	width: 100%;
 }
 
-.search-section__input {
+.search-form__input {
 	height: 100% !important;
 }
 
 @media screen and (min-width: 751px) {
-	.search-section__input {
+	.search-form__input {
 		min-width: 100%;
 	}
 }
 
-.search-section__input::-webkit-search-cancel-button {
+.search-form__input::-webkit-search-cancel-button {
 	content: url("data:image/svg+xml,%3Csvg width='25' height='25' viewBox='0 0 25 25' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M6.43359 18.5L18.4336 6.5' stroke='white' stroke-width='1.5'/%3E%3Cpath d='M6.43359 6.5L18.4336 18.5' stroke='white' stroke-width='1.5'/%3E%3C/svg%3E%0A");
 	cursor: pointer;
 }
 
 @media screen and (max-width: 750px) {
-	.search-section__input {
+	.search-form__input {
 		width: 100%;
 	}
 }
 
-.search-section__results {
+.search-form__results {
 	position: absolute;
 	width: 100%;
 	background-color: rgb(0, 0, 0);

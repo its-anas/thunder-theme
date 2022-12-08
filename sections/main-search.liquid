@@ -23,11 +23,11 @@
       {% endif %}
     </div>
 
-    <div class="search-section__container">
+    <div class="search-form__container">
       <form action="{{ routes.search_url }}" method="get" class="search__form">
         <input
           id="Search"
-          class="search-section__input"
+          class="search-form__input"
           type="search"
           name="q"
           value="{{ search.terms | escape }}"
