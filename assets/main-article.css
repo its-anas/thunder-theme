@@ -34,7 +34,7 @@
 
 .article__tag {
 	padding: 0.3rem;
-	background-color: #0a0a0a;
+	background-color: #1a1a1a;
 	font-size: 0.8rem;
 }
 
@@ -71,7 +71,7 @@
 	display: flex;
 	flex-direction: column;
 	gap: 0.5rem;
-	padding: 1rem 0;
+	padding: 0;
 }
 
 .article__comments__list {
@@ -82,10 +82,12 @@
 }
 
 .article__comments__container {
-	padding: 1rem 0;
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
 }
 .article__comments__container .pagination {
-	padding: 1rem 0;
+	padding: 0;
 }
 
 .article__comments__container .pagination a {
@@ -93,12 +95,32 @@
 }
 
 .article__comment {
-	background-color: #0a0a0a;
+	background-color: #1a1a1a;
 	padding: 1rem;
+	display: flex;
+	flex-direction: column;
+	gap: 0.3rem;
 }
+
 .article__comment__author {
+	display: flex;
+	justify-content: space-between;
+}
+
+.article__comment__author .user {
 	font-size: 0.8rem;
+}
+
+.article__comment__author .date {
+	font-size: 0.6rem;
+}
+
+.article__comment__author * {
 	color: rgb(175, 175, 175);
+}
+
+.article__comment__message p {
+	font-size: 0.8rem;
 }
 
 .article__comment-form__container {

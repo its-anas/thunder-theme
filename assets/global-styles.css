@@ -1634,3 +1634,13 @@ cart-component.hidden {
 div:has(.grecaptcha-badge) {
 	display: none !important;
 }
+
+/* ANCHOR: Share icons */
+.product-page__share-buttons {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	height: auto;
+	align-items: center;
+	gap: 0.5rem;
+}

@@ -53,13 +53,3 @@
 	padding-left: 1rem;
 	padding-right: 1rem;
 }
-
-.main-product-tabs .product-page__share-buttons {
-	display: flex;
-	justify-content: center;
-	width: 100%;
-	height: auto;
-	padding: 1rem;
-	align-items: center;
-	gap: 0.5rem;
-}
