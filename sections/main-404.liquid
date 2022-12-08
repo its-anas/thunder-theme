@@ -1,0 +1,39 @@
+{{ 'main-404.css' | asset_url | stylesheet_tag }}
+
+<h1 class="title">Page not found</h1>
+<p>Sorry this page does not exist</p>
+
+<predictive-search class="search-section__container">
+  <form action="{{ routes.search_url }}" method="get" class="search-section__form">
+    <input
+      id="Search"
+      class="search-section__input"
+      type="search"
+      name="q"
+      value="{{ search.terms | escape }}"
+      placeholder="Search..."
+      {%- if settings.predictive_search_enabled -%}
+        autocorrect="off"
+        autocomplete="off"
+        autocapitalize="off"
+        spellcheck="false"
+      {%- endif -%}
+    >
+    {%- if settings.predictive_search_enabled -%}
+      <div class="search-section__results" id="predictive-search" tabindex="-1"></div>
+    {%- endif -%}
+  </form>
+  <a class="search__icon">
+    {% render 'snippet-icons', icon: 'search' %}
+  </a>
+</predictive-search>
+
+<div class="buttons">
+  <a
+    class="button button--primary border"
+    href="{{ routes.all_products_collection_url }}"
+  >
+    <span></span> <span></span> <span></span> <span></span>
+    Continue shopping
+  </a>
+</div>
