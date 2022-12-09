@@ -116,6 +116,7 @@
 	align-items: center;
 	gap: 0.5rem;
 }
+
 .customer__form__link .button--link::after,
 .customer__form__links .button--link::after {
 	content: "";

@@ -1,0 +1,94 @@
+{{ 'customer.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .customer.{{ section.id }} {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .customer.{{ section.id }} {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="customer {{ section.id }}">
+  <div class="customer__container">
+    <h2>Activate account</h2>
+    <span>Add a password to activate your account.</span>
+    {%- form 'activate_customer_password', class: 'customer__form' -%}
+      {%- if form.errors -%}
+        <div class="customer__form__errors-list">
+          {%- for field in form.errors -%}
+            <div class="customer__form__errors-list__item">
+              <span> ⚠ </span>
+              <span>
+                {%- if field == 'form' -%}
+                  {{ form.errors.messages[field] }}
+                {%- else -%}
+                  {{ form.errors.translated_fields[field] | capitalize }}
+                  {{ form.errors.messages[field] }}
+                {%- endif -%}
+              </span>
+            </div>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+
+      <div class="customer__form__content">
+        <input
+          type="password"
+          name="customer[password]"
+          autocomplete="new-password"
+          placeholder="Password"
+          class="customer__form__input"
+        >
+
+        <input
+          type="password"
+          name="customer[password_confirmation]"
+          autocomplete="new-password"
+          placeholder="Confirm password"
+          class="customer__form__input"
+        >
+
+        <div class="customer__form__button buttons">
+          <button class="button button--primary border">Activate account</button>
+        </div>
+      </div>
+      <div class="customer__form__link">
+        <button name="decline" class="button--link underline">Cancel</button>
+      </div>
+    {%- endform -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Customer activate account",
+  "settings": [
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 0
+    }
+  ]
+}
+{% endschema %}
