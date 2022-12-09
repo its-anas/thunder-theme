@@ -62,7 +62,6 @@
 	.article__tags,
 	.article__share,
 	.article__back-button__container {
-		width: 1000px;
 		padding: 1rem;
 	}
 }
