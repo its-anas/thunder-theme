@@ -870,6 +870,7 @@ button.border.button--secondary:hover {
 	position: relative;
 	color: #fcdb33;
 	font-size: 0.8rem;
+	cursor: pointer;
 }
 
 .button--link:after {

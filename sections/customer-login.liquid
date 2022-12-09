@@ -14,11 +14,52 @@
   }
 {%- endstyle -%}
 
-<div class="customer {{ section.id }}">
-  <div class="customer__container">
-    <h2 class="customer__form__title">Create account</h2>
-    <span>Please fill in the fields below:</span>
-    {%- form 'create_customer', novalidate: 'novalidate', class: 'customer__form' -%}
+<div class="customer customer-login {{ section.id }}">
+  <div class="customer__container" id="recover_page">
+    <h2 class="customer__form__title">Recover password</h2>
+    <p>Please enter your e-mail:</p>
+
+    {%- form 'recover_customer_password', class: 'customer__form' -%}
+      {%- if form.errors -%}
+        <div class="customer__form__errors-list__item">
+          <div>
+            <span> ⚠ </span>
+            <span>{{ form.errors.messages.form }}</span>
+          </div>
+        </div>
+      {%- endif -%}
+      {% assign recover_success = form.posted_successfully? %}
+      <div class="customer__form__content">
+        <input
+          type="email"
+          value=""
+          name="email"
+          autocorrect="off"
+          autocapitalize="off"
+          autocomplete="email"
+          placeholder="Email"
+          class="customer__form__input"
+          required
+        >
+      </div>
+      <div class="customer__form__button buttons">
+        <button class="button button--primary border">RECOVER</button>
+      </div>
+    {%- endform -%}
+    <div class="customer__form__link">
+      <span id="login" class="button--link underline">Back to login</span>
+    </div>
+  </div>
+  <div class="customer__container" id="login_page">
+    <h2 class="customer__form__title">Login</h2>
+    <span>Please enter your email and password:</span>
+
+    {%- form 'customer_login', class: 'customer__form' -%}
+      {%- if recover_success == true -%}
+        <div class="customer__form__success">
+          <span>✓ We've sent you an email with a link to update your password.</span>
+        </div>
+      {%- endif -%}
       {%- if form.errors -%}
         <div class="customer__form__errors-list">
           {%- for field in form.errors -%}
@@ -39,61 +80,79 @@
 
       <div class="customer__form__content">
         <input
-          type="text"
-          name="customer[first_name]"
-          {% if form.first_name %}
-            value="{{ form.first_name }}"
-          {% endif %}
-          autocomplete="given-name"
-          placeholder="First name"
-          class="customer__form__input"
-        >
-        <input
-          type="text"
-          name="customer[last_name]"
-          {% if form.last_name %}
-            value="{{ form.last_name }}"
-          {% endif %}
-          autocomplete="family-name"
-          placeholder="Last name"
-          class="customer__form__input"
-        >
-        <input
           type="email"
           name="customer[email]"
-          {% if form.email %}
-            value="{{ form.email }}"
-          {% endif %}
-          spellcheck="false"
-          autocapitalize="off"
           autocomplete="email"
+          autocorrect="off"
+          autocapitalize="off"
           placeholder="Email"
-          class="customer__form__input {% if form.errors contains 'email' %}error{% endif %}"
-          required
-        >
-        <input
-          type="password"
-          name="customer[password]"
-          placeholder="Password"
-          class="customer__form__input {% if form.errors contains 'password' %}error{% endif %}"
+          class="customer__form__input"
           required
         >
 
+        {%- if form.password_needed -%}
+          <input
+            type="password"
+            value=""
+            name="customer[password]"
+            autocomplete="current-password"
+            placeholder="Password"
+            class="customer__form__input"
+            required
+          >
+        {%- endif -%}
+
         <div class="customer__form__button buttons">
-          <button type="submit" class="button button--primary border">Sign up</button>
+          <button class="button button--primary border">Sign in</button>
         </div>
       </div>
     {%- endform -%}
-    <div class="customer__form__login-link">
-      <span>Already have an account?</span>
-      <a href="{{ routes.account_login_url }}" class="button--link">Login here</a>
+
+    <div class="customer__form__links">
+      <div class="customer__form__link">
+        <span class="small">Forgot your password?</span>
+        <span id="recover" class="button--link underline">Reset password</span>
+      </div>
+      <div class="customer__form__link">
+        <span class="small">New customer?</span>
+        <a href="{{ routes.account_register_url }}" class="button--link underline">Create account</a>
+      </div>
     </div>
   </div>
+
+  {%- if shop.checkout.guest_login -%}
+    <span>Continue as a guest</span>
+
+    {%- form 'guest_login' -%}
+      <div class="buttons">
+        <button class="button button--primary border">Continue</button>
+      </div>
+    {%- endform -%}
+  {%- endif -%}
 </div>
 
+<script>
+  if (window.location.hash === '#recover') {
+    document.querySelector('#recover_page').classList.add('active');
+  } else {
+    document.querySelector('#login_page').classList.add('active');
+  }
+  document.querySelectorAll('.customer__form__link .button--link').forEach((button) => {
+    button.addEventListener('click', () => {
+      if (button.id == 'recover') {
+        document.querySelector('#recover_page').classList.add('active');
+        document.querySelector('#login_page').classList.remove('active');
+      } else if (button.id == 'login') {
+        document.querySelector('#recover_page').classList.remove('active');
+        document.querySelector('#login_page').classList.add('active');
+      }
+    });
+  });
+</script>
 {% schema %}
 {
   "name": "Register",
+  "class": "section-customer-login",
   "settings": [
     {
       "type": "range",

@@ -18,7 +18,7 @@
   <div class="customer__container">
     <h2 class="customer__form__title">Create account</h2>
     <span>Please fill in the fields below:</span>
-    {%- form 'create_customer', novalidate: 'novalidate', class: 'customer__form' -%}
+    {%- form 'create_customer', class: 'customer__form' -%}
       {%- if form.errors -%}
         <div class="customer__form__errors-list">
           {%- for field in form.errors -%}
@@ -84,9 +84,9 @@
         </div>
       </div>
     {%- endform -%}
-    <div class="customer__form__login-link">
-      <span>Already have an account?</span>
-      <a href="{{ routes.account_login_url }}" class="button--link">Login here</a>
+    <div class="customer__form__link">
+      <span class="small">Already have an account?</span>
+      <a href="{{ routes.account_login_url }}" class="button--link underline">Login here</a>
     </div>
   </div>
 </div>
@@ -94,6 +94,7 @@
 {% schema %}
 {
   "name": "Register",
+  "class": "section-customer-register",
   "settings": [
     {
       "type": "range",
