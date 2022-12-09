@@ -1,0 +1,125 @@
+{{ 'customer.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .customer.{{ section.id }} {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .customer.{{ section.id }} {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="customer {{ section.id }}">
+  <div class="customer__container">
+    <h2 class="customer__form__title">Create account</h2>
+    <span>Please fill in the fields below:</span>
+    {%- form 'create_customer', novalidate: 'novalidate', class: 'customer__form' -%}
+      {%- if form.errors -%}
+        <div class="customer__form__errors-list">
+          {%- for field in form.errors -%}
+            <div class="customer__form__errors-list__item">
+              <span> ⚠ </span>
+              <span>
+                {%- if field == 'form' -%}
+                  {{ form.errors.messages[field] }}
+                {%- else -%}
+                  {{ form.errors.translated_fields[field] | capitalize }}
+                  {{ form.errors.messages[field] }}
+                {%- endif -%}
+              </span>
+            </div>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+
+      <div class="customer__form__content">
+        <input
+          type="text"
+          name="customer[first_name]"
+          {% if form.first_name %}
+            value="{{ form.first_name }}"
+          {% endif %}
+          autocomplete="given-name"
+          placeholder="First name"
+          class="customer__form__input"
+        >
+        <input
+          type="text"
+          name="customer[last_name]"
+          {% if form.last_name %}
+            value="{{ form.last_name }}"
+          {% endif %}
+          autocomplete="family-name"
+          placeholder="Last name"
+          class="customer__form__input"
+        >
+        <input
+          type="email"
+          name="customer[email]"
+          {% if form.email %}
+            value="{{ form.email }}"
+          {% endif %}
+          spellcheck="false"
+          autocapitalize="off"
+          autocomplete="email"
+          placeholder="Email"
+          class="customer__form__input"
+          required
+        >
+        {%- if form.errors contains 'email' -%}
+          <!-- UNFINISHED: Make input field highlighted in red -->
+        {%- endif -%}
+        <input
+          type="password"
+          name="customer[password]"
+          placeholder="Password"
+          class="customer__form__input"
+          required
+        >
+        {%- if form.errors contains 'password' -%}
+          <!-- UNFINISHED: Make input field highlighted in red -->
+        {%- endif -%}
+        <div class="customer__form__button buttons">
+          <button type="submit" class="button button--primary border">Sign up</button>
+        </div>
+      </div>
+    {%- endform -%}
+    <div class="customer__form__login-link">
+      <span>Already have an account?</span>
+      <a href="{{ routes.account_login_url }}" class="button--link">Login here</a>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Register",
+  "settings": [
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 0
+    }
+  ]
+}
+{% endschema %}
