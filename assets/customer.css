@@ -57,6 +57,9 @@
 	height: 44px;
 	width: 100%;
 }
+.customer__form__input.error {
+	border-color: #fa6464;
+}
 
 .customer__form__button {
 	height: 44px;
