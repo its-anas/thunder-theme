@@ -35,7 +35,7 @@ class FilterComponent extends HTMLElement {
 				const parser = new DOMParser();
 				const doc = parser.parseFromString(data, "text/html");
 				const resultsCount = doc.querySelector(".results-count-hidden");
-				const selector = this.pageType === "search" ? ".search__page-tab[for='products']" : ".results-count";
+				const selector = this.pageType === "search" ? ".page-tab[for='products']" : ".results-count";
 				document.querySelector(selector).innerHTML = "Products " + resultsCount.innerHTML;
 			});
 	}

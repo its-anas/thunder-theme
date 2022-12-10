@@ -36,6 +36,10 @@ p {
 	margin: 0;
 }
 
+table {
+	border-spacing: 0;
+}
+
 *,
 *::before,
 *::after {
@@ -317,6 +321,7 @@ img {
 }
 
 /* ANCHOR: Typography */
+
 h1,
 h2,
 h3,
@@ -331,7 +336,9 @@ h6 {
 p,
 label,
 legend,
-span {
+span,
+td,
+th {
 	color: var(--text-color);
 }
 
@@ -1644,4 +1651,32 @@ div:has(.grecaptcha-badge) {
 	height: auto;
 	align-items: center;
 	gap: 0.5rem;
+}
+
+/* ANCHOR: Page tabs */
+
+.page-tabs {
+	display: flex;
+	flex-direction: row;
+}
+
+.page-tab {
+	box-sizing: border-box;
+	height: 50px;
+	height: 40px;
+	padding: 0 2rem;
+	padding: 0 1.4rem;
+	border-bottom: 1px solid #fff;
+	cursor: pointer;
+	transition: all 0.1s ease-in-out;
+}
+
+.page-tab:hover {
+	border-bottom: 5px solid #fff !important;
+	transition: all 0.1s ease-in-out;
+}
+
+.page-tab.selected {
+	border-bottom: 3px solid #fff;
+	transition: all 0.1s ease-in-out;
 }

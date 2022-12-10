@@ -7,7 +7,7 @@ class SearchPageTabs extends HTMLElement {
 
 		this.addEventListener("click", (event) => {
 			let type = event.target.attributes.for.nodeValue;
-			this.querySelector(".search__page-tab.selected").classList.remove("selected");
+			this.querySelector(".page-tab.selected").classList.remove("selected");
 			event.target.classList.add("selected");
 
 			document.querySelector(".tab.active").classList.add("hidden");
@@ -33,7 +33,7 @@ class SearchPageTabs extends HTMLElement {
 				const doc = parser.parseFromString(data, "text/html");
 
 				const searchResults = doc.querySelector(".results-count-hidden");
-				document.querySelector(".search__page-tab[for='articles']").innerHTML += ` ${searchResults.innerHTML}`;
+				document.querySelector(".page-tab[for='articles']").innerHTML += ` ${searchResults.innerHTML}`;
 
 				const articles = doc.querySelector(".filter__results--list[type='articles']");
 				document.querySelector(".filter__results--list[type='articles']").innerHTML = `${articles.innerHTML}`;

@@ -80,32 +80,6 @@
 	padding-top: 5rem;
 }
 
-.search__page-tabs {
-	display: flex;
-	flex-direction: row;
-}
-
-.search__page-tab {
-	box-sizing: border-box;
-	height: 50px;
-	height: 40px;
-	padding: 0 2rem;
-	padding: 0 1.4rem;
-	border-bottom: 1px solid #fff;
-	cursor: pointer;
-	transition: all 0.1s ease-in-out;
-}
-
-.search__page-tab:hover {
-	border-bottom: 5px solid #fff !important;
-	transition: all 0.1s ease-in-out;
-}
-
-.search__page-tab.selected {
-	border-bottom: 3px solid #fff;
-	transition: all 0.1s ease-in-out;
-}
-
 .search__content-container {
 	width: 1600px;
 	max-width: 100%;
