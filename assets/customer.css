@@ -190,6 +190,108 @@
 	padding: 1rem 0;
 	border-bottom: 1px solid #fff;
 }
+
+.customer-table tfoot tr:nth-child(1) td {
+	border-top: 1px solid #fff;
+}
+
+.customer-table tfoot tr:first-child td {
+	padding-top: 1rem;
+}
+
+.customer-table tbody tr:last-child td {
+}
+
 .customer-table tbody td {
 	padding: 1rem 0;
+}
+
+.customer-addresses {
+	width: 500px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.customer-address {
+	display: flex;
+	flex-direction: column;
+}
+
+.customer-order__title {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+
+.customer-order__table--main,
+.customer-order__table--vertical__container {
+	width: 1000px;
+	max-width: 100%;
+}
+
+.customer-order__table__head,
+.customer-order__table__body {
+	display: flex;
+	flex-direction: row;
+}
+
+.customer-order__table--main .customer-order__table__head span:nth-child(1),
+.customer-order__table--main .customer-order__table__body span:nth-child(1) {
+	width: 70%;
+}
+
+.customer-order__table--main .customer-order__table__head span:nth-child(2),
+.customer-order__table--main .customer-order__table__body span:nth-child(2) {
+	width: 20%;
+}
+
+.customer-order__table--main .customer-order__table__head span:nth-child(3),
+.customer-order__table--main .customer-order__table__body span:nth-child(3) {
+	width: 10%;
+}
+
+.customer-order__table--vertical__container {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+}
+
+.customer-order__table--vertical {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.customer-order__table--vertical__head,
+.customer-order__table--vertical__body {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+
+.customer-order__table--vertical,
+.customer-order__table--address {
+	width: 500px;
+	max-width: 100%;
+}
+
+.customer-order__table--vertical .customer-order__table--vertical__head,
+.customer-order__table--vertical .customer-order__table--vertical__body {
+	width: 50%;
+}
+
+.customer-order__table--vertical__body {
+	text-align: end;
+}
+
+.customer-order__table--address .customer-order__table__head span,
+.customer-order__table--address .customer-order__table__body span {
+	width: 50%;
+}
+
+.customer-order__table--main .customer-order__table__head span:last-child,
+.customer-order__table--main .customer-order__table__body span:last-child {
+	text-align: end;
 }

@@ -1,0 +1,191 @@
+{{ 'customer.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .customer.{{ section.id }} {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .customer.{{ section.id }} {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="customer {{ section.id }}">
+  <div class="customer__container">
+    <div class="page-tabs">
+      <a href="{{ routes.account_url }}" class="page-tab">Orders</a>
+      <a href="{{ routes.account_addresses_url }}" class="page-tab selected">Addresses</a>
+      <a href="{{ routes.account_logout_url }}" class="page-tab">Logout</a>
+    </div>
+
+    <div class="customer-order__title">
+      <h2>Order {{ order.name }}</h2>
+      {%- assign order_date = order.created_at | time_tag: format: 'date_at_time' -%}
+      <span>Placed on {{ order_date }}</span>
+      {%- if order.cancelled -%}
+        {%- assign cancelled_at = order.cancelled_at | time_tag: format: 'date_at_time' -%}
+        <span>Order Cancelled on {{ cancelled_at }}. Reason: {{ order.cancel_reason_label }}</span>
+      {%- endif -%}
+    </div>
+
+    <div class="customer-order__table--main">
+      <div class="customer-order__table__head">
+        <span>Product</span>
+        <span>Quantity</span>
+        <span>Total</span>
+      </div>
+
+      <div class="customer-order__table__body">
+        {%- for line_item in order.line_items -%}
+          {%- if line_item.url != blank -%}
+            <span>
+              <a href="{{ line_item.url }}">{{ line_item.product.title }}</a>
+              <a>{{ line_item.variant.title }}</a>
+            </span>
+
+            >
+          {%- else -%}
+            <span>{{ line_item.title }}</span>
+          {%- endif -%}
+          {%- assign property_size = line_item.properties | size -%}
+          {%- unless line_item.selling_plan_allocation == null and property_size == 0 -%}
+            {%- unless line_item.product.has_only_default_variant -%}
+              <span>
+                {{ line_item.variant.title }}
+              </span>
+            {%- endunless -%}
+            {%- unless line_item.selling_plan_allocation == null -%}
+              <span>
+                {{ line_item.selling_plan_allocation.selling_plan.name }}
+              </span>
+            {%- endunless -%}
+            {%- if property_size != 0 -%}
+              {%- for property in line_item.properties -%}
+                {% assign property_first_char = property.first | slice: 0 %}
+                {%- if property.last != blank and property_first_char != '_' -%}
+                  <span>
+                    {{ property.first }}:&nbsp;
+                    {%- if property.last contains '/uploads/' -%}
+                      <a href="{{ property.last }}">{{ property.last | split: '/' | last }}</a>
+                    {%- else -%}
+                      {{ property.last }}
+                    {%- endif -%}
+                  </span>
+                {%- endif -%}
+              {%- endfor -%}
+            {%- endif -%}
+          {%- endunless -%}
+
+          {%- if line_item.line_level_discount_allocations != blank -%}
+            <ul>
+              {%- for discount_allocation in line_item.line_level_discount_allocations -%}
+                <li>
+                  {{- discount_allocation.discount_application.title }}
+                  {{- discount_allocation.amount | money -}}
+                </li>
+              {%- endfor -%}
+            </ul>
+          {%- endif -%}
+
+          {%- if line_item.fulfillment -%}
+            <div>
+              {%- assign created_at = line_item.fulfillment.created_at | time_tag: format: 'date' -%}
+              <span>{{ 'customer.order.fulfilled_at_html' | t: date: created_at }}</span>
+
+              {%- if line_item.fulfillment.tracking_url -%}
+                <a href="{{ line_item.fulfillment.tracking_url }}"> Track shipment </a>
+              {%- endif -%}
+              <span>
+                {{ line_item.fulfillment.tracking_company }}
+                {%- if line_item.fulfillment.tracking_number -%}
+                  #{{ line_item.fulfillment.tracking_number }}
+                {%- endif -%}
+              </span>
+            </div>
+          {%- endif -%}
+
+          <span> {{ line_item.quantity }}</span>
+
+          <span>{{ line_item.original_line_price | money }}</span>
+        {%- endfor -%}
+      </div>
+    </div>
+
+    <div class="customer-order__table--vertical__container">
+      <div class="customer-order__table--vertical">
+        <div class="customer-order__table--vertical__head">
+          <span>Subtotal</span>
+
+          {%- for shipping_method in order.shipping_methods -%}
+            <span> Shipping</span>
+          {%- endfor -%}
+
+          <span>Total</span>
+        </div>
+
+        <div class="customer-order__table--vertical__body">
+          <span> {{ order.line_items_subtotal_price | money }}</span>
+
+          {%- for shipping_method in order.shipping_methods -%}
+            <span> {{ shipping_method.price | money }}</span>
+          {%- endfor -%}
+
+          <span> {{ order.total_price | money_with_currency }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="customer-order__table--address">
+      <h5 class="customer-order__table__title">Addresses</h5>
+      <div class="customer-order__table__head">
+        <span> Billing Address</span>
+        <span> Shipping Address</span>
+      </div>
+      <div class="customer-order__table__body">
+        <span>
+          <span>Payment Status: {{ order.financial_status_label }}</span>
+          <span>{{ order.billing_address | format_address }}</span>
+        </span>
+
+        <span>
+          <span>Fulfillment status: {{ order.fulfillment_status_label }}</span>
+          <span> {{ order.shipping_address | format_address }}</span>
+        </span>
+      </div>
+    </div>
+    <a href="{{ routes.account_url }}" class="button--link">Return to Account page</a>
+
+    {% schema %}
+    {
+      "name": "Customer order",
+      "class": "section-customer-login",
+      "settings": [
+        {
+          "type": "range",
+          "id": "padding_top",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Padding top",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "padding_bottom",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Padding bottom",
+          "default": 0
+        }
+      ]
+    }
+    {% endschema %}
+  </div>
+</div>
