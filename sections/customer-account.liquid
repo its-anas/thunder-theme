@@ -102,9 +102,44 @@
         </table>
       {%- else -%}
         <span>You have no orders</span>
-        <div class="buttons"><div class="button button--primary border">Make your first order</div></div>
+        <div class="buttons">
+          <a
+            href="{{ routes.all_products_collection_url }}"
+            class="button button--primary border"
+            >Make your first order</a
+          >
+        </div>
       {% endif %}
       {% render 'snippet-pagination', paginate: paginate %}
     {% endpaginate %}
   </div>
 </div>
+
+{% schema %}
+{
+  "name": "Customer account",
+  "class": "section-customer-login",
+  "settings": [
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 0
+    }
+  ]
+}
+{% endschema %}
