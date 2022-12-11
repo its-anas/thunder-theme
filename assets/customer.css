@@ -117,10 +117,6 @@
 	gap: 0.5rem;
 }
 
-.customer .button--link {
-	font-size: 1rem;
-}
-
 .customer .button--link::after {
 	content: "";
 }
@@ -346,4 +342,42 @@
 
 .customer-order__table__product__variant {
 	font-size: 0.85rem;
+}
+
+.customer-table .button--link,
+.customer-table .button--link {
+	font-size: 1rem;
+}
+
+/* ANCHOR: Customer-addresses */
+
+.customer-addresses__addresses-list {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1rem;
+	justify-content: center;
+}
+
+.customer-addresses__address {
+	width: calc(50% - 0.5rem);
+}
+
+@media screen and (min-width: 750px) {
+	.customer-addresses__address {
+		width: 200px;
+	}
+}
+
+.customer-addresses__address__container {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	gap: 1rem;
+	width: 100%;
+	height: 100%;
+}
+
+.customer-addresses__address__container h6 {
+	padding: 1rem 0;
+	border-bottom: 1px solid #fff;
 }
