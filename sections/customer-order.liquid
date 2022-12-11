@@ -15,13 +15,7 @@
 {%- endstyle -%}
 
 <div class="customer {{ section.id }}">
-  <div class="customer__container">
-    <div class="page-tabs">
-      <a href="{{ routes.account_url }}" class="page-tab">Orders</a>
-      <a href="{{ routes.account_addresses_url }}" class="page-tab selected">Addresses</a>
-      <a href="{{ routes.account_logout_url }}" class="page-tab">Logout</a>
-    </div>
-
+  <div class="customer__container" style="gap: 4rem;">
     <div class="customer-order__title">
       <h2>Order {{ order.name }}</h2>
       {%- assign order_date = order.created_at | time_tag: format: 'date_at_time' -%}
@@ -34,17 +28,49 @@
 
     <div class="customer-order__table--main">
       <div class="customer-order__table__head">
-        <span>Product</span>
-        <span>Quantity</span>
-        <span>Total</span>
+        <span><h6>Product</h6></span>
+        <span><h6>Total</h6></span>
       </div>
 
-      <div class="customer-order__table__body">
-        {%- for line_item in order.line_items -%}
+      {%- for line_item in order.line_items -%}
+        <div class="customer-order__table__body">
           {%- if line_item.url != blank -%}
             <span>
-              <a href="{{ line_item.url }}">{{ line_item.product.title }}</a>
-              <a>{{ line_item.variant.title }}</a>
+              <span class="customer-order__table__product">
+                <div class="customer-order__table__product__picture media">
+                  <img
+                    srcset="
+                      {%- if line_item.product.featured_image.src.width >= 165 -%}{{ line_item.product.featured_image.src | image_url: width: 165 }} 165w,{%- endif -%}
+                      {%- if line_item.product.featured_image.src.width >= 360 -%}{{ line_item.product.featured_image.src | image_url: width: 360 }} 360w,{%- endif -%}
+                      {%- if line_item.product.featured_image.src.width >= 533 -%}{{ line_item.product.featured_image.src | image_url: width: 533 }} 533w,{%- endif -%}
+                      {%- if line_item.product.featured_image.src.width >= 720 -%}{{ line_item.product.featured_image.src | image_url: width: 720 }} 720w,{%- endif -%}
+                      {%- if line_item.product.featured_image.src.width >= 1000 -%}{{ line_item.product.featured_image.src | image_url: width: 1000 }} 1000w,{%- endif -%}
+                      {%- if line_item.product.featured_image.src.width >= 1500 -%}{{ line_item.product.featured_image.src | image_url: width: 1500 }} 1500w,{%- endif -%}
+                      {{ line_item.product.featured_image.src | image_url }} {{ line_item.product.featured_image.src.width }}w
+                    "
+                    src="{{ line_item.product.featured_image.src | image_url: width: 533 }}"
+                    sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: 2 }}px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)"
+                    alt="{{ line_item.product.featured_image.src.alt | escape }}"
+                    class="fit"
+                    {% unless lazy_load == false %}
+                      loading="lazy"
+                    {% endunless %}
+                    width="{{ line_item.product.featured_image.width }}"
+                    height="{{ line_item.product.featured_image.height }}"
+                  >
+                </div>
+                <div class="customer-order__table__product__details">
+                  <a class="customer-order__table__product__title" href="{{ line_item.url }}">
+                    {{- line_item.product.title -}}
+                  </a>
+                  <div class="customer-order__table__product__variant secondary-text ">
+                    {{ line_item.variant.title }}
+                  </div>
+                  <div class="customer-order__table__product__variant secondary-text ">
+                    Quantity: {{ line_item.quantity }}
+                  </div>
+                </div>
+              </span>
             </span>
 
             >
@@ -63,98 +89,53 @@
                 {{ line_item.selling_plan_allocation.selling_plan.name }}
               </span>
             {%- endunless -%}
-            {%- if property_size != 0 -%}
-              {%- for property in line_item.properties -%}
-                {% assign property_first_char = property.first | slice: 0 %}
-                {%- if property.last != blank and property_first_char != '_' -%}
-                  <span>
-                    {{ property.first }}:&nbsp;
-                    {%- if property.last contains '/uploads/' -%}
-                      <a href="{{ property.last }}">{{ property.last | split: '/' | last }}</a>
-                    {%- else -%}
-                      {{ property.last }}
-                    {%- endif -%}
-                  </span>
-                {%- endif -%}
-              {%- endfor -%}
-            {%- endif -%}
           {%- endunless -%}
 
-          {%- if line_item.line_level_discount_allocations != blank -%}
-            <ul>
-              {%- for discount_allocation in line_item.line_level_discount_allocations -%}
-                <li>
-                  {{- discount_allocation.discount_application.title }}
-                  {{- discount_allocation.amount | money -}}
-                </li>
-              {%- endfor -%}
-            </ul>
-          {%- endif -%}
-
-          {%- if line_item.fulfillment -%}
-            <div>
-              {%- assign created_at = line_item.fulfillment.created_at | time_tag: format: 'date' -%}
-              <span>{{ 'customer.order.fulfilled_at_html' | t: date: created_at }}</span>
-
-              {%- if line_item.fulfillment.tracking_url -%}
-                <a href="{{ line_item.fulfillment.tracking_url }}"> Track shipment </a>
-              {%- endif -%}
-              <span>
-                {{ line_item.fulfillment.tracking_company }}
-                {%- if line_item.fulfillment.tracking_number -%}
-                  #{{ line_item.fulfillment.tracking_number }}
-                {%- endif -%}
-              </span>
-            </div>
-          {%- endif -%}
-
-          <span> {{ line_item.quantity }}</span>
-
           <span>{{ line_item.original_line_price | money }}</span>
+        </div>
+      {%- endfor -%}
+    </div>
+
+    <div class="customer-order__table--vertical">
+      <div class="customer-order__table--vertical__head">
+        <span>Subtotal</span>
+
+        {%- for shipping_method in order.shipping_methods -%}
+          <span> Shipping</span>
         {%- endfor -%}
+
+        <span><h6>Total</h6></span>
+      </div>
+
+      <div class="customer-order__table--vertical__body">
+        <span> {{ order.line_items_subtotal_price | money }}</span>
+
+        {%- for shipping_method in order.shipping_methods -%}
+          <span> {{ shipping_method.price | money }}</span>
+        {%- endfor -%}
+
+        <span>
+          <h6>{{ order.total_price | money_with_currency }}</h6>
+        </span>
       </div>
     </div>
 
-    <div class="customer-order__table--vertical__container">
-      <div class="customer-order__table--vertical">
-        <div class="customer-order__table--vertical__head">
-          <span>Subtotal</span>
-
-          {%- for shipping_method in order.shipping_methods -%}
-            <span> Shipping</span>
-          {%- endfor -%}
-
-          <span>Total</span>
+    <div class="customer-order__table--address__container">
+      <div class="customer-order__table--address">
+        <div class="billing-address">
+          <h6>Billing Address</h6>
+          <div>
+            <span>Payment Status: {{ order.financial_status_label }}</span>
+            <span>{{ order.billing_address | format_address }}</span>
+          </div>
         </div>
-
-        <div class="customer-order__table--vertical__body">
-          <span> {{ order.line_items_subtotal_price | money }}</span>
-
-          {%- for shipping_method in order.shipping_methods -%}
-            <span> {{ shipping_method.price | money }}</span>
-          {%- endfor -%}
-
-          <span> {{ order.total_price | money_with_currency }}</span>
+        <div class="shipping-address">
+          <h6>Shipping Address</h6>
+          <div>
+            <span>Fulfillment status: {{ order.fulfillment_status_label }}</span>
+            <span> {{ order.shipping_address | format_address }}</span>
+          </div>
         </div>
-      </div>
-    </div>
-
-    <div class="customer-order__table--address">
-      <h5 class="customer-order__table__title">Addresses</h5>
-      <div class="customer-order__table__head">
-        <span> Billing Address</span>
-        <span> Shipping Address</span>
-      </div>
-      <div class="customer-order__table__body">
-        <span>
-          <span>Payment Status: {{ order.financial_status_label }}</span>
-          <span>{{ order.billing_address | format_address }}</span>
-        </span>
-
-        <span>
-          <span>Fulfillment status: {{ order.fulfillment_status_label }}</span>
-          <span> {{ order.shipping_address | format_address }}</span>
-        </span>
       </div>
     </div>
     <a href="{{ routes.account_url }}" class="button--link">Return to Account page</a>

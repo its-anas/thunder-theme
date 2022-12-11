@@ -17,7 +17,7 @@
 <div class="customer {{ section.id }}">
   <div class="customer__container">
     <div class="page-tabs">
-      <a href="{{ routes.account_url }}" class="page-tab selected">Orders</a>
+      <a href="{{ routes.account_url }}" class="page-tab selected"> Orders</a>
       <a href="{{ routes.account_addresses_url }}" class="page-tab">Addresses</a>
       <a href="{{ routes.account_logout_url }}" class="page-tab">Logout</a>
     </div>
@@ -42,6 +42,7 @@
                 <td>
                   <a
                     href="{{ order.customer_url }}"
+                    class="button--link underline"
                   >
                     {{ order.name }}
                   </a>
