@@ -21,24 +21,15 @@
       <a href="{{ routes.account_addresses_url }}" class="page-tab selected">Addresses</a>
       <a href="{{ routes.account_logout_url }}" class="page-tab">Logout</a>
     </div>
-    {%- paginate customer.addresses by 4 -%}
+    <!-- ANCHOR: Add new address title -->
+    <h1>Addresses</h1>
+
+    <!-- ANCHOR: Add new address button -->
+
+    {%- paginate customer.addresses by 8 -%}
       <div class="customer-addresses__addresses-list">
-        <!-- ANCHOR: Add new address title -->
-        {% comment %} <h1>Addresses</h1> {% endcomment %}
-
-        <!-- ANCHOR: Add new address button -->
-        {% comment %}
-           <div class="buttons">
-            <button
-              class="button button--primary border"
-              type="button"
-            >
-              Add a new address
-            </button>
-          </div>
-        {% endcomment %}
-
         <!-- ANCHOR: Add new address form -->
+
         {% comment %}
            <div>
             <span>Please fill in the fields below</span>
@@ -275,6 +266,15 @@
         {% render 'snippet-pagination', paginate: paginate %}
       </div>
     {%- endpaginate -%}
+
+    <div class="buttons">
+      <button
+        class="button button--primary border"
+        type="button"
+      >
+        Add a new address
+      </button>
+    </div>
   </div>
 </div>
 {% schema %}
