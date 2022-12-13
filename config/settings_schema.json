@@ -1,11 +1,11 @@
 [
      {
           "name": "theme_info",
-          "theme_name": "Skeleton",
+          "theme_name": "Thunder",
           "theme_author": "Theme_author",
           "theme_version": "1.0.0",
-          "theme_documentation_url": "https://shopify.com",
-          "theme_support_url": "https://shopify.com"
+          "theme_documentation_url": "https:\/\/shopify.com",
+          "theme_support_url": "https:\/\/shopify.com"
      },
      {
           "name": "Typography",
@@ -164,7 +164,7 @@
                {
                     "type": "color",
                     "id": "button_text_border_hover_color",
-                    "label": "Text/border on hover",
+                    "label": "Text\/border on hover",
                     "default": "#FFFFFF"
                },
                {

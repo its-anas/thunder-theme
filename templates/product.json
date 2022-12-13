@@ -93,7 +93,7 @@
         "trust_bar"
       ]
     },
-    "product-page-tabs": {
+    "main-product-tabs": {
       "type": "main-product-tabs",
       "blocks": {
         "product_description_tab": {

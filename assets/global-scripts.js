@@ -2908,5 +2908,3 @@ class FeaturedProductSlider extends FeaturedProduct {
 }
 
 customElements.define("featured-product-slider", FeaturedProductSlider);
-
-// ANCHOR: Customer address
