@@ -1599,7 +1599,6 @@ cart-component.hidden {
 
 @media screen and (min-width: 1024px) {
 	#filterForm {
-		/* UNFINISHED: Looks bad on different screen in mac */
 		min-width: 312px;
 	}
 }

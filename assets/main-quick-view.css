@@ -40,7 +40,7 @@ quick-view-component .quick-view {
 quick-view-component .quick-view.active {
   cursor: all;
   opacity: 1;
-  transform: translateX(0);
+  transform: translateX(0); 
   transition: all 1s cubic-bezier(0.75, 0, 0.175, 1);
 }
 

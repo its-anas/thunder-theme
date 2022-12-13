@@ -1,4 +1,5 @@
 {{ 'customer.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'customer.js' | asset_url }}" defer></script>
 
 {%- style -%}
   .customer.{{ section.id }} {
@@ -17,264 +18,317 @@
 <div class="customer">
   <div class="customer__container" style="gap: 6rem;">
     <div class="page-tabs">
-      <a href="{{ routes.account_url }}" class="page-tab"> Orders</a>
+      <a href="{{ routes.account_url }}" class="page-tab">Orders</a>
       <a href="{{ routes.account_addresses_url }}" class="page-tab selected">Addresses</a>
       <a href="{{ routes.account_logout_url }}" class="page-tab">Logout</a>
     </div>
-    <!-- ANCHOR: Add new address title -->
+
     <h1>Addresses</h1>
 
-    <!-- ANCHOR: Add new address button -->
+    <customer-popup>
+      <div class="buttons">
+        <button
+          id="customer__popup__add-address__button"
+          class="button button--primary border"
+          type="button"
+        >
+          Add a new address
+        </button>
+      </div>
 
-    {%- paginate customer.addresses by 8 -%}
-      <div class="customer-addresses__addresses-list">
-        <!-- ANCHOR: Add new address form -->
-
-        {% comment %}
-           <div>
-            <span>Please fill in the fields below</span>
-            {%- form 'customer_address', customer.new_address -%}
-              <div>
-                <input
-                  type="text"
-                  value="{{ form.first_name }}"
-                  autocomplete="given-name"
-                  placeholder="First name"
-                >
-              </div>
-              <div>
-                <input
-                  type="text"
-                  value="{{ form.last_name }}"
-                  autocomplete="family-name"
-                  placeholder="Last name"
-                >
-              </div>
-              <div>
-                <input
-                  type="text"
-                  value="{{ form.company }}"
-                  autocomplete="organization"
-                  placeholder="Company"
-                >
-              </div>
-              <div>
-                <input
-                  type="text"
-                  value="{{ form.address1 }}"
-                  autocomplete="address-line1"
-                  placeholder="Address 1"
-                >
-              </div>
-              <div>
-                <input
-                  type="text"
-                  value="{{ form.address2 }}"
-                  autocomplete="address-line2"
-                  placeholder="Address 2"
-                >
-              </div>
-              <div>
-                <input
-                  type="text"
-                  value="{{ form.city }}"
-                  autocomplete="address-level2"
-                  placeholder="City"
-                >
-              </div>
-              <div>
-                <div>
-                  <select
-                    data-default="{{ form.country }}"
-                    autocomplete="country"
-                  >
-                    {{ all_country_option_tags }}
-                  </select>
-                </div>
-              </div>
-              <div>
-                <div>
-                  <select
-                    data-default="{{ form.province }}"
-                    autocomplete="address-level1"
-                  ></select>
-                </div>
-              </div>
-              <div>
-                <input
-                  type="text"
-                  value="{{ form.zip }}"
-                  autocapitalize="characters"
-                  autocomplete="postal-code"
-                  placeholder="Postal/ZIP code"
-                >
-              </div>
-              <div>
-                <input
-                  type="tel"
-                  value="{{ form.phone }}"
-                  autocomplete="tel"
-                  placeholder="Phone"
-                >
-              </div>
-              <div>
-                {{ form.set_as_default_checkbox }}
-                <label for="address_default_address_new">Set as default address</label>
-              </div>
-              <div>
-                <button class="button--link">Add address</button>
-                <button class="button--link" type="reset">Cancel</button>
-              </div>
-            {%- endform -%}
+      <div class="customer__popup hidden" id="customer__popup__add-address__form">
+        <div class="customer__popup__container">
+          <div class="customer__popup-icon" id="customer__popup__add-address__close-icon">
+            {% render 'snippet-icons', icon: 'close' %}
           </div>
-        {% endcomment %}
+          {%- form 'customer_address', customer.new_address, class: 'customer__form' -%}
+            <span>Please fill in the fields below:</span>
+            <input
+              type="text"
+              name="address[first_name]"
+              class="customer__form__input"
+              value="{{ form.first_name }}"
+              autocomplete="given-name"
+              placeholder="First name"
+              required
+            >
 
+            <input
+              type="text"
+              name="address[last_name]"
+              class="customer__form__input"
+              value="{{ form.last_name }}"
+              autocomplete="family-name"
+              placeholder="Last name"
+              required
+            >
+
+            <input
+              type="text"
+              name="address[zip]"
+              class="customer__form__input"
+              value="{{ form.company }}"
+              autocomplete="organization"
+              placeholder="Company"
+            >
+
+            <input
+              type="text"
+              name="address[address1]"
+              class="customer__form__input"
+              value="{{ form.address1 }}"
+              autocomplete="address-line1"
+              placeholder="Address 1"
+              required
+            >
+
+            <input
+              type="text"
+              name="address[address2]"
+              class="customer__form__input"
+              value="{{ form.address2 }}"
+              autocomplete="address-line2"
+              placeholder="Address 2"
+            >
+
+            <input
+              type="text"
+              name="address[city]"
+              class="customer__form__input"
+              value="{{ form.city }}"
+              autocomplete="address-level2"
+              placeholder="City"
+              required
+            >
+
+            <select
+              type="select"
+              name="address[country]"
+              class="customer__form__input"
+              data-address-country-select
+              data-default="{{ form.country }}"
+              autocomplete="country"
+              required
+            >
+              {{ all_country_option_tags }}
+            </select>
+
+            <select
+              type="select"
+              name="address[province]"
+              class="customer__form__input"
+              data-address-province-select
+              data-default="{{ form.province }}"
+              autocomplete="address-level1"
+              Pl
+            ></select>
+
+            <input
+              type="text"
+              name="address[zip]"
+              class="customer__form__input"
+              value="{{ form.zip }}"
+              autocapitalize="characters"
+              autocomplete="postal-code"
+              placeholder="Postal/ZIP code"
+              required
+            >
+
+            <input
+              type="tel"
+              name="address[phone]"
+              class="customer__form__input"
+              value="{{ form.phone }}"
+              autocomplete="tel"
+              placeholder="Phone"
+            >
+
+            <div>
+              {{ form.set_as_default_checkbox }}
+              <label for="address_default_address_new">Set as default address</label>
+            </div>
+            <div class="buttons">
+              <button class="button button--primary border" id="customer__popup__add-address__add-button" type="submit">
+                Add address
+              </button>
+              <button
+                class="button button--secondary border"
+                id="customer__popup__add-address__cancel-button"
+                type="reset"
+              >
+                Cancel
+              </button>
+            </div>
+          {%- endform -%}
+        </div>
+      </div>
+    </customer-popup>
+    {%- paginate customer.addresses by 4 -%}
+      <div class="customer-addresses__addresses-list">
         <!-- ANCHOR: Address -->
         {%- for address in customer.addresses -%}
           <div class="customer-addresses__address">
             <div class="customer-addresses__address__container">
               {%- if address == customer.default_address -%}
-                <h6>Default</h6>
+                <h6>Default address</h6>
               {% else %}
                 <h6>Address {{ forloop.index | plus: paginate.current_offset }}</h6>
               {%- endif -%}
 
               <span>{{ address | format_address }}</span>
-              <div class="customer-addresses__buttons">
-                <button
-                  type="button"
-                  class="button--link"
-                >
-                  Edit
-                </button>
-                <button
-                  type="button"
-                  class="button--link"
-                  data-confirm-message="Are you sure you wish to delete this address?"
-                  type="submit"
-                >
-                  Delete
-                </button>
-              </div>
-            </div>
-
-            <!-- ANCHOR: Update address form -->
-            {% comment %}
-               {%- form 'customer_address', address, class: 'customer__form' -%}
-                <div class="customer__form__content">
-                  <input
-                    class="customer__form__input"
-                    type="text"
-                    name="address[first_name]"
-                    value="{{ form.first_name }}"
-                    autocomplete="given-name"
-                    placeholder="First name"
+              <customer-popup>
+                <div class="customer-addresses__buttons">
+                  <button
+                    type="button"
+                    class="button--link"
+                    id="customer__popup__add-address__button"
                   >
+                    Edit
+                  </button>
 
-                  <input
-                    class="customer__form__input"
-                    type="text"
-                    name="address[last_name]"
-                    value="{{ form.last_name }}"
-                    autocomplete="family-name"
-                    placeholder="Last name"
+                  <form
+                    method="post"
+                    action="/account/addresses/{{ address.id }}"
+                    onsubmit="return confirm('Are you sure you wish to delete this address?');"
                   >
-
-                  <input
-                    class="customer__form__input"
-                    type="text"
-                    name="address[company]"
-                    value="{{ form.company }}"
-                    autocomplete="organization"
-                    placeholder="Company"
-                  >
-
-                  <input
-                    class="customer__form__input"
-                    type="text"
-                    name="address[address1]"
-                    value="{{ form.address1 }}"
-                    autocomplete="address-line1"
-                    placeholder="Address 1"
-                  >
-
-                  <input
-                    class="customer__form__input"
-                    type="text"
-                    name="address[address2]"
-                    value="{{ form.address2 }}"
-                    autocomplete="address-line2"
-                    placeholder="Address 2"
-                  >
-
-                  <input
-                    class="customer__form__input"
-                    type="text"
-                    name="address[city]"
-                    value="{{ form.city }}"
-                    autocomplete="address-level2"
-                    placeholder="City"
-                  >
-
-                  <select
-                    class="customer__form__input"
-                    name="address[country]"
-                    data-address-country-select
-                    data-default="{{ form.country }}"
-                    autocomplete="country"
-                  >
-                    {{ all_country_option_tags }}
-                  </select>
-
-                  <select
-                    class="customer__form__input"
-                    name="address[province]"
-                    data-default="{{ form.province }}"
-                    autocomplete="address-level1"
-                  ></select>
-
-                  <input
-                    class="customer__form__input"
-                    type="text"
-                    name="address[zip]"
-                    value="{{ form.zip }}"
-                    autocapitalize="characters"
-                    autocomplete="postal-code"
-                    placeholder="Postal/ZIP code"
-                  >
-
-                  <input
-                    class="customer__form__input"
-                    type="tel"
-                    name="address[phone]"
-                    value="{{ form.phone }}"
-                    autocomplete="tel"
-                    placeholder="Phone"
-                  >
+                    <input type="hidden" name="_method" value="delete">
+                    <button
+                      type="submit"
+                      class="button--link"
+                    >
+                      Delete
+                    </button>
+                  </form>
                 </div>
 
-                {{ form.set_as_default_checkbox }}
-                <span>Set as default address</span>
+                <div class="customer__popup hidden" id="customer__popup__add-address__form">
+                  <div class="customer__popup__container">
+                    <div class="customer__popup-icon" id="customer__popup__add-address__close-icon">
+                      {% render 'snippet-icons', icon: 'close' %}
+                    </div>
+                    {%- form 'customer_address', address, class: 'customer__form' -%}
+                      <div class="customer__form__content">
+                        <input
+                          class="customer__form__input"
+                          type="text"
+                          name="address[first_name]"
+                          value="{{ form.first_name }}"
+                          autocomplete="given-name"
+                          placeholder="First name"
+                        >
 
-                <button class="button--link">Update address</button>
-                <button class="button--link" type="reset">Cancel</button>
-              {%- endform -%}
-            {% endcomment %}
+                        <input
+                          class="customer__form__input"
+                          type="text"
+                          name="address[last_name]"
+                          value="{{ form.last_name }}"
+                          autocomplete="family-name"
+                          placeholder="Last name"
+                        >
+
+                        <input
+                          class="customer__form__input"
+                          type="text"
+                          name="address[company]"
+                          value="{{ form.company }}"
+                          autocomplete="organization"
+                          placeholder="Company"
+                        >
+
+                        <input
+                          class="customer__form__input"
+                          type="text"
+                          name="address[address1]"
+                          value="{{ form.address1 }}"
+                          autocomplete="address-line1"
+                          placeholder="Address 1"
+                        >
+
+                        <input
+                          class="customer__form__input"
+                          type="text"
+                          name="address[address2]"
+                          value="{{ form.address2 }}"
+                          autocomplete="address-line2"
+                          placeholder="Address 2"
+                        >
+
+                        <input
+                          class="customer__form__input"
+                          type="text"
+                          name="address[city]"
+                          value="{{ form.city }}"
+                          autocomplete="address-level2"
+                          placeholder="City"
+                        >
+
+                        <select
+                          class="customer__form__input"
+                          name="address[country]"
+                          data-address-country-select
+                          data-default="{{ form.country }}"
+                          autocomplete="country"
+                        >
+                          {{ all_country_option_tags }}
+                        </select>
+
+                        <select
+                          class="customer__form__input"
+                          name="address[province]"
+                          data-address-province-select
+                          data-default="{{ form.province }}"
+                          autocomplete="address-level1"
+                        ></select>
+
+                        <input
+                          class="customer__form__input"
+                          type="text"
+                          name="address[zip]"
+                          value="{{ form.zip }}"
+                          autocapitalize="characters"
+                          autocomplete="postal-code"
+                          placeholder="Postal/ZIP code"
+                        >
+
+                        <input
+                          class="customer__form__input"
+                          type="tel"
+                          name="address[phone]"
+                          value="{{ form.phone }}"
+                          autocomplete="tel"
+                          placeholder="Phone"
+                        >
+                      </div>
+                      <div class="">
+                        {{ form.set_as_default_checkbox }}
+                        <span>Set as default address</span>
+                      </div>
+
+                      <div class="buttons">
+                        <button
+                          class="button button--primary border"
+                        >
+                          Update address
+                        </button>
+                        <button
+                          class="button button--secondary border"
+                          type="reset"
+                          id="customer__popup__add-address__cancel-button"
+                        >
+                          Cancel
+                        </button>
+                      </div>
+                    {%- endform -%}
+                  </div>
+                </div>
+              </customer-popup>
+            </div>
           </div>
         {%- endfor -%}
 
         {% render 'snippet-pagination', paginate: paginate %}
       </div>
     {%- endpaginate -%}
-
-    <div class="buttons">
-      <button
-        class="button button--primary border"
-        type="button"
-      >
-        Add a new address
-      </button>
-    </div>
   </div>
 </div>
 {% schema %}
