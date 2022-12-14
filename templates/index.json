@@ -172,38 +172,6 @@
           },
           "countdown-timer": {
                "type": "section-countdown-timer",
-               "blocks": {
-                    "heading": {
-                         "type": "heading",
-                         "settings": {
-                              "heading": "Heading",
-                              "heading_size": "h4"
-                         }
-                    },
-                    "text": {
-                         "type": "text",
-                         "settings": {
-                              "text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<\/p>"
-                         }
-                    },
-                    "countdown": {
-                         "type": "countdown",
-                         "settings": {}
-                    },
-                    "button": {
-                         "type": "button",
-                         "settings": {
-                              "link_text": "Learn more",
-                              "link_url": ""
-                         }
-                    }
-               },
-               "block_order": [
-                    "heading",
-                    "text",
-                    "countdown",
-                    "button"
-               ],
                "settings": {
                     "digits_size": "big",
                     "digits_container_border": 10,
@@ -227,7 +195,12 @@
                     "date_month": 1,
                     "date_day": 1,
                     "date_hour": 0,
-                    "date_min": 0
+                    "date_min": 0,
+                    "heading": "Heading",
+                    "heading_size": "h4",
+                    "text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<\/p>",
+                    "link_text": "Learn more",
+                    "link_url": ""
                }
           },
           "featured-collection": {

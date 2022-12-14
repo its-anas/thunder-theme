@@ -204,7 +204,7 @@
   },
   "order": [
     "main",
-    "product-page-tabs",
+    "main-product-tabs",
     "compare",
     "promotional-banner",
     "faq",
