@@ -142,9 +142,11 @@
       if (button.id == 'recover') {
         document.querySelector('#recover_page').classList.add('active');
         document.querySelector('#login_page').classList.remove('active');
+        window.location.hash = '#recover';
       } else if (button.id == 'login') {
         document.querySelector('#recover_page').classList.remove('active');
         document.querySelector('#login_page').classList.add('active');
+        window.location.hash = '';
       }
     });
   });
