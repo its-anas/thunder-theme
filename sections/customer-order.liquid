@@ -38,24 +38,7 @@
             <span>
               <span class="customer-order__table__product">
                 <div class="customer-order__table__product__picture media">
-                  <img
-                    srcset="
-                      {%- if line_item.product.featured_image.src.width >= 165 -%}{{ line_item.product.featured_image.src | image_url: width: 165 }} 165w,{%- endif -%}
-                      {%- if line_item.product.featured_image.src.width >= 360 -%}{{ line_item.product.featured_image.src | image_url: width: 360 }} 360w,{%- endif -%}
-                      {%- if line_item.product.featured_image.src.width >= 533 -%}{{ line_item.product.featured_image.src | image_url: width: 533 }} 533w,{%- endif -%}
-                      {%- if line_item.product.featured_image.src.width >= 720 -%}{{ line_item.product.featured_image.src | image_url: width: 720 }} 720w,{%- endif -%}
-                      {%- if line_item.product.featured_image.src.width >= 1000 -%}{{ line_item.product.featured_image.src | image_url: width: 1000 }} 1000w,{%- endif -%}
-                      {%- if line_item.product.featured_image.src.width >= 1500 -%}{{ line_item.product.featured_image.src | image_url: width: 1500 }} 1500w,{%- endif -%}
-                      {{ line_item.product.featured_image.src | image_url }} {{ line_item.product.featured_image.src.width }}w
-                    "
-                    src="{{ line_item.product.featured_image.src | image_url: width: 533 }}"
-                    sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: 2 }}px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)"
-                    alt="{{ line_item.product.featured_image.src.alt | escape }}"
-                    class="fit"
-                    loading="lazy"
-                    width="{{ line_item.product.featured_image.width }}"
-                    height="{{ line_item.product.featured_image.height }}"
-                  >
+                  {% render 'snippet-image'; image: line_item.product.featured_image, style: 'fit' %}
                 </div>
                 <div class="customer-order__table__product__details">
                   <a class="customer-order__table__product__title" href="{{ line_item.url }}">

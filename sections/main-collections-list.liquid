@@ -38,14 +38,7 @@
               <div class="collections-list__item__picture corner-border">
                 <a href="{{ collection.url }}" class="media corner-border-target">
                   {% if collection.featured_image != blank %}
-                    <img
-                      srcset="{{ collection.featured_image | image_url }}"
-                      loading="lazy"
-                      alt="{{ collection.featured_image.alt | escape }}"
-                      width="{{ collection.featured_image.width }}"
-                      height="{{ collection.featured_image.height }}"
-                      class="fit"
-                    >
+                      {% render 'snippet-image'; image: collection.featured_image, style: 'fit' %}
                   {% else %}
                     {{ 'collection-1' | placeholder_svg_tag: 'placeholder' }}
                   {% endif %}

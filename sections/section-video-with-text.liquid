@@ -54,14 +54,7 @@
         {% if section.settings.thumbnail == blank %}
           {{ 'collection-2' | placeholder_svg_tag: 'placeholder' }}
         {% else %}
-          <img
-            srcset="{{ section.settings.thumbnail | image_url }}"
-            loading="lazy"
-            alt="{{ section.settings.thumbnail.alt | escape }}"
-            width="{{ section.settings.thumbnail.width }}"
-            height="{{ section.settings.thumbnail.height }}"
-            class="fit"
-          >
+          {% render 'snippet-image'; image: section.settings.thumbnail, style: 'fit' %}
         {% endif %}
       </div>
     </div>

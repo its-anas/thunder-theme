@@ -23,14 +23,7 @@
                     {{ shop.name }}
                   </p>
                 {% else %}
-                  <img
-                    srcset="{{ block.settings.logo_image | image_url }}"
-                    loading="lazy"
-                    alt="{{ block.settings.logo_image | escape }}"
-                    width="{{ block.settings.logo_image.width }}"
-                    height="{{ block.settings.logo_image.height }}"
-                    class="full"
-                  >
+                  {% render 'snippet-image'; image: block.settings.logo_image, style: 'full' %}
                 {% endif %}
               {% endif %}
             </div>

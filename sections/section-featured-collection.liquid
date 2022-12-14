@@ -82,24 +82,7 @@
 
                 <a href="{{ product.url }}" class="media corner-border-target">
                   {% if product.featured_image != blank %}
-                    <img
-                      srcset="
-                        {%- if product.featured_image.width >= 165 -%}{{ product.featured_image | image_url: width: 165 }} 165w,{%- endif -%}
-                        {%- if product.featured_image.width >= 360 -%}{{ product.featured_image | image_url: width: 360 }} 360w,{%- endif -%}
-                        {%- if product.featured_image.width >= 533 -%}{{ product.featured_image | image_url: width: 533 }} 533w,{%- endif -%}
-                        {%- if product.featured_image.width >= 720 -%}{{ product.featured_image | image_url: width: 720 }} 720w,{%- endif -%}
-                        {%- if product.featured_image.width >= 940 -%}{{ product.featured_image | image_url: width: 940 }} 940w,{%- endif -%}
-                        {%- if product.featured_image.width >= 1066 -%}{{ product.featured_image | image_url: width: 1066 }} 1066w,{%- endif -%}
-                        {{ product.featured_image | image_url }} {{ product.featured_image.width }}w
-                      "
-                      src="{{ product.featured_image | image_url: width: 300 }}"
-                      sizes="300px"
-                      loading="lazy"
-                      alt="{{ product.featured_image.alt | escape }}"
-                      width="{{ product.featured_image.width }}"
-                      height="{{ product.featured_image.height }}"
-                      class="{{ section.settings.image_style }}"
-                    >
+                    {% render 'snippet-image'; image: product.featured_image, style: section.settings.image_style %}
                   {% else %}
                     {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
                   {% endif %}
@@ -390,7 +373,6 @@
       "default": "full-width"
     }
   ],
-
   "presets": [
     {
       "name": "Featured collection"

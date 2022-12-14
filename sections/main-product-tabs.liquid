@@ -44,7 +44,7 @@
         {%- assign share_url = shop.url | append: product.url -%}
         {%- assign twitter_text = product.title | url_param_escape | strip -%}
         {%- assign pinterest_description = product.description | strip | truncatewords: 15 | url_param_escape -%}
-        {%- assign pinterest_image = product.featured_image | img_url: '800x' | prepend: 'https:' -%}
+        {%- assign pinterest_image = product.featured_image | image_url: '800x' | prepend: 'https:' -%}
 
         <p>Share</p>
         <a
@@ -96,8 +96,7 @@
 {% schema %}
 {
   "name": "Product tabs",
-  "class": "main-product-tabs",
-  "settings": [],
+  "class": "main-product-tabs"
   "blocks": [
     { "type": "product_description_tab", "limit": 1, "name": "Product description", "limit": 1, "settings": [] },
     {
@@ -119,7 +118,6 @@
       ]
     },
     { "type": "share_buttons", "limit": 1, "name": "Share buttons", "limit": 1, "settings": [] }
-  ],
-  "presets": []
+  ]
 }
 {% endschema %}

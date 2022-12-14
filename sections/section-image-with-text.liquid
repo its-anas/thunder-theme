@@ -33,14 +33,7 @@
         {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder' }}
       {% elsif section.settings.image != blank %}
         <div class="{{ section.id }} media">
-          <img
-            srcset="{{ section.settings.image | image_url }}"
-            loading="lazy"
-            alt="{{ section.settings.image.alt | escape }}"
-            width="{{ section.settings.image.width }}"
-            height="{{ section.settings.image.height }}"
-            class="{{ section.settings.image_position }}"
-          >
+          {% render 'snippet-image'; image: section.settings.image, style: '{{ section.settings.image_position }}' %}
         </div>
       {% endif %}
     </div>

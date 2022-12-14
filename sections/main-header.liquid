@@ -90,14 +90,7 @@
               {{ shop.name }}
             </p>
           {% else %}
-            <img
-              srcset="{{ section.settings.logo_image | image_url }}"
-              loading="lazy"
-              alt="{{ section.settings.logo_image | escape }}"
-              width="{{ section.settings.logo_image.width }}"
-              height="{{ section.settings.logo_image.height }}"
-              class="full"
-            >
+            {% render 'snippet-image'; image: section.settings.logo_image, style: 'full' %}
           {% endif %}
         {% endif %}
       </a>
@@ -233,14 +226,7 @@
                                       {% if block.settings.tab_icon_image == blank %}
                                         {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
                                       {% else %}
-                                        <img
-                                          srcset="{{ block.settings.tab_icon_image | image_url }}"
-                                          loading="lazy"
-                                          alt="{{ block.settings.tab_icon_image | escape }}"
-                                          width="{{ block.settings.tab_icon_image.width }}"
-                                          height="{{ block.settings.tab_icon_image.height }}"
-                                          class="full"
-                                        >
+                                        {% render 'snippet-image'; image: block.settings.tab_icon_image, style: 'full' %}
                                       {% endif %}
                                     {% endif %}
                                   </div>
@@ -352,14 +338,7 @@
                                           {% if block.settings.tab_content_image == blank %}
                                             {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
                                           {% else %}
-                                            <img
-                                              srcset="{{ block.settings.tab_content_image | image_url }}"
-                                              loading="lazy"
-                                              alt="{{ block.settings.tab_content_image | escape }}"
-                                              width="{{ block.settings.tab_content_image.width }}"
-                                              height="{{ block.settings.tab_content_image.height }}"
-                                              class="full"
-                                            >
+                                            {% render 'snippet-image'; image: block.settings.tab_content_image, style: 'full' %}
                                           {% endif %}
                                         {% endif %}
                                       </div>
@@ -525,14 +504,7 @@
                                   {% if block.settings.tab_icon_image == blank %}
                                     {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
                                   {% else %}
-                                    <img
-                                      srcset="{{ block.settings.tab_icon_image | image_url }}"
-                                      loading="lazy"
-                                      alt="{{ block.settings.tab_icon_image | escape }}"
-                                      width="{{ block.settings.tab_icon_image.width }}"
-                                      height="{{ block.settings.tab_icon_image.height }}"
-                                      class="full"
-                                    >
+                                    {% render 'snippet-image'; image: block.settings.tab_icon_image, style: 'full' %}
                                   {% endif %}
                                 {% endif %}
                               </div>
@@ -686,14 +658,7 @@
                                       {% if block.settings.tab_content_image == blank %}
                                         {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
                                       {% else %}
-                                        <img
-                                          srcset="{{ block.settings.tab_content_image | image_url }}"
-                                          loading="lazy"
-                                          alt="{{ block.settings.tab_content_image | escape }}"
-                                          width="{{ block.settings.tab_content_image.width }}"
-                                          height="{{ block.settings.tab_content_image.height }}"
-                                          class="full"
-                                        >
+                                        {% render 'snippet-image'; image: block.settings.tab_content_image, style: 'full' %}
                                       {% endif %}
                                     {% endif %}
                                   </div>

@@ -48,14 +48,7 @@
               {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder' }}
             {%- elsif block.settings.image != blank -%}
               <div class="media">
-                <img
-                  srcset="{{ block.settings.image | image_url }}"
-                  loading="lazy"
-                  alt="{{ block.settings.image.alt | escape }}"
-                  width="{{ block.settings.image.width }}"
-                  height="{{ block.settings.image.height }}"
-                  class="fit"
-                >
+                {% render 'snippet-image'; image: block.settings.image, style: 'fit' %}
               </div>
             {%- endif -%}
           </div>

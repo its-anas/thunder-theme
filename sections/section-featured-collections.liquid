@@ -73,14 +73,7 @@
                     {% assign image = block.settings.image %}
                   {% endif %}
                   {% if image != blank %}
-                    <img
-                      srcset="{{ image | image_url }}"
-                      loading="lazy"
-                      alt="{{ image.alt | escape }}"
-                      width="{{ image.width }}"
-                      height="{{ image.height }}"
-                      class="fit"
-                    >
+                    {% render 'snippet-image'; image: image, style: 'fit' %}
                   {% else %}
                     {{ 'collection-1' | placeholder_svg_tag: 'placeholder' }}
                   {% endif %}

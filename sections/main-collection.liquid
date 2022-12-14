@@ -107,14 +107,7 @@
                           </div>
                           {% if item.featured_media != blank %}
                             <a href="{{ item.url }}" class="media corner-border-target">
-                              <img
-                                srcset="{{ item.featured_media | image_url }}"
-                                loading="lazy"
-                                alt="{{ item.featured_media.alt | escape }}"
-                                width="{{ item.featured_media.width }}"
-                                height="{{ item.featured_media.height }}"
-                                class="full"
-                              >
+                              {% render 'snippet-image'; image: item.featured_media, style: 'full' %}
                             </a>
                           {% else %}
                             <a href="{{ item.url }}" class="media corner-border-target">

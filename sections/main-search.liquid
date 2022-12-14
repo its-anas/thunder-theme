@@ -3,12 +3,12 @@
 
 {% style %}
   .search__item {
-    width: calc(100% / {{section.settings.products_per_row_desktop}});
+    width: calc(100% / {{ section.settings.products_per_row_desktop }});
   }
 
   @media screen and (max-width: 750px) {
     .search__item {
-      width: calc(100% / {{section.settings.products_per_row_mobile}});
+      width: calc(100% / {{ section.settings.products_per_row_mobile }});
     }
   }
 {% endstyle %}
@@ -126,14 +126,7 @@
                                 </div>
                                 {% if item.featured_media != blank %}
                                   <a href="{{ item.url }}" class="media corner-border-target">
-                                    <img
-                                      srcset="{{ item.featured_media | image_url }}"
-                                      loading="lazy"
-                                      alt="{{ item.featured_media.alt | escape }}"
-                                      width="{{ item.featured_media.width }}"
-                                      height="{{ item.featured_media.height }}"
-                                      class="full"
-                                    >
+                                    {% render 'snippet-image'; image: item.featured_media, style: 'full' %}
                                   </a>
                                 {% else %}
                                   <a href="{{ item.url }}" class="media corner-border-target">
@@ -185,14 +178,7 @@
                       <div class="search__item__picture article {% if item.featured_image != blank %}corner-border{% endif %}">
                         {% if item.image != blank %}
                           <a href="{{ item.url }}" class="media corner-border-target">
-                            <img
-                              srcset="{{ item.image | image_url }}"
-                              loading="lazy"
-                              alt="{{ item.image.alt | escape }}"
-                              width="{{ item.image.width }}"
-                              height="{{ item.image.height }}"
-                              class="fit"
-                            >
+                            {% render 'snippet-image'; image: item.image, style: 'fit' %}
                           </a>
                         {% else %}
                           <a href="{{ item.url }}" class="media">

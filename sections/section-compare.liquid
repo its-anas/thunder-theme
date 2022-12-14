@@ -51,14 +51,8 @@
                     <div>
                       <div class="compare-image {{ section.settings.image_size }}">
                         <a href="{{ block.settings.product.url }}" class="media">
-                          <img
-                            srcset="{{ block.settings.product.featured_image | image_url }}"
-                            loading="lazy"
-                            alt="{{ block.settings.product.featured_image.alt | escape }}"
-                            width="{{ block.settings.product.featured_image.width }}"
-                            height="{{ block.settings.product.featured_image.height }}"
-                            class="{{ section.settings.image_style }}"
-                        ></a>
+                          {% render 'snippet-image'; image: block.settings.product.featured_image, style: section.settings.image_style %}
+                        </a>
 
                         <div
                           class="quick-add-icon"

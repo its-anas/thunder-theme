@@ -20,14 +20,7 @@
                   <div class="cart-page__product-details">
                     <div class="cart-page__product-picture">
                       <a href="{{ item.url }}" class="cart-drawer__product__image">
-                        <img
-                          srcset="{{ item.image | image_url }}"
-                          loading="lazy"
-                          alt="{{ item.image.alt | escape }}"
-                          width="{{ item.image.width }}"
-                          height="{{ item.image.height }}"
-                          class="full"
-                        >
+                        {% render 'snippet-image'; image: item.image, style: 'full' %}
                       </a>
                     </div>
                     <div class="cart-page__product-info">
@@ -172,7 +165,6 @@
 {% schema %}
 {
   "name": "Cart",
-  "class": "main-cart",
-  "settings": []
+  "class": "main-cart"
 }
 {% endschema %}

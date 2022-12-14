@@ -53,24 +53,19 @@
       {% if section.settings.image == blank %}
         {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder' }}
       {% elsif section.settings.image != blank %}
+        {% if section.settings.mobile_image != blank %}
+          {% style %}
+            @media screen and (max-width: 1024px) {
+              .shop-the-look__image .{{ section.id }}.media img {
+                display: none !important;
+              }
+            }
+          {% endstyle %}
+        {% endif %}
         <div class="{{ section.id }} media">
-          <img
-            srcset="{{ section.settings.image | image_url }}"
-            loading="lazy"
-            alt="{{ section.settings.image.alt | escape }}"
-            width="{{ section.settings.image.width }}"
-            height="{{ section.settings.image.height }}"
-            class="fit {% if section.settings.mobile_image != blank %}desktop-only{% endif %}"
-          >
+          {% render 'snippet-image'; image: section.settings.image, style: 'fit' %}
           {% if section.settings.mobile_image != blank %}
-            <img
-              srcset="{{ section.settings.mobile_image | image_url }}"
-              loading="lazy"
-              alt="{{ section.settings.mobile_image.alt | escape }}"
-              width="{{ section.settings.mobile_image.width }}"
-              height="{{ section.settings.mobile_image.height }}"
-              class="fit mobile-only"
-            >
+            {% render 'snippet-image'; image: section.settings.mobile_image, style: 'fit mobile-only' %}
           {% endif %}
         </div>
       {% endif %}
@@ -117,14 +112,7 @@
                   {%- if block.settings.product == blank -%}
                     {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
                   {%- elsif block.settings.product != blank -%}
-                    <img
-                      srcset="{{ block.settings.product.featured_image | image_url }}"
-                      loading="lazy"
-                      alt="{{ block.settings.product.featured_image.alt | escape }}"
-                      width="{{ block.settings.product.featured_image.width }}"
-                      height="{{ block.settings.product.featured_image.height }}"
-                      class="fit"
-                    >
+                    {% render 'snippet-image'; image: block.settings.product.featured_image, style: 'fit' %}
                   {%- endif -%}
                 </div>
                 <div class="shop-the-look__content">

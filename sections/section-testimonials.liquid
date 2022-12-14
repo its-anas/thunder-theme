@@ -80,14 +80,7 @@
                     {%- if block.settings.reviewer_picture == blank -%}
                       {{ 'product-3' | placeholder_svg_tag: 'placeholder' }}
                     {%- elsif block.settings.reviewer_picture != blank -%}
-                      <img
-                        srcset="{{ block.settings.reviewer_picture | image_url }}"
-                        alt="{{ block.settings.reviewer_picture.alt | escape }}"
-                        width="{{ block.settings.reviewer_picture.width }}"
-                        height="{{ block.settings.reviewer_picture.height }}"
-                        loading="lazy"
-                        class="fit"
-                      >
+                        {% render 'snippet-image'; image: block.settings.reviewer_picture, style: 'fit' %}
                     {% endif %}
                   </div>
                   <div class="testimonials__reviewer-info">
@@ -121,14 +114,7 @@
                     {%- if block.settings.reviewer_picture == blank -%}
                       {{ 'product-3' | placeholder_svg_tag: 'placeholder' }}
                     {%- elsif block.settings.reviewer_picture != blank -%}
-                      <img
-                        srcset="{{ block.settings.reviewer_picture | image_url }}"
-                        alt="{{ block.settings.reviewer_picture.alt | escape }}"
-                        width="{{ block.settings.reviewer_picture.width }}"
-                        height="{{ block.settings.reviewer_picture.height }}"
-                        loading="lazy"
-                        class="fit"
-                      >
+                        {% render 'snippet-image'; image: block.settings.reviewer_picture, style: 'fit' %}
                     {% endif %}
                   </div>
                   <div class="testimonials__reviewer-info">

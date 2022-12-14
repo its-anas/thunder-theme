@@ -30,14 +30,7 @@
           {% if block.settings.logo == blank %}
             {{ 'product-1' | placeholder_svg_tag: 'logo placeholder' }}
           {% elsif block.settings.logo != blank %}
-            <img
-              srcset="{{ block.settings.logo | image_url }}"
-              alt="{{ block.settings.logo.alt | escape }}"
-              width="{{ block.settings.logo.width }}"
-              height="{{ block.settings.logo.height }}"
-              loading="lazy"
-              class="logo"
-            >
+              {% render 'snippet-image'; image: block.settings.logo, style: 'logo' %}
           {% endif %}
         {% endfor %}
       </div>

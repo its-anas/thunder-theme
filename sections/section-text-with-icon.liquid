@@ -49,14 +49,7 @@
               {% if block.settings.image == blank %}
                 {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
               {% else %}
-                <img
-                  srcset="{{ block.settings.image | image_url }}"
-                  loading="lazy"
-                  alt="{{ block.settings.image | escape }}"
-                  width="{{ block.settings.image.width }}"
-                  height="{{ block.settings.image.height }}"
-                  class="full"
-                >
+                {% render 'snippet-image'; image: block.settings.image, style: 'full' %}
               {% endif %}
             {% endif %}
           </div>

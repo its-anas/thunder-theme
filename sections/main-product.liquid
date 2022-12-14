@@ -41,14 +41,7 @@
         {% endif %}
       >
         <div class="item-picture media">
-          <img
-            srcset="{{ image | image_url }}"
-            alt="{{ image.alt | escape }}"
-            width="{{ image.width }}"
-            height="{{ image.height }}"
-            class="full" 
-            loading="lazy"
-          >
+            {% render 'snippet-image'; image: image, style: 'full' %}
         </div>
       </div>
     {% endfor %}
@@ -71,14 +64,7 @@
         {% endif %}
       >
         <div class="thumbnail-picture media">
-          <img
-            srcset="{{ thumbnail | image_url }}"
-            loading="lazy"
-            alt="{{ thumbnail.alt | escape }}"
-            width="{{ thumbnail.width }}"
-            height="{{ thumbnail.height }}"
-            class="full"
-          >
+            {% render 'snippet-image'; image: thumbnail, style: 'full' %}
         </div>
       </div>
     {% endfor %}
@@ -281,15 +267,7 @@
                                     class="product-page__radio__input"
                                   >
                                   {% if variant_image != blank %}
-                                    <img
-                                      src="{{ variant_image | image_url: width: 300 }}"
-                                      sizes="300px"
-                                      loading="lazy"
-                                      alt="{{ variant_image.alt | escape }}"
-                                      width="{{ variant_image.width }}"
-                                      height="{{ variant_image.height }}"
-                                      class="full"
-                                    >
+                                      {% render 'snippet-image'; image: variant_image, style: 'full' %}
                                   {% else %}
                                     {{ value }}
                                   {% endif %}
@@ -471,14 +449,7 @@
                         <div class="product-page__recommended-product-container">
                           <div class="product-page__recommended-product corner-border">
                             <a href="{{ bundled_product.url }}" class="media corner-border-target">
-                              <img
-                              srcset="{{ bundled_product.featured_image | image_url }}"
-                              loading="lazy"
-                              alt="{{ bundled_product.featured_image | escape }}"
-                              width="{{ bundled_product.featured_image.width }}"
-                              height="{{ bundled_product.featured_image.height }}"
-                              class="full"
-                            >
+                              {% render 'snippet-image'; image: bundled_product.featured_image, style: 'full' %}
                             </a>
                             <div class="quick-add-icon"
                               id="quick-add-button"

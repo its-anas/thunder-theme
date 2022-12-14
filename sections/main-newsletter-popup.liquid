@@ -33,14 +33,7 @@
       >
         {% if section.settings.show_image == true and section.settings.image != blank %}
           <div class="popup__picture">
-            <img
-              srcset="{{ section.settings.image | image_url }}"
-              loading="lazy"
-              alt="{{ section.settings.image.alt | escape }}"
-              width="{{ section.settings.image.width }}"
-              height="{{ section.settings.image.height }}"
-              class="fit"
-            >
+            {% render 'snippet-image'; image: section.settings.image, style: 'fit' %}
           </div>
         {% endif %}
         <div class="popup__content">
