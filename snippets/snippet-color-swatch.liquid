@@ -13,11 +13,6 @@
 
       if color_swatch_value contains '#'
         assign color_swatch_style = 'background-color: ' | append: color_swatch_value
-        comment
-           elsif images[color_swatch_value] != blank
-          assign color_swatch_image = images[color_swatch_value] | img_url: '72x72'
-          assign color_swatch_style = 'background-image: url(' | append: color_swatch_image | append: ')'
-        endcomment
       endif
 
       break

@@ -179,7 +179,7 @@
                       name="{{ filter.min_value.param_name }}"
                       id="Filter-{{ filter.min_value.param_name }}"
                       {% if filter.min_value.value -%}
-                        value="{{ filter.min_value.value | divided_by: 100  }}"
+                        value="{{ filter.min_value.value | divided_by: 100 }}"
                       {%- else -%}
                         value="{{ filter.range_min | divided_by: 100 }}"
                       {%- endif %}
@@ -202,7 +202,7 @@
                       {%- endif %}
                       type="number"
                       min="0"
-                      max="{{ filter.range_max | divided_by: 100  }}"
+                      max="{{ filter.range_max | divided_by: 100 }}"
                       class="input-max"
                     >
                   </div>

@@ -13,7 +13,7 @@
     background-color: {{ section.settings.background_color }};
   }
 
-  {% if section.settings.border_width > 0%}
+  {% if section.settings.border_width > 0 %}
     .popup__container.border {
       border: {{ section.settings.border_width }}px solid {{ section.settings.border_color }} ;
       border-radius: {{ section.settings.border_radius }}px;
@@ -106,7 +106,7 @@
             {%- endform -%}
             {% if section.settings.show_social_media_icons == true %}
               <div class="popup__social-media">
-                {% render 'social-media-icons' %}
+                {% render 'snippet-social-media-icons' %}
               </div>
             {% endif %}
 
@@ -128,7 +128,6 @@
       "content": "Settings",
       "info": "Once the customer closes the popup, it will not show up again until next time they visit your store. The popup cookie expires when the browser session ends.)"
     },
-
     {
       "type": "checkbox",
       "id": "enable_popup",
@@ -172,7 +171,7 @@
       "type": "text",
       "id": "text",
       "label": "Text",
-      "default": "Subscribe to our newsletter and we’ll send you a 10% discount code towards your first purchase."
+      "default": "Subscribe to our newsletter and we will send you a 10% discount code towards your first purchase."
     },
     {
       "type": "text",
@@ -221,7 +220,6 @@
       "label": "Border corners radius",
       "default": 0
     }
-  ],
-  "blocks": []
+  ]
 }
 {% endschema %}

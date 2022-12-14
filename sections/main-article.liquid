@@ -125,9 +125,9 @@
                                 class="link"
                               >
                                 {%- if form.errors.translated_fields[field] contains 'author' -%}
-                                  {{ 'blogs.article.name' | t }}
+                                  Name
                                 {%- elsif form.errors.translated_fields[field] contains 'body' -%}
-                                  {{ 'blogs.article.message' | t }}
+                                  Comment
                                 {%- else -%}
                                   {{ form.errors.translated_fields[field] }}
                                 {%- endif -%}
@@ -219,7 +219,7 @@
               {%- assign share_url = shop.url | append: article.url -%}
               {%- assign twitter_text = article.title | url_param_escape | strip -%}
               {%- assign pinterest_description = article.description | strip | truncatewords: 15 | url_param_escape -%}
-              {%- assign pinterest_image = article.image | img_url: '800x' | prepend: 'https:' -%}
+              {%- assign pinterest_image = article.image | image_url: '800x' | prepend: 'https:' -%}
 
               <p>Share</p>
               <a

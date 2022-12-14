@@ -1,5 +1,3 @@
-<!-- UNFINISHED: Extract the product item from this to low template lines--> 
-
 {{ 'main-product.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'main-product.js' | asset_url }}" defer></script>
 
@@ -9,19 +7,16 @@
   assign desktop_items = 1
   assign desktop_section_width = 100
 %}
-
 {% style %}
    product-page  {
       padding-top: {{ section.settings.padding_top }}px !important;
       padding-bottom: {{ section.settings.padding_bottom }}px !important;
    }
-
    .product-page-slider__slides-container {
     --mobile-items: {{ mobile_items }};
     --tablet-items: {{ tablet_items }};
     --desktop-items: {{ desktop_items }};
   }
-
   @media screen and (min-width: 1025px) {
      .product-page-slider__slides-container {
       --container-width: calc(var(--section-width) * {{ desktop_section_width | divided_by: 100.00 }} );
@@ -31,37 +26,6 @@
       width: {{ 100 | minus: desktop_section_width | divided_by: 2 }}%;
     }
   }
-
-  .product-page-slider__slides-container .item {
-  aspect-ratio: 1;
-  }
-
-  {% if section.settings.thumbnails_on_mobile == false %}
-    @media screen and (max-width: 1024px) {
-      .product-page-slider__thumbnails {
-          height: 0 !important;
-          visibility: hidden;
-      }
-    }
-    @media screen and (min-width: 1024px) {
-      .product-page-slider__indicators {
-          height: 0 !important;
-          visibility: hidden;
-      }
-    }
-  {% else %}
-    .product-page-slider__indicators {
-        height: 0 !important;
-        visibility: hidden;
-    }
-    .product-page-slider .prev, .product-page-slider .next {
-      opacity: 0 !important;
-    }
-    .product-page-slider__slides-container .slide, .product-page-slider__slides-container .slide .item {
-      transition: none !important;
-      opacity: 1 !important;
-    }
-  {% endif %}
 {% endstyle %}
 
 <div class="product-hidden-images" style="display: none;">
@@ -94,7 +58,6 @@
     </div>
   {% endif %}
 </div>
-
 <div class="product-hidden-thumbnails" style="display: none;">
   {% if product.images.size > 0 %}
     {% for thumbnail in product.images %}
@@ -127,7 +90,6 @@
     </div>
   {% endif %}
 </div>
-
 <div class="product-hidden-payment-methods" style="display: none;">
   <div class="product-page__payment-methods"></div>
 </div>
@@ -144,11 +106,11 @@
           data-desktop-items="{{ desktop_items }}"
           class="{{ section.id }}"
         >
-          <div class="product-page-slider">
+          <div class="product-page-slider {% if section.settings.thumbnails_on_mobile == true %}thumbnails-mobile{% endif %}">
             <div class="prev">
               {% render 'snippet-icons', icon: 'chevron-prev' %}
             </div>
-            <div class="product-page-slider__slides-container">
+            <div class="product-page-slider__slides-container  {% if section.settings.thumbnails_on_mobile == true %}thumbnails-mobile{% endif %}">
               <div class="zoom-icon"></div>
               <div class="slide"></div>
             </div>
@@ -156,9 +118,9 @@
               {% render 'snippet-icons', icon: 'chevron-next' %}
             </div>
           </div>
-          <div class="product-page-slider__indicators"></div>
+          <div class="product-page-slider__indicators {% if section.settings.thumbnails_on_mobile == false %}indicators-mobile{% else %}thumbnails-mobile{% endif %}"></div>
           <div class="product-page-slider__thumbnails-container ">
-            <div class="product-page-slider__thumbnails"></div>
+            <div class="product-page-slider__thumbnails {% if section.settings.thumbnails_on_mobile == false %}indicators-mobile{% endif %}"></div>
           </div>
         </product-page-slider>
         <div
@@ -298,7 +260,6 @@
                                       endif
                                   endfor
                                 %}
-
                                 <label
                                   class="
                                     product-page__radio__label media variant_image 
@@ -326,7 +287,7 @@
                                       loading="lazy"
                                       alt="{{ variant_image.alt | escape }}"
                                       width="{{ variant_image.width }}"
-                                      height="{{ variant_imageheight }}"
+                                      height="{{ variant_image.height }}"
                                       class="full"
                                     >
                                   {% else %}
@@ -340,26 +301,7 @@
                               {% for value in option.values %}
                                 <label
                                   class=" product-page__radio__label color_swatch {% if option.selected_value == value %}checked{% endif %}"
-                                 
-                                  {% comment %}  UNFINISHED: replace with color_swatch.liquid snippet {% endcomment %}
-                                  
-                                  {%- liquid 
-                                    assign color_swatch_list = settings.color_swatch_list | split: ','
-                                    for color_swatch in color_swatch_list
-                                      assign color_swatch_parts = color_swatch | split: ':'
-                                      assign color_swatch_name = color_swatch_parts.first | strip
-                                      if color_swatch_name == value
-                                        assign color_swatch_value = color_swatch_parts.last | strip
-                                         if color_swatch_value contains '#'
-                                         echo "style=' background-color:" 
-                                          echo color_swatch_value
-                                          echo "; color: transparent;'"
-                                         endif
-                                         break
-                                       endif
-                                    endfor 
-                                  -%}
-                               
+                                  style="color: transparent;{% render 'snippet-color-swatch', actual_color: value %}"                               
                                   for="{{ option.name | handle }}-{{ value | handle }}"
                                 >
                                     {{ value }}
@@ -445,88 +387,33 @@
                     .{{ block.id }}--color {
                       background-color: {{ block.settings.background_color }};
                     }
-
                     .countdown-timer__timers {
                       display: flex;
                       justify-content: center;
                     }
-
                     .{{ block.id }}.countdown-timer > .countdown-timer__timers > .countdown-timer__container {
                       background-color: {{ block.settings.digits_background_color }};
                       border-radius: {{ block.settings.digits_container_border }}%;
                     }
-
                     .{{ block.id }}.countdown-timer > .countdown-timer__timers > .countdown-timer__container > p {
                       color: {{ block.settings.digits_color }};
                     }
                   {% endstyle %}
-
-                  {% liquid
-                    assign days = block.settings.time_days | times: 24.00 | times: 60.00
-                    assign hours = block.settings.time_hours | times: 60.00
-                    assign mins = block.settings.time_mins
-                    assign secs = block.settings.time_secs | divided_by: 60.00
-                    assign timeInMinutes = days | plus: hours | plus: mins | plus: secs
-
-                    assign year = block.settings.date_year
-                    assign month = block.settings.date_month | prepend: '00' | slice: -2, 2
-                    assign day = block.settings.date_day | prepend: '00' | slice: -2, 2
-                    assign hour = block.settings.date_hour | prepend: '00' | slice: -2, 2
-                    assign min = block.settings.date_min | prepend: '00' | slice: -2, 2
-                    assign sec = block.settings.date_sec | prepend: '00' | slice: -2, 2
-                  %}
-
-                  {% capture timeInDate -%}
-                    {{- year }}-{{ month }}-{{ day }}T{{ hour }}:{{ min }}:{{ sec -}}
-                  {%- endcapture %}
-                  {% capture countdownType %}{{ block.settings.countdown_timer_type }}{% endcapture %}
-                  {% capture afterExpirationTimeOnly %}{{ block.settings.afterExpirationTimeOnly }}{% endcapture %}
-
-                  <div
-                    id="countdown-timer-{{ block.id }}"
-                    class="{{ block.id }} countdown-timer"
-                  >
-                    <div class="countdown-timer__text">
-                      <p>{{ block.settings.text }}</p>
-                    </div>
-                    <countdown-timer
-                      countdown-type="{{ countdownType }}"
-                      time-in-date="{{ timeInDate }}"
-                      time-in-minutes="{{ timeInMinutes }}"
-                      after-expiration="{{ afterExpirationTimeOnly }}"
-                      section-id="countdown-timer-{{ block.id }}"
-                      cookie-name="countdown-timer-cookie-{{ block.id }}"
-                      class="countdown-timer__timers"
-                    >
-                      <div class="countdown-timer__container">
-                        <p class="days digits--{{ block.settings.digits_size }}"></p>
-                        <p class="label">Days</p>
-                      </div>
-                      <div class="countdown-timer__container">
-                        <p class="hours digits--{{ block.settings.digits_size }}"></p>
-                        <p class="label">Hours</p>
-                      </div>
-                      <div class="countdown-timer__container">
-                        <p class="minutes digits--{{ block.settings.digits_size }}"></p>
-                        <p class="label">Mins</p>
-                      </div>
-                      <div class="countdown-timer__container">
-                        <p class="seconds digits--{{ block.settings.digits_size }}"></p>
-                        <p class="label">Secs</p>
-                      </div>
-                    </countdown-timer>
-                    <div class="countdown-timer__message">
-                      <h6>{{ block.settings.message }}</h6>
-                    </div>
-                  </div>
+                  {% render 'snippet-countdown-timer', element: block %}
                 </div>
               {% when 'buttons' %}
-                <div class="product-page__buttons buttons buttons--center" {{ block.shopify_attributes }}>
-
-                  <{% if settings.cart_type == "drawer" %}a{% else %}button type='submit' name='add' value='Add to cart'{% endif %} class='button button--primary border add-to-cart-button' id='add-to-cart-button' data-variants-number="{{ product.variants.size }}" data-actual-variant="{{ product.selected_or_first_available_variant.id }}"> 
-                  <span></span> <span></span> <span></span> <span></span>
-                  ADD TO CART </{% if settings.cart_type == "drawer" %}a{% else %}button{% endif %}>
-
+                <div class="product-page__buttons buttons buttons--center" {{ block.shopify_attributes }}>    
+                  {% if settings.cart_type == "drawer" %}
+                   <a class='button button--primary border add-to-cart-button' id='add-to-cart-button' data-variants-number="{{ product.variants.size }}" data-actual-variant="{{ product.selected_or_first_available_variant.id }}"> 
+                    <span></span> <span></span> <span></span> <span></span>
+                    ADD TO CART 
+                  </a>
+                  {% else %}
+                   <button type='submit' name='add' value='Add to cart' class='button button--primary border add-to-cart-button' id='add-to-cart-button' data-variants-number="{{ product.variants.size }}" data-actual-variant="{{ product.selected_or_first_available_variant.id }}"> 
+                    <span></span> <span></span> <span></span> <span></span>
+                    ADD TO CART 
+                  </button>
+                  {% endif %}
                   {% if block.settings.show_buy_now == true %}
                   <div class="dynamic-buy-button" id="dynamic-buy-button">
                     {{ form | payment_button }}
@@ -536,8 +423,8 @@
               {% when 'trust_bar' %}
                 <div class="product-page__trust-bar" {{ block.shopify_attributes }}>
                   <a
-                    {% if trust_icon_1_link != blank %}
-                      href="{{ trust_icon_1_link }}"
+                    {% if block.settings.trust_icon_1_link != blank %}
+                      href="{{ block.settings.trust_icon_1_link }}"
                     {% endif %}
                     class="product-page__trust-badge"
                   >
@@ -549,8 +436,8 @@
                     </p>
                   </a>
                   <a
-                    {% if trust_icon_2_link != blank %}
-                      href="{{ trust_icon_2_link }}"
+                    {% if block.settings.trust_icon_2_link != blank %}
+                      href="{{ block.settings.trust_icon_2_link }}"
                     {% endif %}
                     class="product-page__trust-badge"
                   >
@@ -562,8 +449,8 @@
                     </p>
                   </a>
                   <a
-                    {% if trust_icon_2_link != blank %}
-                      href="{{ trust_icon_2_link }}"
+                    {% if block.settings.trust_icon_2_link != blank %}
+                      href="{{ block.settings.trust_icon_2_link }}"
                     {% endif %}
                     class="product-page__trust-badge"
                   >
@@ -668,7 +555,9 @@
     }
 </script>
 
+{% # theme-check-disable ParserBlockingScriptTag %}
 {{ 'option_selection.js' | shopify_asset_url | script_tag }}
+{% # theme-check-enable ParserBlockingScriptTag %}
 
 <script defer>
 
@@ -700,6 +589,8 @@
   let stockAlertThreshold = {{ stock_alert_threshold }};
   let priceDifferenceText= "{{ price_difference_text }}";
 </script>
+
+</div>
 
 {% schema %}
 {
@@ -734,8 +625,26 @@
     }
   ],
   "blocks": [
-    { "type": "vendor", "name": "Vendor", "limit": 1, "settings": [] },
-    { "type": "name", "name": "Product name", "limit": 1, "settings": [] },
+    {
+      "type": "vendor",
+      "name": "Vendor",
+      "limit": 1
+    },
+    {
+      "type": "name",
+      "name": "Product name",
+      "limit": 1
+    },
+    {
+      "type": "price",
+      "name": "Price",
+      "limit": 1
+    },
+    {
+      "type": "quantity",
+      "name": "Quantity",
+      "limit": 1
+    },
     {
       "type": "sale_tag",
       "name": "Sale tag",
@@ -750,7 +659,6 @@
         }
       ]
     },
-    { "type": "price", "name": "Price", "limit": 1, "settings": [] },
     {
       "type": "variants_selector",
       "name": "Variants selector",
@@ -794,12 +702,11 @@
               "label": "Variant image"
             }
           ],
-                "info": "For the color swatch to work properly, the product must have variants, every variant must have an image attached to it, every image alt must be written in the format #color:Name, and the color and it's hex must be added in Color swatch tab in theme settings.",
+          "info": "For the color swatch to work properly, the product must have variants, every variant must have an image attached to it, every image alt must be written in the format #color:Name, and the color and it's hex must be added in Color swatch tab in theme settings.",
           "default": "block"
         }
       ]
     },
-    { "type": "quantity", "name": "Quantity", "limit": 1, "settings": [] },
     {
       "type": "stock_alert",
       "name": "Stock alert",

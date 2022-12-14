@@ -11,7 +11,7 @@
     }
 
     .blog__article {
-      width: calc(100% / {{section.settings.articles_per_row }});
+      width: calc(100% / {{ section.settings.articles_per_row }});
     }
   }
 {% endstyle %}
@@ -44,9 +44,7 @@
                         sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: 2 }}px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)"
                         alt="{{ article.image.src.alt | escape }}"
                         class="motion-reduce fit"
-                        {% unless lazy_load == false %}
-                          loading="lazy"
-                        {% endunless %}
+                        loading="lazy"
                         width="{{ article.image.width }}"
                         height="{{ article.image.height }}"
                       >
@@ -114,7 +112,6 @@
       "label": "Articles per row - desktop/tablet",
       "default": 2
     },
-
     {
       "type": "range",
       "id": "article_aspect_ratios",

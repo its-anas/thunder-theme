@@ -34,84 +34,25 @@
   }
 {%- endstyle -%}
 
-{% liquid
-  assign days = section.settings.time_days | times: 24.00 | times: 60.00
-  assign hours = section.settings.time_hours | times: 60.00
-  assign mins = section.settings.time_mins
-  assign secs = section.settings.time_secs | divided_by: 60.00
-  assign timeInMinutes = days | plus: hours | plus: mins | plus: secs
+<div class="countdown-timer__section-container">
+  <div class="countdown-timer__heading">
+    <{{ section.settings.heading_size }}>
+      {{ section.settings.heading }}
+    </{{ section.settings.heading_size }}>
+  </div>
 
-  assign year = section.settings.date_year
-  assign month = section.settings.date_month | prepend: '00' | slice: -2, 2
-  assign day = section.settings.date_day | prepend: '00' | slice: -2, 2
-  assign hour = section.settings.date_hour | prepend: '00' | slice: -2, 2
-  assign min = section.settings.date_min | prepend: '00' | slice: -2, 2
-  assign sec = section.settings.date_sec | prepend: '00' | slice: -2, 2
-%}
+  {% render 'snippet-countdown-timer', element: section %}
 
-{% capture timeInDate %}{{ year }}-{{ month }}-{{ day }}T{{ hour }}:{{ min }}:{{ sec }}{% endcapture %}
-{% capture countdownType %}{{ section.settings.countdown_timer_type }}{% endcapture %}
-{% capture afterExpirationTimeOnly %}{{ section.settings.afterExpirationTimeOnly }}{% endcapture %}
-
-<div
-  id="countdown-timer-{{ section.id }}"
-  class="{{ section.id }} countdown-timer container {{ section.settings.section_style }} {% if section.settings.background_image == blank %}{{ section.id }}--color{% else %}{{ section.id }}--{{ section.settings.background_type }}{% endif %}"
->
-  {%- for block in section.blocks -%}
-    {%- case block.type -%}
-      {%- when 'heading' -%}
-        <div class="countdown-timer__heading">
-          <{{ block.settings.heading_size }}>
-            {{ block.settings.heading }}
-          </{{ block.settings.heading_size }}>
-        </div>
-      {%- when 'text' -%}
-        <div class="countdown-timer__text">
-          <p>{{ block.settings.text }}</p>
-        </div>
-      {%- when 'countdown' -%}
-        <countdown-timer
-          countdown-type="{{ countdownType }}"
-          time-in-date="{{ timeInDate }}"
-          time-in-minutes="{{ timeInMinutes }}"
-          after-expiration="{{ afterExpirationTimeOnly }}"
-          section-id="countdown-timer-{{ section.id }}"
-          cookie-name="countdown-timer-cookie-{{ section.id }}"
-          class="countdown-timer__timers"
-        >
-          <div class="countdown-timer__container">
-            <p class="days digits--{{ section.settings.digits_size }}"></p>
-            <p class="label">Days</p>
-          </div>
-          <div class="countdown-timer__container">
-            <p class="hours digits--{{ section.settings.digits_size }}"></p>
-            <p class="label">Hours</p>
-          </div>
-          <div class="countdown-timer__container">
-            <p class="minutes digits--{{ section.settings.digits_size }}"></p>
-            <p class="label">Mins</p>
-          </div>
-          <div class="countdown-timer__container">
-            <p class="seconds digits--{{ section.settings.digits_size }}"></p>
-            <p class="label">Secs</p>
-          </div>
-        </countdown-timer>
-        <div class="countdown-timer__message">
-          <h6>{{ section.settings.message }}</h6>
-        </div>
-      {%- when 'button' -%}
-        <div class="countdown-timer__buttons">
-          <a
-            {% if block.settings.link_url != blank %}
-              href="{{ block.settings.link_url }}"
-            {% endif %}
-            class="button-text button--link"
-          >
-            {{- block.settings.link_text -}}
-          </a>
-        </div>
-    {%- endcase -%}
-  {%- endfor -%}
+  <div class="countdown-timer__buttons">
+    <a
+      {% if section.settings.link_url != blank %}
+        href="{{ section.settings.link_url }}"
+      {% endif %}
+      class="button-text button--link"
+    >
+      {{- section.settings.link_text -}}
+    </a>
+  </div>
 </div>
 
 {% schema %}
@@ -391,109 +332,66 @@
       "unit": "m",
       "label": "Minute",
       "default": 0
-    }
-  ],
-  "blocks": [
-    {
-      "type": "heading",
-      "name": "Heading",
-      "limit": 1,
-      "settings": [
-        {
-          "type": "text",
-          "id": "heading",
-          "label": "Heading",
-          "default": "Heading"
-        },
-        {
-          "type": "select",
-          "id": "heading_size",
-          "label": "Heading size",
-          "options": [
-            {
-              "value": "h1",
-              "label": "h1"
-            },
-            {
-              "value": "h2",
-              "label": "h2"
-            },
-            {
-              "value": "h3",
-              "label": "h3"
-            },
-            {
-              "value": "h4",
-              "label": "h4"
-            },
-            {
-              "value": "h5",
-              "label": "h5"
-            },
-            {
-              "value": "h6",
-              "label": "h6"
-            }
-          ],
-          "default": "h4"
-        }
-      ]
-    },
-    {
-      "type": "countdown",
-      "name": "Countdown timer",
-      "limit": 1,
-      "settings": []
     },
     {
       "type": "text",
-      "name": "Text",
-      "limit": 1,
-      "settings": [
-        {
-          "type": "richtext",
-          "id": "text",
-          "label": "Text",
-          "default": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>"
-        }
-      ]
+      "id": "heading",
+      "label": "Heading",
+      "default": "Heading"
     },
     {
-      "type": "button",
-      "name": "Button",
-      "limit": 1,
-      "settings": [
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "options": [
         {
-          "type": "text",
-          "id": "link_text",
-          "label": "Link text",
-          "default": "Learn more"
+          "value": "h1",
+          "label": "h1"
         },
         {
-          "type": "url",
-          "id": "link_url",
-          "label": "Link url"
+          "value": "h2",
+          "label": "h2"
+        },
+        {
+          "value": "h3",
+          "label": "h3"
+        },
+        {
+          "value": "h4",
+          "label": "h4"
+        },
+        {
+          "value": "h5",
+          "label": "h5"
+        },
+        {
+          "value": "h6",
+          "label": "h6"
         }
-      ]
+      ],
+      "default": "h4"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>"
+    },
+    {
+      "type": "text",
+      "id": "link_text",
+      "label": "Link text",
+      "default": "Learn more"
+    },
+    {
+      "type": "url",
+      "id": "link_url",
+      "label": "Link url"
     }
   ],
   "presets": [
     {
-      "name": "Countdown timer",
-      "blocks": [
-        {
-          "type": "heading"
-        },
-        {
-          "type": "text"
-        },
-        {
-          "type": "countdown"
-        },
-        {
-          "type": "button"
-        }
-      ]
+      "name": "Countdown timer"
     }
   ]
 }

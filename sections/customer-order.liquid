@@ -52,9 +52,7 @@
                     sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: 2 }}px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)"
                     alt="{{ line_item.product.featured_image.src.alt | escape }}"
                     class="fit"
-                    {% unless lazy_load == false %}
-                      loading="lazy"
-                    {% endunless %}
+                    loading="lazy"
                     width="{{ line_item.product.featured_image.width }}"
                     height="{{ line_item.product.featured_image.height }}"
                   >
@@ -139,34 +137,34 @@
       </div>
     </div>
     <a href="{{ routes.account_url }}" class="button--link">Return to Account page</a>
-
-    {% schema %}
-    {
-      "name": "Customer order",
-      "class": "section-customer-login",
-      "settings": [
-        {
-          "type": "range",
-          "id": "padding_top",
-          "min": 0,
-          "max": 100,
-          "step": 1,
-          "unit": "px",
-          "label": "Padding top",
-          "default": 0
-        },
-        {
-          "type": "range",
-          "id": "padding_bottom",
-          "min": 0,
-          "max": 100,
-          "step": 1,
-          "unit": "px",
-          "label": "Padding bottom",
-          "default": 0
-        }
-      ]
-    }
-    {% endschema %}
   </div>
 </div>
+
+{% schema %}
+{
+  "name": "Customer order",
+  "class": "section-customer-login",
+  "settings": [
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 0
+    }
+  ]
+}
+{% endschema %}
