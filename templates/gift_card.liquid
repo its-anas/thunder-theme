@@ -1,1 +1,107 @@
-<p>This is the gift card template</p>
+{% layout none %}
+
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+  <head>
+    {%- render 'snippet-meta-tags' -%}
+    {%- render 'snippet-css-variables' -%}
+    <link href="{{ 'global-styles.css' | asset_url }}" rel="stylesheet" type="text/css" media="all">
+
+    {%- assign formatted_initial_value = gift_card.initial_value | money_without_trailing_zeros | strip_html -%}
+    <title>
+      Here's your
+      {{ formatted_initial_value }}
+      gift card for
+      {{ shop.name }}
+      !
+    </title>
+
+    <meta name="description" content="HERE'S YOUR GIFT CARD!">
+    {{ content_for_header }}
+  </head>
+
+  <body>
+    <div class="gift-card">
+      <div class="gift-card__container">
+        <h5>{{ shop.name }}</h5>
+
+        {%- if gift_card.enabled == false or gift_card.expired -%}
+          <h3 class="gift-card__title">Gift card expired</h3>
+        {% else %}
+          <h3 class="gift-card__title">Here's your {{ gift_card.initial_value | money }} gift card!</h3>
+        {%- endif -%}
+
+        {%- assign gift_card_balance = gift_card.balance | money -%}
+
+        {%- if gift_card.balance != gift_card.initial_value -%}
+          <span>Remaining {{ gift_card_balance }}</span>
+        {%- endif -%}
+
+        <img
+          src="{{ 'gift-card/card.svg' | shopify_asset_url }}"
+          alt=""
+          height="{{ 300 | divided_by: 1.5 }}"
+          width="300"
+          loading="lazy"
+          class="gift-card__image"
+        >
+        {%- if gift_card.pass_url -%}
+          <div class="gift-card__details">
+            <a href="{{ gift_card.pass_url }}">
+              <img
+                src="{{ 'gift-card/add-to-apple-wallet.svg' | shopify_asset_url }}"
+                width="120"
+                height="40"
+                alt="Add to Apple Wallet"
+                loading="lazy"
+              >
+            </a>
+          </div>
+        {%- endif -%}
+
+        <div class="gift-card__details">
+          <span>Scan this QR code:</span>
+          <div id="gift-card__qr-code"></div>
+        </div>
+
+        <div class="gift-card__details">
+          <span>Use this code at checkout to redeem your gift card:</span>
+          <input
+            type="text"
+            class="gift-card__number"
+            value="{{ gift_card.code | format_code }}"
+          >
+        </div>
+
+        <div class="gift-card__buttons buttons">
+          <button class="button button--primary border gift-card__copy-link" onclick="copyQrcode();">Copy code</button>
+          <button class="button button--secondary border" onclick="window.print();">Print</button>
+          <div class="gift-card__copy-success" style="display: none;"><span>✓ Code copied successfully</span></div>
+        </div>
+
+        <a
+          href="{{ shop.url }}"
+          class="button--link"
+        >
+          Continue shopping
+        </a>
+      </div>
+    </div>
+  </body>
+</html>
+
+{{ 'vendor/qrcode.js' | shopify_asset_url | script_tag }}
+
+<script>
+  new QRCode(document.getElementById('gift-card__qr-code'), {
+    text: '{{ gift_card.qr_identifier }}',
+    width: 120,
+    height: 120,
+  });
+
+  function copyQrcode() {
+    navigator.clipboard.writeText(document.querySelector('.gift-card__number').value).then(() => {
+      document.querySelector('.gift-card__copy-success').style.display = 'inline';
+    });
+  }
+</script>

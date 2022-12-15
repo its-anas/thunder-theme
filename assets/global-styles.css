@@ -1700,3 +1700,82 @@ div:has(.grecaptcha-badge) {
 	border-bottom: 3px solid #fff;
 	transition: all 0.1s ease-in-out;
 }
+
+/* ANCHOR: Gift card */
+
+.gift-card {
+	width: 100%;
+	height: 100%;
+}
+
+.gift-card__container {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	gap: 3rem;
+	padding: 2rem;
+}
+
+.gift-card__title {
+	text-align: center;
+}
+
+.gift-card__details {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 1rem;
+}
+.gift-card__details span {
+	text-align: center;
+}
+
+@media screen and (min-width: 750px) {
+	.gift-card__details {
+		width: 500px;
+	}
+
+	.gift-card__buttons {
+		width: 500px !important;
+	}
+}
+
+.gift-card__buttons .button {
+	width: 100%;
+}
+
+.gift-card__number {
+	height: 44px;
+	text-align: center;
+	width: 100%;
+}
+
+.gift-card__number span {
+	text-align: center;
+}
+
+@media screen and (max-width: 1024px) {
+	.gift-card__image {
+		--width: 200px;
+		width: var(--width);
+		height: calc(var(--width) / 1.5);
+	}
+}
+
+.gift-card__copy-success {
+	height: 30px;
+	display: flex;
+	align-items: center;
+	padding: 1rem;
+	gap: 0.3rem;
+	height: auto;
+	background-color: #0b260c;
+}
+
+.gift-card__copy-success span {
+	font-size: 0.9rem;
+	color: #4bb543;
+}
