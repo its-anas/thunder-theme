@@ -1157,7 +1157,7 @@ slider-component .slider-component .slides-container .slide .item > * {
 	}
 }
 
-.quick-add-icon {
+.quick-view-button {
 	z-index: 3;
 	width: 1.5rem;
 	height: 1.5rem;
@@ -1165,12 +1165,12 @@ slider-component .slider-component .slides-container .slide .item > * {
 	transition: all 0.2s ease;
 }
 
-.quick-add-icon:hover {
+.quick-view-button:hover {
 	transform: scale(1.4) translate(-15%, -15%);
 	transition: all 0.5s ease;
 }
 
-.quick-add-icon svg {
+.quick-view-button svg {
 	pointer-events: none;
 }
 

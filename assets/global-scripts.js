@@ -893,7 +893,7 @@ function addCartRecommendedProducts(cartProducts) {
 										<quick-view-button>
 										<div
 											class="button--link"
-											id="quick-add-button"
+											id="quick-view-button"
 											data-first-available-variant-id="${variant_first_id}"
 											data-product-handle="${handle}"
 											data-product-variants="${productWithVariants}"
@@ -921,7 +921,7 @@ function addCartRecommendedProducts(cartProducts) {
 										<quick-view-button>
 										<div
 											class="button--link"
-											id="quick-add-button"
+											id="quick-view-button"
 											data-first-available-variant-id="${variant_first_id}"
 											data-product-handle="${handle}"
 											data-product-variants="${productWithVariants}"
@@ -1127,7 +1127,7 @@ class QuickView extends HTMLElement {
 		this.shadowRoot.innerHTML = "<slot></slot>";
 
 		document.addEventListener("click", (event) => {
-			if (event.target.className === "quick-add-icon") {
+			if (event.target.id === "quick-view-button") {
 				this.runQuickView(event.target);
 			}
 		});
@@ -1533,7 +1533,7 @@ class QuickViewButton extends QuickView {
 
 	connectedCallback() {
 		this.addEventListener("click", () => {
-			this.icon = this.querySelector("#quick-add-button");
+			this.icon = this.querySelector("#quick-view-button");
 			this.runQuickView(this.icon);
 			if (document.querySelector("cart-component").classList.contains("active") && this.icon.dataset.productVariants === "with") {
 				document.querySelector(".header-section").classList.add("higher-layer");
@@ -2035,8 +2035,8 @@ class RecentlyViewedComponent extends SliderComponent {
 				itemElement.innerHTML = `
                                       <div class="recently-viewed__image">
                                       ${saleTag}
-                                      <div class="quick-add-icon"
-									     id="quick-add-button"
+                                      <div class="quick-view-button"
+									     id="quick-view-button"
 										data-first-available-variant-id="${variant_first_id}"
 										data-product-handle="${handle}"
 										data-product-variants="${productWithVariants}"

@@ -233,7 +233,7 @@
 	font-size: 0.7rem;
 }
 
-.collection__item .quick-add-icon {
+.collection__item .quick-view-button {
 	position: absolute;
 	z-index: 1;
 	right: 0;

@@ -452,13 +452,13 @@
                             <a href="{{ bundled_product.url }}" class="media corner-border-target">
                               {% render 'snippet-image'; image: bundled_product.featured_image, style: 'full' %}
                             </a>
-                            <div class="quick-add-icon"
-                              id="quick-add-button"
+                            <div class="quick-view-button"
+                              id="quick-view-button"
                               data-first-available-variant-id="{{ bundled_product.first_available_variant.id }}"
                               data-product-handle="{{ bundled_product.handle }}"
                               data-product-variants="{% if  bundled_product.variants.size > 1 %}with{% else %}without{% endif %}"
                               >
-                              {% render 'snippet-icons', icon: 'quick-add' %}
+                              {% render 'snippet-icons', icon: 'quick-view' %}
                               </div>
                           </div>
                           <a href="{{ bundled_product.url }}" class="product-page__recommended-product-title">

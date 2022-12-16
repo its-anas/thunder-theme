@@ -108,7 +108,7 @@
           >
             {%- case block.type -%}
               {%- when 'product' -%}
-                <div class="shop-the-look__product-image">
+                <div class="shop-the-look__product-image media">
                   {%- if block.settings.product == blank -%}
                     {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
                   {%- elsif block.settings.product != blank -%}
@@ -116,9 +116,9 @@
                   {%- endif -%}
                 </div>
                 <div class="shop-the-look__content">
-                  <p class="shop-the-look__product-title">
+                  <p class="shop-the-look__product-title small">
                     {% if block.settings.product.title == blank %}
-                      Product title
+                      Product
                     {% elsif block.settings.product.title != blank %}
                       {{ block.settings.product.title }}
                     {% endif %}
@@ -139,9 +139,9 @@
                       {% endif %}
                     </p>
                   </div>
-                  <a
+                  <div
                     class="button--link"
-                    id="quick-add-button"
+                    id="quick-view-button"
                     data-first-available-variant-id="{{ block.settings.product.first_available_variant.id }}"
                     data-product-handle="{{ block.settings.product.handle }}"
                     data-product-variants="{% if block.settings.product.variants.size > 1 %}with{% else %}without{% endif %}"
@@ -150,8 +150,10 @@
                       Add to cart
                     {%- elsif block.settings.product.variants.size > 1 -%}
                       Quick view
+                    {% else %}
+                      Add to cart
                     {%- endif -%}
-                  </a>
+                  </div>
                 </div>
               {%- when 'feature' -%}
                 <div class="shop-the-look__feature">
@@ -182,14 +184,14 @@
             >
               <div
                 class="shop-the-look__icon"
-                id="quick-add-button"
+                id="quick-view-button"
                 data-first-available-variant-id="{{ block.settings.product.first_available_variant.id }}"
                 data-product-handle="{{ block.settings.product.handle }}"
                 data-product-variants="{% if block.settings.product.variants.size > 1 %}with{% else %}without{% endif %}"
               >
-                <div class="shop-the-look__icon-edge"></div>
-                <div class="shop-the-look__icon-edge-background"></div>
-                <div class="shop-the-look__icon-center"></div>
+                <div class="shop-the-look__icon-edge" style="pointer-events: none;"></div>
+                <div class="shop-the-look__icon-edge-background" style="pointer-events: none;"></div>
+                <div class="shop-the-look__icon-center" style="pointer-events: none;"></div>
               </div>
             </div>
         {%- endcase -%}

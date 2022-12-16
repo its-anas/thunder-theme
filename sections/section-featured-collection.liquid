@@ -71,13 +71,13 @@
                   <p class="tag--normal tag-text">SAVE {{ product.compare_at_price | minus: product.price | money }}</p>
                 {% endif %}
                 <div
-                  class="quick-add-icon"
-                  id="quick-add-button"
+                  class="quick-view-button"
+                  id="quick-view-button"
                   data-first-available-variant-id="{{ product.first_available_variant.id }}"
                   data-product-handle="{{ product.handle }}"
                   data-product-variants="{% if product.variants.size > 1 %}with{% else %}without{% endif %}"
                 >
-                  {% render 'snippet-icons', icon: 'quick-add' -%}
+                  {% render 'snippet-icons', icon: 'quick-view' -%}
                 </div>
 
                 <a href="{{ product.url }}" class="media corner-border-target">
@@ -113,20 +113,20 @@
               <div class="featured-collection__image">
                 <p class="tag--normal tag-text">SAVE {{ product.compare_at_price | minus: product.price | money }}</p>
                 <div
-                  class="quick-add-icon"
-                  id="quick-add-button"
+                  class="quick-view-button"
+                  id="quick-view-button"
                   data-first-available-variant-id="{{ product.first_available_variant.id }}"
                   data-product-handle="{{ product.handle }}"
                   data-product-variants="{% if product.variants.size > 1 %}with{% else %}without{% endif %}"
                 >
-                  {% render 'snippet-icons', icon: 'quick-add' -%}
+                  {% render 'snippet-icons', icon: 'quick-view' -%}
                 </div>
                 {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
               </div>
               <div class="featured-collection__container">
                 <div class="featured-collection__name">
                   <p class="text {% if section.settings.new_tag == true %}tag--animated-hover{% endif %}">
-                    Product title
+                    Product
                   </p>
                 </div>
                 <div class="featured-collection__price">
