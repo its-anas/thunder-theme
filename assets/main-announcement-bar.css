@@ -84,7 +84,7 @@
 	left: 0.1rem;
 }
 
-@media screen and (min-width: 751px) {
+@media screen and (min-width: 750px) {
 	.announcement .chevrons .prev {
 		left: 0.5rem;
 	}
@@ -94,7 +94,7 @@
 	right: 0.1rem;
 }
 
-@media screen and (min-width: 751px) {
+@media screen and (min-width: 750px) {
 	.announcement .chevrons .next {
 		right: 0.5rem;
 	}

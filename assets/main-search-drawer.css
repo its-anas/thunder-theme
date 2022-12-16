@@ -11,7 +11,7 @@
 	transform: translateX(120%);
 }
 
-@media screen and (min-width: 1025px) {
+@media screen and (min-width: 1024px) {
 	.search-drawer {
 		max-width: 500px;
 	}
