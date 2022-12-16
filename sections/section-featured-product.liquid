@@ -127,7 +127,7 @@
 
         <div class="featured-product__price">
           <p>
-            {{ current_variant.price | money }}
+            {{ featured_product.price | money }}
           </p>
         </div>
 
@@ -155,16 +155,12 @@
           <a class="button button--primary border" id="featured-product-add-to-cart">
             <span></span> <span></span> <span></span> <span></span>ADD TO CART</a
           >
-          <a
-            href="{{ routes.cart_url }}/{{ current_variant.id }}:1"
-            class="button button--secondary border"
-            id="featured-product-buy-now"
-          >
-            <span></span> <span></span> <span></span> <span></span>BUY NOW</a
-          >
+          {%- form 'product', featured_product -%}
+            {{ form | payment_button }}
+          {%- endform -%}
         </div>
 
-        <a href="{{ current_variant.url }}" class="featured-product__url button--link"> View details </a>
+        <a href="{{ featured_product.url }}" class="featured-product__url button--link"> View details </a>
       </div>
     </div>
   </div>

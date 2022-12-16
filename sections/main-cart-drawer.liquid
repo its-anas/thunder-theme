@@ -62,39 +62,48 @@
           </div>
         </div>
         <div class="cart-drawer__interaction">
-          <div class="cart-drawer__interaction--empty">
-            <p class="cart-drawer__empty-message">Your cart is empty</p>
-            <div class="buttons">
-              <a
-                class="button button--primary border"
-                href="{{ routes.collections_url }}"
-              >
-                <span></span> <span></span> <span></span> <span></span>
-                SHOP NOW
-              </a>
+          <form action="{{ routes.cart_url }}" method="post" id="cart">
+            <div class="cart-drawer__interaction--empty">
+              <p class="cart-drawer__empty-message">Your cart is empty</p>
+              <div class="buttons">
+                <a
+                  class="button button--primary border"
+                  href="{{ routes.collections_url }}"
+                >
+                  <span></span> <span></span> <span></span> <span></span>
+                  SHOP NOW
+                </a>
+              </div>
             </div>
-          </div>
-          <div class="cart-drawer__interaction--filled">
-            <div class="shadow-divider"></div>
-            <div class="buttons">
-              <a
-                class="button button--primary border border"
-                href=""
-              >
-                <span></span> <span></span> <span></span> <span></span>VIEW CART
-              </a>
-              <a
-                class="button button--primary border border"
-                href=""
-              >
-                <span></span> <span></span> <span></span> <span></span> CHECKOUT
-              </a>
+            <div class="cart-drawer__interaction--filled">
+              <div class="shadow-divider"></div>
+              <div class="buttons">
+                <a
+                  class="button button--primary border border"
+                  href="{{ routes.cart_url }}"
+                >
+                  <span></span> <span></span> <span></span> <span></span>VIEW CART
+                </a>
+                <button
+                  type="submit"
+                  id="checkout"
+                  name="checkout"
+                  {% if cart == empty %}
+                    disabled
+                  {% endif %}
+                  class="button button--primary border"
+                  form="cart"
+                >
+                  <span></span> <span></span> <span></span> <span></span>
+                  CHECKOUT
+                </button>
+              </div>
+              <div class="bottom">
+                <a class="order-note link">Add order note</a>
+                <p class="disclaimer">Shipping & taxes calculated at checkout</p>
+              </div>
             </div>
-            <div class="bottom">
-              <a class="order-note link">Add order note</a>
-              <p class="disclaimer">Shipping & taxes calculated at checkout</p>
-            </div>
-          </div>
+          </form>
         </div>
       </div>
       <div class="recommended-products desktop-only">

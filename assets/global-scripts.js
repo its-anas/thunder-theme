@@ -2638,14 +2638,14 @@ class FeaturedProduct extends HTMLElement {
 				this.querySelector("#featured-product-buy-now").style.display = "none";
 			}
 
-			this.querySelector("#featured-product-buy-now").href = `/cart/${selectedVariant.id}:${quantity}`;
+			// this.querySelector("#featured-product-buy-now").href = `/cart/${selectedVariant.id}:${quantity}`;
 
 			let injectedFunction = `sendToCart(${selectedVariant.id},${quantity})`;
 			this.querySelector("#featured-product-add-to-cart").setAttribute("onclick", injectedFunction);
 
 			this.querySelector(".featured-product__quantity-field #quantity-field").addEventListener("click", () => {
 				quantity = this.querySelector(".featured-product__quantity-field .quantity-field__input").value;
-				this.querySelector("#featured-product-buy-now").href = `/cart/${selectedVariant.id}:${quantity}`;
+				// this.querySelector("#featured-product-buy-now").href = `/cart/${selectedVariant.id}:${quantity}`;
 				let injectedFunction = `sendToCart(${selectedVariant.id},${quantity})`;
 				this.querySelector("#featured-product-add-to-cart").setAttribute("onclick", injectedFunction);
 			});
@@ -2685,14 +2685,14 @@ class FeaturedProduct extends HTMLElement {
 									`;
 				}
 			}
-			this.querySelector("#featured-product-buy-now").href = `/cart/${selectedVariant}:${quantity}`;
+			// this.querySelector("#featured-product-buy-now").href = `/cart/${selectedVariant}:${quantity}`;
 
 			let injectedFunction = `sendToCart(${selectedVariant},${quantity})`;
 			this.querySelector("#featured-product-add-to-cart").setAttribute("onclick", injectedFunction);
 
 			this.querySelector(".featured-product__quantity-field #quantity-field").addEventListener("click", () => {
 				quantity = this.querySelector(".featured-product__quantity-field .quantity-field__input").value;
-				this.querySelector("#featured-product-buy-now").href = `/cart/${selectedVariant}:${quantity}`;
+				// this.querySelector("#featured-product-buy-now").href = `/cart/${selectedVariant}:${quantity}`;
 				let injectedFunction = `sendToCart(${selectedVariant},${quantity})`;
 				this.querySelector("#featured-product-add-to-cart").setAttribute("onclick", injectedFunction);
 			});
