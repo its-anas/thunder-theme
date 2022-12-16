@@ -85,10 +85,10 @@
                   <p class="newsletter__text">{{ block.settings.newsletter_text }}</p>
                 {% endif %}
 
-                {% form 'customer', class: 'newsletter__form' %}
+                {% form 'customer', class: 'newsletter__form', id: 'newsletter-form' %}
+                  <input type="hidden" name="contact[tags]" value="newsletter">
                   <div class="newsletter__container">
                     <input
-                      id=""
                       type="email"
                       name="contact[email]"
                       class="newsletter__input"
@@ -96,9 +96,6 @@
                       autocorrect="off"
                       autocapitalize="off"
                       autocomplete="email"
-                      {% if form.errors %}
-                        autofocus
-                      {% endif %}
                       placeholder="Type your email address"
                       required
                     >
@@ -112,22 +109,21 @@
                       <p></p>
                     </button>
                   </div>
-                  {%- if form.errors -%}
-                    <p class="form__error">
-                      ⚠
-                      {{ form.errors.translated_fields.email | capitalize }}
-                      {{ form.errors.messages.email }}
-                    </p>
-                  {%- endif -%}
-                  {%- if form.posted_successfully? -%}
-                    <p
-                      class="form__success"
-                      tabindex="-1"
-                      autofocus
-                    >
-                      ✓ Subscription confirmed
-                    </p>
-                  {%- endif -%}
+                  <div class="form__messages">
+                    {%- if form.errors -%}
+                      <div class="form__messages__error">
+                        <span class="message-text">
+                          ⚠ {{ form.errors.translated_fields.email | capitalize }}
+                          {{ form.errors.messages.email }}
+                        </span>
+                      </div>
+                    {%- endif -%}
+                    {%- if form.posted_successfully? -%}
+                      <div class="form__messages__success">
+                        <span class="message-text">✓ Subscription confirmed</span>
+                      </div>
+                    {%- endif -%}
+                  </div>
                 {%- endform -%}
               </div>
             </div>
@@ -138,9 +134,8 @@
       <div class="footer__localization">
         {% if section.settings.show_currency_selector == true %}
           {%- form 'localization' -%}
-            <div class="">
+            <div>
               <select
-                class=""
                 name="country_code"
               >
                 {%- for country in localization.available_countries -%}
@@ -175,6 +170,19 @@
     </div>
   </div>
 </section>
+
+{% comment %}
+   <script defer>
+    let footerNewsletterForm = document.getElementById('newsletter-form');
+
+    footerNewsletterForm.addEventListener('submit', function (event) {
+      event.preventDefault();
+      let formData = new FormData(footerNewsletterForm);
+      let payload = new URLSearchParams(formData);
+      console.log(payload);
+    });
+  </script>
+{% endcomment %}
 
 {% schema %}
 {

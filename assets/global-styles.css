@@ -1794,5 +1794,44 @@ div:has(.grecaptcha-badge) {
 @media screen and (min-width: 1024px) {
 	.breadcrumbs {
 		width: 1200px;
+		padding: 1rem;
 	}
+}
+
+/* ANCHOR: Form error/success */
+
+.form__messages {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 0.5rem;
+}
+
+.form__messages__success,
+.form__messages__error {
+	height: 30px;
+	display: flex;
+	align-items: center;
+	padding: 1rem;
+	gap: 0.3rem;
+	height: auto;
+}
+
+.form__messages__error {
+	background-color: #260b0b;
+}
+
+.form__messages__success {
+	background-color: #0b260c;
+}
+
+.form__messages__error .message-text {
+	font-size: 0.9rem;
+	color: #fa6464;
+}
+
+.form__messages__success .message-text {
+	font-size: 0.9rem;
+	color: #4bb543;
 }

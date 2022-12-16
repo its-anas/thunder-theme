@@ -11,7 +11,10 @@
           }
         },
         "picture": {
-          "type": "picture"
+          "type": "picture",
+          "settings": {
+            "picture_height": 400
+          }
         },
         "tags": {
           "type": "tags"
@@ -25,6 +28,17 @@
         "share": {
           "type": "share"
         }
+      },
+      "block_order": [
+        "title",
+        "picture",
+        "tags",
+        "content",
+        "comments",
+        "share"
+      ],
+      "settings": {
+        "page_width": 1200
       }
     }
   },

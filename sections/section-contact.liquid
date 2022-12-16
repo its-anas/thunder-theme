@@ -92,24 +92,22 @@
     </button>
 
     {%- if form.errors -%}
-      <div class="form__error-list">
-        {% for field in form.errors %}
-          <p class="form__error">
-            ⚠ {{ field | capitalize }}
-            {{ form.errors.messages[field] }}
-          </p>
-        {% endfor %}
+      <div class="customer__form__errors-list">
+        {%- for field in form.errors -%}
+          <div class="customer__form__errors-list__item">
+            <span> ⚠ </span>
+            <span>
+              {{ form.errors.messages[field] }}
+            </span>
+          </div>
+        {%- endfor -%}
       </div>
     {%- endif -%}
 
     {%- if form.posted_successfully? -%}
-      <p
-        class="form__success"
-        tabindex="-1"
-        autofocus
-      >
-        ✓ Message sent
-      </p>
+      <div class="customer__form__success">
+        <span>✓ Message sent</span>
+      </div>
     {%- endif -%}
 
     {{ 'shopify.online_store.spam_detection.disclaimer_html' | t }}
