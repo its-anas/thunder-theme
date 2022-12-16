@@ -89,7 +89,7 @@
 	padding: 0;
 }
 
-.article__comments__container .pagination a {
+.article__comments__container .pagination > * {
 	border: 0px;
 }
 

@@ -112,7 +112,7 @@
                   <div class="form__messages">
                     {%- if form.errors -%}
                       <div class="form__messages__error">
-                        <span class="message-text">
+                        <span>
                           ⚠ {{ form.errors.translated_fields.email | capitalize }}
                           {{ form.errors.messages.email }}
                         </span>
@@ -120,7 +120,7 @@
                     {%- endif -%}
                     {%- if form.posted_successfully? -%}
                       <div class="form__messages__success">
-                        <span class="message-text">✓ Subscription confirmed</span>
+                        <span>✓ Subscription confirmed</span>
                       </div>
                     {%- endif -%}
                   </div>

@@ -69,20 +69,18 @@
         <p></p>
       </button>
     </div>
-    {%- if form.errors -%}
-      <div class="customer__form__errors-list__item">
-        <div>
-          <span> ⚠ </span>
-          <span> {{ form.errors.translated_fields.email | capitalize }}</span>
-          <span> {{ form.errors.messages.email }}</span>
+    <div class="form__messages__error">
+      {%- if form.errors -%}
+        <span>⚠</span>
+        <span>{{ form.errors.translated_fields.email | capitalize }}</span>
+        <span>{{ form.errors.messages.email }}</span>
+      {%- endif -%}
+      {%- if form.posted_successfully? -%}
+        <div class="form__messages__success">
+          <span>✓ Subscription confirmed</span>
         </div>
-      </div>
-    {%- endif -%}
-    {%- if form.posted_successfully? -%}
-      <div class="customer__form__success">
-        <span>✓ Subscription confirmed</span>
-      </div>
-    {%- endif -%}
+      {%- endif -%}
+    </div>
   {%- endform -%}
 </div>
 

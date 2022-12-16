@@ -105,8 +105,8 @@
                         {%- if form.errors -%}
                           {%- for field in form.errors -%}
                             <div class="form__messages__error">
-                              <span class="message-text"
-                                >⚠
+                              <span>⚠</span>
+                              <span>
                                 {%- if form.errors.translated_fields[field] contains 'author' -%}
                                   Name
                                 {%- elsif form.errors.translated_fields[field] contains 'body' -%}
@@ -122,7 +122,7 @@
 
                         {%- if form.posted_successfully? -%}
                           <div class="form__messages__success">
-                            <span class="message-text">✓ {{ post_message }}</span>
+                            <span>✓ {{ post_message }}</span>
                           </div>
                         {%- endif -%}
                       </div>

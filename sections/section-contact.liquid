@@ -90,27 +90,21 @@
       <p class="button">SUBMIT</p>
       <p></p>
     </button>
-
-    {%- if form.errors -%}
-      <div class="customer__form__errors-list">
+    <div class="form__messages">
+      {%- if form.errors -%}
         {%- for field in form.errors -%}
-          <div class="customer__form__errors-list__item">
-            <span> ⚠ </span>
-            <span>
-              {{ form.errors.messages[field] }}
-            </span>
+          <div class="form__messages__error">
+            <span>⚠ {{ form.errors.messages[field] }} </span>
           </div>
         {%- endfor -%}
-      </div>
-    {%- endif -%}
+      {%- endif -%}
 
-    {%- if form.posted_successfully? -%}
-      <div class="customer__form__success">
-        <span>✓ Message sent</span>
-      </div>
-    {%- endif -%}
-
-    {{ 'shopify.online_store.spam_detection.disclaimer_html' | t }}
+      {%- if form.posted_successfully? -%}
+        <div class="form__messages__success">
+          <span>✓ Message sent</span>
+        </div>
+      {%- endif -%}
+    </div>
   {%- endform -%}
 </section>
 

@@ -1799,7 +1799,9 @@ div:has(.grecaptcha-badge) {
 }
 
 /* ANCHOR: Form error/success */
-
+.article__comment-form .form__messages {
+	width: 100%;
+}
 .form__messages {
 	display: flex;
 	flex-direction: column;
@@ -1826,12 +1828,12 @@ div:has(.grecaptcha-badge) {
 	background-color: #0b260c;
 }
 
-.form__messages__error .message-text {
+.form__messages__error > * {
 	font-size: 0.9rem;
 	color: #fa6464;
 }
 
-.form__messages__success .message-text {
+.form__messages__success > * {
 	font-size: 0.9rem;
 	color: #4bb543;
 }
