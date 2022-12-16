@@ -636,7 +636,17 @@ async function updateCartDrawer() {
 		.then((data) => {
 			setCartState();
 			let itemList = [];
-			document.getElementById("header__icons-cart__item-count").innerHTML = data.item_count;
+
+			if (data.item_count === 0) {
+				document.getElementById("header__icons-cart__item-count").classList.add("hidden");
+				setTimeout(() => {
+					document.getElementById("header__icons-cart__item-count").innerHTML = data.item_count;
+				}, 500);
+			} else if (data.item_count > 0) {
+				document.getElementById("header__icons-cart__item-count").innerHTML = data.item_count;
+				document.getElementById("header__icons-cart__item-count").classList.remove("hidden");
+			}
+
 			document.querySelector(".cart-drawer__products-list").innerHTML = "";
 			data.items.forEach((item) => {
 				let variantTitle = item.variant_title !== null ? `<p class="product-variant">${item.variant_title}</p>` : "";

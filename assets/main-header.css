@@ -122,12 +122,34 @@
 }
 
 .header__icons-search__item-count,
-.header__icons-drawer__item-count,
-.header__icons-cart__item-count {
+.header__icons-drawer__item-count {
 	position: absolute;
 	top: 0;
 	right: -15px;
 	color: var(--primary-button-background-color);
+}
+
+.header__icons-cart__item-count {
+	position: absolute;
+	top: 13px;
+	right: -2px;
+	font-size: 0.7rem;
+	font-weight: bold;
+	width: 15px;
+	height: 15px;
+	border-radius: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: var(--primary-button-background-color);
+	color: black;
+	opacity: 1;
+	transition: all 0.5s ease-in-out;
+}
+
+.header__icons-cart__item-count.hidden {
+	opacity: 0;
+	transition: all 0.5s ease-in-out;
 }
 
 @media screen and (min-width: 750px) {
