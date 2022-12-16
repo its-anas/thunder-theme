@@ -70,7 +70,8 @@
                     {% if section.settings.show_filter == true %}
                       <div class="show-filter mobile-only">
                         {% render 'snippet-icons', icon: 'search-filter' %}
-                        <span>Filter</span>
+                        <span>Filters</span>
+                        <span id="filterCount"></span>
                       </div>
                     {% endif %}
                     <p class="results-count-hidden" style="opacity: 0;">({{ search.results_count }})</p>

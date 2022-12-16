@@ -21,7 +21,7 @@ class FilterComponent extends HTMLElement {
 
 		document.addEventListener("click", (event) => {
 			if (event.target.className === "filter-active-filters__remove small" || event.target.className === "filter-active-filters__clear small underline") {
-				this.injectResultsCount(this.buildUrl());
+				this.injectResultsCount(event.target.dataset.url);
 				showLoadingBar();
 				this.getNewResults(event.target.dataset.url);
 			}
@@ -35,6 +35,8 @@ class FilterComponent extends HTMLElement {
 				const parser = new DOMParser();
 				const doc = parser.parseFromString(data, "text/html");
 				const resultsCount = doc.querySelector(".results-count-hidden");
+				const filtersCount = doc.querySelectorAll(".filter-active-filters__remove");
+				document.querySelector("#filterCount").innerHTML = filtersCount.length > 0 ? `(${filtersCount.length})` : "";
 				const selector = this.pageType === "search" ? ".page-tab[for='products']" : ".results-count";
 				document.querySelector(selector).innerHTML = "Products " + resultsCount.innerHTML;
 			});

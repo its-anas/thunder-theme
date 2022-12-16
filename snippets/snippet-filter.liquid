@@ -13,6 +13,7 @@
     {% if filters == search.filters %}
       <input type="hidden" name="q" value="{{ search.terms }}">
     {% endif %}
+
     <div class="filter-active-filters">
       {%- for filter in filters -%}
         {%- if filter.type == 'price_range' -%}
