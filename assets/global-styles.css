@@ -1779,3 +1779,14 @@ div:has(.grecaptcha-badge) {
 	font-size: 0.9rem;
 	color: #4bb543;
 }
+
+/* ANCHOR: Breadcrumbs */
+
+.breadcrumbs {
+	display: flex;
+	flex-direction: row;
+	gap: 0.5rem;
+	width: 1200px;
+	margin-left: auto;
+	margin-right: auto;
+}

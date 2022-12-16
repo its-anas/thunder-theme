@@ -3,7 +3,6 @@
 {% style %}
   {% if collection.featured_image != blank and section.settings.show_collection_image == true %}
     .collection__head {
-      background-image: url({{ collection.featured_image | image_url : '1920x' }});
       height: {{ section.settings.section_height }}px;
     }
   {% else %}
@@ -25,8 +24,15 @@
 {% endstyle %}
 
 <div class="collection__head">
-  <h2 class="collection__title">{{ collection.title }}</h2>
-  <p>{{ collection.description }}</p>
+  <div class="collection__head__title">
+    <h2 class="collection__title">{{ collection.title }}</h2>
+    <p>{{ collection.description }}</p>
+  </div>
+  {% if collection.featured_image != blank and section.settings.show_collection_image == true %}
+    <div class="collection__head__image media">
+      {% render 'snippet-image'; image: collection.featured_image, style: 'fit' %}
+    </div>
+  {% endif %}
 </div>
 
 <div class="collection  {% if collection.products_count == 0 %}empty-state{% endif %}">

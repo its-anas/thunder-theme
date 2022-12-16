@@ -15,6 +15,14 @@
 
 <div class="article">
   <div class="article__container">
+    {% render 'snippet-breadcrumbs',
+      bc1: routes.root_url,
+      bc1_text: 'Home',
+      bc2: blog.url,
+      bc2_text: blog.title,
+      bc3: article.url,
+      bc3_text: article.title
+    %}
     {%- for block in section.blocks -%}
       {%- case block.type -%}
         {%- when 'title' -%}

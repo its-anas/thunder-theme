@@ -1,0 +1,11 @@
+<div class="breadcrumbs">
+  <a class="breadcrumb__link secondary-text small" href="{{ bc1 }}">{{ bc1_text }}</a>
+  {% if bc2_text != blank %}
+    <span class="secondary-text small">/</span>
+    <a class="breadcrumb__link secondary-text small" href="{{ bc2 }}">{{ bc2_text }}</a>
+  {% endif %}
+  {% if bc3_text != blank %}
+    <span class="secondary-text small">/</span>
+    <a class="breadcrumb__link secondary-text small" href="{{ bc3 }}">{{ bc3_text }}</a>
+  {% endif %}
+</div>

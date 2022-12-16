@@ -8,10 +8,26 @@
 }
 
 .collection__head {
-	width: 100%;
-	display: flex;
+	display: grid;
 	justify-content: center;
 	align-items: center;
+}
+
+.collection__head__image,
+.collection__head__title {
+	grid-column: 1;
+	grid-row: 1;
+	width: 100%;
+	height: 100%;
+}
+
+.collection__head__title {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 1rem;
+	z-index: 2;
 }
 
 .collection__form {
@@ -266,15 +282,4 @@
 	border-bottom: 3px solid #fff;
 	transition: all 0.1s ease-in-out;
 	pointer-events: none;
-}
-
-.collection__head {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	gap: 1rem;
-	background-size: cover;
-	background-position: center;
-	background-repeat: no-repeat;
 }

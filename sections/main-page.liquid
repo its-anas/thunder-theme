@@ -22,6 +22,7 @@
 
 <div class="page {{ section.id }}">
   <div class="page__container">
+    {% render 'snippet-breadcrumbs', bc1: routes.root_url, bc1_text: 'Home', bc2: page.url, bc2_text: page.title %}
     <h1 class="page__title">
       {{ page.title }}
     </h1>
