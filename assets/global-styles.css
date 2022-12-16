@@ -1786,7 +1786,13 @@ div:has(.grecaptcha-badge) {
 	display: flex;
 	flex-direction: row;
 	gap: 0.5rem;
-	width: 1200px;
+	width: 100%;
 	margin-left: auto;
 	margin-right: auto;
+}
+
+@media screen and (min-width: 1024px) {
+	.breadcrumbs {
+		width: 1200px;
+	}
 }
