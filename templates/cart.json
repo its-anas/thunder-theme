@@ -3,20 +3,20 @@
     "main": {
       "type": "main-cart",
       "blocks": {
-        "total-price": {
-          "type": "total-price"
+        "total_price": {
+          "type": "total_price"
         },
-        "checkout-button": {
-          "type": "checkout-button"
+        "checkout_button": {
+          "type": "checkout_button"
         },
-        "order-note": {
-          "type": "order-note"
+        "order_note": {
+          "type": "order_note"
         }
       },
       "block_order": [
-        "total-price",
-        "checkout-button",
-        "order-note"
+        "total_price",
+        "checkout_button",
+        "order_note"
       ]
     },
     "recently-viewed-products": {
