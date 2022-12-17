@@ -67,7 +67,6 @@
 .search-drawer__container .preload .group > a {
 	font-size: var(--xsmall-font-size);
 	font-weight: 100;
-	color: white;
 	text-transform: capitalize;
 }
 

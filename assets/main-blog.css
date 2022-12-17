@@ -82,5 +82,5 @@
 
 .blog__article__publication-date {
 	font-size: var(--xsmall-font-size);
-	color: rgb(175, 175, 175);
+	color: var(--secondary-text-color);
 }

@@ -70,8 +70,8 @@
 
 .featured-product__buttons #featured-product-add-to-cart.sold-out {
 	pointer-events: none !important;
-	background-color: #aaaaaa;
-	border-color: #aaaaaa;
+	background-color: var(--secondary-text-color);
+	border-color: var(--secondary-text-color);
 }
 
 .featured-product__buttons #featured-product-add-to-cart.sold-out :after {
@@ -128,11 +128,11 @@
 	position: relative;
 	cursor: pointer;
 	padding: 1rem;
-	border: 1px solid #333333;
+	border: 1px solid var(--secondary-text-color);
 }
 
 .featured-product__radio__label.checked {
-	border: 2px solid #ffffff;
+	border: 2px solid var(--text-color);
 }
 
 .featured-product__radio__label.variant_image {
@@ -334,7 +334,7 @@
 
 .featured-product__pictures featured-product-slider .featured-product-slider__indicators span {
 	display: inline-block;
-	background-color: #fff;
+	background-color: var(--text-color);
 	opacity: 0.5;
 	width: 8px;
 	height: 8px;

@@ -50,7 +50,7 @@
 	flex-direction: row;
 	justify-content: space-between;
 	padding: 1rem 0rem;
-	border-bottom: 0.5px solid #fff;
+	border-bottom: 0.5px solid var(--text-color);
 }
 
 .cart-page__products {
@@ -61,11 +61,11 @@
 }
 
 .cart-page__product-variant {
-	color: #aaaaaa;
+	color: var(--secondary-text-color);
 }
 
 .cart-page__stock-disclaimer {
-	color: #fb4343;
+	color: var(--error-text-color);
 }
 
 @media screen and (min-width: 750px) {
@@ -238,7 +238,7 @@
 	justify-content: space-around;
 	padding: 1rem;
 	gap: 1rem;
-	background-color: #222;
+	background-color: var(--secondary-background-color);
 }
 
 .cart-page__interaction-inner .cart-drawer__note-popup {
@@ -271,7 +271,7 @@
 
 .cart-page__order-note,
 .cart-page__checkout-disclaimer {
-	color: #aaaaaa;
+	color: var(--secondary-text-color);
 }
 
 .cart-page__empty-state {

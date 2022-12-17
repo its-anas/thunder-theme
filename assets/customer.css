@@ -55,7 +55,7 @@
 }
 
 .customer__form__input.error {
-	border-color: #fa6464;
+	border-color: var(--error-text-color);
 }
 
 .customer__form__button {
@@ -88,21 +88,21 @@
 }
 
 .customer__form__errors-list__item {
-	background-color: #260b0b;
+	background-color: var(--error-background-color);
 }
 
 .customer__form__errors-list__item span {
 	font-size: var(--small-font-size);
-	color: #fa6464;
+	color: var(--error-text-color);
 }
 
 .customer__form__success {
-	background-color: #0b260c;
+	background-color: var(--success-background-color);
 }
 
 .customer__form__success span {
 	font-size: var(--small-font-size);
-	color: #4bb543;
+	color: var(--success-text-color);
 }
 
 .customer__form__links {
@@ -159,7 +159,7 @@
 }
 
 .customer-table.mobile {
-	border-top: 1px solid #fff;
+	border-top: 1px solid var(--text-color);
 }
 @media screen and (min-width: 750px) {
 	.customer-table.mobile {
@@ -183,11 +183,11 @@
 
 .customer-table thead th {
 	padding: 1rem 0;
-	border-bottom: 1px solid #fff;
+	border-bottom: 1px solid var(--text-color);
 }
 
 .customer-table tfoot tr:nth-child(1) td {
-	border-top: 1px solid #fff;
+	border-top: 1px solid var(--text-color);
 }
 
 .customer-table tfoot tr:first-child td {
@@ -237,7 +237,7 @@
 }
 
 .customer-order__table--vertical {
-	border: 1px solid #fff;
+	border: 1px solid var(--text-color);
 	padding: 1rem;
 }
 
@@ -305,11 +305,11 @@
 
 .customer-order__table--address div h6 {
 	padding: 1rem 0;
-	border-bottom: 1px solid #fff;
+	border-bottom: 1px solid var(--text-color);
 }
 
 .customer-order__table__body {
-	border-top: 1px solid #fff;
+	border-top: 1px solid var(--text-color);
 }
 
 .customer-order__table__head span,
@@ -381,7 +381,7 @@
 
 .customer-addresses__address__container h6 {
 	padding: 1rem 0;
-	border-bottom: 1px solid #fff;
+	border-bottom: 1px solid var(--text-color);
 }
 
 /* --------------------------------- */
@@ -442,8 +442,8 @@
 
 .customer__popup .customer__popup__container {
 	width: 100%;
-	background-color: #000;
-	border: 2px solid #fff;
+	border: 2px solid var(--text-color);
+	background-color: var(--background-color);
 	position: relative;
 	padding: 1rem;
 	display: flex;

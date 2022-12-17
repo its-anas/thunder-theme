@@ -38,7 +38,7 @@
                },
                {
                     "type": "header",
-                    "content": "Body text"
+                    "content": "Text color"
                },
                {
                     "type": "font_picker",
@@ -98,21 +98,65 @@
                },
                {
                     "type": "color",
-                    "id": "headings_color",
-                    "label": "Headings",
-                    "default": "#FFFFFF"
+                    "id": "heading_color",
+                    "label": "Heading color",
+                    "default": "#fff"
                },
                {
                     "type": "color",
                     "id": "text_color",
-                    "label": "Body text",
-                    "default": "#FFFFFF"
+                    "label": "Text color",
+                    "default": "#fff"
                },
                {
                     "type": "color",
-                    "id": "page_background_color",
-                    "label": "Page background",
+                    "id": "secondary_text_color",
+                    "label": "Secondary text color",
+                    "default": "#aaaaaa"
+               },
+               {
+                    "type": "header",
+                    "content": "Background"
+               },
+               {
+                    "type": "color",
+                    "id": "background_color",
+                    "label": "Background color",
                     "default": "#000000"
+               },
+               {
+                    "type": "color",
+                    "id": "secondary_background_color",
+                    "label": "Secondary background color",
+                    "default": "#222"
+               },
+               {
+                    "type": "header",
+                    "content": "Error/Success"
+               },
+               {
+                    "type": "color",
+                    "id": "error_text_color",
+                    "label": "Error text color",
+                    "default": "#fa6464"
+               },
+               {
+                    "type": "color",
+                    "id": "error_background_color",
+                    "label": "Error background color",
+                    "default": "#260b0b"
+               },
+               {
+                    "type": "color",
+                    "id": "success_text_color",
+                    "label": "Success text color",
+                    "default": "#4bb543"
+               },
+               {
+                    "type": "color",
+                    "id": "success_background_color",
+                    "label": "Success background color",
+                    "default": "#0b260c"
                },
                {
                     "type": "header",
@@ -165,7 +209,7 @@
                     "type": "color",
                     "id": "button_text_border_hover_color",
                     "label": "Text\/border on hover",
-                    "default": "#FFFFFF"
+                    "default": "#fff"
                },
                {
                     "type": "color",
@@ -187,7 +231,7 @@
                     "type": "textarea",
                     "id": "color_swatch_list",
                     "label": "List of colors and their hex codes",
-                    "default": "Black:#000000, White:#FFFFFF, Red:#ff0000, Green:#00ff00, Blue:#0000ff, Gold:#FFD700, Grey:#808080, Purple:#800080"
+                    "default": "Black:#000000, White:#fff, Red:#ff0000, Green:#00ff00, Blue:#0000ff, Gold:#FFD700, Grey:#808080, Purple:#800080"
                }
           ]
      },

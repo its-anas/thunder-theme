@@ -7,6 +7,7 @@
      --font-size: {{ settings.size }}px;
      --font-size-type-scale: {{ settings.size }};
      --font-type-scale: {{ settings.type_scale }};
+
      --h1-font-size: calc((((((var(--font-size-type-scale) * var(--font-type-scale)) * var(--font-type-scale)) * var(--font-type-scale)) * var(--font-type-scale)) * var(--font-type-scale)) * var(--font-type-scale) * 1px);
      --h2-font-size: calc(((((var(--font-size-type-scale) * var(--font-type-scale)) * var(--font-type-scale)) * var(--font-type-scale)) * var(--font-type-scale)) * var(--font-type-scale) * 1px);
      --h3-font-size: calc((((var(--font-size-type-scale) * var(--font-type-scale)) * var(--font-type-scale)) * var(--font-type-scale)) * var(--font-type-scale) * 1px);
@@ -21,8 +22,16 @@
      --xxxsmall-font-size: calc(var(--font-size-type-scale) / var(--font-type-scale) / var(--font-type-scale) / var(--font-type-scale) / var(--font-type-scale) * 1px);
      --xxxxsmall-font-size: calc(var(--font-size-type-scale) / var(--font-type-scale) / var(--font-type-scale) / var(--font-type-scale) / var(--font-type-scale) / var(--font-type-scale) * 1px);
 
-     --headings-color: {{ settings.headings_color }}; --text-color: {{ settings.text_color }};
-     --background-color : {{ settings.page_background_color }};
+     --heading-color: {{ settings.heading_color }};
+     --text-color: {{ settings.text_color }};
+     --secondary-text-color: {{ settings.secondary_text_color }};
+     --background-color: {{ settings.background_color }};
+     --secondary-background-color: {{ settings.secondary_background_color }};
+
+     --error-text-color: {{ settings.error_text_color }};
+     --error-background-color:  {{ settings.error_background_color }};
+     --success-text-color:  {{ settings.success_text_color }};
+     --success-background-color:  {{ settings.success_background_color }};
 
      --primary-button-text-color: {{ settings.primary_button_text_color }};
      --primary-button-background-color: {{ settings.primary_button_background_color }};
@@ -35,7 +44,7 @@
      --button-background-hover-color: {{ settings.button_background_hover_color }};
      --button-animation-color: {{ settings.button_animation_color }};
 
-     --headings-style: {{ settings.headings_style }};
+     --heading-style: {{ settings.headings_style }};
 
      --button-border-width : {{ settings.button_border_width }}px;
      --button-border-radius : {{ settings.button_border_radius }}px;

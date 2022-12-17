@@ -99,7 +99,7 @@
 
 .cart-drawer__product__details-middle .product-variant {
 	font-size: var(--xsmall-font-size);
-	color: #aaaaaa;
+	color: var(--secondary-text-color);
 }
 
 .cart-drawer__product__details-side {
@@ -195,7 +195,7 @@
 
 .cart-drawer__interaction .bottom .disclaimer {
 	font-size: var(--xxxsmall-font-size);
-	color: #aaaaaa;
+	color: var(--secondary-text-color);
 }
 
 .cart-drawer .recommended-products.desktop-only {
@@ -311,8 +311,8 @@
 	z-index: 3;
 	width: calc(100% - 4px);
 	height: auto;
-	border: 2px solid #fff;
-	background: #000;
+	border: 2px solid var(--text-color);
+	background: var(--background-color);
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -374,7 +374,7 @@
 
 .free-shipping-reminder__bar__inside {
 	height: 100%;
-	background-color: white;
+	background-color: var(--text-color);
 }
 
 .free-shipping-reminder__bar__inside.not-enough {

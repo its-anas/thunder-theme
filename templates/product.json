@@ -194,7 +194,7 @@
         "section_style": "full-width",
         "tabs_width": 1000,
         "image_height": 300,
-        "question_background_color": "#222222",
+        "question_background_color": "#222",
         "answer_background_color": "#101010"
       }
     },

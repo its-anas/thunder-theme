@@ -176,8 +176,8 @@
                     "digits_size": "big",
                     "digits_container_border": 10,
                     "digits_color": "#000000",
-                    "digits_background_color": "#FCDB33",
-                    "button_color": "#FCDB33",
+                    "digits_background_color": "#fcdb33",
+                    "button_color": "#fcdb33",
                     "background_color": "#0b0b0b",
                     "text_width": 70,
                     "space_between_elements": 1,
@@ -288,7 +288,7 @@
                     "desktop_aspect_ratio": 3,
                     "mobile_aspect_ratio": 1,
                     "selector_color": "#000000",
-                    "selector_background_color": "#ffffff",
+                    "selector_background_color": "#fff",
                     "openable_background_color": "#000000",
                     "heading": "Shop our look",
                     "heading_size": "h6",
@@ -393,7 +393,7 @@
                "type": "section-promotional-banner",
                "settings": {
                     "banner_style": "style-2",
-                    "text_color": "#ffffff",
+                    "text_color": "#fff",
                     "background_color": "#0b0b0b",
                     "space_outside_elements": 0,
                     "height": 80,
@@ -659,8 +659,8 @@
                     "section_style": "full-width",
                     "review_width": 250,
                     "review_height": 150,
-                    "review_background_color": "#222222",
-                    "review_border_color": "#ffffff",
+                    "review_background_color": "#222",
+                    "review_border_color": "#fff",
                     "review_border_width": 2
                }
           },
@@ -836,7 +836,7 @@
                     "section_style": "full-width",
                     "tabs_width": 1000,
                     "image_height": 300,
-                    "question_background_color": "#222222",
+                    "question_background_color": "#222",
                     "answer_background_color": "#101010"
                }
           },

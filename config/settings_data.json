@@ -14,9 +14,9 @@
           "logo_svg": "",
           "menu": "",
           "menu_layout": "logo_first",
-          "content_color": "#ffffff",
+          "content_color": "#fff",
           "header_background_color": "#000000",
-          "border_color": "#ffffff",
+          "border_color": "#fff",
           "border_width": 2,
           "border_radius": 0
         }
@@ -53,7 +53,7 @@
           "show_announcement_bar": true,
           "enable_autoplay": true,
           "autoplay_delay_time": 6,
-          "background_color": "#FCDB33",
+          "background_color": "#fcdb33",
           "text_color": "#000000",
           "button_and_coupon_color": "#000000"
         }
@@ -94,7 +94,7 @@
         ],
         "settings": {
           "background_color": "#000000",
-          "border_color": "#ffffff",
+          "border_color": "#fff",
           "border_width": 2,
           "border_radius": 0
         }
@@ -114,7 +114,7 @@
           "text": "Subscribe to our newsletter and we’ll send you a 10% discount code towards your first purchase.",
           "reject_text": "No thanks, I prefer to pay full price",
           "background_color": "#222222",
-          "border_color": "#ffffff",
+          "border_color": "#fff",
           "border_width": 2,
           "border_radius": 0
         }

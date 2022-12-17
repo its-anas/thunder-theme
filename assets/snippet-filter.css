@@ -4,7 +4,7 @@
 	justify-content: space-between;
 	align-items: center;
 	padding: 0.5rem;
-	border-bottom: 1px solid #fff;
+	border-bottom: 1px solid var(--text-color);
 }
 
 .filter-title {
@@ -17,7 +17,7 @@
 	justify-content: space-between;
 	align-items: center;
 	padding: 0.5rem;
-	border-bottom: 1px solid #fff;
+	border-bottom: 1px solid var(--text-color);
 }
 
 summary {
@@ -41,7 +41,7 @@ details[open] svg {
 
 .filter-active-filters__remove {
 	padding: 0.5rem;
-	background: #222;
+	background-color: var(--secondary-background-color);
 	cursor: pointer;
 	display: flex;
 	justify-content: center;
@@ -54,12 +54,12 @@ details[open] svg {
 }
 
 .filter-active-filters__remove:hover {
-	background: #333;
+	background: var(--secondary-text-color);
 	transition: all 0.3s ease;
 }
 
 .filter-active-filters__remove:active {
-	background: #444;
+	background: var(--secondary-text-color);
 }
 
 .filter-active-filters__clear {
@@ -132,7 +132,7 @@ details[open] svg {
 	border: 0px;
 	background-color: transparent;
 	text-align: right;
-	color: #fff;
+	color: var(--text-color);
 }
 
 .filter-group__price-range__currency-symbol {
@@ -156,7 +156,7 @@ input::-webkit-inner-spin-button {
 	position: relative;
 	height: 3px;
 	width: 100%;
-	background: #555;
+	background: var(--secondary-text-color);
 	outline: none;
 	margin: 1rem 0rem;
 }
@@ -165,7 +165,7 @@ input::-webkit-inner-spin-button {
 	height: 100%;
 	left: 0%;
 	right: 100%;
-	background: #fff;
+	background: var(--text-color);
 	position: absolute;
 }
 
@@ -186,7 +186,7 @@ input::-webkit-inner-spin-button {
 	-webkit-appearance: none;
 	width: 12px;
 	height: 12px;
-	background: #fff;
+	background: var(--text-color);
 }
 
 .color-filter-group__list {
@@ -208,7 +208,7 @@ input::-webkit-inner-spin-button {
 .color-filter-group__list-item input:before {
 	position: absolute;
 	content: "";
-	border: 2px solid #222;
+	border: 2px solid var(--secondary-background-color);
 	top: -1px;
 	left: -1px;
 	width: calc(100% + 2px);
