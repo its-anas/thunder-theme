@@ -1,14 +1,11 @@
 {{ 'section-video-with-text.css' | asset_url | stylesheet_tag }}
 
 {%- style -%}
-    .{{ section.id }}.video-with-text {
-        min-height: {{ section.settings.video_height }}px;
-        margin-top: {{ section.settings.space_outside | divided_by: 2 }}rem;
-        margin-bottom: {{ section.settings.space_outside | divided_by: 2 }}rem;
-    }
-
-  .{{ section.id }}.video-with-text.color {
-    background-color: {{ section.settings.background_color }};
+  .{{ section.id }}.video-with-text {
+      min-height: {{ section.settings.video_height }}px;
+      margin-top: {{ section.settings.space_outside | divided_by: 2 }}rem;
+      margin-bottom: {{ section.settings.space_outside | divided_by: 2 }}rem;
+      background-color: {{ section.settings.background_color }};
   }
   @media screen and (min-width: 750px) {
 
@@ -16,12 +13,6 @@
         width: {{ section.settings.video_height }}px;
         aspect-ratio: 1;
     }
-  }
-
-  .{{ section.id }}.video-with-text.image {
-    background-image: url({{ section.settings.background_image | image_url }});
-    background-size: cover;
-    background-position: center;
   }
 
   .{{ section.id }}.video-with-text > .video-with-text__content > .video-with-text__box {
@@ -35,7 +26,7 @@
   }
 {%- endstyle -%}
 
-<video-with-text class="{{ section.id }} video-with-text {{ section.settings.video_placement }} {{ section.settings.section_style }} {% if section.settings.background_image == blank %}color{% else %}{{ section.settings.background_type }}{% endif %}">
+<video-with-text class="{{ section.id }} video-with-text {{ section.settings.video_placement }} {{ section.settings.section_style }}">
   <div class="video-with-text__media">
     <div class="video-with-text__video-box horizontal--{{ section.settings.video_horizontal_position }}">
       <div class="video-with-text__video media">
@@ -153,33 +144,11 @@
       "content": "Background settings"
     },
     {
-      "type": "select",
-      "id": "background_type",
-      "label": "Type",
-      "options": [
-        {
-          "value": "image",
-          "label": "Image"
-        },
-        {
-          "value": "just-color",
-          "label": "Color"
-        }
-      ],
-      "default": "just-color"
-    },
-    {
       "type": "color",
       "id": "background_color",
       "label": "Background color",
       "default": "#000000",
       "info": "Applied only if Type is 'Color'"
-    },
-    {
-      "type": "image_picker",
-      "id": "background_image",
-      "label": "Background image",
-      "info": "Applied only if Type is 'Image'"
     },
     {
       "type": "header",

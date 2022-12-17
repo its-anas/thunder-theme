@@ -83,7 +83,6 @@
         "desktop_items": 5,
         "heading": "Featured collections",
         "heading_size": "h6",
-        "background_type": "just-color",
         "background_color": "rgba(0,0,0,0)",
         "collection_height": 350,
         "space_between_elements": 1,

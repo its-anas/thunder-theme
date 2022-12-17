@@ -1,17 +1,12 @@
 {%- style -%}
+  .{{ section.id }}.countdown-timer__section-container {
+    background-color: {{ section.settings.background_color }};
+  }
+
   .{{ section.id }}.countdown-timer {
     gap: {{ section.settings.space_between_elements }}rem;
     margin-top: {{ section.settings.space_outside | divided_by: 2 }}rem;
     margin-bottom: {{ section.settings.space_outside | divided_by: 2 }}rem;
-  }
-  .{{ section.id }}--color {
-    background-color: {{ section.settings.background_color }};
-  }
-
-  .{{ section.id }}--image {
-    background-image: url({{ section.settings.background_image | image_url }});
-    background-size: cover;
-    background-position: center;
   }
 
   .{{ section.id }}.countdown-timer > .countdown-timer__timers > .countdown-timer__container {
@@ -34,7 +29,7 @@
   }
 {%- endstyle -%}
 
-<div class="countdown-timer__section-container">
+<div class="{{ section.id }} countdown-timer__section-container">
   <div class="countdown-timer__heading">
     <{{ section.settings.heading_size }}>
       {{ section.settings.heading }}
@@ -107,28 +102,6 @@
     {
       "type": "header",
       "content": "Background settings"
-    },
-    {
-      "type": "select",
-      "id": "background_type",
-      "label": "Type",
-      "options": [
-        {
-          "value": "image",
-          "label": "Image"
-        },
-        {
-          "value": "just-color",
-          "label": "Color"
-        }
-      ],
-      "default": "just-color"
-    },
-    {
-      "type": "image_picker",
-      "id": "background_image",
-      "label": "Image",
-      "info": "Applied only if Type is 'Image'"
     },
     {
       "type": "color",

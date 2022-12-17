@@ -4,23 +4,8 @@
   .{{ section.id }}.testimonials {
     margin-top: {{ section.settings.space_outside | divided_by: 2 }}px;
     margin-bottom: {{ section.settings.space_outside | divided_by: 2 }}px;
-  }
-
-  .{{ section.id }}.testimonials--just-color {
     background-color: {{ section.settings.background_color }};
-   }
-
-   .{{ section.id }}.testimonials--image {
-       {% if section.settings.section_style == "wrapped" %}
-            background-image: url({{ section.settings.background_image | image_url: width: settings.wrapped_content_width }});
-            background-repeat: no-repeat;
-       {% endif %}
-       {% if section.settings.section_style == "full-width" %}
-            background-image: url({{ section.settings.background_image | image_url }});
-            background-size: cover;
-       {% endif %}
-       background-position: center;
-   }
+  }
 
   .{{ section.id }}.testimonials__content,
   .{{ section.id }}.testimonials__row,
@@ -61,7 +46,7 @@
   }
 {%- endstyle -%}
 
-<section class="{{ section.id }} testimonials {% if section.settings.background_image == blank %}testimonials--just-color{% else %}testimonials--{{ section.settings.background_type }}{% endif %} {{ section.settings.section_style }}">
+<section class="{{ section.id }} testimonials {{ section.settings.section_style }}">
   <div class="testimonials__heading">
     <{{ section.settings.heading_size }}>
       {{ section.settings.heading }}
@@ -167,28 +152,6 @@
     {
       "type": "header",
       "content": "Section settings"
-    },
-    {
-      "type": "select",
-      "id": "background_type",
-      "label": "Type",
-      "options": [
-        {
-          "value": "image",
-          "label": "Image"
-        },
-        {
-          "value": "just-color",
-          "label": "Color"
-        }
-      ],
-      "default": "just-color"
-    },
-    {
-      "type": "image_picker",
-      "id": "background_image",
-      "label": "Image",
-      "info": "Applied only if Type is 'Image'"
     },
     {
       "type": "color",

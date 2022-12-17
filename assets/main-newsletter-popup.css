@@ -93,7 +93,7 @@
 }
 
 @media screen and (max-width: 1024px) {
-	.popup__content {
+	.popup__content::before {
 		background-size: cover;
 		background-position: center;
 		content: " ";
@@ -106,7 +106,7 @@
 		opacity: 1;
 		background-repeat: no-repeat;
 		background-position: 50% 0;
-		background-size: cover;
+		opacity: 0.6;
 	}
 }
 

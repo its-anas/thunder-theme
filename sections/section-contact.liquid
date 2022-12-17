@@ -5,23 +5,8 @@
       margin-top: {{ section.settings.space_outside_elements | divided_by: 2 }}px;
       margin-bottom: {{ section.settings.space_outside_elements | divided_by: 2 }}px;
       gap: {{ section.settings.space_between_elements }}rem;
+      background-color: {{ section.settings.background_color }};
    }
-
-   .{{ section.id }}.just-color {
-    background-color: {{ section.settings.background_color }};
-   }
-
-   .{{ section.id }}.image {
-       {% if section.settings.section_style == "wrapped" %}
-            background-image: url({{ section.settings.background_image | image_url: width: settings.wrapped_content_width }});
-            background-repeat: no-repeat;
-       {% else %}
-            background-image: url({{ section.settings.background_image | image_url }});
-            background-size: cover;
-       {% endif %}
-       background-position: center;
-   }
-
 
     @media screen and (min-width: 750px) {
         .{{ section.id }}.contact > .contact__form,.{{ section.id }}.contact > .contact__form  {
@@ -32,7 +17,7 @@
    }
 {%- endstyle -%}
 
-<section class="{{ section.id }} contact container {% if section.settings.background_image == blank %}just-color{% else %}{{ section.settings.background_type }}{% endif %} {{ section.settings.section_style }}">
+<section class="{{ section.id }} contact container {{ section.settings.section_style }}">
   {% if section.settings.heading != blank %}
     <div class="contact__heading">
       <{{ section.settings.heading_size }}>
@@ -163,33 +148,11 @@
       "info": "Desktop and tablet only"
     },
     {
-      "type": "select",
-      "id": "background_type",
-      "label": "Type",
-      "options": [
-        {
-          "value": "image",
-          "label": "Image"
-        },
-        {
-          "value": "just-color",
-          "label": "Color"
-        }
-      ],
-      "default": "just-color"
-    },
-    {
       "type": "color",
       "id": "background_color",
       "label": "Background color",
       "default": "transparent",
       "info": "Applied only if Type is 'Color'"
-    },
-    {
-      "type": "image_picker",
-      "id": "background_image",
-      "label": "Image",
-      "info": "Applied only if Type is 'Image'"
     },
     {
       "type": "range",

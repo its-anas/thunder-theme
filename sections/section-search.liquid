@@ -4,21 +4,7 @@
       margin-bottom: {{ section.settings.space_outside | divided_by: 2 }}px;
       gap: {{ section.settings.space_between_elements }}rem;
       min-height: {{ section.settings.height }}px;
-   }
-
-   .{{ section.id }}.just-color {
-    background-color: {{ section.settings.background_color }};
-   }
-
-   .{{ section.id }}.image {
-       {% if section.settings.section_style == "wrapped" %}
-            background-image: url({{ section.settings.background_image | image_url: width: settings.wrapped_content_width }});
-            background-repeat: no-repeat;
-       {% else %}
-            background-image: url({{ section.settings.background_image | image_url }});
-            background-size: cover;
-       {% endif %}
-       background-position: center;
+      background-color: {{ section.settings.background_color }};
    }
 
    @media screen and (min-width: 750px) {
@@ -28,7 +14,7 @@
    }
 {%- endstyle -%}
 
-<section class="{{ section.id }} search-section {% if section.settings.background_image == blank %}just-color{% else %}{{ section.settings.background_type }}{% endif %} {{ section.settings.section_style }}">
+<section class="{{ section.id }} search-section {{ section.settings.section_style }}">
   {% if section.settings.heading != blank %}
     <div class="search-section__heading">
       <{{ section.settings.heading_size }}>
@@ -117,35 +103,12 @@
       "info": "Desktop and tablet only"
     },
     {
-      "type": "select",
-      "id": "background_type",
-      "label": "Type",
-      "options": [
-        {
-          "value": "image",
-          "label": "Image"
-        },
-        {
-          "value": "just-color",
-          "label": "Color"
-        }
-      ],
-      "default": "just-color"
-    },
-    {
       "type": "color",
       "id": "background_color",
       "label": "Background color",
       "default": "transparent",
       "info": "Applied only if Type is 'Color'"
     },
-    {
-      "type": "image_picker",
-      "id": "background_image",
-      "label": "Image",
-      "info": "Applied only if Type is 'Image'"
-    },
-
     {
       "type": "range",
       "id": "space_between_elements",

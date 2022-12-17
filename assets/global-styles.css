@@ -1399,13 +1399,6 @@ cart-component.hidden {
 	padding: 2rem;
 }
 
-@media screen and (min-width: 750px) {
-	.countdown-timer__section-container {
-		width: 1600px;
-		max-width: 100%;
-	}
-}
-
 .countdown-timer {
 	display: flex;
 	flex-direction: column;
@@ -1528,7 +1521,13 @@ cart-component.hidden {
 	display: grid;
 	align-items: center;
 	background: #fcdb33;
-	padding: 0 2rem;
+	padding: 1rem;
+}
+
+@media screen and (min-width: 750px) {
+	.newsletter__button {
+		padding: 0 2rem;
+	}
 }
 
 .newsletter__button :nth-child(1),

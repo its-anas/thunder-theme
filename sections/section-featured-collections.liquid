@@ -31,25 +31,15 @@
     gap: {{ section.settings.space_between_elements }}rem;
     margin-top: {{ section.settings.space_outside | divided_by: 2 }}px;
     margin-bottom: {{ section.settings.space_outside | divided_by: 2 }}px;
-  }
-
-  .{{ section.id }}.just-color {
     background-color: {{ section.settings.background_color }};
-   }
-
-  .{{ section.id }}.image {
-    background-image: url({{ section.settings.background_image | image_url: width: settings.wrapped_content_width }});
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-   }
+  }
 {%- endstyle -%}
 
 <slider-component
   data-mobile-items="{{ mobile_items }}"
   data-tablet-items="{{ tablet_items }}"
   data-desktop-items="{{ desktop_items }}"
-  class="{{ section.id }} featured-collections just-color {% if section.settings.background_image == blank %}just-color{% else %}{{ section.settings.background_type }}{% endif %} {{ section.settings.section_style }}"
+  class="{{ section.id }} featured-collections {{ section.settings.section_style }}"
 >
   <div class="featured-collections__heading">
     <{{ section.settings.heading_size }}>
@@ -209,33 +199,11 @@
       "default": "h6"
     },
     {
-      "type": "select",
-      "id": "background_type",
-      "label": "Type",
-      "options": [
-        {
-          "value": "image",
-          "label": "Image"
-        },
-        {
-          "value": "just-color",
-          "label": "Color"
-        }
-      ],
-      "default": "just-color"
-    },
-    {
       "type": "color",
       "id": "background_color",
       "label": "Background color",
       "default": "transparent",
       "info": "Applied only if Type is 'Color'"
-    },
-    {
-      "type": "image_picker",
-      "id": "background_image",
-      "label": "Image",
-      "info": "Applied only if Type is 'Image'"
     },
     {
       "type": "range",
