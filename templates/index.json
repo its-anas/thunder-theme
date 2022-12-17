@@ -175,9 +175,9 @@
                "settings": {
                     "digits_size": "big",
                     "digits_container_border": 10,
-                    "digits_color": "#ffffff",
-                    "digits_background_color": "rgba(0,0,0,0)",
-                    "button_color": "#fcdb33",
+                    "digits_color": "#000000",
+                    "digits_background_color": "#FCDB33",
+                    "button_color": "#FCDB33",
                     "background_color": "#0b0b0b",
                     "text_width": 70,
                     "space_between_elements": 1,
