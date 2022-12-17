@@ -2,16 +2,10 @@
 
 {%- style -%}
   .cart-drawer__container, .cart-drawer__content--empty {
-    background-color: black;
-    border: 2px solid white;
-    border-radius: 0px;
+    background-color: {{ settings.header_background_color }};
   }
   .recommended-products {
-    background-color: var(--secondary-background-color);
-  }
-  .recommended-products.desktop-only {
-    border: 2px solid white;
-    border-radius: 0px;
+    background-color: {{ settings.header_background_color }};
   }
   {% if section.settings. show_cart_recommended_products == true %}
     .recommended-products.desktop-only.active {
@@ -23,6 +17,10 @@
       display: none;
     }
   {% endif %}
+  .cart-drawer__container, .cart-drawer__content--empty, .recommended-products.desktop-only {
+    border-radius: {{ settings.header_border_radius }}px;
+    border: {{ settings.header_border_width }}px solid {{ settings.header_border_color }};
+  }
 {%- endstyle -%}
 
 <cart-component class="hidden">

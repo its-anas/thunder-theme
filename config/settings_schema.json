@@ -132,6 +132,48 @@
                },
                {
                     "type": "header",
+                    "content": "Header"
+               },
+               {
+                    "type": "color",
+                    "id": "header_content_color",
+                    "label": "Content color",
+                    "default": "#fff"
+               },
+               {
+                    "type": "color",
+                    "id": "header_background_color",
+                    "label": "Background color",
+                    "default": "#000"
+               },
+               {
+                    "type": "color",
+                    "id": "header_border_color",
+                    "label": "Border color",
+                    "default": "#fff"
+               },
+               {
+                    "type": "range",
+                    "id": "header_border_width",
+                    "min": 0,
+                    "max": 3,
+                    "step": 1,
+                    "unit": "px",
+                    "label": "Border width",
+                    "default": 2
+               },
+               {
+                    "type": "range",
+                    "id": "header_border_radius",
+                    "min": 0,
+                    "max": 20,
+                    "step": 1,
+                    "unit": "px",
+                    "label": "Border corners radius",
+                    "default": 0
+               },
+               {
+                    "type": "header",
                     "content": "Error/Success"
                },
                {
