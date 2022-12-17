@@ -103,44 +103,58 @@
               {% endfor %}
             </div>
           </div>
-          <div class="cart-page__interaction">
+          <div
+            class="cart-page__interaction"
+            {% if section.blocks.size == 0 %}
+              style="display: none;"
+            {% endif %}
+          >
             <div class="shadow-divider"></div>
             <order-note class="cart-page__interaction-inner">
-              <div class="cart-page__interaction-top-text">
-                <h6 class="cart-page__interaction-text">Total</h6>
-                <h6 class="cart-page__total-amount">{{ cart.total_price | money }}</h6>
-              </div>
-              <div class="cart-page__button buttons">
-                <button
-                  type="submit"
-                  id="checkout"
-                  name="checkout"
-                  {% if cart == empty %}
-                    disabled
-                  {% endif %}
-                  class="button button--primary border"
-                  form="cart"
-                >
-                  <span></span> <span></span> <span></span> <span></span>
-                  CHECKOUT
-                </button>
-              </div>
-              <div class="cart-page__interaction-bottom-text">
-                <a class="cart-page__order-note order-note small">Edit order note</a>
-                <p class="cart-page__checkout-disclaimer small">Taxes & shipping calculated at checkout</p>
-              </div>
-              <div class="cart-drawer__note-popup">
-                <div class="cart-drawer__note-popup__content">
-                  <div id="note-close-icon">
-                    {% render 'snippet-icons', icon: 'close' %}
-                  </div>
-                  <label for="cart-note">Add an note to your order</label>
-                  <textarea name="cart-note" id="cart-note" rows="3" placeholder=""></textarea>
-                  <div class="buttons">
-                    <a id="cart-note-send" class="button button--primary border"> SAVE </a>
-                  </div>
-                </div>
-              </div>
+              {% for block in section.blocks %}
+                {% case block.type %}
+                  {%- when '@app' -%}
+                    {% render block %}
+                  {%- when 'total-price' -%}
+                    <div class="cart-page__interaction-top-text" {{ block.shopify_attributes }}>
+                      <h6 class="cart-page__interaction-text">Total</h6>
+                      <h6 class="cart-page__total-amount">{{ cart.total_price | money }}</h6>
+                    </div>
+                  {%- when 'checkout-button' -%}
+                    <div class="cart-page__button buttons" {{ block.shopify_attributes }}>
+                      <button
+                        type="submit"
+                        id="checkout"
+                        name="checkout"
+                        {% if cart == empty %}
+                          disabled
+                        {% endif %}
+                        class="button button--primary border"
+                        form="cart"
+                      >
+                        <span></span> <span></span> <span></span> <span></span>
+                        CHECKOUT
+                      </button>
+                    </div>
+                  {%- when 'order-note' -%}
+                    <div class="cart-page__interaction-bottom-text" {{ block.shopify_attributes }}>
+                      <a class="cart-page__order-note order-note small">Edit order note</a>
+                      <p class="cart-page__checkout-disclaimer small">Taxes & shipping calculated at checkout</p>
+                    </div>
+                    <div class="cart-drawer__note-popup">
+                      <div class="cart-drawer__note-popup__content">
+                        <div id="note-close-icon">
+                          {% render 'snippet-icons', icon: 'close' %}
+                        </div>
+                        <label for="cart-note">Add an note to your order</label>
+                        <textarea name="cart-note" id="cart-note" rows="3" placeholder=""></textarea>
+                        <div class="buttons">
+                          <a id="cart-note-send" class="button button--primary border"> SAVE </a>
+                        </div>
+                      </div>
+                    </div>
+                {% endcase %}
+              {% endfor %}
             </order-note>
           </div>
         </div>
@@ -165,6 +179,23 @@
 {% schema %}
 {
   "name": "Cart",
-  "class": "main-cart"
+  "class": "main-cart",
+  "blocks": [
+    {
+      "type": "@app"
+    },
+    {
+      "type": "total-price",
+      "name": "Total price"
+    },
+    {
+      "type": "checkout-button",
+      "name": "Checkout button"
+    },
+    {
+      "type": "order-note",
+      "name": "Order note"
+    }
+  ]
 }
 {% endschema %}

@@ -117,50 +117,64 @@
         </div>
       </div>
       <div class="featured-product__info">
-        <div class="featured-product__vendor">
-          <p>{{ featured_product.vendor }}</p>
-        </div>
+        {% for block in section.blocks %}
+          {% case block.type %}
+            {%- when '@app' -%}
+              {% render block %}
+            {% when 'vendor' %}
+              <div class="featured-product__vendor" {{ block.shopify_attributes }}>
+                <p>{{ featured_product.vendor }}</p>
+              </div>
+            {% when 'name' %}
+              <div class="featured-product__name" {{ block.shopify_attributes }}>
+                <h3>{{ featured_product.title }}</h3>
+              </div>
+            {% when 'price' %}
+              <div class="featured-product__price" {{ block.shopify_attributes }}>
+                <p>
+                  {{ featured_product.price | money }}
+                </p>
+              </div>
+            {% when 'variants_selector' %}
+              <div class="featured-product__options" {{ block.shopify_attributes }}></div>
 
-        <div class="featured-product__name">
-          <h3>{{ featured_product.title }}</h3>
-        </div>
-
-        <div class="featured-product__price">
-          <p>
-            {{ featured_product.price | money }}
-          </p>
-        </div>
-
-        <div class="featured-product__options"></div>
-
-        <div class="featured-product__quantity-field">
-          <quantity-field class="quantity">
-            <label for="quantity-text"><p>Quantity</p></label>
-            <div class="quantity-field" id="quantity-field">
-              <button type="button" class="quantity-field__minus" id="quantity-field__minus">-</button>
-              <input
-                type="quantity"
-                class="quantity-field__input"
-                id="quantity-field__input"
-                name="quantity"
-                min="1"
-                value="1"
+            {% when 'quantity' %}
+              <div class="featured-product__quantity-field" {{ block.shopify_attributes }}>
+                <quantity-field class="quantity">
+                  <label for="quantity-text"><p>Quantity</p></label>
+                  <div class="quantity-field" id="quantity-field">
+                    <button type="button" class="quantity-field__minus" id="quantity-field__minus">-</button>
+                    <input
+                      type="quantity"
+                      class="quantity-field__input"
+                      id="quantity-field__input"
+                      name="quantity"
+                      min="1"
+                      value="1"
+                    >
+                    <button type="button" class="quantity-field__plus" id="quantity-field__plus">+</button>
+                  </div>
+                </quantity-field>
+              </div>
+            {% when 'buttons' %}
+              <div class="featured-product__buttons buttons" {{ block.shopify_attributes }}>
+                <a class="button button--primary border" id="featured-product-add-to-cart">
+                  <span></span> <span></span> <span></span> <span></span>ADD TO CART</a
+                >
+                {%- form 'product', featured_product -%}
+                  {{ form | payment_button }}
+                {%- endform -%}
+              </div>
+            {% when 'product-link' %}
+              <a
+                href="{{ featured_product.url }}"
+                class="featured-product__url button--link"
+                {{ block.shopify_attributes }}
               >
-              <button type="button" class="quantity-field__plus" id="quantity-field__plus">+</button>
-            </div>
-          </quantity-field>
-        </div>
-
-        <div class="featured-product__buttons buttons">
-          <a class="button button--primary border" id="featured-product-add-to-cart">
-            <span></span> <span></span> <span></span> <span></span>ADD TO CART</a
-          >
-          {%- form 'product', featured_product -%}
-            {{ form | payment_button }}
-          {%- endform -%}
-        </div>
-
-        <a href="{{ featured_product.url }}" class="featured-product__url button--link"> View details </a>
+                View details
+              </a>
+          {% endcase %}
+        {% endfor %}
       </div>
     </div>
   </div>
@@ -301,10 +315,65 @@
       "default": "full-width"
     }
   ],
+  "blocks": [
+    {
+      "type": "@app"
+    },
+    {
+      "type": "vendor",
+      "name": "Vendor"
+    },
+    {
+      "type": "name",
+      "name": "Name"
+    },
+    {
+      "type": "price",
+      "name": "Price"
+    },
+    {
+      "type": "variants_selector",
+      "name": "Variants selector"
+    },
+    {
+      "type": "quantity",
+      "name": "Quantity"
+    },
+    {
+      "type": "buttons",
+      "name": "Button"
+    },
+    {
+      "type": "product-link",
+      "name": "Product link"
+    }
+  ],
   "presets": [
     {
       "name": "Featured product",
-      "blocks": []
+      "blocks": [
+        {
+          "type": "vendor"
+        },
+        {
+          "type": "name"
+        },
+        {
+          "type": "price"
+        },
+        {
+          "type": "variants_selector"
+        },
+        {
+          "type": "quantity"
+        },
+        {
+          "type": "buttons"
+        },
+        {
+          "type": "product-link"
+        }
+      ]
     }
   ]
 }

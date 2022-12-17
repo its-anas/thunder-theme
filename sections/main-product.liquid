@@ -118,6 +118,8 @@
         {% form 'product', product, class: 'product-page__form' %}
           {% for block in section.blocks %}
             {% case block.type %}
+              {%- when '@app' -%}
+                {% render block %}
               {% when 'vendor' %}
                 <div class="product-page__vendor" {{ block.shopify_attributes }}>
                   <p>{{ product.vendor }}</p>
@@ -597,6 +599,9 @@
     }
   ],
   "blocks": [
+    {
+      "type": "@app"
+    },
     {
       "type": "vendor",
       "name": "Vendor",

@@ -3,6 +3,8 @@
 
 {% for block in section.blocks %}
   {% case block.type %}
+    {%- when '@app' -%}
+      {% render block %}
     {% when 'product_description_tab' %}
       <div class="product-page__tabs">
         <product-page-tabs data-set-initial-state="expanded" class="product-page__tabs">
@@ -98,6 +100,9 @@
   "name": "Product tabs",
   "class": "main-product-tabs",
   "blocks": [
+    {
+      "type": "@app"
+    },
     { "type": "product_description_tab", "limit": 1, "name": "Product description", "limit": 1, "settings": [] },
     {
       "type": "tab",

@@ -1,0 +1,19 @@
+{%- for block in section.blocks -%}
+  {% render block %}
+{%- endfor -%}
+
+{% schema %}
+{
+  "name": "Apps",
+  "blocks": [
+    {
+      "type": "@app"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Apps"
+    }
+  ]
+}
+{% endschema %}

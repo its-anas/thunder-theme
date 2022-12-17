@@ -25,6 +25,8 @@
     %}
     {%- for block in section.blocks -%}
       {%- case block.type -%}
+        {%- when '@app' -%}
+          {% render block %}
         {%- when 'title' -%}
           <div class="article__head" {{ block.shopify_attributes }}>
             <h3 class="article__title">{{ article.title | escape }}</h3>
@@ -248,6 +250,9 @@
     }
   ],
   "blocks": [
+    {
+      "type": "@app"
+    },
     {
       "type": "title",
       "name": "Title",
