@@ -12,7 +12,12 @@
         "order-note": {
           "type": "order-note"
         }
-      }
+      },
+      "block_order": [
+        "total-price",
+        "checkout-button",
+        "order-note"
+      ]
     },
     "recently-viewed-products": {
       "type": "section-recently-viewed-products"
