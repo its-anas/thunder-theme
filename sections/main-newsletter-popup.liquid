@@ -53,7 +53,6 @@
             {% form 'customer', class: 'newsletter__form' %}
               <div class="newsletter__container">
                 <input
-                  id=""
                   type="email"
                   name="contact[email]"
                   class="newsletter__input"
@@ -61,13 +60,9 @@
                   autocorrect="off"
                   autocapitalize="off"
                   autocomplete="email"
-                  {% if form.errors %}
-                    autofocus
-                  {% endif %}
                   placeholder="Type your email address"
                   required
                 >
-
                 <button
                   type="submit"
                   class="newsletter__button"
@@ -99,7 +94,7 @@
               </div>
             {% endif %}
 
-            <a class="popup__link link">{{ section.settings.reject_text }}</a>
+            <span class="popup__link underline secondary-text">{{ section.settings.reject_text }}</span>
           </div>
         </div>
       </div>

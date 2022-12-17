@@ -85,7 +85,7 @@
                   <p class="newsletter__text">{{ block.settings.newsletter_text }}</p>
                 {% endif %}
 
-                {% form 'customer', class: 'newsletter__form', id: 'newsletter-form' %}
+                {% form 'customer', class: 'newsletter__form', onsubmit: 'send(event,this)' %}
                   <input type="hidden" name="contact[tags]" value="newsletter">
                   <div class="newsletter__container">
                     <input
@@ -170,19 +170,6 @@
     </div>
   </div>
 </section>
-
-{% comment %}
-   <script defer>
-    let footerNewsletterForm = document.getElementById('newsletter-form');
-
-    footerNewsletterForm.addEventListener('submit', function (event) {
-      event.preventDefault();
-      let formData = new FormData(footerNewsletterForm);
-      let payload = new URLSearchParams(formData);
-      console.log(payload);
-    });
-  </script>
-{% endcomment %}
 
 {% schema %}
 {

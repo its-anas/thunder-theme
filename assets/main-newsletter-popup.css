@@ -183,3 +183,14 @@
 	width: 100%;
 	transform: translate(0, 0);
 }
+
+.popup .form__messages__success {
+	padding: 0rem;
+}
+.popup .form__messages__success span {
+	padding: 1rem;
+}
+
+.popup__link {
+	cursor: pointer;
+}

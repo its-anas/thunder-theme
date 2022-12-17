@@ -1887,14 +1887,15 @@ class PopupComponent extends HTMLElement {
 						.join("=")
 			  )
 			: "";
-		this.decideDrawerAction();
 
+		this.form = this.querySelector("form");
+		this.decideDrawerAction();
 		this.attachShadow({ mode: "open" });
 		this.shadowRoot.innerHTML = "<slot></slot>";
 	}
 
-	saveInCookie() {
-		let popupMessage = "closed";
+	saveInCookie(state) {
+		let popupMessage = state;
 		let message = JSON.stringify(popupMessage);
 		if (!Shopify.designMode) {
 			// let expiry = new Date(400 * 24 * 60 * 60 * 1000 + Date.parse(new Date()));
@@ -1943,11 +1944,17 @@ class PopupComponent extends HTMLElement {
 			this.drawer.classList.remove("border");
 		}, 300);
 
-		this.saveInCookie();
+		this.saveInCookie("closed");
 	}
 
 	decideDrawerAction() {
-		if (!Shopify.designMode && this.drawer.classList.contains("hidden")) {
+		this.form.addEventListener("submit", () => {
+			this.saveInCookie("sent");
+		});
+
+		if (this.cookie === "sent") {
+			this.openPopupDrawer();
+		} else if (!Shopify.designMode && this.drawer.classList.contains("hidden")) {
 			setTimeout(() => {
 				this.openPopupDrawer();
 			}, this.delayTime);
@@ -1971,6 +1978,12 @@ class PopupComponent extends HTMLElement {
 		}
 
 		document.querySelector(".popup__close").addEventListener("click", () => {
+			if (this.drawer.classList.contains("active")) {
+				this.hidePopupDrawer();
+			}
+		});
+
+		document.querySelector(".popup__link").addEventListener("click", () => {
 			if (this.drawer.classList.contains("active")) {
 				this.hidePopupDrawer();
 			}
