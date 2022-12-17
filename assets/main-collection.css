@@ -230,7 +230,6 @@
 
 .collection__item__tag .tag-text {
 	color: var(--button-animation-color);
-	font-size: 0.7rem;
 }
 
 .collection__item .quick-view-button {
@@ -241,7 +240,7 @@
 }
 
 .collection__item__name {
-	font-size: 0.9rem;
+	font-size: var(--small-font-size);
 	text-align: center;
 }
 

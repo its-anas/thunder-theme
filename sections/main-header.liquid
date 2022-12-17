@@ -78,7 +78,7 @@
       <a href="/" class="header__logo-container">
         {% if section.settings.logo_type == 'svg' %}
           {% if section.settings.logo_svg == blank %}
-            <p style="text-transform: uppercase; font-size: 1.2rem; font-weight: bold; text-align: center; color: {{ section.settings.content_color }};">
+            <p class="logo--text" style="text-align: center; color: {{ section.settings.content_color }};">
               {{ shop.name }}
             </p>
           {% else %}
@@ -86,7 +86,7 @@
           {% endif %}
         {% elsif section.settings.logo_type == 'image' %}
           {% if section.settings.logo_image == blank %}
-            <p style="text-transform: uppercase; font-size: 1.2rem; font-weight: bold; text-align: center; color: {{ section.settings.content_color }};">
+            <p class="logo--text" style="text-align: center; color: {{ section.settings.content_color }};">
               {{ shop.name }}
             </p>
           {% else %}

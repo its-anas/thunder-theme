@@ -341,10 +341,6 @@
 	gap: 0.7rem;
 }
 
-.product-page__price--compare-at {
-	font-size: 0.9rem;
-}
-
 .product-page__tag {
 	display: flex;
 	max-height: 100px;
@@ -360,7 +356,7 @@
 
 .product-page__tag .tag--animated {
 	color: var(--button-animation-color);
-	font-size: 0.8rem;
+	font-size: var(--xsmall-font-size);
 }
 
 .product-page__form {
@@ -409,7 +405,7 @@
 .product-page .shopify-payment-button__button--hidden {
 	visibility: visible;
 	color: var(--text-color);
-	font-size: 0.8rem;
+	font-size: var(--xsmall-font-size);
 	text-decoration: underline;
 }
 
@@ -500,12 +496,12 @@
 }
 
 .product-page__trust-text {
-	font-size: 0.6rem;
+	font-size: var(--xxxsmall-font-size);
 }
 
 @media screen and (min-width: 750px) {
 	.product-page__trust-text {
-		font-size: 0.8rem;
+		font-size: var(--xsmall-font-size);
 	}
 }
 

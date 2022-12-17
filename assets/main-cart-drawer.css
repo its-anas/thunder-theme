@@ -98,7 +98,7 @@
 }
 
 .cart-drawer__product__details-middle .product-variant {
-	font-size: 0.8rem;
+	font-size: var(--xsmall-font-size);
 	color: #aaaaaa;
 }
 
@@ -190,11 +190,11 @@
 
 .cart-drawer__interaction .bottom .order-note {
 	cursor: pointer;
-	font-size: 0.7rem;
+	font-size: var(--xxsmall-font-size);
 }
 
 .cart-drawer__interaction .bottom .disclaimer {
-	font-size: 0.6rem;
+	font-size: var(--xxxsmall-font-size);
 	color: #aaaaaa;
 }
 
@@ -298,11 +298,11 @@
 
 .cart-drawer .recommended-product__details .product-name,
 .cart-drawer .recommended-product__details .price--actual {
-	font-size: 0.8rem;
+	font-size: var(--xsmall-font-size);
 }
 
 .cart-drawer .recommended-product__details .button--link {
-	font-size: 0.6rem;
+	font-size: var(--xxxsmall-font-size);
 }
 
 .cart-drawer__note-popup {

@@ -54,10 +54,6 @@
 	}
 }
 
-.footer__heading {
-	font-size: 1rem;
-}
-
 .footer__item {
 	display: flex;
 	flex-direction: column;

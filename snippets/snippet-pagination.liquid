@@ -4,7 +4,7 @@
       {% if paginate.previous %}
         <a href="{{ paginate.previous.url }}{{ anchor }}">
           <svg
-            class="pagination--arrow-left"
+            class="pagination__arrow-left"
             width="24"
             height="25"
             viewBox="0 0 24 25"
@@ -26,11 +26,11 @@
           </a>
         {%- else -%}
           {%- if part.title == paginate.current_page -%}
-            <a style="background-color: #1a1a1a; font-weight: bolder;">
+            <a class="pagination__number">
               {{- part.title -}}
             </a>
           {%- else -%}
-            <span class="pagination__item">{{ part.title }}</span>
+            <span>{{ part.title }}</span>
           {%- endif -%}
         {%- endif -%}
       {%- endfor -%}
@@ -38,7 +38,7 @@
       {% if paginate.next %}
         <a href="{{ paginate.next.url }}{{ anchor }}">
           <svg
-            class="pagination--arrow-right"
+            class="pagination__arrow-right"
             width="24"
             height="25"
             viewBox="0 0 24 25"

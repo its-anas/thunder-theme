@@ -54,7 +54,7 @@
                     "max": 20,
                     "step": 1,
                     "unit": "px",
-                    "default": 15
+                    "default": 16
                },
                {
                     "type": "header",
@@ -85,7 +85,7 @@
                               "label": "1.414 - Augmented Fourth"
                          }
                     ],
-                    "default": "1.250"
+                    "default": "1.125"
                }
           ]
      },

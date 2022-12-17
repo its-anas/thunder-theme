@@ -162,7 +162,7 @@ quick-view-component .quick-view__radio__label {
 
 @media screen and (max-width: 1024px) {
 	quick-view-component .quick-view__radio__label {
-		font-size: 0.8rem;
+		font-size: var(--xsmall-font-size);
 		padding: 0.8rem;
 	}
 }
@@ -212,7 +212,7 @@ quick-view-component .quick-view__details {
 }
 
 quick-view-component .quick-view__product-url {
-	font-size: 0.8rem;
+	font-size: var(--xsmall-font-size);
 }
 
 quick-view-component .quick-view__content {

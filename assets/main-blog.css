@@ -81,6 +81,6 @@
 }
 
 .blog__article__publication-date {
-	font-size: 0.8rem;
+	font-size: var(--xsmall-font-size);
 	color: rgb(175, 175, 175);
 }

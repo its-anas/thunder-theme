@@ -4,6 +4,7 @@
   .{{ section.id }}.slideshow {
     margin-top: {{ section.settings.space_outside | divided_by: 2 }}px;
     margin-bottom: {{ section.settings.space_outside | divided_by: 2 }}px;
+    height: {{ section.settings.image_height }}px;
   }
 
   .{{ section.id }}.slideshow__picture > .media > img {
@@ -23,10 +24,6 @@
   }
 
   @media screen and (min-width: 750px) {
-    .{{ section.id }}.slideshow {
-      height: {{ section.settings.image_height }}px;
-    }
-
     .{{ section.id }}-text-width {
           width: {{ section.settings.text_width }}%;
     }
@@ -38,11 +35,9 @@
   data-delay-time="{{ section.settings.autoplay_delay_time | times: 1000 }}"
 >
   <div class="{{ section.id }} slideshow {{ section.settings.section_style }}">
-    {% comment %} slides {% endcomment %}
     <div class="slideshow__container">
       {% for block in section.blocks %}
         <div class="slideshow__slide" {{ block.shopify_attributes }}>
-          {% comment %} Picture {% endcomment %}
           <div class="{{ section.id }} slideshow__picture">
             {%- if block.settings.image == blank -%}
               {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder' }}
@@ -52,9 +47,7 @@
               </div>
             {%- endif -%}
           </div>
-          {% comment %} Picture end {% endcomment %}
 
-          {% comment %} Content {% endcomment %}
           <div class="slideshow__content vertical--{{ section.settings.vertical_position }}">
             <div class="{{ section.id }} slideshow__box container text-alignment--{{ section.settings.text_alignment }} {{ section.id }}-text-width horizontal--{{ section.settings.horizontal_position }}">
               <{{ block.settings.subheading_size }}>
@@ -93,12 +86,10 @@
               </div>
             </div>
           </div>
-          {% comment %} Content end {% endcomment %}
         </div>
       {% endfor %}
     </div>
 
-    {% comment %} chevrons {% endcomment %}
     <div class="chevrons">
       <span class="prev">
         {% render 'snippet-icons', icon: 'chevron-prev' -%}
@@ -108,7 +99,6 @@
       </span>
     </div>
 
-    {% comment %} indicators {% endcomment %}
     <div class="slideshow__indicators"></div>
   </div>
 </slideshow-section>

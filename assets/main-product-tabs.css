@@ -39,7 +39,7 @@
 
 .main-product-tabs .product-page__tab-title-text {
 	padding-left: 0.5rem;
-	font-size: 1rem;
+	font-size: var(--font-size);
 }
 
 .main-product-tabs .product-page__tab-title-svg {

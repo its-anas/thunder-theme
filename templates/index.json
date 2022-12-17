@@ -41,7 +41,7 @@
                "settings": {
                     "enable_autoplay": true,
                     "autoplay_delay_time": 4,
-                    "image_height": 500,
+                    "image_height": 700,
                     "vertical_position": "bottom",
                     "horizontal_position": "left",
                     "text_alignment": "left",

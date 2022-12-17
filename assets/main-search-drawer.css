@@ -61,11 +61,11 @@
 }
 
 .search-drawer__container .preload .group > h6 {
-	font-size: 0.8rem;
+	font-size: var(--xsmall-font-size);
 }
 
 .search-drawer__container .preload .group > a {
-	font-size: 0.8rem;
+	font-size: var(--xsmall-font-size);
 	font-weight: 100;
 	color: white;
 	text-transform: capitalize;

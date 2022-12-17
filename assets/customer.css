@@ -92,7 +92,7 @@
 }
 
 .customer__form__errors-list__item span {
-	font-size: 0.9rem;
+	font-size: var(--small-font-size);
 	color: #fa6464;
 }
 
@@ -101,7 +101,7 @@
 }
 
 .customer__form__success span {
-	font-size: 0.9rem;
+	font-size: var(--small-font-size);
 	color: #4bb543;
 }
 
@@ -342,7 +342,7 @@
 
 .customer-table .button--link,
 .customer-table .button--link {
-	font-size: 1rem;
+	font-size: var(--font-size);
 }
 
 /* ANCHOR: Customer-addresses */

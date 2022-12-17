@@ -133,8 +133,6 @@ details[open] svg {
 	background-color: transparent;
 	text-align: right;
 	color: #fff;
-	font-size: var(--font-size);
-	font-family: var(--font-family);
 }
 
 .filter-group__price-range__currency-symbol {

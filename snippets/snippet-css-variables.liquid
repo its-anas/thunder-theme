@@ -4,9 +4,22 @@
      --font-style: {{ settings.font_type.style }};
      --font-weight: {{ settings.font_type.weight }};
      --font-weight-bold: {{ settings.font_type.weight | plus: 300 | at_most: 1000 }};
-     --font-size: {{ settings.size | minus: 1 }}px;
-     --font-size-type-scale: {{ settings.size | minus: 1 }};
-     --font-type-scale: {{ settings.type_scale | times: 0.9 }};
+     --font-size: {{ settings.size }}px;
+     --font-size-type-scale: {{ settings.size }};
+     --font-type-scale: {{ settings.type_scale }};
+     --h1-font-size: calc((((((var(--font-size-type-scale) * var(--font-type-scale)) * var(--font-type-scale)) * var(--font-type-scale)) * var(--font-type-scale)) * var(--font-type-scale)) * var(--font-type-scale) * 1px);
+     --h2-font-size: calc(((((var(--font-size-type-scale) * var(--font-type-scale)) * var(--font-type-scale)) * var(--font-type-scale)) * var(--font-type-scale)) * var(--font-type-scale) * 1px);
+     --h3-font-size: calc((((var(--font-size-type-scale) * var(--font-type-scale)) * var(--font-type-scale)) * var(--font-type-scale)) * var(--font-type-scale) * 1px);
+     --h4-font-size: calc(((var(--font-size-type-scale) * var(--font-type-scale)) * var(--font-type-scale)) * var(--font-type-scale) * 1px);
+     --h5-font-size: calc(var(--font-size-type-scale) * (var(--font-type-scale) * var(--font-type-scale) * 1px));
+     --h6-font-size: calc(var(--font-size-type-scale) * var(--font-type-scale) * 1px);
+
+     --xlarge-font-size: calc(var(--font-size-type-scale) * var(--font-type-scale)  * var(--font-type-scale) * 1px);
+     --small-font-size: calc(var(--font-size-type-scale) / var(--font-type-scale) * 1px);
+     --xsmall-font-size: calc(var(--font-size-type-scale) / var(--font-type-scale) / var(--font-type-scale) * 1px);
+     --xxsmall-font-size: calc(var(--font-size-type-scale) / var(--font-type-scale) / var(--font-type-scale) / var(--font-type-scale) * 1px);
+     --xxxsmall-font-size: calc(var(--font-size-type-scale) / var(--font-type-scale) / var(--font-type-scale) / var(--font-type-scale) / var(--font-type-scale) * 1px);
+     --xxxxsmall-font-size: calc(var(--font-size-type-scale) / var(--font-type-scale) / var(--font-type-scale) / var(--font-type-scale) / var(--font-type-scale) / var(--font-type-scale) * 1px);
 
      --headings-color: {{ settings.headings_color }}; --text-color: {{ settings.text_color }};
      --background-color : {{ settings.page_background_color }};
@@ -29,13 +42,6 @@
      --button-border-radius-hover : {{ settings.button_border_radius_hover }}px;
      --block-border-radius : {{ settings.block_border_radius }}px;
      --wrapped-content-width: {{ settings.wrapped_content_width }}px;
-     --h1-font-size: calc((((((var(--font-size-type-scale) * var(--font-type-scale)) * var(--font-type-scale)) * var(--font-type-scale)) * var(--font-type-scale)) * var(--font-type-scale)) * var(--font-type-scale) * 1px); --h2-font-size: calc(((((var(--font-size-type-scale) * var(--font-type-scale)) * var(--font-type-scale)) * var(--font-type-scale)) * var(--font-type-scale)) * var(--font-type-scale) * 1px);
-     --h3-font-size: calc((((var(--font-size-type-scale) * var(--font-type-scale)) * var(--font-type-scale)) * var(--font-type-scale)) * var(--font-type-scale) * 1px);
-     --h4-font-size: calc(((var(--font-size-type-scale) * var(--font-type-scale)) * var(--font-type-scale)) * var(--font-type-scale) * 1px);
-
-     --h5-font-size: calc(var(--font-size-type-scale) * (var(--font-type-scale) * var(--font-type-scale) * 1px));
-     --h6-font-size: calc(var(--font-size-type-scale) * var(--font-type-scale) * 1px);
-     --tag-font-size: calc(((var(--font-size-type-scale) / var(--font-type-scale)) / var(--font-type-scale)) / var(--font-type-scale) * 1px);
 
      --button_symbol : "{{ settings.button_symbol | truncate: 2 }}" ;
      --free-shipping-threshold : {{ settings.free_shipping_threshold }} ;

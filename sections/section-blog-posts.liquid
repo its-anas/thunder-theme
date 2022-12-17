@@ -66,7 +66,7 @@
             </a>
             <a href="{{ article.url }}" class="blog-posts__container">
               <div class="blog-posts__author">
-                <p class="text label-text ">{{ article.created_at | date: format: 'abbreviated_date' }}</p>
+                <p class="text ">{{ article.created_at | date: format: 'abbreviated_date' }}</p>
               </div>
               <div class="blog-posts__title">
                 <p class="text small">{{ article.title }}</p>
@@ -84,7 +84,7 @@
               </a>
               <a class="blog-posts__container">
                 <div class="blog-posts__author">
-                  <p class="text label-text ">Publication date</p>
+                  <p class="text ">Publication date</p>
                 </div>
                 <div class="blog-posts__title">
                   <p class="text small">Article title</p>

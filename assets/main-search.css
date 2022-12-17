@@ -191,7 +191,7 @@
 
 .search__item__tag .tag-text {
 	color: var(--button-animation-color);
-	font-size: 0.7rem;
+	font-size: var(--xxsmall-font-size);
 }
 
 .quick-view-button {
@@ -202,7 +202,7 @@
 }
 
 .search__item__name {
-	font-size: 0.9rem;
+	font-size: var(--small-font-size);
 	text-align: center;
 }
 

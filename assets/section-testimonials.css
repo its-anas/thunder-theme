@@ -69,18 +69,18 @@
 }
 .testimonials__reviewer-name {
 	opacity: 60%;
-	font-size: 0.8rem;
+	font-size: var(--xsmall-font-size);
 }
 .testimonials__review {
 	width: 100%;
 	height: 100%;
 }
 .testimonials__review p {
-	font-size: 0.7rem;
+	font-size: var(--xxsmall-font-size);
 }
 @media screen and (min-width: 750px) {
 	.testimonials__review p {
-		font-size: 0.8rem;
+		font-size: var(--xsmall-font-size);
 	}
 }
 

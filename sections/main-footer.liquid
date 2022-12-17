@@ -11,7 +11,7 @@
             <div class="footer__logo">
               {% if block.settings.logo_type == 'svg' %}
                 {% if block.settings.logo_svg == blank %}
-                  <p style="text-transform: uppercase; font-size: 1.2rem; font-weight: bold;">
+                  <p class="logo--text">
                     {{ shop.name }}
                   </p>
                 {% else %}
@@ -19,7 +19,7 @@
                 {% endif %}
               {% elsif block.settings.logo_type == 'image' %}
                 {% if block.settings.logo_image == blank %}
-                  <p style="text-transform: uppercase; font-size: 1.2rem; font-weight: bold;">
+                  <p class="logo--text">
                     {{ shop.name }}
                   </p>
                 {% else %}
