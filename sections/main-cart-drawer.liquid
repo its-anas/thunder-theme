@@ -2,7 +2,7 @@
 
 {%- style -%}
   .cart-drawer__container, .cart-drawer__content--empty {
-    background-color: {{ settings.header_background_color }};
+    background-color: {{ settings.background_color }};
   }
   .recommended-products.mobile-only {
     background-color: {{ settings.secondary_background_color }};
@@ -20,6 +20,9 @@
   .cart-drawer__container, .cart-drawer__content--empty, .recommended-products.desktop-only {
     border-radius: var(--global-border-radius);
     border: var(--global-border-width) solid var(--global-border-color);
+  }
+  .cart-drawer .recommended-products.desktop-only {
+    background-color: rgb({{ settings.background_color.red }}, {{ settings.background_color.green }}, {{ settings.background_color.blue }}, 0.5);
   }
 {%- endstyle -%}
 
@@ -89,11 +92,10 @@
                   {% if cart == empty %}
                     disabled
                   {% endif %}
-                  class="button button--primary border"
+                  class="button button--secondary border"
                   form="cart"
                 >
-                  <span></span> <span></span> <span></span> <span></span>
-                  CHECKOUT
+                  <span></span> <span></span> <span></span> <span></span> CHECKOUT
                 </button>
               </form>
             </div>

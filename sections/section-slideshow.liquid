@@ -19,6 +19,10 @@
     gap: {{ section.settings.space_between_elements }}rem;
   }
 
+  .{{ section.id }}.slideshow__box > * {
+    color: {{ section.settings.text_color }};
+  }
+
   .slideshow__indicators span.active::after {
     animation: load {{ section.settings.autoplay_delay_time }}s normal forwards;
   }
@@ -108,6 +112,12 @@
   "name": "Slideshow",
   "class": "section-slideshow",
   "settings": [
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
     {
       "type": "checkbox",
       "id": "enable_autoplay",

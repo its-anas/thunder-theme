@@ -18,11 +18,11 @@
   }
 
   .{{ section.id }}  > .faq__container > .faq__content > .faq__tab > .faq__question {
-    background-color: {{ section.settings.question_background_color }};
+    background-color: {{ settings.secondary_background_color }};
   }
 
   .{{ section.id }}  > .faq__container > .faq__content > .faq__tab > .faq__answer {
-    background-color: {{ section.settings.answer_background_color }};
+    background-color: {{ settings.secondary_text_color }};
   }
 
 
@@ -219,18 +219,6 @@
       "unit": "px",
       "label": "Image height",
       "default": 300
-    },
-    {
-      "type": "color",
-      "id": "question_background_color",
-      "label": "Question background color",
-      "default": "#222222"
-    },
-    {
-      "type": "color",
-      "id": "answer_background_color",
-      "label": "Answer background color",
-      "default": "#101010"
     }
   ],
   "blocks": [

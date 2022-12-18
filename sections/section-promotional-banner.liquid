@@ -10,26 +10,8 @@
   .{{ section.id }}.promotional-banner__content--style-1 {
         animation: banner-scroll {{ section.settings.animation_speed }}s linear infinite;
   }
-
   .{{ section.id }}.promotional-banner__content--style-1 > *, .{{ section.id }}.promotional-banner__content--style-2 > *:not(a) {
     color: {{ section.settings.text_color }};
-  }
-
-  .{{ section.id }}.promotional-banner__content--style-2 > a {
-    color: {{ section.settings.button_color }};
-  }
-
-  .{{ section.id }}.promotional-banner__content--style-2 > a {
-    border-color: {{ section.settings.button_color }};
-  }
-
-  .{{ section.id }}.promotional-banner__content--style-2 > a:hover {
-    color: {{ section.settings.button_color }};
-    border-color: {{ section.settings.button_color }};
-  }
-
-  .{{ section.id }}.promotional-banner__content--style-2 > a > span {
-    background-color: {{ section.settings.button_color }};
   }
 {%- endstyle -%}
 
@@ -97,12 +79,8 @@
           </p>
         {% endif %}
         {% if section.settings.style_2_button_text != blank %}
-          <a
-            class="button button--{% if section.settings.button_type == "border" and section.settings.button_style == "primary" %}primary{% else %}secondary{% endif %} {{ section.settings.button_type }}"
-            href="{{ section.settings.style_2_button_url }}"
-          >
-            <span></span> <span></span> <span></span> <span></span>
-            {{ section.settings.style_2_button_text }}
+          <a class="button button--primary border">
+            <span></span> <span></span> <span></span> <span></span> {{ section.settings.style_2_button_text -}}
           </a>
         {% endif %}
       </div>
@@ -296,44 +274,6 @@
       "type": "url",
       "id": "style_2_button_url",
       "label": "Button url"
-    },
-    {
-      "type": "select",
-      "id": "button_type",
-      "label": "Button type",
-      "options": [
-        {
-          "value": "border",
-          "label": "Button"
-        },
-        {
-          "value": " ",
-          "label": "Link"
-        }
-      ],
-      "default": "border"
-    },
-    {
-      "type": "select",
-      "id": "button_style",
-      "label": "Button style",
-      "options": [
-        {
-          "value": "primary",
-          "label": "Filled"
-        },
-        {
-          "value": "secondary",
-          "label": "Empty"
-        }
-      ],
-      "default": "secondary"
-    },
-    {
-      "type": "color",
-      "id": "button_color",
-      "label": "Button color",
-      "default": "#fcdb33"
     }
   ],
   "presets": [

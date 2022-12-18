@@ -7,15 +7,21 @@
   }
 
   .menu-mobile__parent-childs.active.border, .menu-mobile__child-childs.active.border, .menu-mobile__account {
-    border-top: 1px solid {{ settings.global_border_color }};
+    border-top: 1px solid var(--text-color);
   }
 
-  .header__content, .menu-mobile__container, .menu-mobile__headr, .menu-mobile__parent-title, .menu-mobile__child-title, .menu-mobile__child-childs, .menu__dropdown-content {
+  .header__content {
     background-color: {{ settings.header_background_color }};
    }
+  .menu-mobile__container, .menu-mobile__headr, .menu-mobile__parent-title, .menu-mobile__child-title, .menu-mobile__child-childs, .menu__dropdown-content {
+    background-color: {{ settings.background_color }};
+   }
 
-  .menu__parent-title, .menu__child-title, .menu__grandchild, .menu__child.filled::after, .menu-mobile__parent-title h6 a, .menu-mobile__child-title .text,  .menu-mobile__grandchild-title, .menu-mobile__title h6, .menu-mobile__account a {
+  .menu__parent-title {
     color: {{ settings.header_content_color }};
+  }
+  .menu__child-title, .menu__grandchild, .menu__child.filled::after, .menu-mobile__parent-title h6 a, .menu-mobile__child-title .text,  .menu-mobile__grandchild-title, .menu-mobile__title h6, .menu-mobile__account a {
+    color: var(--text-color);
   }
 
   @media screen and (min-width: 1024px) {

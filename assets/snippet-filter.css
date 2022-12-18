@@ -114,7 +114,7 @@ details[open] svg {
 .filter-group__price-range__from-input {
 	position: relative;
 	padding: 0.5rem;
-	border: 1px solid white;
+	border: 1px solid var(--global-border-color);
 	width: 100%;
 	border-radius: var(--global-border-radius);
 }

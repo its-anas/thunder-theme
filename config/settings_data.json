@@ -1,5 +1,22 @@
 {
   "current": {
+    "heading_color": "#ffffff",
+    "text_color": "#ffffff",
+    "background_color": "#000000",
+    "secondary_background_color": "#282828",
+    "header_content_color": "#ffffff",
+    "header_background_color": "#000000",
+    "primary_button_text_color": "#282828",
+    "primary_button_background_color": "#fcdb33",
+    "primary_button_border_color": "#fcdb33",
+    "secondary_button_text_color": "#282828",
+    "secondary_button_background_color": "#fcdb33",
+    "secondary_button_border_color": "#fcdb33",
+    "button_text_border_hover_color": "#fcdb33",
+    "button_animation_color": "#fcdb33",
+    "global_border_color": "#ffffff",
+    "global_border_radius": 0,
+    "button_border_width": 1,
     "header_layout": "header_first",
     "header_full_width": false,
     "social_facebook_link": "https:\/\/facebook.com",
@@ -22,7 +39,7 @@
             "type": "text_with_countdown",
             "settings": {
               "text": "Put your text here",
-              "digits_color": "#000000",
+              "digits_color": "#282828",
               "digits_background_color": "rgba(0,0,0,0)",
               "message": "Offer ended",
               "countdown_timer_type": "time",
@@ -168,5 +185,379 @@
       }
     },
     "content_for_index": []
+  },
+  "presets": {
+    "Thunder": {
+      "heading_color": "#ffffff",
+      "text_color": "#ffffff",
+      "background_color": "#000000",
+      "secondary_background_color": "#282828",
+      "header_content_color": "#ffffff",
+      "header_background_color": "#000000",
+      "primary_button_text_color": "#282828",
+      "primary_button_background_color": "#fcdb33",
+      "primary_button_border_color": "#fcdb33",
+      "secondary_button_text_color": "#282828",
+      "secondary_button_background_color": "#fcdb33",
+      "secondary_button_border_color": "#fcdb33",
+      "button_text_border_hover_color": "#fcdb33",
+      "button_animation_color": "#fcdb33",
+      "global_border_color": "#ffffff",
+      "global_border_radius": 0,
+      "button_border_width": 1,
+      "header_layout": "header_first",
+      "header_full_width": false,
+      "social_facebook_link": "https:\/\/facebook.com",
+      "social_instagram_link": "https:\/\/instagram.com",
+      "social_twitter_link": "https:\/\/twitter.com",
+      "sections": {
+        "main-header": {
+          "type": "main-header",
+          "settings": {
+            "logo_type": "svg",
+            "logo_svg": "",
+            "menu": "main-menu",
+            "menu_layout": "logo_first"
+          }
+        },
+        "main-announcement-bar": {
+          "type": "main-announcement-bar",
+          "blocks": {
+            "text_with_countdown": {
+              "type": "text_with_countdown",
+              "settings": {
+                "text": "Put your text here",
+                "digits_color": "#282828",
+                "digits_background_color": "rgba(0,0,0,0)",
+                "message": "Offer ended",
+                "countdown_timer_type": "time",
+                "time_days": 0,
+                "time_hours": 6,
+                "time_mins": 0,
+                "time_secs": 0,
+                "afterExpirationTimeOnly": "repeatCountdown",
+                "date_year": 2023,
+                "date_month": 1,
+                "date_day": 1,
+                "date_hour": 0,
+                "date_min": 0
+              }
+            }
+          },
+          "block_order": [
+            "text_with_countdown"
+          ],
+          "settings": {
+            "show_announcement_bar": true,
+            "enable_autoplay": true,
+            "autoplay_delay_time": 4,
+            "background_color": "#fcdb33",
+            "text_color": "#000000",
+            "button_and_coupon_color": "#000000"
+          }
+        },
+        "main-search-drawer": {
+          "type": "main-search-drawer",
+          "blocks": {
+            "products": {
+              "type": "products",
+              "settings": {
+                "group_name": "Popular products",
+                "product_1": "",
+                "product_2": "",
+                "product_3": ""
+              }
+            },
+            "collections": {
+              "type": "collections",
+              "settings": {
+                "group_name": "Popular collections",
+                "collection_1": "",
+                "collection_2": "",
+                "collection_3": ""
+              }
+            },
+            "menu2": {
+              "type": "menu",
+              "settings": {
+                "group_name": "Menu",
+                "menu": ""
+              }
+            }
+          },
+          "block_order": [
+            "products",
+            "collections",
+            "menu2"
+          ],
+          "settings": {}
+        },
+        "main-cart-drawer": {
+          "type": "main-cart-drawer",
+          "settings": {
+            "show_cart_recommended_products": true
+          }
+        },
+        "main-popup": {
+          "type": "main-popup",
+          "settings": {
+            "enable_popup": true,
+            "show_social_media_icons": true,
+            "show_image": true,
+            "delay_time": 5,
+            "heading": "GET 10% OFF",
+            "text": "Subscribe to our newsletter and we’ll send you a 10% discount code towards your first purchase.",
+            "reject_text": "No thanks, I prefer to pay full price",
+            "background_color": "#222222"
+          }
+        },
+        "main-footer": {
+          "type": "main-footer",
+          "blocks": {
+            "logo": {
+              "type": "logo",
+              "settings": {
+                "logo_type": "svg",
+                "logo_svg": ""
+              }
+            },
+            "menu": {
+              "type": "menu",
+              "settings": {
+                "menu": ""
+              }
+            },
+            "information": {
+              "type": "information",
+              "settings": {
+                "information_heading": "Company",
+                "phone": "+123 456 7891",
+                "email": "business@email.com",
+                "address": "Address"
+              }
+            },
+            "social_media": {
+              "type": "social_media",
+              "settings": {
+                "social_media_heading": "Follow"
+              }
+            },
+            "newsletter": {
+              "type": "newsletter",
+              "settings": {
+                "newsletter_heading": "Newsletter",
+                "newsletter_text": "Subscribe to get special offers, free giveaways, and once in a lifetime deals."
+              }
+            }
+          },
+          "block_order": [
+            "logo",
+            "menu",
+            "information",
+            "social_media",
+            "newsletter"
+          ],
+          "settings": {
+            "show_currency_selector": false,
+            "show_payment_methods": true,
+            "payment_methods_type": "enabled",
+            "chosen_payment_methods": "paypal,visa,master,american_express,discover,shopify_pay"
+          }
+        },
+        "main-quick-view": {
+          "type": "main-quick-view",
+          "settings": {
+            "variant_selector_type": "dropdown",
+            "color_selector_type": "dropdown"
+          }
+        }
+      }
+    },
+    "Bolt": {
+      "heading_color": "#282828",
+      "text_color": "#282828",
+      "background_color": "#ffffff",
+      "secondary_background_color": "#f2f2f2",
+      "header_content_color": "#ffffff",
+      "header_background_color": "#282828",
+      "primary_button_text_color": "#282828",
+      "primary_button_background_color": "#fcdb33",
+      "primary_button_border_color": "#fcdb33",
+      "secondary_button_text_color": "#282828",
+      "secondary_button_background_color": "#fcdb33",
+      "secondary_button_border_color": "#fcdb33",
+      "button_text_border_hover_color": "#282828",
+      "button_animation_color": "#282828",
+      "global_border_color": "rgba(0,0,0,0)",
+      "global_border_radius": 8,
+      "button_border_width": 1,
+      "header_layout": "header_first",
+      "header_full_width": false,
+      "social_facebook_link": "https:\/\/facebook.com",
+      "social_instagram_link": "https:\/\/instagram.com",
+      "social_twitter_link": "https:\/\/twitter.com",
+      "sections": {
+        "main-header": {
+          "type": "main-header",
+          "settings": {
+            "logo_type": "svg",
+            "logo_svg": "",
+            "menu": "main-menu",
+            "menu_layout": "logo_first"
+          }
+        },
+        "main-announcement-bar": {
+          "type": "main-announcement-bar",
+          "blocks": {
+            "text_with_countdown": {
+              "type": "text_with_countdown",
+              "settings": {
+                "text": "Put your text here",
+                "digits_color": "#282828",
+                "digits_background_color": "rgba(0,0,0,0)",
+                "message": "Offer ended",
+                "countdown_timer_type": "time",
+                "time_days": 0,
+                "time_hours": 6,
+                "time_mins": 0,
+                "time_secs": 0,
+                "afterExpirationTimeOnly": "repeatCountdown",
+                "date_year": 2023,
+                "date_month": 1,
+                "date_day": 1,
+                "date_hour": 0,
+                "date_min": 0
+              }
+            }
+          },
+          "block_order": [
+            "text_with_countdown"
+          ],
+          "settings": {
+            "show_announcement_bar": true,
+            "enable_autoplay": true,
+            "autoplay_delay_time": 4,
+            "background_color": "#fcdb33",
+            "text_color": "#000000",
+            "button_and_coupon_color": "#000000"
+          }
+        },
+        "main-search-drawer": {
+          "type": "main-search-drawer",
+          "blocks": {
+            "products": {
+              "type": "products",
+              "settings": {
+                "group_name": "Popular products",
+                "product_1": "",
+                "product_2": "",
+                "product_3": ""
+              }
+            },
+            "collections": {
+              "type": "collections",
+              "settings": {
+                "group_name": "Popular collections",
+                "collection_1": "",
+                "collection_2": "",
+                "collection_3": ""
+              }
+            },
+            "menu2": {
+              "type": "menu",
+              "settings": {
+                "group_name": "Menu",
+                "menu": ""
+              }
+            }
+          },
+          "block_order": [
+            "products",
+            "collections",
+            "menu2"
+          ],
+          "settings": {}
+        },
+        "main-cart-drawer": {
+          "type": "main-cart-drawer",
+          "settings": {
+            "show_cart_recommended_products": true
+          }
+        },
+        "main-popup": {
+          "type": "main-popup",
+          "settings": {
+            "enable_popup": true,
+            "show_social_media_icons": true,
+            "show_image": true,
+            "delay_time": 5,
+            "heading": "GET 10% OFF",
+            "text": "Subscribe to our newsletter and we’ll send you a 10% discount code towards your first purchase.",
+            "reject_text": "No thanks, I prefer to pay full price",
+            "background_color": "#222222"
+          }
+        },
+        "main-footer": {
+          "type": "main-footer",
+          "blocks": {
+            "logo": {
+              "type": "logo",
+              "settings": {
+                "logo_type": "svg",
+                "logo_svg": ""
+              }
+            },
+            "menu": {
+              "type": "menu",
+              "settings": {
+                "menu": ""
+              }
+            },
+            "information": {
+              "type": "information",
+              "settings": {
+                "information_heading": "Company",
+                "phone": "+123 456 7891",
+                "email": "business@email.com",
+                "address": "Address"
+              }
+            },
+            "social_media": {
+              "type": "social_media",
+              "settings": {
+                "social_media_heading": "Follow"
+              }
+            },
+            "newsletter": {
+              "type": "newsletter",
+              "settings": {
+                "newsletter_heading": "Newsletter",
+                "newsletter_text": "Subscribe to get special offers, free giveaways, and once in a lifetime deals."
+              }
+            }
+          },
+          "block_order": [
+            "logo",
+            "menu",
+            "information",
+            "social_media",
+            "newsletter"
+          ],
+          "settings": {
+            "show_currency_selector": false,
+            "show_payment_methods": true,
+            "payment_methods_type": "enabled",
+            "chosen_payment_methods": "paypal,visa,master,american_express,discover,shopify_pay"
+          }
+        },
+        "main-quick-view": {
+          "type": "main-quick-view",
+          "settings": {
+            "variant_selector_type": "dropdown",
+            "color_selector_type": "dropdown"
+          }
+        }
+      }
+    }
   }
 }

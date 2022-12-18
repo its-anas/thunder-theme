@@ -212,7 +212,8 @@ label {
 	font-size: var(--xxsmall-font-size);
 }
 
-.button--link {
+.button--link,
+.button--link:after {
 	font-size: var(--xsmall-font-size);
 }
 
@@ -421,7 +422,7 @@ p[data-spam-detection-disclaimer] > a {
 	right: 0;
 	width: 100%;
 	height: 40px;
-	background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgb(0, 0, 0) 100%);
+	background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, var(--background-color) 100%);
 	transform: translateY(-98%);
 	pointer-events: none;
 }
@@ -520,11 +521,10 @@ textarea {
 
 input[type="checkbox"] {
 	position: relative;
-	-webkit-appearance: none;
 	flex: none;
 	width: 14px;
 	height: 14px;
-	border: 0.5px solid white;
+	border: 0.5px solid var(--global-border-color);
 	background-color: transparent;
 	border-radius: 0;
 	cursor: pointer;
@@ -534,12 +534,16 @@ input[type="checkbox"] {
 	border-radius: calc(var(--global-border-radius) / 2);
 }
 
+input.color-swatch {
+	-webkit-appearance: none;
+}
+
 input[type="checkbox"]:checked {
-	background-color: transparent;
+	/* background-color: transparent;
 	background-image: url("data:image/svg+xml,%3Csvg width='10' height='9' viewBox='0 0 10 9' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 4L4 7L9 1' stroke='white' stroke-width='1.5'/%3E%3C/svg%3E%0A");
 	background-position: center;
-	background-repeat: no-repeat;
-	border: 2px solid white;
+	background-repeat: no-repeat; */
+	border: 2px solid var(--global-border-color);
 }
 
 @media screen and (min-width: 1024px) {
@@ -637,7 +641,7 @@ button {
 	color: var(--secondary-button-text-color) !important;
 	text-transform: uppercase !important;
 	transition: 1s !important;
-	border: var(--button-border-width) solid var(--primary-button-border-color) !important;
+	border: var(--button-border-width) solid var(--secondary-button-border-color) !important;
 	border-radius: calc(var(--global-border-radius) / 2) !important;
 }
 
@@ -893,7 +897,7 @@ button.border.button--secondary:hover {
 	align-items: center;
 	width: 150px;
 	height: 44px;
-	border: 2px solid white;
+	border: 2px solid var(--text-color);
 	border-radius: calc(var(--global-border-radius) / 2);
 }
 
@@ -1331,7 +1335,7 @@ cart-component.hidden {
 	width: 100%;
 }
 .search-drawer__container .search-section__form {
-	border-bottom: 1px solid white;
+	border-bottom: 2px solid var(--text-color);
 }
 
 .search-form__input {
@@ -1542,7 +1546,7 @@ cart-component.hidden {
 }
 
 .newsletter__button :nth-child(1) {
-	color: var(--background-color);
+	color: var(--primary-button-text-color);
 }
 
 .newsletter__button :nth-child(2):after {

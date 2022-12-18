@@ -7,6 +7,10 @@
 
   .{{ section.id }}.gallery__content {
     background: rgba({{ section.settings.overlay_color.red }}, {{ section.settings.overlay_color.green }}, {{ section.settings.overlay_color.blue }}, {{ section.settings.overlay_opacity | divided_by: 100.0 }});
+
+  }
+  .{{ section.id }}.gallery__content > *:not(.button-text) {
+    color: {{ section.settings.text_color }};
   }
 
   @media screen and (min-width: 750px) {
@@ -161,6 +165,12 @@
       "id": "overlay_color",
       "label": "Overlay color",
       "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#ffffff"
     },
     {
       "type": "range",

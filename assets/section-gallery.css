@@ -25,10 +25,7 @@
 	flex-direction: column;
 	gap: 10px;
 }
-.gallery__content > h6,
-.gallery__content p {
-	text-shadow: 0px 1px 7px rgba(0, 0, 0, 0.5);
-}
+
 @media screen and (max-width: 750px) {
 	.gallery__content > .button {
 		margin-left: auto;

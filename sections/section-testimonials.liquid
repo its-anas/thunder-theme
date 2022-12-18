@@ -17,7 +17,7 @@
   .{{ section.id }}.testimonials__item {
     min-height: {{ section.settings.review_height | times: 0.8 }}px;
     width: {{ section.settings.review_width | times: 0.8 }}px;
-    background-color: {{ section.settings.review_background_color }};
+    background-color: {{ settings.secondary_background_color }};
     border: {{ section.settings.review_border_width }}px {{ section.settings.review_border_color }} solid;
   }
   @media screen and (min-width: 750px) {
@@ -259,12 +259,6 @@
       "unit": "px",
       "label": "Review height",
       "default": 150
-    },
-    {
-      "type": "color",
-      "id": "review_background_color",
-      "label": "Review background color",
-      "default": "#222222"
     },
     {
       "type": "color",

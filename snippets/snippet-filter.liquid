@@ -89,6 +89,7 @@
                           name="{{ filter_value.param_name }}"
                           value="{{ filter_value.value }}"
                           id="Filter-{{ filter.param_name }}-{{ forloop.index }}"
+                          class="color-swatch"
                           {% if filter_value.active -%}
                             checked
                           {%- endif %}

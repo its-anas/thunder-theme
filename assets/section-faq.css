@@ -43,6 +43,7 @@
 }
 .faq__tab:hover {
 	border: 2px solid var(--text-color);
+	border-radius: calc(var(--global-border-radius) / 2);
 }
 @media screen and (min-width: 750px) {
 	.faq__tab:hover {

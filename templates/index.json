@@ -177,7 +177,7 @@
                     "digits_color": "#000000",
                     "digits_background_color": "#fcdb33",
                     "button_color": "#fcdb33",
-                    "background_color": "#0b0b0b",
+                    "background_color": "transparent",
                     "text_width": 70,
                     "space_between_elements": 1,
                     "space_outside_elements": 0,
@@ -226,7 +226,7 @@
                "type": "section-promotional-banner",
                "settings": {
                     "banner_style": "style-1",
-                    "text_color": "#000000",
+                    "text_color": "#282828",
                     "background_color": "#fcdb33",
                     "space_outside_elements": 0,
                     "height": 80,
@@ -238,10 +238,7 @@
                     "style_2_heading_type": "h1",
                     "style_2_text": "Put the banner text here",
                     "style_2_button_text": "Primary button",
-                    "style_2_button_url": "",
-                    "button_type": "border",
-                    "button_style": "secondary",
-                    "button_color": "#fcdb33"
+                    "style_2_button_url": ""
                }
           },
           "shop-the-look": {
@@ -393,7 +390,7 @@
                "settings": {
                     "banner_style": "style-2",
                     "text_color": "#fff",
-                    "background_color": "#0b0b0b",
+                    "background_color": "#282828",
                     "space_outside_elements": 0,
                     "height": 80,
                     "section_style": "full-width",
@@ -404,10 +401,7 @@
                     "style_2_heading_type": "h6",
                     "style_2_text": "Put the banner text here",
                     "style_2_button_text": "Primary button",
-                    "style_2_button_url": "",
-                    "button_type": "border",
-                    "button_style": "secondary",
-                    "button_color": "#fcdb33"
+                    "style_2_button_url": ""
                }
           },
           "featured-collections": {
@@ -523,7 +517,7 @@
                     "video_url": "https:\/\/www.youtube.com\/watch?v=_9VUPq3SxOc",
                     "text_width": 70,
                     "button_style": "border",
-                    "background_color": "#000000",
+                    "background_color": "transparent",
                     "text_alignment": "left",
                     "text_horizontal_position": "left",
                     "space_between_elements": 1,
@@ -590,7 +584,7 @@
                     "horizontal_position": "center",
                     "text_alignment": "center",
                     "text_width": 70,
-                    "background_color": "#0b0b0b",
+                    "background_color": "transparent",
                     "space_between_elements": 1,
                     "space_outside": 0,
                     "section_style": "full-width"
@@ -658,7 +652,6 @@
                     "section_style": "full-width",
                     "review_width": 250,
                     "review_height": 150,
-                    "review_background_color": "#222",
                     "review_border_color": "#fff",
                     "review_border_width": 2
                }
@@ -708,10 +701,7 @@
                     }
                },
                "block_order": [
-                    "template--14285318160433__bf25c28c-3d03-4371-8a92-4e2dc8b83f80-16681014416a8c0f4a-0",
-                    "template--14285318160433__bf25c28c-3d03-4371-8a92-4e2dc8b83f80-16681014416a8c0f4a-1",
-                    "template--14285318160433__bf25c28c-3d03-4371-8a92-4e2dc8b83f80-16681014416a8c0f4a-2",
-                    "dfba6eb7-609a-4b79-810a-e32b44ae64a1"
+                    "template--14285318160433__bf25c28c-3d03-4371-8a92-4e2dc8b83f80-16681014416a8c0f4a-0"
                ],
                "settings": {
                     "gallery_style": "all_in_one",
@@ -774,7 +764,7 @@
                     "space_between_elements": 0.3,
                     "space_outside_elements": 0,
                     "content_width": 72,
-                    "background_color": "#0b0b0b",
+                    "background_color": "transparent",
                     "section_style": "full-width"
                }
           },
@@ -834,9 +824,7 @@
                     "space_between_elements": 1,
                     "section_style": "full-width",
                     "tabs_width": 1000,
-                    "image_height": 300,
-                    "question_background_color": "#222",
-                    "answer_background_color": "#101010"
+                    "image_height": 300
                }
           },
           "logo-list": {

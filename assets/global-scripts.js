@@ -646,7 +646,7 @@ async function updateCartDrawer() {
 			document.querySelector(".cart-drawer__products-list").innerHTML = "";
 			data.items.forEach((item) => {
 				let variantTitle = item.variant_title !== null ? `<p class="product-variant">${item.variant_title}</p>` : "";
-				let itemImage = item.image == null ? "" : `<img srcset="${item.featured_image.url}" loading="lazy" alt="${item.featured_image.alt}" width="${item.featured_image.width}" height="${item.featured_image.height}" class="full">`;
+				let itemImage = item.image == null ? "" : `<img srcset="${item.featured_image.url}" loading="lazy" alt="${item.featured_image.alt}" width="${item.featured_image.width}" height="${item.featured_image.height}" class="fit">`;
 				itemList.push(`
 					<div class="cart-drawer__product" data-variant="${item.variant_id}">
 						<a href="${item.url}" class="cart-drawer__product__image">
