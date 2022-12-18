@@ -2,12 +2,12 @@
 
 {% style %}
   .header-section.boxed .header-container .main-header .header .header__content, .menu-mobile__container, .menu__dropdown-content {
-    border-radius: {{ settings.header_border_radius }}px;
-    border: {{ settings.header_border_width }}px solid {{ settings.header_border_color }};
+    border-radius: var(--global-border-radius);
+    border: var(--global-border-width) solid var(--global-border-color);
   }
 
   .menu-mobile__parent-childs.active.border, .menu-mobile__child-childs.active.border, .menu-mobile__account {
-    border-top: 1px solid {{ settings.header_border_color }};
+    border-top: 1px solid {{ settings.global_border_color }};
   }
 
   .header__content, .menu-mobile__container, .menu-mobile__headr, .menu-mobile__parent-title, .menu-mobile__child-title, .menu-mobile__child-childs, .menu__dropdown-content {
@@ -465,7 +465,7 @@
                                 width: 600px;
                               }
                               .menu__childs.menu_parent_title--{{ menu_parent_title }} {
-                                border-right: 1px solid  {{ settings.header_border_color }};
+                                border-right: 1px solid  {{ settings.global_border_color }};
                               }
                               {% if section.settings.menu_layout == 'navigation_first' %}
                                 @media screen and (max-width: 1440px) {
@@ -602,14 +602,14 @@
                               {% if block.settings.show_tab_picture == true %}
                                 {% style %}
                                     .menu__childs.menu_parent_title--{{ menu_parent_title }} {
-                                      border-right: 1px solid  {{ settings.header_border_color }};
+                                      border-right: 1px solid  {{ settings.global_border_color }};
                                     }
                                   {% if menu_child.links.size > 0 %}
                                     .menu__dropdown.menu_parent_title--{{ menu_parent_title }} {
                                       width: 1200px !important;
                                     }
                                     .menu__grandchilds.menu_parent_title--{{ menu_parent_title }} {
-                                      border-right: 1px solid  {{ settings.header_border_color }};
+                                      border-right: 1px solid  {{ settings.global_border_color }};
                                     }
                                     .menu__content.menu_parent_title--{{ menu_parent_title }} {
                                       transform: translateX(150%);

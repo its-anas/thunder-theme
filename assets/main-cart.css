@@ -239,6 +239,7 @@
 	padding: 1rem;
 	gap: 1rem;
 	background-color: var(--secondary-background-color);
+	border-radius: var(--global-border-radius);
 }
 
 .cart-page__interaction-inner .cart-drawer__note-popup {

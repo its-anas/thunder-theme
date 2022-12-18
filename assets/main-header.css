@@ -19,9 +19,20 @@
 }
 
 /* ANCHOR: HEADER  */
+.header {
+	position: relative;
+	z-index: 2;
+}
+
 .header-section {
 	width: 100%;
 	z-index: 110;
+}
+
+@media screen and (max-width: 750px) {
+	.header-section.bottom {
+		bottom: 0px;
+	}
 }
 
 .header-section.boxed {
@@ -274,6 +285,7 @@
 	flex-direction: row;
 	align-items: flex-start;
 	height: auto;
+	overflow: hidden;
 }
 
 .menu__childs {

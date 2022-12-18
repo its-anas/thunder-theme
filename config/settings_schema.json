@@ -132,7 +132,7 @@
                },
                {
                     "type": "header",
-                    "content": "Header"
+                    "content": "Header/Drawers/Popups"
                },
                {
                     "type": "color",
@@ -145,32 +145,6 @@
                     "id": "header_background_color",
                     "label": "Background color",
                     "default": "#000"
-               },
-               {
-                    "type": "color",
-                    "id": "header_border_color",
-                    "label": "Border color",
-                    "default": "#fff"
-               },
-               {
-                    "type": "range",
-                    "id": "header_border_width",
-                    "min": 0,
-                    "max": 3,
-                    "step": 1,
-                    "unit": "px",
-                    "label": "Border width",
-                    "default": 2
-               },
-               {
-                    "type": "range",
-                    "id": "header_border_radius",
-                    "min": 0,
-                    "max": 20,
-                    "step": 1,
-                    "unit": "px",
-                    "label": "Border corners radius",
-                    "default": 0
                },
                {
                     "type": "header",
@@ -263,6 +237,16 @@
                     "id": "button_animation_color",
                     "label": "Animated border",
                     "default": "#fcdb33"
+               },
+               {
+                    "type": "header",
+                    "content": "Borders"
+               },
+               {
+                    "type": "color",
+                    "id": "global_border_color",
+                    "label": "Global border color",
+                    "default": "#fff"
                }
           ]
      },
@@ -282,6 +266,37 @@
           "settings": [
                {
                     "type": "header",
+                    "content": "Borders"
+               },
+               {
+                    "type": "range",
+                    "id": "global_border_width",
+                    "min": 0,
+                    "max": 3,
+                    "step": 1,
+                    "unit": "px",
+                    "label": "Global border width",
+                    "default": 2
+               },
+               {
+                    "type": "range",
+                    "id": "global_border_radius",
+                    "min": 0,
+                    "max": 25,
+                    "step": 1,
+                    "unit": "px",
+                    "label": "Global border radius",
+                    "default": 0
+               },
+               {
+                    "type": "checkbox",
+                    "id": "show_corner_effect",
+                    "default": true,
+                    "label": "Show animated border corners",
+                    "info": "Applies only to products listed in collection pages and some sections"
+               },
+               {
+                    "type": "header",
                     "content": "Button"
                },
                {
@@ -295,56 +310,26 @@
                     "default": 2
                },
                {
-                    "type": "range",
-                    "id": "button_border_radius",
-                    "label": "Border radius",
-                    "min": 0,
-                    "max": 20,
-                    "step": 1,
-                    "unit": "px",
-                    "default": 0
-               },
-               {
-                    "type": "range",
-                    "id": "button_border_radius_hover",
-                    "label": "Border radius - on hover",
-                    "min": 0,
-                    "max": 20,
-                    "step": 1,
-                    "unit": "px",
-                    "default": 10
+                    "type": "text",
+                    "id": "button_symbol",
+                    "label": "Button symbol",
+                    "info": "A symbol that shows up after buttons and links. e.g. 🢂➜⮕➾⤑↬⮞➤⪢⋙⇌➥↠",
+                    "default": "➜"
                },
                {
                     "type": "header",
-                    "content": "Others"
+                    "content": "Section"
                },
                {
                     "type": "range",
-                    "id": "block_border_radius",
-                    "label": "Block border radius",
-                    "min": 0,
-                    "max": 20,
-                    "step": 1,
-                    "unit": "px",
-                    "default": 0
-               },
-               {
-                    "type": "range",
-                    "id": "wrapped_content_width",
-                    "label": "Content width",
-                    "info": "Only wrapped content",
+                    "id": "wrapped_section_width",
+                    "label": "Wrapped section width",
+                    "info": "Applied only to sections that use the style 'wrapped' instead of 'full-width",
                     "min": 1025,
                     "max": 1440,
                     "step": 5,
                     "unit": "px",
                     "default": 1240
-               },
-               {
-                    "type": "text",
-                    "id": "button_symbol",
-                    "label": "Button symbol",
-                    "info": "A symbol that shows up after buttons and links - don't put more than 2 characters. e.g. 🢂➜⮕→➾⤑⇢↬⮞➤⪢⫸⪼⋙⇌⥋➥⤅↠⇴..",
-                    "default": "➜"
                }
           ]
      },
@@ -383,12 +368,6 @@
                     "id": "header_full_width",
                     "label": "Full width header",
                     "default": false
-               },
-               {
-                    "type": "checkbox",
-                    "id": "header_sticky",
-                    "label": "Sticky header",
-                    "default": true
                }
           ]
      },

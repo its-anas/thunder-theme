@@ -274,10 +274,6 @@ window.addEventListener("load", () => {
 	document.querySelector(".search-drawer").style.height = `calc(100% - ${document.querySelector(".header-section").offsetHeight}px + 8px)`;
 });
 
-window.addEventListener("resize", () => {
-	document.querySelector(".search-drawer").style.height = `calc(100% - ${document.querySelector(".header-section").offsetHeight}px + 8px)`;
-});
-
 class SearchDrawer extends PredictiveSearch {
 	constructor() {
 		super();

@@ -37,6 +37,7 @@
 }
 .contact__button {
 	background: var(--primary-button-background-color);
+	border-radius: calc(var(--global-border-radius) / 2);
 	display: grid;
 	align-items: center;
 	height: 44px;

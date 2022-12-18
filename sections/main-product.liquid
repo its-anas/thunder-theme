@@ -164,12 +164,7 @@
                             <div class="product-page__radio__content">
                               {% for value in option.values %}
                                 <label
-                                  class="
-                                    product-page__radio__label
-                                    {% if option.selected_value == value %}
-                                      checked
-                                    {% endif %}
-                                  "
+                                  class="product-page__radio__label{% if option.selected_value == value %} checked{% endif %}"
                                   for="{{ option.name | handle }}-{{ value | handle }}"
                                 >
                                   <input
@@ -204,11 +199,7 @@
                             <div class="product-page__radio__content">
                               {% for value in option.values %}
                                 <label
-                                  class="
-                                    product-page__radio__label {% if option.selected_value == value %}
-                                      checked
-                                    {% endif %}
-                                  "
+                                  class="product-page__radio__label{% if option.selected_value == value %} checked{% endif %}"
                                   for="{{ option.name | handle }}-{{ value | handle }}"
                                 >
                                   <input
@@ -250,12 +241,7 @@
                                   endfor
                                 %}
                                 <label
-                                  class="
-                                    product-page__radio__label media variant_image 
-                                    {% if option.selected_value == value %}
-                                      checked
-                                    {% endif %}
-                                  "
+                                  class="product-page__radio__label media variant_image{% if option.selected_value == value %} checked{% endif %}"
                                   style=""
                                   for="{{ option.name | handle }}-{{ value | handle }}"
                                 >
@@ -281,7 +267,7 @@
                             <div class="product-page__radio__content">
                               {% for value in option.values %}
                                 <label
-                                  class=" product-page__radio__label color_swatch {% if option.selected_value == value %}checked{% endif %}"
+                                  class=" product-page__radio__label color_swatch{% if option.selected_value == value %} checked{% endif %}"
                                   style="color: transparent;{% render 'snippet-color-swatch', actual_color: value %}"                               
                                   for="{{ option.name | handle }}-{{ value | handle }}"
                                 >
@@ -374,7 +360,7 @@
                     }
                     .{{ block.id }}.countdown-timer > .countdown-timer__timers > .countdown-timer__container {
                       background-color: {{ block.settings.digits_background_color }};
-                      border-radius: {{ block.settings.digits_container_border }}%;
+                      border-radius: calc(var(--global-border-radius)/2);
                     }
                     .{{ block.id }}.countdown-timer > .countdown-timer__timers > .countdown-timer__container > p {
                       color: {{ block.settings.digits_color }};
@@ -452,7 +438,7 @@
                         <div class="product-page__recommended-product-container">
                           <div class="product-page__recommended-product corner-border">
                             <a href="{{ bundled_product.url }}" class="media corner-border-target">
-                              {% render 'snippet-image'; image: bundled_product.featured_image, style: 'full' %}
+                              {% render 'snippet-image'; image: bundled_product.featured_image, style: 'fit' %}
                             </a>
                             <div class="quick-view-button"
                               id="quick-view-button"
@@ -725,16 +711,6 @@
             }
           ],
           "default": "small"
-        },
-        {
-          "type": "range",
-          "id": "digits_container_border",
-          "min": 0,
-          "max": 30,
-          "step": 1,
-          "unit": "%",
-          "label": "Digits container border radius",
-          "default": 10
         },
         {
           "type": "color",

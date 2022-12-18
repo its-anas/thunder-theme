@@ -211,6 +211,10 @@
 	width: 100%;
 	aspect-ratio: 1;
 }
+.collection__item__picture img,
+.collection__item__picture .placeholder {
+	border-radius: var(--global-border-radius);
+}
 
 .collection__item__picture.article,
 .collection__item__picture.article img {

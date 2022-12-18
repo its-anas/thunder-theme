@@ -17,8 +17,8 @@
 }
 .featured-collection__image .tag--normal {
 	position: absolute;
-	left: 0.2rem;
-	top: 0.2rem;
+	left: 7px;
+	top: 7px;
 }
 .featured-collection__image .quick-view-button {
 	position: absolute;

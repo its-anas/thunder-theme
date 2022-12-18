@@ -50,6 +50,11 @@
 	overflow: hidden;
 }
 
+.collections-list__item__picture img,
+.collections-list__item__picture .placeholder {
+	border-radius: var(--global-border-radius);
+}
+
 .collections-list__item__title {
 	z-index: 2;
 	display: flex;

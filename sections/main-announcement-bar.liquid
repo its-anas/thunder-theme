@@ -8,12 +8,30 @@
   .announcement {
     background-color: {{ section.settings.background_color }};
    }
-  .announcement__content > p {
+  .header-section.boxed .announcement {
+    border-radius: var(--global-border-radius);
+   }
+  .announcement__content p {
     color: {{ section.settings.text_color }};
   }
-  .announcement__content > p > .button-text, .announcement__content > p > .coupon {
+  .announcement__content p .button-text, .announcement__content p .coupon {
     color: {{ section.settings.button_and_coupon_color }};
   }
+  {% if settings.header_full_width == false %}
+    {% if settings.header_layout == 'header_first' %}
+      .announcement {
+        transform: translateY(-100%);
+      }
+    {% elsif settings.header_layout == 'header_second' %}
+      .announcement {
+        transform: translateY(100%);
+      }
+    {% endif %}
+    .announcement.slide-in {
+      transform: translateY(0);
+      transition: all 1s cubic-bezier(0.75, 0, 0.175, 1);
+    }
+  {% endif %}
 {%- endstyle -%}
 
 {% if section.settings.show_announcement_bar == true %}
@@ -56,7 +74,7 @@
                       }
                       .countdown-timer__timers > .countdown-timer__container {
                         background-color: {{ block.settings.digits_background_color }};
-                        border-radius: {{ block.settings.digits_container_border }}%;
+                        border-radius: calc(var(--global-border-radius)/2);
                         padding: 0.1rem 0.3rem;
                         min-width: 1.5rem;
                       }
@@ -192,16 +210,6 @@
           "id": "text",
           "label": "Text",
           "default": "Put your text here"
-        },
-        {
-          "type": "range",
-          "id": "digits_container_border",
-          "min": 0,
-          "max": 30,
-          "step": 1,
-          "unit": "%",
-          "label": "Digits container border radius",
-          "default": 10
         },
         {
           "type": "color",

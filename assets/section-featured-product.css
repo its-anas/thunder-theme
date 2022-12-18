@@ -389,4 +389,5 @@
 .featured-product__pictures featured-product-slider .featured-product-slider__thumbnails .active {
 	box-sizing: border-box;
 	border: 2px solid white;
+	border-radius: calc(var(--global-border-radius) / 2);
 }

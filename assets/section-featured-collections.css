@@ -29,6 +29,7 @@
 	min-width: 95%;
 	max-width: 95%;
 	background-color: var(--primary-button-background-color);
+	border-radius: var(--global-border-radius);
 	display: flex;
 	justify-content: center;
 	align-items: center;

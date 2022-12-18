@@ -1,5 +1,13 @@
 {{ 'main-quick-view.css' | asset_url | stylesheet_tag }}
 
+{% style %}
+  quick-view-component .quick-view {
+    background-color: {{ settings.header_background_color }};
+    border-radius: var(--global-border-radius);
+    border: var(--global-border-width) solid var(--global-border-color);
+  }
+{% endstyle %}
+
 <quick-view-component>
   <div class="quick-view hidden">
     <div class="quick-view-container">
@@ -103,11 +111,6 @@
         }
       ],
       "default": "dropdown"
-    }
-  ],
-  "presets": [
-    {
-      "name": "Quick view"
     }
   ]
 }

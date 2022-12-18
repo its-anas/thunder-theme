@@ -37,6 +37,7 @@
 	align-items: center;
 	padding: 1rem;
 	gap: 1rem;
+	border-radius: var(--global-border-radius);
 }
 .testimonials__item:hover {
 	transform: scale(1.05);

@@ -37,7 +37,6 @@
           "type": "countdown_timer",
           "settings": {
             "Digits size": "small",
-            "digits_container_border": 10,
             "digits_color": "#fff",
             "digits_background_color": "transparent",
             "text": "Hurry Up! Offer ends in:",

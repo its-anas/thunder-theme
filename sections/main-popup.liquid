@@ -13,10 +13,10 @@
     background-color: {{ section.settings.background_color }};
   }
 
-  {% if section.settings.border_width > 0 %}
+  {% if settings.global_border_width > 0 %}
     .popup__container.border {
-      border: {{ section.settings.border_width }}px solid {{ section.settings.border_color }} ;
-      border-radius: {{ section.settings.border_radius }}px;
+      border: {{ settings.global_border_width }}px solid {{ settings.global_border_color }} ;
+      border-radius: var(--global-border-radius);
       background-color: {{ section.settings.background_color }};
       overflow: hidden;
     }
@@ -177,32 +177,6 @@
       "id": "background_color",
       "label": "Background color",
       "default": "#222"
-    },
-    {
-      "type": "color",
-      "id": "border_color",
-      "label": "Border color",
-      "default": "#fff"
-    },
-    {
-      "type": "range",
-      "id": "border_width",
-      "min": 0,
-      "max": 3,
-      "step": 1,
-      "unit": "px",
-      "label": "Border width",
-      "default": 2
-    },
-    {
-      "type": "range",
-      "id": "border_radius",
-      "min": 0,
-      "max": 20,
-      "step": 1,
-      "unit": "px",
-      "label": "Border corners radius",
-      "default": 0
     }
   ]
 }

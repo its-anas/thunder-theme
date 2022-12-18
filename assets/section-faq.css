@@ -25,6 +25,7 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	gap: 0.3rem;
 }
 @media screen and (min-width: 750px) and (max-width: 1024px) {
 	.faq__content {
@@ -77,4 +78,13 @@
 }
 .faq__tab.active .faq__question-svg {
 	transform: rotate(180deg);
+}
+
+.faq__image img,
+.faq__image .placeholder {
+	border-radius: var(--global-border-radius);
+}
+.faq__tab .faq__question,
+.faq__tab .faq__answer {
+	border-radius: calc(var(--global-border-radius) / 2);
 }

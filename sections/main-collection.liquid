@@ -96,7 +96,6 @@
                           {% assign price_difference = item.compare_at_price | minus: product.price %}
                           {% if price_difference > 0 %}
                             <div class="collection__item__tag">
-                              <!-- Add in schema, tag--animated or tag--normal dropdown -->
                               <p class="tag--animated tag-text">
                                 {{ price_difference_text }}
                                 {{ item.compare_at_price | minus: item.price | money }}
@@ -114,7 +113,7 @@
                           </div>
                           {% if item.featured_media != blank %}
                             <a href="{{ item.url }}" class="media corner-border-target">
-                              {% render 'snippet-image'; image: item.featured_media, style: 'full' %}
+                              {% render 'snippet-image'; image: item.featured_media, style: 'fit' %}
                             </a>
                           {% else %}
                             <a href="{{ item.url }}" class="media corner-border-target">

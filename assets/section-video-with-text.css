@@ -41,6 +41,8 @@
 .video-with-text__video-box {
 	display: grid;
 	width: 350px;
+	border-radius: var(--global-border-radius);
+	overflow: hidden;
 }
 .video-with-text__video,
 .video-with-text__thumbnail {

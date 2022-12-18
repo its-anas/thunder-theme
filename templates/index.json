@@ -174,7 +174,6 @@
                "type": "section-countdown-timer",
                "settings": {
                     "digits_size": "big",
-                    "digits_container_border": 10,
                     "digits_color": "#000000",
                     "digits_background_color": "#fcdb33",
                     "button_color": "#fcdb33",
