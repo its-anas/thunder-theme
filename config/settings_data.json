@@ -6,26 +6,24 @@
     "social_instagram_link": "https:\/\/instagram.com",
     "social_twitter_link": "https:\/\/twitter.com",
     "sections": {
-      "header": {
-        "type": "header",
+      "main-header": {
+        "type": "main-header",
         "settings": {
           "logo_type": "svg",
           "logo_svg": "",
-          "menu": "",
-          "menu_layout": "logo_first",
-          "border_width": 2,
-          "border_radius": 0
+          "menu": "main-menu",
+          "menu_layout": "logo_first"
         }
       },
-      "announcement-bar": {
-        "type": "announcement-bar",
+      "main-announcement-bar": {
+        "type": "main-announcement-bar",
         "blocks": {
           "text_with_countdown": {
             "type": "text_with_countdown",
             "settings": {
               "text": "Put your text here",
               "digits_color": "#000000",
-              "digits_background_color": "transparent",
+              "digits_background_color": "rgba(0,0,0,0)",
               "message": "Offer ended",
               "countdown_timer_type": "time",
               "time_days": 0,
@@ -47,14 +45,14 @@
         "settings": {
           "show_announcement_bar": true,
           "enable_autoplay": true,
-          "autoplay_delay_time": 6,
+          "autoplay_delay_time": 4,
           "background_color": "#fcdb33",
           "text_color": "#000000",
           "button_and_coupon_color": "#000000"
         }
       },
-      "search-drawer": {
-        "type": "search-drawer",
+      "main-search-drawer": {
+        "type": "main-search-drawer",
         "blocks": {
           "products": {
             "type": "products",
@@ -74,7 +72,7 @@
               "collection_3": ""
             }
           },
-          "menu": {
+          "menu2": {
             "type": "menu",
             "settings": {
               "group_name": "Menu",
@@ -85,21 +83,18 @@
         "block_order": [
           "products",
           "collections",
-          "menu"
+          "menu2"
         ],
-        "settings": {
-          "background_color": "#000000",
-          "border_color": "#fff",
-          "border_width": 2,
-          "border_radius": 0
-        }
-      },
-      "cart-drawer": {
-        "type": "cart-drawer",
         "settings": {}
       },
-      "popup": {
-        "type": "popup",
+      "main-cart-drawer": {
+        "type": "main-cart-drawer",
+        "settings": {
+          "show_cart_recommended_products": true
+        }
+      },
+      "main-popup": {
+        "type": "main-popup",
         "settings": {
           "enable_popup": true,
           "show_social_media_icons": true,
@@ -108,14 +103,11 @@
           "heading": "GET 10% OFF",
           "text": "Subscribe to our newsletter and we’ll send you a 10% discount code towards your first purchase.",
           "reject_text": "No thanks, I prefer to pay full price",
-          "background_color": "#222222",
-          "border_color": "#fff",
-          "border_width": 2,
-          "border_radius": 0
+          "background_color": "#222222"
         }
       },
-      "footer": {
-        "type": "footer",
+      "main-footer": {
+        "type": "main-footer",
         "blocks": {
           "logo": {
             "type": "logo",
@@ -166,9 +158,15 @@
           "payment_methods_type": "enabled",
           "chosen_payment_methods": "paypal,visa,master,american_express,discover,shopify_pay"
         }
+      },
+      "main-quick-view": {
+        "type": "main-quick-view",
+        "settings": {
+          "variant_selector_type": "dropdown",
+          "color_selector_type": "dropdown"
+        }
       }
     },
     "content_for_index": []
-  },
-  "presets": {}
+  }
 }
