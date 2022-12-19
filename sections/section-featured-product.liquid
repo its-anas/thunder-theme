@@ -13,9 +13,16 @@
 {% style %}
     .featured-product.{{ section.id }} {
       background-color: {{ section.settings.background_color }};
+      padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px !important;
+      padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px !important;
+    }
+
+  @media screen and (min-width: 750px) {
+    .featured-product.{{ section.id }} {
       padding-top: {{ section.settings.padding_top }}px !important;
       padding-bottom: {{ section.settings.padding_bottom }}px !important;
     }
+  }
 
    .featured-product-slider__slides-container {
     --mobile-items: {{ mobile_items }};
