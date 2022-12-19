@@ -7,6 +7,10 @@
     height: {{ section.settings.image_height }}px;
   }
 
+  .{{ section.id }} .slideshow__content {
+    background: rgba({{ section.settings.overlay_color.red }}, {{ section.settings.overlay_color.green }}, {{ section.settings.overlay_color.blue }}, {{ section.settings.overlay_opacity | divided_by: 100.0 }});
+  }
+
   .{{ section.id }}.slideshow__picture > .media > img {
     height: {{ section.settings.image_height }}px;
   }
@@ -117,6 +121,22 @@
       "id": "text_color",
       "label": "Text color",
       "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "Overlay color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 70,
+      "step": 1,
+      "unit": "%",
+      "label": "Overlay opacity",
+      "default": 10
     },
     {
       "type": "checkbox",
