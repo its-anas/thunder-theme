@@ -132,8 +132,20 @@
                },
                {
                     "type": "color",
-                    "id": "sale_tag_color",
-                    "label": "Sale tag",
+                    "id": "sale_tag_text_color",
+                    "label": "Sale tag text",
+                    "default": "#000"
+               },
+               {
+                    "type": "color",
+                    "id": "sale_tag_background_color",
+                    "label": "Sale tag background",
+                    "default": "#fcdb33"
+               },
+               {
+                    "type": "color",
+                    "id": "icon_color",
+                    "label": "Icon",
                     "default": "#FA0000"
                },
                {
@@ -198,7 +210,8 @@
                     "type": "color",
                     "id": "header_text_color",
                     "label": "Text",
-                    "default": "#fff"
+                    "default": "#fff",
+                    "info": "Impacts the icons in the header as well."
                },
                {
                     "type": "color",

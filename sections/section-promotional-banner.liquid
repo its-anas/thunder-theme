@@ -8,9 +8,9 @@
     min-height: {{ section.settings.height }}px;
   }
   .{{ section.id }}.promotional-banner__content--style-1 {
-        animation: banner-scroll {{ section.settings.animation_speed }}s linear infinite;
+    animation: banner-scroll {{ section.settings.animation_speed }}s linear infinite;
   }
-  .{{ section.id }}.promotional-banner__content--style-2 * {
+  .{{ section.id }}.promotional-banner__content--style-2 *, .{{ section.id }}.promotional-banner__content--style-1 * {
     color: {{ section.settings.text_color }};
   }
 {%- endstyle -%}

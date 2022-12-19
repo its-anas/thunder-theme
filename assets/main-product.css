@@ -359,7 +359,7 @@
 }
 
 .product-page__tag .tag--animated {
-	color: var(--accent-color-1);
+	color: var(--background-color);
 	font-size: var(--xsmall-font-size);
 }
 
@@ -566,6 +566,7 @@
 
 .product-page__recommended-product-title {
 	text-align: center;
+	color: var(--body-text-color);
 }
 
 .product-page__radios {

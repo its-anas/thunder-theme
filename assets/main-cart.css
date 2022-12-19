@@ -211,6 +211,11 @@
 		width: 100%;
 		right: 0;
 		padding: 8px;
+		z-index: 100;
+	}
+
+	.cart-page__interaction-inner {
+		border: var(--button-border-width) solid var(--global-border-color);
 	}
 
 	.cart-page__interaction .shadow-divider {

@@ -75,11 +75,7 @@
                         <button type="button" class="quantity-field__plus" id="quantity-field__plus">+</button>
                       </div>
                       <div data-variant-id="{{ item.variant_id }}" class="quantity-field__product-remove remove">
-                        <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M8.71678 7.78444V18.6032L17.0342 18.6137V7.7832M8.71678 7.78444H6.21533M8.71678 7.78444H11.0416L13.0369 7.7832L17.0342 7.7832M17.0342 7.7832H19.5292" stroke="white"/>
-                          <path d="M9.53809 6.79688H16.2578" stroke="white"/>
-                          <path d="M14.3414 16.6045L14.3414 9.88672M11.3965 16.6045L11.3965 9.88672" stroke="white"/>
-                        </svg>
+                        {% render 'snippet-icons', icon: 'trash' %}
                       </div>
                     </quantity-field>
                   </div>
@@ -92,11 +88,7 @@
                       </p>
                     {% endif %}
                     <div data-variant-id="{{ item.variant_id }}" class="quantity-field__product-remove--mobile remove">
-                      <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M8.71678 7.78444V18.6032L17.0342 18.6137V7.7832M8.71678 7.78444H6.21533M8.71678 7.78444H11.0416L13.0369 7.7832L17.0342 7.7832M17.0342 7.7832H19.5292" stroke="white"/>
-                        <path d="M9.53809 6.79688H16.2578" stroke="white"/>
-                        <path d="M14.3414 16.6045L14.3414 9.88672M11.3965 16.6045L11.3965 9.88672" stroke="white"/>
-                      </svg>
+                      {% render 'snippet-icons', icon: 'trash' %}
                     </div>
                   </div>
                 </div>
@@ -109,7 +101,6 @@
               style="display: none;"
             {% endif %}
           >
-            <div class="shadow-divider"></div>
             <order-note class="cart-page__interaction-inner">
               {% for block in section.blocks %}
                 {% case block.type %}

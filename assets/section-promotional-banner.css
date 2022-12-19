@@ -23,7 +23,6 @@
 }
 .promotional-banner__content--style-1 > * {
 	flex: 0 0 auto;
-	color: var(--body-text-color);
 	text-align: center;
 }
 .promotional-banner__content--style-2 {

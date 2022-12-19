@@ -62,9 +62,7 @@
           <div class="faq__question">
             <p class="faq__question-text">{{ block.settings.question }}</p>
             <div class="faq__question-svg">
-              <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M7 10.5L12 15.5L17 10.5" stroke="white" stroke-width="1.5"/>
-              </svg>
+              {% render 'snippet-icons', icon: 'tab-chevron-down' %}
             </div>
           </div>
           <div class="faq__answer">

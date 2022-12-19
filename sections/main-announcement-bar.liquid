@@ -97,14 +97,10 @@
         </div>
         <div class="chevrons">
           <span class="prev">
-            <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M14 17.854L9 12.854L14 7.85397" stroke="{{ section.settings.text_color }}" stroke-width="1.5"/>
-            </svg>
+            {% render 'snippet-icons', icon: 'announcement-prev' %}
           </span>
           <span class="next">
-            <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M10 7.85397L15 12.854L10 17.854" stroke="{{ section.settings.text_color }}" stroke-width="1.5"/>
-            </svg>
+            {% render 'snippet-icons', icon: 'announcement-next' %}
           </span>
         </div>
       </div>
