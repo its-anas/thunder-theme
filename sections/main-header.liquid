@@ -1,9 +1,14 @@
 {{ 'main-header.css' | asset_url | stylesheet_tag }}
 
 {% style %}
-  .header-section.boxed .header-container .main-header .header .header__content, .menu-mobile__container, .menu__dropdown-content {
+  .header-section.boxed .header-container .main-header .header .header__content, .menu-mobile__container {
     border-radius: var(--global-border-radius);
     border: var(--global-border-width) solid var(--global-border-color);
+  }
+
+  .menu__dropdown-content {
+    border-radius: var(--global-border-radius);
+    border: {% if settings.global_border_width == 0 %}1px{% else %} var(--global-border-width) {% endif %} solid var(--body-text-color);
   }
 
   .menu-mobile__parent-childs.active.border, .menu-mobile__child-childs.active.border, .menu-mobile__account {
@@ -149,8 +154,8 @@
                       | remove: '\'
                       | remove: '/'
                     -%}
-                    <div class="menu-mobile__parent {{ menu_parent_title }}">
-                      <div class="menu-mobile__parent-title {{ menu_parent_title }}">
+                    <div class="menu-mobile__parent menu-{{ menu_parent_title }}">
+                      <div class="menu-mobile__parent-title menu-{{ menu_parent_title }}">
                         <h6>
                           <a
                             {% if menu_parent.links.size == 0 %}
@@ -202,12 +207,12 @@
                           -%}
 
                           <div class="menu-mobile__child">
-                            <div class="menu-mobile__child-title {{ menu_child_title }}">
+                            <div class="menu-mobile__child-title menu-{{ menu_child_title }}">
                               {% for block in section.blocks %}
                                 {% if block.settings.tab_title == menu_child.title %}
                                   <div class="menu__child-icon media">
                                     {% style %}
-                                      .menu-mobile__child-title.{{ menu_child_title }} {
+                                      .menu-mobile__child-title.menu-{{ menu_child_title }} {
                                         padding: 0rem 0.7rem 0rem 0.7rem;
                                       }
                                     {% endstyle %}
@@ -236,7 +241,7 @@
                                     color: var(--accent-color-1);
                                   }
 
-                                  .menu-mobile__parent-title.{{ menu_parent_title }}:before {
+                                  .menu-mobile__parent-title.menu-{{ menu_parent_title }}:before {
                                       content: " ";
                                       background-color: var(--accent-color-1);
                                       width: 7px;
@@ -281,7 +286,7 @@
                                       animation: blink 1s linear infinite;
                                     }
 
-                                    .menu-mobile__parent-title.{{ menu_parent_title }}:before, .menu-mobile__child-title.{{ menu_child_title }}:before {
+                                    .menu-mobile__parent-title.menu-{{ menu_parent_title }}:before, .menu-mobile__child-title.menu-{{ menu_child_title }}:before {
                                       content: " ";
                                       background-color: var(--accent-color-1);
                                       width: 7px;

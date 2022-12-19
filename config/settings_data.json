@@ -3,6 +3,7 @@
     "heading_color": "#ffffff",
     "body_text_color": "#ffffff",
     "link_color": "#fcdb33",
+    "icon_color": "#ffffff",
     "background_color": "#000000",
     "secondary_background_color": "#282828",
     "global_border_color": "#ffffff",
@@ -16,8 +17,9 @@
     "secondary_button_border_color": "#fcdb33",
     "button_text_border_hover_color": "#fcdb33",
     "button_animation_color": "#fcdb33",
+    "global_border_width": 2,
     "global_border_radius": 0,
-    "button_border_width": 1,
+    "button_border_width": 2,
     "header_layout": "header_first",
     "social_facebook_link": "https:\/\/Facebook.com",
     "social_instagram_link": "https:\/\/Instagram.com",
@@ -94,7 +96,7 @@
           "text": "Subscribe to our newsletter and we will send you a 10% discount code towards your first purchase.",
           "reject_text": "No thanks, I prefer to pay full price",
           "background_color": "#282828",
-          "text_color": "#fff"
+          "text_color": "#ffffff"
         }
       },
       "main-quick-view": {
@@ -171,7 +173,7 @@
       "heading_color": "#282828",
       "body_text_color": "#282828",
       "link_color": "#282828",
-      "sale_tag": "#fa0000",
+      "icon_color": "#282828",
       "background_color": "#ffffff",
       "secondary_background_color": "#f2f2f2",
       "global_border_color": "rgba(0,0,0,0)",
@@ -185,160 +187,9 @@
       "secondary_button_border_color": "#fcdb33",
       "button_text_border_hover_color": "#282828",
       "button_animation_color": "#282828",
-      "global_border_radius": 2,
+      "global_border_width": 0,
+      "global_border_radius": 5,
       "button_border_width": 2,
-      "header_layout": "header_first",
-      "sections": {
-        "main-header": {
-          "type": "main-header",
-          "settings": {
-            "logo_type": "svg",
-            "logo_svg": "",
-            "menu": "main-menu",
-            "menu_layout": "logo_first"
-          }
-        },
-        "main-announcement-bar": {
-          "type": "main-announcement-bar",
-          "blocks": {
-            "a40cdee1-b17b-4872-9799-260102b83373": {
-              "type": "text_with_countdown",
-              "settings": {
-                "text": "Put your text here",
-                "digits_color": "#282828",
-                "digits_background_color": "#fcdb33",
-                "message": "Offer ended",
-                "countdown_timer_type": "time",
-                "time_days": 0,
-                "time_hours": 6,
-                "time_mins": 0,
-                "time_secs": 0,
-                "afterExpirationTimeOnly": "repeatCountdown",
-                "date_year": 2023,
-                "date_month": 1,
-                "date_day": 1,
-                "date_hour": 0,
-                "date_min": 0
-              }
-            }
-          },
-          "block_order": [
-            "a40cdee1-b17b-4872-9799-260102b83373"
-          ],
-          "settings": {
-            "show_announcement_bar": true,
-            "enable_autoplay": true,
-            "autoplay_delay_time": 4,
-            "background_color": "#fcdb33",
-            "text_color": "#282828",
-            "button_and_coupon_color": "#fcdb33"
-          }
-        },
-        "main-search-drawer": {
-          "type": "main-search-drawer",
-          "settings": {}
-        },
-        "main-cart-drawer": {
-          "type": "main-cart-drawer",
-          "settings": {
-            "show_cart_recommended_products": true
-          }
-        },
-        "main-popup": {
-          "type": "main-popup",
-          "settings": {
-            "enable_popup": true,
-            "show_social_media_icons": true,
-            "show_image": true,
-            "delay_time": 5,
-            "heading": "GET 10% OFF",
-            "text": "Subscribe to our newsletter and we will send you a 10% discount code towards your first purchase.",
-            "reject_text": "No thanks, I prefer to pay full price",
-            "background_color": "#ffffff",
-            "text_color": "#282828"
-          }
-        },
-        "main-quick-view": {
-          "type": "main-quick-view",
-          "settings": {
-            "variant_selector_type": "dropdown",
-            "color_selector_type": "dropdown"
-          }
-        },
-        "main-footer": {
-          "type": "main-footer",
-          "blocks": {
-            "1c0ed45f-615b-4172-b30a-86447cf4730e": {
-              "type": "logo",
-              "settings": {
-                "logo_type": "svg",
-                "logo_svg": ""
-              }
-            },
-            "532341c0-b7d8-49e0-bda5-27b77a7c89d0": {
-              "type": "menu",
-              "settings": {
-                "menu": "main-menu"
-              }
-            },
-            "7aabdc92-078f-40fa-8e25-6a75dbeba976": {
-              "type": "information",
-              "settings": {
-                "information_heading": "Company",
-                "phone": "+123 456 7891",
-                "email": "business@gmail.com",
-                "address": "Address, city, zip code, country"
-              }
-            },
-            "0344e01c-f44f-4096-b48e-ae96ff17d93f": {
-              "type": "social_media",
-              "settings": {
-                "social_media_heading": "Follow"
-              }
-            },
-            "d0673f86-8d83-4904-82d0-bda9ab64c5cd": {
-              "type": "newsletter",
-              "settings": {
-                "newsletter_heading": "Newsletter",
-                "newsletter_text": "Subscribe to get special offers, free giveaways, and once in a lifetime deals."
-              }
-            }
-          },
-          "block_order": [
-            "1c0ed45f-615b-4172-b30a-86447cf4730e",
-            "532341c0-b7d8-49e0-bda5-27b77a7c89d0",
-            "7aabdc92-078f-40fa-8e25-6a75dbeba976",
-            "0344e01c-f44f-4096-b48e-ae96ff17d93f",
-            "d0673f86-8d83-4904-82d0-bda9ab64c5cd"
-          ],
-          "settings": {
-            "show_currency_selector": false,
-            "show_payment_methods": true,
-            "payment_methods_type": "enabled",
-            "chosen_payment_methods": "paypal,visa,master,american_express,discover,shopify_pay"
-          }
-        }
-      }
-    },
-    "Thunder": {
-      "heading_color": "#ffffff",
-      "body_text_color": "#ffffff",
-      "link_color": "#fcdb33",
-      "background_color": "#000000",
-      "secondary_background_color": "#282828",
-      "global_border_color": "#ffffff",
-      "header_text_color": "#ffffff",
-      "header_background_color": "#000000",
-      "primary_button_text_color": "#282828",
-      "primary_button_background_color": "#fcdb33",
-      "primary_button_border_color": "#fcdb33",
-      "secondary_button_text_color": "#282828",
-      "secondary_button_background_color": "#fcdb33",
-      "secondary_button_border_color": "#fcdb33",
-      "button_text_border_hover_color": "#fcdb33",
-      "button_animation_color": "#fcdb33",
-      "global_border_radius": 0,
-      "button_border_width": 1,
       "header_layout": "header_first",
       "social_facebook_link": "https:\/\/Facebook.com",
       "social_instagram_link": "https:\/\/Instagram.com",
@@ -415,7 +266,176 @@
             "text": "Subscribe to our newsletter and we will send you a 10% discount code towards your first purchase.",
             "reject_text": "No thanks, I prefer to pay full price",
             "background_color": "#282828",
-            "text_color": "#fff"
+            "text_color": "#ffffff"
+          }
+        },
+        "main-quick-view": {
+          "type": "main-quick-view",
+          "settings": {
+            "variant_selector_type": "dropdown",
+            "color_selector_type": "dropdown"
+          }
+        },
+        "main-footer": {
+          "type": "main-footer",
+          "blocks": {
+            "013e9d2f-a3ec-44ea-9da6-82aad69402a4": {
+              "type": "logo",
+              "settings": {
+                "logo_type": "svg",
+                "logo_svg": ""
+              }
+            },
+            "47218159-9491-478b-a129-ad2f00591fd3": {
+              "type": "menu",
+              "settings": {
+                "menu": "main-menu"
+              }
+            },
+            "04ee91fc-89d4-4217-a5c2-3e52d453db22": {
+              "type": "menu",
+              "settings": {
+                "menu": "main-menu"
+              }
+            },
+            "b4c200d5-657d-4470-b809-a1505ef47f7a": {
+              "type": "information",
+              "settings": {
+                "information_heading": "Company",
+                "phone": "",
+                "email": "",
+                "address": ""
+              }
+            },
+            "dde41eb8-b0ae-427f-ba9e-b202df9c0734": {
+              "type": "social_media",
+              "settings": {
+                "social_media_heading": "Follow"
+              }
+            },
+            "61f08ca9-9f5e-427c-a2fb-033e3df736e6": {
+              "type": "newsletter",
+              "settings": {
+                "newsletter_heading": "Newsletter",
+                "newsletter_text": "Subscribe to get special offers, free giveaways, and once in a lifetime deals."
+              }
+            }
+          },
+          "block_order": [
+            "013e9d2f-a3ec-44ea-9da6-82aad69402a4",
+            "47218159-9491-478b-a129-ad2f00591fd3",
+            "04ee91fc-89d4-4217-a5c2-3e52d453db22",
+            "b4c200d5-657d-4470-b809-a1505ef47f7a",
+            "dde41eb8-b0ae-427f-ba9e-b202df9c0734",
+            "61f08ca9-9f5e-427c-a2fb-033e3df736e6"
+          ],
+          "settings": {
+            "show_currency_selector": false,
+            "show_payment_methods": true,
+            "payment_methods_type": "enabled",
+            "chosen_payment_methods": "paypal,visa,master,american_express,discover,shopify_pay"
+          }
+        }
+      }
+    },
+    "Thunder": {
+      "heading_color": "#ffffff",
+      "body_text_color": "#ffffff",
+      "link_color": "#fcdb33",
+      "icon_color": "#ffffff",
+      "background_color": "#000000",
+      "secondary_background_color": "#282828",
+      "global_border_color": "#ffffff",
+      "header_text_color": "#ffffff",
+      "header_background_color": "#000000",
+      "primary_button_text_color": "#282828",
+      "primary_button_background_color": "#fcdb33",
+      "primary_button_border_color": "#fcdb33",
+      "secondary_button_text_color": "#282828",
+      "secondary_button_background_color": "#fcdb33",
+      "secondary_button_border_color": "#fcdb33",
+      "button_text_border_hover_color": "#fcdb33",
+      "button_animation_color": "#fcdb33",
+      "global_border_width": 2,
+      "global_border_radius": 0,
+      "button_border_width": 2,
+      "header_layout": "header_first",
+      "social_facebook_link": "https:\/\/Facebook.com",
+      "social_instagram_link": "https:\/\/Instagram.com",
+      "social_twitter_link": "https:\/\/Twitter.com",
+      "social_pinterest_link": "https:\/\/pinterest.com",
+      "social_tiktok_link": "https:\/\/tiktok.com",
+      "social_snapchat_link": "https:\/\/snapchat.com",
+      "social_youtube_link": "https:\/\/youtube.com",
+      "social_vimeo_link": "https:\/\/vimeo.com",
+      "sections": {
+        "main-header": {
+          "type": "main-header",
+          "settings": {
+            "logo_type": "svg",
+            "logo_svg": "",
+            "menu": "main-menu",
+            "menu_layout": "logo_first"
+          }
+        },
+        "main-announcement-bar": {
+          "type": "main-announcement-bar",
+          "blocks": {
+            "78bb441a-a4ef-4e3f-8c4b-efbb917c4ae7": {
+              "type": "text_with_countdown",
+              "settings": {
+                "text": "Put your text here",
+                "digits_color": "#000000",
+                "digits_background_color": "#fcdb33",
+                "message": "Offer ended",
+                "countdown_timer_type": "time",
+                "time_days": 0,
+                "time_hours": 6,
+                "time_mins": 0,
+                "time_secs": 0,
+                "afterExpirationTimeOnly": "repeatCountdown",
+                "date_year": 2023,
+                "date_month": 1,
+                "date_day": 1,
+                "date_hour": 0,
+                "date_min": 0
+              }
+            }
+          },
+          "block_order": [
+            "78bb441a-a4ef-4e3f-8c4b-efbb917c4ae7"
+          ],
+          "settings": {
+            "show_announcement_bar": true,
+            "enable_autoplay": true,
+            "autoplay_delay_time": 4,
+            "background_color": "#fcdb33",
+            "text_color": "#282828",
+            "button_and_coupon_color": "#282828"
+          }
+        },
+        "main-search-drawer": {
+          "type": "main-search-drawer",
+          "settings": {}
+        },
+        "main-cart-drawer": {
+          "type": "main-cart-drawer",
+          "settings": {
+            "show_cart_recommended_products": true
+          }
+        },
+        "main-popup": {
+          "type": "main-popup",
+          "settings": {
+            "enable_popup": true,
+            "show_social_media_icons": true,
+            "show_image": true,
+            "delay_time": 5,
+            "heading": "GET 10% OFF",
+            "text": "Subscribe to our newsletter and we will send you a 10% discount code towards your first purchase.",
+            "reject_text": "No thanks, I prefer to pay full price",
+            "background_color": "#282828",
+            "text_color": "#ffffff"
           }
         },
         "main-quick-view": {

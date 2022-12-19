@@ -49,6 +49,7 @@
 	margin-right: 5px;
 	margin-left: 5px;
 	transition: transform 0.1s;
+	border-radius: var(--global-border-radius);
 }
 @media screen and (min-width: 750px) {
 	.slideshow__indicators span:hover {

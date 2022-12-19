@@ -14,8 +14,7 @@
                               "primary_button_text": "Primary button",
                               "primary_button_link": "",
                               "secondary_button_text": "Secondary button",
-                              "secondary_button_link": "",
-                              "button_style": "border"
+                              "secondary_button_link": ""
                          }
                     },
                     "slide2": {
@@ -29,8 +28,7 @@
                               "primary_button_text": "Primary button",
                               "primary_button_link": "",
                               "secondary_button_text": "Secondary button",
-                              "secondary_button_link": "",
-                              "button_style": "border"
+                              "secondary_button_link": ""
                          }
                     }
                },
@@ -502,8 +500,7 @@
                               "primary_button_text": "Primary button",
                               "primary_button_link": "",
                               "secondary_button_text": "Secondary button",
-                              "secondary_button_link": "",
-                              "button_style": "border"
+                              "secondary_button_link": ""
                          }
                     }
                },
@@ -516,7 +513,6 @@
                "settings": {
                     "video_url": "https:\/\/www.youtube.com\/watch?v=_9VUPq3SxOc",
                     "text_width": 70,
-                    "button_style": "border",
                     "background_color": "transparent",
                     "text_alignment": "left",
                     "text_horizontal_position": "left",
@@ -567,8 +563,7 @@
                               "primary_button_text": "Primary button",
                               "primary_button_link": "",
                               "secondary_button_text": "",
-                              "secondary_button_link": "",
-                              "button_style": ""
+                              "secondary_button_link": ""
                          }
                     }
                },

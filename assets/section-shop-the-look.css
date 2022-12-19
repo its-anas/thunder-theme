@@ -125,6 +125,7 @@
 	height: auto;
 	padding: 10px;
 	border: 2px solid white;
+	border-radius: var(--global-border-radius);
 	transform: scale(0);
 	transition: 0.15s all;
 	opacity: 0;
@@ -155,9 +156,10 @@
 	width: 100px !important;
 }
 
-.shop-the-look__product-image > * {
+.shop-the-look__product-image * {
 	height: 100px;
 	width: 100px;
+	border-radius: var(--global-border-radius);
 }
 .shop-the-look__feature {
 	display: flex;

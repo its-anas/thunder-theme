@@ -77,7 +77,7 @@
           <div class="buttons buttons--{{ section.settings.text_alignment }}" {{ block.shopify_attributes }}>
             {% if block.settings.primary_button_text != blank %}
               <a
-                class="button button--{% if block.settings.button_style == "border" %}primary{% else %}secondary{% endif %} {{ block.settings.button_style }}"
+                class="button button--primary border"
                 {% if block.settings.secondary_button_link != blank %}
                   href="{{ block.settings.primary_button_link }}"
                 {% endif %}
@@ -88,7 +88,7 @@
             {% endif %}
             {% if block.settings.secondary_button_text != blank %}
               <a
-                class="button button--secondary {{ block.settings.button_style }}"
+                class="button button--secondary border"
                 {% if block.settings.secondary_button_link != blank %}
                   href="{{ block.settings.secondary_button_link }}"
                 {% endif %}
@@ -465,22 +465,6 @@
           "type": "url",
           "id": "secondary_button_link",
           "label": "Secondary button link"
-        },
-        {
-          "type": "select",
-          "id": "button_style",
-          "label": "Button style",
-          "options": [
-            {
-              "value": "border",
-              "label": "Style 1"
-            },
-            {
-              "value": " ",
-              "label": "Style 2"
-            }
-          ],
-          "default": " "
         }
       ]
     }
