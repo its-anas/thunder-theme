@@ -42,8 +42,8 @@
 	width: 100%;
 }
 .faq__tab:hover {
-	border: 2px solid var(--text-color);
-	border-radius: calc(var(--global-border-radius) / 2);
+	border: 2px solid var(--body-text-color);
+	border-radius: var(--global-border-radius);
 }
 @media screen and (min-width: 750px) {
 	.faq__tab:hover {
@@ -87,5 +87,5 @@
 }
 .faq__tab .faq__question,
 .faq__tab .faq__answer {
-	border-radius: calc(var(--global-border-radius) / 2);
+	border-radius: var(--global-border-radius);
 }

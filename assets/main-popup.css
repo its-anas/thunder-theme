@@ -130,7 +130,7 @@
 
 @media screen and (max-width: 1024px) {
 	.popup__content .newsletter .link {
-		color: var(--text-color);
+		color: var(--body-text-color);
 	}
 }
 

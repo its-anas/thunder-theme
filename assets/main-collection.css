@@ -104,18 +104,18 @@
 	height: 40px;
 	padding: 0 2rem;
 	padding: 0 1.4rem;
-	border-bottom: 1px solid var(--text-color);
+	border-bottom: 1px solid var(--body-text-color);
 	cursor: pointer;
 	transition: all 0.1s ease-in-out;
 }
 
 .collection__page-tab:hover {
-	border-bottom: 5px solid var(--text-color) !important;
+	border-bottom: 5px solid var(--body-text-color) !important;
 	transition: all 0.1s ease-in-out;
 }
 
 .collection__page-tab.selected {
-	border-bottom: 3px solid var(--text-color);
+	border-bottom: 3px solid var(--body-text-color);
 	transition: all 0.1s ease-in-out;
 }
 
@@ -273,7 +273,7 @@
 	height: 40px;
 	padding: 0 2rem;
 	padding: 0 1.4rem;
-	border-bottom: 1px solid var(--text-color);
+	border-bottom: 1px solid var(--body-text-color);
 	cursor: pointer;
 	transition: all 0.1s ease-in-out;
 	margin-left: auto;
@@ -282,7 +282,7 @@
 }
 
 .collection__page-tab.selected {
-	border-bottom: 3px solid var(--text-color);
+	border-bottom: 3px solid var(--body-text-color);
 	transition: all 0.1s ease-in-out;
 	pointer-events: none;
 }

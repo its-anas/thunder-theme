@@ -12,6 +12,9 @@
   .popup__content {
     background-color: {{ section.settings.background_color }};
   }
+  .popup__content .newsletter__heading, .popup__content .newsletter__text  {
+    color: {{ section.settings.text_color }}
+  }
 
   {% if settings.global_border_width > 0 %}
     .popup__container.border {
@@ -40,11 +43,9 @@
           <div class="popup__close"></div>
           <div class="newsletter container">
             {% if section.settings.heading != blank %}
-              <div class="newsletter__heading">
-                <h6>
-                  {{ section.settings.heading }}
-                </h6>
-              </div>
+              <h6 class="newsletter__heading">
+                {{ section.settings.heading }}
+              </h6>
             {% endif %}
             {% if section.settings.text != blank %}
               <p class="newsletter__text">{{ section.settings.text }}</p>
@@ -176,7 +177,13 @@
       "type": "color",
       "id": "background_color",
       "label": "Background color",
-      "default": "#222"
+      "default": "#282828"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#fff"
     }
   ]
 }

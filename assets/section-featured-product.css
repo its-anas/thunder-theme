@@ -132,7 +132,7 @@
 }
 
 .featured-product__radio__label.checked {
-	border: 2px solid var(--text-color);
+	border: 2px solid var(--body-text-color);
 }
 
 .featured-product__radio__label.variant_image {
@@ -334,7 +334,7 @@
 
 .featured-product__pictures featured-product-slider .featured-product-slider__indicators span {
 	display: inline-block;
-	background-color: var(--text-color);
+	background-color: var(--body-text-color);
 	opacity: 0.5;
 	width: 8px;
 	height: 8px;
@@ -389,5 +389,5 @@
 .featured-product__pictures featured-product-slider .featured-product-slider__thumbnails .active {
 	box-sizing: border-box;
 	border: 2px solid white;
-	border-radius: calc(var(--global-border-radius) / 2);
+	border-radius: var(--global-border-radius);
 }

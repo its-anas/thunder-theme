@@ -58,7 +58,7 @@
 .slideshow__indicators span.active::after {
 	content: "";
 	position: absolute;
-	background-color: var(--primary-button-background-color);
+	background-color: var(--accent-color-1);
 	transform: translateX(-20px);
 	height: 5px;
 }

@@ -1,6 +1,14 @@
 {{ 'main-footer.css' | asset_url | stylesheet_tag }}
 
-{%- style -%}{%- endstyle -%}
+{%- style -%}
+  .footer {
+    background-color: {{ settings.footer_background_color }};
+  }
+
+  .footer * {
+    color: {{ settings.footer_text_color }};
+  }
+{%- endstyle -%}
 
 <section class="footer">
   <div class="footer__container">

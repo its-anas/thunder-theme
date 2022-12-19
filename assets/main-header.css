@@ -1,7 +1,7 @@
 .loading-bar {
 	width: 0%;
 	height: 8px;
-	background-color: var(--primary-button-background-color);
+	background-color: var(--accent-color-1);
 	position: fixed;
 	z-index: 200;
 	top: 0;
@@ -132,14 +132,6 @@
 	cursor: pointer;
 }
 
-.header__icons-search__item-count,
-.header__icons-drawer__item-count {
-	position: absolute;
-	top: 0;
-	right: -15px;
-	color: var(--primary-button-background-color);
-}
-
 .header__icons-cart__item-count {
 	position: absolute;
 	top: 13px;
@@ -152,7 +144,7 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	background-color: var(--primary-button-background-color);
+	background-color: var(--accent-color-1);
 	color: black;
 	opacity: 1;
 	transition: all 0.5s ease-in-out;
@@ -327,7 +319,7 @@
 	content: url("data:image/svg+xml,%3Csvg width='9' height='8' viewBox='0 0 9 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M1.84289 7.76007L4.10076 4.5022L4.39685 4.07498L4.10076 3.64776L1.84289 0.389887L0.610031 1.24432L2.57182 4.07498L0.610031 6.90564L1.84289 7.76007ZM6.20635 7.76007L8.46423 4.5022L8.76031 4.07498L8.46423 3.64776L6.20635 0.389887L4.9735 1.24432L6.93529 4.07498L4.9735 6.90564L6.20635 7.76007Z' fill='white'/%3E%3C/svg%3E%0A");
 	position: absolute;
 	right: 15px;
-	color: var(--text-color);
+	color: var(--body-text-color);
 }
 
 .menu__content {

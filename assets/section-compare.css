@@ -33,8 +33,8 @@
 }
 .compare__cell {
 	padding: 1em 0em;
-	border-top: 1px solid var(--text-color);
-	border-bottom: 1px solid var(--text-color);
+	border-top: 1px solid var(--body-text-color);
+	border-bottom: 1px solid var(--body-text-color);
 }
 .compare__content {
 	display: flex;
@@ -56,7 +56,7 @@
 	position: relative;
 	height: 100px;
 	width: 100px;
-	border-radius: calc(var(--global-border-radius) / 2);
+	border-radius: var(--global-border-radius);
 }
 @media screen and (min-width: 750px) {
 	.compare__content_image-and-text .compare-image.small {

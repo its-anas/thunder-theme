@@ -10,7 +10,7 @@
   .{{ section.id }}.promotional-banner__content--style-1 {
         animation: banner-scroll {{ section.settings.animation_speed }}s linear infinite;
   }
-  .{{ section.id }}.promotional-banner__content--style-1 > *, .{{ section.id }}.promotional-banner__content--style-2 > *:not(a) {
+  .{{ section.id }}.promotional-banner__content--style-2 * {
     color: {{ section.settings.text_color }};
   }
 {%- endstyle -%}
@@ -79,8 +79,8 @@
           </p>
         {% endif %}
         {% if section.settings.style_2_button_text != blank %}
-          <a class="button button--primary border">
-            <span></span> <span></span> <span></span> <span></span> {{ section.settings.style_2_button_text -}}
+          <a class="button--link">
+            {{ section.settings.style_2_button_text -}}
           </a>
         {% endif %}
       </div>

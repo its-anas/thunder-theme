@@ -35,7 +35,7 @@
 	justify-content: space-between;
 	align-items: center;
 	background-color: var(--secondary-background-color);
-	border-radius: calc(var(--global-border-radius) / 2);
+	border-radius: var(--global-border-radius);
 }
 
 .main-product-tabs .product-page__tab-title-text {

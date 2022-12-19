@@ -35,7 +35,7 @@
 	padding: 0.3rem;
 	background-color: var(--secondary-background-color);
 	font-size: var(--xsmall-font-size);
-	border-radius: calc(var(--global-border-radius) / 2);
+	border-radius: var(--global-border-radius);
 }
 
 .article__share {
@@ -167,11 +167,6 @@
 
 .article__back-button__container {
 	text-align: center;
-}
-
-.article__back-button {
-	color: var(--secondary-text-color);
-	font-size: var(--xsmall-font-size);
 }
 
 .article__comment-form__button {

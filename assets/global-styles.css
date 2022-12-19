@@ -214,7 +214,7 @@ label {
 
 .button--link,
 .button--link:after {
-	font-size: var(--xsmall-font-size);
+	font-size: var(--small-font-size);
 }
 
 .button-text,
@@ -282,14 +282,14 @@ label,
 legend,
 span,
 td,
-th,
-a {
-	color: var(--text-color);
+th {
+	color: var(--body-text-color);
 }
 
 a {
-	color: var(--text-color);
+	color: var(--link-color);
 	text-decoration: none;
+	cursor: pointer;
 }
 
 a.link {
@@ -507,16 +507,16 @@ select {
 	padding: 0.5rem;
 	border: 1px solid rgb(144, 144, 144);
 	background-color: var(--secondary-background-color);
-	color: var(--text-color);
+	color: var(--body-text-color);
 	outline: none;
 }
 
 input,
 select {
-	border-radius: calc(var(--global-border-radius) / 2) !important;
+	border-radius: var(--global-border-radius) !important;
 }
 textarea {
-	border-radius: calc(var(--global-border-radius) / 2) !important;
+	border-radius: var(--global-border-radius) !important;
 }
 
 input[type="checkbox"] {
@@ -531,7 +531,7 @@ input[type="checkbox"] {
 	padding: 0rem;
 	margin: 0rem !important;
 	box-sizing: border-box;
-	border-radius: calc(var(--global-border-radius) / 2);
+	border-radius: var(--global-border-radius);
 }
 
 input.color-swatch {
@@ -569,7 +569,7 @@ textarea {
 input:focus,
 textarea:focus,
 select:focus {
-	border: 1px solid var(--text-color);
+	border: 1px solid var(--body-text-color);
 }
 
 input::-moz-placeholder,
@@ -642,7 +642,7 @@ button {
 	text-transform: uppercase !important;
 	transition: 1s !important;
 	border: var(--button-border-width) solid var(--secondary-button-border-color) !important;
-	border-radius: calc(var(--global-border-radius) / 2) !important;
+	border-radius: var(--global-border-radius) !important;
 }
 
 @media screen and (min-width: 1024px) {
@@ -737,7 +737,7 @@ a.border.button--primary,
 a.border.button--secondary,
 button.border.button--primary,
 button.border.button--secondary {
-	border-radius: calc(var(--global-border-radius) / 2);
+	border-radius: var(--global-border-radius);
 	transition: 1s;
 }
 
@@ -865,7 +865,7 @@ button.border.button--secondary:hover {
 
 .button--link {
 	position: relative;
-	color: var(--primary-button-background-color);
+	color: var(--link-color);
 	cursor: pointer;
 }
 
@@ -897,8 +897,8 @@ button.border.button--secondary:hover {
 	align-items: center;
 	width: 150px;
 	height: 44px;
-	border: 2px solid var(--text-color);
-	border-radius: calc(var(--global-border-radius) / 2);
+	border: 2px solid var(--body-text-color);
+	border-radius: var(--global-border-radius);
 }
 
 .quantity-field.cart {
@@ -920,7 +920,7 @@ button.border.button--secondary:hover {
 .quantity-field__plus {
 	width: 33%;
 	height: 100%;
-	color: var(--text-color);
+	color: var(--body-text-color);
 }
 
 /* ANCHOR: Slider component */
@@ -1074,14 +1074,10 @@ slider-component .placeholder {
 }
 
 /* ANCHOR: Tags */
-.tag--normal {
-	color: var(--primary-button-background-color);
-}
-
 .tag--animated {
 	-webkit-animation: blink 1s linear infinite;
 	animation: blink 1s linear infinite;
-	color: var(--primary-button-background-color);
+	color: var(--accent-color-1);
 }
 
 .tag--animated-hover:after {
@@ -1100,7 +1096,7 @@ slider-component .placeholder {
 .tag--animated,
 .tag--animated-hover:after {
 	padding: 0.05rem 0.15rem;
-	color: var(--text-color);
+	color: var(--accent-color-1);
 	pointer-events: none;
 }
 
@@ -1115,8 +1111,10 @@ slider-component .placeholder {
 .tag--normal,
 .tag--animated,
 .tag--animated-hover:after {
-	border: 1px solid;
-	border-radius: calc(var(--global-border-radius) / 2);
+	color: var(--background-color);
+	background-color: var(--accent-color-1);
+	border-radius: var(--global-border-radius);
+	font-weight: bold;
 }
 
 @-webkit-keyframes blink {
@@ -1250,12 +1248,12 @@ cart-component.hidden {
 	display: flex;
 	flex-direction: column;
 	padding: 0% 0%;
-	border: 1px solid var(--text-color);
+	border: 1px solid var(--body-text-color);
 }
 
 .search-results__divider {
 	height: 1px;
-	background: var(--text-color);
+	background: var(--body-text-color);
 }
 
 .search-results__list-item {
@@ -1271,7 +1269,7 @@ cart-component.hidden {
 	min-width: 60px;
 	height: 60px;
 	min-height: 60px;
-	border-radius: calc(var(--global-border-radius) / 2);
+	border-radius: var(--global-border-radius);
 	overflow: hidden;
 }
 
@@ -1288,7 +1286,7 @@ cart-component.hidden {
 }
 
 .search-results__item-heading {
-	color: var(--text-color);
+	color: var(--body-text-color);
 }
 
 .search-results__item-price {
@@ -1303,7 +1301,7 @@ cart-component.hidden {
 	width: 100%;
 	border: none;
 	background: none;
-	color: var(--primary-button-background-color);
+	color: var(--link-color);
 	cursor: pointer;
 }
 
@@ -1335,7 +1333,7 @@ cart-component.hidden {
 	width: 100%;
 }
 .search-drawer__container .search-section__form {
-	border-bottom: 2px solid var(--text-color);
+	border-bottom: 2px solid var(--body-text-color);
 }
 
 .search-form__input {
@@ -1375,7 +1373,7 @@ cart-component.hidden {
 	min-height: 50px;
 	background: var(--primary-button-background-color);
 	cursor: pointer;
-	border-radius: calc(var(--global-border-radius) / 2);
+	border-radius: var(--global-border-radius);
 	margin-left: -20px;
 	z-index: 2;
 }
@@ -1527,7 +1525,7 @@ cart-component.hidden {
 	display: grid;
 	align-items: center;
 	background: var(--primary-button-background-color);
-	border-radius: calc(var(--global-border-radius) / 2);
+	border-radius: var(--global-border-radius);
 	padding: 1rem;
 	margin-left: -20px;
 	z-index: 2;
@@ -1601,7 +1599,7 @@ cart-component.hidden {
 		width: 100%;
 		height: 100%;
 		padding: 0.5rem;
-		border: 2px solid var(--text-color);
+		border: 2px solid var(--body-text-color);
 		background-color: var(--background-color);
 	}
 
@@ -1649,8 +1647,8 @@ cart-component.hidden {
 	align-items: center;
 	width: 40px;
 	height: 40px;
-	border: 1px solid var(--text-color);
-	color: var(--text-color);
+	border: 1px solid var(--body-text-color);
+	color: var(--body-text-color);
 }
 
 .pagination__text {
@@ -1660,7 +1658,7 @@ cart-component.hidden {
 .pagination__number {
 	background-color: var(--secondary-background-color);
 	font-weight: bolder;
-	border-radius: calc(var(--global-border-radius) / 2);
+	border-radius: var(--global-border-radius);
 }
 
 .pagination__arrow-left,
@@ -1702,18 +1700,18 @@ div:has(.grecaptcha-badge) {
 	height: 40px;
 	padding: 0 2rem;
 	padding: 0 1.4rem;
-	border-bottom: 1px solid var(--text-color);
+	border-bottom: 1px solid var(--body-text-color);
 	cursor: pointer;
 	transition: all 0.1s ease-in-out;
 }
 
 .page-tab:hover {
-	border-bottom: 5px solid var(--text-color) !important;
+	border-bottom: 5px solid var(--body-text-color) !important;
 	transition: all 0.1s ease-in-out;
 }
 
 .page-tab.selected {
-	border-bottom: 3px solid var(--text-color);
+	border-bottom: 3px solid var(--body-text-color);
 	transition: all 0.1s ease-in-out;
 }
 

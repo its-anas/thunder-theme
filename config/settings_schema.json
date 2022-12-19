@@ -99,20 +99,70 @@
                {
                     "type": "color",
                     "id": "heading_color",
-                    "label": "Heading color",
+                    "label": "Heading",
                     "default": "#fff"
                },
                {
                     "type": "color",
-                    "id": "text_color",
-                    "label": "Text color",
+                    "id": "body_text_color",
+                    "label": "Body text",
                     "default": "#fff"
                },
                {
                     "type": "color",
                     "id": "secondary_text_color",
-                    "label": "Secondary text color",
+                    "label": "Secondary text",
                     "default": "#aaaaaa"
+               },
+               {
+                    "type": "color",
+                    "id": "link_color",
+                    "label": "Link",
+                    "default": "#004477"
+               },
+               {
+                    "type": "header",
+                    "content": "Supplementary colors"
+               },
+               {
+                    "type": "color",
+                    "id": "accent_color_1",
+                    "label": "Accent 1",
+                    "default": "#fcdb33"
+               },
+               {
+                    "type": "color",
+                    "id": "sale_tag_color",
+                    "label": "Sale tag",
+                    "default": "#FA0000"
+               },
+               {
+                    "type": "header",
+                    "content": "Error/success"
+               },
+               {
+                    "type": "color",
+                    "id": "error_text_color",
+                    "label": "Error text",
+                    "default": "#fa6464"
+               },
+               {
+                    "type": "color",
+                    "id": "error_background_color",
+                    "label": "Error background",
+                    "default": "#260b0b"
+               },
+               {
+                    "type": "color",
+                    "id": "success_text_color",
+                    "label": "Success text",
+                    "default": "#4bb543"
+               },
+               {
+                    "type": "color",
+                    "id": "success_background_color",
+                    "label": "Success background",
+                    "default": "#0b260c"
                },
                {
                     "type": "header",
@@ -121,58 +171,56 @@
                {
                     "type": "color",
                     "id": "background_color",
-                    "label": "Background color",
+                    "label": "Background",
                     "default": "#000000"
                },
                {
                     "type": "color",
                     "id": "secondary_background_color",
-                    "label": "Secondary background color",
+                    "label": "Secondary background",
                     "default": "#222"
                },
                {
                     "type": "header",
-                    "content": "Header/Drawers/Popups"
+                    "content": "Global border"
                },
                {
                     "type": "color",
-                    "id": "header_content_color",
-                    "label": "Content color",
+                    "id": "global_border_color",
+                    "label": "Border color",
+                    "default": "#fff"
+               },
+               {
+                    "type": "header",
+                    "content": "Header"
+               },
+               {
+                    "type": "color",
+                    "id": "header_text_color",
+                    "label": "Text",
                     "default": "#fff"
                },
                {
                     "type": "color",
                     "id": "header_background_color",
-                    "label": "Background color",
+                    "label": "Background",
                     "default": "#000"
                },
                {
                     "type": "header",
-                    "content": "Error/Success"
+                    "content": "Footer"
                },
                {
                     "type": "color",
-                    "id": "error_text_color",
-                    "label": "Error text color",
-                    "default": "#fa6464"
+                    "id": "footer_text_color",
+                    "label": "Text",
+                    "default": "#fff"
                },
                {
                     "type": "color",
-                    "id": "error_background_color",
-                    "label": "Error background color",
-                    "default": "#260b0b"
-               },
-               {
-                    "type": "color",
-                    "id": "success_text_color",
-                    "label": "Success text color",
-                    "default": "#4bb543"
-               },
-               {
-                    "type": "color",
-                    "id": "success_background_color",
-                    "label": "Success background color",
-                    "default": "#0b260c"
+                    "id": "footer_background_color",
+                    "label": "Background",
+                    "default": "#282828"
                },
                {
                     "type": "header",
@@ -237,27 +285,6 @@
                     "id": "button_animation_color",
                     "label": "Animated border",
                     "default": "#fcdb33"
-               },
-               {
-                    "type": "header",
-                    "content": "Borders"
-               },
-               {
-                    "type": "color",
-                    "id": "global_border_color",
-                    "label": "Global border color",
-                    "default": "#fff"
-               }
-          ]
-     },
-     {
-          "name": "Color swatch",
-          "settings": [
-               {
-                    "type": "textarea",
-                    "id": "color_swatch_list",
-                    "label": "List of colors and their hex codes",
-                    "default": "Black:#000000, White:#fff, Red:#ff0000, Green:#00ff00, Blue:#0000ff, Gold:#FFD700, Grey:#808080, Purple:#800080"
                }
           ]
      },
@@ -297,12 +324,27 @@
                },
                {
                     "type": "header",
+                    "content": "Section"
+               },
+               {
+                    "type": "range",
+                    "id": "wrapped_section_width",
+                    "label": "Section width",
+                    "info": "Applied only to sections that use the style 'wrapped' and not 'full-width",
+                    "min": 1025,
+                    "max": 1440,
+                    "step": 5,
+                    "unit": "px",
+                    "default": 1240
+               },
+               {
+                    "type": "header",
                     "content": "Button"
                },
                {
                     "type": "range",
                     "id": "button_border_width",
-                    "label": "Border width",
+                    "label": "Button border width",
                     "min": 1,
                     "max": 5,
                     "step": 1,
@@ -315,32 +357,6 @@
                     "label": "Button symbol",
                     "info": "A symbol that shows up after buttons and links. e.g. 🢂➜⮕➾⤑↬⮞➤⪢⋙⇌➥↠",
                     "default": "➜"
-               },
-               {
-                    "type": "header",
-                    "content": "Section"
-               },
-               {
-                    "type": "range",
-                    "id": "wrapped_section_width",
-                    "label": "Wrapped section width",
-                    "info": "Applied only to sections that use the style 'wrapped' instead of 'full-width",
-                    "min": 1025,
-                    "max": 1440,
-                    "step": 5,
-                    "unit": "px",
-                    "default": 1240
-               }
-          ]
-     },
-     {
-          "name": "Search behavior",
-          "settings": [
-               {
-                    "type": "checkbox",
-                    "id": "predictive_search_enabled",
-                    "default": true,
-                    "label": "Enable product suggestions"
                }
           ]
      },
@@ -368,6 +384,28 @@
                     "id": "header_full_width",
                     "label": "Full width header",
                     "default": false
+               }
+          ]
+     },
+     {
+          "name": "Color swatch",
+          "settings": [
+               {
+                    "type": "textarea",
+                    "id": "color_swatch_list",
+                    "label": "List of colors and their hex codes",
+                    "default": "Black:#000000, White:#fff, Red:#ff0000, Green:#00ff00, Blue:#0000ff, Gold:#FFD700, Grey:#808080, Purple:#800080"
+               }
+          ]
+     },
+     {
+          "name": "Search behavior",
+          "settings": [
+               {
+                    "type": "checkbox",
+                    "id": "predictive_search_enabled",
+                    "default": true,
+                    "label": "Enable product suggestions"
                }
           ]
      },
