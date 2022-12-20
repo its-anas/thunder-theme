@@ -47,7 +47,7 @@
           {% endstyle %}
           {%- if article.image -%}
             <div class="article__picture media" {{ block.shopify_attributes }}>
-              {% render 'snippet-image'; image: article.image, style: 'fit' %}
+              {% render 'snippet-image'; image: article.image, style: 'cover' %}
             </div>
           {%- endif -%}
         {%- when 'tags' -%}

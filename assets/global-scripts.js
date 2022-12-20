@@ -646,7 +646,7 @@ async function updateCartDrawer() {
 			document.querySelector(".cart-drawer__products-list").innerHTML = "";
 			data.items.forEach((item) => {
 				let variantTitle = item.variant_title !== null ? `<p class="product-variant">${item.variant_title}</p>` : "";
-				let itemImage = item.image == null ? "" : `<img srcset="${item.featured_image.url}" loading="lazy" alt="${item.featured_image.alt}" width="${item.featured_image.width}" height="${item.featured_image.height}" class="fit">`;
+				let itemImage = item.image == null ? "" : `<img srcset="${item.featured_image.url}" loading="lazy" alt="${item.featured_image.alt}" width="${item.featured_image.width}" height="${item.featured_image.height}" class="cover">`;
 				itemList.push(`
 					<div class="cart-drawer__product" data-variant="${item.variant_id}">
 						<a href="${item.url}" class="cart-drawer__product__image">
@@ -888,7 +888,7 @@ function addCartRecommendedProducts(cartProducts) {
 												alt="${product.media[0].alt}"
 												width="${product.media[0].width}"
 												height="${product.media[0].height}"
-												class="fit"
+												class="cover"
 											>
 										</div>
 										<div class="recommended-product__details">
@@ -918,7 +918,7 @@ function addCartRecommendedProducts(cartProducts) {
 												alt="${product.media[0].alt}"
 												width="${product.media[0].width}"
 												height="${product.media[0].height}"
-												class="fit"
+												class="cover"
 											>
 										</div>
 										<div class="recommended-product__details">
@@ -1202,7 +1202,7 @@ class QuickView extends HTMLElement {
 									height="${image.height}"
 									id="${image.id}"
 									${style}
-									class="fit"
+									class="cover"
 								>
 							</div>
 							`;
@@ -1324,7 +1324,7 @@ class QuickView extends HTMLElement {
 																alt="${productVariantsImages[vkey].alt}"
 																width="${productVariantsImages[vkey].width}"
 																height="${productVariantsImages[vkey].height}"
-																class="fit"
+																class="cover"
 															>
 													`;
 													done = true;
@@ -2467,7 +2467,7 @@ class FeaturedProduct extends HTMLElement {
 												alt="${this.featuredProductImages[vkey].alt}"
 												width="${this.featuredProductImages[vkey].width}"
 												height="${this.featuredProductImages[vkey].height}"
-												class="fit"
+												class="cover"
 											>
 										`;
 										done = true;
@@ -2585,7 +2585,7 @@ class FeaturedProduct extends HTMLElement {
 												alt=""${this.featuredProductImages[vkey].alt}"
 												width="${this.featuredProductImages[vkey].with}"
 												height="${this.featuredProductImages[vkey].alt}"
-												class="full"
+												class="contain"
 												loading="lazy"
 											>
 										</div>
@@ -2599,7 +2599,7 @@ class FeaturedProduct extends HTMLElement {
 													alt=""${this.featuredProductImages[vkey].alt}"
 													width="${this.featuredProductImages[vkey].with}"
 													height="${this.featuredProductImages[vkey].alt}"
-													class="full"
+													class="contain"
 													loading="lazy"
 												>
 											</div>
@@ -2615,7 +2615,7 @@ class FeaturedProduct extends HTMLElement {
 										alt=""${this.featuredProductImages[vkey].alt}"
 										width="${this.featuredProductImages[vkey].with}"
 										height="${this.featuredProductImages[vkey].alt}"
-										class="full"
+										class="contain"
 										loading="lazy"
 									>
 								</div>
@@ -2629,7 +2629,7 @@ class FeaturedProduct extends HTMLElement {
 											alt=""${this.featuredProductImages[vkey].alt}"
 											width="${this.featuredProductImages[vkey].with}"
 											height="${this.featuredProductImages[vkey].alt}"
-											class="full"
+											class="contain"
 											loading="lazy"
 										>
 									</div>
@@ -2678,7 +2678,7 @@ class FeaturedProduct extends HTMLElement {
 												alt=""${this.featuredProductImages[vkey].alt}"
 												width="${this.featuredProductImages[vkey].with}"
 												height="${this.featuredProductImages[vkey].alt}"
-												class="full"
+												class="contain"
 												loading="lazy"
 											>
 										</div>
@@ -2692,7 +2692,7 @@ class FeaturedProduct extends HTMLElement {
 													alt=""${this.featuredProductImages[vkey].alt}"
 													width="${this.featuredProductImages[vkey].with}"
 													height="${this.featuredProductImages[vkey].alt}"
-													class="full"
+													class="contain"
 													loading="lazy"
 												>
 											</div>

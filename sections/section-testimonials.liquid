@@ -65,7 +65,7 @@
                     {%- if block.settings.reviewer_picture == blank -%}
                       {{ 'product-3' | placeholder_svg_tag: 'placeholder' }}
                     {%- elsif block.settings.reviewer_picture != blank -%}
-                        {% render 'snippet-image'; image: block.settings.reviewer_picture, style: 'fit' %}
+                        {% render 'snippet-image'; image: block.settings.reviewer_picture, style: 'cover' %}
                     {% endif %}
                   </div>
                   <div class="testimonials__reviewer-info">
@@ -99,7 +99,7 @@
                     {%- if block.settings.reviewer_picture == blank -%}
                       {{ 'product-3' | placeholder_svg_tag: 'placeholder' }}
                     {%- elsif block.settings.reviewer_picture != blank -%}
-                        {% render 'snippet-image'; image: block.settings.reviewer_picture, style: 'fit' %}
+                        {% render 'snippet-image'; image: block.settings.reviewer_picture, style: 'cover' %}
                     {% endif %}
                   </div>
                   <div class="testimonials__reviewer-info">

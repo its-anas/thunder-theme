@@ -75,16 +75,14 @@ img {
 .media img {
 	width: 100%;
 	height: 100%;
-	-o-object-position: center center;
-	object-position: center center;
 }
 
-.media img.fit {
+.media img.cover {
 	-o-object-fit: cover;
 	object-fit: cover;
 }
 
-.media img.full {
+.media img.contain {
 	-o-object-fit: contain;
 	object-fit: contain;
 }

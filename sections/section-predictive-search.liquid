@@ -5,7 +5,7 @@
         <a href="{{ product.url }}" class="search-results__item">
           {%- if product.featured_media != blank -%}
             <div class="search-results__image media">
-              {% render 'snippet-image'; image: product.featured_media, style: 'fit' %}
+              {% render 'snippet-image'; image: product.featured_media, style: 'cover' %}
             </div>
           {%- endif -%}
           <div class="search-results__item-content">

@@ -91,7 +91,7 @@
           {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder' }}
         {%- elsif block.settings.image != blank -%}
           <div class="media">
-            {% render 'snippet-image'; image: block.settings.image, style: 'fit' %}
+            {% render 'snippet-image'; image: block.settings.image, style: 'cover' %}
           </div>
         {%- endif -%}
       </div>

@@ -49,7 +49,7 @@
         {% endif %}
       >
         <div class="item-picture media">
-            {% render 'snippet-image'; image: image, style: 'full' %}
+            {% render 'snippet-image'; image: image, style: 'contain' %}
         </div>
       </div>
     {% endfor %}
@@ -72,7 +72,7 @@
         {% endif %}
       >
         <div class="thumbnail-picture media">
-            {% render 'snippet-image'; image: thumbnail, style: 'full' %}
+            {% render 'snippet-image'; image: thumbnail, style: 'contain' %}
         </div>
       </div>
     {% endfor %}
@@ -264,7 +264,7 @@
                                     class="product-page__radio__input"
                                   >
                                   {% if variant_image != blank %}
-                                      {% render 'snippet-image'; image: variant_image, style: 'full' %}
+                                      {% render 'snippet-image'; image: variant_image, style: 'contain' %}
                                   {% else %}
                                     {{ value }}
                                   {% endif %}
@@ -446,7 +446,7 @@
                         <div class="product-page__recommended-product-container">
                           <div class="product-page__recommended-product corner-border">
                             <a href="{{ bundled_product.url }}" class="media corner-border-target">
-                              {% render 'snippet-image'; image: bundled_product.featured_image, style: 'fit' %}
+                              {% render 'snippet-image'; image: bundled_product.featured_image, style: 'cover' %}
                             </a>
                             <div class="quick-view-button"
                               id="quick-view-button"

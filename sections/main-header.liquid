@@ -101,7 +101,7 @@
               {{ shop.name }}
             </p>
           {% else %}
-            {% render 'snippet-image'; image: section.settings.logo_image, style: 'full' %}
+            {% render 'snippet-image'; image: section.settings.logo_image, style: 'contain' %}
           {% endif %}
         {% endif %}
       </a>
@@ -226,7 +226,7 @@
                                       {% if block.settings.tab_icon_image == blank %}
                                         {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
                                       {% else %}
-                                        {% render 'snippet-image'; image: block.settings.tab_icon_image, style: 'full' %}
+                                        {% render 'snippet-image'; image: block.settings.tab_icon_image, style: 'contain' %}
                                       {% endif %}
                                     {% endif %}
                                   </div>
@@ -327,7 +327,7 @@
                                           {% if block.settings.tab_content_image == blank %}
                                             {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
                                           {% else %}
-                                            {% render 'snippet-image'; image: block.settings.tab_content_image, style: 'full' %}
+                                            {% render 'snippet-image'; image: block.settings.tab_content_image, style: 'contain' %}
                                           {% endif %}
                                         {% endif %}
                                       </div>
@@ -489,7 +489,7 @@
                                   {% if block.settings.tab_icon_image == blank %}
                                     {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
                                   {% else %}
-                                    {% render 'snippet-image'; image: block.settings.tab_icon_image, style: 'full' %}
+                                    {% render 'snippet-image'; image: block.settings.tab_icon_image, style: 'contain' %}
                                   {% endif %}
                                 {% endif %}
                               </div>
@@ -645,7 +645,7 @@
                                       {% if block.settings.tab_content_image == blank %}
                                         {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
                                       {% else %}
-                                        {% render 'snippet-image'; image: block.settings.tab_content_image, style: 'full' %}
+                                        {% render 'snippet-image'; image: block.settings.tab_content_image, style: 'contain' %}
                                       {% endif %}
                                     {% endif %}
                                   </div>

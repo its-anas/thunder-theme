@@ -30,7 +30,7 @@
   </div>
   {% if collection.featured_image != blank and section.settings.show_collection_image == true %}
     <div class="collection__head__image media">
-      {% render 'snippet-image'; image: collection.featured_image, style: 'fit' %}
+      {% render 'snippet-image'; image: collection.featured_image, style: 'cover' %}
     </div>
   {% endif %}
 </div>
@@ -113,7 +113,7 @@
                           </div>
                           {% if item.featured_media != blank %}
                             <a href="{{ item.url }}" class="media corner-border-target">
-                              {% render 'snippet-image'; image: item.featured_media, style: 'fit' %}
+                              {% render 'snippet-image'; image: item.featured_media, style: 'cover' %}
                             </a>
                           {% else %}
                             <a href="{{ item.url }}" class="media corner-border-target">

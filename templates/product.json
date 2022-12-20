@@ -186,7 +186,7 @@
         "heading": "FAQ",
         "heading_size": "h6",
         "show_image": true,
-        "image_style": "fit",
+        "image_style": "cover",
         "background_color": "transparent",
         "space_outside": 0,
         "space_between_elements": 1,

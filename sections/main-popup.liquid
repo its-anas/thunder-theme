@@ -36,7 +36,7 @@
       >
         {% if section.settings.show_image == true and section.settings.image != blank %}
           <div class="popup__picture">
-            {% render 'snippet-image'; image: section.settings.image, style: 'fit' %}
+            {% render 'snippet-image'; image: section.settings.image, style: 'cover' %}
           </div>
         {% endif %}
         <div class="popup__content">

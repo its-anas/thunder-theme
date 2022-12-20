@@ -31,7 +31,7 @@
                     {{ shop.name }}
                   </p>
                 {% else %}
-                  {% render 'snippet-image'; image: block.settings.logo_image, style: 'full' %}
+                  {% render 'snippet-image'; image: block.settings.logo_image, style: 'contain' %}
                 {% endif %}
               {% endif %}
             </div>

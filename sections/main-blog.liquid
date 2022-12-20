@@ -30,7 +30,7 @@
                 <a class="blog__article__container" href="{{ article.url }}">
                   <div class="blog__article__image media">
                     {%- if article.image -%}
-                      {% render 'snippet-image'; image: article.image, style: 'fit' %}
+                      {% render 'snippet-image'; image: article.image, style: 'cover' %}
                     {%- else -%}
                       {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder' }}
                     {%- endif -%}

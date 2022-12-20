@@ -73,7 +73,7 @@
                 {% if block.settings.image == blank %}
                   {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
                 {% else %}
-                  {% render 'snippet-image'; image: block.settings.image, style: 'full' %}
+                  {% render 'snippet-image'; image: block.settings.image, style: 'contain' %}
                 {% endif %}
               {% endif %}
             </a>

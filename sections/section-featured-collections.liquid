@@ -63,7 +63,7 @@
                     {% assign image = block.settings.image %}
                   {% endif %}
                   {% if image != blank %}
-                    {% render 'snippet-image'; image: image, style: 'fit' %}
+                    {% render 'snippet-image'; image: image, style: 'cover' %}
                   {% else %}
                     {{ 'collection-1' | placeholder_svg_tag: 'placeholder' }}
                   {% endif %}
@@ -256,7 +256,7 @@
       "type": "select",
       "id": "section_style",
       "label": "Section width",
-      "default": "full",
+      "default": "contain",
       "options": [
         {
           "value": "full-width",

@@ -63,9 +63,9 @@
           {% endstyle %}
         {% endif %}
         <div class="{{ section.id }} media">
-          {% render 'snippet-image'; image: section.settings.image, style: 'fit' %}
+          {% render 'snippet-image'; image: section.settings.image, style: 'cover' %}
           {% if section.settings.mobile_image != blank %}
-            {% render 'snippet-image'; image: section.settings.mobile_image, style: 'fit mobile-only' %}
+            {% render 'snippet-image'; image: section.settings.mobile_image, style: 'cover mobile-only' %}
           {% endif %}
         </div>
       {% endif %}
@@ -112,7 +112,7 @@
                   {%- if block.settings.product == blank -%}
                     {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
                   {%- elsif block.settings.product != blank -%}
-                    {% render 'snippet-image'; image: block.settings.product.featured_image, style: 'fit' %}
+                    {% render 'snippet-image'; image: block.settings.product.featured_image, style: 'cover' %}
                   {%- endif -%}
                 </div>
                 <div class="shop-the-look__content">
@@ -305,7 +305,7 @@
       "type": "select",
       "id": "section_style",
       "label": "Section style",
-      "default": "full",
+      "default": "contain",
       "options": [
         {
           "value": " ",

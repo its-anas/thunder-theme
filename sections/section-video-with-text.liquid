@@ -45,7 +45,7 @@
         {% if section.settings.thumbnail == blank %}
           {{ 'collection-2' | placeholder_svg_tag: 'placeholder' }}
         {% else %}
-          {% render 'snippet-image'; image: section.settings.thumbnail, style: 'fit' %}
+          {% render 'snippet-image'; image: section.settings.thumbnail, style: 'cover' %}
         {% endif %}
       </div>
     </div>

@@ -58,7 +58,7 @@
             <a href="{{ article.url }}" class="blog-posts__image">
               <div class="media">
                 {% if article.image != blank %}
-                    {% render 'snippet-image'; image: article.image, style: 'fit' %}
+                    {% render 'snippet-image'; image: article.image, style: 'cover' %}
                 {% else %}
                   {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder' }}
                 {% endif %}

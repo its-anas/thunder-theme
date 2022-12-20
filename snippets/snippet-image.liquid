@@ -1,18 +1,22 @@
-<img
-  srcset="
-    {%- if image.src.width >= 165 -%}{{ image.src | image_url: width: 165 }} 165w,{%- endif -%}
-    {%- if image.src.width >= 360 -%}{{ image.src | image_url: width: 360 }} 360w,{%- endif -%}
-    {%- if image.src.width >= 533 -%}{{ image.src | image_url: width: 533 }} 533w,{%- endif -%}
-    {%- if image.src.width >= 720 -%}{{ image.src | image_url: width: 720 }} 720w,{%- endif -%}
-    {%- if image.src.width >= 1000 -%}{{ image.src | image_url: width: 1000 }} 1000w,{%- endif -%}
-    {%- if image.src.width >= 1500 -%}{{ image.src | image_url: width: 1500 }} 1500w,{%- endif -%}
-    {{ image.src | image_url }} {{ image.src.width }}w
-  "
-  src="{{ image.src | image_url: width: 533 }}"
-  sizes="(min-width: {{ settings.wrapped_section_width }}px) {{ settings.wrapped_section_width | minus: 100 | divided_by: 2 }}px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)"
-  alt="{{ image.src.alt | escape }}"
-  class="{{ style }}"
-  loading="lazy"
-  width="{{ image.width }}"
-  height="{{ image.height }}"
->
+{% comment %}
+   {%- capture sizes -%}
+  (min-width: 1024px) calc((100vw - 100px) / 1),
+  (min-width: 750px) calc((100vw - 100px) / 2),
+  calc((100vw - 1rem) / 3)
+  {%- endcapture -%}
+
+  {%- assign all_widths = '50, 100, 150, 200, 250, 350, 500, 750, 1000, 1250, 1500, 1750, 2000, 3000, 3840' -%}
+{% endcomment %}
+
+{{
+  image
+  | image_url: width: 3840
+  | image_tag:
+    loading: 'lazy',
+    width: image.width,
+    height: image.height,
+    class: style,
+    sizes: sizes,
+    widths: '50, 100, 150, 200, 250, 350, 500, 750, 1000, 1250, 1500, 1750, 2000, 3000, 3840',
+    alt: image.alt
+}}
