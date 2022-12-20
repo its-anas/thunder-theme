@@ -1,12 +1,8 @@
-{% comment %}
-   {%- capture sizes -%}
+{%- capture sizes -%}
   (min-width: 1024px) calc((100vw - 100px) / 1),
   (min-width: 750px) calc((100vw - 100px) / 2),
   calc((100vw - 1rem) / 3)
   {%- endcapture -%}
-
-  {%- assign all_widths = '50, 100, 150, 200, 250, 350, 500, 750, 1000, 1250, 1500, 1750, 2000, 3000, 3840' -%}
-{% endcomment %}
 
 {{
   image

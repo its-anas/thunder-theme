@@ -38,7 +38,20 @@
             <span>
               <span class="customer-order__table__product">
                 <div class="customer-order__table__product__picture media">
-                  {% render 'snippet-image'; image: line_item.product.featured_image, style: 'cover' %}
+                  {%- assign image = line_item.product.featured_image -%}
+                  {%- assign widths = '70, 80, 90, 100' -%}
+                  {%- assign width = '100' -%}
+                  {{
+                    image
+                    | image_url: width: 3840
+                    | image_tag:
+                      loading: 'lazy',
+                      class: 'cover',
+                      alt: image.alt,
+                      width: image.width,
+                      height: image.height,
+                      widths: widths
+                  }}
                 </div>
                 <div class="customer-order__table__product__details">
                   <a class="customer-order__table__product__title" href="{{ line_item.url }}">

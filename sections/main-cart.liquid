@@ -20,7 +20,22 @@
                   <div class="cart-page__product-details">
                     <div class="cart-page__product-picture">
                       <a href="{{ item.url }}" class="cart-drawer__product__image">
-                        {% render 'snippet-image'; image: item.image, style: 'contain' %}
+                        {%- assign image = item.image -%}
+                        {%- assign sizes = '100vw' -%}
+                        {%- assign widths = '80, 95' -%}
+                        {%- assign width = '95' -%}
+                        {{
+                          image
+                          | image_url: width: width
+                          | image_tag:
+                            loading: 'lazy',
+                            class: 'contain',
+                            alt: image.alt,
+                            width: image.width,
+                            height: image.height,
+                            sizes: sizes,
+                            widths: widths
+                        }}
                       </a>
                     </div>
                     <div class="cart-page__product-info">

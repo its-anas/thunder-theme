@@ -30,7 +30,22 @@
   </div>
   {% if collection.featured_image != blank and section.settings.show_collection_image == true %}
     <div class="collection__head__image media">
-      {% render 'snippet-image'; image: collection.featured_image, style: 'cover' %}
+      {%- assign image = collection.featured_image -%}
+      {%- assign sizes = '100vw' -%}
+      {%- assign widths = '350, 500, 750, 1000, 1250, 1500, 1750, 2000, 3000, 3750' -%}
+      {%- assign width = '3750' -%}
+      {{
+        image
+        | image_url: width: width
+        | image_tag:
+          loading: 'lazy',
+          class: 'cover',
+          alt: image.alt,
+          width: image.width,
+          height: image.height,
+          sizes: sizes,
+          widths: widths
+      }}
     </div>
   {% endif %}
 </div>
@@ -113,7 +128,22 @@
                           </div>
                           {% if item.featured_media != blank %}
                             <a href="{{ item.url }}" class="media corner-border-target">
-                              {% render 'snippet-image'; image: item.featured_media, style: 'cover' %}
+                              {%- assign image = item.featured_media -%}
+                              {%- capture sizes %} (min-width: 1024px) calc((1175px - {{ section.settings.products_per_row_desktop | times: 2 }}rem) / {{ section.settings.products_per_row_desktop }}), (min-width: 750px) calc((100vw - 2rem - {{ section.settings.products_per_row_desktop | times: 2 }}rem) / {{ section.settings.products_per_row_desktop }}), calc((100vw - 1rem - {{ section.settings.products_per_row_mobile | times: 1 }}rem) / {{ section.settings.products_per_row_mobile }}) {%- endcapture -%}
+                              {%- assign widths = '125, 150, 175, 200, 225, 250, 300, 325, 350, 375' -%}
+                              {%- assign width = '375' -%}
+                              {{
+                                image
+                                | image_url: width: width
+                                | image_tag:
+                                  loading: 'lazy',
+                                  class: 'cover',
+                                  alt: image.alt,
+                                  width: image.width,
+                                  height: image.height,
+                                  sizes: sizes,
+                                  widths: widths
+                              }}
                             </a>
                           {% else %}
                             <a href="{{ item.url }}" class="media corner-border-target">
