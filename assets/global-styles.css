@@ -685,7 +685,7 @@ button {
 @media screen and (min-width: 1024px) {
 	.button--primary,
 	.button--secondary {
-		padding: 15px 0px;
+		padding: 15px 1rem;
 	}
 }
 

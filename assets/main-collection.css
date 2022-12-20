@@ -233,7 +233,7 @@
 }
 
 .collection__item__tag .tag-text {
-	color: var(--button-animation-color);
+	color: var(--sale-tag-color);
 }
 
 .collection__item .quick-view-button {
@@ -246,6 +246,7 @@
 .collection__item__name {
 	font-size: var(--small-font-size);
 	text-align: center;
+	color: var(--body-text-color);
 }
 
 .collection__item__prices {

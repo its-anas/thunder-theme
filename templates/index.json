@@ -164,7 +164,7 @@
                     "overlay_opacity": 10,
                     "vertical_position": "top",
                     "horizontal_position": "center",
-                    "deskop_image_height": 500,
+                    "deskop_image_height": 600,
                     "mobile_image_height": 300
                }
           },
@@ -705,7 +705,7 @@
                     "overlay_opacity": 10,
                     "vertical_position": "center",
                     "horizontal_position": "center",
-                    "deskop_image_height": 350,
+                    "deskop_image_height": 600,
                     "mobile_image_height": 300
                }
           },

@@ -244,13 +244,20 @@
       "default": 4
     },
     {
-      "type": "range",
+      "type": "select",
       "id": "products_per_row_mobile",
-      "min": 1,
-      "max": 3,
-      "step": 1,
       "label": "Products per row - mobile",
-      "default": 2
+      "options": [
+        {
+          "value": "1",
+          "label": "1"
+        },
+        {
+          "value": "2",
+          "label": "2"
+        }
+      ],
+      "default": "2"
     },
     {
       "type": "checkbox",
