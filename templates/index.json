@@ -205,7 +205,7 @@
                     "collection": "",
                     "image_style": "cover",
                     "aspect_ratio": 1,
-                    "mobile_items": 2,
+                    "mobile_items": "2",
                     "tablet_items": 3,
                     "desktop_items": 4,
                     "items_limit": 13,
@@ -458,7 +458,7 @@
                ],
                "settings": {
                     "aspect_ratio": 0.6,
-                    "mobile_items": 3,
+                    "mobile_items": "2",
                     "tablet_items": 4,
                     "desktop_items": 5,
                     "heading": "Featured collections",
@@ -651,62 +651,58 @@
                     "review_border_width": 2
                }
           },
-          "gallery2": {
-               "type": "section-gallery",
+          "image-banner": {
+               "type": "section-image-banner",
                "blocks": {
-                    "template--14285318160433__bf25c28c-3d03-4371-8a92-4e2dc8b83f80-16681014416a8c0f4a-0": {
-                         "type": "image",
+                    "subheading": {
+                         "type": "subheading",
                          "settings": {
-                              "heading": "Heading",
-                              "heading_size": "h4",
-                              "text": "This should be a place to put a text",
-                              "button_text": "Button",
-                              "button_link": ""
+                              "subheading": "Subheading",
+                              "subheading_size": "h6"
                          }
                     },
-                    "image2": {
-                         "type": "image",
+                    "heading": {
+                         "type": "heading",
                          "settings": {
                               "heading": "Heading",
-                              "heading_size": "h4",
-                              "text": "This should be a place to put a text",
-                              "button_text": "Button",
-                              "button_link": ""
+                              "heading_size": "h2"
                          }
                     },
-                    "image3": {
-                         "type": "image",
+                    "text": {
+                         "type": "text",
                          "settings": {
-                              "heading": "Heading",
-                              "heading_size": "h4",
-                              "text": "This should be a place to put a text",
-                              "button_text": "Button",
-                              "button_link": ""
+                              "text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<\/p>"
                          }
                     },
-                    "image4": {
-                         "type": "image",
+                    "button": {
+                         "type": "button",
                          "settings": {
-                              "heading": "Heading",
-                              "heading_size": "h4",
-                              "text": "This should be a place to put a text",
-                              "button_text": "Button",
-                              "button_link": ""
+                              "primary_button_text": "Primary button",
+                              "primary_button_link": "",
+                              "secondary_button_text": "Secondary button",
+                              "secondary_button_link": ""
                          }
                     }
                },
                "block_order": [
-                    "template--14285318160433__bf25c28c-3d03-4371-8a92-4e2dc8b83f80-16681014416a8c0f4a-0"
+                    "subheading",
+                    "heading",
+                    "text",
+                    "button"
                ],
                "settings": {
-                    "gallery_style": "all_in_one",
-                    "section_style": "full-width",
+                    "image_height": 500,
+                    "image_style": "cover",
+                    "background_style": "block",
                     "overlay_color": "#000000",
-                    "overlay_opacity": 10,
+                    "overlay_opacity": 40,
                     "vertical_position": "center",
                     "horizontal_position": "center",
-                    "deskop_image_height": 600,
-                    "mobile_image_height": 300
+                    "text_alignment": "center",
+                    "text_width": 50,
+                    "space_between_elements": 1,
+                    "space_outside": 0,
+                    "section_style": "full-width"
                }
           },
           "text-with-icon": {
@@ -884,7 +880,7 @@
           "video-with-text",
           "animated-rich-text",
           "testimonials",
-          "gallery2",
+          "image-banner",
           "text-with-icon",
           "faq",
           "logo-list"

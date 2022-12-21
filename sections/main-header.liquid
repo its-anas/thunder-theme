@@ -29,6 +29,10 @@
     color: var(--body-text-color);
   }
 
+  .header__logo-container img, .header__logo-container svg {
+    width: {{ section.settings.logo_width }}px;
+  }
+
   @media screen and (min-width: 1024px) {
       {%- if section.settings.menu_layout == "logo_first_navigation_inline" -%}
       .header__menu {
@@ -86,7 +90,7 @@
 <section class="header">
   <div class="header__content">
     <div class="header__logo">
-      <a href="/" class="header__logo-container">
+      <a href="/" class="header__logo-container media">
         {% if section.settings.logo_type == 'svg' %}
           {% if section.settings.logo_svg == blank %}
             <p class="logo--text" style="text-align: center; color: {{ settings.header_text_color }};">
@@ -101,7 +105,13 @@
               {{ shop.name }}
             </p>
           {% else %}
-            {% render 'snippet-image'; image: section.settings.logo_image, style: 'contain' %}
+            {%- assign image = section.settings.logo_image -%}
+            {%- assign width = section.settings.logo_width -%}
+            {{
+              image
+              | image_url: width: width
+              | image_tag: loading: 'lazy', class: 'contain', alt: image.alt, width: image.width, height: image.height
+            }}
           {% endif %}
         {% endif %}
       </a>
@@ -226,7 +236,18 @@
                                       {% if block.settings.tab_icon_image == blank %}
                                         {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
                                       {% else %}
-                                        {% render 'snippet-image'; image: block.settings.tab_icon_image, style: 'contain' %}
+                                        {%- assign image = block.settings.tab_icon_image -%}
+                                        {%- assign width = '60' -%}
+                                        {{
+                                          image
+                                          | image_url: width: width
+                                          | image_tag:
+                                            loading: 'lazy',
+                                            class: 'contain',
+                                            alt: image.alt,
+                                            width: image.width,
+                                            height: image.height
+                                        }}
                                       {% endif %}
                                     {% endif %}
                                   </div>
@@ -327,7 +348,22 @@
                                           {% if block.settings.tab_content_image == blank %}
                                             {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
                                           {% else %}
-                                            {% render 'snippet-image'; image: block.settings.tab_content_image, style: 'contain' %}
+                                            {%- assign image = block.settings.tab_content_image -%}
+                                            {%- assign sizes = '(min-width 750px) 500px, 100vw' -%}
+                                            {%- assign widths = '200, 225, 250, 275, 300, 325, 350, 375, 400' -%}
+                                            {%- assign width = '400' -%}
+                                            {{
+                                              image
+                                              | image_url: width: width
+                                              | image_tag:
+                                                loading: 'lazy',
+                                                class: 'cover',
+                                                alt: image.alt,
+                                                width: image.width,
+                                                height: image.height,
+                                                sizes: sizes,
+                                                widths: widths
+                                            }}
                                           {% endif %}
                                         {% endif %}
                                       </div>
@@ -489,7 +525,18 @@
                                   {% if block.settings.tab_icon_image == blank %}
                                     {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
                                   {% else %}
-                                    {% render 'snippet-image'; image: block.settings.tab_icon_image, style: 'contain' %}
+                                    {%- assign image = block.settings.tab_icon_image -%}
+                                    {%- assign width = '60' -%}
+                                    {{
+                                      image
+                                      | image_url: width: width
+                                      | image_tag:
+                                        loading: 'lazy',
+                                        class: 'contain',
+                                        alt: image.alt,
+                                        width: image.width,
+                                        height: image.height
+                                    }}
                                   {% endif %}
                                 {% endif %}
                               </div>
@@ -645,7 +692,22 @@
                                       {% if block.settings.tab_content_image == blank %}
                                         {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
                                       {% else %}
-                                        {% render 'snippet-image'; image: block.settings.tab_content_image, style: 'contain' %}
+                                        {%- assign image = block.settings.tab_content_image -%}
+                                        {%- assign sizes = '600px' -%}
+                                        {%- assign widths = '200, 225, 250, 275, 300, 325, 350, 375, 400, 425, 450, 475, 500, 525, 550, 575, 600' -%}
+                                        {%- assign width = '600' -%}
+                                        {{
+                                          image
+                                          | image_url: width: width
+                                          | image_tag:
+                                            loading: 'lazy',
+                                            class: 'cover',
+                                            alt: image.alt,
+                                            width: image.width,
+                                            height: image.height,
+                                            sizes: sizes,
+                                            widths: widths
+                                        }}
                                       {% endif %}
                                     {% endif %}
                                   </div>
@@ -744,6 +806,16 @@
       "id": "logo_image",
       "label": "Logo - image",
       "info": "Applicable only if logo type is image"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "min": 100,
+      "max": 160,
+      "step": 10,
+      "unit": "px",
+      "label": "Logo width",
+      "default": 120
     },
     {
       "type": "header",

@@ -54,8 +54,7 @@
   </div>
   <div class="{{ section.id }} testimonials__content">
     <div class="{{ section.id }} testimonials__row">
-      {%- capture testimonial_right -%}
-        <div class="{{ section.id }} testimonials__slide--right">
+      {%- capture testimonial_content -%}
           {% for block in section.blocks %}
             {% assign num = forloop.index | modulo: 2 %}
             {% if num != 0 %}
@@ -65,7 +64,20 @@
                     {%- if block.settings.reviewer_picture == blank -%}
                       {{ 'product-3' | placeholder_svg_tag: 'placeholder' }}
                     {%- elsif block.settings.reviewer_picture != blank -%}
-                        {% render 'snippet-image'; image: block.settings.reviewer_picture, style: 'cover' %}
+                      {%- assign image = block.settings.reviewer_picture -%}
+                      {%- assign widths = '40, 60' -%}
+                      {%- assign width = '60' -%}
+                      {{
+                        image
+                        | image_url: width: width
+                        | image_tag:
+                          loading: 'lazy',
+                          class: 'cover',
+                          alt: image.alt,
+                          width: image.width,
+                          height: image.height,
+                          widths: widths
+                      }}
                     {% endif %}
                   </div>
                   <div class="testimonials__reviewer-info">
@@ -81,44 +93,18 @@
               </div>
             {% endif %}
           {% endfor -%}
-        </div>
       {%- endcapture -%}
       {% for testimonial in (1..15) %}
-        {{ testimonial_right }}
+        <div class="{{ section.id }} testimonials__slide--right">
+          {{ testimonial_content }}
+        </div>
       {% endfor %}
     </div>
     <div class="{{ section.id }} testimonials__row--reversed">
-      {%- capture testimonial_right -%}
-        <div class="{{ section.id }} testimonials__slide--left">
-          {% for block in section.blocks %}
-            {% assign num = forloop.index | modulo: 2 %}
-            {% if num == 0 %}
-              <div class="{{ section.id }} testimonials__item">
-                <div class="testimonials__reviewer">
-                  <div class="testimonials__reviewer-picture media">
-                    {%- if block.settings.reviewer_picture == blank -%}
-                      {{ 'product-3' | placeholder_svg_tag: 'placeholder' }}
-                    {%- elsif block.settings.reviewer_picture != blank -%}
-                        {% render 'snippet-image'; image: block.settings.reviewer_picture, style: 'cover' %}
-                    {% endif %}
-                  </div>
-                  <div class="testimonials__reviewer-info">
-                    <div class="testimonials__reviewer-stars">
-                      {% render 'snippet-icons', icon: block.settings.stars_count -%}
-                    </div>
-                    <p class="testimonials__reviewer-name">~{{ block.settings.reviewer_name }}</p>
-                  </div>
-                </div>
-                <div class="testimonials__review">
-                  <p>"{{ block.settings.review_text | truncate: 200 }}"</p>
-                </div>
-              </div>
-            {% endif %}
-          {% endfor -%}
-        </div>
-      {%- endcapture -%}
       {% for testimonial in (1..15) %}
-        {{ testimonial_right }}
+        <div class="{{ section.id }} testimonials__slide--left">
+          {{ testimonial_content }}
+        </div>
       {% endfor %}
     </div>
   </div>

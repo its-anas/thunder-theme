@@ -91,7 +91,70 @@
           {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder' }}
         {%- elsif block.settings.image != blank -%}
           <div class="media">
-            {% render 'snippet-image'; image: block.settings.image, style: 'cover' %}
+            {%- capture sizes -%}
+                  {%- if section.settings.gallery_style == 'all_in_one' -%}
+                    {%- assign full_width = 100 -%}
+                    {{ full_width | divided_by: section.blocks.size }}vw
+                  {%- elsif section.settings.gallery_style == 'multiple_rows' -%}
+                        {%- if section.blocks.size == 1 -%}
+                          (min-width: 750px) 100vw
+                        {%- endif -%}
+                        {%- if section.blocks.size == 2 -%}
+                            {%- if forloop.index == 1 -%}
+                              (min-width: 750px) 65vw
+                            {%- elsif forloop.index == 2 -%}
+                              (min-width: 750px) 35vw
+                            {%- endif -%}
+                        {%- endif -%}
+                        {%- if section.blocks.size == 3 -%}
+                            {%- if forloop.index == 1 -%}
+                              (min-width: 750px) 65vw
+                            {%- elsif forloop.index == 2 -%}
+                              (min-width: 750px) 35vw
+                            {%- elsif forloop.index == 3 -%}
+                              (min-width: 750px) 100vw
+                            {%- endif -%}
+                        {%- endif -%}
+                        {%- if section.blocks.size == 4 -%}
+                            {%- if forloop.index == 1 or forloop.index == 4 -%}
+                              (min-width: 750px) 65vw
+                            {%- elsif forloop.index == 2 or forloop.index == 3 -%}
+                              (min-width: 750px) 35vw
+                            {%- endif -%}
+                        {%- endif -%}
+                        {%- if section.blocks.size == 5 -%}
+                            {%- if forloop.index == 1 or forloop.index == 4 -%}
+                              (min-width: 750px) 65vw
+                            {%- elsif forloop.index == 2 or forloop.index == 3 -%}
+                              (min-width: 750px) 35vw
+                            {%- elsif forloop.index == 5 -%}
+                              (min-width: 750px) 100vw
+                            {%- endif -%}
+                        {%- endif -%}
+                        {%- if section.blocks.size == 6 -%}
+                            {%- if forloop.index == 1 or forloop.index == 4 or forloop.index == 5 -%}
+                              (min-width: 750px) 65vw
+                            {%- elsif forloop.index == 2 or forloop.index == 3 or forloop.index == 6 -%}
+                              (min-width: 750px) 35vw
+                            {%- endif -%}
+                        {%- endif -%}
+                        , 100vw
+                  {%- endif -%}
+            {%- endcapture -%}
+            {%- assign image = block.settings.image -%}
+            {%- assign widths = '250, 275, 300, 325, 350, 375, 400, 450, 500, 600, 700, 800, 900, 1000, 1250, 1500, 1750, 2000, 2500, 3000, 3500, 3750' -%}
+            {{
+              image
+              | image_url: width: 3750
+              | image_tag:
+                loading: 'lazy',
+                class: 'cover',
+                alt: image.alt,
+                width: image.width,
+                height: image.height,
+                sizes: sizes,
+                widths: widths
+            }}
           </div>
         {%- endif -%}
       </div>

@@ -63,9 +63,37 @@
           {% endstyle %}
         {% endif %}
         <div class="{{ section.id }} media">
-          {% render 'snippet-image'; image: section.settings.image, style: 'cover' %}
+          {%- assign image = section.settings.image -%}
+          {%- assign sizes = '100vw' -%}
+          {%- assign widths = '1000, 1250, 1500, 1750, 2000, 2500, 3000, 3500, 3750' -%}
+          {{
+            image
+            | image_url: width: 3750
+            | image_tag:
+              loading: 'lazy',
+              class: 'cover',
+              alt: image.alt,
+              width: image.width,
+              height: image.height,
+              sizes: sizes,
+              widths: widths
+          }}
           {% if section.settings.mobile_image != blank %}
-            {% render 'snippet-image'; image: section.settings.mobile_image, style: 'cover mobile-only' %}
+            {%- assign image = section.settings.mobile_image -%}
+            {%- assign sizes = '100vw' -%}
+            {%- assign widths = '350, 500, 750, 1000' -%}
+            {{
+              image
+              | image_url: width: 1000
+              | image_tag:
+                loading: 'lazy',
+                class: 'cover mobile-only',
+                alt: image.alt,
+                width: image.width,
+                height: image.height,
+                sizes: sizes,
+                widths: widths
+            }}
           {% endif %}
         </div>
       {% endif %}
@@ -112,7 +140,18 @@
                   {%- if block.settings.product == blank -%}
                     {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
                   {%- elsif block.settings.product != blank -%}
-                    {% render 'snippet-image'; image: block.settings.product.featured_image, style: 'cover' %}
+                    {%- assign image = block.settings.product.featured_image -%}
+                    {%- assign widths = '100' -%}
+                    {{
+                      image
+                      | image_url: width: 100
+                      | image_tag:
+                        loading: 'lazy',
+                        class: 'cover',
+                        alt: image.alt,
+                        width: image.width,
+                        height: image.height
+                    }}
                   {%- endif -%}
                 </div>
                 <div class="shop-the-look__content">

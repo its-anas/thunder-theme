@@ -63,7 +63,7 @@
                     {% assign image = block.settings.image %}
                   {% endif %}
                   {% if image != blank %}
-                    {%- capture sizes -%}'(min-width: 1024px) calc((1600px - {{ desktop_items | times: 2 }}rem) / {{ desktop_items }}), (min-width: 750px) calc((80vw - {{ tablet_items | times: 1 }}rem) / {{ tablet_items }}), calc((88vw - 1rem - {{ mobile_items | times: 1 }}rem ) / {{ mobile_items }})' {%- endcapture -%}
+                    {%- capture sizes -%}(min-width: 1024px) calc((1600px - {{ desktop_items | times: 2 }}rem) / {{ desktop_items }}), (min-width: 750px) calc((80vw - {{ tablet_items | times: 1 }}rem) / {{ tablet_items }}), calc((88vw - 1rem - {{ mobile_items | times: 1 }}rem ) / {{ mobile_items }}){%- endcapture -%}
                     {%- assign widths = '120, 130. 140, 150, 160, 170, 180, 190, 200, 225, 250, 300, 325, 350, 375, 400' -%}
                     {%- assign width = '400' -%}
                     {{

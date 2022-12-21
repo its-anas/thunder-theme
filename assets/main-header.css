@@ -92,6 +92,7 @@
 	overflow: hidden;
 	display: flex;
 	align-items: center;
+	justify-content: flex-start;
 }
 
 .header__menu {
@@ -294,6 +295,7 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	padding: 0.2rem;
 }
 
 .menu__child {

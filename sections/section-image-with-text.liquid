@@ -33,7 +33,22 @@
         {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder' }}
       {% elsif section.settings.image != blank %}
         <div class="{{ section.id }} media">
-          {% render 'snippet-image'; image: section.settings.image, style: '{{ section.settings.image_position }}' %}
+          {%- assign image = section.settings.image -%}
+          {%- capture sizes -%}(min-width: 1024px) 50vw, 100vw{%- endcapture -%}
+          {%- assign widths = '350, 500, 750, 1000, 1250, 1500, 1750, 2000, 2500, 3000, 3500, 3750' -%}
+          {%- assign width = '3750' -%}
+          {{
+            image
+            | image_url: width: width
+            | image_tag:
+              loading: 'lazy',
+              class: section.settings.image_position,
+              alt: image.alt,
+              width: image.width,
+              height: image.height,
+              sizes: sizes,
+              widths: widths
+          }}
         </div>
       {% endif %}
     </div>

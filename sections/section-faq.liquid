@@ -52,7 +52,19 @@
         {%- if section.settings.image == blank -%}
           {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder' }}
         {%- elsif section.settings.image != blank -%}
-          {% render 'snippet-image'; image: section.settings.image, style: section.settings.image_style %}
+          {%- assign image = section.settings.image -%}
+          {%- assign widths = '230, 300' -%}
+          {{
+            image
+            | image_url: width: 300
+            | image_tag:
+              loading: 'lazy',
+              class: 'cover',
+              alt: image.alt,
+              width: image.width,
+              height: image.height,
+              widths: widths
+          }}
         {% endif %}
       </div>
     {% endif %}
@@ -133,22 +145,6 @@
       "type": "image_picker",
       "id": "image",
       "label": "Image"
-    },
-    {
-      "type": "select",
-      "id": "image_style",
-      "label": "Image style",
-      "options": [
-        {
-          "value": "cover",
-          "label": "Fit section"
-        },
-        {
-          "value": "contain",
-          "label": "Full image"
-        }
-      ],
-      "default": "cover"
     },
     {
       "type": "color",

@@ -51,7 +51,19 @@
                     <div>
                       <div class="compare-image {{ section.settings.image_size }}">
                         <a href="{{ block.settings.product.url }}" class="media">
-                          {% render 'snippet-image'; image: block.settings.product.featured_image, style: section.settings.image_style %}
+                          {%- assign image = block.settings.product.featured_image -%}
+                          {%- assign widths = '100' -%}
+                          {{
+                            image
+                            | image_url: width: 100
+                            | image_tag:
+                              loading: 'lazy',
+                              class: 'cover',
+                              alt: image.alt,
+                              width: image.width,
+                              height: image.height,
+                              widths: widths
+                          }}
                         </a>
 
                         <div
@@ -234,22 +246,6 @@
       ],
       "default": "medium",
       "info": "Deskop only"
-    },
-    {
-      "type": "select",
-      "id": "image_style",
-      "label": "Image style",
-      "options": [
-        {
-          "value": "cover",
-          "label": "Fit section"
-        },
-        {
-          "value": "contain",
-          "label": "Full image"
-        }
-      ],
-      "default": "cover"
     },
     {
       "type": "text",

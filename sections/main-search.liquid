@@ -128,7 +128,7 @@
                                 {% if item.featured_media != blank %}
                                   <a href="{{ item.url }}" class="media corner-border-target">
                                     {%- assign image = item.featured_media -%}
-                                    {%- capture sizes -%}'(min-width: 1024px) calc((1175px - {{ section.settings.products_per_row_desktop | times: 2 }}rem) / {{ section.settings.products_per_row_desktop }}), (min-width: 750px) calc((100vw - 2rem - {{ section.settings.products_per_row_desktop | times: 2 }}rem) / {{ section.settings.products_per_row_desktop }}), calc((100vw - 1rem - {{ section.settings.products_per_row_mobile | times: 1 }}rem) / {{ section.settings.products_per_row_mobile }})'{%- endcapture -%}
+                                    {%- capture sizes -%}(min-width: 1024px) calc((1175px - {{ section.settings.products_per_row_desktop | times: 2 }}rem) / {{ section.settings.products_per_row_desktop }}), (min-width: 750px) calc((100vw - 2rem - {{ section.settings.products_per_row_desktop | times: 2 }}rem) / {{ section.settings.products_per_row_desktop }}), calc((100vw - 1rem - {{ section.settings.products_per_row_mobile | times: 1 }}rem) / {{ section.settings.products_per_row_mobile }}){%- endcapture -%}
                                     {%- assign widths = '125, 150, 175, 200, 225, 250, 300, 325, 350, 375' -%}
                                     {%- assign width = '375' -%}
                                     {{
@@ -195,7 +195,7 @@
                         {% if item.image != blank %}
                           <a href="{{ item.url }}" class="media corner-border-target">
                             {%- assign image = item.image -%}
-                            {%- capture sizes -%}'(min-width: 1024px) calc((1175px - 6rem) / 3), (min-width: 750px) calc((100vw - 2rem - 6rem) / 3), calc(100vw - 2rem)'{%- endcapture -%}
+                            {%- capture sizes -%}(min-width: 1024px) calc((1175px - 6rem) / 3), (min-width: 750px) calc((100vw - 2rem - 6rem) / 3), calc(100vw - 2rem){%- endcapture -%}
                             {%- assign widths = '200, 225, 250, 300, 325, 350, 375, 400, 425, 450, 475, 500' -%}
                             {%- assign width = '500' -%}
                             {{

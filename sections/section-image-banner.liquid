@@ -31,7 +31,22 @@
       {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder' }}
     {%- elsif section.settings.image != blank -%}
       <div class="media">
-        {% render 'snippet-image'; image: section.settings.image, style: '{{ section.settings.image_style }}' %}
+        {%- assign image = section.settings.image -%}
+        {%- assign sizes = '100vw' -%}
+        {%- assign widths = '350, 500, 750, 1000, 1250, 1500, 1750, 2000, 2500, 3000, 3500, 3750' -%}
+        {%- assign width = '3750' -%}
+        {{
+          image
+          | image_url: width: width
+          | image_tag:
+            loading: 'lazy',
+            class: 'cover',
+            alt: image.alt,
+            width: image.width,
+            height: image.height,
+            sizes: sizes,
+            widths: widths
+        }}
       </div>
     {%- endif -%}
   </div>
@@ -101,22 +116,6 @@
       "label": "Height",
       "default": 500,
       "info": "The height will expand if the Text is very long."
-    },
-    {
-      "type": "select",
-      "id": "image_style",
-      "label": "Image style",
-      "options": [
-        {
-          "value": "cover",
-          "label": "Fit section"
-        },
-        {
-          "value": "contain",
-          "label": "Full image"
-        }
-      ],
-      "default": "cover"
     },
     {
       "type": "header",

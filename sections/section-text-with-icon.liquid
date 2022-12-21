@@ -19,16 +19,16 @@
 
   .{{ section.id }} > .text-with-icon__container > .text-with-icon__column > .text-with-icon__content-box > .icon {
     width: {{ section.settings.icon_size }}px;
-    height: {{ section.settings.icon_size }}px;
+    aspect-ratio: 1;
   }
 {%- endstyle -%}
 
-<section class="{{ section.id }} text-with-icon {{ section.settings.section_style }}>
+<section class="{{ section.id }} text-with-icon {{ section.settings.section_style }}">
   <div class="text-with-icon__container">
     {% for block in section.blocks %}
       <div class="text-with-icon__column" {{ block.shopify_attributes }}>
         <div class="text-with-icon__content-box">
-          <div class="icon">
+          <div class="icon media">
             {% if block.settings.icon_type == 'svg' %}
               {% if block.settings.svg == blank %}
                 {% render 'snippet-icons', icon: 'multi-icon' %}
@@ -39,7 +39,18 @@
               {% if block.settings.image == blank %}
                 {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
               {% else %}
-                {% render 'snippet-image'; image: block.settings.image, style: 'contain' %}
+                {%- assign image = block.settings.image -%}
+                {%- assign width = section.settings.icon_size -%}
+                {{
+                  image
+                  | image_url: width: width
+                  | image_tag:
+                    loading: 'lazy',
+                    class: 'contain',
+                    alt: image.alt,
+                    width: image.width,
+                    height: image.height
+                }}
               {% endif %}
             {% endif %}
           </div>

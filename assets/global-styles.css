@@ -1264,6 +1264,23 @@ cart-component.hidden {
 	border-radius: var(--global-border-radius);
 	overflow: hidden;
 }
+@media screen and (min-width: 750px) {
+	.search-results__image {
+		width: 70px;
+		min-width: 70px;
+		height: 70px;
+		min-height: 70px;
+	}
+}
+
+@media screen and (min-width: 1024px) {
+	.search-results__image {
+		width: 80px;
+		min-width: 80px;
+		height: 80px;
+		min-height: 80px;
+	}
+}
 
 .search-results__item {
 	display: flex;

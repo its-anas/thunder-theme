@@ -5,7 +5,20 @@
         <a href="{{ product.url }}" class="search-results__item">
           {%- if product.featured_media != blank -%}
             <div class="search-results__image media">
-              {% render 'snippet-image'; image: product.featured_media, style: 'cover' %}
+              {%- assign image = product.featured_media -%}
+              {%- assign widths = '60, 70, 80' -%}
+              {%- assign width = '80' -%}
+              {{
+                image
+                | image_url: width: width
+                | image_tag:
+                  loading: 'lazy',
+                  class: 'cover',
+                  alt: image.alt,
+                  width: image.width,
+                  height: image.height,
+                  widths: widths
+              }}
             </div>
           {%- endif -%}
           <div class="search-results__item-content">

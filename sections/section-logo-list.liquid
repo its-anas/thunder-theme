@@ -11,7 +11,8 @@
     animation: logos-scroll {{ section.settings.animation_speed }}s linear infinite;
   }
   .{{ section.id }}.logo-list > .logo-list__content > .slide  > .logo {
-    height: {{ section.settings.logo_height }}px;
+    height: {{ section.settings.logo_size }}px;
+    width: {{ section.settings.logo_size }}px;
     border-radius: calc(var(--global-border-radius)/2);
   }
 {%- endstyle -%}
@@ -31,7 +32,17 @@
           {% if block.settings.logo == blank %}
             {{ 'product-1' | placeholder_svg_tag: 'logo placeholder' }}
           {% elsif block.settings.logo != blank %}
-              {% render 'snippet-image'; image: block.settings.logo, style: 'logo' %}
+              {%- assign image = block.settings.logo -%}
+              {{
+                image
+                | image_url: width: section.settings.logo_size
+                | image_tag:
+                  loading: 'lazy',
+                  class: 'logo',
+                  alt: image.alt,
+                  width: image.width,
+                  height: image.height
+              }}
           {% endif %}
         {% endfor %}
       </div>
@@ -114,12 +125,12 @@
     },
     {
       "type": "range",
-      "id": "logo_height",
+      "id": "logo_size",
       "min": 65,
       "max": 100,
       "step": 1,
       "unit": "px",
-      "label": "Logo height",
+      "label": "Logo size (height/width)",
       "default": 80
     },
     {

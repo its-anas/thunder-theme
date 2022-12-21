@@ -39,7 +39,7 @@
                 <a href="{{ collection.url }}" class="media corner-border-target">
                   {% if collection.featured_image != blank %}
                     {%- assign image = collection.featured_image -%}
-                    {%- capture sizes -%}'(min-width: 1024px) calc((1600px - 6rem - {{ section.settings.collections_per_row_desktop | times: 2 }}rem) / {{section.settings.collections_per_row_desktop }}), (min-width: 750px) calc((100vw - 6rem - {{ section.settings.collections_per_row_desktop | times: 2 }}rem) / {{section.settings.collections_per_row_desktop }}), calc((100vw - 1rem - {{ section.settings.collections_per_row_mobile | times: 1 }}rem ) / {{ section.settings.collections_per_row_mobile }})' {%- endcapture -%}
+                    {%- capture sizes -%}(min-width: 1024px) calc((1600px - 6rem - {{ section.settings.collections_per_row_desktop | times: 2 }}rem) / {{section.settings.collections_per_row_desktop }}), (min-width: 750px) calc((100vw - 6rem - {{ section.settings.collections_per_row_desktop | times: 2 }}rem) / {{section.settings.collections_per_row_desktop }}), calc((100vw - 1rem - {{ section.settings.collections_per_row_mobile | times: 1 }}rem ) / {{ section.settings.collections_per_row_mobile }}){%- endcapture -%}
                     {%- assign widths = '125, 150, 175, 200, 225, 250, 300, 325, 350, 375, 400, 425, 450, 475' -%}
                     {%- assign width = '475' -%}
                     {{

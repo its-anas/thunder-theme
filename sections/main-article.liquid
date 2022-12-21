@@ -49,8 +49,19 @@
             <div class="article__picture media" {{ block.shopify_attributes }}>
               {%- assign image = article.image -%}
               {%- assign sizes = '100vw' -%}
-              {%- assign widths = '350, 500, 750, 1000, 1250, 1500, 1750, 2000, 3000, 3750' -%}
-              {{ image | image_url: width: 3750 | image_tag: loading: 'lazy', class: 'cover', alt: image.alt, width: image.width, height: image.height, sizes: sizes, widths: widths }}
+              {%- assign widths = '350, 500, 750, 1000, 1250, 1500, 1750, 2000, 2500, 3000, 3500, 3750' -%}
+              {{
+                image
+                | image_url: width: 3750
+                | image_tag:
+                  loading: 'lazy',
+                  class: 'cover',
+                  alt: image.alt,
+                  width: image.width,
+                  height: image.height,
+                  sizes: sizes,
+                  widths: widths
+              }}
             </div>
           {%- endif -%}
         {%- when 'tags' -%}

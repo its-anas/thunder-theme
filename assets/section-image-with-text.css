@@ -9,7 +9,7 @@
 .image-with-text--second {
 	flex-direction: column-reverse;
 }
-@media screen and (min-width: 750px) {
+@media screen and (min-width: 1024px) {
 	.image-with-text {
 		height: auto;
 	}
@@ -27,17 +27,17 @@
 	align-items: center;
 	justify-content: center;
 }
-@media screen and (min-width: 750px) {
+@media screen and (min-width: 1024px) {
 	.image-with-text__image {
 		height: 100%;
 		width: 50%;
 	}
 }
-.image-with-text__image--fit {
+.image-with-text__image--cover {
 	height: 100%;
 	width: 100%;
 }
-.image-with-text__image--full {
+.image-with-text__image--contain {
 	height: 80%;
 	width: auto;
 	max-width: 80%;
@@ -46,7 +46,7 @@
 	height: 50%;
 	width: 100%;
 }
-@media screen and (min-width: 750px) {
+@media screen and (min-width: 1024px) {
 	.image-with-text__content {
 		height: 100%;
 		width: 50%;
