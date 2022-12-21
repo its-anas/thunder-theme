@@ -73,7 +73,22 @@
 
                 <a href="{{ product.url }}" class="media corner-border-target">
                   {% if product.featured_image != blank %}
-                    {% render 'snippet-image'; image: product.featured_image, style: section.settings.image_style %}
+                    {%- assign image = product.featured_image -%}
+                    {%- capture sizes -%}'(min-width: 1024px) calc((1600px - {{ desktop_items | times: 2 }}rem) / {{ desktop_items }}), (min-width: 750px) calc((80vw - {{ tablet_items | times: 1 }}rem) / {{ tablet_items }}), calc((88vw - 1rem - {{ mobile_items | times: 1 }}rem ) / {{ mobile_items }})' {%- endcapture -%}
+                    {%- assign widths = '120, 130. 140, 150, 160, 170, 180, 190, 200, 225, 250, 300, 325, 350, 375, 400' -%}
+                    {%- assign width = '400' -%}
+                    {{
+                      image
+                      | image_url: width: width
+                      | image_tag:
+                        loading: 'lazy',
+                        class: 'cover',
+                        alt: image.alt,
+                        width: image.width,
+                        height: image.height,
+                        sizes: sizes,
+                        widths: widths
+                    }}
                   {% else %}
                     {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
                   {% endif %}
@@ -161,22 +176,6 @@
     {
       "type": "header",
       "content": "Product settings"
-    },
-    {
-      "type": "select",
-      "id": "image_style",
-      "label": "Image style",
-      "options": [
-        {
-          "value": "cover",
-          "label": "Fit section"
-        },
-        {
-          "value": "contain",
-          "label": "Full image"
-        }
-      ],
-      "default": "cover"
     },
     {
       "type": "range",

@@ -43,7 +43,7 @@
                   {%- assign width = '100' -%}
                   {{
                     image
-                    | image_url: width: 3840
+                    | image_url: width: width
                     | image_tag:
                       loading: 'lazy',
                       class: 'cover',

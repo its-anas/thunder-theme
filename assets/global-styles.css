@@ -1495,12 +1495,6 @@ cart-component.hidden {
 	gap: 0.7rem;
 }
 
-@media screen and (max-width: 750px) {
-	.newsletter__form {
-		width: 90%;
-	}
-}
-
 .newsletter__container {
 	display: flex;
 	flex-direction: row;
@@ -1518,7 +1512,7 @@ cart-component.hidden {
 	align-items: center;
 	background: var(--primary-button-background-color);
 	border-radius: var(--global-border-radius);
-	padding: 1rem;
+	padding: 0.5rem;
 	margin-left: -20px;
 	z-index: 2;
 }

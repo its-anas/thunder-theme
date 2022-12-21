@@ -31,7 +31,18 @@
                     {{ shop.name }}
                   </p>
                 {% else %}
-                  {% render 'snippet-image'; image: block.settings.logo_image, style: 'contain' %}
+                  {%- assign image = block.settings.logo_image -%}
+                  {%- assign width = '120' -%}
+                  {{
+                    image
+                    | image_url: width: width
+                    | image_tag:
+                      loading: 'lazy',
+                      class: 'contain',
+                      alt: image.alt,
+                      width: image.width,
+                      height: image.height
+                  }}
                 {% endif %}
               {% endif %}
             </div>
