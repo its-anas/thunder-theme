@@ -188,7 +188,7 @@
         "show_image": true,
         "image_style": "cover",
         "background_color": "transparent",
-        "space_outside": 0,
+        "space_outside_elements" : 0,
         "space_between_elements": 1,
         "tabs_width": 1000,
         "image_height": 300,

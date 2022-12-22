@@ -5,8 +5,8 @@
 {%- style -%}
   .{{ section.id }}.compare__section {
     background-color: {{ section.settings.background_color }};
-    margin-top: {{ section.settings.space_outside | divided_by: 2 }}px;
-    margin-bottom: {{ section.settings.space_outside | divided_by: 2 }}px;
+    margin-top: {{ section.settings.space_outside_elements| divided_by: 2 }}px;
+    margin-bottom: {{ section.settings.space_outside_elements | divided_by: 2 }}px;
   }
 
   .{{ section.id }}.compare__table {
@@ -191,7 +191,7 @@
   "settings": [
     {
       "type": "range",
-      "id": "space_outside",
+      "id": "space_outside_elements",
       "label": "Space outside section",
       "min": 0,
       "max": 100,

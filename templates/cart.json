@@ -86,7 +86,7 @@
         "background_color": "rgba(0,0,0,0)",
         "collection_height": 350,
         "space_between_elements": 1,
-        "space_outside": 0,
+        "space_outside_elements" : 0,
         "row_width": 80
       }
     }

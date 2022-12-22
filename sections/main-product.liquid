@@ -392,14 +392,6 @@
               {% when 'countdown_timer' %}
                 <div class="product-page__countdown-timer {{ section.id }}" {{ block.shopify_attributes }}>
                   {% style %}
-                    .{{ block.id }}.countdown-timer {
-                      gap: {{ block.settings.space_between_elements }}rem;
-                      margin-top: {{ block.settings.space_outside | divided_by: 2 }}rem;
-                      margin-bottom: {{ block.settings.space_outside | divided_by: 2 }}rem;
-                    }
-                    .{{ block.id }}--color {
-                      background-color: {{ block.settings.background_color }};
-                    }
                     .countdown-timer__timers {
                       display: flex;
                       justify-content: center;

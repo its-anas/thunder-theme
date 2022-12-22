@@ -45,7 +45,7 @@
                     "text_alignment": "left",
                     "text_width": 50,
                     "space_between_elements": 1,
-                    "space_outside": 0
+                    "space_outside_elements" : 0
                }
           },
           "multi-icon": {
@@ -360,7 +360,7 @@
                     "product5"
                ],
                "settings": {
-                    "space_outside": 0,
+                    "space_outside_elements" : 0,
                     "background_color": "rgba(0,0,0,0)",
                     "image_size": "large",
                     "image_style": "cover",
@@ -457,7 +457,7 @@
                     "background_color": "rgba(0,0,0,0)",
                     "collection_height": 350,
                     "space_between_elements": 1,
-                    "space_outside": 0,
+                    "space_outside_elements" : 0,
                     "row_width": 80
                }
           },
@@ -510,7 +510,7 @@
                     "video_height": 500,
                     "video_horizontal_position": "right",
                     "video_placement": "first",
-                    "space_outside": 0
+                    "space_outside_elements" : 0
                }
           },
           "animated-rich-text": {
@@ -570,7 +570,7 @@
                     "text_width": 70,
                     "background_color": "transparent",
                     "space_between_elements": 1,
-                    "space_outside": 0
+                    "space_outside_elements" : 0
                }
           },
           "testimonials": {
@@ -630,7 +630,7 @@
                     "background_color": "rgba(0,0,0,0)",
                     "heading": "Hear from our customers",
                     "heading_size": "h6",
-                    "space_outside": 0,
+                    "space_outside_elements" : 0,
                     "space_between_elements": 1,
                     "review_width": 250,
                     "review_height": 150,
@@ -688,7 +688,7 @@
                     "text_alignment": "center",
                     "text_width": 50,
                     "space_between_elements": 1,
-                    "space_outside": 0
+                    "space_outside_elements" : 0
                }
           },
           "text-with-icon": {
@@ -796,7 +796,7 @@
                     "show_image": true,
                     "image_style": "cover",
                     "background_color": "transparent",
-                    "space_outside": 0,
+                    "space_outside_elements" : 0,
                     "space_between_elements": 1,
                     "tabs_width": 1000,
                     "image_height": 300
@@ -844,7 +844,7 @@
                     "animation_speed": 30,
                     "logo_height": 80,
                     "space_between_elements": 1,
-                    "space_outside": 0,
+                    "space_outside_elements" : 0,
                     "background_color": "rgba(0,0,0,0)"
                }
           }
