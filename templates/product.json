@@ -114,6 +114,60 @@
         "share_buttons"
       ]
     },
+    "shop-the-look": {
+      "type": "section-shop-the-look",
+      "blocks": {
+        "feature1": {
+          "type": "feature",
+          "settings": {
+            "feature_title": "Feature",
+            "feature_description": "Put a short description to highlight the feature of the product. For example the material or the color.",
+            "desktop_vertical_position": 56,
+            "desktop_horizontal_position": 43,
+            "mobile_vertical_position": 56,
+            "mobile_horizontal_position": 43
+          }
+        },
+        "feature2": {
+          "type": "feature",
+          "settings": {
+            "feature_title": "Feature",
+            "feature_description": "Put a short description to highlight the feature of the product. For example the material or the color.",
+            "desktop_vertical_position": 73,
+            "desktop_horizontal_position": 60,
+            "mobile_vertical_position": 73,
+            "mobile_horizontal_position": 60
+          }
+        },
+        "feature3": {
+          "type": "feature",
+          "settings": {
+            "feature_title": "Feature",
+            "feature_description": "Put a short description to highlight the feature of the product. For example the material or the color.",
+            "desktop_vertical_position": 20,
+            "desktop_horizontal_position": 50,
+            "mobile_vertical_position": 20,
+            "mobile_horizontal_position": 50
+          }
+        }
+      },
+      "block_order": [
+        "feature1",
+        "feature2",
+        "feature3"
+      ],
+      "settings": {
+        "desktop_aspect_ratio": 4,
+        "mobile_aspect_ratio": 1,
+        "selector_color": "#282828",
+        "selector_background_color": "#ffffff",
+        "openable_background_color": "#ffffff",
+        "heading": "Product features",
+        "heading_size": "h6",
+        "top_space": 0,
+        "bottom_space": 0
+      }
+    },
     "compare": {
       "type": "section-compare",
       "blocks": {
@@ -204,6 +258,7 @@
   "order": [
     "main",
     "main-product-tabs",
+    "shop-the-look",
     "compare",
     "promotional-banner",
     "faq",
