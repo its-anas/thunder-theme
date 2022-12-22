@@ -13,7 +13,7 @@
   }
 {%- endstyle -%}
 
-<div class="{{ section.id }} newsletter container {{ section.settings.section_style }}">
+<div class="{{ section.id }} newsletter container">
   {% if section.settings.heading != blank %}
     <div class="newsletter__heading">
       <{{ section.settings.heading_size }}>
@@ -159,22 +159,6 @@
       "step": 50,
       "unit": "px",
       "default": 0
-    },
-    {
-      "type": "select",
-      "id": "section_style",
-      "label": "Section width",
-      "default": "full-width",
-      "options": [
-        {
-          "value": "full-width",
-          "label": "Full width"
-        },
-        {
-          "value": "wrapped",
-          "label": "Wrapped"
-        }
-      ]
     }
   ],
   "presets": [

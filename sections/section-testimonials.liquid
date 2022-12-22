@@ -46,7 +46,7 @@
   }
 {%- endstyle -%}
 
-<section class="{{ section.id }} testimonials {{ section.settings.section_style }}">
+<section class="{{ section.id }} testimonials">
   <div class="testimonials__heading">
     <{{ section.settings.heading_size }}>
       {{ section.settings.heading }}
@@ -204,23 +204,6 @@
       "step": 0.5,
       "unit": "rem",
       "default": 1
-    },
-    {
-      "type": "select",
-      "id": "section_style",
-      "label": "Section width",
-      "info": "Desktop only",
-      "options": [
-        {
-          "value": "full-width",
-          "label": "Full width"
-        },
-        {
-          "value": "wrapped",
-          "label": "Wrapped"
-        }
-      ],
-      "default": "full-width"
     },
     {
       "type": "header",

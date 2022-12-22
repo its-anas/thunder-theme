@@ -40,7 +40,7 @@
   data-mobile-items="{{ mobile_items }}"
   data-tablet-items="{{ tablet_items }}"
   data-desktop-items="{{ desktop_items }}"
-  class="{{ section.id }} blog-posts {{ section.settings.section_style }}"
+  class="{{ section.id }} blog-posts"
 >
   <div class="blog-posts__heading">
     <{{ section.settings.heading_size }}>
@@ -271,22 +271,6 @@
       "unit": "%",
       "label": "Section width relative to screen",
       "default": 50
-    },
-    {
-      "type": "select",
-      "id": "section_style",
-      "label": "Section width",
-      "options": [
-        {
-          "value": "full-width",
-          "label": "Full width"
-        },
-        {
-          "value": "wrapped",
-          "label": "Wrapped"
-        }
-      ],
-      "default": "full-width"
     }
   ],
   "presets": [

@@ -83,7 +83,7 @@
   }
 {%- endstyle -%}
 
-<section class="{{ section.id }} gallery {{ section.settings.section_style }}">
+<section class="{{ section.id }} gallery">
   {% for block in section.blocks %}
     <div class="gallery__item" {{ block.shopify_attributes }}>
       <div class="{{ section.id }} gallery__image">
@@ -204,23 +204,6 @@
       ],
       "default": "all_in_one",
       "info": "Desktop only"
-    },
-    {
-      "type": "select",
-      "id": "section_style",
-      "label": "Section width",
-      "info": "Desktop only",
-      "options": [
-        {
-          "value": "full-width",
-          "label": "Full width"
-        },
-        {
-          "value": "wrapped",
-          "label": "Wrapped"
-        }
-      ],
-      "default": "full-width"
     },
     {
       "type": "color",

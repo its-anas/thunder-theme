@@ -24,7 +24,7 @@
   }
 {%- endstyle -%}
 
-<section class="{{ section.id }} compare__section {{ section.settings.section_style }}">
+<section class="{{ section.id }} compare__section">
   <div class="compare__heading">
     <{{ section.settings.heading_size }}>
       {{ section.settings.heading }}
@@ -189,23 +189,6 @@
   "class": "section-compare",
   "max_blocks": 5,
   "settings": [
-    {
-      "type": "select",
-      "id": "section_style",
-      "label": "Section width",
-      "info": "Desktop only",
-      "options": [
-        {
-          "value": "full-width",
-          "label": "Full width"
-        },
-        {
-          "value": "wrapped",
-          "label": "Wrapped"
-        }
-      ],
-      "default": "full-width"
-    },
     {
       "type": "range",
       "id": "space_outside",

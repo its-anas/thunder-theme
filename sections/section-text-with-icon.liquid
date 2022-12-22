@@ -23,7 +23,7 @@
   }
 {%- endstyle -%}
 
-<section class="{{ section.id }} text-with-icon {{ section.settings.section_style }}">
+<section class="{{ section.id }} text-with-icon">
   <div class="text-with-icon__container">
     {% for block in section.blocks %}
       <div class="text-with-icon__column" {{ block.shopify_attributes }}>
@@ -131,23 +131,6 @@
       "label": "Background color",
       "default": "transparent",
       "info": "Applied only if Type is 'Color'"
-    },
-    {
-      "type": "select",
-      "id": "section_style",
-      "label": "Section style",
-      "info": "Desktop only",
-      "options": [
-        {
-          "value": "full-width",
-          "label": "Full width"
-        },
-        {
-          "value": "wrapped",
-          "label": "Wrapped"
-        }
-      ],
-      "default": "full-width"
     }
   ],
   "blocks": [

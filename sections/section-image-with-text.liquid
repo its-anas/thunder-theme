@@ -26,7 +26,7 @@
   }
 {%- endstyle -%}
 
-<div class="{{ section.id }} image-with-text image-with-text--{{ section.settings.image_placement }} {{ section.settings.section_style }}">
+<div class="{{ section.id }} image-with-text image-with-text--{{ section.settings.image_placement }}">
   <div class="image-with-text__image">
     <div class="image-with-text__image--{{ section.settings.image_position }}">
       {% if section.settings.image == blank %}
@@ -260,23 +260,6 @@
       "step": 10,
       "unit": "px",
       "default": 0
-    },
-    {
-      "type": "select",
-      "id": "section_style",
-      "label": "Section width",
-      "info": "Desktop only",
-      "options": [
-        {
-          "value": "full-width",
-          "label": "Full width"
-        },
-        {
-          "value": "wrapped",
-          "label": "Wrapped"
-        }
-      ],
-      "default": "full-width"
     }
   ],
   "blocks": [

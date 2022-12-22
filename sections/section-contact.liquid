@@ -17,7 +17,7 @@
    }
 {%- endstyle -%}
 
-<section class="{{ section.id }} contact container {{ section.settings.section_style }}">
+<section class="{{ section.id }} contact container">
   {% if section.settings.heading != blank %}
     <div class="contact__heading">
       <{{ section.settings.heading_size }}>
@@ -173,22 +173,6 @@
       "step": 50,
       "unit": "px",
       "default": 0
-    },
-    {
-      "type": "select",
-      "id": "section_style",
-      "label": "Section width",
-      "default": "full-width",
-      "options": [
-        {
-          "value": "full-width",
-          "label": "Full width"
-        },
-        {
-          "value": "wrapped",
-          "label": "Wrapped"
-        }
-      ]
     }
   ],
   "presets": [

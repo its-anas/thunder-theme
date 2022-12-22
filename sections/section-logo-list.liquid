@@ -17,7 +17,7 @@
   }
 {%- endstyle -%}
 
-<section class="{{ section.id }} logo-list {{ section.settings.section_style }}">
+<section class="{{ section.id }} logo-list">
   {% if section.settings.heading != blank %}
     <div class="logo-list__heading">
       <{{ section.settings.heading_size }}>
@@ -95,24 +95,7 @@
         }
       ],
       "default": "h6"
-    },
-    {
-      "type": "select",
-      "id": "section_style",
-      "label": "Section width",
-      "info": "Desktop only",
-      "options": [
-        {
-          "value": "full-width",
-          "label": "Full width"
-        },
-        {
-          "value": "wrapped",
-          "label": "Wrapped"
-        }
-      ],
-      "default": "full-width"
-    },
+    }
     {
       "type": "range",
       "id": "animation_speed",

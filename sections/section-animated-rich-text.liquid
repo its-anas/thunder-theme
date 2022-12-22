@@ -22,7 +22,7 @@
    }
 {%- endstyle -%}
 
-<section class="{{ section.id }} {{ section.settings.section_style }}">
+<section class="{{ section.id }}">
   <div class="wrapper container {{ section.id }}-space-between text-alignment--{{ section.settings.text_alignment }} {{ section.id }}-text-width horizontal--{{ section.settings.horizontal_position }}">
     {%- for block in section.blocks -%}
       {%- case block.type -%}
@@ -234,23 +234,6 @@
       "step": 10,
       "unit": "px",
       "default": 0
-    },
-    {
-      "type": "select",
-      "id": "section_style",
-      "label": "Section width",
-      "info": "Desktop only",
-      "options": [
-        {
-          "value": "full-width",
-          "label": "Full width"
-        },
-        {
-          "value": "wrapped",
-          "label": "Wrapped"
-        }
-      ],
-      "default": "full-width"
     }
   ],
   "blocks": [

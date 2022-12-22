@@ -45,8 +45,7 @@
                     "text_alignment": "left",
                     "text_width": 50,
                     "space_between_elements": 1,
-                    "space_outside": 0,
-                    "section_style": "full-width"
+                    "space_outside": 0
                }
           },
           "multi-icon": {
@@ -125,8 +124,7 @@
                     "background_color": "rgba(0,0,0,0)",
                     "space_between_elements": 1,
                     "space_outside_elements": 0,
-                    "row_width": 40,
-                    "section_style": "full-width"
+                    "row_width": 40
                }
           },
           "gallery": {
@@ -159,7 +157,6 @@
                ],
                "settings": {
                     "gallery_style": "all_in_one",
-                    "section_style": "full-width",
                     "overlay_color": "#000000",
                     "overlay_opacity": 10,
                     "vertical_position": "top",
@@ -179,7 +176,6 @@
                     "text_width": 70,
                     "space_between_elements": 1,
                     "space_outside_elements": 0,
-                    "section_style": "full-width",
                     "message": "Offer ended",
                     "countdown_timer_type": "time",
                     "time_days": 0,
@@ -216,8 +212,7 @@
                     "background_color": "rgba(0,0,0,0)",
                     "space_between_elements": 1,
                     "space_outside_elements": 0,
-                    "row_width": 80,
-                    "section_style": "full-width"
+                    "row_width": 80
                }
           },
           "promotional-banner": {
@@ -228,7 +223,6 @@
                     "background_color": "#fcdb33",
                     "space_outside_elements": 0,
                     "height": 80,
-                    "section_style": "full-width",
                     "animation_speed": 60,
                     "style_1_text": "Put the banner text here",
                     "style_1_text_type": "h5",
@@ -286,8 +280,7 @@
                     "openable_background_color": "#000000",
                     "heading": "Shop our look",
                     "heading_size": "h6",
-                    "space_outside_elements": 0,
-                    "section_style": ""
+                    "space_outside_elements": 0
                }
           },
           "compare": {
@@ -367,7 +360,6 @@
                     "product5"
                ],
                "settings": {
-                    "section_style": "full-width",
                     "space_outside": 0,
                     "background_color": "rgba(0,0,0,0)",
                     "image_size": "large",
@@ -391,7 +383,6 @@
                     "background_color": "#282828",
                     "space_outside_elements": 0,
                     "height": 80,
-                    "section_style": "full-width",
                     "animation_speed": 60,
                     "style_1_text": "Put the banner text here",
                     "style_1_text_type": "h3",
@@ -467,8 +458,7 @@
                     "collection_height": 350,
                     "space_between_elements": 1,
                     "space_outside": 0,
-                    "row_width": 80,
-                    "section_style": "full-width"
+                    "row_width": 80
                }
           },
           "video-with-text": {
@@ -520,8 +510,7 @@
                     "video_height": 500,
                     "video_horizontal_position": "right",
                     "video_placement": "first",
-                    "space_outside": 0,
-                    "section_style": "full-width"
+                    "space_outside": 0
                }
           },
           "animated-rich-text": {
@@ -581,8 +570,7 @@
                     "text_width": 70,
                     "background_color": "transparent",
                     "space_between_elements": 1,
-                    "space_outside": 0,
-                    "section_style": "full-width"
+                    "space_outside": 0
                }
           },
           "testimonials": {
@@ -644,7 +632,6 @@
                     "heading_size": "h6",
                     "space_outside": 0,
                     "space_between_elements": 1,
-                    "section_style": "full-width",
                     "review_width": 250,
                     "review_height": 150,
                     "review_border_color": "#fff",
@@ -701,8 +688,7 @@
                     "text_alignment": "center",
                     "text_width": 50,
                     "space_between_elements": 1,
-                    "space_outside": 0,
-                    "section_style": "full-width"
+                    "space_outside": 0
                }
           },
           "text-with-icon": {
@@ -755,8 +741,7 @@
                     "space_between_elements": 0.3,
                     "space_outside_elements": 0,
                     "content_width": 72,
-                    "background_color": "transparent",
-                    "section_style": "full-width"
+                    "background_color": "transparent"
                }
           },
           "faq": {
@@ -813,7 +798,6 @@
                     "background_color": "transparent",
                     "space_outside": 0,
                     "space_between_elements": 1,
-                    "section_style": "full-width",
                     "tabs_width": 1000,
                     "image_height": 300
                }
@@ -857,7 +841,6 @@
                "settings": {
                     "heading": "Trusted by",
                     "heading_size": "h6",
-                    "section_style": "full-width",
                     "animation_speed": 30,
                     "logo_height": 80,
                     "space_between_elements": 1,

@@ -42,7 +42,7 @@
   data-autoplay="{{ section.settings.enable_autoplay }}"
   data-delay-time="{{ section.settings.autoplay_delay_time | times: 1000 }}"
 >
-  <div class="{{ section.id }} slideshow {{ section.settings.section_style }}">
+  <div class="{{ section.id }} slideshow">
     <div class="slideshow__container">
       {% for block in section.blocks %}
         <div class="slideshow__slide" {{ block.shopify_attributes }}>
@@ -278,23 +278,6 @@
       "step": 10,
       "unit": "px",
       "default": 0
-    },
-    {
-      "type": "select",
-      "id": "section_style",
-      "label": "Section width",
-      "info": "Desktop only",
-      "options": [
-        {
-          "value": "full-width",
-          "label": "Full width"
-        },
-        {
-          "value": "wrapped",
-          "label": "Wrapped"
-        }
-      ],
-      "default": "full-width"
     }
   ],
   "blocks": [

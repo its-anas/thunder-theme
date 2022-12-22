@@ -87,8 +87,7 @@
         "collection_height": 350,
         "space_between_elements": 1,
         "space_outside": 0,
-        "row_width": 80,
-        "section_style": "full-width"
+        "row_width": 80
       }
     }
   },

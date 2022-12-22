@@ -15,7 +15,7 @@
   }
 {%- endstyle -%}
 
-<section class="{{ section.settings.section_style }}">
+<section>
   <div class="{{ section.id }} promotional-banner">
     {% if section.settings.banner_style == 'style-1' %}
       {% if section.settings.style_1_text != blank %}
@@ -140,24 +140,7 @@
       "unit": "px",
       "label": "Section height",
       "default": 100
-    },
-    {
-      "type": "select",
-      "id": "section_style",
-      "label": "Section width",
-      "info": "Desktop only",
-      "options": [
-        {
-          "value": "full-width",
-          "label": "Full width"
-        },
-        {
-          "value": "wrapped",
-          "label": "Wrapped"
-        }
-      ],
-      "default": "full-width"
-    },
+    }
     {
       "type": "header",
       "content": "Style 1 settings",

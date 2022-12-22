@@ -29,7 +29,7 @@
   }
 {%- endstyle -%}
 
-<video-with-text class="{{ section.id }} video-with-text {{ section.settings.video_placement }} {{ section.settings.section_style }}">
+<video-with-text class="{{ section.id }} video-with-text {{ section.settings.video_placement }}">
   <div class="video-with-text__media">
     <div class="video-with-text__video-box horizontal--{{ section.settings.video_horizontal_position }}">
       <div class="video-with-text__video media">
@@ -264,23 +264,6 @@
       "step": 1,
       "unit": "rem",
       "default": 0
-    },
-    {
-      "type": "select",
-      "id": "section_style",
-      "label": "Section width",
-      "info": "Desktop only",
-      "options": [
-        {
-          "value": "full-width",
-          "label": "Full width"
-        },
-        {
-          "value": "wrapped",
-          "label": "Wrapped"
-        }
-      ],
-      "default": "full-width"
     }
   ],
   "blocks": [

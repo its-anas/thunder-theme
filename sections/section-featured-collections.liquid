@@ -39,7 +39,7 @@
   data-mobile-items="{{ mobile_items }}"
   data-tablet-items="{{ tablet_items }}"
   data-desktop-items="{{ desktop_items }}"
-  class="{{ section.id }} featured-collections {{ section.settings.section_style }}"
+  class="{{ section.id }} featured-collections"
 >
   <div class="featured-collections__heading">
     <{{ section.settings.heading_size }}>
@@ -265,23 +265,6 @@
       "unit": "%",
       "label": "Section width relative to screen",
       "default": 50
-    },
-    {
-      "type": "select",
-      "id": "section_style",
-      "label": "Section width",
-      "default": "contain",
-      "options": [
-        {
-          "value": "full-width",
-          "label": "Full width"
-        },
-        {
-          "value": "wrapped",
-          "label": "Wrapped"
-        }
-      ],
-      "default": "full-width"
     }
   ],
   "blocks": [

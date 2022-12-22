@@ -8,8 +8,6 @@
   assign featured_product = section.settings.product
 %}
 
-{% assign current_variant = featured_product.selected_or_first_available_variant %}
-
 {% style %}
     .featured-product.{{ section.id }} {
       background-color: {{ section.settings.background_color }};
@@ -70,7 +68,7 @@
 {% endstyle %}
 
 <featured-product
-  class="featured-product {{ section.id }} {{ section.settings.section_style }}"
+  class="featured-product {{ section.id }}"
 >
   <div class="featured-product__container">
     <div class="featured-product__content">
@@ -303,23 +301,6 @@
       "step": 10,
       "unit": "px",
       "default": 0
-    },
-    {
-      "type": "select",
-      "id": "section_style",
-      "label": "Section width",
-      "default": "contain",
-      "options": [
-        {
-          "value": "full-width",
-          "label": "Full width"
-        },
-        {
-          "value": "wrapped",
-          "label": "Wrapped"
-        }
-      ],
-      "default": "full-width"
     }
   ],
   "blocks": [

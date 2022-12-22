@@ -14,7 +14,7 @@
    }
 {%- endstyle -%}
 
-<section class="{{ section.id }} search-section {{ section.settings.section_style }}">
+<section class="{{ section.id }} search-section">
   {% if section.settings.heading != blank %}
     <div class="search-section__heading">
       <{{ section.settings.heading_size }}>
@@ -138,22 +138,6 @@
       "unit": "px",
       "label": "Section height",
       "default": 150
-    },
-    {
-      "type": "select",
-      "id": "section_style",
-      "label": "Section width",
-      "default": "full-width",
-      "options": [
-        {
-          "value": "full-width",
-          "label": "Full width"
-        },
-        {
-          "value": "wrapped",
-          "label": "Wrapped"
-        }
-      ]
     }
   ],
   "presets": [

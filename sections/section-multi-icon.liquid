@@ -40,7 +40,7 @@
   data-mobile-items="{{ mobile_items }}"
   data-tablet-items="{{ tablet_items }}"
   data-desktop-items="{{ desktop_items }}"
-  class="{{ section.id }} multi-icon {{ section.settings.section_style }}"
+  class="{{ section.id }} multi-icon"
 >
   {% if section.settings.heading != blank %}
     <div class="multi-icon__heading">
@@ -231,23 +231,6 @@
       "unit": "%",
       "label": "Section width relative to screen",
       "default": 40
-    },
-    {
-      "type": "select",
-      "id": "section_style",
-      "label": "Section width",
-      "info": "Desktop only",
-      "options": [
-        {
-          "value": "full-width",
-          "label": "Full width"
-        },
-        {
-          "value": "wrapped",
-          "label": "Wrapped"
-        }
-      ],
-      "default": "full-width"
     }
   ],
   "blocks": [
