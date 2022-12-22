@@ -139,18 +139,6 @@ img {
 	}
 }
 
-@media screen and (min-width: 750px) {
-	.full-width {
-		width: 100%;
-	}
-
-	.wrapped {
-		max-width: var(--wrapped-content-width);
-		margin-right: auto;
-		margin-left: auto;
-	}
-}
-
 .logo--text {
 	text-transform: uppercase;
 	font-size: var(--xlarge-font-size);

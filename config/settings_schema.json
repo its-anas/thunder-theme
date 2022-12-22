@@ -337,21 +337,6 @@
                },
                {
                     "type": "header",
-                    "content": "Section"
-               },
-               {
-                    "type": "range",
-                    "id": "wrapped_section_width",
-                    "label": "Section width",
-                    "info": "Applied only to sections that use the style 'wrapped' and not 'full-width",
-                    "min": 1025,
-                    "max": 1440,
-                    "step": 5,
-                    "unit": "px",
-                    "default": 1240
-               },
-               {
-                    "type": "header",
                     "content": "Button"
                },
                {
