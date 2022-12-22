@@ -276,7 +276,7 @@
                     "product3"
                ],
                "settings": {
-                    "desktop_aspect_ratio": 3,
+                    "desktop_aspect_ratio": 3.5,
                     "mobile_aspect_ratio": 1,
                     "selector_color": "#000000",
                     "selector_background_color": "#fff",
@@ -513,7 +513,7 @@
                     "text_alignment": "left",
                     "text_horizontal_position": "left",
                     "space_between_elements": 1,
-                    "video_height": 500,
+                    "video_height": 400,
                     "video_horizontal_position": "right",
                     "video_placement": "first",
                     "top_space": 0,

@@ -250,8 +250,7 @@
 	display: flex;
 	justify-content: center;
 	overflow: hidden;
-	--section-width: 100%;
-	--item-width: calc(var(--section-width) / var(--slider-items));
+	--item-width: calc(100% / var(--slider-items));
 }
 
 @media screen and (max-width: 750px) {

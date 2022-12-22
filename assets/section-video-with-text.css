@@ -45,6 +45,7 @@
 .video-with-text__video-box {
 	display: grid;
 	width: 350px;
+	aspect-ratio: 1;
 	border-radius: var(--global-border-radius);
 	overflow: hidden;
 }

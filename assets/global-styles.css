@@ -993,9 +993,8 @@ slider-component .slider-component .prev {
 slider-component .slider-component .slides-container {
 	display: flex;
 	justify-content: center;
-	width: 90%;
-	--section-width: 100%;
-	--item-width: calc(var(--section-width) / var(--slider-items));
+	width: 80%;
+	--item-width: calc(100% / var(--slider-items));
 }
 
 @media screen and (max-width: 750px) {
