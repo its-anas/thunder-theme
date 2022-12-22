@@ -4,7 +4,6 @@
   assign mobile_items = 1
   assign tablet_items = 1
   assign desktop_items = 1
-  assign desktop_section_width = 100
   assign featured_product = section.settings.product
 %}
 
@@ -29,12 +28,9 @@
   }
 
   @media screen and (min-width: 1024px) {
-     .featured-product-slider__slides-container {
-      --container-width: calc(var(--section-width) * {{ desktop_section_width | divided_by: 100.00 }} );
-    }
      .prev,
      .next {
-      width: {{ 100 | minus: desktop_section_width | divided_by: 2 }}%;
+      width: 5%;
     }
   }
 

@@ -16,7 +16,7 @@
 
 @media screen and (min-width: 1024px) {
 	.main-product-tabs .product-page__tabs {
-		width: 1600px;
+		width: var(--page-width);
 	}
 }
 

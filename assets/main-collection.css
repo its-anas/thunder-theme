@@ -56,7 +56,7 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	width: 1600px;
+	width: var(--page-width);
 	max-width: 100%;
 	padding: 0.5rem;
 	gap: 2rem;
@@ -120,7 +120,7 @@
 }
 
 .collection__content-container {
-	width: 1600px;
+	width: var(--page-width);
 	max-width: 100%;
 	height: auto;
 	gap: 1rem;

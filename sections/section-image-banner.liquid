@@ -1,10 +1,10 @@
 {{ 'section-image-banner.css' | asset_url | stylesheet_tag }}
 
 {%- style -%}
-    .{{ section.id }}.image-banner {
-      margin-top: {{ section.settings.space_outside | divided_by: 2 }}px;
-      margin-bottom: {{ section.settings.space_outside | divided_by: 2 }}px;
-    }
+  .{{ section.id }}.image-banner {
+    margin-top: {{ section.settings.space_outside | divided_by: 2 }}px;
+    margin-bottom: {{ section.settings.space_outside | divided_by: 2 }}px;
+  }
 
   .{{ section.id }}.image-banner__box {
     gap: {{ section.settings.space_between_elements }}rem;

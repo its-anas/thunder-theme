@@ -5,7 +5,6 @@
   assign mobile_items = 1
   assign tablet_items = 1
   assign desktop_items = 1
-  assign desktop_section_width = 100
 %}
 {% style %}
    product-page {
@@ -26,12 +25,9 @@
     --desktop-items: {{ desktop_items }};
   }
   @media screen and (min-width: 1024px) {
-     .product-page-slider__slides-container {
-      --container-width: calc(var(--section-width) * {{ desktop_section_width | divided_by: 100.00 }} );
-    }
      .prev,
      .next {
-      width: {{ 100 | minus: desktop_section_width | divided_by: 2 }}%;
+      width: 5%;
     }
   }
 {% endstyle %}
@@ -49,7 +45,7 @@
         {% endif %}
       >
         <div class="item-picture media">
-            {%- capture sizes -%}(min-width: 1024px) calc((1600px - 10rem ) / 2), (min-width: 750px) calc(100vw - 4rem), calc(100vw - 2rem){%- endcapture -%}
+            {%- capture sizes -%}(min-width: 1024px) calc((var(--page-width) - 10rem ) / 2), (min-width: 750px) calc(100vw - 4rem), calc(100vw - 2rem){%- endcapture -%}
             {%- assign widths = '300, 350, 400, 450, 500, 550, 600, 650, 700, 750, 800, 850, 900' -%}
             {%- assign width = '900' -%}
             {{
@@ -87,7 +83,7 @@
       >
         <div class="thumbnail-picture media">
             {%- assign image = thumbnail -%}
-            {%- capture sizes -%}(min-width: 1024px) calc(((1600px - 10rem ) / 2 ) / 6), (min-width: 750px) calc((100vw - 4rem) / 5), calc((100vw - 2rem) / 4){%- endcapture -%}
+            {%- capture sizes -%}(min-width: 1024px) calc(((var(--page-width) - 10rem ) / 2 ) / 6), (min-width: 750px) calc((100vw - 4rem) / 5), calc((100vw - 2rem) / 4){%- endcapture -%}
             {%- assign widths = '60, 70, 80, 90, 100, 110, 120, 130' -%}
             {%- assign width = '130' -%}
             {{
@@ -489,7 +485,7 @@
                           <div class="product-page__recommended-product corner-border">
                             <a href="{{ bundled_product.url }}" class="media corner-border-target">
                               {%- assign image = bundled_product.featured_image -%}
-                              {%- capture sizes -%}(min-width: 1024px) calc(((1600px - 10rem ) / 2) / 3), calc((100vw - 4rem) / 3){%- endcapture -%}
+                              {%- capture sizes -%}(min-width: 1024px) calc(((var(--page-width) - 10rem ) / 2) / 3), calc((100vw - 4rem) / 3){%- endcapture -%}
                               {%- assign widths = '100, 125' -%}
                               {%- assign width = '125' -%}
                               {{

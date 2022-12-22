@@ -8,7 +8,7 @@
     .article__tags,
     .article__share,
     .article__back-button__container {
-      width: {{ section.settings.page_width }}px;
+      width: var(--page-width);
     }
   }
 {% endstyle %}
@@ -233,18 +233,6 @@
 {
   "name": "Article",
   "class": "main-article",
-  "settings": [
-    {
-      "type": "range",
-      "id": "page_width",
-      "min": 1000,
-      "max": 1600,
-      "step": 100,
-      "default": 1200,
-      "unit": "px",
-      "label": "Page width"
-    }
-  ],
   "blocks": [
     {
       "type": "@app"

@@ -7,7 +7,7 @@
       padding-bottom: {{ section.settings.space_outside | divided_by: 2 }}rem;
       background-color: {{ section.settings.background_color }};
       margin: 0 auto;
-      width: 1600px;
+      width: var(--page-width);
       max-width: 100%;
   }
   @media screen and (min-width: 750px) {
@@ -49,7 +49,7 @@
           {{ 'collection-2' | placeholder_svg_tag: 'placeholder' }}
         {% else %}
           {%- assign image = section.settings.thumbnail -%}
-          {%- assign sizes = '(min-width: 1024px) calc(1600px / 2), (min-width: 750px) calc(100vw / 2), 100vw' -%}
+          {%- assign sizes = '(min-width: 1024px) calc(var(--page-width) / 2), (min-width: 750px) calc(100vw / 2), 100vw' -%}
           {%- assign widths = '250, 275, 300, 325, 350, 375, 400, 425, 450, 474, 500' -%}
           {%- assign width = '500' -%}
           {{

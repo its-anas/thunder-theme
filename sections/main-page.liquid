@@ -15,7 +15,7 @@
 
   @media screen and (min-width: 750px) {
     .page__container {
-      width: {{ section.settings.page_width }}px;
+      width: var(--page-width);
     }
   }
 {% endstyle %}
@@ -53,16 +53,6 @@
       "step": 1,
       "default": 0,
       "label": "Padding bottom"
-    },
-    {
-      "type": "range",
-      "id": "page_width",
-      "min": 1000,
-      "max": 1600,
-      "step": 100,
-      "default": 1200,
-      "unit": "px",
-      "label": "Page width"
     }
   ]
 }

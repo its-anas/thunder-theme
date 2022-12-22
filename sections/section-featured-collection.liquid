@@ -4,7 +4,6 @@
   assign mobile_items = section.settings.mobile_items
   assign tablet_items = section.settings.tablet_items
   assign desktop_items = section.settings.desktop_items
-  assign desktop_section_width = section.settings.row_width
 %}
 
 {%- style -%}
@@ -15,12 +14,9 @@
   }
 
   @media screen and (min-width: 1024px) {
-    .{{ section.id }}.featured-collection > .slider-component > .slides-container {
-      --container-width: calc(var(--section-width) * {{ desktop_section_width | divided_by: 100.00 }} );
-    }
     .{{ section.id }}.featured-collection > .slider-component > .prev,
     .{{ section.id }}.featured-collection > .slider-component > .next {
-      width: {{ 100 | minus: desktop_section_width | divided_by: 2 }}%;
+      width: 5%;
     }
   }
 
@@ -74,7 +70,7 @@
                 <a href="{{ product.url }}" class="media corner-border-target">
                   {% if product.featured_image != blank %}
                     {%- assign image = product.featured_image -%}
-                    {%- capture sizes -%}(min-width: 1024px) calc((1600px - {{ desktop_items | times: 2 }}rem) / {{ desktop_items }}), (min-width: 750px) calc((80vw - {{ tablet_items | times: 1 }}rem) / {{ tablet_items }}), calc((88vw - 1rem - {{ mobile_items | times: 1 }}rem ) / {{ mobile_items }}){%- endcapture -%}
+                    {%- capture sizes -%}(min-width: 1024px) calc((var(--page-width) - {{ desktop_items | times: 2 }}rem) / {{ desktop_items }}), (min-width: 750px) calc((80vw - {{ tablet_items | times: 1 }}rem) / {{ tablet_items }}), calc((88vw - 1rem - {{ mobile_items | times: 1 }}rem ) / {{ mobile_items }}){%- endcapture -%}
                     {%- assign widths = '120, 130. 140, 150, 160, 170, 180, 190, 200, 225, 250, 300, 325, 350, 375, 400' -%}
                     {%- assign width = '400' -%}
                     {{
@@ -318,16 +314,6 @@
       "step": 1,
       "unit": "px",
       "default": 0
-    },
-    {
-      "type": "range",
-      "id": "row_width",
-      "min": 40,
-      "max": 90,
-      "step": 5,
-      "unit": "%",
-      "label": "Section width relative to screen",
-      "default": 50
     }
   ],
   "presets": [

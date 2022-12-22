@@ -4,7 +4,6 @@
   assign mobile_items = section.settings.mobile_items
   assign tablet_items = section.settings.tablet_items
   assign desktop_items = section.settings.desktop_items
-  assign desktop_section_width = section.settings.row_width
 %}
 
 {%- style -%}
@@ -15,12 +14,9 @@
   }
 
   @media screen and (min-width: 1024px) {
-    .{{ section.id }}.recently-viewed > .slider-component > .slides-container {
-      --container-width: calc(var(--section-width) * {{ desktop_section_width | divided_by: 100.00 }} );
-    }
     .{{ section.id }}.recently-viewed > .slider-component > .prev,
     .{{ section.id }}.recently-viewed > .slider-component > .next {
-      width: {{ 100 | minus: desktop_section_width | divided_by: 2 }}%;
+      width: 5%;
     }
   }
 
@@ -241,16 +237,6 @@
       "step": 50,
       "unit": "px",
       "default": 0
-    },
-    {
-      "type": "range",
-      "id": "row_width",
-      "min": 40,
-      "max": 90,
-      "step": 5,
-      "unit": "%",
-      "label": "Section width relative to screen",
-      "default": 50
     }
   ],
 
