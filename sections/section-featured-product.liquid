@@ -10,14 +10,14 @@
 {% style %}
     .featured-product.{{ section.id }} {
       background-color: {{ section.settings.background_color }};
-      padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px !important;
-      padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px !important;
+      padding-top: {{ section.settings.top_space | times: 0.75 | round: 0 }}px !important;
+      padding-bottom: {{ section.settings.bottom_space | times: 0.75 | round: 0 }}px !important;
     }
 
   @media screen and (min-width: 750px) {
     .featured-product.{{ section.id }} {
-      padding-top: {{ section.settings.padding_top }}px !important;
-      padding-bottom: {{ section.settings.padding_bottom }}px !important;
+      padding-top: {{ section.settings.top_space }}px !important;
+      padding-bottom: {{ section.settings.bottom_space }}px !important;
     }
   }
 
@@ -280,8 +280,8 @@
     },
     {
       "type": "range",
-      "id": "padding_top",
-      "label": "Top padding",
+      "id": "top_space",
+      "label": "Top space",
       "min": 0,
       "max": 400,
       "step": 10,
@@ -290,7 +290,7 @@
     },
     {
       "type": "range",
-      "id": "padding_bottom",
+      "id": "bottom_space",
       "label": "Top bottom",
       "min": 0,
       "max": 400,

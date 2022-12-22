@@ -5,8 +5,18 @@
 
   .{{ section.id }}.countdown-timer {
     gap: {{ section.settings.space_between_elements }}rem;
-    margin-top: {{ section.settings.space_outside_elements| divided_by: 2 }}rem;
-    margin-bottom: {{ section.settings.space_outside_elements | divided_by: 2 }}rem;
+  }
+
+  .{{ section.id }}.countdown-timer {
+    margin-top: {{ section.settings.top_space | times: 0.75 | round: 0 }}px;
+    margin-bottom: {{ section.settings.bottom_space | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .{{ section.id }}.countdown-timer {
+      margin-top: {{ section.settings.top_space }}px;
+      margin-bottom: {{ section.settings.bottom_space }}px;
+    }
   }
 
   .{{ section.id }}.countdown-timer > .countdown-timer__timers > .countdown-timer__container {
@@ -127,12 +137,22 @@
     },
     {
       "type": "range",
-      "id": "space_outside_elements",
-      "label": "Space outside elements",
+      "id": "top_space",
       "min": 0,
       "max": 100,
-      "step": 5,
+      "step": 1,
       "unit": "px",
+      "label": "Top space",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "bottom_space",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Bottom space",
       "default": 0
     },
     {

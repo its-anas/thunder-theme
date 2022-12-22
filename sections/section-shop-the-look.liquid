@@ -18,7 +18,15 @@
   }
 
   .{{ section.id }}.shop-the-look {
-    padding: {{ section.settings.space_outside_elements | divided_by: 2 }}px 0;
+    margin-top: {{ section.settings.top_space | times: 0.75 | round: 0 }}px;
+    margin-bottom: {{ section.settings.bottom_space | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .{{ section.id }}.shop-the-look {
+      margin-top: {{ section.settings.top_space }}px;
+      margin-bottom: {{ section.settings.bottom_space }}px;
+    }
   }
 
   .{{ section.id }}.shop-the-look > .shop-the-look__wrapper > .shop-the-look__container > .shop-the-look__box > .shop-the-look__icon > .shop-the-look__icon-center:after {
@@ -332,12 +340,22 @@
     },
     {
       "type": "range",
-      "id": "space_outside_elements",
-      "label": "Space outside elements",
+      "id": "top_space",
       "min": 0,
       "max": 100,
-      "step": 5,
+      "step": 1,
       "unit": "px",
+      "label": "Top space",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "bottom_space",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Bottom space",
       "default": 0
     }
   ],

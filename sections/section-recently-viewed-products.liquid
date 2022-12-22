@@ -26,9 +26,19 @@
 
   .{{ section.id }}.recently-viewed {
     gap: {{ section.settings.space_between_elements }}rem;
-    margin-top: {{ section.settings.space_outside_elements | divided_by: 2 }}px;
-    margin-bottom: {{ section.settings.space_outside_elements | divided_by: 2 }}px;
     background-color: {{ section.settings.background_color }};
+  }
+
+  .{{ section.id }}.recently-viewed {
+    margin-top: {{ section.settings.top_space | times: 0.75 | round: 0 }}px;
+    margin-bottom: {{ section.settings.bottom_space | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .{{ section.id }}.recently-viewed {
+      margin-top: {{ section.settings.top_space }}px;
+      margin-bottom: {{ section.settings.bottom_space }}px;
+    }
   }
 
    #selectit {
@@ -230,12 +240,22 @@
     },
     {
       "type": "range",
-      "id": "space_outside_elements",
-      "label": "Space outside elements",
+      "id": "top_space",
       "min": 0,
-      "max": 200,
-      "step": 50,
+      "max": 100,
+      "step": 1,
       "unit": "px",
+      "label": "Top space",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "bottom_space",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Bottom space",
       "default": 0
     }
   ],

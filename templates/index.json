@@ -45,7 +45,8 @@
                     "text_alignment": "left",
                     "text_width": 50,
                     "space_between_elements": 1,
-                    "space_outside_elements" : 0
+                    "top_space": 0,
+                    "bottom_space": 0
                }
           },
           "multi-icon": {
@@ -123,8 +124,8 @@
                     "desktop_items": 6,
                     "background_color": "rgba(0,0,0,0)",
                     "space_between_elements": 1,
-                    "space_outside_elements": 0,
-                    "row_width": 40
+                    "top_space": 0,
+                    "bottom_space": 0
                }
           },
           "gallery": {
@@ -175,7 +176,8 @@
                     "background_color": "transparent",
                     "text_width": 70,
                     "space_between_elements": 1,
-                    "space_outside_elements": 0,
+                    "top_space": 0,
+                    "bottom_space": 0,
                     "message": "Offer ended",
                     "countdown_timer_type": "time",
                     "time_days": 0,
@@ -211,8 +213,8 @@
                     "heading_size": "h6",
                     "background_color": "rgba(0,0,0,0)",
                     "space_between_elements": 1,
-                    "space_outside_elements": 0,
-                    "row_width": 80
+                    "top_space": 0,
+                    "bottom_space": 0
                }
           },
           "promotional-banner": {
@@ -221,7 +223,8 @@
                     "banner_style": "style-1",
                     "text_color": "#282828",
                     "background_color": "#fcdb33",
-                    "space_outside_elements": 0,
+                    "top_space": 0,
+                    "bottom_space": 0,
                     "height": 80,
                     "animation_speed": 60,
                     "style_1_text": "Put the banner text here",
@@ -280,7 +283,8 @@
                     "openable_background_color": "#000000",
                     "heading": "Shop our look",
                     "heading_size": "h6",
-                    "space_outside_elements": 0
+                    "top_space": 0,
+                    "bottom_space": 0
                }
           },
           "compare": {
@@ -360,7 +364,8 @@
                     "product5"
                ],
                "settings": {
-                    "space_outside_elements" : 0,
+                    "top_space": 0,
+                    "bottom_space": 0,
                     "background_color": "rgba(0,0,0,0)",
                     "image_size": "large",
                     "image_style": "cover",
@@ -381,7 +386,8 @@
                     "banner_style": "style-2",
                     "text_color": "#fff",
                     "background_color": "#282828",
-                    "space_outside_elements": 0,
+                    "top_space": 0,
+                    "bottom_space": 0,
                     "height": 80,
                     "animation_speed": 60,
                     "style_1_text": "Put the banner text here",
@@ -457,8 +463,8 @@
                     "background_color": "rgba(0,0,0,0)",
                     "collection_height": 350,
                     "space_between_elements": 1,
-                    "space_outside_elements" : 0,
-                    "row_width": 80
+                    "top_space": 0,
+                    "bottom_space": 0
                }
           },
           "video-with-text": {
@@ -510,7 +516,8 @@
                     "video_height": 500,
                     "video_horizontal_position": "right",
                     "video_placement": "first",
-                    "space_outside_elements" : 0
+                    "top_space": 0,
+                    "bottom_space": 0
                }
           },
           "animated-rich-text": {
@@ -570,7 +577,8 @@
                     "text_width": 70,
                     "background_color": "transparent",
                     "space_between_elements": 1,
-                    "space_outside_elements" : 0
+                    "top_space": 0,
+                    "bottom_space": 0
                }
           },
           "testimonials": {
@@ -630,7 +638,8 @@
                     "background_color": "rgba(0,0,0,0)",
                     "heading": "Hear from our customers",
                     "heading_size": "h6",
-                    "space_outside_elements" : 0,
+                    "top_space": 0,
+                    "bottom_space": 0,
                     "space_between_elements": 1,
                     "review_width": 250,
                     "review_height": 150,
@@ -688,7 +697,8 @@
                     "text_alignment": "center",
                     "text_width": 50,
                     "space_between_elements": 1,
-                    "space_outside_elements" : 0
+                    "top_space": 0,
+                    "bottom_space": 0
                }
           },
           "text-with-icon": {
@@ -739,7 +749,8 @@
                "settings": {
                     "icon_size": 50,
                     "space_between_elements": 0.3,
-                    "space_outside_elements": 0,
+                    "top_space": 0,
+                    "bottom_space": 0,
                     "content_width": 72,
                     "background_color": "transparent"
                }
@@ -796,7 +807,8 @@
                     "show_image": true,
                     "image_style": "cover",
                     "background_color": "transparent",
-                    "space_outside_elements" : 0,
+                    "top_space": 0,
+                    "bottom_space": 0,
                     "space_between_elements": 1,
                     "tabs_width": 1000,
                     "image_height": 300
@@ -844,7 +856,8 @@
                     "animation_speed": 30,
                     "logo_height": 80,
                     "space_between_elements": 1,
-                    "space_outside_elements" : 0,
+                    "top_space": 0,
+                    "bottom_space": 0,
                     "background_color": "rgba(0,0,0,0)"
                }
           }

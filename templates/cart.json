@@ -78,7 +78,7 @@
       ],
       "settings": {
         "aspect_ratio": 0.6,
-        "mobile_items": 3,
+        "mobile_items": "2",
         "tablet_items": 4,
         "desktop_items": 5,
         "heading": "Featured collections",
@@ -86,8 +86,8 @@
         "background_color": "rgba(0,0,0,0)",
         "collection_height": 350,
         "space_between_elements": 1,
-        "space_outside_elements" : 0,
-        "row_width": 80
+        "top_space": 0,
+        "bottom_space": 0
       }
     }
   },
