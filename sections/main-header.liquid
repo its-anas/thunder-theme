@@ -486,7 +486,7 @@
                                 width: 600px;
                               }
                               .menu__childs.menu_parent_title--{{ menu_parent_title }} {
-                                border-right: 1px solid  {{ settings.global_border_color }};
+                                border-right: 1px solid var(--body-text-color);
                               }
                               {% if section.settings.menu_layout == 'navigation_first' %}
                                 @media screen and (max-width: 1440px) {
@@ -636,7 +636,7 @@
                               {% if block.settings.show_tab_picture == true %}
                                 {% style %}
                                     .menu__childs.menu_parent_title--{{ menu_parent_title }} {
-                                      border-right: 1px solid  {{ settings.global_border_color }};
+                                      border-right: 1px solid var(--body-text-color);
                                     }
                                   {% if menu_child.links.size > 0 %}
                                     .menu__dropdown.menu_parent_title--{{ menu_parent_title }} {

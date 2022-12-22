@@ -14,6 +14,10 @@
       background: rgba({{ section.settings.overlay_color.red }}, {{ section.settings.overlay_color.green }}, {{ section.settings.overlay_color.blue }}, {{ section.settings.overlay_opacity | divided_by: 100.0 }});
   }
 
+  .{{ section.id }}.overlay *:not(a) {
+      color: {{ section.settings.text_color }};
+  }
+
   .{{ section.id }}.image-banner {
     min-height: {{ section.settings.image_height }}px;
   }
@@ -140,15 +144,21 @@
     {
       "type": "color",
       "id": "overlay_color",
-      "label": "Color",
+      "label": "Overlay color",
       "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#ffffff"
     },
     {
       "type": "range",
       "id": "overlay_opacity",
       "min": 0,
       "max": 100,
-      "step": 10,
+      "step": 1,
       "unit": "%",
       "label": "Opacity",
       "default": 40
