@@ -2,12 +2,6 @@
 
 {%- style -%}
   .{{ section.id }}.image-with-text {
-      min-height: 600px;
-      height: {{ section.settings.image_height }}px;
-      background-color: {{ section.settings.background_color }};
-  }
-
-  .{{ section.id }}.image-with-text {
     margin-top: {{ section.settings.top_space | times: 0.75 | round: 0 }}px;
     margin-bottom: {{ section.settings.bottom_space | times: 0.75 | round: 0 }}px;
   }
@@ -19,16 +13,36 @@
     }
   }
 
-  @media screen and (min-width: 750px) {
   .{{ section.id }}.image-with-text {
-      min-height: 0px;
-      height: {{ section.settings.image_height }}px;
+      background-color: {{ section.settings.background_color }};
   }
+  @media screen and (max-width: 750px) {
+    .image-with-text__image,
+    .image-with-text__content {
+        height: {{ section.settings.mobile_image_height }}px;
+    }
   }
+  @media screen and (min-width: 750px) and (max-width: 1024px) {
+    .{{ section.id }}.image-with-text {
+        height: {{ section.settings.image_height | times: 0.75 | round: 0 }}px;
+    }
+  }
+  @media screen and (min-width: 1024px) {
+    .{{ section.id }}.image-with-text {
+        height: {{ section.settings.image_height }}px;
+    }
+  }
+
   @media screen and (min-width: 1024px) {
     .{{ section.id }}-text-width {
       width: {{ section.settings.text_width }}%;
     }
+  }
+
+  @media screen and (max-width: 750px) {
+      .{{ section.id }}.image-with-text__content > div {
+        justify-content: center !important;
+      }
   }
 
   .{{ section.id }} > .box {
@@ -125,8 +139,18 @@
       "max": 800,
       "step": 10,
       "unit": "px",
-      "label": "Height",
+      "label": "Desktop height",
       "default": 700
+    },
+    {
+      "type": "range",
+      "id": "mobile_image_height",
+      "min": 300,
+      "max": 450,
+      "step": 10,
+      "unit": "px",
+      "label": "Mobile height",
+      "default": 350
     },
     {
       "type": "select",

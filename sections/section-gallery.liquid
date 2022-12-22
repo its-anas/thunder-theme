@@ -5,17 +5,25 @@
     height: {{ section.settings.mobile_image_height }}px;
   }
 
+  @media screen and (min-width: 750px) and (max-width: 1024px) {
+    .{{ section.id }}.image-with-text {
+        height: {{ section.settings.deskop_image_height | times: 0.75 | round: 0 }}px;
+    }
+  }
+
+  @media screen and (min-width: 1024px) {
+    .{{ section.id }}.gallery__image {
+      height: {{ section.settings.deskop_image_height }}px;
+    }
+  }
+
+  @media screen and (min-width: 750px) {
   .{{ section.id }}.gallery__content {
     background: rgba({{ section.settings.overlay_color.red }}, {{ section.settings.overlay_color.green }}, {{ section.settings.overlay_color.blue }}, {{ section.settings.overlay_opacity | divided_by: 100.0 }});
   }
   .{{ section.id }}.gallery__content > *:not(.button-text) {
     color: {{ section.settings.text_color }};
   }
-
-  @media screen and (min-width: 750px) {
-    .{{ section.id }}.gallery__image {
-      height: {{ section.settings.deskop_image_height }}px;
-    }
 
     {% if section.settings.gallery_style == "all_in_one" %}
       .{{ section.id }}.gallery > div {

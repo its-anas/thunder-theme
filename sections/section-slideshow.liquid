@@ -2,7 +2,19 @@
 
 {%- style -%}
   .{{ section.id }}.slideshow {
-    height: {{ section.settings.image_height }}px;
+    height: {{ section.settings.mobile_image_height }}px;
+  }
+
+  @media screen and (min-width: 750px) and (max-width: 1024px) {
+    .{{ section.id }}.image-with-text {
+        height: {{ section.settings.image_height | times: 0.75 | round: 0 }}px;
+    }
+  }
+
+  @media screen and (min-width: 1024px) {
+    .{{ section.id }}.slideshow {
+      height: {{ section.settings.image_height }}px;
+    }
   }
 
   .{{ section.id }}.slideshow {
@@ -185,8 +197,18 @@
       "max": 800,
       "step": 10,
       "unit": "px",
-      "label": "Height",
+      "label": "Desktop height",
       "default": 700
+    },
+    {
+      "type": "range",
+      "id": "mobile_image_height",
+      "min": 400,
+      "max": 700,
+      "step": 10,
+      "unit": "px",
+      "label": "Mobile height",
+      "default": 500
     },
     {
       "type": "header",

@@ -3,11 +3,7 @@
 	align-items: center;
 	overflow: hidden;
 }
-@media screen and (min-width: 750px) {
-	.video-with-text {
-		gap: 2rem;
-	}
-}
+
 .video-with-text.first {
 	flex-direction: column;
 }
@@ -44,7 +40,6 @@
 }
 .video-with-text__video-box {
 	display: grid;
-	width: 350px;
 	aspect-ratio: 1;
 	border-radius: var(--global-border-radius);
 	overflow: hidden;

@@ -23,10 +23,17 @@
       width: var(--page-width);
       max-width: 100%;
   }
+
   @media screen and (min-width: 750px) {
     .{{ section.id }} .video-with-text__media .video-with-text__video-box {
-        width: {{ section.settings.video_height }}px;
+        width: {{ section.settings.video_height | times: 0.75 | round: 0 }}px;
         aspect-ratio: 1;
+    }
+  }
+
+    @media screen and (min-width: 1024px) {
+    .{{ section.id }} .video-with-text__media .video-with-text__video-box {
+        width: {{ section.settings.video_height }}px;
     }
   }
 

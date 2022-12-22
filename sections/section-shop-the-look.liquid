@@ -1,9 +1,15 @@
 {{ 'section-shop-the-look.css' | asset_url | stylesheet_tag }}
 
 {%- style -%}
-  @media screen and (max-width: 1024px) {
+  @media screen and (max-width: 750px) {
     .{{ section.id }}.shop-the-look > .shop-the-look__wrapper, .{{ section.id }}.shop-the-look > .shop-the-look__wrapper > .shop-the-look__image {
       aspect-ratio: {{ section.settings.mobile_aspect_ratio }};
+    }
+  }
+
+  @media screen and (min-width: 750px) and (max-width: 1024px) {
+    .{{ section.id }}.shop-the-look > .shop-the-look__wrapper, .{{ section.id }}.shop-the-look > .shop-the-look__wrapper > .shop-the-look__image {
+      aspect-ratio: {{ section.settings.desktop_aspect_ratio | times: 0.75 | round: 0 }}px;
     }
   }
 

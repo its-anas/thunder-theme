@@ -318,7 +318,7 @@ p[data-spam-detection-disclaimer] > a {
 	text-align: center;
 }
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 750px) {
 	.text-alignment--center {
 		text-align: center;
 	}
@@ -342,14 +342,6 @@ p[data-spam-detection-disclaimer] > a {
 
 .vertical--bottom {
 	justify-content: flex-end;
-}
-
-@media screen and (max-width: 750px) {
-	.vertical--top,
-	.vertical--center,
-	.vertical--bottom {
-		justify-content: center;
-	}
 }
 
 @media screen and (min-width: 750px) {

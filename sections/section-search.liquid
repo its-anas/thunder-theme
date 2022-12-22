@@ -1,8 +1,8 @@
 {%- style -%}
   .{{ section.id }}.search-section {
       gap: {{ section.settings.space_between_elements }}rem;
-      min-height: {{ section.settings.height }}px;
       background-color: {{ section.settings.background_color }};
+      padding: 2rem;
    }
 
   .{{ section.id }}.search-section {
@@ -148,16 +148,6 @@
       "unit": "px",
       "label": "Bottom space",
       "default": 0
-    },
-    {
-      "type": "range",
-      "id": "height",
-      "min": 150,
-      "max": 300,
-      "step": 50,
-      "unit": "px",
-      "label": "Section height",
-      "default": 150
     }
   ],
   "presets": [

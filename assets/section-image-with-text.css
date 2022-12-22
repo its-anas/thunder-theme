@@ -9,7 +9,7 @@
 .image-with-text--second {
 	flex-direction: column-reverse;
 }
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 750px) {
 	.image-with-text {
 		height: auto;
 	}
@@ -20,14 +20,14 @@
 		flex-direction: row-reverse;
 	}
 }
+
 .image-with-text__image {
-	height: 50%;
 	width: 100%;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 }
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 750px) {
 	.image-with-text__image {
 		height: 100%;
 		width: 50%;
@@ -46,7 +46,7 @@
 	height: 50%;
 	width: 100%;
 }
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 750px) {
 	.image-with-text__content {
 		height: 100%;
 		width: 50%;

@@ -121,7 +121,7 @@
                     "aspect_ratio": 1,
                     "mobile_items": 3,
                     "tablet_items": 5,
-                    "desktop_items": 6,
+                    "desktop_items": 8,
                     "background_color": "rgba(0,0,0,0)",
                     "space_between_elements": 1,
                     "top_space": 0,
