@@ -944,15 +944,7 @@ slider-component .slider-component .next {
 	opacity: 0.5;
 }
 
-@media screen and (max-width: 750px) {
-	slider-component .slider-component .prev,
-	slider-component .slider-component .next {
-		display: none;
-		width: 10%;
-	}
-}
-
-@media screen and (min-width: 750px) and (max-width: 1024px) {
+@media screen and (max-width: 1024px) {
 	slider-component .slider-component .prev,
 	slider-component .slider-component .next {
 		display: none;

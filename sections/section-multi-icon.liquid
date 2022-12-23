@@ -69,9 +69,11 @@
               {% endif %}
               class="multi-icon__icon media"
             >
-              {% if block.settings.icon_type == 'svg' %}
+              {% if block.settings.icon_type == 'theme-icon' %}
+                {% render 'snippet-icons', icon: block.settings.theme_icon %}
+              {% elsif block.settings.icon_type == 'svg' %}
                 {% if block.settings.svg == blank %}
-                  {% render 'snippet-icons', icon: 'multi-icon' %}
+                  {% render 'snippet-icons', icon: block.settings.theme_icon %}
                 {% else %}
                   {{ block.settings.svg }}
                 {% endif %}
@@ -196,7 +198,7 @@
       "step": 1,
       "unit": "n",
       "label": "Items per row in desktop",
-      "default": 6
+      "default": 8
     },
     {
       "type": "header",
@@ -255,28 +257,180 @@
           "label": "Icon type",
           "options": [
             {
+              "value": "theme-icon",
+              "label": "Theme icon"
+            },
+            {
               "value": "svg",
-              "label": "svg"
+              "label": "Custom icon - svg"
             },
             {
               "value": "image",
-              "label": "Image"
+              "label": "Custom icon - png"
             }
           ],
-          "default": "svg",
-          "info": "It is recommended to use svg icons instead of jpeg/png icons to get the best quality"
+          "default": "theme-icon"
+        },
+        {
+          "type": "select",
+          "id": "theme_icon",
+          "label": "Theme icon",
+          "default": "facebook",
+          "info": "Applicable only if you choose 'Theme icon'' from the icon type dropdown",
+          "options": [
+            {
+              "group": "Shop",
+              "value": "home",
+              "label": "Home"
+            },
+            {
+              "group": "Shop",
+              "value": "account",
+              "label": "Account"
+            },
+            {
+              "group": "Shop",
+              "value": "search",
+              "label": "Search"
+            },
+            {
+              "group": "Shop",
+              "value": "cart",
+              "label": "Cart"
+            },
+            {
+              "group": "Communication",
+              "value": "phone",
+              "label": "Phone"
+            },
+            {
+              "group": "Communication",
+              "value": "email",
+              "label": "Email"
+            },
+            {
+              "group": "Communication",
+              "value": "contact",
+              "label": "Contact"
+            },
+            {
+              "group": "Communication",
+              "value": "support",
+              "label": "Support"
+            },
+            {
+              "group": "Shipping",
+              "value": "box",
+              "label": "Box"
+            },
+            {
+              "group": "Shipping",
+              "value": "location",
+              "label": "Location"
+            },
+            {
+              "group": "Shipping",
+              "value": "map",
+              "label": "Map"
+            },
+            {
+              "group": "Trust",
+              "value": "badge",
+              "label": "Badge"
+            },
+            {
+              "group": "Trust",
+              "value": "shield",
+              "label": "Shield"
+            },
+            {
+              "group": "Trust",
+              "value": "review",
+              "label": "Review"
+            },
+            {
+              "group": "Others",
+              "value": "star",
+              "label": "Star"
+            },
+            {
+              "group": "Others",
+              "value": "play",
+              "label": "Play"
+            },
+            {
+              "group": "Others",
+              "value": "checkmark",
+              "label": "Checkmark"
+            },
+            {
+              "group": "Others",
+              "value": "prohibition",
+              "label": "Prohibition"
+            },
+            {
+              "group": "Others",
+              "value": "warning",
+              "label": "Warning"
+            },
+            {
+              "group": "Social",
+              "value": "share",
+              "label": "Share"
+            },
+            {
+              "group": "Social",
+              "value": "facebook",
+              "label": "Facebook"
+            },
+            {
+              "group": "Social",
+              "value": "instagram",
+              "label": "Instagram"
+            },
+            {
+              "group": "Social",
+              "value": "twitter",
+              "label": "Twitter"
+            },
+            {
+              "group": "Social",
+              "value": "pinterest",
+              "label": "Pinterest"
+            },
+            {
+              "group": "Social",
+              "value": "tiktok",
+              "label": "Tiktok"
+            },
+            {
+              "group": "Social",
+              "value": "snapchat",
+              "label": "Snapchat"
+            },
+            {
+              "group": "Social",
+              "value": "youtube",
+              "label": "Youtube"
+            },
+            {
+              "group": "Social",
+              "value": "vimeo",
+              "label": "Vimeo"
+            }
+          ]
         },
         {
           "type": "liquid",
           "id": "svg",
-          "label": "Icon - svg",
-          "info": "Applicable only if icon type is svg"
+          "label": "Custom icon - svg",
+          "info": "Applicable only if you choose 'Custom icon - svg' from the icon type dropdown"
         },
         {
           "type": "image_picker",
           "id": "image",
-          "label": "Icon - image",
-          "info": "Applicable only if icon type is image"
+          "label": "Custom icon - png",
+          "info": "Applicable only if you choose 'Custom icon - png' from the icon type dropdown"
         },
         {
           "type": "text",
@@ -292,40 +446,64 @@
       "name": "Multi icon",
       "blocks": [
         {
-          "type": "image_picker"
+          "type": "image_picker",
+          "settings": {
+            "url": "",
+            "icon_type": "svg",
+            "theme_icon": "facebook",
+            "svg": "<svg width=\"64\" height=\"64\" viewBox=\"0 0 64 64\" fill=\"none\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\">\n<path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M21.4064 4.97799C19.3354 4.97799 17.6564 6.65692 17.6564 8.72799V55.272C17.6564 57.3431 19.3354 59.022 21.4064 59.022H42.5936C44.6647 59.022 46.3436 57.3431 46.3436 55.272V8.72799C46.3436 6.65692 44.6647 4.97799 42.5936 4.97799H21.4064ZM19.1564 8.72799C19.1564 7.48535 20.1638 6.47799 21.4064 6.47799H42.5936C43.8363 6.47799 44.8436 7.48535 44.8436 8.72799V55.272C44.8436 56.5147 43.8363 57.522 42.5936 57.522H21.4064C20.1638 57.522 19.1564 56.5147 19.1564 55.272V8.72799ZM23.8143 9.25264C22.8478 9.25264 22.0643 10.0361 22.0643 11.0026V18.5792C22.0643 19.5457 22.8478 20.3292 23.8143 20.3292H31.1906C32.1571 20.3292 32.9406 19.5457 32.9406 18.5792V11.0026C32.9406 10.0361 32.1571 9.25264 31.1906 9.25264H23.8143ZM23.5643 11.0026C23.5643 10.8646 23.6762 10.7526 23.8143 10.7526H31.1906C31.3287 10.7526 31.4406 10.8646 31.4406 11.0026V18.5792C31.4406 18.7173 31.3287 18.8292 31.1906 18.8292H23.8143C23.6763 18.8292 23.5643 18.7173 23.5643 18.5792V11.0026Z\" fill=\"black\"\/>\n<\/svg>",
+            "text": "Icon"
+          }
         },
         {
-          "type": "image_picker"
+          "type": "image_picker",
+          "settings": {
+            "url": "",
+            "icon_type": "svg",
+            "theme_icon": "facebook",
+            "svg": "<svg width=\"64\" height=\"64\" viewBox=\"0 0 64 64\" fill=\"none\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\">\n<path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M14.3226 17.485H50C51.3807 17.485 52.5 18.6042 52.5 19.985V28.3382H42.3526H23.4258H11.8226V19.985C11.8226 18.6042 12.9419 17.485 14.3226 17.485ZM11.8226 29.8382V44.015C11.8226 45.3957 12.9419 46.515 14.3226 46.515H50C51.3807 46.515 52.5 45.3958 52.5 44.015V29.8382H42.6633L39.6868 32.8147C38.796 33.7055 37.5878 34.2059 36.328 34.2059H29.4504C28.1906 34.2059 26.9824 33.7055 26.0916 32.8147L23.1151 29.8382H11.8226ZM10.3226 19.985C10.3226 17.7758 12.1135 15.985 14.3226 15.985H50C52.2091 15.985 54 17.7758 54 19.985V44.015C54 46.2242 52.2092 48.015 50 48.015H14.3226C12.1135 48.015 10.3226 46.2242 10.3226 44.015V19.985ZM27.1523 31.754L25.2364 29.8382H40.542L38.6261 31.754C38.0167 32.3635 37.19 32.7059 36.328 32.7059H29.4504C28.5884 32.7059 27.7618 32.3635 27.1523 31.754Z\" fill=\"black\"\/>\n<\/svg>",
+            "text": "Icon"
+          }
         },
         {
-          "type": "image_picker"
+          "type": "image_picker",
+          "settings": {
+            "url": "",
+            "icon_type": "svg",
+            "theme_icon": "facebook",
+            "svg": "<svg width=\"64\" height=\"64\" viewBox=\"0 0 64 64\" fill=\"none\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\">\n<path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M42.8017 11.5H21.1983C19.8175 11.5 18.6983 12.6193 18.6983 14V50C18.6983 51.3807 19.8175 52.5 21.1983 52.5H42.8017C44.1824 52.5 45.3017 51.3807 45.3017 50V14C45.3017 12.6193 44.1824 11.5 42.8017 11.5ZM21.1983 10C18.9891 10 17.1983 11.7909 17.1983 14V50C17.1983 52.2091 18.9891 54 21.1983 54H42.8017C45.0108 54 46.8017 52.2091 46.8017 50V14C46.8017 11.7909 45.0108 10 42.8017 10H21.1983ZM40.3047 17.7629L38.2851 16.8974L38.8759 15.5187L40.8956 16.3842C41.539 16.66 41.9562 17.2927 41.9562 17.9927V45.9318C41.9562 46.6319 41.539 47.2646 40.8956 47.5403L38.8759 48.4059L38.2851 47.0272L40.3047 46.1616C40.3966 46.1222 40.4562 46.0318 40.4562 45.9318V17.9927C40.4562 17.8927 40.3966 17.8023 40.3047 17.7629ZM31.7208 16.8974L33.7405 17.7629C33.8324 17.8023 33.892 17.8927 33.892 17.9927V45.9318C33.892 46.0318 33.8324 46.1222 33.7405 46.1616L31.7208 47.0272L32.3117 48.4059L34.3313 47.5403C34.9748 47.2646 35.392 46.6319 35.392 45.9318V17.9927C35.392 17.2927 34.9748 16.66 34.3313 16.3842L32.3117 15.5187L31.7208 16.8974Z\" fill=\"black\"\/>\n<\/svg>",
+            "text": "Icon"
+          }
         },
         {
-          "type": "image_picker"
+          "type": "image_picker",
+          "settings": {
+            "url": "",
+            "icon_type": "svg",
+            "theme_icon": "facebook",
+            "svg": "<svg width=\"64\" height=\"64\" viewBox=\"0 0 64 64\" fill=\"none\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\">\n<rect x=\"19.4167\" y=\"18.75\" width=\"25.5\" height=\"25.5\" rx=\"2.25\" stroke=\"black\" stroke-width=\"1.5\"\/>\n<rect x=\"38.2289\" y=\"5.90714\" width=\"1.48336\" height=\"12.1116\" fill=\"black\"\/>\n<rect x=\"38.2289\" y=\"44.9929\" width=\"1.48336\" height=\"12.1116\" fill=\"black\"\/>\n<rect x=\"23.7662\" y=\"5.90714\" width=\"1.48336\" height=\"12.1116\" fill=\"black\"\/>\n<rect x=\"23.7662\" y=\"44.9929\" width=\"1.48336\" height=\"12.1116\" fill=\"black\"\/>\n<path d=\"M46.6667 30V34\" stroke=\"black\" stroke-width=\"2\"\/>\n<\/svg>",
+            "text": "Icon"
+          }
         },
         {
-          "type": "image_picker"
+          "type": "image_picker",
+          "settings": {
+            "url": "",
+            "icon_type": "svg",
+            "theme_icon": "facebook",
+            "svg": "<svg width=\"64\" height=\"64\" viewBox=\"0 0 64 64\" fill=\"none\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\">\n<path d=\"M14.9999 35.6667L10.6665 49.7501H54L49.6667 35.6667M14.9999 13.9999H49.6667V35.6667H14.9999V13.9999Z\" stroke=\"black\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"\/>\n<path d=\"M27.8916 43.25H36.775L38.8333 49.7501H25.8333L27.8916 43.25Z\" stroke=\"black\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"\/>\n<\/svg>",
+            "text": "Icon"
+          }
         },
         {
-          "type": "image_picker"
-        },
-        {
-          "type": "image_picker"
-        },
-        {
-          "type": "image_picker"
-        },
-        {
-          "type": "image_picker"
-        },
-        {
-          "type": "image_picker"
-        },
-        {
-          "type": "image_picker"
-        },
-        {
-          "type": "image_picker"
+          "type": "image_picker",
+          "settings": {
+            "url": "",
+            "icon_type": "svg",
+            "theme_icon": "facebook",
+            "svg": "<svg width=\"64\" height=\"64\" viewBox=\"0 0 64 64\" fill=\"none\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\">\n<path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M50.4634 14.0973L45.6823 18.8783L48.5318 21.7279L49.0622 22.2582L48.5318 22.7885L20.5267 50.7937L20.307 51.0134H19.9964H13.2365H12.4865V50.2634V43.5035V43.1928L12.7062 42.9732L36.0202 19.6592L33.6486 18.3579L23.6855 28.3211L22.6248 27.2604L32.9858 16.8994L33.3836 16.5016L33.8769 16.7722L37.1249 18.5544L40.7113 14.968L41.2417 14.4377L41.772 14.968L44.6216 17.8177L49.4027 13.0366L50.4634 14.0973ZM13.9865 43.8142V49.5134H19.6857L46.9409 22.2582L41.2417 16.559L13.9865 43.8142Z\" fill=\"black\"\/>\n<\/svg>",
+            "text": "Icon"
+          }
         }
       ]
     }
