@@ -1,9 +1,12 @@
 {% style %}
   :root {
      --font-family: {{ settings.font_type.family }}, {{ settings.font_type.fallback_families }};
+     --heading-font-family: {{ settings.headings_font_type.family }}, {{ settings.headings_font_type.fallback_families }};
      --font-style: {{ settings.font_type.style }};
+     --heading-font-style: {{ settings.headings_font_type.style }};
      --font-weight: {{ settings.font_type.weight }};
-     --font-weight-bold: {{ settings.font_type.weight | plus: 300 | at_most: 1000 }};
+     --heading-font-weight: {{ settings.headings_font_type.weight }};
+
      --font-size: {{ settings.size }}px;
      --font-size-type-scale: {{ settings.size }};
      --font-type-scale: {{ settings.type_scale }};

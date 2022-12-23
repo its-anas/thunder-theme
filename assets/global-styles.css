@@ -141,7 +141,7 @@ img {
 
 .logo--text {
 	text-transform: uppercase;
-	font-size: var(--xlarge-font-size);
+	font-size: var(--h6-font-size);
 	font-weight: bold;
 }
 
@@ -226,6 +226,19 @@ label {
 html,
 body {
 	font-family: var(--font-family);
+	font-weight: var(--font-weight);
+	font-style: var(--font-style);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: var(--heading-font-family);
+	font-weight: var(--heading-font-weight);
+	font-style: var(--heading-font-style);
 }
 
 input,
