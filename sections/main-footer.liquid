@@ -5,8 +5,12 @@
     background-color: {{ settings.footer_background_color }};
   }
 
-  .footer * {
+  .footer *:not(select) {
     color: {{ settings.footer_text_color }};
+  }
+
+  select[name='country_code'] {
+    padding: 0 !important;
   }
 {%- endstyle -%}
 
@@ -87,7 +91,7 @@
             <div class="footer__social-media footer__item">
               <h6 class="footer__heading">{{ block.settings.social_media_heading }}</h6>
               <div class="footer__social-media-icons">
-                {% render 'snippet-social-media-icons' %}
+                {% render 'snippet-social-media-icons', color: settings.footer_text_color %}
               </div>
             </div>
           {%- when 'newsletter' -%}

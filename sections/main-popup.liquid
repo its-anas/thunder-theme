@@ -106,7 +106,7 @@
             {%- endform -%}
             {% if section.settings.show_social_media_icons == true %}
               <div class="popup__social-media">
-                {% render 'snippet-social-media-icons' %}
+                {% render 'snippet-social-media-icons', color: section.settings.text_color %}
               </div>
             {% endif %}
 
