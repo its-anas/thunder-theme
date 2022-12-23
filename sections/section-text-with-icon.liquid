@@ -39,9 +39,11 @@
       <div class="text-with-icon__column" {{ block.shopify_attributes }}>
         <div class="text-with-icon__content-box">
           <div class="icon media">
-            {% if block.settings.icon_type == 'svg' %}
+            {% if block.settings.icon_type == 'theme-icon' %}
+              {% render 'snippet-icons', icon: block.settings.theme_icon %}
+            {% elsif block.settings.icon_type == 'svg' %}
               {% if block.settings.svg == blank %}
-                {% render 'snippet-icons', icon: 'multi-icon' %}
+                {% render 'snippet-icons', icon: block.settings.theme_icon %}
               {% else %}
                 {{ block.settings.svg }}
               {% endif %}
@@ -164,28 +166,184 @@
           "label": "Icon type",
           "options": [
             {
+              "value": "theme-icon",
+              "label": "Theme icon"
+            },
+            {
               "value": "svg",
-              "label": "svg"
+              "label": "Custom icon - svg"
             },
             {
               "value": "image",
-              "label": "Image"
+              "label": "Custom icon - png"
             }
           ],
-          "default": "svg",
-          "info": "It is recommended to use svg icons instead of jpeg/png icons to get the best quality"
+          "default": "theme-icon"
+        },
+        {
+          "type": "select",
+          "id": "theme_icon",
+          "label": "Theme icon",
+          "default": "facebook",
+          "info": "Applicable only if you choose 'Theme icon'' from the icon type dropdown",
+          "options": [
+            {
+              "group": "Shop",
+              "value": "home",
+              "label": "Home"
+            },
+            {
+              "group": "Shop",
+              "value": "account",
+              "label": "Account"
+            },
+            {
+              "group": "Shop",
+              "value": "search",
+              "label": "Search"
+            },
+            {
+              "group": "Shop",
+              "value": "cart",
+              "label": "Cart"
+            },
+            {
+              "group": "Communication",
+              "value": "phone",
+              "label": "Phone"
+            },
+            {
+              "group": "Communication",
+              "value": "email",
+              "label": "Email"
+            },
+            {
+              "group": "Communication",
+              "value": "contact",
+              "label": "Contact"
+            },
+            {
+              "group": "Communication",
+              "value": "support",
+              "label": "Support"
+            },
+            {
+              "group": "Shipping",
+              "value": "box",
+              "label": "Box"
+            },
+            {
+              "group": "Shipping",
+              "value": "location",
+              "label": "Location"
+            },
+            {
+              "group": "Shipping",
+              "value": "map",
+              "label": "Map"
+            },
+            {
+              "group": "Trust",
+              "value": "badge",
+              "label": "Badge"
+            },
+            {
+              "group": "Trust",
+              "value": "shield",
+              "label": "Shield"
+            },
+            {
+              "group": "Trust",
+              "value": "review",
+              "label": "Review"
+            },
+            {
+              "group": "Others",
+              "value": "star",
+              "label": "Star"
+            },
+            {
+              "group": "Others",
+              "value": "play",
+              "label": "Play"
+            },
+            {
+              "group": "Others",
+              "value": "checkmark",
+              "label": "Checkmark"
+            },
+            {
+              "group": "Others",
+              "value": "prohibition",
+              "label": "Prohibition"
+            },
+            {
+              "group": "Others",
+              "value": "warning",
+              "label": "Warning"
+            },
+            {
+              "group": "Social",
+              "value": "share",
+              "label": "Share"
+            },
+            {
+              "group": "Social",
+              "value": "facebook",
+              "label": "Facebook"
+            },
+            {
+              "group": "Social",
+              "value": "instagram",
+              "label": "Instagram"
+            },
+            {
+              "group": "Social",
+              "value": "twitter",
+              "label": "Twitter"
+            },
+            {
+              "group": "Social",
+              "value": "pinterest",
+              "label": "Pinterest"
+            },
+            {
+              "group": "Social",
+              "value": "tiktok",
+              "label": "Tiktok"
+            },
+            {
+              "group": "Social",
+              "value": "snapchat",
+              "label": "Snapchat"
+            },
+            {
+              "group": "Social",
+              "value": "youtube",
+              "label": "Youtube"
+            },
+            {
+              "group": "Social",
+              "value": "vimeo",
+              "label": "Vimeo"
+            }
+          ]
         },
         {
           "type": "liquid",
           "id": "svg",
-          "label": "Icon - svg",
-          "info": "Applicable only if icon type is svg"
+          "label": "Custom icon - svg",
+          "info": "Applicable only if you choose 'Custom icon - svg' from the icon type dropdown"
         },
         {
           "type": "image_picker",
           "id": "image",
-          "label": "Icon - image",
-          "info": "Applicable only if icon type is image"
+          "label": "Custom icon - png",
+          "info": "Applicable only if you choose 'Custom icon - png' from the icon type dropdown"
+        },
+        {
+          "type": "header",
+          "content": "Style"
         },
         {
           "type": "text",
