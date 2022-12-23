@@ -29,8 +29,14 @@
 }
 
 .video-with-text__media,
-.video-with-text__content {
-	padding: 2rem;
+.video-with-text__box {
+	padding: 1rem;
+}
+@media screen and (min-width: 750px) {
+	.video-with-text__media,
+	.video-with-text__box {
+		padding: 2rem;
+	}
 }
 
 @media screen and (min-width: 750px) {

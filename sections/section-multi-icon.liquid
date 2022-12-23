@@ -21,7 +21,7 @@
   }
 
   .{{ section.id }}.multi-icon > .slider-component > .slides-container > .slide > .item {
-    aspect-ratio: {{ section.settings.aspect_ratio }};
+    aspect-ratio: 1;
   }
 
   .{{ section.id }}.multi-icon {
@@ -162,43 +162,33 @@
     },
     {
       "type": "range",
-      "id": "aspect_ratio",
-      "min": 0.5,
-      "max": 2,
-      "step": 0.1,
-      "unit": "a/r",
-      "label": "Aspect ratio",
-      "default": 1
-    },
-    {
-      "type": "range",
       "id": "mobile_items",
       "min": 2,
-      "max": 4,
+      "max": 6,
       "step": 1,
       "unit": "n",
       "label": "Items per row in mobile",
-      "default": 3
+      "default": 4
     },
     {
       "type": "range",
       "id": "tablet_items",
       "min": 3,
-      "max": 6,
+      "max": 8,
       "step": 1,
       "unit": "n",
       "label": "Items per row in tablet",
-      "default": 5
+      "default": 6
     },
     {
       "type": "range",
       "id": "desktop_items",
-      "min": 3,
-      "max": 8,
+      "min": 6,
+      "max": 14,
       "step": 1,
       "unit": "n",
       "label": "Items per row in desktop",
-      "default": 8
+      "default": 12
     },
     {
       "type": "header",
