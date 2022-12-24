@@ -425,14 +425,18 @@
                 </div>
               {% when 'trust_bar' %}
                 <div class="product-page__trust-bar" {{ block.shopify_attributes }}>
-                  <a
+                  <a 
                     {% if block.settings.trust_icon_1_link != blank %}
                       href="{{ block.settings.trust_icon_1_link }}"
                     {% endif %}
                     class="product-page__trust-badge"
                   >
                     <div class="product-page__trust-icon">
-                      {{ block.settings.trust_icon_1_svg }}
+                      {% if block.settings.trust_icon_1_svg  == blank %}
+                         {% render 'snippet-icons', icon: block.settings.theme_icon_1 %}
+                      {% else %}
+                        {{ block.settings.trust_icon_1_svg }}
+                      {% endif %}
                     </div>
                     <p class="product-page__trust-text {% if block.settings.trust_icon_1_link != blank %}underline{% endif %}">
                       {{ block.settings.trust_icon_1_text }}
@@ -445,7 +449,11 @@
                     class="product-page__trust-badge"
                   >
                     <div class="product-page__trust-icon">
-                      {{ block.settings.trust_icon_2_svg }}
+                      {% if block.settings.trust_icon_2_svg  == blank %}
+                         {% render 'snippet-icons', icon: block.settings.theme_icon_2 %}
+                      {% else %}
+                        {{ block.settings.trust_icon_2_svg }}
+                      {% endif %}
                     </div>
                     <p class="product-page__trust-text {% if block.settings.trust_icon_2_link != blank %}underline{% endif %}">
                       {{ block.settings.trust_icon_2_text }}
@@ -458,7 +466,11 @@
                     class="product-page__trust-badge"
                   >
                     <div class="product-page__trust-icon">
-                      {{ block.settings.trust_icon_3_svg }}
+                      {% if block.settings.trust_icon_3_svg  == blank %}
+                         {% render 'snippet-icons', icon: block.settings.theme_icon_3 %}
+                      {% else %}
+                        {{ block.settings.trust_icon_3_svg }}
+                      {% endif %}
                     </div>
                     <p class="product-page__trust-text {% if block.settings.trust_icon_3_link != blank %}underline{% endif %}">
                       {{ block.settings.trust_icon_3_text }}
@@ -959,52 +971,511 @@
       "limit": 1,
       "settings": [
         {
-          "type": "liquid",
-          "id": "trust_icon_1_svg",
-          "label": "First trust icon SVG"
+          "type": "header",
+          "content": "Trust icon 1"
         },
         {
           "type": "text",
           "id": "trust_icon_1_text",
-          "label": "First trust icon text",
+          "label": "Text",
           "default": "Free shipping"
         },
         {
           "type": "url",
           "id": "trust_icon_1_link",
-          "label": "First trust icon link"
+          "label": "Link"
+        },
+                {
+          "type": "select",
+          "id": "theme_icon_1",
+          "label": "Icon",
+          "default": "box",
+          "info": "Applicable only if 'Custom icon - svg' is empty",
+          "options": [
+            {
+              "group": "Shop",
+              "value": "home",
+              "label": "Home"
+            },
+            {
+              "group": "Shop",
+              "value": "account",
+              "label": "Account"
+            },
+            {
+              "group": "Shop",
+              "value": "search",
+              "label": "Search"
+            },
+            {
+              "group": "Shop",
+              "value": "cart",
+              "label": "Cart"
+            },
+            {
+              "group": "Communication",
+              "value": "phone",
+              "label": "Phone"
+            },
+            {
+              "group": "Communication",
+              "value": "email",
+              "label": "Email"
+            },
+            {
+              "group": "Communication",
+              "value": "contact",
+              "label": "Contact"
+            },
+            {
+              "group": "Communication",
+              "value": "support",
+              "label": "Support"
+            },
+            {
+              "group": "Shipping",
+              "value": "box",
+              "label": "Box"
+            },
+            {
+              "group": "Shipping",
+              "value": "location",
+              "label": "Location"
+            },
+            {
+              "group": "Shipping",
+              "value": "map",
+              "label": "Map"
+            },
+            {
+              "group": "Trust",
+              "value": "badge",
+              "label": "Badge"
+            },
+            {
+              "group": "Trust",
+              "value": "shield",
+              "label": "Shield"
+            },
+            {
+              "group": "Trust",
+              "value": "review",
+              "label": "Review"
+            },
+            {
+              "group": "Others",
+              "value": "star",
+              "label": "Star"
+            },
+            {
+              "group": "Others",
+              "value": "play",
+              "label": "Play"
+            },
+            {
+              "group": "Others",
+              "value": "checkmark",
+              "label": "Checkmark"
+            },
+            {
+              "group": "Others",
+              "value": "prohibition",
+              "label": "Prohibition"
+            },
+            {
+              "group": "Others",
+              "value": "warning",
+              "label": "Warning"
+            },
+            {
+              "group": "Social",
+              "value": "share",
+              "label": "Share"
+            },
+            {
+              "group": "Social",
+              "value": "facebook",
+              "label": "Facebook"
+            },
+            {
+              "group": "Social",
+              "value": "instagram",
+              "label": "Instagram"
+            },
+            {
+              "group": "Social",
+              "value": "twitter",
+              "label": "Twitter"
+            },
+            {
+              "group": "Social",
+              "value": "pinterest",
+              "label": "Pinterest"
+            },
+            {
+              "group": "Social",
+              "value": "tiktok",
+              "label": "Tiktok"
+            },
+            {
+              "group": "Social",
+              "value": "snapchat",
+              "label": "Snapchat"
+            },
+            {
+              "group": "Social",
+              "value": "youtube",
+              "label": "Youtube"
+            },
+            {
+              "group": "Social",
+              "value": "vimeo",
+              "label": "Vimeo"
+            }
+          ]
         },
         {
           "type": "liquid",
-          "id": "trust_icon_2_svg",
-          "label": "Second trust icon SVG"
+          "id": "trust_icon_1_svg",
+          "label": "Custom icon - svg"
+        },
+       {
+          "type": "header",
+          "content": "Trust icon 2"
         },
         {
           "type": "text",
           "id": "trust_icon_2_text",
-          "label": "Second trust icon text",
+          "label": "Text",
           "default": "30-day money back guarantee"
         },
         {
           "type": "url",
           "id": "trust_icon_2_link",
-          "label": "Second trust icon link"
+          "label": "Link"
+        },
+        {
+          "type": "select",
+          "id": "theme_icon_2",
+          "label": "Icon",
+          "default": "badge",
+          "info": "Applicable only if 'Custom icon - svg' is empty",
+          "options": [
+            {
+              "group": "Shop",
+              "value": "home",
+              "label": "Home"
+            },
+            {
+              "group": "Shop",
+              "value": "account",
+              "label": "Account"
+            },
+            {
+              "group": "Shop",
+              "value": "search",
+              "label": "Search"
+            },
+            {
+              "group": "Shop",
+              "value": "cart",
+              "label": "Cart"
+            },
+            {
+              "group": "Communication",
+              "value": "phone",
+              "label": "Phone"
+            },
+            {
+              "group": "Communication",
+              "value": "email",
+              "label": "Email"
+            },
+            {
+              "group": "Communication",
+              "value": "contact",
+              "label": "Contact"
+            },
+            {
+              "group": "Communication",
+              "value": "support",
+              "label": "Support"
+            },
+            {
+              "group": "Shipping",
+              "value": "box",
+              "label": "Box"
+            },
+            {
+              "group": "Shipping",
+              "value": "location",
+              "label": "Location"
+            },
+            {
+              "group": "Shipping",
+              "value": "map",
+              "label": "Map"
+            },
+            {
+              "group": "Trust",
+              "value": "badge",
+              "label": "Badge"
+            },
+            {
+              "group": "Trust",
+              "value": "shield",
+              "label": "Shield"
+            },
+            {
+              "group": "Trust",
+              "value": "review",
+              "label": "Review"
+            },
+            {
+              "group": "Others",
+              "value": "star",
+              "label": "Star"
+            },
+            {
+              "group": "Others",
+              "value": "play",
+              "label": "Play"
+            },
+            {
+              "group": "Others",
+              "value": "checkmark",
+              "label": "Checkmark"
+            },
+            {
+              "group": "Others",
+              "value": "prohibition",
+              "label": "Prohibition"
+            },
+            {
+              "group": "Others",
+              "value": "warning",
+              "label": "Warning"
+            },
+            {
+              "group": "Social",
+              "value": "share",
+              "label": "Share"
+            },
+            {
+              "group": "Social",
+              "value": "facebook",
+              "label": "Facebook"
+            },
+            {
+              "group": "Social",
+              "value": "instagram",
+              "label": "Instagram"
+            },
+            {
+              "group": "Social",
+              "value": "twitter",
+              "label": "Twitter"
+            },
+            {
+              "group": "Social",
+              "value": "pinterest",
+              "label": "Pinterest"
+            },
+            {
+              "group": "Social",
+              "value": "tiktok",
+              "label": "Tiktok"
+            },
+            {
+              "group": "Social",
+              "value": "snapchat",
+              "label": "Snapchat"
+            },
+            {
+              "group": "Social",
+              "value": "youtube",
+              "label": "Youtube"
+            },
+            {
+              "group": "Social",
+              "value": "vimeo",
+              "label": "Vimeo"
+            }
+          ]
         },
         {
           "type": "liquid",
-          "id": "trust_icon_3_svg",
-          "label": "Third trust icon SVG"
+          "id": "trust_icon_2_svg",
+          "label": "Custom icon - svg"
+        },
+        {
+          "type": "header",
+          "content": "Trust icon 3"
         },
         {
           "type": "text",
           "id": "trust_icon_3_text",
-          "label": "Third trust icon text",
+          "label": "Text",
           "default": "24/7 customer support"
         },
         {
           "type": "url",
           "id": "trust_icon_3_link",
-          "label": "Third trust icon link"
+          "label": "Link"
+        },
+        {
+          "type": "select",
+          "id": "theme_icon_3",
+          "label": "Icon",
+          "default": "contact",
+          "info": "Applicable only if 'Custom icon - svg' is empty",
+          "options": [
+            {
+              "group": "Shop",
+              "value": "home",
+              "label": "Home"
+            },
+            {
+              "group": "Shop",
+              "value": "account",
+              "label": "Account"
+            },
+            {
+              "group": "Shop",
+              "value": "search",
+              "label": "Search"
+            },
+            {
+              "group": "Shop",
+              "value": "cart",
+              "label": "Cart"
+            },
+            {
+              "group": "Communication",
+              "value": "phone",
+              "label": "Phone"
+            },
+            {
+              "group": "Communication",
+              "value": "email",
+              "label": "Email"
+            },
+            {
+              "group": "Communication",
+              "value": "contact",
+              "label": "Contact"
+            },
+            {
+              "group": "Communication",
+              "value": "support",
+              "label": "Support"
+            },
+            {
+              "group": "Shipping",
+              "value": "box",
+              "label": "Box"
+            },
+            {
+              "group": "Shipping",
+              "value": "location",
+              "label": "Location"
+            },
+            {
+              "group": "Shipping",
+              "value": "map",
+              "label": "Map"
+            },
+            {
+              "group": "Trust",
+              "value": "badge",
+              "label": "Badge"
+            },
+            {
+              "group": "Trust",
+              "value": "shield",
+              "label": "Shield"
+            },
+            {
+              "group": "Trust",
+              "value": "review",
+              "label": "Review"
+            },
+            {
+              "group": "Others",
+              "value": "star",
+              "label": "Star"
+            },
+            {
+              "group": "Others",
+              "value": "play",
+              "label": "Play"
+            },
+            {
+              "group": "Others",
+              "value": "checkmark",
+              "label": "Checkmark"
+            },
+            {
+              "group": "Others",
+              "value": "prohibition",
+              "label": "Prohibition"
+            },
+            {
+              "group": "Others",
+              "value": "warning",
+              "label": "Warning"
+            },
+            {
+              "group": "Social",
+              "value": "share",
+              "label": "Share"
+            },
+            {
+              "group": "Social",
+              "value": "facebook",
+              "label": "Facebook"
+            },
+            {
+              "group": "Social",
+              "value": "instagram",
+              "label": "Instagram"
+            },
+            {
+              "group": "Social",
+              "value": "twitter",
+              "label": "Twitter"
+            },
+            {
+              "group": "Social",
+              "value": "pinterest",
+              "label": "Pinterest"
+            },
+            {
+              "group": "Social",
+              "value": "tiktok",
+              "label": "Tiktok"
+            },
+            {
+              "group": "Social",
+              "value": "snapchat",
+              "label": "Snapchat"
+            },
+            {
+              "group": "Social",
+              "value": "youtube",
+              "label": "Youtube"
+            },
+            {
+              "group": "Social",
+              "value": "vimeo",
+              "label": "Vimeo"
+            }
+          ]
+        },
+        {
+          "type": "liquid",
+          "id": "trust_icon_3_svg",
+          "label": "Custom icon - svg"
         }
       ]
     },
