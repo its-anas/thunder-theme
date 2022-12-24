@@ -135,12 +135,16 @@ class ProductPage extends HTMLElement {
 		let addToCartButton = this.querySelector("#add-to-cart-button");
 		let pageProductVariantsNumber = parseInt(addToCartButton.dataset.variantsNumber);
 		addToCartButton.addEventListener("click", (event) => {
+			let buttonText = addToCartButton.innerHTML;
+			// addToCartButton.innerHTML = `<div class="loading-spinner"> <svg viewBox="25 25 50 50"> <circle cx="50" cy="50" r="20"></circle> </svg> </div>`;
 			if (cartType === "drawer") {
 				event.preventDefault();
 			}
 			let variantId = pageProductVariantsNumber > 1 ? document.querySelector(".product-page__hidden-variants #product-select option[selected]").value : addToCartButton.dataset.actualVariant;
 			let quantity = document.querySelector(".product-page__form .quantity-field__input").value;
-			sendToCart(variantId, quantity);
+			sendToCart(variantId, quantity).then(() => {
+				addToCartButton.innerHTML = buttonText;
+			});
 		});
 
 		function announceSoldout(inventory) {

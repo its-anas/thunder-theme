@@ -21,6 +21,8 @@ function unlockPage() {
 	document.querySelector(".theme-overlay").classList.add("hidden");
 }
 
+updateCartDrawer();
+
 // ANCHOR: Slider component
 
 class SliderComponent extends HTMLElement {
@@ -435,13 +437,13 @@ class MenuDrawerComponent extends HTMLElement {
 		this.decideDrawerAction();
 	}
 
-	showDrawer() {
+	showMenuDrawer() {
 		this.classList.remove("hidden");
 		this.classList.add("active");
 		lockPage();
 	}
 
-	hideDrawer() {
+	hideMenuDrawer() {
 		unlockPage();
 
 		this.classList.remove("active");
@@ -471,20 +473,20 @@ class MenuDrawerComponent extends HTMLElement {
 
 		document.querySelector(".header__icons-drawer").addEventListener("click", () => {
 			if (this.classList.contains("hidden")) {
-				this.showDrawer();
+				this.showMenuDrawer();
 			} else if (this.classList.contains("active")) {
-				this.hideDrawer();
+				this.hideMenuDrawer();
 			}
 		});
 
 		document.querySelector(".theme-overlay").addEventListener("click", () => {
 			if (this.classList.contains("active")) {
-				this.hideDrawer();
+				this.hideMenuDrawer();
 			}
 		});
 
 		this.closeIcon.addEventListener("click", () => {
-			this.hideDrawer();
+			this.hideMenuDrawer();
 		});
 
 		if (Shopify.designMode) {
@@ -492,7 +494,7 @@ class MenuDrawerComponent extends HTMLElement {
 				event.target.classList.forEach((i) => {
 					this.style.height = `calc(100% - ${document.querySelector(".header-section").offsetHeight}px + 8px)`;
 					if (i === "main-header") {
-						this.showDrawer();
+						this.showMenuDrawer();
 					}
 				});
 			});
@@ -501,7 +503,7 @@ class MenuDrawerComponent extends HTMLElement {
 				event.target.classList.forEach((i) => {
 					this.style.height = `calc(100% - ${document.querySelector(".header-section").offsetHeight}px + 8px)`;
 					if (i === "main-header") {
-						this.showDrawer();
+						this.showMenuDrawer();
 					}
 				});
 			});
@@ -509,7 +511,7 @@ class MenuDrawerComponent extends HTMLElement {
 			document.addEventListener("shopify:section:deselect", (event) => {
 				event.target.classList.forEach((i) => {
 					if (i === "main-header") {
-						this.hideDrawer();
+						this.hideMenuDrawer();
 					}
 				});
 			});
@@ -583,7 +585,9 @@ async function sendToCart(itemId, quantity) {
 	})
 		.then((response) => {
 			if (cartType === "drawer" && !window.location.pathname.includes("/cart")) {
-				showDrawer();
+				updateCartDrawer().then(() => {
+					showCartDrawer();
+				});
 			} else {
 				window.location.assign(window.Shopify.routes.root + "cart").then(() => {
 					window.location.reload();
@@ -596,33 +600,59 @@ async function sendToCart(itemId, quantity) {
 		});
 }
 
-function showDrawer() {
-	updateCartDrawer().then(() => {
-		setCartState().then(() => {
-			if (document.querySelector("cart-component").classList.contains("hidden")) {
-				injectCartDrawerRecommendedProducts();
-				lockPage();
-			}
+function showCartDrawer() {
+	document.querySelector("cart-component").classList.remove("hidden");
+	document.querySelector("cart-component").classList.add("active");
+	lockPage();
 
-			document.querySelector("cart-component").classList.remove("hidden");
-			document.querySelector("cart-component").classList.add("active");
-		});
-	});
+	setTimeout(() => {
+		if (document.querySelector(".cart-drawer__products-list").childElementCount > 0) {
+			showRecommendedDrawer();
+		}
+	}, 300);
+}
+
+function showRecommendedDrawer() {
+	document.querySelector(".recommended-products.desktop-only").classList.add("active");
+}
+
+function hideRecommendedDrawer() {
+	document.querySelector(".recommended-products.desktop-only").classList.remove("active");
 }
 
 async function updateCartDrawer() {
 	await fetch("/cart.js")
 		.then((resp) => resp.json())
 		.then((data) => {
-			setCartState();
+			let cartItemsCount = data.items.length;
 			let itemList = [];
 
 			if (data.item_count === 0) {
+				document.querySelector(".cart-drawer__products").classList.remove("show");
+				document.querySelector(".cart-drawer__products").classList.add("hide");
+				document.querySelector(".cart-drawer__interaction--filled").classList.remove("show");
+				document.querySelector(".cart-drawer__interaction--filled").classList.add("hide");
+				document.querySelector(".free-shipping-reminder").classList.remove("show");
+				document.querySelector(".free-shipping-reminder").classList.add("hide");
+				document.querySelector(".cart-drawer__interaction--empty").classList.remove("hide");
+				document.querySelector(".cart-drawer__interaction--empty").classList.add("show");
+				updateFreeShippingBar(data.total_price);
+
 				document.getElementById("header__icons-cart__item-count").classList.add("hidden");
 				setTimeout(() => {
 					document.getElementById("header__icons-cart__item-count").innerHTML = data.item_count;
 				}, 500);
+				hideRecommendedDrawer();
 			} else if (data.item_count > 0) {
+				updateFreeShippingBar(data.total_price);
+				document.querySelector(".cart-drawer__interaction--empty").classList.remove("show");
+				document.querySelector(".cart-drawer__interaction--empty").classList.add("hide");
+				document.querySelector(".cart-drawer__products").classList.remove("hide");
+				document.querySelector(".cart-drawer__products").classList.add("show");
+				document.querySelector(".cart-drawer__interaction--filled").classList.remove("hide");
+				document.querySelector(".cart-drawer__interaction--filled").classList.add("show");
+				document.querySelector(".free-shipping-reminder").classList.remove("hide");
+				document.querySelector(".free-shipping-reminder").classList.add("show");
 				document.getElementById("header__icons-cart__item-count").innerHTML = data.item_count;
 				document.getElementById("header__icons-cart__item-count").classList.remove("hidden");
 			}
@@ -674,6 +704,9 @@ async function updateCartDrawer() {
 			itemList.forEach((item) => {
 				document.querySelector(".cart-drawer__products-list").innerHTML += item;
 			});
+
+			addCartRecommendedProducts(data.items);
+
 			document.querySelectorAll(".cart-drawer__interaction .cart-drawer__interaction--filled .buttons .button").forEach((button, index) => {
 				let buttonText = button.innerHTML.includes("- ") ? button.innerHTML.split("- ")[0] : button.innerHTML;
 				if (index === 0) {
@@ -686,7 +719,6 @@ async function updateCartDrawer() {
 				let variantId = icon.parentNode.getAttribute("data-variant-id");
 				icon.addEventListener("click", () => {
 					updateCartQuantity(variantId, 0).then(updateCartDrawer);
-					setCartState();
 				});
 			});
 			document.querySelectorAll(".quantity-field.cart").forEach((field) => {
@@ -698,42 +730,6 @@ async function updateCartDrawer() {
 					updateCartQuantity(variantId, quantity).then(updateCartDrawer);
 				});
 			});
-		});
-}
-
-async function setCartState() {
-	await fetch("/cart.js")
-		.then((resp) => resp.json())
-		.then((data) => {
-			let cartItemsCount = data.items.length;
-			if (cartItemsCount === 0) {
-				if (document.querySelector(".recommended-products.desktop-only")) {
-					document.querySelector(".recommended-products.desktop-only").classList.remove("active");
-				}
-				document.querySelector(".cart-drawer__products").classList.remove("show");
-				document.querySelector(".cart-drawer__products").classList.add("hide");
-				document.querySelector(".cart-drawer__interaction--filled").classList.remove("show");
-				document.querySelector(".cart-drawer__interaction--filled").classList.add("hide");
-				document.querySelector(".free-shipping-reminder").classList.remove("show");
-				document.querySelector(".free-shipping-reminder").classList.add("hide");
-
-				document.querySelector(".cart-drawer__interaction--empty").classList.remove("hide");
-				document.querySelector(".cart-drawer__interaction--empty").classList.add("show");
-
-				updateFreeShippingBar(data.total_price);
-			} else if (cartItemsCount > 0) {
-				updateFreeShippingBar(data.total_price);
-
-				document.querySelector(".cart-drawer__interaction--empty").classList.remove("show");
-				document.querySelector(".cart-drawer__interaction--empty").classList.add("hide");
-
-				document.querySelector(".cart-drawer__products").classList.remove("hide");
-				document.querySelector(".cart-drawer__products").classList.add("show");
-				document.querySelector(".cart-drawer__interaction--filled").classList.remove("hide");
-				document.querySelector(".cart-drawer__interaction--filled").classList.add("show");
-				document.querySelector(".free-shipping-reminder").classList.remove("hide");
-				document.querySelector(".free-shipping-reminder").classList.add("show");
-			}
 		});
 }
 
@@ -810,29 +806,6 @@ function updateFreeShippingBar(cartAmount) {
 			<div class="free-shipping-reminder__bar__inside ${barCssClass}" > </div>
 		</div>
 	`;
-	}
-}
-
-function injectCartDrawerRecommendedProducts() {
-	fetch("/cart.js")
-		.then((resp) => resp.json())
-		.then((data) => {
-			addCartRecommendedProducts(data.items);
-		});
-}
-
-const targetNode = document.querySelector(".recommended-products.desktop-only");
-const config = { childList: true, subtree: true };
-const observer = new MutationObserver(callback);
-observer.observe(targetNode, config);
-
-function callback(mutationList, observer) {
-	for (const mutation of mutationList) {
-		if (mutation.addedNodes.length > 0) {
-			if (document.querySelector(".recommended-products.desktop-only")) {
-				document.querySelector(".recommended-products.desktop-only").classList.add("active");
-			}
-		}
 	}
 }
 
@@ -993,15 +966,13 @@ class CartComponent extends HTMLElement {
 		this.decideDrawerAction();
 	}
 
-	hideDrawer() {
+	hideCartDrawer() {
 		unlockPage();
 
 		this.classList.remove("active");
 		this.classList.add("hidden");
 
-		if (document.querySelector(".recommended-products.desktop-only")) {
-			document.querySelector(".recommended-products.desktop-only").classList.remove("active");
-		}
+		hideRecommendedDrawer();
 	}
 
 	decideDrawerAction() {
@@ -1021,9 +992,9 @@ class CartComponent extends HTMLElement {
 		if (document.querySelector(".header__icons-cart").getAttribute("for") === "drawer" && !window.location.pathname.includes("/cart")) {
 			document.querySelector(".header__icons-cart").addEventListener("click", () => {
 				if (this.classList.contains("hidden")) {
-					showDrawer();
+					showCartDrawer();
 				} else if (this.classList.contains("active")) {
-					this.hideDrawer();
+					this.hideCartDrawer();
 				}
 			});
 
@@ -1031,21 +1002,18 @@ class CartComponent extends HTMLElement {
 				if ((document.querySelector("cart-component").classList.contains("active") && document.querySelector(".header__icons-search").contains(event.target)) || (document.querySelector("cart-component").classList.contains("active") && document.querySelector(".header__icons-drawer").contains(event.target))) {
 					this.classList.remove("active");
 					this.classList.add("hidden");
-
-					if (document.querySelector(".recommended-products.desktop-only")) {
-						document.querySelector(".recommended-products.desktop-only").classList.remove("active");
-					}
+					hideRecommendedDrawer();
 				}
 			});
 
 			document.querySelector(".theme-overlay").addEventListener("click", () => {
 				if (this.classList.contains("active")) {
-					this.hideDrawer();
+					this.hideCartDrawer();
 				}
 			});
 
 			this.closeIcon.addEventListener("click", () => {
-				this.hideDrawer();
+				this.hideCartDrawer();
 			});
 
 			if (Shopify.designMode) {
@@ -1054,7 +1022,7 @@ class CartComponent extends HTMLElement {
 						this.style.height = `calc(100% - ${document.querySelector(".header-section").offsetHeight}px + 8px)`;
 
 						if (i === "main-cart-drawer") {
-							showDrawer();
+							showCartDrawer();
 						}
 					});
 				});
@@ -1064,7 +1032,7 @@ class CartComponent extends HTMLElement {
 						this.style.height = `calc(100% - ${document.querySelector(".header-section").offsetHeight}px + 8px)`;
 
 						if (i === "main-cart-drawer") {
-							showDrawer();
+							showCartDrawer();
 						}
 					});
 				});
@@ -1072,7 +1040,7 @@ class CartComponent extends HTMLElement {
 				document.addEventListener("shopify:section:deselect", (event) => {
 					event.target.classList.forEach((i) => {
 						if (i === "main-cart-drawer") {
-							this.hideDrawer();
+							this.hideCartDrawer();
 						}
 					});
 				});
@@ -1126,7 +1094,9 @@ class QuickView extends HTMLElement {
 	}
 
 	showQuickView() {
-		this.querySelector(".quick-view .quantity-field__input").value = 1;
+		if (this.querySelector(".quick-view .quantity-field__input")) {
+			this.querySelector(".quick-view .quantity-field__input").value = 1;
+		}
 		document.querySelector("quick-view-component").style.height = `calc(100% - ${document.querySelector(".header-section").offsetHeight}px +  0.5rem)`;
 		document.querySelector("quick-view-component").style.marginTop = `calc(${document.querySelector(".header-section").offsetHeight}px -  0.5rem)`;
 		let headerSize = document.querySelector(".header-section").offsetHeight;

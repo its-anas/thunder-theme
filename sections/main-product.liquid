@@ -410,7 +410,8 @@
                 <div class="product-page__buttons buttons buttons--center" {{ block.shopify_attributes }}>    
                    <button type='submit' name='add' value='Add to cart' class='button button--primary border add-to-cart-button' id='add-to-cart-button' data-variants-number="{{ product.variants.size }}" data-actual-variant="{{ product.selected_or_first_available_variant.id }}"> 
                     <span></span> <span></span> <span></span> <span></span>
-                    ADD TO CART 
+                    ADD TO CART  
+
                   </button>
                   {% if block.settings.show_buy_now == true %}
                   <div class="dynamic-buy-button" id="dynamic-buy-button">
