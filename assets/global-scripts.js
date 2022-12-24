@@ -562,7 +562,7 @@ customElements.define("menu-mobile", MenuMobile);
 
 // ANCHOR: Cart drawer
 
-function sendToCart(itemId, quantity) {
+async function sendToCart(itemId, quantity) {
 	let variantId = parseInt(itemId);
 
 	let formData = {
@@ -574,7 +574,7 @@ function sendToCart(itemId, quantity) {
 		],
 	};
 
-	fetch(window.Shopify.routes.root + "cart/add.js", {
+	await fetch(window.Shopify.routes.root + "cart/add.js", {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
@@ -589,8 +589,6 @@ function sendToCart(itemId, quantity) {
 					window.location.reload();
 				});
 			}
-			setTimeout(() => {}, 1000);
-
 			return response.json();
 		})
 		.catch((error) => {
@@ -1088,25 +1086,25 @@ customElements.define("cart-component", CartComponent);
 // ANCHOR: Quick view
 
 function fromQuickViewToCart(selectedVariant, quantity) {
-	if (document.querySelector("cart-component").classList.contains("hidden")) {
-		unlockPage();
-	}
+	sendToCart(selectedVariant, quantity).then(() => {
+		if (document.querySelector("cart-component").classList.contains("hidden")) {
+			unlockPage();
+		}
 
-	if (document.querySelector("cart-component").classList.contains("active")) {
-		document.querySelector(".theme-overlay").classList.remove("higher-layer");
+		if (document.querySelector("cart-component").classList.contains("active")) {
+			document.querySelector(".theme-overlay").classList.remove("higher-layer");
+			setTimeout(() => {
+				document.querySelector(".header-section").classList.remove("higher-layer");
+			}, 500);
+		}
+
+		document.querySelector(".quick-view").classList.add("hidden");
+		document.querySelector(".quick-view").classList.remove("active");
+
 		setTimeout(() => {
-			document.querySelector(".header-section").classList.remove("higher-layer");
-		}, 500);
-	}
-
-	document.querySelector(".quick-view").classList.add("hidden");
-	document.querySelector(".quick-view").classList.remove("active");
-
-	sendToCart(selectedVariant, quantity);
-
-	setTimeout(() => {
-		document.querySelector("quick-view-component").style.zIndex = -1;
-	}, 300);
+			document.querySelector("quick-view-component").style.zIndex = -1;
+		}, 300);
+	});
 }
 
 class QuickView extends HTMLElement {
@@ -1128,6 +1126,7 @@ class QuickView extends HTMLElement {
 	}
 
 	showQuickView() {
+		this.querySelector(".quick-view .quantity-field__input").value = 1;
 		document.querySelector("quick-view-component").style.height = `calc(100% - ${document.querySelector(".header-section").offsetHeight}px +  0.5rem)`;
 		document.querySelector("quick-view-component").style.marginTop = `calc(${document.querySelector(".header-section").offsetHeight}px -  0.5rem)`;
 		let headerSize = document.querySelector(".header-section").offsetHeight;
@@ -1433,7 +1432,6 @@ class QuickView extends HTMLElement {
 		document.querySelector(".quick-view__price").innerHTML = `${formatMoney(selectedVariantPrice)}`;
 
 		quantity = document.querySelector(".quick-view__quantity-field .quantity-field__input").value;
-		document.getElementById("quick-view-buy-now").href = `/cart/${selectedVariant.id}:${quantity}`;
 
 		document.querySelectorAll(".quick-view__image-box img").forEach((image) => {
 			if (image.id.toString() === selectedVariant.image_id.toString()) {
@@ -1450,9 +1448,14 @@ class QuickView extends HTMLElement {
 
 		document.querySelector(".quick-view__quantity-field #quantity-field").addEventListener("click", () => {
 			quantity = document.querySelector(".quick-view__quantity-field .quantity-field__input").value;
-			document.getElementById("quick-view-buy-now").href = `/cart/${selectedVariant.id}:${quantity}`;
 			let injectedFunction = `fromQuickViewToCart(${selectedVariant.id},${quantity})`;
 			document.getElementById("quick-view-add-to-cart").setAttribute("onclick", injectedFunction);
+		});
+
+		document.getElementById("quick-view-buy-now").addEventListener("click", () => {
+			window.location.assign(window.Shopify.routes.root + `cart/${selectedVariant.id}:${quantity}`).then(() => {
+				window.location.reload();
+			});
 		});
 	}
 

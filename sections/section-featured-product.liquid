@@ -159,8 +159,8 @@
               </div>
             {% when 'buttons' %}
               <div class="featured-product__buttons buttons" {{ block.shopify_attributes }}>
-                <a class="button button--primary border" id="featured-product-add-to-cart">
-                  <span></span> <span></span> <span></span> <span></span>ADD TO CART</a
+                <button class="button button--primary border" id="featured-product-add-to-cart">
+                  <span></span> <span></span> <span></span> <span></span>ADD TO CART</button
                 >
                 {%- form 'product', featured_product -%}
                   {{ form | payment_button }}

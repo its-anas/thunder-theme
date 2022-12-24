@@ -132,9 +132,12 @@ class ProductPage extends HTMLElement {
 			cloneImages(".product-hidden-thumbnails .thumbnail", ".product-page-slider__thumbnails");
 		}
 
-		let addToCartButton = document.querySelector("#add-to-cart-button");
+		let addToCartButton = this.querySelector("#add-to-cart-button");
 		let pageProductVariantsNumber = parseInt(addToCartButton.dataset.variantsNumber);
-		addToCartButton.addEventListener("click", () => {
+		addToCartButton.addEventListener("click", (event) => {
+			if (cartType === "drawer") {
+				event.preventDefault();
+			}
 			let variantId = pageProductVariantsNumber > 1 ? document.querySelector(".product-page__hidden-variants #product-select option[selected]").value : addToCartButton.dataset.actualVariant;
 			let quantity = document.querySelector(".product-page__form .quantity-field__input").value;
 			sendToCart(variantId, quantity);
