@@ -310,6 +310,7 @@
 
 .cart-drawer .recommended-product__details .button--link {
 	font-size: var(--xsmall-font-size);
+	text-decoration: underline;
 }
 
 .cart-drawer__note-popup {

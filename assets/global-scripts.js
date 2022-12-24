@@ -864,17 +864,17 @@ function addCartRecommendedProducts(cartProducts) {
 										<div class="details">
 											<p class="product-name">${product.title}...</p>
 											<p class="price--actual">${formatMoney(product.price)}</p>
-										</div>
+										</div> 
 										<quick-view-button>
-										<div
-											class="button--link"
-											id="quick-view-button"
-											data-first-available-variant-id="${variant_first_id}"
-											data-product-handle="${handle}"
-											data-product-variants="${productWithVariants}"
-										>
-											${quickAddButtonText}
-										</div>
+											<div
+												class="button--link"
+												id="quick-view-button"
+												data-first-available-variant-id="${variant_first_id}"
+												data-product-handle="${handle}"
+												data-product-variants="${productWithVariants}"
+											>
+												${quickAddButtonText}
+											</div>
 										</quick-view-button>
 										</div>
 									</div>
@@ -894,15 +894,15 @@ function addCartRecommendedProducts(cartProducts) {
 											<p class="product-name">${product.title}...</p>
 											<p class="price--actual">${formatMoney(product.price)}</p>
 										<quick-view-button>
-										<div
-											class="button--link"
-											id="quick-view-button"
-											data-first-available-variant-id="${variant_first_id}"
-											data-product-handle="${handle}"
-											data-product-variants="${productWithVariants}"
-										>
-											${quickAddButtonText}
-										</div>
+											<div
+												class="button--link"
+												id="quick-view-button"
+												data-first-available-variant-id="${variant_first_id}"
+												data-product-handle="${handle}"
+												data-product-variants="${productWithVariants}"
+											>
+												${quickAddButtonText}
+											</div>
 										</quick-view-button>
 									</div>
 								`;
@@ -1135,7 +1135,7 @@ class QuickView extends HTMLElement {
 		document.querySelector(".quick-view").classList.remove("hidden");
 		document.querySelector(".quick-view").classList.add("active");
 
-		if (document.querySelector(".qv-icon.hide")) {
+		if (document.querySelector(".loading-spinner.active")) {
 			setTimeout(() => {
 				document.querySelectorAll(".loading-spinner.active").forEach((spinner) => {
 					spinner.classList.remove("active");
@@ -1538,6 +1538,7 @@ class QuickViewButton extends QuickView {
 		this.addEventListener("click", () => {
 			this.icon = this.querySelector("#quick-view-button");
 			this.runQuickView(this.icon);
+			this.icon.innerHTML += `<div class="loading-spinner tiny"> <svg class="mini" viewBox="25 25 50 50"> <circle stroke="var(--link-color)" cx="50" cy="50" r="20"></circle> </svg> </div>`;
 			if (document.querySelector("cart-component").classList.contains("active") && this.icon.dataset.productVariants === "with") {
 				document.querySelector(".header-section").classList.add("higher-layer");
 				setTimeout(() => {

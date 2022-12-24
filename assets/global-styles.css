@@ -893,6 +893,18 @@ button:has(.loading-spinner.active) {
 	pointer-events: none;
 }
 
+.button--link#quick-view-button {
+	display: flex;
+	flex-direction: row;
+	gap: 0.3rem;
+}
+
+.loading-spinner.tiny {
+	position: relative !important;
+	width: 15px;
+	height: 15px;
+}
+
 .loading-spinner {
 	display: none;
 	position: absolute;
@@ -1237,9 +1249,8 @@ slider-component .placeholder {
 	pointer-events: none;
 }
 
-quick-view-button .button--link {
-	text-decoration: underline;
-	/* UNFINISHED: CONTINUE HERE */
+.button--link:after {
+	content: "";
 }
 
 cart-component,
