@@ -135,16 +135,13 @@ class ProductPage extends HTMLElement {
 		let addToCartButton = this.querySelector("#add-to-cart-button");
 		let pageProductVariantsNumber = parseInt(addToCartButton.dataset.variantsNumber);
 		addToCartButton.addEventListener("click", (event) => {
-			let buttonText = addToCartButton.innerHTML;
-			// addToCartButton.innerHTML = `<div class="loading-spinner"> <svg viewBox="25 25 50 50"> <circle cx="50" cy="50" r="20"></circle> </svg> </div>`;
+			this.querySelector(".add-to-cart-button .loading-spinner").classList.add("active");
 			if (cartType === "drawer") {
 				event.preventDefault();
 			}
 			let variantId = pageProductVariantsNumber > 1 ? document.querySelector(".product-page__hidden-variants #product-select option[selected]").value : addToCartButton.dataset.actualVariant;
 			let quantity = document.querySelector(".product-page__form .quantity-field__input").value;
-			sendToCart(variantId, quantity).then(() => {
-				addToCartButton.innerHTML = buttonText;
-			});
+			sendToCart(variantId, quantity);
 		});
 
 		function announceSoldout(inventory) {
@@ -209,8 +206,11 @@ class ProductPage extends HTMLElement {
 						document.querySelector(".shopify-payment-button__more-options").innerHTML = `${document.querySelector(".shopify-payment-button__more-options").innerHTML} ${paymentMethods}`;
 						document.querySelector(".dynamic-buy-button").style.height = `${document.querySelector(".dynamic-buy-button").scrollHeight}px`;
 						document.querySelector(".dynamic-buy-button").classList.add("loaded");
-						document.querySelector(".shopify-payment-button__button").classList.add("button", "button--secondary", "border");
-						document.querySelector(".shopify-payment-button__button").innerHTML += "<span></span> <span></span> <span></span> <span></span>";
+						document.querySelector("product-page .shopify-payment-button__button").classList.add("button", "button--secondary", "border");
+						document.querySelector("product-page .shopify-payment-button__button").innerHTML += `<span></span> <span></span> <span></span> <span></span><div class="loading-spinner" style="background: var(--primary-button-background-color);"> <svg viewBox="25 25 50 50"> <circle cx="50" cy="50" r="20"></circle></svg></div>`;
+						document.querySelector("product-page .shopify-payment-button__button").addEventListener("click", () => {
+							document.querySelector("product-page .shopify-payment-button__button .loading-spinner").classList.add("active");
+						});
 						observer.disconnect();
 					}, 500);
 				}

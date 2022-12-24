@@ -785,10 +785,14 @@ button.border.button--secondary:hover {
 	}
 }
 
+a.button,
+button.button {
+	position: relative;
+}
+
 @media screen and (min-width: 750px) {
 	a.button,
 	button.button {
-		position: relative;
 		overflow: hidden;
 		text-decoration: none;
 		text-transform: uppercase;
@@ -883,12 +887,23 @@ button.border.button--secondary:hover {
 }
 
 /* ANCHOR: Loading spinner */
-/* .loading-spinner {
+:has(.loading-spinner.active) {
+	pointer-events: none;
+}
+
+.loading-spinner {
+	display: none;
+	position: absolute;
+	top: 0;
 	width: 100%;
 	height: 100%;
-	display: flex;
 	justify-content: center;
 	align-items: center;
+	pointer-events: none;
+}
+
+.loading-spinner.active {
+	display: flex;
 }
 
 .loading-spinner svg {
@@ -925,7 +940,7 @@ button.border.button--secondary:hover {
 	100% {
 		stroke-dashoffset: -125px;
 	}
-} */
+}
 
 /*  ANCHOR: Quantity field */
 .quantity {

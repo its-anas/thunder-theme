@@ -355,7 +355,6 @@
 }
 
 .product-page__tag .tag--animated {
-	color: var(--background-color);
 	font-size: var(--xsmall-font-size);
 }
 

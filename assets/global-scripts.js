@@ -587,6 +587,9 @@ async function sendToCart(itemId, quantity) {
 			if (cartType === "drawer" && !window.location.pathname.includes("/cart")) {
 				updateCartDrawer().then(() => {
 					showCartDrawer();
+					setTimeout(() => {
+						document.querySelector(".add-to-cart-button .loading-spinner").classList.remove("active");
+					}, 800);
 				});
 			} else {
 				window.location.assign(window.Shopify.routes.root + "cart").then(() => {
@@ -710,9 +713,9 @@ async function updateCartDrawer() {
 			document.querySelectorAll(".cart-drawer__interaction .cart-drawer__interaction--filled .buttons .button").forEach((button, index) => {
 				let buttonText = button.innerHTML.includes("- ") ? button.innerHTML.split("- ")[0] : button.innerHTML;
 				if (index === 0) {
-					button.innerHTML = `${buttonText} - ${data.item_count} ITEMS`;
+					button.innerHTML = `${buttonText} - ${data.item_count} ITEMS <div class="loading-spinner" style="background: var(--primary-button-background-color);"> <svg viewBox="25 25 50 50"> <circle cx="50" cy="50" r="20"></circle> </svg>`;
 				} else if (index === 1) {
-					button.innerHTML = `${buttonText} - ${formatMoney(data.total_price)}`;
+					button.innerHTML = `${buttonText} - ${formatMoney(data.total_price)} <div class="loading-spinner" style="background: var(--primary-button-background-color);"> <svg viewBox="25 25 50 50"> <circle cx="50" cy="50" r="20"></circle> </svg>`;
 				}
 			});
 			document.querySelectorAll(".cart-drawer__product__details-side .remove").forEach((icon) => {
@@ -1014,6 +1017,14 @@ class CartComponent extends HTMLElement {
 
 			this.closeIcon.addEventListener("click", () => {
 				this.hideCartDrawer();
+			});
+
+			let cartButtons = this.querySelector(".cart-drawer__interaction--filled");
+			cartButtons.querySelector("button").addEventListener("click", () => {
+				cartButtons.querySelector("button").querySelector(".loading-spinner").classList.add("active");
+			});
+			cartButtons.querySelector("a").addEventListener("click", () => {
+				cartButtons.querySelector("a").querySelector(".loading-spinner").classList.add("active");
 			});
 
 			if (Shopify.designMode) {
