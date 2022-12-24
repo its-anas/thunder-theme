@@ -563,11 +563,6 @@ customElements.define("menu-mobile", MenuMobile);
 // ANCHOR: Cart drawer
 
 function sendToCart(itemId, quantity) {
-	// if (document.querySelector("#add-to-cart-button")) {
-	// 	document.querySelector("#add-to-cart-button").classList.add("loading");
-	// }
-	showLoadingBar();
-
 	let variantId = parseInt(itemId);
 
 	let formData = {
@@ -594,9 +589,7 @@ function sendToCart(itemId, quantity) {
 					window.location.reload();
 				});
 			}
-			setTimeout(() => {
-				hideLoadingBar();
-			}, 1000);
+			setTimeout(() => {}, 1000);
 
 			return response.json();
 		})
@@ -606,24 +599,17 @@ function sendToCart(itemId, quantity) {
 }
 
 function showDrawer() {
-	updateCartDrawer()
-		.then(() => {
-			setCartState().then(() => {
-				if (document.querySelector("cart-component").classList.contains("hidden")) {
-					injectCartDrawerRecommendedProducts();
-					lockPage();
-				}
+	updateCartDrawer().then(() => {
+		setCartState().then(() => {
+			if (document.querySelector("cart-component").classList.contains("hidden")) {
+				injectCartDrawerRecommendedProducts();
+				lockPage();
+			}
 
-				document.querySelector("cart-component").classList.remove("hidden");
-				document.querySelector("cart-component").classList.add("active");
-			});
-		})
-		.then(() => {
-			// if (document.querySelector("#add-to-cart-button")) {
-			// 	document.querySelector("#add-to-cart-button").classList.remove("loading");
-			// 	document.querySelector("#add-to-cart-button").classList.add("finished");
-			// }
+			document.querySelector("cart-component").classList.remove("hidden");
+			document.querySelector("cart-component").classList.add("active");
 		});
+	});
 }
 
 async function updateCartDrawer() {
@@ -1642,20 +1628,6 @@ function matchVariant(allSelectedVariants, allAvailableVariants) {
 
 	return matchedVariant;
 }
-
-// ANCHOR: Dynamic buy now button
-
-// document.querySelector(".dynamic-buy-button").addEventListener("click", () => {
-// 	document.querySelector(".product-page__buttons .shopify-payment-button__button").classList.add("loading");
-// });
-
-// document.addEventListener("click", (e) => {
-// 	if (document.querySelector(".product-page__buttons #add-to-cart-button.finished")) {
-// 		if (!e.target.classList.contains("add-to-cart-button")) {
-// 			document.querySelector(".product-page__buttons #add-to-cart-button").classList.remove("finished");
-// 		}
-// 	}
-// });
 
 // ANCHOR: Quantity field
 

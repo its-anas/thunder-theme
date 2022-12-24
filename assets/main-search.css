@@ -194,7 +194,6 @@
 }
 
 .search__item__tag .tag-text {
-	color: var(--background-color);
 	font-size: var(--xxsmall-font-size);
 }
 
