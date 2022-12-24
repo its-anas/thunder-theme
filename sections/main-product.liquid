@@ -411,8 +411,12 @@
                    <button type='submit' name='add' value='Add to cart' class='button button--primary border add-to-cart-button' id='add-to-cart-button' data-variants-number="{{ product.variants.size }}" data-actual-variant="{{ product.selected_or_first_available_variant.id }}"> 
                     <span></span> <span></span> <span></span> <span></span>
                     ADD TO CART  
-                  <div class="loading-spinner" style="background: var(--primary-button-background-color);"> <svg viewBox="25 25 50 50"> <circle cx="50" cy="50" r="20"></circle> </svg>
-                  </button>
+                    {% render 'snippet-icons',
+                      icon: 'loading-spinner',
+                      spinner_color: 'var(--primary-button-text-color)',
+                      spinner_background_color: 'var(--primary-button-background-color)'
+                    %}
+                </button>
                   {% if block.settings.show_buy_now == true %}
                   <div class="dynamic-buy-button" id="dynamic-buy-button">
                     {{ form | payment_button }}

@@ -51,11 +51,21 @@
       <div class="quick-view__bottom buttons buttons--center">
         <div class="shadow-divider"></div>
         <button class="button button--primary border quick-view-add-to-cart" id="quick-view-add-to-cart">
-          <span></span> <span></span> <span></span> <span></span>ADD TO CART</button
-        >
+          <span></span> <span></span> <span></span> <span></span>ADD TO CART
+          {% render 'snippet-icons',
+            icon: 'loading-spinner',
+            spinner_color: 'var(--primary-button-text-color)',
+            spinner_background_color: 'var(--primary-button-background-color)'
+          %}
+        </button>
         <button class="button button--secondary border quick-view-buy-now" id="quick-view-buy-now">
-          <span></span> <span></span> <span></span> <span></span>BUY NOW</button
-        >
+          <span></span> <span></span> <span></span> <span></span>BUY NOW
+          {% render 'snippet-icons',
+            icon: 'loading-spinner',
+            spinner_color: 'var(--secondary-button-text-color)',
+            spinner_background_color: 'var(--secondary-button-background-color)'
+          %}
+        </button>
       </div>
     </div>
   </div>

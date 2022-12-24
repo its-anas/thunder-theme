@@ -587,9 +587,16 @@ async function sendToCart(itemId, quantity) {
 			if (cartType === "drawer" && !window.location.pathname.includes("/cart")) {
 				updateCartDrawer().then(() => {
 					showCartDrawer();
-					setTimeout(() => {
-						document.querySelector(".add-to-cart-button .loading-spinner").classList.remove("active");
-					}, 800);
+					document.querySelectorAll(".loading-spinner.active").forEach((spinner) => {
+						setTimeout(() => {
+							spinner.classList.remove("active");
+							if (document.querySelector(".qv-icon.hide")) {
+								document.querySelectorAll(".qv-icon").forEach((icon) => {
+									icon.classList.remove("hide");
+								});
+							}
+						}, 800);
+					});
 				});
 			} else {
 				window.location.assign(window.Shopify.routes.root + "cart").then(() => {
@@ -610,7 +617,9 @@ function showCartDrawer() {
 
 	setTimeout(() => {
 		if (document.querySelector(".cart-drawer__products-list").childElementCount > 0) {
-			showRecommendedDrawer();
+			if (document.querySelector(".recommended-products__list-container").childElementCount > 0) {
+				showRecommendedDrawer();
+			}
 		}
 	}, 300);
 }
@@ -713,9 +722,9 @@ async function updateCartDrawer() {
 			document.querySelectorAll(".cart-drawer__interaction .cart-drawer__interaction--filled .buttons .button").forEach((button, index) => {
 				let buttonText = button.innerHTML.includes("- ") ? button.innerHTML.split("- ")[0] : button.innerHTML;
 				if (index === 0) {
-					button.innerHTML = `${buttonText} - ${data.item_count} ITEMS <div class="loading-spinner" style="background: var(--primary-button-background-color);"> <svg viewBox="25 25 50 50"> <circle cx="50" cy="50" r="20"></circle> </svg>`;
+					button.innerHTML = `${buttonText} - ${data.item_count} ITEMS <div class="loading-spinner" style="background: var(--primary-button-background-color);"> <svg viewBox="25 25 50 50"> <circle stroke="var(--primary-button-text-color)" cx="50" cy="50" r="20"></circle> </svg> </div>`;
 				} else if (index === 1) {
-					button.innerHTML = `${buttonText} - ${formatMoney(data.total_price)} <div class="loading-spinner" style="background: var(--primary-button-background-color);"> <svg viewBox="25 25 50 50"> <circle cx="50" cy="50" r="20"></circle> </svg>`;
+					button.innerHTML = `${buttonText} - ${formatMoney(data.total_price)} <div class="loading-spinner" style="background: var(--secondary-button-background-color);"> <svg viewBox="25 25 50 50"> <circle stroke="var(--secondary-button-text-color)" cx="50" cy="50" r="20"></circle> </svg> </div>`;
 				}
 			});
 			document.querySelectorAll(".cart-drawer__product__details-side .remove").forEach((icon) => {
@@ -1021,10 +1030,10 @@ class CartComponent extends HTMLElement {
 
 			let cartButtons = this.querySelector(".cart-drawer__interaction--filled");
 			cartButtons.querySelector("button").addEventListener("click", () => {
-				cartButtons.querySelector("button").querySelector(".loading-spinner").classList.add("active");
+				cartButtons.querySelector("button .loading-spinner").classList.add("active");
 			});
 			cartButtons.querySelector("a").addEventListener("click", () => {
-				cartButtons.querySelector("a").querySelector(".loading-spinner").classList.add("active");
+				cartButtons.querySelector("a .loading-spinner").classList.add("active");
 			});
 
 			if (Shopify.designMode) {
@@ -1097,6 +1106,8 @@ class QuickView extends HTMLElement {
 
 		document.addEventListener("click", (event) => {
 			if (event.target.id === "quick-view-button") {
+				event.target.querySelector(".loading-spinner").classList.add("active");
+				event.target.querySelector(".qv-icon").classList.add("hide");
 				this.runQuickView(event.target);
 			}
 		});
@@ -1123,6 +1134,17 @@ class QuickView extends HTMLElement {
 		document.querySelector("quick-view-component").style.zIndex = 105;
 		document.querySelector(".quick-view").classList.remove("hidden");
 		document.querySelector(".quick-view").classList.add("active");
+
+		if (document.querySelector(".qv-icon.hide")) {
+			setTimeout(() => {
+				document.querySelectorAll(".loading-spinner.active").forEach((spinner) => {
+					spinner.classList.remove("active");
+				});
+				document.querySelectorAll(".qv-icon").forEach((icon) => {
+					icon.classList.remove("hide");
+				});
+			}, 500);
+		}
 	}
 
 	hideQuickView() {
@@ -1433,7 +1455,12 @@ class QuickView extends HTMLElement {
 			document.getElementById("quick-view-add-to-cart").setAttribute("onclick", injectedFunction);
 		});
 
+		document.getElementById("quick-view-add-to-cart").addEventListener("click", () => {
+			document.querySelector("#quick-view-add-to-cart .loading-spinner").classList.add("active");
+		});
+
 		document.getElementById("quick-view-buy-now").addEventListener("click", () => {
+			document.querySelector("#quick-view-buy-now .loading-spinner").classList.add("active");
 			window.location.assign(window.Shopify.routes.root + `cart/${selectedVariant.id}:${quantity}`).then(() => {
 				window.location.reload();
 			});
@@ -2302,6 +2329,7 @@ class FeaturedProduct extends HTMLElement {
 		this.attachShadow({ mode: "open" });
 		this.shadowRoot.innerHTML = "<slot></slot>";
 
+		let section = this.querySelector(".featured-product__container");
 		this.sectionId = this.querySelector("[data-section-id]").dataset.sectionId;
 		this.featuredProductVariantSelectorType = this.querySelector("[data-featured-product-variant-selector-type]").dataset.featuredProductVariantSelectorType;
 		this.featuredProductColorSelectorType = this.querySelector("[data-featured-product-color-selector-type]").dataset.featuredProductColorSelectorType;
@@ -2309,6 +2337,31 @@ class FeaturedProduct extends HTMLElement {
 		this.featuredProductImages = JSON.parse(localStorage.getItem(`featuredProductImages-${this.sectionId}`));
 		this.featuredProductVariants = JSON.parse(localStorage.getItem(`featuredProductVariants-${this.sectionId}`));
 		this.featuredProductOptions = JSON.parse(localStorage.getItem(`featuredProductOptions-${this.sectionId}`));
+
+		this.querySelector("#featured-product-add-to-cart").addEventListener("click", () => {
+			this.querySelector("#featured-product-add-to-cart .loading-spinner").classList.add("active");
+		});
+
+		if (this.querySelector(".featured-product__buttons")) {
+			const targetNode = this.querySelector(".featured-product__buttons");
+			const config = { childList: true, subtree: true };
+			const observer = new MutationObserver(callback);
+			observer.observe(targetNode, config);
+
+			function callback(mutationList, observer) {
+				for (const mutation of mutationList) {
+					if (mutation.type === "childList" && mutation.target.className === "shopify-payment-button" && mutation.addedNodes.length > 0) {
+						setTimeout(() => {
+							section.querySelector(".shopify-payment-button__button").innerHTML += `<span></span> <span></span> <span></span> <span></span><div class="loading-spinner" style="background: var(--secondary-button-background-color);"> <svg viewBox="25 25 50 50"> <circle stroke="var(--secondary-button-text-color)" cx="50" cy="50" r="20"></circle> </svg> </div>`;
+							section.querySelector(".shopify-payment-button__button").addEventListener("click", () => {
+								section.querySelector(".shopify-payment-button__button .loading-spinner").classList.add("active");
+							});
+							observer.disconnect();
+						}, 500);
+					}
+				}
+			}
+		}
 
 		if (Object.keys(this.featuredProductVariants).length > 1) {
 			this.addOptions();

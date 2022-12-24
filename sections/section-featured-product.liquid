@@ -83,7 +83,6 @@
             <div
               class="featured-product-slider"
               data-section-id="{{ section.id }}"
-              data-section-id="{{ section.id }}"
               data-featured-product-variant-selector-type="{{ section.settings.variant_selector_type }}"
               data-featured-product-color-selector-type="{{ section.settings.color_selector_type }}"
             >
@@ -160,8 +159,13 @@
             {% when 'buttons' %}
               <div class="featured-product__buttons buttons" {{ block.shopify_attributes }}>
                 <button class="button button--primary border" id="featured-product-add-to-cart">
-                  <span></span> <span></span> <span></span> <span></span>ADD TO CART</button
-                >
+                  <span></span> <span></span> <span></span> <span></span>ADD TO CART
+                  {% render 'snippet-icons',
+                    icon: 'loading-spinner',
+                    spinner_color: 'var(--primary-button-text-color)',
+                    spinner_background_color: 'var(--primary-button-background-color)'
+                  %}
+                </button>
                 {%- form 'product', featured_product -%}
                   {{ form | payment_button }}
                 {%- endform -%}

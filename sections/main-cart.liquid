@@ -140,6 +140,11 @@
                       >
                         <span></span> <span></span> <span></span> <span></span>
                         CHECKOUT
+                        {% render 'snippet-icons',
+                          icon: 'loading-spinner',
+                          spinner_color: 'var(--primary-button-text-color)',
+                          spinner_background_color: 'var(--primary-button-background-color)'
+                        %}
                       </button>
                     </div>
                   {%- when 'order_note' -%}
@@ -181,6 +186,12 @@
     {% endif %}
   </div>
 </div>
+
+<script>
+  document.querySelector('.cart-page__button button').addEventListener('click', () => {
+    document.querySelector('.cart-page__button button .loading-spinner').classList.add('active');
+  });
+</script>
 
 {% schema %}
 {
