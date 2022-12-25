@@ -22,8 +22,8 @@ function unlockPage() {
 }
 
 function endButtonsLoadingAnimation(timeout) {
-	if (document.querySelector(".loading-spinner.active")) {
-		setTimeout(() => {
+	setTimeout(() => {
+		if (document.querySelector(".loading-spinner.active")) {
 			document.querySelectorAll(".loading-spinner.active").forEach((spinner) => {
 				spinner.classList.remove("active");
 			});
@@ -33,8 +33,8 @@ function endButtonsLoadingAnimation(timeout) {
 				});
 			}
 			console.log("Loading animation ended");
-		}, timeout);
-	}
+		}
+	}, timeout);
 }
 
 updateCartDrawer();
