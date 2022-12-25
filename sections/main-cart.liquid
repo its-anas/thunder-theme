@@ -20,22 +20,26 @@
                   <div class="cart-page__product-details">
                     <div class="cart-page__product-picture">
                       <a href="{{ item.url }}" class="cart-drawer__product__image">
-                        {%- assign image = item.image -%}
-                        {%- assign sizes = '100vw' -%}
-                        {%- assign widths = '80, 95' -%}
-                        {%- assign width = '95' -%}
-                        {{
-                          image
-                          | image_url: width: width
-                          | image_tag:
-                            loading: 'lazy',
-                            class: 'contain',
-                            alt: image.alt,
-                            width: image.width,
-                            height: image.height,
-                            sizes: sizes,
-                            widths: widths
-                        }}
+                        {% if item.image != blank %}
+                          {%- assign image = item.image -%}
+                          {%- assign sizes = '100vw' -%}
+                          {%- assign widths = '80, 95' -%}
+                          {%- assign width = '95' -%}
+                          {{
+                            image
+                            | image_url: width: width
+                            | image_tag:
+                              loading: 'lazy',
+                              class: 'contain',
+                              alt: image.alt,
+                              width: image.width,
+                              height: image.height,
+                              sizes: sizes,
+                              widths: widths
+                          }}
+                        {% else %}
+                          {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
+                        {% endif %}
                       </a>
                     </div>
                     <div class="cart-page__product-info">

@@ -185,6 +185,8 @@
 	min-width: 75px;
 	max-width: 75px;
 	aspect-ratio: 1;
+	border-radius: var(--global-border-radius);
+	overflow: hidden;
 }
 
 @media screen and (min-width: 750px) {

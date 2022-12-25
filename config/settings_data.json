@@ -1,5 +1,6 @@
 {
   "current": {
+    "headings_font_type": "montserrat_n9",
     "heading_color": "#282828",
     "body_text_color": "#282828",
     "link_color": "#282828",
@@ -172,6 +173,7 @@
   },
   "presets": {
     "Bolt": {
+      "headings_font_type": "montserrat_n9",
       "heading_color": "#282828",
       "body_text_color": "#282828",
       "link_color": "#282828",
@@ -341,6 +343,7 @@
       }
     },
     "Thunder": {
+      "headings_font_type": "montserrat_n9",
       "heading_color": "#ffffff",
       "body_text_color": "#ffffff",
       "link_color": "#fcdb33",

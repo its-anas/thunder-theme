@@ -209,7 +209,7 @@ input::-webkit-inner-spin-button {
 .color-filter-group__list-item input:before {
 	position: absolute;
 	content: "";
-	border: 2px solid var(--secondary-background-color);
+	border: 1px solid var(--secondary-background-color);
 	top: -1px;
 	left: -1px;
 	width: calc(100% + 2px);
@@ -218,12 +218,12 @@ input::-webkit-inner-spin-button {
 }
 
 .color-filter-group__list-item input:checked:before {
-	border: 3px solid var(--background-color);
+	border: 1.5px solid var(--background-color);
 }
 
 .color-filter-group__list-item input:checked {
 	background-image: none !important;
-	border-width: 3px;
+	border-width: 2px;
 }
 
 .filter-mobile__button {

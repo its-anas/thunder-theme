@@ -156,6 +156,8 @@ quick-view-component .quick-view__radio__label {
 	cursor: pointer;
 	padding: 1rem;
 	border: 1px solid var(--secondary-text-color);
+	border-radius: var(--global-border-radius);
+	font-size: var(--xsmall-font-size);
 }
 
 @media screen and (max-width: 1024px) {
