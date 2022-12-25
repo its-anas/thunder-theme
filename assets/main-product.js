@@ -207,7 +207,7 @@ class ProductPage extends HTMLElement {
 						document.querySelector(".dynamic-buy-button").style.height = `${document.querySelector(".dynamic-buy-button").scrollHeight}px`;
 						document.querySelector(".dynamic-buy-button").classList.add("loaded");
 						document.querySelector("product-page .shopify-payment-button__button").classList.add("button", "button--secondary", "border");
-						document.querySelector("product-page .shopify-payment-button__button").innerHTML += `<span></span> <span></span> <span></span> <span></span><div class="loading-spinner" style="background: var(--secondary-button-background-color);"> <svg viewBox="25 25 50 50"> <circle stroke="var(--secondary-text-background-color)" cx="50" cy="50" r="20"></circle> </svg> </div>`;
+						document.querySelector("product-page .shopify-payment-button__button").innerHTML += `<span></span> <span></span> <span></span> <span></span><div class="loading-spinner" style="background: var(--secondary-button-background-color);"> <svg viewBox="25 25 50 50"> <circle stroke="var(--secondary-button-text-color)" cx="50" cy="50" r="20"></circle> </svg> </div>`;
 						document.querySelector("product-page .shopify-payment-button__button").addEventListener("click", () => {
 							document.querySelector("product-page .shopify-payment-button__button .loading-spinner").classList.add("active");
 						});

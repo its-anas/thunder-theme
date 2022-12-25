@@ -74,8 +74,8 @@
 }
 .compare__content_image-and-text .compare-image .quick-view-button {
 	position: absolute;
-	right: 0.1rem;
-	bottom: 0.1rem;
+	right: 0;
+	bottom: 0;
 }
 .compare__content_image-and-text .product-name {
 	text-transform: uppercase;
@@ -87,4 +87,5 @@
 .compare__content_prices {
 	display: flex;
 	flex-direction: column;
+	gap: 0.3rem;
 }

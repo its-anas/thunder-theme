@@ -192,21 +192,21 @@
                       {% endif %}
                     </p>
                   </div>
-                  <div
-                    class="button--link"
-                    id="quick-view-button"
-                    data-first-available-variant-id="{{ block.settings.product.first_available_variant.id }}"
-                    data-product-handle="{{ block.settings.product.handle }}"
-                    data-product-variants="{% if block.settings.product.variants.size > 1 %}with{% else %}without{% endif %}"
-                  >
-                    {%- if block.settings.product.variants.size == 1 -%}
-                      Add to cart
-                    {%- elsif block.settings.product.variants.size > 1 -%}
-                      Quick view
-                    {% else %}
-                      Add to cart
-                    {%- endif -%}
-                  </div>
+                  {% if block.settings.product != blank %}
+                    <div
+                      class="button--link"
+                      id="quick-view-button"
+                      data-first-available-variant-id="{{ block.settings.product.first_available_variant.id }}"
+                      data-product-handle="{{ block.settings.product.handle }}"
+                      data-product-variants="{% if block.settings.product.variants.size > 1 %}with{% else %}without{% endif %}"
+                    >
+                      {%- if block.settings.product.variants.size > 1 -%}
+                        Quick view +
+                      {% else %}
+                        Add to cart +
+                      {%- endif -%}
+                    </div>
+                  {% endif %}
                 </div>
               {%- when 'feature' -%}
                 <div class="shop-the-look__feature">

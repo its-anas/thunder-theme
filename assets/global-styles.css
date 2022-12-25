@@ -231,6 +231,10 @@ body {
 	font-style: var(--font-style);
 }
 
+th {
+	font-weight: var(--font-weight) !important;
+}
+
 h1,
 h2,
 h3,
@@ -907,19 +911,12 @@ button:has(.loading-spinner.active) {
 .button--link#quick-view-button {
 	font-size: var(--xsmall-font-size);
 	text-decoration: underline;
-	display: flex;
-	flex-direction: row;
-	gap: 0.3rem;
-}
-
-.loading-spinner.tiny {
-	position: relative !important;
-	width: 15px;
-	height: 15px;
+	width: fit-content;
 }
 
 .loading-spinner {
-	display: none;
+	opacity: 0;
+	display: flex;
 	position: absolute;
 	top: 0;
 	width: 100%;
@@ -930,7 +927,13 @@ button:has(.loading-spinner.active) {
 }
 
 .loading-spinner.active {
-	display: flex;
+	opacity: 1;
+}
+
+.loading-spinner.tiny {
+	width: 15px;
+	height: 15px;
+	right: -18px;
 }
 
 .loading-spinner svg {
@@ -1154,11 +1157,19 @@ slider-component .slider-component .slides-container .slide .item {
 	min-width: var(--item-width);
 	max-width: var(--item-width);
 	height: 100%;
+	padding: 0.2rem;
+	box-sizing: border-box;
+}
+
+@media screen and (min-width: 750px) {
+	slider-component .slider-component .slides-container .slide .item {
+		padding: 1rem;
+	}
 }
 
 slider-component .slider-component .slides-container .slide .item > * {
 	overflow: hidden;
-	max-width: 95%;
+	max-width: 100%;
 }
 
 slider-component img,

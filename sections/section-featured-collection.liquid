@@ -68,7 +68,7 @@
                   <p class="tag--normal tag-text">SAVE {{ product.compare_at_price | minus: product.price | money }}</p>
                 {% endif %}
                 <div
-                  class="quick-view-button"
+                  class="quick-view-button desktop-only"
                   id="quick-view-button"
                   data-first-available-variant-id="{{ product.first_available_variant.id }}"
                   data-product-handle="{{ product.handle }}"
@@ -116,6 +116,22 @@
                   <p class="text price--actual">{{ product.price | money }}</p>
                   <p class="text price--compare-at">{{ product.compare_at_price | money }}</p>
                 </div>
+                <quick-view-button>
+                  <div
+                    class="button--link mobile-only"
+                    id="quick-view-button"
+                    data-first-available-variant-id="{{ product.first_available_variant.id }}"
+                    data-product-handle="{{ product.handle }}"
+                    data-product-variants="{% if product.variants.size > 1 %}with{% else %}without{% endif %}"
+                  >
+                    {%- if product.variants.size > 1 -%}
+                      Quick view +
+                    {% else %}
+                      Add to cart +
+                    {%- endif -%}
+                    {% render 'snippet-icons', icon: 'loading-spinner-tiny' %}
+                  </div>
+                </quick-view-button>
               </div>
             </div>
           {% endfor %}
@@ -124,15 +140,6 @@
             <div class="item">
               <div class="featured-collection__image">
                 <p class="tag--normal tag-text">SAVE {{ product.compare_at_price | minus: product.price | money }}</p>
-                <div
-                  class="quick-view-button"
-                  id="quick-view-button"
-                  data-first-available-variant-id="{{ product.first_available_variant.id }}"
-                  data-product-handle="{{ product.handle }}"
-                  data-product-variants="{% if product.variants.size > 1 %}with{% else %}without{% endif %}"
-                >
-                  {% render 'snippet-icons', icon: 'quick-view' -%}
-                </div>
                 {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
               </div>
               <div class="featured-collection__container">
