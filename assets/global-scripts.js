@@ -21,6 +21,22 @@ function unlockPage() {
 	document.querySelector(".theme-overlay").classList.add("hidden");
 }
 
+function endButtonsLoadingAnimation(timeout) {
+	if (document.querySelector(".loading-spinner.active")) {
+		setTimeout(() => {
+			document.querySelectorAll(".loading-spinner.active").forEach((spinner) => {
+				spinner.classList.remove("active");
+			});
+			if (document.querySelector(".qv-icon.hide")) {
+				document.querySelectorAll(".qv-icon.hide").forEach((icon) => {
+					icon.classList.remove("hide");
+				});
+			}
+			console.log("Loading animation ended");
+		}, timeout);
+	}
+}
+
 updateCartDrawer();
 
 // ANCHOR: Slider component
@@ -587,16 +603,7 @@ async function sendToCart(itemId, quantity) {
 			if (cartType === "drawer" && !window.location.pathname.includes("/cart")) {
 				updateCartDrawer().then(() => {
 					showCartDrawer();
-					document.querySelectorAll(".loading-spinner.active").forEach((spinner) => {
-						setTimeout(() => {
-							spinner.classList.remove("active");
-							if (document.querySelector(".qv-icon.hide")) {
-								document.querySelectorAll(".qv-icon").forEach((icon) => {
-									icon.classList.remove("hide");
-								});
-							}
-						}, 800);
-					});
+					endButtonsLoadingAnimation(800);
 				});
 			} else {
 				window.location.assign(window.Shopify.routes.root + "cart").then(() => {
@@ -1143,16 +1150,7 @@ class QuickView extends HTMLElement {
 		document.querySelector(".quick-view").classList.remove("hidden");
 		document.querySelector(".quick-view").classList.add("active");
 
-		if (document.querySelector(".loading-spinner.active")) {
-			setTimeout(() => {
-				document.querySelectorAll(".loading-spinner.active").forEach((spinner) => {
-					spinner.classList.remove("active");
-				});
-				document.querySelectorAll(".qv-icon").forEach((icon) => {
-					icon.classList.remove("hide");
-				});
-			}, 500);
-		}
+		endButtonsLoadingAnimation(500);
 	}
 
 	hideQuickView() {
