@@ -1,20 +1,21 @@
 {{ 'main-collection.css' | asset_url | stylesheet_tag }}
 
 {% style %}
-  {% if collection.featured_image != blank and section.settings.show_collection_image == true %}
     .collection__head, .collection__head__title, .collection__head__image {
       height: {{ section.settings.section_height }}px;
+    }
+  {% if collection.featured_image != blank and section.settings.show_collection_image == true %}
+    .collection__head * {
+      color: {{ section.settings.text_color }};
     }
   {% else %}
     .collection__head {
       margin-top: 130px;
-      padding: 3rem;
+    }
+    .collection__head, .collection__head__title, .collection__head__image {
+      height: 200px;
     }
   {% endif %}
-  .collection__head * {
-    color: {{ section.settings.text_color }};
-  }
-
   .collection__item {
     width: calc(100% / {{ section.settings.products_per_row_desktop }});
   }

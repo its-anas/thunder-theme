@@ -160,9 +160,9 @@
     </div>
     <div class="footer__bottom">
       <div class="footer__localization">
-        <localization-form>
-          {% form 'localization' %}
-            {% if section.settings.show_language_selector == true %}
+        {% if section.settings.show_language_selector == true %}
+          <localization-form>
+            {% form 'localization' %}
               <div>
                 <select
                   name="language_code"
@@ -185,11 +185,11 @@
                   value="{{ localization.language.iso_code }}"
                 >
               </div>
-            {% endif %}
-          {% endform %}
-        </localization-form>
-        <localization-form>
-          {% if section.settings.show_currency_selector == true %}
+            {% endform %}
+          </localization-form>
+        {% endif %}
+        {% if section.settings.show_currency_selector == true %}
+          <localization-form>
             {%- form 'localization' -%}
               <div>
                 <select
@@ -211,8 +211,8 @@
                 <input type="hidden" id="hidden_value" name="country_code" value="{{ localization.country.iso_code }}">
               </div>
             {%- endform -%}
-          {% endif %}
-        </localization-form>
+          </localization-form>
+        {% endif %}
       </div>
 
       <div class="footer__payment-methods">

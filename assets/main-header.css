@@ -1,7 +1,7 @@
 .loading-bar {
 	width: 0%;
-	height: 3px;
-	background-color: #355bf8;
+	height: 5px;
+	background-color: var(--body-text-color);
 	position: fixed;
 	z-index: 200;
 	top: 0;
