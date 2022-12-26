@@ -2949,3 +2949,21 @@ class FeaturedProductSlider extends FeaturedProduct {
 }
 
 customElements.define("featured-product-slider", FeaturedProductSlider);
+
+// ANCHOR: Localization Form
+
+class LocalizationForm extends HTMLElement {
+	constructor() {
+		super();
+	}
+
+	connectedCallback() {
+		this.form = this.querySelector("form");
+		this.querySelector("select").addEventListener("change", (e) => {
+			this.querySelector("input[id=hidden_value]").value = e.target.value;
+			this.form.submit();
+		});
+	}
+}
+
+customElements.define("localization-form", LocalizationForm);

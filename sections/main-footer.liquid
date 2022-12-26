@@ -9,7 +9,12 @@
     color: {{ settings.footer_text_color }};
   }
 
-  select[name='country_code'] {
+  .footer option {
+    color: var(--body-text-color);
+  }
+
+  select[name='country_code'] ,
+  select[name='language_code'] {
     padding: 0 !important;
   }
 {%- endstyle -%}
@@ -155,27 +160,59 @@
     </div>
     <div class="footer__bottom">
       <div class="footer__localization">
-        {% if section.settings.show_currency_selector == true %}
-          {%- form 'localization' -%}
-            <div>
-              <select
-                name="country_code"
-              >
-                {%- for country in localization.available_countries -%}
-                  <option
-                    value="{{ country.iso_code }}"
-                    {%- if country.iso_code == localization.country.iso_code %}
-                      selected
-                    {% endif %}
-                  >
-                    {{ country.name }} ({{ country.currency.iso_code }}
-                    {{ country.currency.symbol }})
-                  </option>
-                {%- endfor -%}
-              </select>
-            </div>
-          {%- endform -%}
-        {% endif %}
+        <localization-form>
+          {% form 'localization' %}
+            {% if section.settings.show_language_selector == true %}
+              <div>
+                <select
+                  name="language_code"
+                >
+                  {%- for language in localization.available_languages -%}
+                    <option
+                      value="{{ language.iso_code }}"
+                      {%- if language.iso_code == localization.language.iso_code %}
+                        selected
+                      {% endif %}
+                    >
+                      {{ language.endonym_name | capitalize }}
+                    </option>
+                  {%- endfor -%}
+                </select>
+                <input
+                  type="hidden"
+                  id="hidden_value"
+                  name="language_code"
+                  value="{{ localization.language.iso_code }}"
+                >
+              </div>
+            {% endif %}
+          {% endform %}
+        </localization-form>
+        <localization-form>
+          {% if section.settings.show_currency_selector == true %}
+            {%- form 'localization' -%}
+              <div>
+                <select
+                  name="country_code"
+                >
+                  {%- for country in localization.available_countries -%}
+                    <option
+                      value="{{ country.iso_code }}"
+                      {%- if country.iso_code == localization.country.iso_code %}
+                        selected
+                      {% endif %}
+                    >
+                      {{ country.name }}
+                      ({{ country.currency.iso_code }}
+                      {{ country.currency.symbol }})
+                    </option>
+                  {%- endfor -%}
+                </select>
+                <input type="hidden" id="hidden_value" name="country_code" value="{{ localization.country.iso_code }}">
+              </div>
+            {%- endform -%}
+          {% endif %}
+        </localization-form>
       </div>
 
       <div class="footer__payment-methods">
@@ -204,6 +241,13 @@
       "label": "Currency selector",
       "default": false,
       "info": "To add a currency, go to your [currency settings.](/admin/settings/payments)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_language_selector",
+      "label": "Language selector",
+      "default": false,
+      "info": "To add a language, go to your [Language settings.](/admin/settings/languages)"
     },
     {
       "type": "checkbox",
