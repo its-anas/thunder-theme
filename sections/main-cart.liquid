@@ -1,4 +1,5 @@
 {{ 'main-cart.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'main-cart.js' | asset_url }}" defer></script>
 
 <div class="cart-page {% if cart.items.size == 0 %}empty-state{% endif %}">
   <div class="cart-page__container">

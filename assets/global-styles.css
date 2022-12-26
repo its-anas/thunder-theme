@@ -951,6 +951,10 @@ button:has(.loading-spinner.active) {
 	height: 100%;
 }
 
+a.remove .loading-spinner svg.mini {
+	height: 80%;
+}
+
 .loading-spinner circle {
 	fill: none;
 	stroke-width: 4;
@@ -960,8 +964,9 @@ button:has(.loading-spinner.active) {
 	animation: dash 1.5s ease-in-out infinite;
 }
 
-.qv-icon.hide {
-	display: none;
+.qv-icon.hide,
+.rm-icon.hide {
+	opacity: 0;
 }
 
 @keyframes rotate {

@@ -33,10 +33,14 @@ class SearchPageTabs extends HTMLElement {
 				const doc = parser.parseFromString(data, "text/html");
 
 				const searchResults = doc.querySelector(".results-count-hidden");
-				document.querySelector(".page-tab[for='articles']").innerHTML += ` ${searchResults.innerHTML}`;
+				if (searchResults) {
+					document.querySelector(".page-tab[for='articles']").innerHTML += ` ${searchResults.innerHTML}`;
+				}
 
 				const articles = doc.querySelector(".filter__results--list[type='articles']");
-				document.querySelector(".filter__results--list[type='articles']").innerHTML = `${articles.innerHTML}`;
+				if (articles) {
+					document.querySelector(".filter__results--list[type='articles']").innerHTML = `${articles.innerHTML}`;
+				}
 			});
 	}
 }

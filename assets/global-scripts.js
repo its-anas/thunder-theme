@@ -293,7 +293,7 @@ window.addEventListener("load", () => {
 	document.querySelector(".search-drawer").style.height = `calc(100% - ${document.querySelector(".header-section").offsetHeight}px + 8px)`;
 });
 
-class SearchDrawer extends PredictiveSearch {
+class SearchDrawer extends HTMLElement {
 	constructor() {
 		super();
 
@@ -663,10 +663,10 @@ async function updateCartDrawer() {
 				document.querySelector(".free-shipping-reminder").classList.add("hide");
 				document.querySelector(".cart-drawer__interaction--empty").classList.remove("hide");
 				document.querySelector(".cart-drawer__interaction--empty").classList.add("show");
-				updateFreeShippingBar(data.total_price);
 
 				document.getElementById("header__icons-cart__item-count").classList.add("hidden");
 				setTimeout(() => {
+					updateFreeShippingBar(data.total_price);
 					document.getElementById("header__icons-cart__item-count").innerHTML = data.item_count;
 				}, 500);
 				hideRecommendedDrawer();
@@ -722,11 +722,16 @@ async function updateCartDrawer() {
 						<div class="cart-drawer__product__details-side" data-variant-id="${item.variant_id}">
 						<p class="price--actual">${formatMoney(item.final_line_price)}</p>
 						<a class="remove">
-						<svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-							<path d="M8.71678 7.78444V18.6032L17.0342 18.6137V7.7832M8.71678 7.78444H6.21533M8.71678 7.78444H11.0416L13.0369 7.7832L17.0342 7.7832M17.0342 7.7832H19.5292" stroke="var(--icon-color)"/>
-							<path d="M9.53809 6.79688H16.2578" stroke="var(--icon-color)"/>
-							<path d="M14.3414 16.6045L14.3414 9.88672M11.3965 16.6045L11.3965 9.88672" stroke="var(--icon-color)"/>
-						</svg>
+							<div class="loading-spinner">
+								<svg class="mini" viewBox="25 25 50 50">
+								<circle  stroke="var(--icon-color)" cx="50" cy="50" r="20"></circle>
+								</svg>
+							</div>
+							<svg class="rm-icon" width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M8.71678 7.78444V18.6032L17.0342 18.6137V7.7832M8.71678 7.78444H6.21533M8.71678 7.78444H11.0416L13.0369 7.7832L17.0342 7.7832M17.0342 7.7832H19.5292" stroke="var(--icon-color)"/>
+								<path d="M9.53809 6.79688H16.2578" stroke="var(--icon-color)"/>
+								<path d="M14.3414 16.6045L14.3414 9.88672M11.3965 16.6045L11.3965 9.88672" stroke="var(--icon-color)"/>
+							</svg>
 						</a>
 						</div>
 						</div>`);
@@ -746,8 +751,14 @@ async function updateCartDrawer() {
 				}
 			});
 			document.querySelectorAll(".cart-drawer__product__details-side .remove").forEach((icon) => {
-				let variantId = icon.parentNode.getAttribute("data-variant-id");
 				icon.addEventListener("click", () => {
+					if (icon.querySelector(".loading-spinner")) {
+						icon.querySelector(".loading-spinner").classList.add("active");
+						if (icon.querySelector(".rm-icon")) {
+							icon.querySelector(".rm-icon").classList.add("hide");
+						}
+					}
+					let variantId = icon.parentNode.getAttribute("data-variant-id");
 					updateCartQuantity(variantId, 0).then(updateCartDrawer);
 				});
 			});
@@ -762,27 +773,6 @@ async function updateCartDrawer() {
 			});
 		});
 }
-
-document.querySelectorAll(".cart-page__product .quantity-field").forEach((field) => {
-	field.addEventListener("click", () => {
-		let input = field.querySelector("input");
-		let variantId = input.getAttribute("data-variant-id");
-		let quantity = input.value;
-
-		updateCartQuantity(variantId, quantity).then(() => {
-			window.location.reload();
-		});
-	});
-});
-
-document.querySelectorAll(".cart-page__product .remove").forEach((icon) => {
-	icon.addEventListener("click", () => {
-		let variantId = icon.getAttribute("data-variant-id");
-		updateCartQuantity(variantId, 0).then(() => {
-			window.location.reload();
-		});
-	});
-});
 
 async function updateCartQuantity(variantId, qty) {
 	let variant = variantId.toString();
@@ -810,7 +800,7 @@ async function updateCartQuantity(variantId, qty) {
 
 function updateFreeShippingBar(cartAmount) {
 	let firstMessage = `Spend ${formatMoney(freeShippingThreshold - cartAmount)} more and get free shipping`;
-	let secondMessage = `Congratulations! You have qualified for free shipping`;
+	let secondMessage = `🎉 You have qualified for free shipping 🎉`;
 
 	let freeShippingMessage = cartAmount < freeShippingThreshold ? firstMessage : secondMessage;
 
