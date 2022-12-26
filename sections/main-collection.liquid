@@ -2,7 +2,7 @@
 
 {% style %}
   {% if collection.featured_image != blank and section.settings.show_collection_image == true %}
-    .collection__head {
+    .collection__head, .collection__head__title, .collection__head__image {
       height: {{ section.settings.section_height }}px;
     }
   {% else %}
@@ -11,6 +11,9 @@
       padding: 3rem;
     }
   {% endif %}
+  .collection__head * {
+    color: {{ section.settings.text_color }};
+  }
 
   .collection__item {
     width: calc(100% / {{ section.settings.products_per_row_desktop }});
@@ -217,6 +220,12 @@
   "name": "Collection",
   "class": "main-collection",
   "settings": [
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#fff"
+    },
     {
       "type": "range",
       "id": "section_height",
