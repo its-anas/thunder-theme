@@ -1530,7 +1530,7 @@ cart-component.hidden {
 
 	.search__icon:hover:after {
 		content: var(--button_symbol);
-		color: var(--background-color);
+		color: var(--primary-button-text-color);
 	}
 }
 

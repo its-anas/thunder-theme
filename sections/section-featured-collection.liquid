@@ -14,6 +14,28 @@
   }
 
   @media screen and (min-width: 1024px) {
+    .{{ section.id }}.featured-collection .slide {
+      {% if section.settings.desktop_items > section.settings.collection.products.size %}
+        justify-content: center !important;
+      {% endif %}
+    }
+  }
+  @media screen and (min-width: 750px) and (max-width: 1024px) {
+    .{{ section.id }}.featured-collection .slide {
+      {% if section.settings.tablet_items > section.settings.collection.products.size %}
+        justify-content: center !important;
+      {% endif %}
+    }
+  }
+  @media screen and (max-width: 750px) {
+    .{{ section.id }}.featured-collection .slide {
+      {% if section.settings.mobile_items > section.settings.collection.products.size %}
+        justify-content: center !important;
+      {% endif %}
+    }
+  }
+
+  @media screen and (min-width: 1024px) {
     .{{ section.id }}.featured-collection > .slider-component > .prev,
     .{{ section.id }}.featured-collection > .slider-component > .next {
       width: 5%;

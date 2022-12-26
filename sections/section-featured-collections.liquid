@@ -12,6 +12,29 @@
     --tablet-items: {{ tablet_items }};
     --desktop-items: {{ desktop_items }};
   }
+
+  @media screen and (min-width: 1024px) {
+    .{{ section.id }}.featured-collections .slide {
+      {% if section.settings.desktop_items > section.settings.blocks.size %}
+        justify-content: center !important;
+      {% endif %}
+    }
+  }
+  @media screen and (min-width: 750px) and (max-width: 1024px) {
+    .{{ section.id }}.featured-collections .slide {
+      {% if section.settings.tablet_items > section.settings.blocks.size %}
+        justify-content: center !important;
+      {% endif %}
+    }
+  }
+  @media screen and (max-width: 750px) {
+    .{{ section.id }}.featured-collections .slide {
+      {% if section.settings.mobile_items > section.settings.blocks.size %}
+        justify-content: center !important;
+      {% endif %}
+    }
+  }
+
   @media screen and (min-width: 1024px) {
     .{{ section.id }}.featured-collections > .slider-component > .prev,
     .{{ section.id }}.featured-collections > .slider-component > .next {
