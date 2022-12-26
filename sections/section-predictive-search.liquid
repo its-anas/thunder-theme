@@ -3,8 +3,8 @@
     {%- for product in predictive_search.resources.products -%}
       <div class="search-results__list-item">
         <a href="{{ product.url }}" class="search-results__item">
-          {%- if product.featured_media != blank -%}
-            <div class="search-results__image media">
+          <div class="search-results__image media">
+            {%- if product.featured_media != blank -%}
               {%- assign image = product.featured_media -%}
               {%- assign widths = '60, 70, 80' -%}
               {%- assign width = '80' -%}
@@ -19,8 +19,11 @@
                   height: image.height,
                   widths: widths
               }}
-            </div>
-          {%- endif -%}
+            {%- else -%}
+              {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
+            {%- endif -%}
+          </div>
+
           <div class="search-results__item-content">
             <span class="search-results__item-heading">{{ product.title }}</span>
             <span class="search-results__item-price">{{ product.price | money }}</span>

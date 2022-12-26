@@ -211,10 +211,6 @@ quick-view-component .quick-view__details {
 	height: 120px;
 }
 
-quick-view-component .quick-view__product-url {
-	font-size: var(--xsmall-font-size);
-}
-
 quick-view-component .quick-view__content {
 	width: 100%;
 	display: flex;

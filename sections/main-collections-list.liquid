@@ -19,6 +19,10 @@
   .collections-list__item__picture {
     aspect-ratio: 1;
   }
+
+  .collections-list__item__title * {
+    color: {{ section.settings.text_color }};
+  }
 {% endstyle %}
 
 <div class="collections-list">
@@ -112,6 +116,12 @@
       "id": "show_collection_title",
       "label": "Show collection title",
       "default": true
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#fff"
     }
   ]
 }

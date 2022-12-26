@@ -204,26 +204,12 @@ input::-webkit-inner-spin-button {
 .color-filter-group__list-item input {
 	width: 35px;
 	height: 35px;
-}
-
-.color-filter-group__list-item input:before {
-	position: absolute;
-	content: "";
-	border: 1px solid var(--secondary-background-color);
-	top: -1px;
-	left: -1px;
-	width: calc(100% + 2px);
-	height: calc(100% + 2px);
+	border: 1px solid var(--secondary-text-color);
 	border-radius: var(--global-border-radius);
 }
 
-.color-filter-group__list-item input:checked:before {
-	border: 1.5px solid var(--background-color);
-}
-
 .color-filter-group__list-item input:checked {
-	background-image: none !important;
-	border-width: 2px;
+	border: 2px solid var(--body-text-color);
 }
 
 .filter-mobile__button {

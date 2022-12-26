@@ -619,6 +619,11 @@ button {
 	outline: none;
 }
 
+button#add-to-cart-button:after,
+button#quick-view-add-to-cart:after {
+	content: "➕";
+}
+
 .shopify-payment-button__button {
 	padding: 0px !important;
 	height: 43px !important;
@@ -1277,7 +1282,7 @@ slider-component .placeholder {
 	pointer-events: none;
 }
 
-.button--link:after {
+#quick-view-button.button--link:after {
 	content: "";
 }
 
