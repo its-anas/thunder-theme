@@ -6,19 +6,25 @@ window.addEventListener("load", () => {
 	setDropdownPadding();
 });
 
-// const scrollObserver = new IntersectionObserver((entries) => {
-// 	entries.forEach((entry) => {
-// 		if (entry.isIntersecting) {
-// 			entry.target.classList.add("");
-// 		}
-// 	});
-// });
+const scrollObserver = new IntersectionObserver((entries) => {
+	entries.forEach((entry) => {
+		if (entry.isIntersecting) {
+			entry.target.classList.add("reveal");
+		}
+	});
+});
 
-// window.addEventListener("load", () => {
-// 	document.querySelectorAll("").forEach((section) => {
-// 		scrollObserver.observe(section);
-// 	});
-// });
+document.querySelectorAll("[reveal-on-scroll]").forEach((section) => {
+	scrollObserver.observe(section);
+});
+
+if (Shopify.designMode) {
+	document.addEventListener("shopify:section:load", (event) => {
+		document.querySelectorAll("[reveal-on-scroll]").forEach((section) => {
+			scrollObserver.observe(section);
+		});
+	});
+}
 
 // ANCHOR: Global functions
 
@@ -2135,9 +2141,9 @@ class Slideshow extends HTMLElement {
 		let movement = 0;
 		let currentPosition = 0;
 
-		if (totalSlides <= 1) {
-			next.style.display = "none";
-			prev.style.display = "none";
+		if (totalSlides > 1) {
+			next.style.display = "block";
+			prev.style.display = "block";
 		}
 
 		function loadIndicators() {

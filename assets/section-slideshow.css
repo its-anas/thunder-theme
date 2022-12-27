@@ -71,7 +71,7 @@
 }
 .slideshow .chevrons .prev,
 .slideshow .chevrons .next {
-	display: inline-block;
+	display: none;
 	height: 32px;
 	width: 32px;
 	cursor: pointer;

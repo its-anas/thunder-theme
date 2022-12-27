@@ -6,15 +6,6 @@ class Announcement extends HTMLElement {
 		this.attachShadow({ mode: "open" });
 		this.shadowRoot.innerHTML = "<slot></slot>";
 		this.loadSlideshow();
-		window.addEventListener("load", () => {
-			this.querySelector(".announcement").classList.add("slide-in");
-		});
-
-		if (Shopify.designMode) {
-			document.addEventListener("shopify:section:load", (event) => {
-				this.querySelector(".announcement").classList.add("slide-in");
-			});
-		}
 	}
 	loadSlideshow() {
 		let announcement = this.querySelector(".announcement");
