@@ -417,9 +417,7 @@ p[data-spam-detection-disclaimer] > a {
 }
 
 /* ANCHOR:  Reveal/Fade */
-.shopify-section:not(.main-header):not(.main-announcement-bar):not(.main-search-drawer):not(.main-cart-drawer):not(.main-popup):not(.main-quick-view) {
-	opacity: 0;
-}
+
 .reveal {
 	transform: translate(0, 10%);
 	-webkit-animation: reveal 1s;

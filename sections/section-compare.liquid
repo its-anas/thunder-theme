@@ -127,10 +127,12 @@
                         data-product-handle="{{ block.settings.product.handle }}"
                         data-product-variants="{% if  block.settings.product.variants.size > 1 %}with{% else %}without{% endif %}"
                       >
-                        {%- if block.settings.product.variants.size > 1 -%}
-                          Quick view +
-                        {% else %}
-                          Add to cart +
+                        {% if block.settings.product != blank %}
+                          {%- if block.settings.product.variants.size > 1 -%}
+                            Quick view +
+                          {% else %}
+                            Add to cart +
+                          {%- endif -%}
                         {%- endif -%}
                         {% render 'snippet-icons', icon: 'loading-spinner-tiny' %}
                       </div>

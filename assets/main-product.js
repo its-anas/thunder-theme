@@ -78,11 +78,6 @@ class ProductPage extends HTMLElement {
 					}
 				}
 
-				document.querySelector(".product-page-slider__slides-container").classList.add("reveal");
-				setTimeout(() => {
-					document.querySelector(".product-page-slider__slides-container").classList.remove("reveal");
-				}, 200);
-
 				document.querySelectorAll(".product-hidden-images .item").forEach((item) => {
 					if (item.getAttribute("data-attached-to-variant")) {
 						if (item.getAttribute("data-attached-to-variant") === variant.title) {
