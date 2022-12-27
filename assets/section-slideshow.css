@@ -73,7 +73,7 @@
 .slideshow .chevrons .next {
 	display: none;
 	height: 32px;
-	width: 32px;
+	width: fit-content;
 	cursor: pointer;
 	opacity: 0.5;
 	position: absolute;

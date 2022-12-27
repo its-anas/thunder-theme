@@ -1,6 +1,7 @@
 .image-banner {
 	position: relative;
 	display: grid;
+	overflow: hidden;
 }
 .image-banner__picture,
 .image-banner__content {

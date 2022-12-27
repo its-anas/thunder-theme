@@ -292,7 +292,7 @@
 
 .product-page__pictures product-page-slider .product-page-slider__thumbnails .active {
 	box-sizing: border-box;
-	border: 2px solid white;
+	border: 2px solid var(--body-text-color);
 	border-radius: var(--global-border-radius);
 	overflow: hidden;
 }

@@ -115,7 +115,7 @@
 
 {% assign current_variant = product.selected_or_first_available_variant %}
 
-<product-page class="product-page" data-product="{{ product.id }}">
+<product-page reveal-on-scroll class="product-page" data-product="{{ product.id }}">
   <div class="product-page__container">
       {% render 'snippet-breadcrumbs', bc1: routes.root_url, bc1_text: 'Home', bc2: routes.collections_url, bc2_text: 'Products', bc3: product.url, bc3_text: product.title %}
     <div class="product-page__content">
@@ -404,6 +404,9 @@
                       color: {{ block.settings.digits_color }};
                     }
                   {% endstyle %}
+                  <div class="countdown-timer__text">
+                    <p>{{ block.settings.text }}</p>
+                  </div>
                   {% render 'snippet-countdown-timer', element: block %}
                 </div>
               {% when 'buttons' %}

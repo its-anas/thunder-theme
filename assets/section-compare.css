@@ -34,7 +34,6 @@
 .compare__cell {
 	padding: 1em 0em;
 	border-top: 1px solid var(--body-text-color);
-	border-bottom: 1px solid var(--body-text-color);
 }
 .compare__content {
 	display: flex;

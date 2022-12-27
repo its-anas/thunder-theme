@@ -39,13 +39,16 @@
   }
 {%- endstyle -%}
 
-<div class="{{ section.id }} countdown-timer__section-container">
+<div reveal-on-scroll class="{{ section.id }} countdown-timer__section-container">
   <div class="countdown-timer__heading">
     <{{ section.settings.heading_size }}>
       {{ section.settings.heading }}
     </{{ section.settings.heading_size }}>
   </div>
 
+  <div class="countdown-timer__text">
+    <p>{{ section.settings.text }}</p>
+  </div>
   {% render 'snippet-countdown-timer', element: section %}
 
   <div class="countdown-timer__buttons">

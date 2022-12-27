@@ -89,6 +89,9 @@
                         font-size: 0.5rem;
                       }
                     {%- endstyle -%}
+                    <div class="countdown-timer__text">
+                      <p>{{ block.settings.text }}</p>
+                    </div>
                     {% render 'snippet-countdown-timer', element: block %}
                 {%- endcase -%}
               </div>

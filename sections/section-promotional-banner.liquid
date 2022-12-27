@@ -24,7 +24,7 @@
 {%- endstyle -%}
 
 <section>
-  <div class="{{ section.id }} promotional-banner">
+  <div reveal-on-scroll class="{{ section.id }} promotional-banner">
     {% if section.settings.banner_style == 'style-1' %}
       {% if section.settings.style_1_text != blank %}
         <div class="{{ section.id }} promotional-banner__content--style-1">

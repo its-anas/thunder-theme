@@ -65,9 +65,11 @@
 {%- endstyle -%}
 
 <slider-component
+  reveal-on-scroll
   data-mobile-items="{{ mobile_items }}"
   data-tablet-items="{{ tablet_items }}"
   data-desktop-items="{{ desktop_items }}"
+  reveal-on-scroll
   class="{{ section.id }} multi-icon"
 >
   {% if section.settings.heading != blank %}

@@ -36,7 +36,7 @@
    }
 {%- endstyle -%}
 
-<section class="{{ section.id }} image-banner">
+<section reveal-on-scroll class="{{ section.id }} image-banner">
   <div class="{{ section.id }} image-banner__picture">
     {%- if section.settings.image == blank -%}
       {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder' }}

@@ -32,7 +32,7 @@
    }
 {%- endstyle -%}
 
-<section class="{{ section.id }}">
+<section reveal-on-scroll class="{{ section.id }} animated-rich-text">
   <div class="wrapper container {{ section.id }}-space-between text-alignment--{{ section.settings.text_alignment }} {{ section.id }}-text-width horizontal--{{ section.settings.horizontal_position }}">
     {%- for block in section.blocks -%}
       {%- case block.type -%}

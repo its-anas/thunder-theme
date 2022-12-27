@@ -27,7 +27,7 @@
   }
 {% endstyle %}
 
-<div class="collection__head">
+<div reveal-on-scroll class="collection__head">
   <div class="collection__head__title">
     <h2 class="collection__title">{{ collection.title }}</h2>
     <p>{{ collection.description }}</p>
@@ -106,7 +106,7 @@
                     </select>
                   </div>
                 </div>
-                <div class="filter__results--list">
+                <div reveal-on-scroll class="filter__results--list">
                   {% for item in collection.products %}
                     <div class="collection__item">
                       <div class="collection__item-container">

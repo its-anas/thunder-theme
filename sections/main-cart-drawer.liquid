@@ -12,10 +12,12 @@
       transform: translateX(-99%);
       transition: transform 0.8s cubic-bezier(0.75, 0, 0.175, 1);
     }
-  {% else %}
-    .recommended-products.mobile-only {
-      display: none;
+    .recommended-products.mobile-only.active {
+      opacity: 1;
+      transform: translateX(0);
+      transition: all 0.5s cubic-bezier(0.75, 0, 0.175, 1);
     }
+  {% else %}
   {% endif %}
   .cart-drawer__container, .cart-drawer__content--empty, .recommended-products.desktop-only {
     border-radius: var(--global-border-radius);
@@ -26,7 +28,7 @@
   }
 {%- endstyle -%}
 
-<cart-component class="hidden">
+<cart-component reveal-on-scroll class="hidden">
   <order-note class="cart-drawer">
     <div class="cart-drawer__content--filled">
       <div class="cart-drawer__note-popup hidden">

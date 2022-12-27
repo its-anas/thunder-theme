@@ -64,6 +64,7 @@
 {% endstyle %}
 
 <featured-product
+  reveal-on-scroll
   class="featured-product {{ section.id }}"
 >
   <div class="featured-product__container">
@@ -93,9 +94,7 @@
                 <div class="zoom-icon"></div>
                 <div class="slide">
                   <div class="item">
-                    <div class="item-picture media">
-                      {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
-                    </div>
+                    <div class="item-picture media"></div>
                   </div>
                 </div>
               </div>
@@ -107,9 +106,7 @@
             <div class="featured-product-slider__thumbnails-container ">
               <div class="featured-product-slider__thumbnails">
                 <div class="thumbnail">
-                  <div class="thubmnail-picture media">
-                    {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
-                  </div>
+                  <div class="thubmnail-picture media"></div>
                 </div>
               </div>
             </div>
@@ -166,9 +163,11 @@
                     spinner_background_color: 'var(--primary-button-background-color)'
                   %}
                 </button>
-                {%- form 'product', featured_product -%}
-                  {{ form | payment_button }}
-                {%- endform -%}
+                {% if featured_product != blank %}
+                  {%- form 'product', featured_product -%}
+                    {{ form | payment_button }}
+                  {%- endform -%}
+                {% endif %}
               </div>
             {% when 'product-link' %}
               <a

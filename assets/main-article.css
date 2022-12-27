@@ -19,6 +19,7 @@
 
 .article__picture {
 	width: 100%;
+	overflow: hidden;
 }
 
 .article__picture img {

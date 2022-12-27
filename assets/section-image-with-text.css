@@ -21,12 +21,26 @@
 	}
 }
 
+.image-with-text .image-with-text__image {
+	position: relative;
+}
+
+.image-with-text .image-with-text__image:after {
+	content: "";
+	position: absolute;
+	top: 0;
+	right: 0;
+	height: 100%;
+	background-color: var(--background-color);
+}
+
 .image-with-text__image {
 	width: 100%;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 }
+
 @media screen and (min-width: 750px) {
 	.image-with-text__image {
 		height: 100%;

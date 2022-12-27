@@ -2,7 +2,6 @@
   .{{ section.id }}.search-section {
       gap: {{ section.settings.space_between_elements }}rem;
       background-color: {{ section.settings.background_color }};
-      padding: 2rem;
    }
 
   .{{ section.id }}.search-section {
@@ -24,7 +23,7 @@
    }
 {%- endstyle -%}
 
-<section class="{{ section.id }} search-section">
+<section reveal-on-scroll class="{{ section.id }} search-section container">
   {% if section.settings.heading != blank %}
     <div class="search-section__heading">
       <{{ section.settings.heading_size }}>
