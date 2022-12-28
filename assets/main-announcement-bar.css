@@ -56,11 +56,14 @@
 
 @media screen and (max-width: 750px) {
 	.announcement__content {
-		font-size: var(--xsmall-font-size);
 		gap: 0.2rem;
-		flex-direction: column;
+		flex-direction: row;
 		padding-top: 0.3rem;
 		padding-bottom: 0.3rem;
+	}
+
+	.announcement__content .countdown-timer__text p {
+		font-size: var(--xsmall-font-size);
 	}
 }
 

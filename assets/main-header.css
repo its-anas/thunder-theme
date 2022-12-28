@@ -56,6 +56,23 @@
 	flex-direction: column;
 }
 
+.header-container {
+	overflow: hidden;
+}
+
+.header-container:has(.announcement.reveal) {
+	animation: 1s removeOverflow 0.1s forwards;
+}
+
+@keyframes removeOverflow {
+	0% {
+		overflow: hidden;
+	}
+	100% {
+		overflow: visible;
+	}
+}
+
 .header__content {
 	position: relative;
 	width: 100%;
