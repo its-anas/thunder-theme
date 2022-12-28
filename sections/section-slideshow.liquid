@@ -2,22 +2,6 @@
 
 {%- style -%}
   .{{ section.id }}.slideshow {
-    height: {{ section.settings.mobile_image_height }}px;
-  }
-
-  @media screen and (min-width: 750px) and (max-width: 1024px) {
-    .{{ section.id }}.image-with-text {
-        height: {{ section.settings.image_height | times: 0.75 | round: 0 }}px;
-    }
-  }
-
-  @media screen and (min-width: 1024px) {
-    .{{ section.id }}.slideshow {
-      height: {{ section.settings.image_height }}px;
-    }
-  }
-
-  .{{ section.id }}.slideshow {
     margin-top: {{ section.settings.top_space | times: 0.75 | round: 0 }}px;
     margin-bottom: {{ section.settings.bottom_space | times: 0.75 | round: 0 }}px;
   }
@@ -28,6 +12,28 @@
       margin-bottom: {{ section.settings.bottom_space }}px;
     }
   }
+
+  {% if section.settings.full_screen_height %}
+    .{{ section.id }}.slideshow {
+      height: 101vh;
+    }
+  {% else %}
+    .{{ section.id }}.slideshow {
+      height: {{ section.settings.mobile_image_height }}px;
+    }
+
+    @media screen and (min-width: 750px) and (max-width: 1024px) {
+      .{{ section.id }}.image-with-text {
+          height: {{ section.settings.image_height | times: 0.75 | round: 0 }}px;
+      }
+    }
+
+    @media screen and (min-width: 1024px) {
+      .{{ section.id }}.slideshow {
+        height: {{ section.settings.image_height }}px;
+      }
+    }
+  {% endif %}
 
   .{{ section.id }} .slideshow__content {
     background: rgba({{ section.settings.overlay_color.red }}, {{ section.settings.overlay_color.green }}, {{ section.settings.overlay_color.blue }}, {{ section.settings.overlay_opacity | divided_by: 100.0 }});
@@ -191,6 +197,12 @@
       "default": 4
     },
     {
+      "type": "checkbox",
+      "id": "full_screen_height",
+      "label": "Full screen height",
+      "default": false
+    },
+    {
       "type": "range",
       "id": "image_height",
       "min": 600,
@@ -198,7 +210,8 @@
       "step": 10,
       "unit": "px",
       "label": "Desktop height",
-      "default": 700
+      "default": 700,
+      "info": "Applied only if full screen height is disabled"
     },
     {
       "type": "range",
@@ -208,7 +221,8 @@
       "step": 10,
       "unit": "px",
       "label": "Mobile height",
-      "default": 500
+      "default": 500,
+      "info": "Applied only if full screen height is disabled"
     },
     {
       "type": "header",

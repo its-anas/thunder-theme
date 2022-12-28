@@ -13,6 +13,32 @@
     }
   }
 
+  .{{ section.id }}.image-banner {
+    min-height: {{ section.settings.image_height }}px;
+  }
+
+  {% if section.settings.full_screen_height %}
+    .{{ section.id }}.image-banner {
+      height: 101vh;
+    }
+  {% else %}
+    .{{ section.id }}.image-banner {
+      min-height: {{ section.settings.mobile_image_height }}px;
+    }
+
+    @media screen and (min-width: 750px) and (max-width: 1024px) {
+      .{{ section.id }}.image-banner {
+        min-height: {{ section.settings.desktop_image_height | times: 0.75 | round: 0 }}px;
+      }
+    }
+
+    @media screen and (min-width: 1024px) {
+      .{{ section.id }}.image-banner {
+        min-height: {{ section.settings.desktop_image_height }}px;
+      }
+    }
+  {% endif %}
+
   .{{ section.id }}.image-banner__box {
     gap: {{ section.settings.space_between_elements }}rem;
   }
@@ -23,10 +49,6 @@
 
   .{{ section.id }}.overlay *:not(a) {
       color: {{ section.settings.text_color }};
-  }
-
-  .{{ section.id }}.image-banner {
-    min-height: {{ section.settings.image_height }}px;
   }
 
   @media screen and (min-width: 1024px) {
@@ -118,15 +140,32 @@
       "label": "Image"
     },
     {
+      "type": "checkbox",
+      "id": "full_screen_height",
+      "label": "Full screen height",
+      "default": false
+    },
+    {
       "type": "range",
-      "id": "image_height",
-      "min": 300,
-      "max": 1000,
-      "step": 100,
+      "id": "desktop_image_height",
+      "min": 600,
+      "max": 800,
+      "step": 10,
       "unit": "px",
-      "label": "Height",
+      "label": "Desktop height",
+      "default": 700,
+      "info": "Applied only if full screen height is disabled"
+    },
+    {
+      "type": "range",
+      "id": "mobile_image_height",
+      "min": 400,
+      "max": 700,
+      "step": 10,
+      "unit": "px",
+      "label": "Mobile height",
       "default": 500,
-      "info": "The height will expand if the Text is very long."
+      "info": "Applied only if full screen height is disabled. And the height will expand if the Text is very long."
     },
     {
       "type": "header",
