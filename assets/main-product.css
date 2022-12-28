@@ -354,7 +354,7 @@
 	transition: all 0.5s cubic-bezier(0.75, 0, 0.175, 1);
 }
 
-.product-page__tag .tag--animated {
+.product-page__tag .tag-text {
 	font-size: var(--xsmall-font-size);
 }
 

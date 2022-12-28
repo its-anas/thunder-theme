@@ -15,7 +15,7 @@
 	position: relative;
 	width: 100%;
 }
-.featured-collection__image .tag--normal {
+.featured-collection__image .tag-text {
 	position: absolute;
 	left: 7px;
 	top: 7px;

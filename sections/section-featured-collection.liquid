@@ -88,7 +88,9 @@
               <div class="featured-collection__image corner-border">
                 {% assign price_difference = product.compare_at_price | minus: product.price %}
                 {% if price_difference > 0 %}
-                  <p class="tag--normal tag-text">SAVE {{ product.compare_at_price | minus: product.price | money }}</p>
+                  <p class="tag--animated tag-text">
+                    SAVE {{ product.compare_at_price | minus: product.price | money }}
+                  </p>
                 {% endif %}
                 <div
                   class="quick-view-button desktop-only"
@@ -162,7 +164,7 @@
           {%- capture placeholder_product -%}
             <div class="item">
               <div class="featured-collection__image">
-                <p class="tag--normal tag-text">SAVE {{ product.compare_at_price | minus: product.price | money }}</p>
+                <p class="tag--animated tag-text">SAVE {{ product.compare_at_price | minus: product.price | money }}</p>
                 {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
               </div>
               <div class="featured-collection__container">

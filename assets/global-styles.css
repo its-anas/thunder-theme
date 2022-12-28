@@ -2367,15 +2367,22 @@ slider-component .placeholder {
 
 /* ANCHOR: Tags */
 .tag--animated {
-	-webkit-animation: blink 1s linear infinite;
-	animation: blink 1s linear infinite;
 	color: var(--accent-color-1);
 }
 
 .tag--animated-hover:after {
-	content: "NEW";
 	vertical-align: middle;
 	margin-left: 0.5rem;
+}
+
+.tag--animated-hover:after {
+	content: "NEW";
+}
+
+.tag--animated,
+.tag--animated-hover:after {
+	-webkit-animation: blink 1s linear infinite;
+	animation: blink 1s linear infinite;
 }
 
 .tag--normal,
@@ -2392,14 +2399,6 @@ slider-component .placeholder {
 	pointer-events: none;
 }
 
-@media screen and (min-width: 1024px) {
-	.tag--animated,
-	.tag--animated-hover:after {
-		-webkit-animation: blink 1s linear infinite;
-		animation: blink 1s linear infinite;
-	}
-}
-
 .tag--normal,
 .tag--animated,
 .tag--animated-hover:after {
@@ -2407,42 +2406,6 @@ slider-component .placeholder {
 	background-color: var(--sale-tag-background-color);
 	border-radius: var(--global-border-radius);
 	font-weight: bold;
-}
-
-@-webkit-keyframes blink {
-	0% {
-		opacity: 0.5;
-	}
-
-	49% {
-		opacity: 0.5;
-	}
-
-	50% {
-		opacity: 1;
-	}
-
-	99% {
-		opacity: 1;
-	}
-}
-
-@keyframes blink {
-	0% {
-		opacity: 0.5;
-	}
-
-	49% {
-		opacity: 0.5;
-	}
-
-	50% {
-		opacity: 1;
-	}
-
-	99% {
-		opacity: 1;
-	}
 }
 
 /* ANCHOR: Drawers */

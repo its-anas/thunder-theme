@@ -336,6 +336,12 @@
                     "info": "Applies only to products listed in collection pages and some sections"
                },
                {
+                    "type": "checkbox",
+                    "id": "animate_tags",
+                    "default": true,
+                    "label": "Animate tags"
+               },
+               {
                     "type": "header",
                     "content": "Button"
                },

@@ -11,7 +11,7 @@
 	position: relative;
 	width: 100%;
 }
-.recently-viewed__image .tag--normal {
+.recently-viewed__image .tag-text {
 	position: absolute;
 	left: 0.2rem;
 	top: 0.2rem;

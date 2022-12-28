@@ -73,6 +73,45 @@
        }
   }
 
+  {% if settings.animate_tags == true %}
+        @-webkit-keyframes blink {
+                0% {
+                        opacity: 0.5;
+                }
+
+                49% {
+                        opacity: 0.5;
+                }
+
+                50% {
+                        opacity: 1;
+                }
+
+                99% {
+                        opacity: 1;
+                }
+        }
+
+        @keyframes blink {
+                0% {
+                        opacity: 0.5;
+                }
+
+                49% {
+                        opacity: 0.5;
+                }
+
+                50% {
+                        opacity: 1;
+                }
+
+                99% {
+                        opacity: 1;
+                }
+        }
+   {% endif %}
+
+
   .button--primary.border:after, .button--secondary.border:after, .button--primary:not(.border):after, .button--secondary:not(.border):after {
        content: "{{ settings.button_symbol | truncate: 2 }}";
   }
@@ -171,7 +210,5 @@
                 left: 0;
                 border-width: 0 0 1px 1px;
         }
-
-
   {% endif %}
 {% endstyle %}
