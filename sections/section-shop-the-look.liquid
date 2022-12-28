@@ -49,13 +49,15 @@
   .{{ section.id }}.shop-the-look > .shop-the-look__wrapper > .shop-the-look__container > .shop-the-look__box > .shop-the-look__icon > .shop-the-look__icon-edge {
     background-color: {{ section.settings.selector_background_color }};
   }
-
-  .shop-the-look__icon {}
-  .shop-the-look__icon-edge {}
-  .shop-the-look__icon-center {}
 {%- endstyle -%}
 
-<section reveal-on-scroll class="{{ section.id }} shop-the-look">
+<shop-the-look
+  reveal-on-scroll
+  {% if section.settings.auto_open_selectors == true %}
+    data-auto-open="true"
+  {% endif %}
+  class="{{ section.id }} shop-the-look"
+>
   {% if section.settings.heading != blank %}
     <{{ section.settings.heading_size }} class="shop-the-look__heading">
       {{ section.settings.heading }}
@@ -251,7 +253,7 @@
       {% endfor %}
     </div>
   </div>
-</section>
+</shop-the-look>
 
 {% schema %}
 {
@@ -303,8 +305,15 @@
     {
       "type": "color",
       "id": "openable_background_color",
-      "label": "Openable element background color",
+      "label": "Content background color",
       "default": "#000"
+    },
+    {
+      "type": "checkbox",
+      "id": "auto_open_selectors",
+      "label": "Auto open the selectors one by one",
+      "default": true,
+      "info": "It will stop when the user clicks on a selector"
     },
     {
       "type": "text",

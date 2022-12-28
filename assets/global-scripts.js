@@ -542,44 +542,75 @@ function matchVariant(allSelectedVariants, allAvailableVariants) {
 
 // ANCHOR: Shop the look
 
-let icons = document.querySelectorAll(".shop-the-look__icon");
-
-document.addEventListener("click", (event) => {
-	icons.forEach((icon) => {
-		if (!icon.contains(event.target)) {
-			handleUnselectedIcon(icon);
-		} else if (icon.contains(event.target)) {
-			handleSelectedIcon(icon);
-		}
-	});
-});
-
-function handleUnselectedIcon(icon) {
-	icon.classList.remove("shop-the-look__icon-rotate");
-	if (icon.nextElementSibling) {
-		icon.nextElementSibling.classList.remove("clicked");
+class ShopTheLook extends HTMLElement {
+	constructor() {
+		super();
 	}
-}
 
-function handleSelectedIcon(icon) {
-	if (!icon.classList.contains("shop-the-look__icon-rotate")) {
-		icons.forEach((i) => {
-			i.classList.remove("shop-the-look__icon-rotate");
-			if (i.nextElementSibling) {
-				i.nextElementSibling.classList.remove("clicked");
-			}
+	connectedCallback() {
+		this.time;
+		this.autoOpen = this.getAttribute("data-auto-open");
+		this.desktopIcons = this.querySelectorAll(".shop-the-look__box.desktop-only .shop-the-look__icon");
+
+		this.icons = this.querySelectorAll(".shop-the-look__icon");
+		this.addEventListener("click", (event) => {
+			this.icons.forEach((icon) => {
+				if (icon.contains(event.target)) {
+					this.handleSelectedIcon(icon);
+				}
+			});
 		});
-		icon.classList.add("shop-the-look__icon-rotate");
-		if (icon.nextElementSibling) {
-			icon.nextElementSibling.classList.add("clicked");
-		}
-	} else {
-		icon.classList.remove("shop-the-look__icon-rotate");
-		if (icon.nextElementSibling) {
-			icon.nextElementSibling.classList.remove("clicked");
+
+		if (this.autoOpen === "true") {
+			this.autoOpenSelectors();
 		}
 	}
+
+	autoOpenSelectors() {
+		let index = 0;
+		this.time = setInterval(() => {
+			const icon = this.desktopIcons[index];
+			this.hideAllSelectorsContent();
+			this.showSelectorContent(icon);
+			index++;
+			if (index >= this.desktopIcons.length) {
+				index = 0;
+			}
+		}, 5000);
+	}
+
+	showSelectorContent(icon) {
+		icon.classList.add("rotate");
+		if (icon.nextElementSibling) {
+			icon.nextElementSibling.classList.add("active");
+		}
+	}
+
+	hideSelectorContent(icon) {
+		icon.classList.remove("rotate");
+		if (icon.nextElementSibling) {
+			icon.nextElementSibling.classList.remove("active");
+		}
+	}
+
+	hideAllSelectorsContent() {
+		this.icons.forEach((i) => {
+			this.hideSelectorContent(i);
+		});
+	}
+
+	handleSelectedIcon(icon) {
+		if (!icon.classList.contains("rotate")) {
+			this.hideAllSelectorsContent();
+			this.showSelectorContent(icon);
+		} else {
+			this.hideSelectorContent(icon);
+		}
+		clearInterval(this.time);
+	}
 }
+
+customElements.define("shop-the-look", ShopTheLook);
 
 // ANCHOR: Menu drawer
 
