@@ -803,11 +803,10 @@ class SliderComponent extends HTMLElement {
 	connectedCallback() {
 		this.attachShadow({ mode: "open" });
 		this.shadowRoot.innerHTML = "<slot></slot>";
-		if (this.querySelector("recently-viewed-component")) {
+		if (this.querySelector("recently-viewed-component") || this.querySelector("recommended-products")) {
 			setTimeout(() => {
-				// to wait for the recently viewed component to load
 				this.loadSlider();
-			}, 500);
+			}, 2000);
 		} else {
 			this.loadSlider();
 		}
@@ -913,8 +912,8 @@ class SliderComponent extends HTMLElement {
 					slide.style.transform = `translateX(${nextTranslate}px)`;
 				}
 
-				actualTranslate = parseInt(slide.style.transform == "translateX(0px)" ? 0 : slide.style.transform.match(/[-]{0,1}[\d]*[.]{0,1}[\d]+/g)[0]);
-				newTranslate = 0;
+				let actualTranslate = parseInt(slide.style.transform === "translateX(0px)" ? 0 : slide.style.transform.match(/[-]{0,1}[\d]*[.]{0,1}[\d]+/g)[0]);
+				let newTranslate = 0;
 
 				if (movement > 50) {
 					newTranslate = Math.max(actualTranslate - itemWidth * itemsDisplayed, maxSliderScroll);
@@ -3055,3 +3054,29 @@ class LocalizationForm extends HTMLElement {
 }
 
 customElements.define("localization-form", LocalizationForm);
+
+// Recommended products section
+class RecommendedProducts extends HTMLElement {
+	constructor() {
+		super();
+	}
+
+	connectedCallback() {
+		fetch(this.dataset.url)
+			.then((response) => response.text())
+			.then((text) => {
+				const html = document.createElement("div");
+				html.innerHTML = text;
+				const recommendations = html.querySelector("recommended-products");
+
+				if (recommendations && recommendations.innerHTML.trim().length) {
+					this.innerHTML = recommendations.innerHTML;
+				}
+			})
+			.catch((e) => {
+				console.error(e);
+			});
+	}
+}
+
+customElements.define("recommended-products", RecommendedProducts);

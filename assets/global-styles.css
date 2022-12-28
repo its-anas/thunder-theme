@@ -2415,6 +2415,7 @@ slider-component .placeholder {
 	height: 1.5rem;
 	transform: translate(-15%, -15%);
 	transition: all 0.2s ease;
+	cursor: pointer;
 }
 
 @media screen and (min-width: 1024px) {

@@ -257,6 +257,9 @@
         "answer_background_color": "#101010"
       }
     },
+    "recommended-products": {
+      "type": "section-recommended-products"
+    },
     "recently-viewed-products": {
       "type": "section-recently-viewed-products"
     }
@@ -268,6 +271,7 @@
     "compare",
     "promotional-banner",
     "faq",
+    "recommended-products",
     "recently-viewed-products"
   ]
 }
