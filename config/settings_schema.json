@@ -156,25 +156,25 @@
                     "type": "color",
                     "id": "error_text_color",
                     "label": "Error text",
-                    "default": "#fa6464"
+                    "default": "#7b0000"
                },
                {
                     "type": "color",
                     "id": "error_background_color",
                     "label": "Error background",
-                    "default": "#260b0b"
+                    "default": "#ffbebe"
                },
                {
                     "type": "color",
                     "id": "success_text_color",
                     "label": "Success text",
-                    "default": "#4bb543"
+                    "default": "#097b00"
                },
                {
                     "type": "color",
                     "id": "success_background_color",
                     "label": "Success background",
-                    "default": "#0b260c"
+                    "default": "#beffc0"
                },
                {
                     "type": "header",

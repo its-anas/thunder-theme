@@ -120,6 +120,10 @@
 	display: grid;
 }
 
+.customer-login .button {
+	width: 100%;
+}
+
 .customer-login .customer__container {
 	grid-row: 1;
 	grid-column: 1;
