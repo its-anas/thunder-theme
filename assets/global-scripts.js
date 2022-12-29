@@ -976,12 +976,10 @@ class PredictiveSearch extends HTMLElement {
 	onChange() {
 		const searchTerm = this.input.value.trim();
 		const limit = this.input.dataset.limit;
-		console.log(limit);
 		if (!searchTerm.length) {
 			this.close();
 			return;
 		}
-
 		this.getSearchResults(searchTerm, limit);
 	}
 
@@ -1008,12 +1006,55 @@ class PredictiveSearch extends HTMLElement {
 	}
 
 	open() {
-		this.querySelector(".search-form__results").classList.remove("hidden");
+		this.querySelector(".preload").classList.add("hidden");
+		setTimeout(() => {
+			this.querySelector(".buttons").style.height = "auto";
+			this.querySelector(".search-form__results").style.height = "auto";
+			document.querySelector(".search-form__container").style.height = "100%";
+			this.querySelector(".preload").style.height = "0";
+			this.querySelector(".preload").style.padding = "0";
+		}, 300);
+		setTimeout(() => {
+			this.querySelector(".search-form__results").classList.remove("hidden");
+			this.querySelector(".buttons").classList.remove("hidden");
+		}, 300);
 	}
 
 	close() {
 		this.querySelector(".search-form__results").classList.add("hidden");
+		this.querySelector(".buttons").classList.add("hidden");
+		setTimeout(() => {
+			this.querySelector(".buttons").style.height = "0";
+			this.querySelector(".search-form__results").style.height = "0";
+			document.querySelector(".search-form__container").style.height = "auto";
+			this.querySelector(".preload").style.height = "auto";
+			this.querySelector(".preload").style.padding = "0.5rem";
+		}, 300);
+		setTimeout(() => {
+			this.querySelector(".preload").classList.remove("hidden");
+		}, 300);
+		setTimeout(() => {
+			this.querySelector(".search-results__results-list").innerHTML = "";
+		}, 1000);
 	}
+
+	// if (this.inputField) {
+	// 	this.inputField.addEventListener("input", (event) => {
+	// 		if (this.searchDrawer.querySelector(".preload")) {
+	// 			if (event.target.value.length > 0) {
+	// 				this.searchDrawer.querySelector(".preload").classList.add("hidden");
+	// 				setTimeout(() => {
+	// 					this.searchDrawer.querySelector(".preload").style.display = "none";
+	// 				}, 500);
+	// 			} else {
+	// 				this.searchDrawer.querySelector(".preload").style.display = "block";
+	// 				setTimeout(() => {
+	// 					this.searchDrawer.querySelector(".preload").classList.remove("hidden");
+	// 				}, 500);
+	// 			}
+	// 		}
+	// 	});
+	// }
 
 	debounce(fn, wait) {
 		let t;
@@ -1090,18 +1131,6 @@ class SearchDrawer extends HTMLElement {
 			this.hideSearchDrawer();
 			this.resetSearch();
 		});
-
-		if (this.inputField) {
-			this.inputField.addEventListener("input", (event) => {
-				if (this.searchDrawer.querySelector(".preload")) {
-					if (event.target.value.length > 0) {
-						this.searchDrawer.querySelector(".preload").classList.add("hidden");
-					} else {
-						this.searchDrawer.querySelector(".preload").classList.remove("hidden");
-					}
-				}
-			});
-		}
 
 		if (Shopify.designMode) {
 			document.addEventListener("shopify:section:load", (event) => {

@@ -222,5 +222,5 @@
 .search__container .hidden {
 	opacity: 0;
 	pointer-events: none;
-	transition: all 0.5s ease-in-out;
+	transition: all 0.3s ease-in-out;
 }
