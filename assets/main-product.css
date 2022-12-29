@@ -214,19 +214,6 @@
 	}
 }
 
-.zoom-icon {
-	position: absolute;
-	top: 0px;
-	right: 0px;
-	z-index: 5;
-	cursor: pointer;
-	opacity: 0.5;
-}
-
-.zoom-icon:hover {
-	opacity: 1;
-}
-
 .product-page__pictures product-page-slider .product-page-slider__slides-container {
 	width: 90%;
 	display: flex;

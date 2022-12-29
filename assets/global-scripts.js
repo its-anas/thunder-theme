@@ -2905,6 +2905,13 @@ class FeaturedProductSlider extends FeaturedProduct {
 				});
 			});
 		}
+
+		this.querySelector(`.${this.sectionId} .zoom-icon`).addEventListener("click", () => {
+			document.querySelector(`.${this.sectionId} .featured-product__pictures`).classList.toggle("zoom-in");
+		});
+		document.querySelector(`.${this.sectionId} .featured-product__close`).addEventListener("click", () => {
+			document.querySelector(`.${this.sectionId} .featured-product__pictures`).classList.toggle("zoom-in");
+		});
 	}
 
 	loadSlider() {
@@ -3012,6 +3019,7 @@ class FeaturedProductSlider extends FeaturedProduct {
 		}
 
 		function moveNext() {
+			setNewTranslate();
 			let translateNext = getTranslateX("next");
 			slide.style.transform = `translateX(${translateNext}px)`;
 
@@ -3021,6 +3029,7 @@ class FeaturedProductSlider extends FeaturedProduct {
 		}
 
 		function movePrev() {
+			setNewTranslate();
 			let translatePrev = getTranslateX("prev");
 			slide.style.transform = `translateX(${translatePrev}px)`;
 
@@ -3065,6 +3074,23 @@ class FeaturedProductSlider extends FeaturedProduct {
 				});
 			});
 		}
+
+		function setNewTranslate() {
+			itemWidth = item.offsetWidth;
+			let actualActiveItemIndex = parseInt(section.querySelector(`.featured-product-slider__indicators .active`).getAttribute("data-slide-to"));
+			newTranslate = actualActiveItemIndex * itemWidth * -1;
+			slide.style.transform = `translateX(${newTranslate}px)`;
+		}
+
+		section.querySelector(`.zoom-icon`).addEventListener("click", () => {
+			setNewTranslate();
+		});
+		section.querySelector(`.featured-product__close`).addEventListener("click", () => {
+			setNewTranslate();
+		});
+		window.addEventListener("resize", () => {
+			setNewTranslate();
+		});
 
 		window.addEventListener("resize", setMaxScroll);
 		next.addEventListener("click", moveNext);

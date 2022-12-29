@@ -70,6 +70,9 @@
   <div class="featured-product__container">
     <div class="featured-product__content">
       <div class="featured-product__pictures">
+        <div class="featured-product__close">
+          {% render 'snippet-icons', icon: 'close' %}
+        </div>
         <div class="featured-product__slider">
           <featured-product-slider
             data-mobile-items="{{ mobile_items }}"
@@ -91,7 +94,7 @@
                 {% render 'snippet-icons', icon: 'chevron-prev' %}
               </div>
               <div class="featured-product-slider__slides-container">
-                <div class="zoom-icon"></div>
+                <div class="zoom-icon">{% render 'snippet-icons', icon: 'zoom-in' %}</div>
                 <div class="slide">
                   <div class="item">
                     <div class="item-picture media"></div>
