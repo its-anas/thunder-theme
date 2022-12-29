@@ -79,88 +79,101 @@
 
   <recommended-products
     class="slider-component recommended-products"
-    data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit=5"
+    data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit={{ section.settings.recommendations_count}}"
+    data-section-id="{{ section.id }}"
   >
     <div class="prev">
       {% render 'snippet-icons', icon: 'chevron-prev' -%}
     </div>
     <div class="slides-container">
       <div class="slide">
-        {% for product in recommendations.products %}
-          <div class="item">
-            <div class="recommended-products__image corner-border">
-              {% assign price_difference = product.compare_at_price | minus: product.price %}
-              {% if price_difference > 0 %}
-                <p class="tag--animated tag-text">SAVE {{ product.compare_at_price | minus: product.price | money }}</p>
-              {% endif %}
-              <div
-                class="quick-view-button desktop-only"
-                id="quick-view-button"
-                data-first-available-variant-id="{{ product.first_available_variant.id }}"
-                data-product-handle="{{ product.handle }}"
-                data-product-variants="{% if product.variants.size > 1 %}with{% else %}without{% endif %}"
-              >
-                {% render 'snippet-icons', icon: 'quick-view' -%}
-              </div>
-
-              <a href="{{ product.url }}" class="media corner-border-target">
-                {% if product.featured_image != blank %}
-                  {%- assign image = product.featured_image -%}
-                  {%- capture sizes -%}(min-width: 1024px) calc((var(--page-width) - {{ desktop_items | times: 2 }}rem) / {{ desktop_items }}), (min-width: 750px) calc((80vw - {{ tablet_items | times: 1 }}rem) / {{ tablet_items }}), calc((88vw - 1rem - {{ mobile_items | times: 1 }}rem ) / {{ mobile_items }}){%- endcapture -%}
-                  {%- assign widths = '120, 130. 140, 150, 160, 170, 180, 190, 200, 225, 250, 300, 325, 350, 375, 400' -%}
-                  {%- assign width = '400' -%}
-                  {{
-                    image
-                    | image_url: width: width
-                    | image_tag:
-                      loading: 'lazy',
-                      class: 'cover',
-                      alt: image.alt,
-                      width: image.width,
-                      height: image.height,
-                      sizes: sizes,
-                      widths: widths
-                  }}
+        {% if recommendations.performed and recommendations.products_count > 0 %}
+          {% for product in recommendations.products %}
+            <div class="item">
+              <div class="recommended-products__image corner-border">
+                {% assign price_difference = product.compare_at_price | minus: product.price %}
+                {% if product.available %}
+                  {% if price_difference > 0 %}
+                    <p class="tag--animated tag-text">
+                      SAVE {{ product.compare_at_price | minus: product.price | money }}
+                    </p>
+                  {% endif %}
                 {% else %}
-                  {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
+                  <p class="tag--disabled tag-text">SOLDOUT</p>
                 {% endif %}
-              </a>
-            </div>
-            <div class="recommended-products__container">
-              <div class="recommended-products__name">
-                {% assign product_date = product.published_at | date: '%s' %}
-                {% assign current_date = 'now' | date: '%s' %}
+                {% if product.available %}
+                  <div
+                    class="quick-view-button desktop-only"
+                    id="quick-view-button"
+                    data-first-available-variant-id="{{ product.first_available_variant.id }}"
+                    data-product-handle="{{ product.handle }}"
+                    data-product-variants="{% if product.variants.size > 1 %}with{% else %}without{% endif %}"
+                  >
+                    {% render 'snippet-icons', icon: 'quick-view' -%}
+                  </div>
+                {% endif %}
 
-                {% assign difference_in_seconds = current_date | minus: product_date %}
-                {% assign difference_in_days = difference_in_seconds | divided_by: 3600 | divided_by: 24 %}
-
-                <p class="text {% if section.settings.new_tag == true and difference_in_days < section.settings.new_tag_time %}tag--animated-hover{% endif %}">
-                  {{ product.title }}
-                </p>
-              </div>
-              <div class="recommended-products__price">
-                <p class="text price--actual">{{ product.price | money }}</p>
-                <p class="text price--compare-at">{{ product.compare_at_price | money }}</p>
-              </div>
-              <quick-view-button>
-                <div
-                  class="button--link mobile-only"
-                  id="quick-view-button"
-                  data-first-available-variant-id="{{ product.first_available_variant.id }}"
-                  data-product-handle="{{ product.handle }}"
-                  data-product-variants="{% if product.variants.size > 1 %}with{% else %}without{% endif %}"
-                >
-                  {%- if product.variants.size > 1 -%}
-                    Quick view +
+                <a href="{{ product.url }}" class="media corner-border-target">
+                  {% if product.featured_image != blank %}
+                    {%- assign image = product.featured_image -%}
+                    {%- capture sizes -%}(min-width: 1024px) calc((var(--page-width) - {{ desktop_items | times: 2 }}rem) / {{ desktop_items }}), (min-width: 750px) calc((80vw - {{ tablet_items | times: 1 }}rem) / {{ tablet_items }}), calc((88vw - 1rem - {{ mobile_items | times: 1 }}rem ) / {{ mobile_items }}){%- endcapture -%}
+                    {%- assign widths = '120, 130. 140, 150, 160, 170, 180, 190, 200, 225, 250, 300, 325, 350, 375, 400' -%}
+                    {%- assign width = '400' -%}
+                    {{
+                      image
+                      | image_url: width: width
+                      | image_tag:
+                        loading: 'lazy',
+                        class: 'cover',
+                        alt: image.alt,
+                        width: image.width,
+                        height: image.height,
+                        sizes: sizes,
+                        widths: widths
+                    }}
                   {% else %}
-                    Add to cart +
-                  {%- endif -%}
-                  {% render 'snippet-icons', icon: 'loading-spinner-tiny' %}
+                    {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
+                  {% endif %}
+                </a>
+              </div>
+              <div class="recommended-products__container">
+                <div class="recommended-products__name">
+                  {% assign product_date = product.published_at | date: '%s' %}
+                  {% assign current_date = 'now' | date: '%s' %}
+
+                  {% assign difference_in_seconds = current_date | minus: product_date %}
+                  {% assign difference_in_days = difference_in_seconds | divided_by: 3600 | divided_by: 24 %}
+
+                  <p class="text {% if section.settings.new_tag == true and difference_in_days < section.settings.new_tag_time %}tag--animated-hover{% endif %}">
+                    {{ product.title }}
+                  </p>
                 </div>
-              </quick-view-button>
+                <div class="recommended-products__price">
+                  <p class="text price--actual">{{ product.price | money }}</p>
+                  <p class="text price--compare-at">{{ product.compare_at_price | money }}</p>
+                </div>
+                {% if product.available %}
+                  <quick-view-button>
+                    <div
+                      class="button--link mobile-only"
+                      id="quick-view-button"
+                      data-first-available-variant-id="{{ product.first_available_variant.id }}"
+                      data-product-handle="{{ product.handle }}"
+                      data-product-variants="{% if product.variants.size > 1 %}with{% else %}without{% endif %}"
+                    >
+                      {%- if product.variants.size > 1 -%}
+                        Quick view +
+                      {% else %}
+                        Add to cart +
+                      {%- endif -%}
+                      {% render 'snippet-icons', icon: 'loading-spinner-tiny' %}
+                    </div>
+                  </quick-view-button>
+                {%- endif -%}
+              </div>
             </div>
-          </div>
-        {% endfor %}
+          {% endfor %}
+        {%- endif -%}
       </div>
     </div>
     <div class="next">
@@ -226,13 +239,11 @@
     },
     {
       "type": "range",
-      "id": "items_limit",
-      "min": 3,
-      "max": 20,
-      "step": 1,
-      "unit": "p",
-      "label": "Maximum number of products",
-      "default": 8
+      "id": "recommendations_count",
+      "min": 4,
+      "max": 10,
+      "label": "Recommendations count",
+      "default": 4
     },
     {
       "type": "checkbox",

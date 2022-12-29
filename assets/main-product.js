@@ -34,10 +34,6 @@ class ProductPage extends HTMLElement {
 			});
 		});
 
-		if (document.querySelector(".product-page__tag")) {
-			document.querySelector(".product-page__tag").innerHTML = "";
-		}
-
 		announceSoldout(currentVariantInventory);
 
 		if (document.querySelector(".product-page__hidden-variants") && productJson.variants.length > 0) {
@@ -48,6 +44,7 @@ class ProductPage extends HTMLElement {
 
 				if (priceDifference > 0) {
 					if (document.querySelector(".product-page__tag")) {
+						document.querySelector(".product-page__tag").innerHTML = "";
 						document.querySelector(".product-page__tag").classList.remove("hidden");
 						document.querySelector(".product-page__tag").innerHTML = `<p class='tag--animated tag-text'> ${priceDifferenceText} ${formatMoney(priceDifference)} </p>`;
 					}

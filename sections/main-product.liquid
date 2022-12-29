@@ -164,16 +164,20 @@
               {% when 'sale_tag' %}
                 <div class="product-page__prices" {{ block.shopify_attributes }}>
                   {% assign price_difference_text = block.settings.price_difference_text %}
-                  {% assign price_difference = current_variant.compare_at_price | minus: product.price %}
-                  {% if price_difference > 0 %}
-                    <div class="product-page__tag">
-                      <p class="tag--animated tag-text">
-                        {{ price_difference_text }}
-                        {{ current_variant.compare_at_price | minus: current_variant.price | money }}
-                      </p>
-                    </div>
-                  {% endif %}
-                  <div class="product-page__tag"></div>
+                  {% assign price_difference = current_variant.compare_at_price | minus: current_variant.price %}
+                  <div class="product-page__tag">
+                    {% if current_variant.available %}
+                      {% if price_difference > 0 %}
+                        <p class="tag--animated tag-text">
+                          {{ price_difference_text }}
+                          {{ current_variant.compare_at_price | minus: current_variant.price | money }}
+                        </p>
+                      {% endif %}
+                    {% endif %}
+                    {% unless current_variant.available %}
+                      <p class="tag--disabled tag-text">SOLDOUT</p>
+                    {% endunless %}
+                  </div>
                 </div>
               {% when 'price' %}
                 <div class="product-page__prices" {{ block.shopify_attributes }}>
@@ -201,9 +205,6 @@
                                   for="{{ option.name | handle }}-{{ value | handle }}"
                                 >
                                   <input
-                                    {% if option.selected_value == value %}
-                                      checked
-                                    {% endif %}
                                     type="radio"
                                     name="{{ option.name }}"
                                     value="{{ value }}"
@@ -549,8 +550,8 @@
 
 
 <script defer>
-    updateRecentlyViewedProductsCookie("{{ product.id }}", "{{ product.title }}", "{{ product.url }}", "{{ product.featured_image | image_url }}", "{{ product.featured_image.alt }}", "{{ product.featured_image.width }}", "{{ product.featured_image.height }}", "{{ product.price | money }}", "{{ product.compare_at_price | money }}", "{{ product.compare_at_price | minus: product.price }}", "{{ product.compare_at_price | minus: product.price | money }}", "{{ 'now' | date: "%d" | minus: product.published_at | date: "%d" }}", "{{ product.first_available_variant.id }}", "{{ product.handle }}", "{{ product.variants.size }}");
-    function updateRecentlyViewedProductsCookie(productId, productTitle, productUrl, productImage, productImageAlt, productImageWidth, productImageHeight, productPrice, productCompareAtPrice, productPriceDifference, productPriceDifferenceWithCurrency, productDateDifference, productVariantFirstId, productHandle, productVariantsSize) {
+    updateRecentlyViewedProductsCookie("{{ product.id }}", "{{ product.title }}", "{{ product.url }}", "{{ product.available }}", "{{ product.featured_image | image_url }}", "{{ product.featured_image.alt }}", "{{ product.featured_image.width }}", "{{ product.featured_image.height }}", "{{ product.price | money }}", "{{ product.compare_at_price | money }}", "{{ product.compare_at_price | minus: product.price }}", "{{ product.compare_at_price | minus: product.price | money }}", "{{ 'now' | date: "%d" | minus: product.published_at | date: "%d" }}", "{{ product.first_available_variant.id }}", "{{ product.handle }}", "{{ product.variants.size }}");
+    function updateRecentlyViewedProductsCookie(productId, productTitle, productUrl, productAvailability, productImage, productImageAlt, productImageWidth, productImageHeight, productPrice, productCompareAtPrice, productPriceDifference, productPriceDifferenceWithCurrency, productDateDifference, productVariantFirstId, productHandle, productVariantsSize) {
       let recentlyViewedProducts = [];
 
       let recentlyViewedProductsCookie =
@@ -570,6 +571,7 @@
         id: productId,
         title: productTitle,
         url: productUrl,
+        availability: productAvailability,
         image: productImage,
         image_alt: productImageAlt,
         image_width: productImageWidth,

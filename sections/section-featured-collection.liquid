@@ -87,20 +87,26 @@
             <div class="item">
               <div class="featured-collection__image corner-border">
                 {% assign price_difference = product.compare_at_price | minus: product.price %}
-                {% if price_difference > 0 %}
-                  <p class="tag--animated tag-text">
-                    SAVE {{ product.compare_at_price | minus: product.price | money }}
-                  </p>
+                {% if product.available %}
+                  {% if price_difference > 0 %}
+                    <p class="tag--animated tag-text">
+                      SAVE {{ product.compare_at_price | minus: product.price | money }}
+                    </p>
+                  {% endif %}
+                {% else %}
+                  <p class="tag--disabled tag-text">SOLDOUT</p>
                 {% endif %}
-                <div
-                  class="quick-view-button desktop-only"
-                  id="quick-view-button"
-                  data-first-available-variant-id="{{ product.first_available_variant.id }}"
-                  data-product-handle="{{ product.handle }}"
-                  data-product-variants="{% if product.variants.size > 1 %}with{% else %}without{% endif %}"
-                >
-                  {% render 'snippet-icons', icon: 'quick-view' -%}
-                </div>
+                {% if product.available %}
+                  <div
+                    class="quick-view-button desktop-only"
+                    id="quick-view-button"
+                    data-first-available-variant-id="{{ product.first_available_variant.id }}"
+                    data-product-handle="{{ product.handle }}"
+                    data-product-variants="{% if product.variants.size > 1 %}with{% else %}without{% endif %}"
+                  >
+                    {% render 'snippet-icons', icon: 'quick-view' -%}
+                  </div>
+                {% endif %}
 
                 <a href="{{ product.url }}" class="media corner-border-target">
                   {% if product.featured_image != blank %}
@@ -141,22 +147,24 @@
                   <p class="text price--actual">{{ product.price | money }}</p>
                   <p class="text price--compare-at">{{ product.compare_at_price | money }}</p>
                 </div>
-                <quick-view-button>
-                  <div
-                    class="button--link mobile-only"
-                    id="quick-view-button"
-                    data-first-available-variant-id="{{ product.first_available_variant.id }}"
-                    data-product-handle="{{ product.handle }}"
-                    data-product-variants="{% if product.variants.size > 1 %}with{% else %}without{% endif %}"
-                  >
-                    {%- if product.variants.size > 1 -%}
-                      Quick view +
-                    {% else %}
-                      Add to cart +
-                    {%- endif -%}
-                    {% render 'snippet-icons', icon: 'loading-spinner-tiny' %}
-                  </div>
-                </quick-view-button>
+                {% if product.available %}
+                  <quick-view-button>
+                    <div
+                      class="button--link mobile-only"
+                      id="quick-view-button"
+                      data-first-available-variant-id="{{ product.first_available_variant.id }}"
+                      data-product-handle="{{ product.handle }}"
+                      data-product-variants="{% if product.variants.size > 1 %}with{% else %}without{% endif %}"
+                    >
+                      {%- if product.variants.size > 1 -%}
+                        Quick view +
+                      {% else %}
+                        Add to cart +
+                      {%- endif -%}
+                      {% render 'snippet-icons', icon: 'loading-spinner-tiny' %}
+                    </div>
+                  </quick-view-button>
+                {% endif %}
               </div>
             </div>
           {% endfor %}

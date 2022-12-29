@@ -2386,7 +2386,8 @@ slider-component .placeholder {
 }
 
 .tag--normal,
-.tag--animated {
+.tag--animated,
+.tag--disabled {
 	z-index: 3;
 	padding: 0.05rem 0.15rem;
 	pointer-events: none;
@@ -2404,6 +2405,13 @@ slider-component .placeholder {
 .tag--animated-hover:after {
 	color: var(--sale-tag-text-color);
 	background-color: var(--sale-tag-background-color);
+	border-radius: var(--global-border-radius);
+	font-weight: bold;
+}
+
+.tag--disabled {
+	color: var(--sale-tag-text-color);
+	background-color: var(--secondary-text-color);
 	border-radius: var(--global-border-radius);
 	font-weight: bold;
 }
