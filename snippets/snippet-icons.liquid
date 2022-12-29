@@ -97,6 +97,12 @@
   <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M7 10.5L12 15.5L17 10.5" stroke="var(--icon-color)" stroke-width="1.5"/>
   </svg>
+{% elsif icon == 'zoom-in' %}
+  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M16.0056 15.9883L19.4986 19.4812" stroke="var(--icon-color)" stroke-width="1.5"/>
+    <circle cx="11.1255" cy="11.1233" r="6.37717" stroke="var(--icon-color)" stroke-width="1.5"/>
+    <path d="M10.7334 13.5643V9.13608H11.5827V13.5643H10.7334ZM8.89341 11.7546V10.9559H13.4227V11.7546H8.89341Z" fill="var(--icon-color)"/>
+  </svg>
 {% elsif icon == 'header-search' %}
   <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M16.5056 15.9884L19.9986 19.4813" stroke="{{ settings.header_text_color | color_to_rgb }}" stroke-width="1.5"/>

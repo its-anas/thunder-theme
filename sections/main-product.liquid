@@ -120,6 +120,10 @@
       {% render 'snippet-breadcrumbs', bc1: routes.root_url, bc1_text: 'Home', bc2: routes.collections_url, bc2_text: 'Products', bc3: product.url, bc3_text: product.title %}
     <div class="product-page__content">
       <div class="product-page__pictures">
+        <div class="product-page__close">
+          {% render 'snippet-icons', icon: 'close' %}
+        </div>
+        
         <product-page-slider
           data-mobile-items="{{ mobile_items }}"
           data-tablet-items="{{ tablet_items }}"
@@ -131,8 +135,8 @@
               {% render 'snippet-icons', icon: 'chevron-prev' %}
             </div>
             <div class="product-page-slider__slides-container  {% if section.settings.thumbnails_on_mobile == true %}thumbnails-mobile{% endif %}">
-              <div class="zoom-icon"></div>
-              <div class="slide"></div>
+              <div class="zoom-icon">{% render 'snippet-icons', icon: 'zoom-in' %}</div>
+              <div class="slide" style="transform: translateX(0px);"></div>
             </div>
             <div class="next">
               {% render 'snippet-icons', icon: 'chevron-next' %}
