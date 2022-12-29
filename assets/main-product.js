@@ -345,6 +345,7 @@ class ProductPageSlider extends HTMLElement {
 		}
 
 		function moveNext() {
+			setNewTranslate();
 			let translateNext = getTranslateX("next");
 			slide.style.transform = `translateX(${translateNext}px)`;
 
@@ -354,6 +355,7 @@ class ProductPageSlider extends HTMLElement {
 		}
 
 		function movePrev() {
+			setNewTranslate();
 			let translatePrev = getTranslateX("prev");
 			slide.style.transform = `translateX(${translatePrev}px)`;
 
@@ -414,14 +416,8 @@ class ProductPageSlider extends HTMLElement {
 		window.addEventListener("resize", () => {
 			setNewTranslate();
 		});
-		next.addEventListener("click", () => {
-			moveNext();
-			setNewTranslate();
-		});
-		prev.addEventListener("click", () => {
-			movePrev();
-			setNewTranslate();
-		});
+		next.addEventListener("click", moveNext);
+		prev.addEventListener("click", movePrev);
 
 		if (document.querySelector(".product-page__hidden-variants .selector-wrapper select")) {
 			document.querySelectorAll(".product-page__hidden-variants .selector-wrapper select").forEach((select) => {
