@@ -44,8 +44,9 @@
             </div>
           </form>
         </div>
-        {% if section.blocks.size > 0 %}
-          <div class="preload">
+
+        <div class="preload">
+          {% if section.blocks.size > 0 %}
             {% for block in section.blocks %}
               {% case block.type %}
                 {% when 'products' %}
@@ -95,8 +96,8 @@
                   {% endif %}
               {% endcase %}
             {% endfor %}
-          </div>
-        {% endif %}
+          {% endif %}
+        </div>
       </div>
     </div>
   </predictive-search>
