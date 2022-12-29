@@ -1,0 +1,50 @@
+{% style %}
+  .{{ section.id }}.divider {
+    height: {{ section.settings.mobile_height }}px;
+    width: 100%;
+  }
+  @media screen and (min-width: 750px) and (max-width: 1024px) {
+      .{{ section.id }}.divider {
+          height: {{ section.settings.desktop_height | times: 0.75 | round: 0 }}px;
+      }
+  }
+    @media screen and (min-width: 1024px) {
+        .{{ section.id }}.divider {
+            height: {{ section.settings.desktop_height }}px;
+        }
+    }
+{% endstyle %}
+
+<div class="{{ section.id }} divider"></div>
+
+{% schema %}
+{
+  "name": "Divider",
+  "class": "section-divider",
+  "settings": [
+    {
+      "type": "range",
+      "id": "desktop_height",
+      "min": 50,
+      "max": 300,
+      "step": 10,
+      "label": "Desktop height",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "mobile_height",
+      "min": 30,
+      "max": 200,
+      "step": 10,
+      "label": "Mobile height",
+      "default": 70
+    }
+  ],
+  "presets": [
+    {
+      "name": "Divider"
+    }
+  ]
+}
+{% endschema %}

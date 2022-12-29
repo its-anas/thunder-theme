@@ -986,73 +986,61 @@ p[data-spam-detection-disclaimer] > a {
 
 	/* Newsletter/Search/Contact sections */
 	.section-newsletter .newsletter > *,
-	.search-section > *,
 	.contact * {
 		opacity: 0;
 	}
 
 	.section-newsletter .newsletter.reveal > *,
-	.search-section.reveal > *,
 	.contact.reveal * {
 		animation: 0.3s slideUp cubic-bezier(0.75, 0, 0.175, 1) forwards;
 	}
 
 	.section-newsletter .newsletter.reveal > *:nth-child(1),
-	.search-section.reveal > *:nth-child(1),
 	.contact.reveal *:nth-child(1) {
 		animation-delay: 0.2s;
 	}
 
 	.section-newsletter .newsletter.reveal > *:nth-child(2),
-	.search-section.reveal > *:nth-child(2),
 	.contact.reveal *:nth-child(2) {
 		animation-delay: 0.4s;
 	}
 
 	.section-newsletter .newsletter.reveal > *:nth-child(3),
-	.search-section.reveal > *:nth-child(3),
 	.contact.reveal *:nth-child(3) {
 		animation-delay: 0.6s;
 	}
 
 	.section-newsletter .newsletter.reveal > *:nth-child(4),
-	.search-section.reveal > *:nth-child(4),
 	.contact.reveal *:nth-child(4) {
 		animation-delay: 0.8s;
 	}
 
 	.section-newsletter .newsletter.reveal > *:nth-child(5),
-	.search-section.reveal > *:nth-child(5),
 	.contact.reveal *:nth-child(5) {
 		animation-delay: 1s;
 	}
 
 	.section-newsletter .newsletter.reveal > *:nth-child(6),
-	.search-section.reveal > *:nth-child(6),
 	.contact.reveal *:nth-child(6) {
 		animation-delay: 1.2s;
 	}
 
 	.section-newsletter .newsletter.reveal > *:nth-child(7),
-	.search-section.reveal > *:nth-child(7),
 	.contact.reveal *:nth-child(7) {
 		animation-delay: 1.4s;
 	}
 
 	.section-newsletter .newsletter.reveal > *:nth-child(8),
-	.search-section.reveal > *:nth-child(8),
 	.contact.reveal *:nth-child(8) {
 		animation-delay: 1.6s;
 	}
 
 	.section-newsletter .newsletter.reveal > *:nth-child(9),
-	.search-section.reveal > *:nth-child(9),
 	.contact.reveal *:nth-child(9) {
 		animation-delay: 1.8s;
 	}
 
 	.section-newsletter .newsletter.reveal > *:nth-child(10),
-	.search-section.reveal > *:nth-child(10),
 	.contact.reveal *:nth-child(10) {
 		animation-delay: 2s;
 	}
@@ -1441,46 +1429,6 @@ p[data-spam-detection-disclaimer] > a {
 
 	predictive-search.reveal .search-results__list-item:nth-child(10) {
 		animation-delay: 0.55s;
-	}
-
-	predictive-search.reveal .search-results__list-item:nth-child(11) {
-		animation-delay: 0.6s;
-	}
-
-	predictive-search.reveal .search-results__list-item:nth-child(12) {
-		animation-delay: 0.65s;
-	}
-
-	predictive-search.reveal .search-results__list-item:nth-child(13) {
-		animation-delay: 0.7s;
-	}
-
-	predictive-search.reveal .search-results__list-item:nth-child(14) {
-		animation-delay: 0.75s;
-	}
-
-	predictive-search.reveal .search-results__list-item:nth-child(15) {
-		animation-delay: 0.8s;
-	}
-
-	predictive-search.reveal .search-results__list-item:nth-child(16) {
-		animation-delay: 0.85s;
-	}
-
-	predictive-search.reveal .search-results__list-item:nth-child(17) {
-		animation-delay: 0.9s;
-	}
-
-	predictive-search.reveal .search-results__list-item:nth-child(18) {
-		animation-delay: 0.95s;
-	}
-
-	predictive-search.reveal .search-results__list-item:nth-child(19) {
-		animation-delay: 1s;
-	}
-
-	predictive-search.reveal .search-results__list-item:nth-child(20) {
-		animation-delay: 1.05s;
 	}
 
 	/* Slider component */
@@ -2521,11 +2469,6 @@ cart-component.hidden {
 	border: 1px solid var(--body-text-color);
 }
 
-.search-results__divider {
-	height: 1px;
-	background: var(--body-text-color);
-}
-
 .search-results__list-item {
 	padding: 10px;
 }
@@ -2595,6 +2538,16 @@ cart-component.hidden {
 }
 
 /* ANCHOR: Search section */
+
+.search__form {
+	display: flex;
+	flex-direction: column;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+}
+
 .search-section {
 	display: flex;
 	flex-direction: column;
@@ -2602,6 +2555,11 @@ cart-component.hidden {
 	align-items: center;
 	margin-right: auto;
 	margin-left: auto;
+}
+
+.search-section .search-form__results,
+.search-section .search-results__results-list {
+	border-radius: var(--global-border-radius);
 }
 
 .search-form__container {
@@ -2617,11 +2575,11 @@ cart-component.hidden {
 	}
 }
 
-.search-section__form {
+.search-drawer__form {
 	position: relative;
 	width: 100%;
 }
-.search-drawer__container .search-section__form {
+.search-drawer__container .search-drawer__form {
 	border-bottom: 2px solid var(--body-text-color);
 }
 

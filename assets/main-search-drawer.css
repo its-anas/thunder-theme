@@ -70,7 +70,7 @@
 	text-transform: capitalize;
 }
 
-.search-drawer__container .search-section__close {
+.search-drawer__container .search-drawer__close {
 	position: absolute;
 	right: 0px;
 	bottom: 25%;
@@ -101,10 +101,6 @@
 .search-drawer__container .search-results__results-list {
 	border: 0px;
 	padding-top: 1rem;
-}
-
-.search-drawer__container .search-results__divider {
-	height: 0px;
 }
 
 .search-drawer__container .search-form__input::-webkit-search-cancel-button {

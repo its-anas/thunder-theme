@@ -12,10 +12,11 @@
     <div class="search-drawer hidden">
       <div class="search-drawer__container">
         <div class="search-form__container">
-          <form action="{{ routes.search_url }}" method="get" class="search-section__form">
+          <form action="{{ routes.search_url }}" method="get" class="search-drawer__form">
             <input
               id="Search"
               class="search-form__input"
+              data-limit="8"
               type="search"
               name="q"
               value="{{ search.terms | escape }}"
@@ -30,7 +31,7 @@
             {%- if settings.predictive_search_enabled -%}
               <div class="search-form__results" id="predictive-search" tabindex="-1"></div>
             {%- endif -%}
-            <div class="search-section__close">
+            <div class="search-drawer__close">
               {% render 'snippet-icons', icon: 'close' %}
             </div>
           </form>

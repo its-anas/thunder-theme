@@ -975,16 +975,18 @@ class PredictiveSearch extends HTMLElement {
 
 	onChange() {
 		const searchTerm = this.input.value.trim();
+		const limit = this.input.dataset.limit;
+		console.log(limit);
 		if (!searchTerm.length) {
 			this.close();
 			return;
 		}
 
-		this.getSearchResults(searchTerm);
+		this.getSearchResults(searchTerm, limit);
 	}
 
-	getSearchResults(searchTerm) {
-		fetch(`/search/suggest?q=${searchTerm}&resources[type]=product&resources[limit]=8&section_id=section-predictive-search`)
+	getSearchResults(searchTerm, limit) {
+		fetch(`/search/suggest?q=${searchTerm}&resources[type]=product&resources[limit]=${limit}&section_id=section-predictive-search`)
 			.then((response) => {
 				if (!response.ok) {
 					var error = new Error(response.status);
@@ -1037,7 +1039,7 @@ class SearchDrawer extends HTMLElement {
 		super();
 
 		this.searchDrawer = this.querySelector(".search-drawer");
-		this.closeIcon = this.searchDrawer.querySelector(".search-section__close");
+		this.closeIcon = this.searchDrawer.querySelector(".search-drawer__close");
 		this.inputField = this.searchDrawer.querySelector(".search-form__input");
 
 		this.decideDrawerAction();
