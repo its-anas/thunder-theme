@@ -3079,24 +3079,23 @@ class FeaturedProductSlider extends FeaturedProduct {
 		}
 
 		function moveNext() {
-			setNewTranslate();
 			let translateNext = getTranslateX("next");
 			slide.style.transform = `translateX(${translateNext}px)`;
 
 			pushActiveClass(".featured-product-slider__slides-container .slide .item", "next");
 			pushActiveClass(".featured-product-slider__indicators span", "next");
 			pushActiveClass(".featured-product-slider__thumbnails .thumbnail", "next");
+			setNewTranslate();
 		}
 
 		function movePrev() {
-			setNewTranslate();
 			let translatePrev = getTranslateX("prev");
 			slide.style.transform = `translateX(${translatePrev}px)`;
 
 			pushActiveClass(".featured-product-slider__slides-container .slide .item", "prev");
 			pushActiveClass(".featured-product-slider__indicators span", "prev");
-
 			pushActiveClass(".featured-product-slider__thumbnails .thumbnail", "prev");
+			setNewTranslate();
 		}
 
 		function travelToItem(AllItems, actualItem, follower) {

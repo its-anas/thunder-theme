@@ -345,23 +345,23 @@ class ProductPageSlider extends HTMLElement {
 		}
 
 		function moveNext() {
-			setNewTranslate();
 			let translateNext = getTranslateX("next");
 			slide.style.transform = `translateX(${translateNext}px)`;
 
 			pushActiveClass(".product-page-slider__slides-container .slide .item", "next");
 			pushActiveClass(".product-page-slider__indicators span", "next");
 			pushActiveClass(".product-page-slider__thumbnails .thumbnail", "next");
+			setNewTranslate();
 		}
 
 		function movePrev() {
-			setNewTranslate();
 			let translatePrev = getTranslateX("prev");
 			slide.style.transform = `translateX(${translatePrev}px)`;
 
 			pushActiveClass(".product-page-slider__slides-container .slide .item", "prev");
 			pushActiveClass(".product-page-slider__indicators span", "prev");
 			pushActiveClass(".product-page-slider__thumbnails .thumbnail", "prev");
+			setNewTranslate();
 		}
 
 		function travelToItem(AllItems, actualItem, follower) {
