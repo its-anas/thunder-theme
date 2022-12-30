@@ -100,7 +100,14 @@ img {
 	}
 }
 
-@media screen and (min-width: 1024px) {
+/* Tablet only */
+@media screen and (max-width: 750px) {
+	.tablet-desktop-only {
+		display: none !important;
+	}
+}
+
+@media screen and (min-width: 750px) {
 	.mobile-only {
 		display: none !important;
 	}
@@ -220,6 +227,10 @@ label {
 
 .price--compare-at {
 	font-weight: lighter;
+}
+
+.price--discounted {
+	color: var(--error-text-color);
 }
 
 /* ANCHOR: Font family */
@@ -1336,6 +1347,11 @@ p[data-spam-detection-disclaimer] > a {
 	}
 
 	/* Cart drawer */
+	cart-component .cart-drawer__product .quantity {
+		flex-direction: row;
+		justify-content: space-between;
+	}
+
 	cart-component .cart-drawer__product,
 	cart-component .recommended-product {
 		opacity: 0;
@@ -2320,17 +2336,9 @@ slider-component .placeholder {
 }
 
 /* ANCHOR: Tags */
+
 .tag--animated {
 	color: var(--accent-color-1);
-}
-
-.tag--animated-hover:after {
-	vertical-align: middle;
-	margin-left: 0.5rem;
-}
-
-.tag--animated-hover:after {
-	content: "NEW";
 }
 
 .tag--animated,
@@ -2354,20 +2362,47 @@ slider-component .placeholder {
 	pointer-events: none;
 }
 
+.tag--animated-hover:after {
+	content: "NEW";
+	vertical-align: middle;
+	margin-left: 0.5rem;
+}
+
+.tag--normal,
+.tag--animated,
+.tag--disabled,
+.tag--animated-hover:after {
+	color: var(--sale-tag-text-color);
+	border-radius: var(--global-border-radius);
+	font-weight: bold;
+	text-transform: uppercase;
+}
+
 .tag--normal,
 .tag--animated,
 .tag--animated-hover:after {
-	color: var(--sale-tag-text-color);
 	background-color: var(--sale-tag-background-color);
-	border-radius: var(--global-border-radius);
-	font-weight: bold;
 }
 
 .tag--disabled {
-	color: var(--sale-tag-text-color);
 	background-color: var(--secondary-text-color);
+}
+
+.discount-tag {
+	display: flex;
+	align-items: center;
+	padding: 0.3rem;
+	gap: 0.3rem;
+	background-color: var(--icon-color);
 	border-radius: var(--global-border-radius);
-	font-weight: bold;
+	width: fit-content;
+	pointer-events: none;
+}
+
+.discount-tag span {
+	font-size: var(--xsmall-font-size);
+	color: var(--background-color);
+	text-transform: uppercase;
 }
 
 /* ANCHOR: Drawers */
@@ -3105,12 +3140,10 @@ div:has(.grecaptcha-badge) {
 
 .form__messages__success,
 .form__messages__error {
-	height: 30px;
 	display: flex;
 	align-items: center;
 	padding: 1rem;
 	gap: 0.3rem;
-	height: auto;
 	width: 100%;
 }
 

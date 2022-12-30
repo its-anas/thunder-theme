@@ -38,7 +38,7 @@
             <span>
               <span class="customer-order__table__product">
                 <div class="customer-order__table__product__picture media">
-                  {%- assign image = line_item.product.featured_image -%}
+                  {%- assign image = line_item.variant.featured_image -%}
                   {%- assign widths = '70, 80, 90, 100' -%}
                   {%- assign width = '100' -%}
                   {{
@@ -63,6 +63,18 @@
                   <div class="customer-order__table__product__variant secondary-text ">
                     Quantity: {{ line_item.quantity }}
                   </div>
+                  {%- if line_item.line_level_discount_allocations != blank -%}
+                    {%- for discount_allocation in line_item.line_level_discount_allocations -%}
+                      <div class="discount-tag">
+                        {%- render 'snippet-icons', icon: 'discount' %}
+                        <span>
+                          {{ discount_allocation.discount_application.title }} (-
+                          {{- discount_allocation.amount | money -}}
+                          )
+                        </span>
+                      </div>
+                    {%- endfor -%}
+                  {%- endif -%}
                 </div>
               </span>
             </span>
@@ -83,32 +95,55 @@
             {%- endunless -%}
           {%- endunless -%}
 
-          <span>{{ line_item.original_line_price | money }}</span>
+          <div class="customer-order__table__prices">
+            <p class="price--actual {% if line_item.original_line_price > line_item.final_line_price or line_item.final_line_price == 0 or line_item.variant.compare_at_price > line_item.variant.price %}price--discounted{% endif %}">
+              {%- if line_item.final_line_price == 0 -%}
+                Free
+              {%- else -%}
+                {{- line_item.final_line_price | money -}}
+              {%- endif -%}
+            </p>
+            <p class="price--compare-at">
+              {%- if line_item.original_line_price > line_item.final_line_price -%}
+                {{- line_item.original_line_price | money -}}
+              {%- else -%}
+                {{- line_item.variant.compare_at_price | times: line_item.quantity | money -}}
+              {%- endif -%}
+            </p>
+          </div>
         </div>
       {%- endfor -%}
     </div>
 
     <div class="customer-order__table--vertical">
-      <div class="customer-order__table--vertical__head">
-        <span>Subtotal</span>
-
+      <div>
+        <span>Subtotal</span> <span>{{ order.line_items_subtotal_price | money }}</span>
+      </div>
+      {%- if cart.cart_level_discount_applications != blank -%}
+        {%- for discount_application in cart.cart_level_discount_applications -%}
+          <div>
+            <span>
+              Discount ({{ discount_application.title -}}
+              )
+            </span>
+            <span>
+              -
+              {{- discount_application.total_allocated_amount | money -}}
+            </span>
+          </div>
+        {%- endfor -%}
+      {%- endif -%}
+      <div>
         {%- for shipping_method in order.shipping_methods -%}
           <span> Shipping</span>
         {%- endfor -%}
-
-        <span><h6>Total</h6></span>
-      </div>
-
-      <div class="customer-order__table--vertical__body">
-        <span> {{ order.line_items_subtotal_price | money }}</span>
-
         {%- for shipping_method in order.shipping_methods -%}
           <span> {{ shipping_method.price | money }}</span>
         {%- endfor -%}
-
-        <span>
-          <h6>{{ order.total_price | money_with_currency }}</h6>
-        </span>
+      </div>
+      <div>
+        <h6>Total</h6>
+        <h6>{{ order.total_price | money_with_currency }}</h6>
       </div>
     </div>
 

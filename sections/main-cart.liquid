@@ -10,19 +10,19 @@
       <form action="{{ routes.cart_url }}" method="post" id="cart">
         <div class="cart-page__content">
           <div class="cart-page__content-inner">
-            <div class="cart-page__content-head">
+            <div class="cart-page__content-head tablet-desktop-only">
               <p class="cart-page__content-head__product small">PRODUCT</p>
               <p class="cart-page__content-head__quantity small">QUANTITY</p>
               <p class="cart-page__content-head__price small">PRICE</p>
             </div>
             <div class="cart-page__products">
-              {% for item in cart.items %}
+              {% for line_item in cart.items %}
                 <div class="cart-page__product">
                   <div class="cart-page__product-details">
                     <div class="cart-page__product-picture">
-                      <a href="{{ item.url }}" class="cart-drawer__product__image">
-                        {% if item.image != blank %}
-                          {%- assign image = item.image -%}
+                      <a href="{{ line_item.url }}" class="cart-drawer__product__image">
+                        {% if line_item.image != blank %}
+                          {%- assign image = line_item.image -%}
                           {%- assign sizes = '100vw' -%}
                           {%- assign widths = '80, 95' -%}
                           {%- assign width = '95' -%}
@@ -45,37 +45,71 @@
                     </div>
                     <div class="cart-page__product-info">
                       <div class="cart-page__product-info__inner">
-                        <a href="{{ item.url }}" class="cart-page__product-name">{{ item.product.title }}</a>
-                        {% if item.options_with_values.size > 1 %}
-                          {% for option in item.options_with_values %}
+                        <a href="{{ line_item.url }}" class="cart-page__product-name">{{ line_item.product.title }}</a>
+                        {% if line_item.options_with_values.size > 1 %}
+                          {% for option in line_item.options_with_values %}
                             <p class="cart-page__product-variant small">{{ option.name }}: {{ option.value }}</p>
                           {% endfor %}
                         {% endif %}
                         {% assign free_shipping_threshold = settings.free_shipping_threshold | times: 1 %}
-                        {% if free_shipping_threshold > item.variant.inventory_quantity
-                          and item.variant.inventory_quantity != 0
+                        {% if free_shipping_threshold > line_item.variant.inventory_quantity
+                          and line_item.variant.inventory_quantity != 0
                         %}
                           <p class="cart-page__stock-disclaimer small">
-                            {{ item.variant.inventory_quantity }} left in stock
+                            {{ line_item.variant.inventory_quantity }} left in stock
                           </p>
                         {% endif %}
-                      </div>
-                      <div class="cart-page__product-quantity--mobile">
-                        <quantity-field class="quantity" {{ block.shopify_attributes }}>
-                          <div class="quantity-field cart" id="quantity-field">
-                            <button type="button" class="quantity-field__minus" id="quantity-field__minus">-</button>
-                            <input
-                              type="quantity"
-                              class="quantity-field__input"
-                              id="quantity-field__input"
-                              name="quantity"
-                              min="1"
-                              data-variant-id="{{ item.variant_id }}"
-                              value="{{ item.quantity }}"
+                        <div class="cart-page__product-prices mobile-only">
+                          <p class="cart-page__product-price {% if line_item.original_line_price > line_item.final_line_price or line_item.final_line_price == 0 or line_item.variant.compare_at_price > line_item.variant.price %}price--discounted{% endif %}">
+                            {%- if line_item.final_line_price == 0 -%}
+                              Free
+                            {%- else -%}
+                              {{- line_item.final_line_price | money -}}
+                            {%- endif -%}
+                          </p>
+                          <p class="cart-page__product-compare-at price--compare-at">
+                            {%- if line_item.original_line_price > line_item.final_line_price -%}
+                              {{- line_item.original_line_price | money -}}
+                            {%- else -%}
+                              {{- line_item.variant.compare_at_price | times: line_item.quantity | money -}}
+                            {%- endif -%}
+                          </p>
+                        </div>
+                        {%- if line_item.line_level_discount_allocations != blank -%}
+                          {%- for discount_allocation in line_item.line_level_discount_allocations -%}
+                            <div class="discount-tag">
+                              {%- render 'snippet-icons', icon: 'discount' %}
+                              <span>
+                                {{ discount_allocation.discount_application.title }} (-
+                                {{- discount_allocation.amount | money -}}
+                                )
+                              </span>
+                            </div>
+                          {%- endfor -%}
+                        {%- endif -%}
+                        <div class="cart-page__product-quantity--mobile">
+                          <quantity-field class="quantity" {{ block.shopify_attributes }}>
+                            <div class="quantity-field cart" id="quantity-field">
+                              <button type="button" class="quantity-field__minus" id="quantity-field__minus">-</button>
+                              <input
+                                type="quantity"
+                                class="quantity-field__input"
+                                id="quantity-field__input"
+                                name="quantity"
+                                min="1"
+                                data-variant-id="{{ line_item.variant_id }}"
+                                value="{{ line_item.quantity }}"
+                              >
+                              <button type="button" class="quantity-field__plus" id="quantity-field__plus">+</button>
+                            </div>
+                            <div
+                              data-variant-id="{{ line_item.variant_id }}"
+                              class="quantity-field__product-remove remove"
                             >
-                            <button type="button" class="quantity-field__plus" id="quantity-field__plus">+</button>
-                          </div>
-                        </quantity-field>
+                              {% render 'snippet-icons', icon: 'trash' %}
+                            </div>
+                          </quantity-field>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -89,27 +123,31 @@
                           id="quantity-field__input"
                           name="quantity"
                           min="1"
-                          data-variant-id="{{ item.variant_id }}"
-                          value="{{ item.quantity }}"
+                          data-variant-id="{{ line_item.variant_id }}"
+                          value="{{ line_item.quantity }}"
                         >
                         <button type="button" class="quantity-field__plus" id="quantity-field__plus">+</button>
                       </div>
-                      <div data-variant-id="{{ item.variant_id }}" class="quantity-field__product-remove remove">
+                      <div data-variant-id="{{ line_item.variant_id }}" class="quantity-field__product-remove remove">
                         {% render 'snippet-icons', icon: 'trash' %}
                       </div>
                     </quantity-field>
                   </div>
-                  <div class="cart-page__product-prices">
-                    <p class="cart-page__product-price">{{ item.final_line_price | money }}</p>
-                    {% assign compare_at_price = item.variant.compare_at_price | times: item.quantity %}
-                    {% if compare_at_price > item.final_line_price %}
-                      <p class="cart-page__product-compare-at price--compare-at">
-                        {{ compare_at_price | money }}
-                      </p>
-                    {% endif %}
-                    <div data-variant-id="{{ item.variant_id }}" class="quantity-field__product-remove--mobile remove">
-                      {% render 'snippet-icons', icon: 'trash' %}
-                    </div>
+                  <div class="cart-page__product-prices tablet-desktop-only">
+                    <p class="cart-page__product-price {% if line_item.original_line_price > line_item.final_line_price or line_item.final_line_price == 0 or line_item.variant.compare_at_price > line_item.variant.price %}price--discounted{% endif %}">
+                      {%- if line_item.final_line_price == 0 -%}
+                        Free
+                      {%- else -%}
+                        {{- line_item.final_line_price | money -}}
+                      {%- endif -%}
+                    </p>
+                    <p class="cart-page__product-compare-at price--compare-at">
+                      {%- if line_item.original_line_price > line_item.final_line_price -%}
+                        {{- line_item.original_line_price | money -}}
+                      {%- else -%}
+                        {{- line_item.variant.compare_at_price | times: line_item.quantity | money -}}
+                      {%- endif -%}
+                    </p>
                   </div>
                 </div>
               {% endfor %}
@@ -131,6 +169,22 @@
                       <h6 class="cart-page__interaction-text">Total</h6>
                       <h6 class="cart-page__total-amount">{{ cart.total_price | money }}</h6>
                     </div>
+                    {%- if cart.cart_level_discount_applications != blank -%}
+                      {%- for discount_application in cart.cart_level_discount_applications -%}
+                        <div class="cart-page__interaction-top-text" {{ block.shopify_attributes }}>
+                          <div class="discount-tag">
+                            {%- render 'snippet-icons', icon: 'discount' %}
+                            <span>
+                              {{ discount_application.title -}}
+                            </span>
+                          </div>
+                          <span>
+                            -
+                            {{- discount_application.total_allocated_amount | money -}}
+                          </span>
+                        </div>
+                      {%- endfor -%}
+                    {%- endif -%}
                   {%- when 'checkout_button' -%}
                     <div class="cart-page__button buttons" {{ block.shopify_attributes }}>
                       <button

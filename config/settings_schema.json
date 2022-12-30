@@ -156,7 +156,8 @@
                     "type": "color",
                     "id": "error_text_color",
                     "label": "Error text",
-                    "default": "#7b0000"
+                    "default": "#7b0000",
+                    "info": "Impact the stock alert text and discounted price text too."
                },
                {
                     "type": "color",

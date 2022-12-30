@@ -229,6 +229,7 @@
 	width: 80%;
 }
 
+.customer-order__table__prices,
 .customer-order__table--main .customer-order__table__head span:nth-child(2),
 .customer-order__table--main .customer-order__table__body span:nth-child(2) {
 	width: 20%;
@@ -256,6 +257,18 @@
 	display: flex;
 	flex-direction: column;
 	gap: 0.5rem;
+}
+
+.customer-order__table--vertical {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+
+.customer-order__table--vertical * {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
 }
 
 .customer-order__table--vertical,
@@ -302,6 +315,7 @@
 	padding-top: 0.5rem;
 }
 
+.customer-order__table__prices,
 .customer-order__table--main .customer-order__table__head span:last-child,
 .customer-order__table--main .customer-order__table__body span:last-child {
 	text-align: end;
@@ -315,7 +329,7 @@
 .customer-order__table__body {
 	border-top: 1px solid var(--body-text-color);
 }
-
+.customer-order__table__prices,
 .customer-order__table__head span,
 .customer-order__table__body span {
 	padding: 1rem 0;
@@ -338,6 +352,10 @@
 	display: flex;
 	flex-direction: column;
 	gap: 0.5rem;
+}
+
+.customer-order__table__product__details .discount-tag {
+	display: block;
 }
 
 .customer-order__table__product__variant {
