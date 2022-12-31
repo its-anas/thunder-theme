@@ -45,21 +45,21 @@
         {% endif %}
       >
         <div class="item-picture media">
-            {%- capture sizes -%}(min-width: 1024px) calc((var(--page-width) - 10rem ) / 2), (min-width: 750px) calc(100vw - 4rem), calc(100vw - 2rem){%- endcapture -%}
-            {%- assign widths = '300, 350, 400, 450, 500, 550, 600, 650, 700, 750, 800, 850, 900' -%}
-            {%- assign width = '900' -%}
-            {{
-              image
-              | image_url: width: width
-              | image_tag:
-                loading: 'lazy',
-                class: 'contain',
-                alt: image.alt,
-                width: image.width,
-                height: image.height,
-                sizes: sizes,
-                widths: widths
-            }}
+          {%- capture sizes -%}(min-width: 1024px) calc((var(--page-width) - 10rem ) / 2), (min-width: 750px) calc(100vw - 4rem), calc(100vw - 2rem){%- endcapture -%}
+          {%- assign widths = '300, 350, 400, 450, 500, 550, 600, 650, 700, 750, 800, 850, 900' -%}
+          {%- assign width = '900' -%}
+          {{
+            image
+            | image_url: width: width
+            | image_tag:
+              loading: 'lazy',
+              class: 'contain',
+              alt: image.alt,
+              width: image.width,
+              height: image.height,
+              sizes: sizes,
+              widths: widths
+          }}
         </div>
       </div>
     {% endfor %}
@@ -82,22 +82,22 @@
         {% endif %}
       >
         <div class="thumbnail-picture media">
-            {%- assign image = thumbnail -%}
-            {%- capture sizes -%}(min-width: 1024px) calc(((var(--page-width) - 10rem ) / 2 ) / 6), (min-width: 750px) calc((100vw - 4rem) / 5), calc((100vw - 2rem) / 4){%- endcapture -%}
-            {%- assign widths = '60, 70, 80, 90, 100, 110, 120, 130' -%}
-            {%- assign width = '130' -%}
-            {{
-              image
-              | image_url: width: width
-              | image_tag:
-                loading: 'lazy',
-                class: 'contain',
-                alt: image.alt,
-                width: image.width,
-                height: image.height,
-                sizes: sizes,
-                widths: widths
-            }}
+          {%- assign image = thumbnail -%}
+          {%- capture sizes -%}(min-width: 1024px) calc(((var(--page-width) - 10rem ) / 2 ) / 6), (min-width: 750px) calc((100vw - 4rem) / 5), calc((100vw - 2rem) / 4){%- endcapture -%}
+          {%- assign widths = '60, 70, 80, 90, 100, 110, 120, 130' -%}
+          {%- assign width = '130' -%}
+          {{
+            image
+            | image_url: width: width
+            | image_tag:
+              loading: 'lazy',
+              class: 'contain',
+              alt: image.alt,
+              width: image.width,
+              height: image.height,
+              sizes: sizes,
+              widths: widths
+          }}
         </div>
       </div>
     {% endfor %}
@@ -117,13 +117,20 @@
 
 <product-page reveal-on-scroll class="product-page" data-product="{{ product.id }}">
   <div class="product-page__container">
-      {% render 'snippet-breadcrumbs', bc1: routes.root_url, bc1_text: 'Home', bc2: routes.collections_url, bc2_text: 'Products', bc3: product.url, bc3_text: product.title %}
+    {% render 'snippet-breadcrumbs',
+      bc1: routes.root_url,
+      bc1_text: 'Home',
+      bc2: routes.collections_url,
+      bc2_text: 'Products',
+      bc3: product.url,
+      bc3_text: product.title
+    %}
     <div class="product-page__content">
       <div class="product-page__pictures">
         <div class="product-page__close">
           {% render 'snippet-icons', icon: 'close' %}
         </div>
-        
+
         <product-page-slider
           data-mobile-items="{{ mobile_items }}"
           data-tablet-items="{{ tablet_items }}"
@@ -142,9 +149,13 @@
               {% render 'snippet-icons', icon: 'chevron-next' %}
             </div>
           </div>
-          <div class="product-page-slider__indicators {% if section.settings.thumbnails_on_mobile == false %}indicators-mobile{% else %}thumbnails-mobile{% endif %}"></div>
+          <div
+            class="product-page-slider__indicators {% if section.settings.thumbnails_on_mobile == false %}indicators-mobile{% else %}thumbnails-mobile{% endif %}"
+          ></div>
           <div class="product-page-slider__thumbnails-container ">
-            <div class="product-page-slider__thumbnails {% if section.settings.thumbnails_on_mobile == false %}indicators-mobile{% endif %}"></div>
+            <div
+              class="product-page-slider__thumbnails {% if section.settings.thumbnails_on_mobile == false %}indicators-mobile{% endif %}"
+            ></div>
           </div>
         </product-page-slider>
         <div
@@ -270,12 +281,12 @@
                           {% elsif block.settings.color_selector_type == 'variant_image' %}
                             <div class="product-page__radio__content">
                               {% for value in option.values %}
-                                {% liquid 
-                                  for variant in product.variants 
-                                      if variant.title contains value
-                                        assign variant_image = variant.featured_image
-                                        break
-                                      endif
+                                {% liquid
+                                  for variant in product.variants
+                                    if variant.title contains value
+                                      assign variant_image = variant.featured_image
+                                      break
+                                    endif
                                   endfor
                                 %}
                                 <label
@@ -294,20 +305,20 @@
                                     class="product-page__radio__input"
                                   >
                                   {% if variant_image != blank %}
-                                      {%- assign image = variant_image -%}
-                                      {%- assign widths = '80, 90, 100' -%}
-                                      {%- assign width = '100' -%}
-                                      {{
-                                        image
-                                        | image_url: width: width
-                                        | image_tag:
-                                          loading: 'lazy',
-                                          class: 'contain',
-                                          alt: image.alt,
-                                          width: image.width,
-                                          height: image.height,
-                                          widths: widths
-                                      }}
+                                    {%- assign image = variant_image -%}
+                                    {%- assign widths = '80, 90, 100' -%}
+                                    {%- assign width = '100' -%}
+                                    {{
+                                      image
+                                      | image_url: width: width
+                                      | image_tag:
+                                        loading: 'lazy',
+                                        class: 'contain',
+                                        alt: image.alt,
+                                        width: image.width,
+                                        height: image.height,
+                                        widths: widths
+                                    }}
                                   {% else %}
                                     {{ value }}
                                   {% endif %}
@@ -319,10 +330,10 @@
                               {% for value in option.values %}
                                 <label
                                   class=" product-page__radio__label color_swatch{% if option.selected_value == value %} checked{% endif %}"
-                                  style="color: transparent;{% render 'snippet-color-swatch', actual_color: value %}"                               
+                                  style="color: transparent;{% render 'snippet-color-swatch', actual_color: value %}"
                                   for="{{ option.name | handle }}-{{ value | handle }}"
                                 >
-                                    {{ value }}
+                                  {{ value }}
                                   <input
                                     {% if option.selected_value == value %}
                                       checked
@@ -354,7 +365,7 @@
                         </option>
                       {% endfor %}
                     </select>
-                  </div> 
+                  </div>
                 {% endunless %}
               {% when 'quantity' %}
                 <quantity-field class="quantity" {{ block.shopify_attributes }}>
@@ -415,33 +426,41 @@
                   {% render 'snippet-countdown-timer', element: block %}
                 </div>
               {% when 'buttons' %}
-                <div class="product-page__buttons buttons buttons--center" {{ block.shopify_attributes }}>    
-                   <button type='submit' name='add' value='Add to cart' class='button button--primary border add-to-cart-button' id='add-to-cart-button' data-variants-number="{{ product.variants.size }}" data-actual-variant="{{ product.selected_or_first_available_variant.id }}"> 
+                <div class="product-page__buttons buttons buttons--center" {{ block.shopify_attributes }}>
+                  <button
+                    type="submit"
+                    name="add"
+                    value="Add to cart"
+                    class="button button--primary border add-to-cart-button"
+                    id="add-to-cart-button"
+                    data-variants-number="{{ product.variants.size }}"
+                    data-actual-variant="{{ product.selected_or_first_available_variant.id }}"
+                  >
                     <span></span> <span></span> <span></span> <span></span>
-                    ADD TO CART  
+                    ADD TO CART
                     {% render 'snippet-icons',
                       icon: 'loading-spinner',
                       spinner_color: 'var(--primary-button-text-color)',
                       spinner_background_color: 'var(--primary-button-background-color)'
                     %}
-                </button>
+                  </button>
                   {% if block.settings.show_buy_now == true %}
-                  <div class="dynamic-buy-button" id="dynamic-buy-button">
-                    {{ form | payment_button }}
-                  </div>
-                {% endif %}
+                    <div class="dynamic-buy-button" id="dynamic-buy-button">
+                      {{ form | payment_button }}
+                    </div>
+                  {% endif %}
                 </div>
               {% when 'trust_bar' %}
                 <div class="product-page__trust-bar" {{ block.shopify_attributes }}>
-                  <a 
+                  <a
                     {% if block.settings.trust_icon_1_link != blank %}
                       href="{{ block.settings.trust_icon_1_link }}"
                     {% endif %}
                     class="product-page__trust-badge"
                   >
                     <div class="product-page__trust-icon">
-                      {% if block.settings.trust_icon_1_svg  == blank %}
-                         {% render 'snippet-icons', icon: block.settings.theme_icon_1 %}
+                      {% if block.settings.trust_icon_1_svg == blank %}
+                        {% render 'snippet-icons', icon: block.settings.theme_icon_1 %}
                       {% else %}
                         {{ block.settings.trust_icon_1_svg }}
                       {% endif %}
@@ -457,8 +476,8 @@
                     class="product-page__trust-badge"
                   >
                     <div class="product-page__trust-icon">
-                      {% if block.settings.trust_icon_2_svg  == blank %}
-                         {% render 'snippet-icons', icon: block.settings.theme_icon_2 %}
+                      {% if block.settings.trust_icon_2_svg == blank %}
+                        {% render 'snippet-icons', icon: block.settings.theme_icon_2 %}
                       {% else %}
                         {{ block.settings.trust_icon_2_svg }}
                       {% endif %}
@@ -474,8 +493,8 @@
                     class="product-page__trust-badge"
                   >
                     <div class="product-page__trust-icon">
-                      {% if block.settings.trust_icon_3_svg  == blank %}
-                         {% render 'snippet-icons', icon: block.settings.theme_icon_3 %}
+                      {% if block.settings.trust_icon_3_svg == blank %}
+                        {% render 'snippet-icons', icon: block.settings.theme_icon_3 %}
                       {% else %}
                         {{ block.settings.trust_icon_3_svg }}
                       {% endif %}
@@ -511,14 +530,15 @@
                                   widths: widths
                               }}
                             </a>
-                            <div class="quick-view-button desktop-only"
+                            <div
+                              class="quick-view-button desktop-only"
                               id="quick-view-button"
                               data-first-available-variant-id="{{ bundled_product.first_available_variant.id }}"
                               data-product-handle="{{ bundled_product.handle }}"
                               data-product-variants="{% if  bundled_product.variants.size > 1 %}with{% else %}without{% endif %}"
-                              >
+                            >
                               {% render 'snippet-icons', icon: 'quick-view' %}
-                              </div>
+                            </div>
                           </div>
                           <a href="{{ bundled_product.url }}" class="product-page__recommended-product-title">
                             {{ bundled_product.title }}
@@ -552,55 +572,54 @@
   </div>
 </product-page>
 
-
 <script defer>
-    updateRecentlyViewedProductsCookie("{{ product.id }}", "{{ product.title }}", "{{ product.url }}", "{{ product.available }}", "{{ product.featured_image | image_url }}", "{{ product.featured_image.alt }}", "{{ product.featured_image.width }}", "{{ product.featured_image.height }}", "{{ product.price | money }}", "{{ product.compare_at_price | money }}", "{{ product.compare_at_price | minus: product.price }}", "{{ product.compare_at_price | minus: product.price | money }}", "{{ 'now' | date: "%d" | minus: product.published_at | date: "%d" }}", "{{ product.first_available_variant.id }}", "{{ product.handle }}", "{{ product.variants.size }}");
-    function updateRecentlyViewedProductsCookie(productId, productTitle, productUrl, productAvailability, productImage, productImageAlt, productImageWidth, productImageHeight, productPrice, productCompareAtPrice, productPriceDifference, productPriceDifferenceWithCurrency, productDateDifference, productVariantFirstId, productHandle, productVariantsSize) {
-      let recentlyViewedProducts = [];
+  updateRecentlyViewedProductsCookie("{{ product.id }}", "{{ product.title }}", "{{ product.url }}", "{{ product.available }}", "{{ product.featured_image | image_url }}", "{{ product.featured_image.alt }}", "{{ product.featured_image.width }}", "{{ product.featured_image.height }}", "{{ product.price | money }}", "{{ product.compare_at_price | money }}", "{{ product.compare_at_price | minus: product.price }}", "{{ product.compare_at_price | minus: product.price | money }}", "{{ 'now' | date: "%d" | minus: product.published_at | date: "%d" }}", "{{ product.first_available_variant.id }}", "{{ product.handle }}", "{{ product.variants.size }}");
+  function updateRecentlyViewedProductsCookie(productId, productTitle, productUrl, productAvailability, productImage, productImageAlt, productImageWidth, productImageHeight, productPrice, productCompareAtPrice, productPriceDifference, productPriceDifferenceWithCurrency, productDateDifference, productVariantFirstId, productHandle, productVariantsSize) {
+    let recentlyViewedProducts = [];
 
-      let recentlyViewedProductsCookie =
-        document.cookie.indexOf("recentlyViewedProducts=") !== -1
-          ? JSON.parse(
-              document.cookie
-                .split("; ")
-                .find((row) => row.startsWith("recentlyViewedProducts"))
-                .split("=")
-                .slice(1)
-                .join("=")
-            )
-          : [];
-      let expiry = new Date(400 * 24 * 60 * 60 * 1000 + Date.parse(new Date()));
+    let recentlyViewedProductsCookie =
+      document.cookie.indexOf("recentlyViewedProducts=") !== -1
+        ? JSON.parse(
+            document.cookie
+              .split("; ")
+              .find((row) => row.startsWith("recentlyViewedProducts"))
+              .split("=")
+              .slice(1)
+              .join("=")
+          )
+        : [];
+    let expiry = new Date(400 * 24 * 60 * 60 * 1000 + Date.parse(new Date()));
 
-      let productData = {
-        id: productId,
-        title: productTitle,
-        url: productUrl,
-        availability: productAvailability,
-        image: productImage,
-        image_alt: productImageAlt,
-        image_width: productImageWidth,
-        image_height: productImageHeight,
-        price: productPrice,
-        compare_at_price: productCompareAtPrice,
-        price_difference: productPriceDifference,
-        price_difference_with_currency: productPriceDifferenceWithCurrency,
-        date_difference: productDateDifference,
-        variant_first_id: productVariantFirstId,
-        handle: productHandle,
-        variants_size: productVariantsSize,
-      };
+    let productData = {
+      id: productId,
+      title: productTitle,
+      url: productUrl,
+      availability: productAvailability,
+      image: productImage,
+      image_alt: productImageAlt,
+      image_width: productImageWidth,
+      image_height: productImageHeight,
+      price: productPrice,
+      compare_at_price: productCompareAtPrice,
+      price_difference: productPriceDifference,
+      price_difference_with_currency: productPriceDifferenceWithCurrency,
+      date_difference: productDateDifference,
+      variant_first_id: productVariantFirstId,
+      handle: productHandle,
+      variants_size: productVariantsSize,
+    };
 
-      for (product = 0; product < recentlyViewedProductsCookie.length; product++) {
-        if (recentlyViewedProductsCookie[product].id === productData.id) {
-          recentlyViewedProductsCookie.splice(product, 1);
-        }
+    for (product = 0; product < recentlyViewedProductsCookie.length; product++) {
+      if (recentlyViewedProductsCookie[product].id === productData.id) {
+        recentlyViewedProductsCookie.splice(product, 1);
       }
-
-      recentlyViewedProductsCookie.push(productData);
-      let newList = JSON.stringify(recentlyViewedProductsCookie);
-
-      document.cookie = "recentlyViewedProducts" + "=" + newList + "; expires=" + expiry + "; path=/; domain=." + window.location.hostname;
     }
+
+    recentlyViewedProductsCookie.push(productData);
+    let newList = JSON.stringify(recentlyViewedProductsCookie);
+
+    document.cookie = "recentlyViewedProducts" + "=" + newList + "; expires=" + expiry + "; path=/; domain=." + window.location.hostname;
+  }
 </script>
 
 {% # theme-check-disable ParserBlockingScriptTag %}
@@ -608,6 +627,8 @@
 {% # theme-check-enable ParserBlockingScriptTag %}
 
 <script defer>
+  
+  
 
   let variantsInventory = {};
   {% for variant in product.variants %}
@@ -619,14 +640,20 @@
           {%- liquid 
             for block in section.blocks 
                 case block.type 
-                  when "buttons" 
-                    if block.settings.show_payment_methods == true 
-                        assign enabled_payment_types = block.settings.chosen_payment_methods | remove: ' ' | split: ',' 
-                        for type in enabled_payment_types 
-                          echo type | payment_type_svg_tag: class: 'icon'
-                        endfor 
-                    endif 
-                endcase
+                    when "buttons" 
+                        if block.settings.show_payment_methods == true 
+                            if settings.payment_methods_type == 'chosen'
+                                assign enabled_payment_types = settings.chosen_payment_methods | remove: ' ' | split: ','
+                                for type in enabled_payment_types
+                                    echo type | payment_type_svg_tag: class: 'icon'
+                                endfor
+                            elsif settings.payment_methods_type == 'enabled'
+                                for type in shop.enabled_payment_types
+                                    echo type | payment_type_svg_tag: class: 'icon'
+                                endfor
+                            endif
+                        endif 
+                  endcase
             endfor 
           -%}
       </div>
@@ -636,9 +663,9 @@
   let currentVariantInventory = {{ current_variant.inventory_quantity }};
   let stockAlertThreshold = {{ stock_alert_threshold }};
   let priceDifferenceText= "{{ price_difference_text }}";
-</script>
 
-</div>
+
+</script>
 
 {% schema %}
 {
@@ -980,13 +1007,6 @@
           "id": "show_payment_methods",
           "label": "Show payment methods icons with buy now button",
           "default": true
-        },
-        {
-          "type": "text",
-          "id": "chosen_payment_methods",
-          "label": "Pick which payment methods to show",
-          "default": "paypal,visa,master,american_express,discover,shopify_pay",
-          "info": "All available payment methods: afterpay,american_express,apple_pay,bitcoin,dankort,diners_club,discover,dogecoin,dwolla,facebook_pay,forbrugsforeningen,google_pay,ideal,jcb,klarna,klarna-pay-later,litecoin,maestro,master,paypal,shopify_pay,sofort,visa"
         }
       ]
     },
@@ -1010,7 +1030,7 @@
           "id": "trust_icon_1_link",
           "label": "Link"
         },
-                {
+        {
           "type": "select",
           "id": "theme_icon_1",
           "label": "Icon",
@@ -1164,7 +1184,7 @@
           "id": "trust_icon_1_svg",
           "label": "Custom icon - svg"
         },
-       {
+        {
           "type": "header",
           "content": "Trust icon 2"
         },

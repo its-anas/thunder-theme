@@ -216,12 +216,20 @@
       </div>
 
       <div class="footer__payment-methods">
-        {% if section.settings.show_payment_methods == true %}
-          {% assign enabled_payment_types = section.settings.chosen_payment_methods | remove: ' ' | split: ',' %}
-          {% for type in enabled_payment_types %}
-            {{ type | payment_type_svg_tag: class: 'icon' }}
-          {% endfor %}
-        {% endif %}
+        {%- liquid
+          if section.settings.show_payment_methods == true
+            if settings.payment_methods_type == 'chosen'
+              assign enabled_payment_types = settings.chosen_payment_methods | remove: ' ' | split: ','
+              for type in enabled_payment_types
+                echo type | payment_type_svg_tag: class: 'icon'
+              endfor
+            elsif settings.payment_methods_type == 'enabled'
+              for type in shop.enabled_payment_types
+                echo type | payment_type_svg_tag: class: 'icon'
+              endfor
+            endif
+          endif
+        -%}
       </div>
 
       <p class="footer__powered-by">
@@ -254,29 +262,6 @@
       "id": "show_payment_methods",
       "label": "Show payment methods",
       "default": true
-    },
-    {
-      "type": "select",
-      "id": "payment_methods_type",
-      "label": "Payment methods type",
-      "options": [
-        {
-          "value": "enabled",
-          "label": "Option 1: Show the enabled payment methods only"
-        },
-        {
-          "value": "chosen",
-          "label": "Option 2: Pick which payment methods to show"
-        }
-      ],
-      "default": "enabled"
-    },
-    {
-      "type": "text",
-      "id": "chosen_payment_methods",
-      "label": "Option 2: Pick which payment methods to show",
-      "default": "paypal,visa,master,american_express,discover,shopify_pay",
-      "info": "All available payment methods: afterpay,american_express,apple_pay,bitcoin,dankort,diners_club,discover,dogecoin,dwolla,facebook_pay,forbrugsforeningen,google_pay,ideal,jcb,klarna,klarna-pay-later,litecoin,maestro,master,paypal,shopify_pay,sofort,visa"
     }
   ],
   "blocks": [

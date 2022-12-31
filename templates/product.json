@@ -59,8 +59,7 @@
           "settings": {
             "show_add_to_cart": true,
             "show_buy_now": true,
-            "show_payment_methods": true,
-            "chosen_payment_methods": "paypal,visa,master,american_express,discover,shopify_pay"
+            "show_payment_methods": true
           }
         },
         "recommended_products": {

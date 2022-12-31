@@ -165,8 +165,7 @@
           "show_currency_selector": false,
           "show_language_selector": false,
           "show_payment_methods": true,
-          "payment_methods_type": "enabled",
-          "chosen_payment_methods": "paypal,visa,master,american_express,discover,shopify_pay"
+          "payment_methods_type": "enabled"
         }
       }
     },
@@ -338,8 +337,7 @@
             "show_currency_selector": false,
             "show_language_selector": false,
             "show_payment_methods": true,
-            "payment_methods_type": "enabled",
-            "chosen_payment_methods": "paypal,visa,master,american_express,discover,shopify_pay"
+            "payment_methods_type": "enabled"
           }
         }
       }
@@ -509,8 +507,7 @@
             "show_currency_selector": false,
             "show_language_selector": false,
             "show_payment_methods": true,
-            "payment_methods_type": "enabled",
-            "chosen_payment_methods": "paypal,visa,master,american_express,discover,shopify_pay"
+            "payment_methods_type": "enabled"
           }
         }
       }
