@@ -1821,7 +1821,7 @@ a.button--secondary {
 @media screen and (min-width: 1024px) {
 	a.button--primary,
 	a.button--secondary {
-		padding: 15px 0px;
+		padding: 1rem;
 	}
 }
 
@@ -2141,7 +2141,7 @@ a.remove .loading-spinner svg.mini {
 }
 
 .quantity-field.cart {
-	width: 83px;
+	width: 95px;
 	height: 25px;
 }
 
