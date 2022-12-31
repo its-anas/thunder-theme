@@ -1131,16 +1131,16 @@ p[data-spam-detection-disclaimer] > a {
 
 	/* Collection/Search page */
 
-	.collection__head .collection__head__image *,
-	.collection__head .collection__head__title {
+	.collection__header .collection__header__image *,
+	.collection__header .collection__header__title {
 		opacity: 0;
 	}
 
-	.collection__head.reveal .collection__head__title {
+	.collection__header.reveal .collection__header__title {
 		animation: 0.8s slideUp 0.5s cubic-bezier(0.75, 0, 0.175, 1) forwards;
 	}
 
-	.collection__head.reveal .collection__head__image * {
+	.collection__header.reveal .collection__header__image * {
 		animation: 1s zoomIn cubic-bezier(0.75, 0, 0.175, 1) forwards;
 	}
 
