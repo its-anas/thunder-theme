@@ -213,8 +213,6 @@
                     "tablet_items": 3,
                     "desktop_items": 4,
                     "items_limit": 13,
-                    "new_tag": true,
-                    "new_tag_time": 30,
                     "heading": "Featured collection",
                     "heading_size": "h6",
                     "background_color": "rgba(0,0,0,0)",

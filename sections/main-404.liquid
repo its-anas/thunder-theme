@@ -14,12 +14,6 @@
           name="q"
           value="{{ search.terms | escape }}"
           placeholder="What are you looking for?"
-          {%- if settings.predictive_search_enabled -%}
-            autocorrect="off"
-            autocomplete="off"
-            autocapitalize="off"
-            spellcheck="false"
-          {%- endif -%}
         >
         <button class="search__icon">
           {% render 'snippet-icons', icon: 'search' %}

@@ -99,9 +99,7 @@
         "products_per_row_desktop": 4,
         "products_per_row_mobile": "2",
         "show_filter": true,
-        "filters_expanded_at_start": true,
-        "new_tag": true,
-        "new_tag_time": 30
+        "filters_expanded_at_start": true
       }
     }
   },

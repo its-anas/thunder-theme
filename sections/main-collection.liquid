@@ -128,7 +128,7 @@
 
                         <a
                           href="{{ item.url }}"
-                          class="collection__item__name {% if section.settings.new_tag == true and difference_in_days < section.settings.new_tag_time %}tag--animated-hover{% endif %}"
+                          class="collection__item__name {% if settings.new_tag == true and difference_in_days < settings.new_tag_time %}tag--animated-hover{% endif %}"
                         >
                           {{- item.title -}}
                         </a>
@@ -232,23 +232,6 @@
       "id": "filters_expanded_at_start",
       "label": "Filters expanded at start",
       "default": true
-    },
-    {
-      "type": "checkbox",
-      "id": "new_tag",
-      "label": "Show 'NEW' tag",
-      "default": true
-    },
-    {
-      "type": "range",
-      "id": "new_tag_time",
-      "label": "'NEW' tag countback",
-      "info": "Show the 'NEW' tag if the product is published in the last X days",
-      "min": 0,
-      "max": 90,
-      "step": 1,
-      "unit": "D",
-      "default": 30
     }
   ]
 }

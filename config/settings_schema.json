@@ -365,10 +365,31 @@
                     "info": "Applies only to products listed in collection pages and some sections"
                },
                {
+                    "type": "header",
+                    "content": "Tags"
+               },
+               {
                     "type": "checkbox",
                     "id": "animate_tags",
                     "default": true,
                     "label": "Animate tags"
+               },
+               {
+                    "type": "checkbox",
+                    "id": "new_tag",
+                    "label": "Show 'NEW' tag for new products",
+                    "default": true
+               },
+               {
+                    "type": "range",
+                    "id": "new_tag_time",
+                    "label": "'NEW' tag count back",
+                    "info": "Show the 'NEW' tag if the product is published in the last X days",
+                    "min": 0,
+                    "max": 90,
+                    "step": 1,
+                    "unit": "D",
+                    "default": 30
                },
                {
                     "type": "header",
@@ -428,17 +449,6 @@
                     "id": "color_swatch_list",
                     "label": "List of colors and their hex codes",
                     "default": "Black:#000000, White:#fff, Red:#ff0000, Green:#00ff00, Blue:#0000ff, Gold:#FFD700, Grey:#808080, Purple:#800080"
-               }
-          ]
-     },
-     {
-          "name": "Search behavior",
-          "settings": [
-               {
-                    "type": "checkbox",
-                    "id": "predictive_search_enabled",
-                    "default": true,
-                    "label": "Enable product suggestions"
                }
           ]
      },

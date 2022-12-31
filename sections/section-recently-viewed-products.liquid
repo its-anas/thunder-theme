@@ -68,8 +68,8 @@
     <div
       data-items-limit="{{ section.settings.items_limit }}"
       data-image-style="{{ section.settings.image_style }}"
-      data-new-tag="{{ section.settings.new_tag }}"
-      data-new-tag-time="{{ section.settings.new_tag_time }}"
+      data-new-tag="{{ settings.new_tag }}"
+      data-new-tag-time="{{ settings.new_tag_time }}"
       class="slides-container"
     >
       <div class="slide"></div>
@@ -162,23 +162,6 @@
       "unit": "p",
       "label": "Maximum number of products",
       "default": 8
-    },
-    {
-      "type": "checkbox",
-      "id": "new_tag",
-      "label": "Show 'NEW' tag",
-      "default": true
-    },
-    {
-      "type": "range",
-      "id": "new_tag_time",
-      "label": "'NEW' tag countback",
-      "info": "Show the 'NEW' tag if the product is published in the last X days",
-      "min": 0,
-      "max": 90,
-      "step": 1,
-      "unit": "D",
-      "default": 30
     },
     {
       "type": "header",

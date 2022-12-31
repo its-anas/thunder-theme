@@ -21,14 +21,14 @@
               name="q"
               value="{{ search.terms | escape }}"
               placeholder="Search..."
-              {%- if settings.predictive_search_enabled -%}
+              {%- if section.settings.predictive_search_enabled -%}
                 autocorrect="off"
                 autocomplete="off"
                 autocapitalize="off"
                 spellcheck="false"
               {%- endif -%}
             >
-            {%- if settings.predictive_search_enabled -%}
+            {%- if section.settings.predictive_search_enabled -%}
               <div class="search-form__results hidden" id="predictive-search" tabindex="-1"></div>
             {%- endif -%}
             <div class="search-drawer__close">
@@ -107,6 +107,18 @@
 {
   "name": "Search",
   "class": "main-search-drawer",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Search behavior"
+    },
+    {
+      "type": "checkbox",
+      "id": "predictive_search_enabled",
+      "default": true,
+      "label": "Enable product suggestions"
+    }
+  ],
   "max_blocks": 3,
   "blocks": [
     {

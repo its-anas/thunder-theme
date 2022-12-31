@@ -144,7 +144,7 @@
                   {% assign difference_in_seconds = current_date | minus: product_date %}
                   {% assign difference_in_days = difference_in_seconds | divided_by: 3600 | divided_by: 24 %}
 
-                  <p class="text {% if section.settings.new_tag == true and difference_in_days < section.settings.new_tag_time %}tag--animated-hover{% endif %}">
+                  <p class="text {% if settings.new_tag == true and difference_in_days < settings.new_tag_time %}tag--animated-hover{% endif %}">
                     {{ product.title }}
                   </p>
                 </div>
@@ -244,23 +244,6 @@
       "max": 10,
       "label": "Recommendations count",
       "default": 4
-    },
-    {
-      "type": "checkbox",
-      "id": "new_tag",
-      "label": "Show 'NEW' tag",
-      "default": true
-    },
-    {
-      "type": "range",
-      "id": "new_tag_time",
-      "label": "'NEW' tag countback",
-      "info": "Show the 'NEW' tag if the product is published in the last X days",
-      "min": 0,
-      "max": 90,
-      "step": 1,
-      "unit": "D",
-      "default": 30
     },
     {
       "type": "header",
