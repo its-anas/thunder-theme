@@ -108,8 +108,8 @@
                   </div>
                 {% endif %}
 
-                <a href="{{ product.url }}" class="media corner-border-target">
-                  {% if product.featured_image != blank %}
+                {% if product.featured_image != blank %}
+                  <a href="{{ product.url }}" class="media corner-border-target">
                     {%- assign image = product.featured_image -%}
                     {%- capture sizes -%}(min-width: 1024px) calc((var(--page-width) - {{ desktop_items | times: 2 }}rem) / {{ desktop_items }}), (min-width: 750px) calc((80vw - {{ tablet_items | times: 1 }}rem) / {{ tablet_items }}), calc((88vw - 1rem - {{ mobile_items | times: 1 }}rem ) / {{ mobile_items }}){%- endcapture -%}
                     {%- assign widths = '120, 130. 140, 150, 160, 170, 180, 190, 200, 225, 250, 300, 325, 350, 375, 400' -%}
@@ -126,10 +126,12 @@
                         sizes: sizes,
                         widths: widths
                     }}
-                  {% else %}
+                  </a>
+                {% else %}
+                  <a class="media corner-border-target">
                     {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
-                  {% endif %}
-                </a>
+                  </a>
+                {% endif %}
               </div>
               <div class="featured-collection__container">
                 <div class="featured-collection__name">
@@ -171,9 +173,11 @@
         {% else %}
           {%- capture placeholder_product -%}
             <div class="item">
-              <div class="featured-collection__image">
+              <div class="featured-collection__image corner-border">
                 <p class="tag--animated tag-text">SAVE {{ product.compare_at_price | minus: product.price | money }}</p>
-                {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
+                <div class="media corner-border-target">
+                  {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
+              </div>
               </div>
               <div class="featured-collection__container">
                 <div class="featured-collection__name">

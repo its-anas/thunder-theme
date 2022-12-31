@@ -209,7 +209,7 @@
                 {%- when 'article' -%}
                   <div class="search__item article">
                     <div class="search__item-container">
-                      <div class="search__item__picture article {% if item.featured_image != blank %}corner-border{% endif %}">
+                      <div class="search__item__picture article corner-border">
                         {% if item.image != blank %}
                           <a href="{{ item.url }}" class="media corner-border-target">
                             {%- assign image = item.image -%}
@@ -230,7 +230,7 @@
                             }}
                           </a>
                         {% else %}
-                          <a href="{{ item.url }}" class="media">
+                          <a href="{{ item.url }}" class="media corner-border-target">
                             {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder' }}
                           </a>
                         {% endif %}
