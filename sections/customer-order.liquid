@@ -29,10 +29,9 @@
       {%- if order.cancelled -%}
         {%- assign cancelled_at = order.cancelled_at | time_tag: format: 'date_at_time' -%}
         <span>
-          {{
-            'customer.order.order_canceled'
-            | t: cancellation_date: cancelled_at, cancellation_reason: order.cancel_reason_label
-          }}
+          {{ 'customer.order.cancellation_date' | t }}
+          {{ cancelled_at }}. {{ 'customer.order.cancellation_reason' | t }}
+          {{ order.cancel_reason_label }}
         </span>
       {%- endif -%}
     </div>

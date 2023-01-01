@@ -15,6 +15,40 @@
         "pagination": {},
         "shopify": {}
     },
+    "404": {
+        "general": {}
+    },
+    "article": {
+        "general": {},
+        "comments": {}
+    },
+    "blog": {
+        "general": {}
+    },
+    "cart": {
+        "general": {}
+    },
+    "collection": {
+        "general": {},
+        "product": {}
+    },
+    "gift_card": {
+        "issued": {}
+    },
+    "list_collections": {
+        "general": {}
+    },
+    "password": {
+        "general": {},
+        "password": {}
+    },
+    "product": {
+        "general": {},
+        "form": {}
+    },
+    "search": {
+        "general": {}
+    },
     "customer": {
         "account": {
             "tabs": {
@@ -105,7 +139,8 @@
         "order": {
             "title": "Order",
             "description": "Placed on",
-            "order_canceled": "Order canceled on {{ cancellation_date }}. Reason: {{ cancellation_reason }}",
+            "cancellation_date": "Order canceled on",
+            "cancellation_reason": "Reason:",
             "free": "Free",
             "order_table": {
                 "product": "Product",
@@ -139,39 +174,5 @@
             "link": "Login here",
             "link_label": "Already have an account?"
         }
-    },
-    "404": {
-        "general": {}
-    },
-    "article": {
-        "general": {},
-        "comments": {}
-    },
-    "blog": {
-        "general": {}
-    },
-    "cart": {
-        "general": {}
-    },
-    "collection": {
-        "general": {},
-        "product": {}
-    },
-    "gift_card": {
-        "issued": {}
-    },
-    "list_collections": {
-        "general": {}
-    },
-    "password": {
-        "general": {},
-        "password": {}
-    },
-    "product": {
-        "general": {},
-        "form": {}
-    },
-    "search": {
-        "general": {}
     }
 }
