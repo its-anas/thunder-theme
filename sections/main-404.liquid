@@ -2,8 +2,8 @@
 
 <div class="main-404">
   <div class="main-404__container">
-    <h3>Page not found</h3>
-    <p>Sorry this page does not exist</p>
+    <h3>{{ '404.title' | t }}</h3>
+    <p>{{ '404.description' | t }}</p>
 
     <div class="search-form__container">
       <form action="{{ routes.search_url }}" method="get" class="search__form">
@@ -13,7 +13,7 @@
           type="search"
           name="q"
           value="{{ search.terms | escape }}"
-          placeholder="What are you looking for?"
+          placeholder="{{ '404.field_placeholder' | t }}"
         >
         <button class="search__icon">
           {% render 'snippet-icons', icon: 'search' %}
@@ -26,7 +26,7 @@
         href="{{ routes.all_products_collection_url }}"
       >
         <span></span> <span></span> <span></span> <span></span>
-        Continue shopping
+        {{ '404.button' | t }}
       </a>
     </div>
   </div>

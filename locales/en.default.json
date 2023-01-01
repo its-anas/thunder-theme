@@ -16,7 +16,12 @@
         "shopify": {}
     },
     "404": {
-        "general": {}
+        "general": {
+            "title": "Page not found",
+            "description": "Sorry this page does not exist",
+            "field_placeholder": "What are you looking for?",
+            "button": " Continue shopping"
+        }
     },
     "article": {
         "general": {},
@@ -51,12 +56,12 @@
     },
     "customer": {
         "account": {
+            "title": "Order history",
             "tabs": {
                 "orders": "Orders",
                 "addresses": "Addresses",
                 "logout": "Logout"
             },
-            "title": "Order history",
             "table": {
                 "order_number": "Order number",
                 "date": "Date",
