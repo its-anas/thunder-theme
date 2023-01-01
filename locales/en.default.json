@@ -72,7 +72,7 @@
                 "payment_status": "Payment status",
                 "fulfillment_status": "Fulfillment status",
                 "total": "Total"
-            },
+            }
         },
         "activate_account": {
             "title": "Activate account",
