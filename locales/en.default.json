@@ -56,11 +56,15 @@
     },
     "customer": {
         "account": {
-            "title": "Order history",
-            "tabs": {
-                "orders": "Orders",
-                "addresses": "Addresses",
-                "logout": "Logout"
+            "general": {
+                "title": "Order history",
+                "tabs": {
+                    "orders": "Orders",
+                    "addresses": "Addresses",
+                    "logout": "Logout"
+                },
+                "empty_description": "You haven't placed any orders yet.",
+                "empty_button": "Start shopping"
             },
             "table": {
                 "order_number": "Order number",
@@ -69,8 +73,6 @@
                 "fulfillment_status": "Fulfillment status",
                 "total": "Total"
             },
-            "empty_description": "You haven't placed any orders yet.",
-            "empty_button": "Start shopping"
         },
         "activate_account": {
             "title": "Activate account",
