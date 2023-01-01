@@ -100,6 +100,10 @@
 	gap: 0.5rem;
 }
 
+.cart-drawer__product-prices.tablet-desktop-only {
+	display: none;
+}
+
 .cart-drawer__product__details-middle .product-variants {
 	display: flex;
 	flex-direction: column;
@@ -438,4 +442,8 @@
 	100% {
 		opacity: 60%;
 	}
+}
+
+.cart-page__product-prices.tablet-desktop-only * {
+	text-align: end;
 }

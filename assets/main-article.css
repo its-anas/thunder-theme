@@ -1,5 +1,5 @@
 .article {
-	margin-top: 130px;
+	margin-top: var(--page-top-space);
 	width: 100%;
 	height: auto;
 }

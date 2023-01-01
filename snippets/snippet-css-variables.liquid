@@ -63,6 +63,8 @@
 
      --button_symbol : "{{ settings.button_symbol | truncate: 2 }}";
      --free-shipping-threshold : {{ settings.free_shipping_threshold }};
+
+     --page-top-space: 150px;
   }
 
   @media screen and (min-width: 750px) {
@@ -114,13 +116,10 @@
 
   .button--primary.border:after, .button--secondary.border:after, .button--primary:not(.border):after, .button--secondary:not(.border):after {
        content: "{{ settings.button_symbol | truncate: 2 }}";
+       line-height: 1.2rem;
   }
 
   .button--link:after {
-       content: "{{ settings.button_symbol | truncate: 2 }}";
-  }
-
-  .shopify-payment-button__button:after {
        content: "{{ settings.button_symbol | truncate: 2 }}";
   }
 

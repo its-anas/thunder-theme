@@ -16,8 +16,8 @@
 
 <div class="customer {{ section.id }}">
   <div class="customer__container">
-    <h2 class="customer__form__title">Create account</h2>
-    <span>Please fill in the fields below:</span>
+    <h2 class="customer__form__title">{{ 'customer.register.title' | t }}</h2>
+    <span>{{ 'customer.register.description' | t }}</span>
     {%- form 'create_customer', class: 'customer__form' -%}
       {%- if form.errors -%}
         <div class="customer__form__errors-list">
@@ -45,7 +45,7 @@
             value="{{ form.first_name }}"
           {% endif %}
           autocomplete="given-name"
-          placeholder="First name"
+          placeholder="{{ 'customer.register.form.first_name' | t }}"
           class="customer__form__input"
         >
         <input
@@ -55,7 +55,7 @@
             value="{{ form.last_name }}"
           {% endif %}
           autocomplete="family-name"
-          placeholder="Last name"
+          placeholder="{{ 'customer.register.form.last_name' | t }}"
           class="customer__form__input"
         >
         <input
@@ -67,26 +67,26 @@
           spellcheck="false"
           autocapitalize="off"
           autocomplete="email"
-          placeholder="Email"
+          placeholder="{{ 'customer.register.form.email' | t }}"
           class="customer__form__input {% if form.errors contains 'email' %}error{% endif %}"
           required
         >
         <input
           type="password"
           name="customer[password]"
-          placeholder="Password"
+          placeholder="{{ 'customer.register.form.password' | t }}"
           class="customer__form__input {% if form.errors contains 'password' %}error{% endif %}"
           required
         >
 
         <div class="customer__form__button buttons">
-          <button type="submit" class="button button--primary border">Sign up</button>
+          <button type="submit" class="button button--primary border">{{ 'customer.register.button' | t }}</button>
         </div>
       </div>
     {%- endform -%}
     <div class="customer__form__link">
-      <span class="small">Already have an account?</span>
-      <a href="{{ routes.account_login_url }}" class="small underline">Login here</a>
+      <span class="small">{{ 'customer.register.link_label' | t }}</span>
+      <a href="{{ routes.account_login_url }}" class="small underline">{{ 'customer.register.link' | t }}</a>
     </div>
   </div>
 </div>
@@ -94,7 +94,6 @@
 {% schema %}
 {
   "name": "Customer register",
-  "class": "section-customer-register",
   "settings": [
     {
       "type": "range",

@@ -17,19 +17,34 @@
 <div class="customer {{ section.id }}">
   <div class="customer__container" style="gap: 4rem;">
     <div class="customer-order__title">
-      <h2>Order {{ order.name }}</h2>
+      <h2>
+        {{ 'customer.order.title' | t }}
+        {{ order.name }}
+      </h2>
       {%- assign order_date = order.created_at | time_tag: format: 'date_at_time' -%}
-      <span>Placed on {{ order_date }}</span>
+      <span>
+        {{ 'customer.order.description' | t }}
+        {{ order_date -}}
+      </span>
       {%- if order.cancelled -%}
         {%- assign cancelled_at = order.cancelled_at | time_tag: format: 'date_at_time' -%}
-        <span>Order Cancelled on {{ cancelled_at }}. Reason: {{ order.cancel_reason_label }}</span>
+        <span>
+          {{
+            'customer.order.order_canceled'
+            | t: cancellation_date: cancelled_at, cancellation_reason: order.cancel_reason_label
+          }}
+        </span>
       {%- endif -%}
     </div>
 
     <div class="customer-order__table--main">
       <div class="customer-order__table__head">
-        <span><h6>Product</h6></span>
-        <span><h6>Total</h6></span>
+        <span>
+          <h6>{{ 'customer.order.order_table.product' | t }}</h6>
+        </span>
+        <span>
+          <h6>{{ 'customer.order.order_table.total' | t }}</h6>
+        </span>
       </div>
 
       {%- for line_item in order.line_items -%}
@@ -61,7 +76,8 @@
                     {{ line_item.variant.title }}
                   </div>
                   <div class="customer-order__table__product__variant secondary-text ">
-                    Quantity: {{ line_item.quantity }}
+                    {{ 'customer.order.order_table.quantity' | t }}
+                    {{ line_item.quantity }}
                   </div>
                   {%- if line_item.line_level_discount_allocations != blank -%}
                     {%- for discount_allocation in line_item.line_level_discount_allocations -%}
@@ -98,7 +114,7 @@
           <div class="customer-order__table__prices">
             <p class="price--actual {% if line_item.original_line_price > line_item.final_line_price or line_item.final_line_price == 0 or line_item.variant.compare_at_price > line_item.variant.price %}price--discounted{% endif %}">
               {%- if line_item.final_line_price == 0 -%}
-                Free
+                {{ 'customer.order.free' | t }}
               {%- else -%}
                 {{- line_item.final_line_price | money -}}
               {%- endif -%}
@@ -117,13 +133,14 @@
 
     <div class="customer-order__table--vertical">
       <div>
-        <span>Subtotal</span> <span>{{ order.line_items_subtotal_price | money }}</span>
+        <span>{{ 'customer.order.total_table.subtotal' | t }}</span>
+        <span>{{ order.line_items_subtotal_price | money }}</span>
       </div>
       {%- if cart.cart_level_discount_applications != blank -%}
         {%- for discount_application in cart.cart_level_discount_applications -%}
           <div>
             <span>
-              Discount ({{ discount_application.title -}}
+              {{ 'customer.order.total_table.discount' | t }} ({{ discount_application.title -}}
               )
             </span>
             <span>
@@ -135,14 +152,14 @@
       {%- endif -%}
       <div>
         {%- for shipping_method in order.shipping_methods -%}
-          <span> Shipping</span>
+          <span>{{ 'customer.order.total_table.shipping' | t }}</span>
         {%- endfor -%}
         {%- for shipping_method in order.shipping_methods -%}
           <span> {{ shipping_method.price | money }}</span>
         {%- endfor -%}
       </div>
       <div>
-        <h6>Total</h6>
+        <h6>{{ 'customer.order.total_table.total' | t }}</h6>
         <h6>{{ order.total_price | money_with_currency }}</h6>
       </div>
     </div>
@@ -150,29 +167,36 @@
     <div class="customer-order__table--address__container">
       <div class="customer-order__table--address">
         <div class="billing-address">
-          <h6>Billing Address</h6>
+          <h6>{{ 'customer.order.address.billing' | t }}</h6>
           <div>
-            <span>Payment Status: {{ order.financial_status_label }}</span>
+            <span>
+              {{ 'customer.order.address.payment_status' | t }}
+              {{ order.financial_status_label -}}
+            </span>
             <span>{{ order.billing_address | format_address }}</span>
           </div>
         </div>
         <div class="shipping-address">
-          <h6>Shipping Address</h6>
+          <h6>{{ 'customer.order.address.shipping' | t }}</h6>
           <div>
-            <span>Fulfillment status: {{ order.fulfillment_status_label }}</span>
+            <span>
+              {{ 'customer.order.address.fulfillment_status' | t }}
+              {{ order.fulfillment_status_label -}}
+            </span>
             <span> {{ order.shipping_address | format_address }}</span>
           </div>
         </div>
       </div>
     </div>
-    <a href="{{ routes.account_url }}" class="button--link underline">Return to Account page</a>
+    <a href="{{ routes.account_url }}" class="button--link underline">
+      {{- 'customer.order.return_link' | t -}}
+    </a>
   </div>
 </div>
 
 {% schema %}
 {
   "name": "Customer order",
-  "class": "section-customer-login",
   "settings": [
     {
       "type": "range",

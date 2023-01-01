@@ -5,15 +5,14 @@ class customerPopup extends HTMLElement {
 
 	connectedCallback() {
 		this.addEventListener("click", (e) => {
-			if (e.target.id === "customer__popup__add-address__button" || e.target.id === "customer__popup__add-address__close-icon" || e.target.id === "customer__popup__add-address__cancel-button") {
+			if (e.target.id === "customer__popup__add-address__button") {
 				this.loadCustomerPopup();
 				let form = this.querySelector("#customer__popup__add-address__form");
-
-				if (form.classList.contains("hidden")) {
-					this.showPopup();
-				} else {
-					this.hidePopup();
-				}
+				this.showPopup();
+			} else if (e.target.id === "customer__popup__add-address__close-icon" || e.target.id === "customer__popup__add-address__cancel-button") {
+				this.loadCustomerPopup();
+				let form = this.querySelector("#customer__popup__add-address__form");
+				this.hidePopup();
 			}
 		});
 
@@ -26,13 +25,18 @@ class customerPopup extends HTMLElement {
 
 	loadCustomerPopup() {
 		let country = this.querySelector("select[data-address-country-select]").dataset.default;
-		let province = this.querySelector("select[data-address-province-select]").dataset.default;
-		this.querySelector("select[data-address-country-select]").value = country;
-		this.querySelector("select[data-address-province-select]").value = province;
+		if (country === "") {
+			this.querySelector("select[data-address-country-select]").value = "---";
+			this.querySelector("select[data-address-province-select]").style.display = "none";
+		} else {
+			let province = this.querySelector("select[data-address-province-select]").dataset.default;
+			this.querySelector("select[data-address-country-select]").value = country;
+			this.querySelector("select[data-address-province-select]").value = province;
 
-		if (this.querySelector(`select[data-address-country-select] option[value='${country}']`)) {
-			let provinces = this.querySelector(`select[data-address-country-select] option[value='${country}']`).dataset.provinces;
-			this.injectProvinces(country, provinces);
+			if (this.querySelector(`select[data-address-country-select] option[value='${country}']`)) {
+				let provinces = this.querySelector(`select[data-address-country-select] option[value='${country}']`).dataset.provinces;
+				this.injectProvinces(country, provinces);
+			}
 		}
 	}
 

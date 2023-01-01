@@ -16,8 +16,8 @@
 
 <div class="customer customer-login {{ section.id }}">
   <div class="customer__container" id="recover_page">
-    <h2 class="customer__form__title">Recover password</h2>
-    <p>Please enter your e-mail:</p>
+    <h2 class="customer__form__title">{{ 'customer.reset_password.title' | t }}</h2>
+    <p>{{ 'customer.reset_password.description' | t }}</p>
 
     {%- form 'recover_customer_password', class: 'customer__form' -%}
       {%- if form.errors -%}
@@ -37,27 +37,27 @@
           autocorrect="off"
           autocapitalize="off"
           autocomplete="email"
-          placeholder="Email"
+          placeholder="{{ 'customer.reset_password.email_field' | t }}"
           class="customer__form__input"
           required
         >
       </div>
       <div class="buttons">
-        <button class="button button--primary border">RECOVER</button>
+        <button class="button button--primary border">{{ 'customer.reset_password.buttons.recover' | t }}</button>
       </div>
     {%- endform -%}
     <div class="customer__form__link">
-      <a id="login" class="small underline">Back to login</a>
+      <a id="login" class="small underline">{{- 'customer.reset_password.buttons.back_to_login' | t -}}</a>
     </div>
   </div>
   <div class="customer__container" id="login_page">
-    <h2 class="customer__form__title">Login</h2>
-    <span>Please fill in the fields below:</span>
+    <h2 class="customer__form__title">{{ 'customer.login.title' | t }}</h2>
+    <span>{{ 'customer.login.description' | t }}</span>
 
     {%- form 'customer_login', class: 'customer__form' -%}
       {%- if recover_success == true -%}
         <div class="customer__form__success">
-          <span>✓ We've sent you an email with a link to update your password.</span>
+          <span>{{ 'customer.login.success' | t }}</span>
         </div>
       {%- endif -%}
       {%- if form.errors -%}
@@ -85,7 +85,7 @@
           autocomplete="email"
           autocorrect="off"
           autocapitalize="off"
-          placeholder="Email"
+          placeholder="{{ 'customer.login.email_field' | t }}"
           class="customer__form__input"
           required
         >
@@ -96,38 +96,39 @@
             value=""
             name="customer[password]"
             autocomplete="current-password"
-            placeholder="Password"
+            placeholder="{{ 'customer.login.password_field' | t }}"
             class="customer__form__input"
             required
           >
         {%- endif -%}
 
         <div class="customer__form__button buttons">
-          <button class="button button--primary border">Sign in</button>
+          <button class="button button--primary border">{{ 'customer.login.buttons.login' | t }}</button>
         </div>
       </div>
     {%- endform -%}
 
     <div class="customer__form__links">
       <div class="customer__form__link">
-        <span class="small">Forgot your password?</span>
-        <a id="recover" class="small underline">Reset password</a>
+        <span class="small">{{ 'customer.login.buttons_labels.forgot_password' | t }}</span>
+        <a id="recover" class="small underline">{{ 'customer.login.buttons.reset' | t }}</a>
       </div>
       <div class="customer__form__link">
-        <span class="small">New customer?</span>
-        <a href="{{ routes.account_register_url }}" class="small underline">Create account</a>
+        <span class="small">{{ 'customer.login.buttons_labels.new_customer' | t }}</span>
+        <a href="{{ routes.account_register_url }}" class="small underline">
+          {{- 'customer.login.buttons.register' | t -}}
+        </a>
       </div>
     </div>
   </div>
 
   {%- if shop.checkout.guest_login -%}
-    <span>Continue as a guest</span>
-
-    {%- form 'guest_login' -%}
-      <div class="buttons">
-        <button class="button button--primary border">Continue</button>
-      </div>
-    {%- endform -%}
+    <div class="customer__form__link">
+      <span>{{ 'customer.login.buttons_labels.continue' | t }}</span>
+      {%- form 'guest_login' -%}
+        <button class="button--link">{{- 'customer.login.buttons.continue' | t -}}</button>
+      {%- endform -%}
+    </div>
   {%- endif -%}
 </div>
 
@@ -154,7 +155,6 @@
 {% schema %}
 {
   "name": "Customer login",
-  "class": "section-customer-login",
   "settings": [
     {
       "type": "range",

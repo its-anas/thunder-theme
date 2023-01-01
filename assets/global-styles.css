@@ -2882,7 +2882,7 @@ cart-component.hidden {
 @media screen and (min-width: 1024px) {
 	.filter__box {
 		position: sticky;
-		top: 130px;
+		top: var(--page-top-space);
 		overflow: hidden;
 		height: 100%;
 		transition: all 0.5s ease-in-out;
@@ -2976,7 +2976,7 @@ cart-component.hidden {
 
 .shopify-challenge__container {
 	padding: 15rem 0 !important;
-	margin-top: 130px !important;
+	margin-top: var(--page-top-space) !important;
 }
 
 div:has(.grecaptcha-badge) {

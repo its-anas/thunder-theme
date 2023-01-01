@@ -1,7 +1,7 @@
 .main-404 {
 	width: 100%;
 	height: auto;
-	margin-top: 130px;
+	margin-top: var(--page-top-space);
 }
 
 .main-404__container {

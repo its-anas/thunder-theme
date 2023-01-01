@@ -16,8 +16,8 @@
 
 <div class="customer {{ section.id }}">
   <div class="customer__container">
-    <h2>Activate account</h2>
-    <span>Add a password to activate your account.</span>
+    <h2>{{ 'customer.activate_account.title' | t }}</h2>
+    <span>{{ 'customer.activate_account.description' | t }}</span>
     {%- form 'activate_customer_password', class: 'customer__form' -%}
       {%- if form.errors -%}
         <div class="customer__form__errors-list">
@@ -53,11 +53,11 @@
           class="customer__form__input"
         >
         <div class="customer__form__button buttons">
-          <button class="button button--primary border">Activate account</button>
+          <button class="button button--primary border">{{ 'customer.activate_account.buttons.activate' | t }}</button>
         </div>
       </div>
       <div class="customer__form__link">
-        <button name="decline" class="small underline">Decline invitation</button>
+        <button name="decline" class="small underline">{{ 'customer.activate_account.buttons.decline' | t }}</button>
       </div>
     {%- endform -%}
   </div>

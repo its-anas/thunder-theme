@@ -17,23 +17,23 @@
 <div class="customer {{ section.id }}">
   <div class="customer__container">
     <div class="page-tabs">
-      <a href="{{ routes.account_url }}" class="page-tab selected"> Orders</a>
-      <a href="{{ routes.account_addresses_url }}" class="page-tab">Addresses</a>
-      <a href="{{ routes.account_logout_url }}" class="page-tab">Logout</a>
+      <a href="{{ routes.account_url }}" class="page-tab selected">{{ 'customer.account.tabs.orders' | t }}</a>
+      <a href="{{ routes.account_addresses_url }}" class="page-tab">{{ 'customer.account.tabs.addresses' | t }}</a>
+      <a href="{{ routes.account_logout_url }}" class="page-tab">{{ 'customer.account.tabs.logout' | t }}</a>
     </div>
 
-    <h2 class="customer-table__title">Order history</h2>
+    <h2 class="customer-table__title">{{ 'customer.account.title' | t }}</h2>
 
     {% paginate customer.orders by 20 %}
       {% if customer.orders.size > 0 %}
         <table class="customer-table desktop-tablet">
           <thead>
             <tr>
-              <th>Order number</th>
-              <th>Date</th>
-              <th>Payment status</th>
-              <th>Fulfillment status</th>
-              <th>Total</th>
+              <th>{{ 'customer.account.table.order_number' | t }}</th>
+              <th>{{ 'customer.account.table.date' | t }}</th>
+              <th>{{ 'customer.account.table.payment_status' | t }}</th>
+              <th>{{ 'customer.account.table.fulfillment_status' | t }}</th>
+              <th>{{ 'customer.account.table.total' | t }}</th>
             </tr>
           </thead>
           <tbody>
@@ -65,8 +65,8 @@
         </table>
         <table class="customer-table mobile">
           {%- for order in customer.orders -%}
-            <tr>
-              <th>Order number</th>
+            <tr class="customer-table__order-head">
+              <th>{{ 'customer.account.table.order_number' | t }}</th>
               <td>
                 <a
                   href="{{ order.customer_url }}"
@@ -77,25 +77,25 @@
               </td>
             </tr>
             <tr>
-              <th>Date</th>
+              <th>{{ 'customer.account.table.date' | t }}</th>
               <td>
                 {{ order.created_at | time_tag: format: 'date' }}
               </td>
             </tr>
             <tr>
-              <th>Payment status</th>
+              <th>{{ 'customer.account.table.payment_status' | t }}</th>
               <td>
                 {{ order.financial_status_label }}
               </td>
             </tr>
             <tr>
-              <th>Fulfillment status</th>
+              <th>{{ 'customer.account.table.fulfillment_status' | t }}</th>
               <td>
                 {{ order.fulfillment_status_label }}
               </td>
             </tr>
             <tr>
-              <th>Total</th>
+              <th>{{ 'customer.account.table.total' | t }}</th>
               <td>
                 {{ order.total_price | money_with_currency }}
               </td>
@@ -103,13 +103,14 @@
           {% endfor %}
         </table>
       {%- else -%}
-        <span>You have no orders</span>
+        <span>{{ 'customer.account.empty_description' | t }}</span>
         <div class="buttons">
           <a
             href="{{ routes.all_products_collection_url }}"
             class="button button--primary border"
-            >Make your first order</a
           >
+            {{ 'customer.account.empty_button' | t }}
+          </a>
         </div>
       {% endif %}
       {% render 'snippet-pagination', paginate: paginate %}
@@ -120,7 +121,6 @@
 {% schema %}
 {
   "name": "Customer account",
-  "class": "section-customer-login",
   "settings": [
     {
       "type": "range",
