@@ -82,14 +82,11 @@
               <div class="article__comments__container">
                 {%- if article.comments_count > 0 -%}
                   <div class="article__comments__head">
-                    <h6 class="article__comments__count">COMMENTS ({{ article.comments_count }})</h6>
+                    <h6 class="article__comments__count">
+                      {{ 'pages.article.comments_section_title' | t }} ({{ article.comments_count }})
+                    </h6>
                   </div>
                   {% paginate article.comments by 5 %}
-                    {% comment %}
-                       {%- if comment.status == 'pending' and comment.content -%}
-                        <span id="{{ comment.id }}">{{- comment.content }} by {{ comment.author -}}</span>
-                      {%- endif -%}
-                    {% endcomment %}
                     <div class="article__comments__list">
                       {%- for comment in article.comments -%}
                         <div class="article__comment">
@@ -116,7 +113,7 @@
                   -%}
                   <div class="article__comment-form">
                     <div class="article__comment-form__container">
-                      <h6 class="article__comment-form__title">Leave a comment</h6>
+                      <h6 class="article__comment-form__title">{{ 'pages.article.comment_form_title' | t }}</h6>
 
                       <div class="form__messages">
                         {%- if form.errors -%}
@@ -125,9 +122,9 @@
                               <span>⚠</span>
                               <span>
                                 {%- if form.errors.translated_fields[field] contains 'author' -%}
-                                  Name
+                                  {{ 'customer.form.name' | t }}
                                 {%- elsif form.errors.translated_fields[field] contains 'body' -%}
-                                  Comment
+                                  {{ 'pages.article.comment_field' | t }}
                                 {%- else -%}
                                   {{ form.errors.translated_fields[field] }}
                                 {%- endif -%}
@@ -151,7 +148,7 @@
                           autocomplete="name"
                           value="{{ form.author }}"
                           required
-                          placeholder="Name"
+                          placeholder="{{ 'customer.form.name' | t }}"
                         >
                       </div>
 
@@ -164,7 +161,7 @@
                           autocorrect="off"
                           autocapitalize="off"
                           required
-                          placeholder="Email"
+                          placeholder="{{ 'customer.form.email' | t }}"
                         >
                       </div>
 
@@ -172,12 +169,14 @@
                         <textarea
                           name="comment[body]"
                           required
-                          placeholder="Message"
+                          placeholder="{{ 'pages.article.comment_field' | t }}"
                         >{{ form.body }}</textarea>
                       </div>
 
                       <div class="article__comment-form__button buttons">
-                        <button type="submit" class="button button--primary border" value="post">Submit comment</button>
+                        <button type="submit" class="button button--primary border" value="post">
+                          {{ 'pages.article.submit_button' | t }}
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -193,7 +192,7 @@
               {%- assign pinterest_description = article.description | strip | truncatewords: 15 | url_param_escape -%}
               {%- assign pinterest_image = article.image | image_url: '800x' | prepend: 'https:' -%}
 
-              <p>Share</p>
+              <p>{{ 'general.social.share' | t }}</p>
               <a
                 href="https://www.facebook.com/sharer.php?u={{ share_url }}"
                 target="_blank"
@@ -224,7 +223,7 @@
     {%- endfor -%}
 
     <div class="article__back-button__container">
-      <a class="article__back-button underline" href="{{ blog.url }}">Back to blog</a>
+      <a class="article__back-button underline" href="{{ blog.url }}">{{ 'pages.article.back_button' | t }}</a>
     </div>
   </div>
 </div>

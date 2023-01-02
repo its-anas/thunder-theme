@@ -6,7 +6,10 @@
         "cart_drawer": {},
         "search_drawer": {},
         "popup": {},
-        "quick_view": {}
+        "quick_view": {},
+        "social": {
+            "share": "Share"
+        }
     },
     "pages": {
         "product": {},
@@ -15,7 +18,14 @@
         "collection": {},
         "search": {},
         "blog": {},
-        "article": {},
+        "article": {
+            "comments_section_title": "Comments",
+            "comment_form_title": "Leave a comment",
+            "name_field": "Name",
+            "comment_field": "Comment",
+            "submit_button": "Submit comment",
+            "back_button": "Back to blog"
+        },
         "password": {},
         "gift_card": {},
         "404": {
@@ -55,6 +65,7 @@
         "form": {
             "first_name": "First name",
             "last_name": "Last name",
+            "name": "Name",
             "company": "Company",
             "address1": "Address 1",
             "address2": "Address 2",
