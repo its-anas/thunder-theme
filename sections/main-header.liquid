@@ -123,7 +123,7 @@
             <div class="menu-mobile__container">
               <div class="menu-mobile__head">
                 <div class="menu-mobile__title">
-                  <h6>Menu</h6>
+                  <h6>{{ 'general.header.menu' | t }}</h6>
                 </div>
                 <div id="close-icon">
                   {% render 'snippet-icons', icon: 'close' %}
@@ -387,9 +387,9 @@
                 <div class="menu-mobile__account-container">
                   <div class="menu-mobile__account">
                     {% render 'snippet-icons', icon: 'account' %}
-                    <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}"
-                      >Account</a
-                    >
+                    <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}">
+                      {{ 'general.header.account' | t }}
+                    </a>
                   </div>
                 </div>
               {%- endif -%}

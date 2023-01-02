@@ -1,8 +1,9 @@
 {
     "general": {
-        "header": {},
-        "footer": {},
-        "menu": {},
+        "header": {
+            "menu": "Menu",
+            "account": "Account"
+        },
         "cart_drawer": {
             "title": "Cart",
             "empty_cart_text": "Your cart is empty",

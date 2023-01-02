@@ -190,7 +190,7 @@
                       {% endif %}
                     {% endif %}
                     {% unless current_variant.available %}
-                      <p class="tag--disabled tag-text">SOLDOUT</p>
+                      <p class="tag--disabled tag-text">{{ 'general.tags.sold_out' | t }}</p>
                     {% endunless %}
                   </div>
                 </div>
@@ -401,7 +401,7 @@
                       <path d="M12.1297 13.6845L11.9497 8.89453H13.0797L12.8897 13.6845H12.1297ZM12.5197 15.9545C12.333 15.9545 12.1763 15.8912 12.0497 15.7645C11.923 15.6379 11.8597 15.4879 11.8597 15.3145C11.8597 15.1279 11.923 14.9745 12.0497 14.8545C12.1763 14.7345 12.333 14.6745 12.5197 14.6745C12.7063 14.6745 12.8597 14.7345 12.9797 14.8545C13.0997 14.9745 13.1597 15.1279 13.1597 15.3145C13.1597 15.4879 13.0997 15.6379 12.9797 15.7645C12.8597 15.8912 12.7063 15.9545 12.5197 15.9545Z" fill="#FB4343"/>
                     </svg>
                     <p class="product-page__stock-disclaimer__text">
-                      {{ current_variant.inventory_quantity }} left in stock
+                      {{ 'pages.product.stock_disclaimer' | t: inventory: current_variant.inventory_quantity }}
                     </p>
                   </div>
                 {% endif %}
@@ -437,7 +437,7 @@
                     data-actual-variant="{{ product.selected_or_first_available_variant.id }}"
                   >
                     <span></span> <span></span> <span></span> <span></span>
-                    ADD TO CART
+                    {{ 'general.buttons.add_to_cart' | t }}
                     {% render 'snippet-icons',
                       icon: 'loading-spinner',
                       spinner_color: 'var(--primary-button-text-color)',
@@ -552,9 +552,9 @@
                               data-product-variants="{% if  bundled_product.variants.size > 1 %}with{% else %}without{% endif %}"
                             >
                               {%- if bundled_product.variants.size > 1 -%}
-                                Quick view +
+                                {{ 'general.buttons.quick_view' | t }} +
                               {% else %}
-                                Add to cart +
+                                {{ 'general.buttons.add_to_cart' | t }} +
                               {%- endif -%}
                               {% render 'snippet-icons', icon: 'loading-spinner-tiny' %}
                             </div>
@@ -629,7 +629,13 @@
 <script defer>
   
   
-
+  
+  
+  
+  
+  
+  
+  
   let variantsInventory = {};
   {% for variant in product.variants %}
   variantsInventory["{{ variant.title }}"] = {{ variant.inventory_quantity }};
@@ -663,6 +669,13 @@
   let currentVariantInventory = {{ current_variant.inventory_quantity }};
   let stockAlertThreshold = {{ stock_alert_threshold }};
   let priceDifferenceText= "{{ price_difference_text }}";
+
+
+
+
+
+
+
 
 
 </script>
