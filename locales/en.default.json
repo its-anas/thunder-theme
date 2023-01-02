@@ -7,9 +7,11 @@
             "title": "Cart",
             "empty_cart_text": "Your cart is empty",
             "view_cart_button": "View cart",
-            "recommended_products_title": "You may also like"
+            "recommended_products_text": "You may also like"
         },
-        "search_drawer": {},
+        "search_drawer": {
+            "show_all": "Show all results"
+        },
         "popup": {},
         "quick_view": {},
         "social": {
@@ -40,6 +42,11 @@
             "edit": "Edit order note",
             "label": "Add order note",
             "button": "SAVE"
+        },
+        "newsletter": {
+            "placeholder`": "Type your email address",
+            "button": "Subscribe",
+            "success_message": "Subscription confirmed"
         },
         "form": {
             "first_name": "First name",
