@@ -71,7 +71,8 @@
     },
     "pages": {
         "product": {
-            "stock_disclaimer": "{{ inventory }} left in stock"
+            "stock_disclaimer": "{{ inventory }} left in stock",
+            "quantity": "Quantity"
         },
         "cart": {
             "title": "Cart",

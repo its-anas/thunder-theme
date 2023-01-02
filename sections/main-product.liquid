@@ -369,7 +369,9 @@
                 {% endunless %}
               {% when 'quantity' %}
                 <quantity-field class="quantity" {{ block.shopify_attributes }}>
-                  <label for="quantity-text"><p>Quantity</p></label>
+                  <label for="quantity-text">
+                    <p>{{ 'pages.product.quantity' | t }}</p>
+                  </label>
                   <div class="quantity-field" id="quantity-field">
                     <button type="button" class="quantity-field__minus" id="quantity-field__minus">-</button>
                     <input
@@ -636,6 +638,7 @@
   
   
   
+  
   let variantsInventory = {};
   {% for variant in product.variants %}
   variantsInventory["{{ variant.title }}"] = {{ variant.inventory_quantity }};
@@ -669,6 +672,7 @@
   let currentVariantInventory = {{ current_variant.inventory_quantity }};
   let stockAlertThreshold = {{ stock_alert_threshold }};
   let priceDifferenceText= "{{ price_difference_text }}";
+
 
 
 
