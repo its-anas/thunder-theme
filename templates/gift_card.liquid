@@ -9,11 +9,7 @@
 
     {%- assign formatted_initial_value = gift_card.initial_value | money_without_trailing_zeros | strip_html -%}
     <title>
-      Here's your
-      {{ formatted_initial_value }}
-      gift card for
-      {{ shop.name }}
-      !
+      {{ 'pages.gift_card.message' | t: value: formatted_initial_value, shop: shop.name }}
     </title>
 
     <meta name="description" content="HERE'S YOUR GIFT CARD!">
@@ -26,15 +22,15 @@
         <h5>{{ shop.name }}</h5>
 
         {%- if gift_card.enabled == false or gift_card.expired -%}
-          <h3 class="gift-card__title">Gift card expired</h3>
+          <h3 class="gift-card__title">{{ 'pages.gift_card.expired_gift_card_title' | t }}</h3>
         {% else %}
-          <h3 class="gift-card__title">Here's your {{ gift_card.initial_value | money }} gift card!</h3>
+          <h3 class="gift-card__title">{{ 'pages.gift_card.gift_card_title' | t: value: formatted_initial_value }}</h3>
         {%- endif -%}
 
         {%- assign gift_card_balance = gift_card.balance | money -%}
 
         {%- if gift_card.balance != gift_card.initial_value -%}
-          <span>Remaining {{ gift_card_balance }}</span>
+          <span>{{ 'pages.gift_card.remaining_balance' | t: balance: gift_card_balance }}</span>
         {%- endif -%}
 
         <img
@@ -60,12 +56,12 @@
         {%- endif -%}
 
         <div class="gift-card__details">
-          <span>Scan this QR code:</span>
+          <span>{{ 'pages.gift_card.qr_code_text' | t }}</span>
           <div id="gift-card__qr-code"></div>
         </div>
 
         <div class="gift-card__details">
-          <span>Use this code at checkout to redeem your gift card:</span>
+          <span>{{ 'pages.gift_card.code_text' | t }}</span>
           <input
             type="text"
             class="gift-card__number"
@@ -75,16 +71,22 @@
         </div>
 
         <div class="gift-card__buttons buttons">
-          <button class="button button--primary border gift-card__copy-link" onclick="copyQrcode();">Copy code</button>
-          <button class="button button--secondary border" onclick="window.print();">Print</button>
-          <div class="gift-card__copy-success" style="display: none;"><span>✓ Code copied successfully</span></div>
+          <button class="button button--primary border gift-card__copy-link" onclick="copyQrcode();">
+            {{ 'pages.gift_card.copy_button' | t }}
+          </button>
+          <button class="button button--secondary border" onclick="window.print();">
+            {{ 'pages.gift_card.print_button' | t }}
+          </button>
+          <div class="gift-card__copy-success" style="display: none;">
+            <span>✓ {{ 'pages.gift_card.copy_success_message' | t }}</span>
+          </div>
         </div>
 
         <a
           href="{{ shop.url }}"
           class="button--link"
         >
-          Continue shopping
+          {{ 'general.buttons.continue_button' | t }}
         </a>
       </div>
     </div>

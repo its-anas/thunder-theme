@@ -9,6 +9,9 @@
         "quick_view": {},
         "social": {
             "share": "Share"
+        },
+        "buttons": {
+            "continue_button": "Continue shopping"
         }
     },
     "pages": {
@@ -17,7 +20,6 @@
         "collections_list": {},
         "collection": {},
         "search": {},
-        "blog": {},
         "article": {
             "comments_section_title": "Comments",
             "comment_form_title": "Leave a comment",
@@ -26,13 +28,33 @@
             "submit_button": "Submit comment",
             "back_button": "Back to blog"
         },
-        "password": {},
-        "gift_card": {},
+        "password": {
+            "title": "Opening soon",
+            "subscription_success_message": "Subscription confirmed",
+            "subscribe_button": "Notify me",
+            "password_page_link": "Enter using password",
+            "password_page_title": "Enter your password",
+            "password_error_message": "Wrong password!",
+            "password_enter_button": "Enter",
+            "newsletter_text": "Get notified when we open",
+            "login_label": "Store owner?",
+            "login_button": "Login here"
+        },
+        "gift_card": {
+            "message": "Here's your {{ value }} gift card for {{ shop }}",
+            "expired_gift_card_title": "Gift card expired",
+            "gift_card_title": "Here's your {{ value }} gift card!",
+            "remaining_balance": "Remaining {{ balance }}",
+            "qr_code_text": "Scan this QR code:",
+            "code_text": "Use this code at checkout to redeem your gift card:",
+            "copy_button": "Copy code",
+            "copy_success_message": "Code copied successfully",
+            "print_button": "Print"
+        },
         "404": {
             "title": "Page not found",
             "description": "Sorry this page does not exist",
-            "field_placeholder": "What are you looking for?",
-            "button": " Continue shopping"
+            "field_placeholder": "What are you looking for?"
         }
     },
     "sections": {

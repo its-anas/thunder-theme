@@ -59,9 +59,9 @@
                   <h5 class="blog__article__title">{{ article.title }}</h5>
                   <span class="blog__article__publication-date">
                     {% if section.settings.show_publication_date == true %}
-                      {{ article.published_at | time_tag: format: 'date' }}
+                      {{ article.published_at | time_tag: format: 'date' }}.
                     {% endif %}
-                    {% if section.settings.show_author == true %} by {{ article.author }} {% endif %}
+                    {% if section.settings.show_author == true %} {{ article.author }} {% endif %}
                   </span>
                 </a>
               {%- endif -%}
