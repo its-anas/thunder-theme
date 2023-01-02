@@ -21,17 +21,19 @@
           </div>
         </div>
         <div class="quick-view__details">
-          <p class="quick-view__vendor">Vendor</p>
-          <h6 class="quick-view__title">Product</h6>
-          <p class="quick-view__price price--actual">Price</p>
-          <a href="" class="quick-view__product-url button--link">View details</a>
+          <p class="quick-view__vendor">{{ 'general.quick_view.vendor' | t }}</p>
+          <h6 class="quick-view__title">{{ 'general.quick_view.product' | t }}</h6>
+          <p class="quick-view__price price--actual">$0.00</p>
+          <a href="" class="quick-view__product-url button--link">{{ 'general.buttons.view_details' | t }}</a>
         </div>
       </div>
       <div class="quick-view__content">
         <div class="quick-view__options"></div>
         <div class="quick-view__quantity-field">
           <quantity-field class="quantity">
-            <label for="quantity-text"><p>Quantity</p></label>
+            <label for="quantity-text">
+              <p>{{ 'general.quick_view.quantity' | t }}</p>
+            </label>
             <div class="quantity-field" id="quantity-field">
               <button type="button" class="quantity-field__minus" id="quantity-field__minus">-</button>
               <input
@@ -51,7 +53,7 @@
       <div class="quick-view__bottom buttons buttons--center">
         <div class="shadow-divider"></div>
         <button class="button button--primary border quick-view-add-to-cart" id="quick-view-add-to-cart">
-          <span></span> <span></span> <span></span> <span></span>ADD TO CART
+          <span></span> <span></span> <span></span> <span></span>{{ 'general.buttons.add_to_cart' | t }}
           {% render 'snippet-icons',
             icon: 'loading-spinner',
             spinner_color: 'var(--primary-button-text-color)',
@@ -59,7 +61,7 @@
           %}
         </button>
         <button class="button button--secondary border quick-view-buy-now" id="quick-view-buy-now">
-          <span></span> <span></span> <span></span> <span></span>BUY NOW
+          <span></span> <span></span> <span></span> <span></span>{{ 'general.buttons.buy_now' | t }}
         </button>
       </div>
     </div>

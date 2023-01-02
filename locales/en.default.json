@@ -12,8 +12,11 @@
         "search_drawer": {
             "show_all": "Show all results"
         },
-        "popup": {},
-        "quick_view": {},
+        "quick_view": {
+            "vendor": "Vendor",
+            "product": "Product",
+            "quantity": "Quantity"
+        },
         "social": {
             "share": "Share"
         },
@@ -22,7 +25,9 @@
             "quick_view": "Quick view",
             "add_to_cart": "Add to cart",
             "shop_now": "Shop now",
-            "checkout": "Checkout"
+            "buy_now": "Buy now",
+            "checkout": "Checkout",
+            "view_details": "View details"
         },
         "placeholders": {
             "search": "Search"
@@ -44,7 +49,7 @@
             "button": "SAVE"
         },
         "newsletter": {
-            "placeholder`": "Type your email address",
+            "placeholder": "Type your email address",
             "button": "Subscribe",
             "success_message": "Subscription confirmed"
         },
