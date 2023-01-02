@@ -18,7 +18,12 @@
         "article": {},
         "password": {},
         "gift_card": {},
-        "404": {}
+        "404": {
+            "title": "Page not found",
+            "description": "Sorry this page does not exist",
+            "field_placeholder": "What are you looking for?",
+            "button": " Continue shopping"
+        }
     },
     "sections": {
         "animated_rich_text": {},
@@ -47,12 +52,94 @@
         "video_with_text": {}
     },
     "customer": {
-        "account": {},
-        "addresses": {},
-        "login_page": {},
-        "order": {},
-        "orders": {},
-        "register": {},
-        "reset_password": {}
+        "form": {
+            "first_name": "First name",
+            "last_name": "Last name",
+            "company": "Company",
+            "address1": "Address 1",
+            "address2": "Address 2",
+            "city": "City",
+            "zip": "Postal/Zip code",
+            "phone": "Phone",
+            "set_default_address": "Set as default address",
+            "email": "Email",
+            "password": "Password"
+        },
+        "account": {
+            "title": "Order history",
+            "empty_page_description": "You haven't placed any orders yet.",
+            "empty_page_button": "Start shopping",
+            "orders": "Orders",
+            "addresses": "Addresses",
+            "logout": "Logout",
+            "order_number": "Order number",
+            "date": "Date",
+            "payment_status": "Payment status",
+            "fulfillment_status": "Fulfillment status",
+            "total": "Total"
+        },
+        "activate_account": {
+            "title": "Activate account",
+            "description": "Add a password to activate your account.",
+            "activate": "Activate account",
+            "decline": "Decline invitation"
+        },
+        "addresses": {
+            "title": "Addresses",
+            "button": "Add new address",
+            "default_address": "Default address",
+            "address": "Address",
+            "edit": "Edit",
+            "delete": "Delete",
+            "new_address_form_title": "Please fill in the fields below:",
+            "new_address_form_add_address_button": "Add address",
+            "new_address_form_cancel_button": "Cancel",
+            "update_address_form_update_address_button": "Update address",
+            "update_address_form_cancel_button": "Cancel"
+        },
+        "reset_password": {
+            "title": "Recover password",
+            "description": "Enter your email address below and we'll send you a link to reset your password.",
+            "email_field": "Email",
+            "recover_button": "Recover",
+            "back_to_login_button": "Back to login"
+        },
+        "login": {
+            "title": "Login",
+            "description": "Please fill in the fields below:",
+            "login_button": "Sign in",
+            "reset_label": "Forgot password?",
+            "reset_button": "Reset password",
+            "register_label": "New customer?",
+            "register_button": "Create account",
+            "continue_label": "Continue as a guest",
+            "continue_button": "Continue",
+            "success": "✓ We've sent you an email with a link to update your password."
+        },
+        "order": {
+            "title": "Order",
+            "description": "Placed on",
+            "cancellation_date": "Order canceled on",
+            "cancellation_reason": "Reason:",
+            "free": "Free",
+            "product": "Product",
+            "quantity": "Quantity:",
+            "total": "Total",
+            "subtotal": "Subtotal",
+            "shipping": "Shipping",
+            "discount": "Discount",
+            "billing_address": "Billing address",
+            "shipping_address": "Shipping address",
+            "payment_status": "Payment status",
+            "fulfillment_status": "Fulfillment status",
+            "return_link": "Return to Account page"
+        },
+        "register": {
+            "title": "Create account",
+            "description": "Please fill in the fields below:",
+            "button": "Sign up",
+            "link": "Login here",
+            "link_label": "Already have an account?"
+        }
     }
 }

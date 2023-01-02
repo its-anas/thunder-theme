@@ -18,11 +18,11 @@
 <div class="customer">
   <div class="customer__container" style="gap: 6rem;">
     <div class="page-tabs">
-      <a href="{{ routes.account_url }}" class="page-tab">{{ 'customer.account.tabs.orders' | t }}</a>
+      <a href="{{ routes.account_url }}" class="page-tab">{{ 'customer.account.orders' | t }}</a>
       <a href="{{ routes.account_addresses_url }}" class="page-tab selected">
-        {{ 'customer.account.tabs.addresses' | t }}
+        {{ 'customer.account.addresses' | t }}
       </a>
-      <a href="{{ routes.account_logout_url }}" class="page-tab">{{ 'customer.account.tabs.logout' | t }}</a>
+      <a href="{{ routes.account_logout_url }}" class="page-tab">{{ 'customer.account.logout' | t }}</a>
     </div>
 
     <h1>{{ 'customer.addresses.title' | t }}</h1>
@@ -44,14 +44,14 @@
             {% render 'snippet-icons', icon: 'close' %}
           </div>
           {%- form 'customer_address', customer.new_address, class: 'customer__form' -%}
-            <span>{{ 'customer.addresses.new_address.text' | t }}</span>
+            <span>{{ 'customer.addresses.new_address_form_title' | t }}</span>
             <input
               type="text"
               name="address[first_name]"
               class="customer__form__input"
               value="{{ form.first_name }}"
               autocomplete="given-name"
-              placeholder="{{ 'customer.addresses.form.first_name' | t }}"
+              placeholder="{{ 'customer.form.first_name' | t }}"
               required
             >
 
@@ -61,7 +61,7 @@
               class="customer__form__input"
               value="{{ form.last_name }}"
               autocomplete="family-name"
-              placeholder="{{ 'customer.addresses.form.last_name' | t }}"
+              placeholder="{{ 'customer.form.last_name' | t }}"
               required
             >
 
@@ -71,7 +71,7 @@
               class="customer__form__input"
               value="{{ form.company }}"
               autocomplete="organization"
-              placeholder="{{ 'customer.addresses.form.company' | t }}"
+              placeholder="{{ 'customer.form.company' | t }}"
             >
 
             <input
@@ -80,7 +80,7 @@
               class="customer__form__input"
               value="{{ form.address1 }}"
               autocomplete="address-line1"
-              placeholder="{{ 'customer.addresses.form.address1' | t }}"
+              placeholder="{{ 'customer.form.address1' | t }}"
               required
             >
 
@@ -90,7 +90,7 @@
               class="customer__form__input"
               value="{{ form.address2 }}"
               autocomplete="address-line2"
-              placeholder="{{ 'customer.addresses.form.address2' | t }}"
+              placeholder="{{ 'customer.form.address2' | t }}"
             >
 
             <input
@@ -99,7 +99,7 @@
               class="customer__form__input"
               value="{{ form.city }}"
               autocomplete="address-level2"
-              placeholder="{{ 'customer.addresses.form.city' | t }}"
+              placeholder="{{ 'customer.form.city' | t }}"
               required
             >
 
@@ -131,7 +131,7 @@
               value="{{ form.zip }}"
               autocapitalize="characters"
               autocomplete="postal-code"
-              placeholder="{{ 'customer.addresses.form.zip' | t }}"
+              placeholder="{{ 'customer.form.zip' | t }}"
               required
             >
 
@@ -141,23 +141,23 @@
               class="customer__form__input"
               value="{{ form.phone }}"
               autocomplete="tel"
-              placeholder="{{ 'customer.addresses.form.phone' | t }}"
+              placeholder="{{ 'customer.form.phone' | t }}"
             >
 
             <div>
               {{ form.set_as_default_checkbox }}
-              <label for="address_default_address_new">{{ 'customer.addresses.form.set_default_address' | t }}</label>
+              <label for="address_default_address_new">{{ 'customer.form.set_default_address' | t }}</label>
             </div>
             <div class="buttons">
               <button class="button button--primary border" id="customer__popup__add-address__add-button" type="submit">
-                {{ 'customer.addresses.new_address.buttons.add_address' | t }}
+                {{ 'customer.addresses.new_address_form_add_address_button' | t }}
               </button>
               <button
                 class="button button--secondary border"
                 id="customer__popup__add-address__cancel-button"
                 type="reset"
               >
-                {{ 'customer.addresses.new_address.buttons.cancel' | t }}
+                {{ 'customer.addresses.new_address_form_cancel_button' | t }}
               </button>
             </div>
           {%- endform -%}
@@ -171,10 +171,10 @@
           <div class="customer-addresses__address">
             <div class="customer-addresses__address__container">
               {%- if address == customer.default_address -%}
-                <h6>{{ 'customer.addresses.addresses_list.default_address' | t }}</h6>
+                <h6>{{ 'customer.addresses.default_address' | t }}</h6>
               {% else %}
                 <h6>
-                  {{ 'customer.addresses.addresses_list.address' | t }}
+                  {{ 'customer.addresses.address' | t }}
                   {{ forloop.index | plus: paginate.current_offset }}
                 </h6>
               {%- endif -%}
@@ -187,7 +187,7 @@
                     class="button--link underline"
                     id="customer__popup__add-address__button"
                   >
-                    {{ 'customer.addresses.addresses_list.edit' | t }}
+                    {{ 'customer.addresses.edit' | t }}
                   </button>
 
                   <form
@@ -200,7 +200,7 @@
                       type="submit"
                       class="button--link underline"
                     >
-                      {{ 'customer.addresses.addresses_list.delete' | t }}
+                      {{ 'customer.addresses.delete' | t }}
                     </button>
                   </form>
                 </div>
@@ -218,7 +218,7 @@
                           name="address[first_name]"
                           value="{{ form.first_name }}"
                           autocomplete="given-name"
-                          placeholder="{{ 'customer.addresses.form.first_name' | t }}"
+                          placeholder="{{ 'customer.form.first_name' | t }}"
                         >
 
                         <input
@@ -227,7 +227,7 @@
                           name="address[last_name]"
                           value="{{ form.last_name }}"
                           autocomplete="family-name"
-                          placeholder="{{ 'customer.addresses.form.last_name' | t }}"
+                          placeholder="{{ 'customer.form.last_name' | t }}"
                         >
 
                         <input
@@ -236,7 +236,7 @@
                           name="address[company]"
                           value="{{ form.company }}"
                           autocomplete="organization"
-                          placeholder="{{ 'customer.addresses.form.company' | t }}"
+                          placeholder="{{ 'customer.form.company' | t }}"
                         >
 
                         <input
@@ -245,7 +245,7 @@
                           name="address[address1]"
                           value="{{ form.address1 }}"
                           autocomplete="address-line1"
-                          placeholder="{{ 'customer.addresses.form.address1' | t }}"
+                          placeholder="{{ 'customer.form.address1' | t }}"
                         >
 
                         <input
@@ -254,7 +254,7 @@
                           name="address[address2]"
                           value="{{ form.address2 }}"
                           autocomplete="address-line2"
-                          placeholder="{{ 'customer.addresses.form.address2' | t }}"
+                          placeholder="{{ 'customer.form.address2' | t }}"
                         >
 
                         <input
@@ -263,7 +263,7 @@
                           name="address[city]"
                           value="{{ form.city }}"
                           autocomplete="address-level2"
-                          placeholder="{{ 'customer.addresses.form.city' | t }}"
+                          placeholder="{{ 'customer.form.city' | t }}"
                         >
 
                         <select
@@ -291,7 +291,7 @@
                           value="{{ form.zip }}"
                           autocapitalize="characters"
                           autocomplete="postal-code"
-                          placeholder="{{ 'customer.addresses.form.zip' | t }}"
+                          placeholder="{{ 'customer.form.zip' | t }}"
                         >
 
                         <input
@@ -300,26 +300,26 @@
                           name="address[phone]"
                           value="{{ form.phone }}"
                           autocomplete="tel"
-                          placeholder="{{ 'customer.addresses.form.phone' | t }}"
+                          placeholder="{{ 'customer.form.phone' | t }}"
                         >
                       </div>
                       <div class="">
                         {{ form.set_as_default_checkbox }}
-                        <span>{{ 'customer.addresses.form.set_default_address' | t }}</span>
+                        <span>{{ 'customer.form.set_default_address' | t }}</span>
                       </div>
 
                       <div class="buttons">
                         <button
                           class="button button--primary border"
                         >
-                          {{ 'customer.addresses.update_address.buttons.update_address' | t }}
+                          {{ 'customer.addresses.update_address_form_update_address_button' | t }}
                         </button>
                         <button
                           class="button button--secondary border"
                           type="reset"
                           id="customer__popup__add-address__cancel-button"
                         >
-                          {{ 'customer.addresses.update_address.buttons.cancel' | t }}
+                          {{ 'customer.addresses.update_address_form_cancel_button' | t }}
                         </button>
                       </div>
                     {%- endform -%}
@@ -329,7 +329,6 @@
             </div>
           </div>
         {%- endfor -%}
-
         {% render 'snippet-pagination', paginate: paginate %}
       </div>
     {%- endpaginate -%}

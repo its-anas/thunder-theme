@@ -43,11 +43,11 @@
         >
       </div>
       <div class="buttons">
-        <button class="button button--primary border">{{ 'customer.reset_password.buttons.recover' | t }}</button>
+        <button class="button button--primary border">{{ 'customer.reset_password.recover_button' | t }}</button>
       </div>
     {%- endform -%}
     <div class="customer__form__link">
-      <a id="login" class="small underline">{{- 'customer.reset_password.buttons.back_to_login' | t -}}</a>
+      <a id="login" class="small underline">{{- 'customer.reset_password.back_to_login_button' | t -}}</a>
     </div>
   </div>
   <div class="customer__container" id="login_page">
@@ -85,7 +85,7 @@
           autocomplete="email"
           autocorrect="off"
           autocapitalize="off"
-          placeholder="{{ 'customer.login.email_field' | t }}"
+          placeholder="{{ 'customer.form.email' | t }}"
           class="customer__form__input"
           required
         >
@@ -96,27 +96,27 @@
             value=""
             name="customer[password]"
             autocomplete="current-password"
-            placeholder="{{ 'customer.login.password_field' | t }}"
+            placeholder="{{ 'customer.form.password' | t }}"
             class="customer__form__input"
             required
           >
         {%- endif -%}
 
         <div class="customer__form__button buttons">
-          <button class="button button--primary border">{{ 'customer.login.buttons.login' | t }}</button>
+          <button class="button button--primary border">{{ 'customer.login.login_button' | t }}</button>
         </div>
       </div>
     {%- endform -%}
 
     <div class="customer__form__links">
       <div class="customer__form__link">
-        <span class="small">{{ 'customer.login.buttons_labels.forgot_password' | t }}</span>
-        <a id="recover" class="small underline">{{ 'customer.login.buttons.reset' | t }}</a>
+        <span class="small">{{ 'customer.login.reset_label' | t }}</span>
+        <a id="recover" class="small underline">{{ 'customer.login.reset_button' | t }}</a>
       </div>
       <div class="customer__form__link">
-        <span class="small">{{ 'customer.login.buttons_labels.new_customer' | t }}</span>
+        <span class="small">{{ 'customer.login.register_label' | t }}</span>
         <a href="{{ routes.account_register_url }}" class="small underline">
-          {{- 'customer.login.buttons.register' | t -}}
+          {{- 'customer.login.register_button' | t -}}
         </a>
       </div>
     </div>
@@ -124,9 +124,9 @@
 
   {%- if shop.checkout.guest_login -%}
     <div class="customer__form__link">
-      <span>{{ 'customer.login.buttons_labels.continue' | t }}</span>
+      <span>{{ 'customer.login.continue_button' | t }}</span>
       {%- form 'guest_login' -%}
-        <button class="button--link">{{- 'customer.login.buttons.continue' | t -}}</button>
+        <button class="button--link">{{- 'customer.login.continue_button' | t -}}</button>
       {%- endform -%}
     </div>
   {%- endif -%}

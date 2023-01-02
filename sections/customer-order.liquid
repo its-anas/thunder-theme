@@ -39,10 +39,10 @@
     <div class="customer-order__table--main">
       <div class="customer-order__table__head">
         <span>
-          <h6>{{ 'customer.order.order_table.product' | t }}</h6>
+          <h6>{{ 'customer.order.product' | t }}</h6>
         </span>
         <span>
-          <h6>{{ 'customer.order.order_table.total' | t }}</h6>
+          <h6>{{ 'customer.order.total' | t }}</h6>
         </span>
       </div>
 
@@ -75,7 +75,7 @@
                     {{ line_item.variant.title }}
                   </div>
                   <div class="customer-order__table__product__variant secondary-text ">
-                    {{ 'customer.order.order_table.quantity' | t }}
+                    {{ 'customer.order.quantity' | t }}
                     {{ line_item.quantity }}
                   </div>
                   {%- if line_item.line_level_discount_allocations != blank -%}
@@ -132,14 +132,14 @@
 
     <div class="customer-order__table--vertical">
       <div>
-        <span>{{ 'customer.order.total_table.subtotal' | t }}</span>
+        <span>{{ 'customer.order.subtotal' | t }}</span>
         <span>{{ order.line_items_subtotal_price | money }}</span>
       </div>
       {%- if cart.cart_level_discount_applications != blank -%}
         {%- for discount_application in cart.cart_level_discount_applications -%}
           <div>
             <span>
-              {{ 'customer.order.total_table.discount' | t }} ({{ discount_application.title -}}
+              {{ 'customer.order.discount' | t }} ({{ discount_application.title -}}
               )
             </span>
             <span>
@@ -151,14 +151,14 @@
       {%- endif -%}
       <div>
         {%- for shipping_method in order.shipping_methods -%}
-          <span>{{ 'customer.order.total_table.shipping' | t }}</span>
+          <span>{{ 'customer.order.shipping' | t }}</span>
         {%- endfor -%}
         {%- for shipping_method in order.shipping_methods -%}
           <span> {{ shipping_method.price | money }}</span>
         {%- endfor -%}
       </div>
       <div>
-        <h6>{{ 'customer.order.total_table.total' | t }}</h6>
+        <h6>{{ 'customer.order.total' | t }}</h6>
         <h6>{{ order.total_price | money_with_currency }}</h6>
       </div>
     </div>
@@ -166,20 +166,20 @@
     <div class="customer-order__table--address__container">
       <div class="customer-order__table--address">
         <div class="billing-address">
-          <h6>{{ 'customer.order.address.billing' | t }}</h6>
+          <h6>{{ 'customer.order.billing_address' | t }}</h6>
           <div>
             <span>
-              {{ 'customer.order.address.payment_status' | t }}
+              {{ 'customer.order.payment_status' | t }}
               {{ order.financial_status_label -}}
             </span>
             <span>{{ order.billing_address | format_address }}</span>
           </div>
         </div>
         <div class="shipping-address">
-          <h6>{{ 'customer.order.address.shipping' | t }}</h6>
+          <h6>{{ 'customer.order.shipping_address' | t }}</h6>
           <div>
             <span>
-              {{ 'customer.order.address.fulfillment_status' | t }}
+              {{ 'customer.order.fulfillment_status' | t }}
               {{ order.fulfillment_status_label -}}
             </span>
             <span> {{ order.shipping_address | format_address }}</span>
