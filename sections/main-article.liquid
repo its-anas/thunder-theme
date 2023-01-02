@@ -122,7 +122,7 @@
                               <span>⚠</span>
                               <span>
                                 {%- if form.errors.translated_fields[field] contains 'author' -%}
-                                  {{ 'customer.form.name' | t }}
+                                  {{ 'general.form.name' | t }}
                                 {%- elsif form.errors.translated_fields[field] contains 'body' -%}
                                   {{ 'pages.article.comment_field' | t }}
                                 {%- else -%}
@@ -148,7 +148,7 @@
                           autocomplete="name"
                           value="{{ form.author }}"
                           required
-                          placeholder="{{ 'customer.form.name' | t }}"
+                          placeholder="{{ 'general.form.name' | t }}"
                         >
                       </div>
 
@@ -161,7 +161,7 @@
                           autocorrect="off"
                           autocapitalize="off"
                           required
-                          placeholder="{{ 'customer.form.email' | t }}"
+                          placeholder="{{ 'general.form.email' | t }}"
                         >
                       </div>
 

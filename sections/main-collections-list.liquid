@@ -27,7 +27,9 @@
 
 <div reveal-on-scroll class="collections-list">
   <div class="collections-list__container">
-    <div class="collections-list__head"><h2>Collections</h2></div>
+    <div class="collections-list__head">
+      <h2>{{ 'pages.collections_list.title' | t }}</h2>
+    </div>
 
     {%- paginate collections by section.settings.collections_per_page -%}
       <div class="collections-list__content">

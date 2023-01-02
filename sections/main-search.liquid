@@ -17,9 +17,9 @@
   <div class="search__container">
     <div class="search__head">
       {% if search.performed %}
-        <h2 class="search__title">Results for “{{ search.terms }}”</h2>
+        <h2 class="search__title">{{ 'pages.search.title_with_query' | t: query: search.terms }}</h2>
       {% else %}
-        <h2 class="search__title">Search</h2>
+        <h2 class="search__title">{{ 'pages.search.title' | t }}</h2>
       {% endif %}
     </div>
 
@@ -31,7 +31,7 @@
           type="search"
           name="q"
           value="{{ search.terms | escape }}"
-          placeholder="Search..."
+          placeholder="{{ 'general.placeholders.search' | t }}..."
         >
         <button class="search__icon">
           {% render 'snippet-icons', icon: 'search' %}
@@ -43,8 +43,8 @@
       {%- if search.results_count > 0 or search.filters != empty -%}
         <div class="search__content-head">
           <search-page-tabs class="page-tabs">
-            <p class="page-tab selected" for="products">Products</p>
-            <p class="page-tab" for="articles">Articles</p>
+            <p class="page-tab selected" for="products">{{ 'pages.search.products_tab' | t }}</p>
+            <p class="page-tab" for="articles">{{ 'pages.search.articles_tab' | t }}</p>
           </search-page-tabs>
         </div>
         <div class="search__content">
@@ -64,14 +64,14 @@
                     {% if section.settings.show_filter == true %}
                       <div class="show-filter mobile-only">
                         {% render 'snippet-icons', icon: 'search-filter' %}
-                        <span>Filters</span>
+                        <span>{{ 'general.filter.section_title' | t }}</span>
                         <span id="filterCount"></span>
                       </div>
                     {% endif %}
                     <p class="results-count-hidden" style="opacity: 0;">({{ search.results_count }})</p>
 
                     <div class="sort-by">
-                      <p for="SortBy">Sort by:</p>
+                      <p for="SortBy">{{ 'general.filter.sort_by' | t }}</p>
 
                       {%- assign sort_by = search.sort_by | default: search.default_sort_by -%}
                       <select
@@ -110,7 +110,7 @@
                                       </p>
                                     {% endif %}
                                   {% else %}
-                                    <p class="tag--disabled tag-text">SOLDOUT</p>
+                                    <p class="tag--disabled tag-text">{{ 'general.tags.sold_out' | t }}</p>
                                   {% endif %}
                                 </div>
                                 {% if item.available %}
@@ -183,9 +183,9 @@
                                     data-product-variants="{% if item.variants.size > 1 %}with{% else %}without{% endif %}"
                                   >
                                     {%- if item.variants.size > 1 -%}
-                                      Quick view +
+                                      {{ 'general.buttons.quick_view' | t }} +
                                     {% else %}
-                                      Add to cart +
+                                      {{ 'general.buttons.add_to_cart' | t }} +
                                     {%- endif -%}
                                     {% render 'snippet-icons', icon: 'loading-spinner-tiny' %}
                                   </div>
@@ -243,7 +243,7 @@
           </div>
         </div>
       {%- else -%}
-        <p>No results could be found.</p>
+        <p>{{ 'pages.search.no_results_message' | t }}</p>
       {%- endif -%}
     {% else %}
 

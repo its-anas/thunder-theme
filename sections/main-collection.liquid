@@ -14,7 +14,9 @@
 
 <div class="collection  {% if collection.products_count == 0 %}empty-state{% endif %}">
   <div class="collection__container">
-    <p class="collection__page-tab selected results-count" style="text-align: center;">Products</p>
+    <p class="collection__page-tab selected results-count" style="text-align: center;">
+      {{ 'pages.collection.title' | t }}
+    </p>
     {%- if collection.products_count > 0 -%}
       <div class="collection__content">
         <div class="collection__content-container tab active" type="products">
@@ -36,7 +38,7 @@
                   {% if section.settings.show_filter == true %}
                     <div class="show-filter mobile-only">
                       {% render 'snippet-icons', icon: 'search-filter' %}
-                      <span>Filters</span>
+                      <span>{{ 'general.filter.section_title' | t }}</span>
                       <span id="filterCount"></span>
                     </div>
                   {% endif %}
@@ -44,7 +46,7 @@
                   <p class="results-count-hidden" style="opacity: 0;">({{ collection.products_count }})</p>
 
                   <div class="sort-by">
-                    <p for="SortBy">Sort by:</p>
+                    <p for="SortBy">{{ 'general.filter.sort_by' | t }}</p>
 
                     <select
                       name="sort_by"
@@ -80,7 +82,7 @@
                                 </p>
                               {% endif %}
                             {% else %}
-                              <p class="tag--disabled tag-text">SOLDOUT</p>
+                              <p class="tag--disabled tag-text">{{ 'general.tags.sold_out' | t }}</p>
                             {% endif %}
                           </div>
                           {% if item.available %}
@@ -149,9 +151,9 @@
                               data-product-variants="{% if item.variants.size > 1 %}with{% else %}without{% endif %}"
                             >
                               {%- if item.variants.size > 1 -%}
-                                Quick view +
+                                {{ 'general.buttons.quick_view' | t }} +
                               {% else %}
-                                Add to cart +
+                                {{ 'general.buttons.add_to_cart' | t }} +
                               {%- endif -%}
                               {% render 'snippet-icons', icon: 'loading-spinner-tiny' %}
                             </div>
@@ -168,14 +170,14 @@
         </div>
       </div>
     {%- else -%}
-      <p>This collection does not have any products.</p>
+      <p>{{ 'pages.collection.empty_collection_text' | t }}</p>
       <div class="buttons">
         <a
           class="button button--primary border"
           href="{{ routes.collections_url }}"
         >
           <span></span> <span></span> <span></span> <span></span>
-          SHOP NOW
+          {{ 'general.buttons.shop_now' | t }}
         </a>
       </div>
     {%- endif -%}

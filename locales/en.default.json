@@ -11,15 +11,74 @@
             "share": "Share"
         },
         "buttons": {
-            "continue_button": "Continue shopping"
+            "continue_button": "Continue shopping",
+            "quick_view": "Quick view",
+            "add_to_cart": "Add to cart",
+            "shop_now": "Shop now"
+        },
+        "placeholders": {
+            "search": "Search"
+        },
+        "tags": {
+            "sold_out": "Sold out"
+        },
+        "filter": {
+            "title": "Filters",
+            "clear_button": "Clear all",
+            "price_range_text": "to",
+            "view_results_buttons": "View results",
+            "section_title": "Filters",
+            "sort_by": "Sort by"
+        },
+        "form": {
+            "first_name": "First name",
+            "last_name": "Last name",
+            "name": "Name",
+            "company": "Company",
+            "address1": "Address 1",
+            "address2": "Address 2",
+            "city": "City",
+            "zip": "Postal/Zip code",
+            "phone": "Phone",
+            "set_default_address": "Set as default address",
+            "email": "Email",
+            "password": "Password"
         }
     },
     "pages": {
-        "product": {},
-        "cart": {},
-        "collections_list": {},
-        "collection": {},
-        "search": {},
+        "product": {
+            "stock_disclaimer": "{{ inventory }} left in stock"
+        },
+        "cart": {
+            "title": "Cart",
+            "product": "PRODUCT",
+            "quantity": "QUANTITY",
+            "price": "PRICE",
+            "free": "Free",
+            "total": "Total",
+            "button": "Checkout",
+            "tax_disclaimer": "Taxes & shipping calculated at checkout",
+            "empty_cart_text": "You cart is empty",
+            "note": {
+                "edit": "Edit order note",
+                "label": "Add an note to your order",
+                "button": "SAVE"
+            }
+        },
+        "collections_list": {
+            "title": "Collections"
+        },
+        "collection": {
+            "title": "Products",
+            "empty_collection_text": "This collection does not have any products."
+        },
+        "search": {
+            "title": "Search",
+            "title_with_query": "Results for \"{{ query }}\"",
+            "products_tab": "Products",
+            "articles_tab": "Articles",
+            "no_results_message": "No results could be found."
+        },
         "article": {
             "comments_section_title": "Comments",
             "comment_form_title": "Leave a comment",
@@ -84,20 +143,6 @@
         "video_with_text": {}
     },
     "customer": {
-        "form": {
-            "first_name": "First name",
-            "last_name": "Last name",
-            "name": "Name",
-            "company": "Company",
-            "address1": "Address 1",
-            "address2": "Address 2",
-            "city": "City",
-            "zip": "Postal/Zip code",
-            "phone": "Phone",
-            "set_default_address": "Set as default address",
-            "email": "Email",
-            "password": "Password"
-        },
         "account": {
             "title": "Order history",
             "empty_page_description": "You haven't placed any orders yet.",

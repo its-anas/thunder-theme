@@ -45,7 +45,7 @@
             value="{{ form.first_name }}"
           {% endif %}
           autocomplete="given-name"
-          placeholder="{{ 'customer.form.first_name' | t }}"
+          placeholder="{{ 'general.form.first_name' | t }}"
           class="customer__form__input"
         >
         <input
@@ -55,7 +55,7 @@
             value="{{ form.last_name }}"
           {% endif %}
           autocomplete="family-name"
-          placeholder="{{ 'customer.form.last_name' | t }}"
+          placeholder="{{ 'general.form.last_name' | t }}"
           class="customer__form__input"
         >
         <input
@@ -67,14 +67,14 @@
           spellcheck="false"
           autocapitalize="off"
           autocomplete="email"
-          placeholder="{{ 'customer.form.email' | t }}"
+          placeholder="{{ 'general.form.email' | t }}"
           class="customer__form__input {% if form.errors contains 'email' %}error{% endif %}"
           required
         >
         <input
           type="password"
           name="customer[password]"
-          placeholder="{{ 'customer.form.password' | t }}"
+          placeholder="{{ 'general.form.password' | t }}"
           class="customer__form__input {% if form.errors contains 'password' %}error{% endif %}"
           required
         >

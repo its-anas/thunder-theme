@@ -51,7 +51,7 @@
               class="customer__form__input"
               value="{{ form.first_name }}"
               autocomplete="given-name"
-              placeholder="{{ 'customer.form.first_name' | t }}"
+              placeholder="{{ 'general.form.first_name' | t }}"
               required
             >
 
@@ -61,7 +61,7 @@
               class="customer__form__input"
               value="{{ form.last_name }}"
               autocomplete="family-name"
-              placeholder="{{ 'customer.form.last_name' | t }}"
+              placeholder="{{ 'general.form.last_name' | t }}"
               required
             >
 
@@ -71,7 +71,7 @@
               class="customer__form__input"
               value="{{ form.company }}"
               autocomplete="organization"
-              placeholder="{{ 'customer.form.company' | t }}"
+              placeholder="{{ 'general.form.company' | t }}"
             >
 
             <input
@@ -80,7 +80,7 @@
               class="customer__form__input"
               value="{{ form.address1 }}"
               autocomplete="address-line1"
-              placeholder="{{ 'customer.form.address1' | t }}"
+              placeholder="{{ 'general.form.address1' | t }}"
               required
             >
 
@@ -90,7 +90,7 @@
               class="customer__form__input"
               value="{{ form.address2 }}"
               autocomplete="address-line2"
-              placeholder="{{ 'customer.form.address2' | t }}"
+              placeholder="{{ 'general.form.address2' | t }}"
             >
 
             <input
@@ -99,7 +99,7 @@
               class="customer__form__input"
               value="{{ form.city }}"
               autocomplete="address-level2"
-              placeholder="{{ 'customer.form.city' | t }}"
+              placeholder="{{ 'general.form.city' | t }}"
               required
             >
 
@@ -131,7 +131,7 @@
               value="{{ form.zip }}"
               autocapitalize="characters"
               autocomplete="postal-code"
-              placeholder="{{ 'customer.form.zip' | t }}"
+              placeholder="{{ 'general.form.zip' | t }}"
               required
             >
 
@@ -141,12 +141,12 @@
               class="customer__form__input"
               value="{{ form.phone }}"
               autocomplete="tel"
-              placeholder="{{ 'customer.form.phone' | t }}"
+              placeholder="{{ 'general.form.phone' | t }}"
             >
 
             <div>
               {{ form.set_as_default_checkbox }}
-              <label for="address_default_address_new">{{ 'customer.form.set_default_address' | t }}</label>
+              <label for="address_default_address_new">{{ 'general.form.set_default_address' | t }}</label>
             </div>
             <div class="buttons">
               <button class="button button--primary border" id="customer__popup__add-address__add-button" type="submit">
@@ -218,7 +218,7 @@
                           name="address[first_name]"
                           value="{{ form.first_name }}"
                           autocomplete="given-name"
-                          placeholder="{{ 'customer.form.first_name' | t }}"
+                          placeholder="{{ 'general.form.first_name' | t }}"
                         >
 
                         <input
@@ -227,7 +227,7 @@
                           name="address[last_name]"
                           value="{{ form.last_name }}"
                           autocomplete="family-name"
-                          placeholder="{{ 'customer.form.last_name' | t }}"
+                          placeholder="{{ 'general.form.last_name' | t }}"
                         >
 
                         <input
@@ -236,7 +236,7 @@
                           name="address[company]"
                           value="{{ form.company }}"
                           autocomplete="organization"
-                          placeholder="{{ 'customer.form.company' | t }}"
+                          placeholder="{{ 'general.form.company' | t }}"
                         >
 
                         <input
@@ -245,7 +245,7 @@
                           name="address[address1]"
                           value="{{ form.address1 }}"
                           autocomplete="address-line1"
-                          placeholder="{{ 'customer.form.address1' | t }}"
+                          placeholder="{{ 'general.form.address1' | t }}"
                         >
 
                         <input
@@ -254,7 +254,7 @@
                           name="address[address2]"
                           value="{{ form.address2 }}"
                           autocomplete="address-line2"
-                          placeholder="{{ 'customer.form.address2' | t }}"
+                          placeholder="{{ 'general.form.address2' | t }}"
                         >
 
                         <input
@@ -263,7 +263,7 @@
                           name="address[city]"
                           value="{{ form.city }}"
                           autocomplete="address-level2"
-                          placeholder="{{ 'customer.form.city' | t }}"
+                          placeholder="{{ 'general.form.city' | t }}"
                         >
 
                         <select
@@ -291,7 +291,7 @@
                           value="{{ form.zip }}"
                           autocapitalize="characters"
                           autocomplete="postal-code"
-                          placeholder="{{ 'customer.form.zip' | t }}"
+                          placeholder="{{ 'general.form.zip' | t }}"
                         >
 
                         <input
@@ -300,12 +300,12 @@
                           name="address[phone]"
                           value="{{ form.phone }}"
                           autocomplete="tel"
-                          placeholder="{{ 'customer.form.phone' | t }}"
+                          placeholder="{{ 'general.form.phone' | t }}"
                         >
                       </div>
                       <div class="">
                         {{ form.set_as_default_checkbox }}
-                        <span>{{ 'customer.form.set_default_address' | t }}</span>
+                        <span>{{ 'general.form.set_default_address' | t }}</span>
                       </div>
 
                       <div class="buttons">

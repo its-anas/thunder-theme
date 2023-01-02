@@ -3,7 +3,7 @@
 
 <filter-component>
   <div class="filter-head">
-    <h6 class="filter-title">Filters</h6>
+    <h6 class="filter-title">{{ 'general.filter.title' | t }}</h6>
     <div class="filter-close mobile-only">
       {% render 'snippet-icons', icon: 'close' %}
     </div>
@@ -42,7 +42,7 @@
         {% endif %}
         class="filter-active-filters__clear small underline"
       >
-        Clear all
+        {{ 'general.filter.clear_button' | t }}
       </span>
     </div>
 
@@ -65,14 +65,6 @@
         </summary>
 
         <div class="filter-group__container">
-          {% comment %}
-             <div class="filter-group__header">
-              {%- if filter.active_values.size > 0 -%}
-                <a href="{{ filter.url_to_remove }}" class="filter-group__header-reset">Reset</a>f
-              {%- endif -%}
-            </div>
-          {% endcomment %}
-
           {%- case filter.type -%}
             {%- when 'boolean', 'list' -%}
               {% if filter.label == 'Color' %}
@@ -133,7 +125,6 @@
                   assign range_left_value = filter.min_value.value | times: 1.00
                   assign range_left_max = filter.range_max | times: 1.00
                   assign range_style_left = range_left_value | divided_by: range_left_max | times: 100
-
                   assign range_right_value = filter.max_value.value | times: 1.00
                   assign range_right_max = filter.range_max | times: 1.00
                   assign range_style_right = range_right_value | divided_by: range_right_max | times: 100
@@ -189,7 +180,7 @@
                       class="input-min"
                     >
                   </div>
-                  <span class="filter-group__price-range__separator">to</span>
+                  <span class="filter-group__price-range__separator">{{ 'general.filter.price_range_text' | t }}</span>
                   <div class="filter-group__price-range__from-input">
                     <span class="filter-group__price-range__currency-symbol">{{ cart.currency.symbol }}</span>
                     <input
@@ -219,6 +210,8 @@
   </form>
   <div class="filter-mobile__button buttons mobile-only">
     <div class="shadow-divider"></div>
-    <a class="button button--primary border"> <span></span> <span></span> <span></span> <span></span>View results</a>
+    <a class="button button--primary border">
+      <span></span> <span></span> <span></span> <span></span>{{ 'general.filter.view_results_buttons' | t -}}
+    </a>
   </div>
 </filter-component>
