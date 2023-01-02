@@ -43,7 +43,7 @@
         {%- assign twitter_text = product.title | url_param_escape | strip -%}
         {%- assign pinterest_description = product.description | strip | truncatewords: 15 | url_param_escape -%}
         {%- assign pinterest_image = product.featured_image | image_url: '800x' | prepend: 'https:' -%}
-        <p>{{ 'general.social.share' | t }}</p>
+        <p>{{ 'general.others.share' | t }}</p>
         <a
           href="https://www.facebook.com/sharer.php?u={{ share_url }}"
           target="_blank"

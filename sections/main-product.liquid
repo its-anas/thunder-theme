@@ -178,7 +178,7 @@
                 </div>
               {% when 'sale_tag' %}
                 <div class="product-page__prices" {{ block.shopify_attributes }}>
-                  {% assign price_difference_text = block.settings.price_difference_text %}
+                  {% assign price_difference_text = 'general.others.sale_text' | t %}
                   {% assign price_difference = current_variant.compare_at_price | minus: current_variant.price %}
                   <div class="product-page__tag">
                     {% if current_variant.available %}
@@ -190,7 +190,7 @@
                       {% endif %}
                     {% endif %}
                     {% unless current_variant.available %}
-                      <p class="tag--disabled tag-text">{{ 'general.tags.sold_out' | t }}</p>
+                      <p class="tag--disabled tag-text">{{ 'general.others.sold_out' | t }}</p>
                     {% endunless %}
                   </div>
                 </div>
@@ -370,7 +370,7 @@
               {% when 'quantity' %}
                 <quantity-field class="quantity" {{ block.shopify_attributes }}>
                   <label for="quantity-text">
-                    <p>{{ 'pages.product.quantity' | t }}</p>
+                    <p>{{ 'general.others.quantity' | t }}</p>
                   </label>
                   <div class="quantity-field" id="quantity-field">
                     <button type="button" class="quantity-field__minus" id="quantity-field__minus">-</button>
@@ -403,7 +403,7 @@
                       <path d="M12.1297 13.6845L11.9497 8.89453H13.0797L12.8897 13.6845H12.1297ZM12.5197 15.9545C12.333 15.9545 12.1763 15.8912 12.0497 15.7645C11.923 15.6379 11.8597 15.4879 11.8597 15.3145C11.8597 15.1279 11.923 14.9745 12.0497 14.8545C12.1763 14.7345 12.333 14.6745 12.5197 14.6745C12.7063 14.6745 12.8597 14.7345 12.9797 14.8545C13.0997 14.9745 13.1597 15.1279 13.1597 15.3145C13.1597 15.4879 13.0997 15.6379 12.9797 15.7645C12.8597 15.8912 12.7063 15.9545 12.5197 15.9545Z" fill="#FB4343"/>
                     </svg>
                     <p class="product-page__stock-disclaimer__text">
-                      {{ 'pages.product.stock_disclaimer' | t: inventory: current_variant.inventory_quantity }}
+                      {{ 'general.others.stock_disclaimer' | t: inventory: current_variant.inventory_quantity }}
                     </p>
                   </div>
                 {% endif %}
@@ -640,6 +640,10 @@
   
   
   
+  
+  
+  
+  
   let variantsInventory = {};
   {% for variant in product.variants %}
   variantsInventory["{{ variant.title }}"] = {{ variant.inventory_quantity }};
@@ -673,6 +677,10 @@
   let currentVariantInventory = {{ current_variant.inventory_quantity }};
   let stockAlertThreshold = {{ stock_alert_threshold }};
   let priceDifferenceText= "{{ price_difference_text }}";
+
+
+
+
 
 
 
@@ -745,16 +753,7 @@
     {
       "type": "sale_tag",
       "name": "Sale tag",
-      "limit": 1,
-      "settings": [
-        {
-          "type": "text",
-          "id": "price_difference_text",
-          "label": "Price difference disclaimer text",
-          "default": "SAVE",
-          "info": "Make sure the product compare at price is filled in and is greater than the price. Otherwise the sale tag will not show or will not work properly."
-        }
-      ]
+      "limit": 1
     },
     {
       "type": "variants_selector",

@@ -13,10 +13,7 @@
           "type": "name"
         },
         "sale_tag": {
-          "type": "sale_tag",
-          "settings": {
-            "price_difference_text": "SAVE"
-          }
+          "type": "sale_tag"
         },
         "price": {
           "type": "price"

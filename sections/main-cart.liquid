@@ -56,7 +56,7 @@
                           and line_item.variant.inventory_quantity != 0
                         %}
                           <p class="cart-page__stock-disclaimer small">
-                            {{ 'pages.product.stock_disclaimer' | t: inventory: line_item.variant.inventory_quantity }}
+                            {{ 'general.others.stock_disclaimer' | t: inventory: line_item.variant.inventory_quantity }}
                           </p>
                         {% endif %}
                         <div class="cart-page__product-prices mobile-only">

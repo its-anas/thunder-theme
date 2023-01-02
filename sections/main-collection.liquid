@@ -71,7 +71,7 @@
                     <div class="collection__item">
                       <div class="collection__item-container">
                         <div class="collection__item__picture corner-border">
-                          {% assign price_difference_text = 'SAVE' %}
+                          {% assign price_difference_text = 'general.others.sale_text' | t %}
                           {% assign price_difference = item.compare_at_price | minus: item.price %}
                           <div class="collection__item__tag">
                             {% if item.available %}
@@ -82,7 +82,7 @@
                                 </p>
                               {% endif %}
                             {% else %}
-                              <p class="tag--disabled tag-text">{{ 'general.tags.sold_out' | t }}</p>
+                              <p class="tag--disabled tag-text">{{ 'general.others.sold_out' | t }}</p>
                             {% endif %}
                           </div>
                           {% if item.available %}

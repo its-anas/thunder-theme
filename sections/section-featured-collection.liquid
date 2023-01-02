@@ -90,7 +90,7 @@
                 {% if product.available %}
                   {% if price_difference > 0 %}
                     <p class="tag--animated tag-text">
-                      SAVE {{ product.compare_at_price | minus: product.price | money }}
+                      {{ 'general.others.sale_text' | t }} {{ product.compare_at_price | minus: product.price | money }}
                     </p>
                   {% endif %}
                 {% else %}
@@ -174,7 +174,7 @@
           {%- capture placeholder_product -%}
             <div class="item">
               <div class="featured-collection__image corner-border">
-                <p class="tag--animated tag-text">SAVE {{ product.compare_at_price | minus: product.price | money }}</p>
+                <p class="tag--animated tag-text">{{ 'general.others.sale_text' | t }} {{ product.compare_at_price | minus: product.price | money }}</p>
                 <div class="media corner-border-target">
                   {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
               </div>

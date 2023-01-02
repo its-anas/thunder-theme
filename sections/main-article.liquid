@@ -192,7 +192,7 @@
               {%- assign pinterest_description = article.description | strip | truncatewords: 15 | url_param_escape -%}
               {%- assign pinterest_image = article.image | image_url: '800x' | prepend: 'https:' -%}
 
-              <p>{{ 'general.social.share' | t }}</p>
+              <p>{{ 'general.others.share' | t }}</p>
               <a
                 href="https://www.facebook.com/sharer.php?u={{ share_url }}"
                 target="_blank"

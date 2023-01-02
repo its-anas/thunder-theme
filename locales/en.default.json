@@ -13,17 +13,6 @@
         "search_drawer": {
             "show_all": "Show all results"
         },
-        "quick_view": {
-            "vendor": "Vendor",
-            "product": "Product",
-            "quantity": "Quantity"
-        },
-        "placeholder": {
-            "product": "Product"
-        },
-        "social": {
-            "share": "Share"
-        },
         "buttons": {
             "continue_button": "Continue shopping",
             "quick_view": "Quick view",
@@ -32,27 +21,6 @@
             "buy_now": "Buy now",
             "checkout": "Checkout",
             "view_details": "View details"
-        },
-        "tags": {
-            "sold_out": "Sold out"
-        },
-        "filter": {
-            "title": "Filters",
-            "clear_button": "Clear all",
-            "price_range_text": "to",
-            "view_results_buttons": "View results",
-            "section_title": "Filters",
-            "sort_by": "Sort by"
-        },
-        "note": {
-            "edit": "Edit order note",
-            "label": "Add order note",
-            "button": "SAVE"
-        },
-        "newsletter": {
-            "placeholder": "Type your email address",
-            "button": "Subscribe",
-            "success_message": "Subscription confirmed"
         },
         "form": {
             "first_name": "First name",
@@ -69,13 +37,42 @@
             "password": "Password",
             "search": "Search",
             "message": "Message"
+        },
+        "newsletter": {
+            "placeholder": "Type your email address",
+            "button": "Subscribe",
+            "success_message": "Subscription confirmed"
+        },
+        "filter": {
+            "title": "Filters",
+            "clear_button": "Clear all",
+            "price_range_text": "to",
+            "view_results_buttons": "View results",
+            "section_title": "Filters",
+            "sort_by": "Sort by"
+        },
+        "placeholder": {
+            "product": "Product",
+            "vendor": "Vendor"
+        },
+        "note": {
+            "edit": "Edit order note",
+            "label": "Add order note",
+            "button": "SAVE"
+        },
+        "free_shipping_bar": {
+            "first_message": "Spend {x} more and get free shipping",
+            "second_message": "🎉 You have qualified for free shipping 🎉"
+        },
+        "others": {
+            "quantity": "Quantity",
+            "share": "Share",
+            "sold_out": "SOLD OUT",
+            "sale_text": "SAVE",
+            "stock_disclaimer": "{{ inventory }} left in stock"
         }
     },
     "pages": {
-        "product": {
-            "stock_disclaimer": "{{ inventory }} left in stock",
-            "quantity": "Quantity"
-        },
         "cart": {
             "title": "Cart",
             "product": "PRODUCT",
@@ -138,15 +135,6 @@
         }
     },
     "sections": {
-        "blog_posts": {
-            "publication_date": "Publication date",
-            "article_title": "Article title",
-            "button": "View all articles"
-        },
-        "contact": {
-            "button": "Submit",
-            "success_message": "Message sent successfully"
-        },
         "countdown_timer": {
             "days": "Days",
             "hours": "Hours",
@@ -161,17 +149,17 @@
             "button": "View all collections"
         },
         "featured_product": {
-            "quantity": "Quantity",
             "view_details": "View details"
         },
-        "promotional_banner": {},
-        "recently_viewed_products": {},
-        "recommended_products": {},
-        "shop_the_look": {},
-        "slideshow": {},
-        "testimonials": {},
-        "text_with_icon": {},
-        "video_with_text": {}
+        "blog_posts": {
+            "publication_date": "Publication date",
+            "article_title": "Article title",
+            "button": "View all articles"
+        },
+        "contact": {
+            "button": "Submit",
+            "success_message": "Message sent successfully"
+        }
     },
     "customer": {
         "account": {
