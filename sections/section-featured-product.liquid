@@ -141,7 +141,9 @@
             {% when 'quantity' %}
               <div class="featured-product__quantity-field" {{ block.shopify_attributes }}>
                 <quantity-field class="quantity">
-                  <label for="quantity-text"><p>Quantity</p></label>
+                  <label for="quantity-text">
+                    <p>{{ 'sections.featured_product.quantity' | t }}</p>
+                  </label>
                   <div class="quantity-field" id="quantity-field">
                     <button type="button" class="quantity-field__minus" id="quantity-field__minus">-</button>
                     <input
@@ -159,7 +161,7 @@
             {% when 'buttons' %}
               <div class="featured-product__buttons buttons" {{ block.shopify_attributes }}>
                 <button class="button button--primary border" id="featured-product-add-to-cart">
-                  <span></span> <span></span> <span></span> <span></span>ADD TO CART
+                  <span></span> <span></span> <span></span> <span></span>{{ 'general.buttons.add_to_cart' | t }}
                   {% render 'snippet-icons',
                     icon: 'loading-spinner',
                     spinner_color: 'var(--primary-button-text-color)',
@@ -178,7 +180,7 @@
                 class="featured-product__url button--link"
                 {{ block.shopify_attributes }}
               >
-                View details
+                {{ 'sections.featured_product.view_details' | t }}
               </a>
           {% endcase %}
         {% endfor %}

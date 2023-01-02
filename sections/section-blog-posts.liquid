@@ -129,10 +129,10 @@
               </a>
               <a class="blog-posts__container">
                 <div class="blog-posts__author">
-                  <p class="text ">Publication date</p>
+                  <p class="text ">{{ 'sections.blog_posts.publication_date' | t }}</p>
                 </div>
                 <div class="blog-posts__title">
-                  <p class="text small">Article title</p>
+                  <p class="text small">{{ 'sections.blog_posts.article_title' | t }}</p>
                 </div>
               </a>
             </div>
@@ -148,7 +148,7 @@
     </div>
   </div>
   <div class="blog-posts__link">
-    <a class="button-text button--link" {% if section.settings.blog.url != blank %}href="{{ section.settings.blog.url }}{% endif %}">View all</a>
+    <a class="button-text button--link" {% if section.settings.blog.url != blank %}href="{{ section.settings.blog.url }}{% endif %}">{{ 'sections.blog_posts.button' | t }}</a>
 
   </div>
 </slider-component>

@@ -127,7 +127,7 @@
                   {% if block.settings.collection.title != blank %}
                     {{ block.settings.collection.title }}
                   {% elsif block.settings.collection.title == blank %}
-                    COLLECTION
+                    {{ 'sections.featured_collections.collection' | t }}
                   {% endif %}
                 </div>
               </div>
@@ -146,8 +146,9 @@
       {% if block.settings.collection != blank %}
         href="{{ routes.collections_url }}"
       {% endif %}
-      >View all</a
     >
+      {{ 'sections.featured_collections.button' | t }}
+    </a>
   </div>
 </slider-component>
 

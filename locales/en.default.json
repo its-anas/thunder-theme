@@ -18,6 +18,9 @@
             "product": "Product",
             "quantity": "Quantity"
         },
+        "placeholder": {
+            "product": "Product"
+        },
         "social": {
             "share": "Share"
         },
@@ -29,9 +32,6 @@
             "buy_now": "Buy now",
             "checkout": "Checkout",
             "view_details": "View details"
-        },
-        "placeholders": {
-            "search": "Search"
         },
         "tags": {
             "sold_out": "Sold out"
@@ -66,7 +66,9 @@
             "phone": "Phone",
             "set_default_address": "Set as default address",
             "email": "Email",
-            "password": "Password"
+            "password": "Password",
+            "search": "Search",
+            "message": "Message"
         }
     },
     "pages": {
@@ -136,22 +138,32 @@
         }
     },
     "sections": {
-        "animated_rich_text": {},
-        "blog_posts": {},
-        "compare": {},
-        "contact": {},
-        "countdown-timer": {},
-        "faq": {},
-        "featured_collection": {},
-        "featured_collections": {},
-        "featured_product": {},
-        "gallery": {},
-        "image_banner": {},
-        "image_with_text": {},
-        "logo_list": {},
-        "multi_icon": {},
-        "newsletter": {},
-        "password": {},
+        "blog_posts": {
+            "publication_date": "Publication date",
+            "article_title": "Article title",
+            "button": "View all articles"
+        },
+        "contact": {
+            "button": "Submit",
+            "success_message": "Message sent successfully"
+        },
+        "countdown_timer": {
+            "days": "Days",
+            "hours": "Hours",
+            "minutes": "Mins",
+            "seconds": "Secs"
+        },
+        "featured_collection": {
+            "button": "View all products"
+        },
+        "featured_collections": {
+            "collection": "Collection",
+            "button": "View all collections"
+        },
+        "featured_product": {
+            "quantity": "Quantity",
+            "view_details": "View details"
+        },
         "promotional_banner": {},
         "recently_viewed_products": {},
         "recommended_products": {},

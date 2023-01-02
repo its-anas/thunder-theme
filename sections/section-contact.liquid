@@ -82,7 +82,7 @@
       type="submit"
       class="contact__button"
     >
-      <p class="button">SUBMIT</p>
+      <p class="button">{{ 'sections.contact.button' | t }}</p>
       <p></p>
     </button>
     <div class="form__messages">
@@ -96,7 +96,7 @@
 
       {%- if form.posted_successfully? -%}
         <div class="form__messages__success">
-          <span>✓ Message sent</span>
+          <span>✓ {{ 'sections.contact.success_message' | t }}</span>
         </div>
       {%- endif -%}
     </div>

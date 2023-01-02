@@ -51,7 +51,7 @@
         {% elsif form.posted_successfully? %}
 
         {% endif %}
-        placeholder="Type your email address"
+        placeholder="{{ 'general.newsletter.placeholder' | t }}"
         required
       >
 
@@ -61,7 +61,7 @@
         name="commit"
         id="subscribe"
       >
-        <p class="button">SUBSCRIBE</p>
+        <p class="button">{{ 'general.newsletter.button' | t }}</p>
         <p></p>
       </button>
     </div>
@@ -76,7 +76,7 @@
       {%- endif -%}
       {%- if form.posted_successfully? -%}
         <div class="form__messages__success">
-          <span>✓ Subscription confirmed</span>
+          <span>✓ {{ 'general.newsletter.success_message' | t }}</span>
         </div>
       {%- endif -%}
     </div>

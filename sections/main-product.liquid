@@ -432,7 +432,7 @@
                   <button
                     type="submit"
                     name="add"
-                    value="Add to cart"
+                    value="{{ 'general.buttons.add_to_cart' | t }}"
                     class="button button--primary border add-to-cart-button"
                     id="add-to-cart-button"
                     data-variants-number="{{ product.variants.size }}"
@@ -639,6 +639,7 @@
   
   
   
+  
   let variantsInventory = {};
   {% for variant in product.variants %}
   variantsInventory["{{ variant.title }}"] = {{ variant.inventory_quantity }};
@@ -672,6 +673,7 @@
   let currentVariantInventory = {{ current_variant.inventory_quantity }};
   let stockAlertThreshold = {{ stock_alert_threshold }};
   let priceDifferenceText= "{{ price_difference_text }}";
+
 
 
 
