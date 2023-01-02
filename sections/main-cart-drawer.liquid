@@ -36,10 +36,10 @@
           <div id="note-close-icon">
             {% render 'snippet-icons', icon: 'close' %}
           </div>
-          <label for="cart-note">Add an note to your order</label>
-          <textarea name="cart-note" id="cart-note" rows="3" placeholder=""></textarea>
+          <label for="cart-note">{{ 'general.note.label' | t }}</label>
+          <textarea name="cart-note" id="cart-note" rows="3"></textarea>
           <div class="buttons">
-            <a id="cart-note-send" class="button button--primary border"> SAVE </a>
+            <a id="cart-note-send" class="button button--primary border">{{ 'general.note.button' | t }}</a>
           </div>
         </div>
       </div>
@@ -47,7 +47,7 @@
       <div class="cart-drawer__container">
         <div class="cart-drawer__head">
           <div class="cart-drawer__title">
-            <h6>Cart</h6>
+            <h6>{{ 'general.cart_drawer.title' | t }}</h6>
           </div>
           <div id="close-icon">
             {% render 'snippet-icons', icon: 'close' %}
@@ -58,7 +58,7 @@
         <div class="cart-drawer__products">
           <div class="cart-drawer__products-list"></div>
           <div class="recommended-products mobile-only">
-            <p class="recommended-products__title">You may also like</p>
+            <p class="recommended-products__title">{{ 'general.cart_drawer.recommended_products_title' | t }}</p>
             <div class="recommended-products__list">
               <div class="recommended-products__list-container"></div>
             </div>
@@ -66,14 +66,14 @@
         </div>
         <div class="cart-drawer__interaction">
           <div class="cart-drawer__interaction--empty">
-            <p class="cart-drawer__empty-message">Your cart is empty</p>
+            <p class="cart-drawer__empty-message">{{ 'general.cart_drawer.empty_cart_text' | t }}</p>
             <div class="buttons">
               <a
                 class="button button--primary border"
                 href="{{ routes.collections_url }}"
               >
                 <span></span> <span></span> <span></span> <span></span>
-                SHOP NOW
+                {{ 'general.buttons.shop_now' | t }}
               </a>
             </div>
           </div>
@@ -84,7 +84,7 @@
                 class="button button--primary border border"
                 href="{{ routes.cart_url }}"
               >
-                <span></span> <span></span> <span></span> <span></span>VIEW CART
+                <span></span> <span></span> <span></span> <span></span>{{ 'general.cart_drawer.view_cart_button' | t }}
               </a>
               <form action="{{ routes.cart_url }}" method="post" id="cart" class="buttons">
                 <button
@@ -97,19 +97,19 @@
                   class="button button--secondary border"
                   form="cart"
                 >
-                  <span></span> <span></span> <span></span> <span></span> CHECKOUT
+                  <span></span> <span></span> <span></span> <span></span> {{ 'general.buttons.checkout' | t }}
                 </button>
               </form>
             </div>
             <div class="bottom">
-              <a class="order-note link">Add order note</a>
-              <p class="disclaimer">Shipping & taxes calculated at checkout</p>
+              <a class="order-note link">{{ 'general.note.label' | t }}</a>
+              <p class="disclaimer">{{ 'pages.cart.empty_cart_text' | t }}</p>
             </div>
           </div>
         </div>
       </div>
       <div class="recommended-products desktop-only">
-        <p class="recommended-products__title">You may also like</p>
+        <p class="recommended-products__title">{{ 'general.cart_drawer.recommended_products_title' | t }}</p>
         <div class="recommended-products__list">
           <div class="recommended-products__list-container"></div>
         </div>

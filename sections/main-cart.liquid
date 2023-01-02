@@ -198,12 +198,12 @@
                         form="cart"
                       >
                         <span></span> <span></span> <span></span> <span></span>
-                        {{ 'pages.cart.button' | t }}
+                        {{ 'general.buttons.checkout' | t }}
                       </button>
                     </div>
                   {%- when 'order_note' -%}
                     <div class="cart-page__interaction-bottom-text" {{ block.shopify_attributes }}>
-                      <a class="cart-page__order-note order-note small">{{ 'pages.cart.note.edit' | t }}</a>
+                      <a class="cart-page__order-note order-note small">{{ 'general.note.edit' | t }}</a>
                       <p class="cart-page__checkout-disclaimer small">{{ 'pages.cart.tax_disclaimer' | t }}</p>
                     </div>
                     <div class="cart-drawer__note-popup">
@@ -211,11 +211,11 @@
                         <div id="note-close-icon">
                           {% render 'snippet-icons', icon: 'close' %}
                         </div>
-                        <label for="cart-note">{{ 'pages.cart.note.add' | t }}</label>
+                        <label for="cart-note">{{ 'general.note.add' | t }}</label>
                         <textarea name="cart-note" id="cart-note" rows="3"></textarea>
                         <div class="buttons">
                           <a id="cart-note-send" class="button button--primary border">
-                            {{ 'pages.cart.note.button' | t }}
+                            {{ 'general.note.button' | t }}
                           </a>
                         </div>
                       </div>

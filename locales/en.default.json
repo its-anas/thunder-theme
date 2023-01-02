@@ -3,7 +3,12 @@
         "header": {},
         "footer": {},
         "menu": {},
-        "cart_drawer": {},
+        "cart_drawer": {
+            "title": "Cart",
+            "empty_cart_text": "Your cart is empty",
+            "view_cart_button": "View cart",
+            "recommended_products_title": "You may also like"
+        },
         "search_drawer": {},
         "popup": {},
         "quick_view": {},
@@ -14,7 +19,8 @@
             "continue_button": "Continue shopping",
             "quick_view": "Quick view",
             "add_to_cart": "Add to cart",
-            "shop_now": "Shop now"
+            "shop_now": "Shop now",
+            "checkout": "Checkout"
         },
         "placeholders": {
             "search": "Search"
@@ -29,6 +35,11 @@
             "view_results_buttons": "View results",
             "section_title": "Filters",
             "sort_by": "Sort by"
+        },
+        "note": {
+            "edit": "Edit order note",
+            "label": "Add order note",
+            "button": "SAVE"
         },
         "form": {
             "first_name": "First name",
@@ -56,14 +67,8 @@
             "price": "PRICE",
             "free": "Free",
             "total": "Total",
-            "button": "Checkout",
-            "tax_disclaimer": "Taxes & shipping calculated at checkout",
-            "empty_cart_text": "You cart is empty",
-            "note": {
-                "edit": "Edit order note",
-                "label": "Add an note to your order",
-                "button": "SAVE"
-            }
+            "tax_disclaimer": "Shipping & taxes calculated at checkout",
+            "empty_cart_text": "You cart is empty"
         },
         "collections_list": {
             "title": "Collections"
