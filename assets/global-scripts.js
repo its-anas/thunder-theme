@@ -143,7 +143,7 @@ function hideRecommendedDrawer() {
 }
 
 async function updateCartDrawer() {
-	await fetch("/cart.js")
+	await fetch(window.Shopify.routes.root + "cart.js")
 		.then((resp) => resp.json())
 		.then((data) => {
 			let cartItemsCount = data.items.length;
@@ -1044,7 +1044,7 @@ class PredictiveSearch extends HTMLElement {
 	}
 
 	getSearchResults(searchTerm, limit) {
-		fetch(`/search/suggest?q=${searchTerm}&resources[type]=product&resources[limit]=${limit}&section_id=section-predictive-search`)
+		fetch(window.Shopify.routes.root + `search/suggest?q=${searchTerm}&resources[type]=product&resources[limit]=${limit}&section_id=section-predictive-search`)
 			.then((response) => {
 				if (!response.ok) {
 					var error = new Error(response.status);
@@ -1433,14 +1433,14 @@ class QuickView extends HTMLElement {
 			let variantId = icon.dataset.firstAvailableVariantId;
 			sendToCart(variantId, 1);
 		} else if (icon.dataset.productVariants === "with") {
-			fetch(`/products/${icon.dataset.productHandle}/product.json`)
+			fetch(window.Shopify.routes.root + `products/${icon.dataset.productHandle}/product.json`)
 				.then((resp) => resp.json())
 				.then((data) => {
 					window.quickViewVariants = data.product.variants;
 					let productVendor = data.product.vendor;
 					let productTitle = data.product.title;
 					let productPrice = data.product.price;
-					let productUrl = `/products/${data.product.handle}`;
+					let productUrl = window.Shopify.routes.root + `products/${data.product.handle}`;
 					let productOptions = {};
 					let productVariantsImages = {};
 

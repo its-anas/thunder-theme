@@ -44,10 +44,10 @@ class FilterComponent extends HTMLElement {
 
 	buildUrl() {
 		let parameters = [];
-		let windowLocation = window.location;
-		let pathName = this.pageType === "search" ? `/search?q=${document.querySelector(".search-form__input").value}&type=product&` : `/${window.location.pathname.split("/")[1]}/${window.location.pathname.split("/")[2]}?`;
+		let collectionPathName = window.Shopify.routes.root === "/" ? `${window.location.pathname.split("/")[1]}/${window.location.pathname.split("/")[2]}?` : `${window.location.pathname.split("/")[2]}/${window.location.pathname.split("/")[3]}?`;
+		let pathName = this.pageType === "search" ? `search?q=${document.querySelector(".search-form__input").value}&type=product&` : collectionPathName;
 		let sortBy = `sort_by=${document.querySelector(".sort-by__select").value}`;
-		let url = `${windowLocation.origin + pathName + sortBy}`;
+		let url = `${window.Shopify.routes.root + pathName + sortBy}`;
 
 		this.querySelectorAll(".filter-group__container input").forEach((container) => {
 			if (container.type === "checkbox" && container.checked) {
