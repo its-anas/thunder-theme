@@ -162,8 +162,8 @@
           "newsletter"
         ],
         "settings": {
-          "show_currency_selector": false,
-          "show_language_selector": false,
+          "show_currency_selector": true,
+          "show_language_selector": true,
           "show_payment_methods": true,
           "payment_methods_type": "enabled"
         }

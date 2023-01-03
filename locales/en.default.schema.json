@@ -1,0 +1,36 @@
+{
+    "settings_schema": {
+        "general": {
+            "background_color": {
+                "label": "Background color"
+            },
+            "text_color": {
+                "label": "Text color"
+            }
+        },
+        "main-announcement-bar": {
+            "name": "Announcement Bar",
+            "settings": {
+                "show_announcement_bar": {
+                    "label": "Show announcement bar"
+                },
+                "enable_autoplay": {
+                    "label": "Enable autoplay"
+                },
+                "delay_time": {
+                    "label": "Delay time"
+                },
+                "button_and_coupon_color": {
+                    "label": "Button/Coupon color"
+                }
+            },
+            "blocks": {
+                "text_with_button": {
+                    "name": "Text with button",
+                    "settings": {}
+                }
+            }
+        }
+    },
+    "sections": {}
+}
