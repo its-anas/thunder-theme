@@ -20,7 +20,7 @@
   }
 
   .shop-the-look__product {
-    background-color: var(--background-color);
+    background-color: {{ section.settings.openable_background_color }};
   }
 
   .{{ section.id }}.shop-the-look {
@@ -261,6 +261,35 @@
   "class": "section-shop-the-look",
   "settings": [
     {
+      "type": "checkbox",
+      "id": "auto_open_selectors",
+      "label": "Auto open the selectors one by one",
+      "default": true,
+      "info": "It will stop when the user clicks on a selector"
+    },
+    {
+      "type": "color",
+      "id": "selector_color",
+      "label": "Selector color",
+      "default": "#000"
+    },
+    {
+      "type": "color",
+      "id": "selector_background_color",
+      "label": "Selector background color",
+      "default": "#fff"
+    },
+    {
+      "type": "color",
+      "id": "openable_background_color",
+      "label": "Popup background color",
+      "default": "#fff"
+    },
+    {
+      "type": "header",
+      "content": "Image"
+    },
+    {
       "type": "image_picker",
       "id": "image",
       "label": "Image"
@@ -291,29 +320,8 @@
       "default": 1
     },
     {
-      "type": "color",
-      "id": "selector_color",
-      "label": "Selector color",
-      "default": "#fff"
-    },
-    {
-      "type": "color",
-      "id": "selector_background_color",
-      "label": "Selector background color",
-      "default": "#000"
-    },
-    {
-      "type": "color",
-      "id": "openable_background_color",
-      "label": "Content background color",
-      "default": "#000"
-    },
-    {
-      "type": "checkbox",
-      "id": "auto_open_selectors",
-      "label": "Auto open the selectors one by one",
-      "default": true,
-      "info": "It will stop when the user clicks on a selector"
+      "type": "header",
+      "content": "Section"
     },
     {
       "type": "text",

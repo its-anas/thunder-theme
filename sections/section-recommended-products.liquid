@@ -86,7 +86,7 @@
       {% render 'snippet-icons', icon: 'chevron-prev' -%}
     </div>
     <div class="slides-container">
-      <div class="slide"> 
+      <div class="slide">
         {% if recommendations.performed and recommendations.products_count > 0 %}
           {% for product in recommendations.products %}
             <div class="item">
@@ -95,7 +95,8 @@
                 {% if product.available %}
                   {% if price_difference > 0 %}
                     <p class="tag--animated tag-text">
-                      {{ 'general.others.sale_text' | t }} {{ product.compare_at_price | minus: product.price | money }}
+                      {{ 'general.others.sale_text' | t }}
+                      {{ product.compare_at_price | minus: product.price | money }}
                     </p>
                   {% endif %}
                 {% else %}
@@ -292,7 +293,7 @@
       "id": "background_color",
       "label": "Background color",
       "default": "transparent",
-      "info": "Applied only if Type is 'Color'"
+      "info": "Applied only if 'type' is 'color'"
     },
     {
       "type": "range",

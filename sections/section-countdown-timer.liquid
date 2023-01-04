@@ -69,6 +69,71 @@
   "class": "section-countdown-timer",
   "settings": [
     {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>"
+    },
+    {
+      "type": "range",
+      "id": "text_width",
+      "label": "Text width",
+      "info": "Desktop only",
+      "min": 40,
+      "max": 90,
+      "step": 10,
+      "unit": "%",
+      "default": 70
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "text",
+      "id": "link_text",
+      "label": "Text",
+      "default": "Learn more"
+    },
+    {
+      "type": "url",
+      "id": "link_url",
+      "label": "URL"
+    },
+    {
+      "type": "color",
+      "id": "button_color",
+      "label": "Color",
+      "default": "#fcdb33"
+    },
+    {
+      "type": "header",
+      "content": "Countdown timer"
+    },
+    {
+      "type": "text",
+      "id": "message",
+      "label": "Expiration message",
+      "default": "Offer ended",
+      "info": "It is optional for Option 1 but required for Option 2"
+    },
+    {
+      "type": "select",
+      "id": "countdown_timer_type",
+      "label": "Type",
+      "options": [
+        {
+          "value": "time",
+          "label": "Option 1: Based on user cookies"
+        },
+        {
+          "value": "date",
+          "label": "Option 2: Based on a date"
+        }
+      ],
+      "default": "time"
+    },
+    {
       "type": "select",
       "id": "digits_size",
       "label": "Digits size",
@@ -95,95 +160,6 @@
       "id": "digits_background_color",
       "label": "Digits background color",
       "default": "#fcdb33"
-    },
-    {
-      "type": "color",
-      "id": "button_color",
-      "label": "Button color",
-      "default": "#fcdb33"
-    },
-    {
-      "type": "header",
-      "content": "Background settings"
-    },
-    {
-      "type": "color",
-      "id": "background_color",
-      "label": "Background color",
-      "default": "transparent",
-      "info": "Applied only if Type is 'Color'"
-    },
-    {
-      "type": "header",
-      "content": "Section style"
-    },
-    {
-      "type": "range",
-      "id": "text_width",
-      "label": "Text width",
-      "info": "Desktop only",
-      "min": 40,
-      "max": 90,
-      "step": 10,
-      "unit": "%",
-      "default": 70
-    },
-    {
-      "type": "range",
-      "id": "space_between_elements",
-      "label": "Space between elements",
-      "min": 1,
-      "max": 3,
-      "step": 0.5,
-      "unit": "rem",
-      "default": 1
-    },
-    {
-      "type": "range",
-      "id": "top_space",
-      "min": 0,
-      "max": 100,
-      "step": 1,
-      "unit": "px",
-      "label": "Top space",
-      "default": 0
-    },
-    {
-      "type": "range",
-      "id": "bottom_space",
-      "min": 0,
-      "max": 100,
-      "step": 1,
-      "unit": "px",
-      "label": "Bottom space",
-      "default": 0
-    },
-    {
-      "type": "header",
-      "content": "Countdown timer settings"
-    },
-    {
-      "type": "text",
-      "id": "message",
-      "label": "After expiration message",
-      "default": "Offer ended",
-      "info": "It is optional for Option 1 but required for Option 2"
-    },
-    {
-      "type": "select",
-      "id": "countdown_timer_type",
-      "label": "Countdown timer type",
-      "options": [
-        {
-          "value": "time",
-          "label": "Option 1: Based on user cookies"
-        },
-        {
-          "value": "date",
-          "label": "Option 2: Based on a date"
-        }
-      ],
-      "default": "time"
     },
     {
       "type": "header",
@@ -303,6 +279,10 @@
       "default": 0
     },
     {
+      "type": "header",
+      "content": "Section"
+    },
+    {
       "type": "text",
       "id": "heading",
       "label": "Heading",
@@ -341,21 +321,40 @@
       "default": "h4"
     },
     {
-      "type": "richtext",
-      "id": "text",
-      "label": "Text",
-      "default": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>"
+      "type": "range",
+      "id": "space_between_elements",
+      "label": "Space between elements",
+      "min": 1,
+      "max": 3,
+      "step": 0.5,
+      "unit": "rem",
+      "default": 1
     },
     {
-      "type": "text",
-      "id": "link_text",
-      "label": "Link text",
-      "default": "Learn more"
+      "type": "range",
+      "id": "top_space",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Top space",
+      "default": 0
     },
     {
-      "type": "url",
-      "id": "link_url",
-      "label": "Link url"
+      "type": "range",
+      "id": "bottom_space",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Bottom space",
+      "default": 0
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "transparent"
     }
   ],
   "presets": [

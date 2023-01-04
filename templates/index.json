@@ -142,7 +142,7 @@
                          "settings": {
                               "heading": "Heading",
                               "heading_size": "h4",
-                              "text": "This should be a place to put a text",
+                              "text": "<p>This should be a place to put a text</p>",
                               "button_text": "Button",
                               "button_link": ""
                          }
@@ -152,7 +152,7 @@
                          "settings": {
                               "heading": "Heading",
                               "heading_size": "h4",
-                              "text": "This should be a place to put a text",
+                              "text": "<p>This should be a place to put a text</p>",
                               "button_text": "Button",
                               "button_link": ""
                          }
@@ -233,9 +233,8 @@
                     "animation_speed": 60,
                     "style_1_text": "Put the banner text here",
                     "style_1_text_type": "h5",
-                    "style_2_heading": "Heading",
+                    "style_2_heading": "Put the banner text here",
                     "style_2_heading_type": "h1",
-                    "style_2_text": "Put the banner text here",
                     "style_2_button_text": "Primary button",
                     "style_2_button_url": ""
                }
@@ -284,7 +283,7 @@
                     "mobile_aspect_ratio": 1,
                     "selector_color": "#000000",
                     "selector_background_color": "#fff",
-                    "openable_background_color": "#000000",
+                    "openable_background_color": "#fff",
                     "heading": "Shop our look",
                     "heading_size": "h6",
                     "top_space": 0,
@@ -396,9 +395,8 @@
                     "animation_speed": 60,
                     "style_1_text": "Put the banner text here",
                     "style_1_text_type": "h3",
-                    "style_2_heading": "Heading",
+                    "style_2_heading": "Put the banner text here",
                     "style_2_heading_type": "h6",
-                    "style_2_text": "Put the banner text here",
                     "style_2_button_text": "Primary button",
                     "style_2_button_url": ""
                }

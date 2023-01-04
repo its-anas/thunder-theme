@@ -140,94 +140,15 @@
   "class": "section-video-with-text",
   "settings": [
     {
-      "type": "image_picker",
-      "id": "thumbnail",
-      "label": "Poster"
+      "type": "header",
+      "content": "Video"
     },
     {
       "type": "video_url",
       "id": "video_url",
       "accept": ["youtube"],
       "default": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
-      "label": "Video url"
-    },
-    {
-      "type": "range",
-      "id": "text_width",
-      "label": "Text width",
-      "info": "Desktop only",
-      "min": 70,
-      "max": 100,
-      "step": 10,
-      "unit": "%",
-      "default": 70
-    },
-    {
-      "type": "header",
-      "content": "Background settings"
-    },
-    {
-      "type": "color",
-      "id": "background_color",
-      "label": "Background color",
-      "default": "#000000",
-      "info": "Applied only if Type is 'Color'"
-    },
-    {
-      "type": "header",
-      "content": "Section settings"
-    },
-    {
-      "type": "select",
-      "id": "text_alignment",
-      "label": "Text alignment",
-      "info": "Desktop only",
-      "options": [
-        {
-          "value": "left",
-          "label": "Left"
-        },
-        {
-          "value": "center",
-          "label": "Center"
-        },
-        {
-          "value": "right",
-          "label": "Right"
-        }
-      ],
-      "default": "left"
-    },
-    {
-      "type": "select",
-      "id": "text_horizontal_position",
-      "label": "Text position",
-      "info": "Desktop only",
-      "options": [
-        {
-          "value": "left",
-          "label": "Left"
-        },
-        {
-          "value": "center",
-          "label": "Center"
-        },
-        {
-          "value": "right",
-          "label": "Right"
-        }
-      ],
-      "default": "left"
-    },
-    {
-      "type": "range",
-      "id": "space_between_elements",
-      "label": "Space between elements",
-      "min": 1,
-      "max": 3,
-      "step": 0.5,
-      "unit": "rem",
-      "default": 1
+      "label": "URL"
     },
     {
       "type": "range",
@@ -236,13 +157,13 @@
       "max": 450,
       "step": 10,
       "unit": "px",
-      "label": "Video height/width",
+      "label": "Height/width",
       "default": 400
     },
     {
       "type": "select",
       "id": "video_horizontal_position",
-      "label": "Video position",
+      "label": "Position",
       "info": "Desktop only",
       "options": [
         {
@@ -263,7 +184,7 @@
     {
       "type": "select",
       "id": "video_placement",
-      "label": "Video placement",
+      "label": "Placement",
       "options": [
         {
           "value": "first",
@@ -275,6 +196,82 @@
         }
       ],
       "default": "first"
+    },
+    {
+      "type": "image_picker",
+      "id": "thumbnail",
+      "label": "Thumbnail"
+    },
+    {
+      "type": "header",
+      "content": "Text"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Alignment",
+      "info": "Desktop only",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "select",
+      "id": "text_horizontal_position",
+      "label": "Position",
+      "info": "Desktop only",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "range",
+      "id": "text_width",
+      "label": "Width",
+      "info": "Desktop only",
+      "min": 70,
+      "max": 100,
+      "step": 10,
+      "unit": "%",
+      "default": 70
+    },
+    {
+      "type": "header",
+      "content": "Section"
+    },
+    {
+      "type": "range",
+      "id": "space_between_elements",
+      "label": "Space between elements",
+      "min": 1,
+      "max": 3,
+      "step": 0.5,
+      "unit": "rem",
+      "default": 1
     },
     {
       "type": "range",
@@ -295,6 +292,13 @@
       "unit": "px",
       "label": "Bottom space",
       "default": 0
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#000000",
+      "info": "Applied only if 'type' is 'color'"
     }
   ],
   "blocks": [

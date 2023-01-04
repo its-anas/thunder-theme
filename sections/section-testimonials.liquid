@@ -127,7 +127,47 @@
   "settings": [
     {
       "type": "header",
-      "content": "Animation settings"
+      "content": "Review"
+    },
+    {
+      "type": "range",
+      "id": "review_width",
+      "min": 250,
+      "max": 350,
+      "step": 1,
+      "unit": "px",
+      "label": "Width",
+      "default": 250
+    },
+    {
+      "type": "range",
+      "id": "review_height",
+      "min": 150,
+      "max": 250,
+      "step": 1,
+      "unit": "px",
+      "label": "Height",
+      "default": 150
+    },
+    {
+      "type": "range",
+      "id": "review_border_width",
+      "label": "Border width",
+      "min": 0,
+      "max": 5,
+      "step": 1,
+      "unit": "px",
+      "default": 2
+    },
+    {
+      "type": "color",
+      "id": "review_border_color",
+      "label": "Border color",
+      "default": "#fff"
+    },
+    {
+      "type": "header",
+      "content": "Animation"
     },
     {
       "type": "checkbox",
@@ -147,19 +187,12 @@
     },
     {
       "type": "header",
-      "content": "Section settings"
-    },
-    {
-      "type": "color",
-      "id": "background_color",
-      "label": "Background color",
-      "default": "transparent",
-      "info": "Applied only if Type is 'Color'"
+      "content": "Section"
     },
     {
       "type": "text",
       "id": "heading",
-      "label": "Section heading",
+      "label": "Heading",
       "default": "Hear from our customers"
     },
     {
@@ -196,6 +229,16 @@
     },
     {
       "type": "range",
+      "id": "space_between_elements",
+      "label": "Space between elements",
+      "min": 1,
+      "max": 3,
+      "step": 0.5,
+      "unit": "rem",
+      "default": 1
+    },
+    {
+      "type": "range",
       "id": "top_space",
       "min": 0,
       "max": 100,
@@ -215,54 +258,11 @@
       "default": 0
     },
     {
-      "type": "range",
-      "id": "space_between_elements",
-      "label": "Space between elements",
-      "min": 1,
-      "max": 3,
-      "step": 0.5,
-      "unit": "rem",
-      "default": 1
-    },
-    {
-      "type": "header",
-      "content": "Review settings"
-    },
-    {
-      "type": "range",
-      "id": "review_width",
-      "min": 250,
-      "max": 350,
-      "step": 1,
-      "unit": "px",
-      "label": "Review width",
-      "default": 250
-    },
-    {
-      "type": "range",
-      "id": "review_height",
-      "min": 150,
-      "max": 250,
-      "step": 1,
-      "unit": "px",
-      "label": "Review height",
-      "default": 150
-    },
-    {
       "type": "color",
-      "id": "review_border_color",
-      "label": "Review border color",
-      "default": "#fff"
-    },
-    {
-      "type": "range",
-      "id": "review_border_width",
-      "label": "Review border width",
-      "min": 0,
-      "max": 5,
-      "step": 1,
-      "unit": "px",
-      "default": 2
+      "id": "background_color",
+      "label": "Background color",
+      "default": "transparent",
+      "info": "Applied only if 'type' is 'color'"
     }
   ],
   "max_blocks": 20,

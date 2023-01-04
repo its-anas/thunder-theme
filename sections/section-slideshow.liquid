@@ -159,28 +159,6 @@
   "class": "section-slideshow",
   "settings": [
     {
-      "type": "color",
-      "id": "text_color",
-      "label": "Text color",
-      "default": "#ffffff"
-    },
-    {
-      "type": "color",
-      "id": "overlay_color",
-      "label": "Overlay color",
-      "default": "#000000"
-    },
-    {
-      "type": "range",
-      "id": "overlay_opacity",
-      "min": 0,
-      "max": 70,
-      "step": 1,
-      "unit": "%",
-      "label": "Overlay opacity",
-      "default": 10
-    },
-    {
       "type": "checkbox",
       "id": "enable_autoplay",
       "label": "Enable autoplay",
@@ -195,6 +173,113 @@
       "unit": "s",
       "label": "Delay time",
       "default": 4
+    },
+    {
+      "type": "header",
+      "content": "Text"
+    },
+    {
+      "type": "select",
+      "id": "vertical_position",
+      "label": "Vertical position",
+      "options": [
+        {
+          "value": "top",
+          "label": "Top"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "bottom",
+          "label": "Bottom"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "horizontal_position",
+      "label": "Horizontal position",
+      "info": "Desktop only",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Alignment",
+      "info": "Desktop only",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "text_width",
+      "label": "Width",
+      "info": "Desktop only",
+      "min": 40,
+      "max": 90,
+      "step": 10,
+      "unit": "%",
+      "default": 50
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Overlay"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 70,
+      "step": 1,
+      "unit": "%",
+      "label": "Opacity",
+      "default": 10
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "Color",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Section"
     },
     {
       "type": "checkbox",
@@ -223,87 +308,6 @@
       "label": "Mobile height",
       "default": 500,
       "info": "Applied only if full screen height is disabled"
-    },
-    {
-      "type": "header",
-      "content": "Text style"
-    },
-    {
-      "type": "select",
-      "id": "vertical_position",
-      "label": "Text position - Vertical",
-      "options": [
-        {
-          "value": "top",
-          "label": "Top"
-        },
-        {
-          "value": "center",
-          "label": "Center"
-        },
-        {
-          "value": "bottom",
-          "label": "Bottom"
-        }
-      ],
-      "default": "center"
-    },
-    {
-      "type": "select",
-      "id": "horizontal_position",
-      "label": "Text position - Horizonal",
-      "info": "Desktop only",
-      "options": [
-        {
-          "value": "left",
-          "label": "Left"
-        },
-        {
-          "value": "center",
-          "label": "Center"
-        },
-        {
-          "value": "right",
-          "label": "Right"
-        }
-      ],
-      "default": "center"
-    },
-    {
-      "type": "select",
-      "id": "text_alignment",
-      "label": "Text alignment",
-      "info": "Desktop only",
-      "options": [
-        {
-          "value": "left",
-          "label": "Left"
-        },
-        {
-          "value": "center",
-          "label": "Center"
-        },
-        {
-          "value": "right",
-          "label": "Right"
-        }
-      ],
-      "default": "center"
-    },
-    {
-      "type": "range",
-      "id": "text_width",
-      "label": "Text width",
-      "info": "Desktop only",
-      "min": 40,
-      "max": 90,
-      "step": 10,
-      "unit": "%",
-      "default": 50
-    },
-    {
-      "type": "header",
-      "content": "Section style"
     },
     {
       "type": "range",
@@ -347,15 +351,19 @@
           "label": "Image"
         },
         {
+          "type": "header",
+          "content": "Subheading"
+        },
+        {
           "type": "text",
           "id": "subheading",
-          "label": "Subheading",
+          "label": "Text",
           "default": "Subheading"
         },
         {
           "type": "select",
           "id": "subheading_size",
-          "label": "Subeading size",
+          "label": "Size",
           "options": [
             {
               "value": "h1",
@@ -385,15 +393,19 @@
           "default": "h6"
         },
         {
+          "type": "header",
+          "content": "Heading"
+        },
+        {
           "type": "text",
           "id": "heading",
-          "label": "Heading",
+          "label": "Text",
           "default": "Heading"
         },
         {
           "type": "select",
           "id": "heading_size",
-          "label": "Heading size",
+          "label": "Size",
           "options": [
             {
               "value": "h1",
@@ -423,10 +435,18 @@
           "default": "h2"
         },
         {
+          "type": "header",
+          "content": "Paragraph"
+        },
+        {
           "type": "richtext",
           "id": "text",
           "label": "Text",
           "default": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>"
+        },
+        {
+          "type": "header",
+          "content": "Button"
         },
         {
           "type": "text",

@@ -109,6 +109,21 @@
   "class": "section-contact",
   "settings": [
     {
+      "type": "range",
+      "id": "field_width",
+      "min": 300,
+      "max": 600,
+      "step": 50,
+      "unit": "px",
+      "label": "Field width",
+      "default": 450,
+      "info": "Desktop and tablet only"
+    },
+    {
+      "type": "header",
+      "content": "Section"
+    },
+    {
       "type": "text",
       "id": "heading",
       "label": "Heading",
@@ -148,24 +163,6 @@
     },
     {
       "type": "range",
-      "id": "field_width",
-      "min": 300,
-      "max": 600,
-      "step": 50,
-      "unit": "px",
-      "label": "Field width",
-      "default": 450,
-      "info": "Desktop and tablet only"
-    },
-    {
-      "type": "color",
-      "id": "background_color",
-      "label": "Background color",
-      "default": "transparent",
-      "info": "Applied only if Type is 'Color'"
-    },
-    {
-      "type": "range",
       "id": "space_between_elements",
       "label": "Space between elements",
       "min": 1,
@@ -193,6 +190,12 @@
       "unit": "px",
       "label": "Bottom space",
       "default": 0
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "transparent"
     }
   ],
   "presets": [

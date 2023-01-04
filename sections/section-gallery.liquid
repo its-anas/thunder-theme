@@ -198,45 +198,6 @@
   "settings": [
     {
       "type": "select",
-      "id": "gallery_style",
-      "label": "Gallery style",
-      "options": [
-        {
-          "value": "multiple_rows",
-          "label": "Multiple rows"
-        },
-        {
-          "value": "all_in_one",
-          "label": "All in one row"
-        }
-      ],
-      "default": "all_in_one",
-      "info": "Desktop only"
-    },
-    {
-      "type": "color",
-      "id": "text_color",
-      "label": "Text color",
-      "default": "#ffffff"
-    },
-    {
-      "type": "color",
-      "id": "overlay_color",
-      "label": "Overlay color",
-      "default": "#000000"
-    },
-    {
-      "type": "range",
-      "id": "overlay_opacity",
-      "min": 0,
-      "max": 70,
-      "step": 1,
-      "unit": "%",
-      "label": "Overlay opacity",
-      "default": 10
-    },
-    {
-      "type": "select",
       "id": "vertical_position",
       "label": "Text position - Vertical",
       "options": [
@@ -258,7 +219,7 @@
     {
       "type": "select",
       "id": "horizontal_position",
-      "label": "Text position - Horizonal",
+      "label": "Text position - Horizontal",
       "info": "Desktop only",
       "options": [
         {
@@ -277,13 +238,60 @@
       "default": "center"
     },
     {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Overlay"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 70,
+      "step": 1,
+      "unit": "%",
+      "label": "Opacity",
+      "default": 10
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "Color",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Image"
+    },
+    {
+      "type": "select",
+      "id": "gallery_style",
+      "label": "Layout",
+      "options": [
+        {
+          "value": "multiple_rows",
+          "label": "Multiple rows"
+        },
+        {
+          "value": "all_in_one",
+          "label": "All in one row"
+        }
+      ],
+      "default": "all_in_one",
+      "info": "Desktop only"
+    },
+    {
       "type": "range",
       "id": "deskop_image_height",
       "min": 400,
       "max": 800,
       "step": 10,
       "unit": "px",
-      "label": "Image height - Desktop",
+      "label": "Desktop height",
       "default": 700
     },
     {
@@ -293,7 +301,7 @@
       "max": 500,
       "step": 10,
       "unit": "px",
-      "label": "Image height - Mobile",
+      "label": "Mobile height",
       "default": 300
     }
   ],
@@ -346,10 +354,10 @@
           "default": "h4"
         },
         {
-          "type": "text",
+          "type": "richtext",
           "id": "text",
           "label": "Text",
-          "default": "This should be a place to put a text"
+          "default": "<p>This should be a place to put a text</p>"
         },
         {
           "type": "text",

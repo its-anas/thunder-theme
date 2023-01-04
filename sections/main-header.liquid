@@ -64,7 +64,7 @@
           }
       {%- endif -%}
 
-      {% if section.settings.menu_layout == "navigation_first" or section.settings.menu_layout == "drawer" %}
+      {% if section.settings.menu_layout == "drawer" %}
           .header__logo {
               order: 2;
               justify-content: center;
@@ -338,33 +338,25 @@
                                   <div class="menu-mobile__picture-container">
                                     {% if block.settings.show_tab_picture == true %}
                                       <div class="menu-mobile__picture media">
-                                        {% if block.settings.tab_content_type == 'svg' %}
-                                          {% if block.settings.tab_content_svg == blank %}
-                                            {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
-                                          {% else %}
-                                            {{ block.settings.tab_content_svg }}
-                                          {% endif %}
-                                        {% elsif block.settings.tab_content_type == 'image' %}
-                                          {% if block.settings.tab_content_image == blank %}
-                                            {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
-                                          {% else %}
-                                            {%- assign image = block.settings.tab_content_image -%}
-                                            {%- assign sizes = '(min-width 750px) 500px, 100vw' -%}
-                                            {%- assign widths = '200, 225, 250, 275, 300, 325, 350, 375, 400' -%}
-                                            {%- assign width = '400' -%}
-                                            {{
-                                              image
-                                              | image_url: width: width
-                                              | image_tag:
-                                                loading: 'lazy',
-                                                class: 'cover',
-                                                alt: image.alt,
-                                                width: image.width,
-                                                height: image.height,
-                                                sizes: sizes,
-                                                widths: widths
-                                            }}
-                                          {% endif %}
+                                        {% if block.settings.tab_content_image == blank %}
+                                          {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
+                                        {% else %}
+                                          {%- assign image = block.settings.tab_content_image -%}
+                                          {%- assign sizes = '(min-width 750px) 500px, 100vw' -%}
+                                          {%- assign widths = '200, 225, 250, 275, 300, 325, 350, 375, 400' -%}
+                                          {%- assign width = '400' -%}
+                                          {{
+                                            image
+                                            | image_url: width: width
+                                            | image_tag:
+                                              loading: 'lazy',
+                                              class: 'cover',
+                                              alt: image.alt,
+                                              width: image.width,
+                                              height: image.height,
+                                              sizes: sizes,
+                                              widths: widths
+                                          }}
                                         {% endif %}
                                       </div>
                                       <p class="menu-mobile__picture-description">
@@ -488,28 +480,14 @@
                               .menu__childs.menu_parent_title--{{ menu_parent_title }} {
                                 border-right: 1px solid var(--body-text-color);
                               }
-                              {% if section.settings.menu_layout == 'navigation_first' %}
-                                @media screen and (max-width: 1440px) {
-                                  .menu__dropdown.menu_parent_title--{{ menu_parent_title }} {
-                                  width: 600px;
-                                  transform: translateX(-50%) translateY(-10%);
-                                  left: 50%;
-                                  }
-
-                                  .menu__parent:hover .menu__dropdown.menu_parent_title--{{ menu_parent_title }} {
-                                    transform: translateX(-50%) translateY(0%);
-                                  }
-                                }
-                              {% else %}
-                                 .menu__dropdown.menu_parent_title--{{ menu_parent_title }} {
-                                  width: 600px;
-                                  transform: translateX(-50%) translateY(-10%);
-                                  left: 50%;
-                                  }
-                                  .menu__parent:hover .menu__dropdown.menu_parent_title--{{ menu_parent_title }} {
-                                    transform: translateX(-50%) translateY(0%);
-                                  }
-                              {% endif %}
+                              .menu__dropdown.menu_parent_title--{{ menu_parent_title }} {
+                              width: 600px;
+                              transform: translateX(-50%) translateY(-10%);
+                              left: 50%;
+                              }
+                              .menu__parent:hover .menu__dropdown.menu_parent_title--{{ menu_parent_title }} {
+                                transform: translateX(-50%) translateY(0%);
+                              }
                             {% endstyle %}
                           {% endif %}
                           {% for block in section.blocks %}
@@ -656,59 +634,37 @@
                                       transform: translateX(100%);
                                     }
                                   {% endif %}
-
-                                  {% if section.settings.menu_layout == 'navigation_first' %}
-                                    @media screen and (max-width: 1440px) {
-                                      .menu__dropdown.menu_parent_title--{{ menu_parent_title }} {
-                                        width: 600px;
-                                        transform: translateX(-50%) translateY(-10%);
-                                        left: 50%;
-                                      }
-                                      .menu__parent:hover .menu__dropdown.menu_parent_title--{{ menu_parent_title }} {
-                                        transform: translateX(-50%) translateY(0%);
-                                      }
+                                  .menu__dropdown.menu_parent_title--{{ menu_parent_title }} {
+                                    width: 600px;
+                                    transform: translateX(-50%) translateY(-10%);
+                                    left: 50%;
                                     }
-                                  {% else %}
-                                    .menu__dropdown.menu_parent_title--{{ menu_parent_title }} {
-                                      width: 600px;
-                                      transform: translateX(-50%) translateY(-10%);
-                                      left: 50%;
-                                      }
-                                      .menu__parent:hover .menu__dropdown.menu_parent_title--{{ menu_parent_title }} {
-                                        transform: translateX(-50%) translateY(0%);
-                                      }
-                                  {% endif %}
+                                    .menu__parent:hover .menu__dropdown.menu_parent_title--{{ menu_parent_title }} {
+                                      transform: translateX(-50%) translateY(0%);
+                                    }
                                 {% endstyle %}
 
                                 <div class="menu__content menu_parent_title--{{ menu_parent_title }}">
                                   <div class="menu__picture media">
-                                    {% if block.settings.tab_content_type == 'svg' %}
-                                      {% if block.settings.tab_content_svg == blank %}
-                                        {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
-                                      {% else %}
-                                        {{ block.settings.tab_content_svg }}
-                                      {% endif %}
-                                    {% elsif block.settings.tab_content_type == 'image' %}
-                                      {% if block.settings.tab_content_image == blank %}
-                                        {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
-                                      {% else %}
-                                        {%- assign image = block.settings.tab_content_image -%}
-                                        {%- assign sizes = '600px' -%}
-                                        {%- assign widths = '200, 225, 250, 275, 300, 325, 350, 375, 400, 425, 450, 475, 500, 525, 550, 575, 600' -%}
-                                        {%- assign width = '600' -%}
-                                        {{
-                                          image
-                                          | image_url: width: width
-                                          | image_tag:
-                                            loading: 'lazy',
-                                            class: 'cover',
-                                            alt: image.alt,
-                                            width: image.width,
-                                            height: image.height,
-                                            sizes: sizes,
-                                            widths: widths
-                                        }}
-                                      {% endif %}
+                                    {% if block.settings.tab_content_image == blank %}
+                                      {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
+                                    {% else %}
+                                      {%- assign image = block.settings.tab_content_image -%}
+                                      {%- assign sizes = '600px' -%}
+                                      {%- assign widths = '200, 225, 250, 275, 300, 325, 350, 375, 400, 425, 450, 475, 500, 525, 550, 575, 600' -%}
+                                      {%- assign width = '600' -%}
+                                      {{
+                                        image
+                                        | image_url: width: width
+                                        | image_tag:
+                                          loading: 'lazy',
+                                          class: 'cover',
+                                          alt: image.alt,
+                                          width: image.width,
+                                          height: image.height,
+                                          sizes: sizes,
+                                          widths: widths
+                                      }}
                                     {% endif %}
                                   </div>
                                   <p class="menu__description">
@@ -775,53 +731,6 @@
   "class": "main-header",
   "settings": [
     {
-      "type": "header",
-      "content": "Logo"
-    },
-    {
-      "type": "select",
-      "id": "logo_type",
-      "label": "Logo type",
-      "options": [
-        {
-          "value": "svg",
-          "label": "Svg"
-        },
-        {
-          "value": "image",
-          "label": "Image"
-        }
-      ],
-      "default": "svg",
-      "info": "It is highly recommended to use svg logo instead of jpeg/png logo to get the best quality"
-    },
-    {
-      "type": "liquid",
-      "id": "logo_svg",
-      "label": "Logo - svg",
-      "info": "Applicable only if logo type is svg"
-    },
-    {
-      "type": "image_picker",
-      "id": "logo_image",
-      "label": "Logo - image",
-      "info": "Applicable only if logo type is image"
-    },
-    {
-      "type": "range",
-      "id": "logo_width",
-      "min": 100,
-      "max": 160,
-      "step": 10,
-      "unit": "px",
-      "label": "Logo width",
-      "default": 120
-    },
-    {
-      "type": "header",
-      "content": "Menu"
-    },
-    {
       "type": "link_list",
       "id": "menu",
       "label": "Menu",
@@ -841,16 +750,54 @@
           "label": "Logo first, navigation inline"
         },
         {
-          "value": "navigation_first",
-          "label": "Navigation first, logo center"
-        },
-        {
           "value": "drawer",
           "label": "Drawer"
         }
       ],
       "default": "logo_first",
-      "info": "This is for desktop only. Drawer layout will be applied to mobile devices"
+      "info": "This is for desktop only. Drawer layout will be applied to mobile."
+    },
+    {
+      "type": "header",
+      "content": "Logo"
+    },
+    {
+      "type": "select",
+      "id": "logo_type",
+      "label": "Type",
+      "options": [
+        {
+          "value": "svg",
+          "label": "svg"
+        },
+        {
+          "value": "image",
+          "label": "png/jpg"
+        }
+      ],
+      "default": "svg"
+    },
+    {
+      "type": "liquid",
+      "id": "logo_svg",
+      "label": "svg",
+      "info": "Applicable only if logo type is 'svg'"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_image",
+      "label": "png/jpg",
+      "info": "Applicable only if logo type is 'png/jpg'"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "min": 100,
+      "max": 160,
+      "step": 10,
+      "unit": "px",
+      "label": "Width",
+      "default": 120
     }
   ],
   "blocks": [
@@ -861,13 +808,17 @@
         {
           "type": "text",
           "id": "tab_title",
-          "label": "Tab title",
-          "info": "Put the title of the tab (menu child) here, exactly like it's shown in the menu. Make sure they are unique and not duplicates. And also respect the uppercase, lowercase and spaces."
+          "label": "Sub-menu name",
+          "info": "Put the name of the sub-menu here, exactly like it's shown in the menu. Make sure they are unique and not duplicates. And also respect the uppercase, lowercase and spaces."
+        },
+        {
+          "type": "header",
+          "content": "Sub-menu icon"
         },
         {
           "type": "select",
           "id": "tab_icon_type",
-          "label": "Tab icon/image type",
+          "label": "Type",
           "options": [
             {
               "value": "svg",
@@ -875,67 +826,44 @@
             },
             {
               "value": "image",
-              "label": "Image"
-            }
-          ],
-          "default": "svg",
-          "info": "It is recommended to use svg icons instead of jpeg/png to get the best quality"
-        },
-        {
-          "type": "liquid",
-          "id": "tab_icon_svg",
-          "label": "Tab icon - svg",
-          "info": "Applicable only if icon type is svg"
-        },
-        {
-          "type": "image_picker",
-          "id": "tab_icon_image",
-          "label": "Tab icon - image",
-          "info": "Applicable only if icon type is image"
-        },
-        {
-          "type": "header",
-          "content": "Tab picture"
-        },
-        {
-          "type": "checkbox",
-          "id": "show_tab_picture",
-          "label": "Show tab picture and description",
-          "default": true
-        },
-        {
-          "type": "select",
-          "id": "tab_content_type",
-          "label": "Tab content image type",
-          "options": [
-            {
-              "value": "svg",
-              "label": "svg"
-            },
-            {
-              "value": "image",
-              "label": "Image"
+              "label": "png/jpg"
             }
           ],
           "default": "svg"
         },
+
         {
           "type": "liquid",
-          "id": "tab_content_svg",
-          "label": "Tab content image - svg",
-          "info": "Applicable only if image type is svg"
+          "id": "tab_icon_svg",
+          "label": "svg",
+          "info": "Applicable only if icon type is 'svg'"
+        },
+        {
+          "type": "image_picker",
+          "id": "tab_icon_image",
+          "label": "png/jpg",
+          "info": "Applicable only if icon type is 'png/jpg'"
+        },
+        {
+          "type": "header",
+          "content": "Sub-menu picture"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_tab_picture",
+          "label": "Show image and description",
+          "default": true
         },
         {
           "type": "image_picker",
           "id": "tab_content_image",
-          "label": "Tab content image - image",
-          "info": "Applicable only if image type is image"
+          "label": "Image"
         },
         {
           "type": "text",
           "id": "tab_description",
-          "label": "Tab description",
-          "default": "Tab description"
+          "label": "Description",
+          "default": "Description"
         }
       ]
     }

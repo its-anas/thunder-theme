@@ -81,11 +81,6 @@
             {{- section.settings.style_2_heading -}}
           </{{ section.settings.style_2_heading_type }}>
         {% endif %}
-        {% if section.settings.style_2_text != blank %}
-          <p>
-            {{ section.settings.style_2_text }}
-          </p>
-        {% endif %}
         {% if section.settings.style_2_button_text != blank %}
           <a class="button--link">
             {{ section.settings.style_2_button_text -}}
@@ -118,72 +113,20 @@
       "default": "style-1"
     },
     {
-      "type": "color",
-      "id": "text_color",
-      "label": "Text color",
-      "default": "#000000"
-    },
-    {
-      "type": "color",
-      "id": "background_color",
-      "label": "Background color",
-      "default": "#fcdb33"
-    },
-    {
-      "type": "range",
-      "id": "top_space",
-      "min": 0,
-      "max": 100,
-      "step": 1,
-      "unit": "px",
-      "label": "Top space",
-      "default": 0
-    },
-    {
-      "type": "range",
-      "id": "bottom_space",
-      "min": 0,
-      "max": 100,
-      "step": 1,
-      "unit": "px",
-      "label": "Bottom space",
-      "default": 0
-    },
-    {
-      "type": "range",
-      "id": "height",
-      "min": 80,
-      "max": 150,
-      "step": 10,
-      "unit": "px",
-      "label": "Section height",
-      "default": 100
-    },
-    {
       "type": "header",
-      "content": "Style 1 settings",
+      "content": "Style 1",
       "info": "Applied only if 'Style 1' is selected"
-    },
-    {
-      "type": "range",
-      "id": "animation_speed",
-      "min": 10,
-      "max": 60,
-      "step": 1,
-      "unit": "sec",
-      "label": "Animation speed",
-      "default": 60
     },
     {
       "type": "text",
       "id": "style_1_text",
-      "label": "Text",
+      "label": "Heading",
       "default": "Put the banner text here"
     },
     {
       "type": "select",
       "id": "style_1_text_type",
-      "label": "Text type",
+      "label": "Heading size",
       "options": [
         {
           "value": "h1",
@@ -208,29 +151,35 @@
         {
           "value": "h6",
           "label": "h6"
-        },
-        {
-          "value": "p",
-          "label": "Text"
         }
       ],
       "default": "h3"
     },
     {
+      "type": "range",
+      "id": "animation_speed",
+      "min": 10,
+      "max": 60,
+      "step": 1,
+      "unit": "sec",
+      "label": "Animation speed",
+      "default": 60
+    },
+    {
       "type": "header",
-      "content": "Style 2 settings",
+      "content": "Style 2",
       "info": "Applied only if 'Style 2' is selected"
     },
     {
       "type": "text",
       "id": "style_2_heading",
       "label": "Heading",
-      "default": "Heading"
+      "default": "Put the banner text here"
     },
     {
       "type": "select",
       "id": "style_2_heading_type",
-      "label": "heading type",
+      "label": "Heading size",
       "options": [
         {
           "value": "h1",
@@ -261,12 +210,6 @@
     },
     {
       "type": "text",
-      "id": "style_2_text",
-      "label": "Text",
-      "default": "Put the banner text here"
-    },
-    {
-      "type": "text",
       "id": "style_2_button_text",
       "label": "Button text",
       "default": "Primary button"
@@ -275,6 +218,52 @@
       "type": "url",
       "id": "style_2_button_url",
       "label": "Button url"
+    },
+    {
+      "type": "header",
+      "content": "Section"
+    },
+    {
+      "type": "range",
+      "id": "height",
+      "min": 80,
+      "max": 150,
+      "step": 10,
+      "unit": "px",
+      "label": "Height",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "top_space",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Top space",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "bottom_space",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Bottom space",
+      "default": 0
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#fcdb33"
     }
   ],
   "presets": [

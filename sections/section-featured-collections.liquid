@@ -158,10 +158,6 @@
   "class": "section-featured-collections",
   "settings": [
     {
-      "type": "header",
-      "content": "Collection settings"
-    },
-    {
       "type": "range",
       "id": "aspect_ratio",
       "min": 0.5,
@@ -209,7 +205,7 @@
     },
     {
       "type": "header",
-      "content": "Section settings"
+      "content": "Section"
     },
     {
       "type": "text",
@@ -250,24 +246,6 @@
       "default": "h6"
     },
     {
-      "type": "color",
-      "id": "background_color",
-      "label": "Background color",
-      "default": "transparent",
-      "info": "Applied only if Type is 'Color'"
-    },
-    {
-      "type": "range",
-      "id": "collection_height",
-      "min": 200,
-      "max": 400,
-      "step": 50,
-      "unit": "px",
-      "label": "Collection height",
-      "default": 350,
-      "info": "This is for desktop only. In the other screens the height will be calculated automatically based on this number."
-    },
-    {
       "type": "range",
       "id": "space_between_elements",
       "label": "Space between elements",
@@ -296,6 +274,12 @@
       "unit": "px",
       "label": "Bottom space",
       "default": 0
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "transparent"
     }
   ],
   "blocks": [
@@ -319,7 +303,7 @@
           "type": "image_picker",
           "id": "image",
           "label": "Image",
-          "info": "Applied only if checkbox is checked"
+          "info": "Applied only if 'Use different image' is checked"
         }
       ]
     }

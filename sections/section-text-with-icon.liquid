@@ -108,6 +108,21 @@
     },
     {
       "type": "range",
+      "id": "content_width",
+      "label": "Icons width",
+      "min": 50,
+      "max": 90,
+      "step": 1,
+      "unit": "%",
+      "default": 50,
+      "info": "Applied to desktop only"
+    },
+    {
+      "type": "header",
+      "content": "Section"
+    },
+    {
+      "type": "range",
       "id": "space_between_elements",
       "label": "Space between elements",
       "min": 0.1,
@@ -137,45 +152,34 @@
       "default": 0
     },
     {
-      "type": "range",
-      "id": "content_width",
-      "label": "Content width",
-      "min": 50,
-      "max": 90,
-      "step": 1,
-      "unit": "%",
-      "default": 50,
-      "info": "Applied to desktop only"
-    },
-    {
       "type": "color",
       "id": "background_color",
       "label": "Background color",
       "default": "transparent",
-      "info": "Applied only if Type is 'Color'"
+      "info": "Applied only if 'type' is 'color'"
     }
   ],
   "blocks": [
     {
       "type": "text-with-icon",
-      "name": "Text with icon",
+      "name": "Icon",
       "settings": [
         {
           "type": "select",
           "id": "icon_type",
-          "label": "Icon type",
+          "label": "Type",
           "options": [
             {
               "value": "theme-icon",
-              "label": "Theme icon"
+              "label": "Theme"
             },
             {
               "value": "svg",
-              "label": "Custom icon - svg"
+              "label": "svg"
             },
             {
               "value": "image",
-              "label": "Custom icon - png"
+              "label": "png/jpg"
             }
           ],
           "default": "theme-icon"
@@ -183,9 +187,9 @@
         {
           "type": "select",
           "id": "theme_icon",
-          "label": "Theme icon",
-          "default": "facebook",
-          "info": "Applicable only if you choose 'Theme icon'' from the icon type dropdown",
+          "label": "Theme",
+          "default": "box",
+          "info": "Applicable only if you choose 'Theme'' from the icon type dropdown",
           "options": [
             {
               "group": "Shop",
@@ -332,18 +336,18 @@
         {
           "type": "liquid",
           "id": "svg",
-          "label": "Custom icon - svg",
+          "label": "svg",
           "info": "Applicable only if you choose 'Custom icon - svg' from the icon type dropdown"
         },
         {
           "type": "image_picker",
           "id": "image",
-          "label": "Custom icon - png",
+          "label": "png/jpg",
           "info": "Applicable only if you choose 'Custom icon - png' from the icon type dropdown"
         },
         {
           "type": "header",
-          "content": "Style"
+          "content": "Content"
         },
         {
           "type": "text",

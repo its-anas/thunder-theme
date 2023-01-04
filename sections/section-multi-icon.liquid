@@ -143,6 +143,40 @@
   "class": "section-multi-icon",
   "settings": [
     {
+      "type": "range",
+      "id": "mobile_items",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "unit": "n",
+      "label": "Icons  per row in mobile",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "tablet_items",
+      "min": 3,
+      "max": 8,
+      "step": 1,
+      "unit": "n",
+      "label": "Icons per row in tablet",
+      "default": 6
+    },
+    {
+      "type": "range",
+      "id": "desktop_items",
+      "min": 6,
+      "max": 14,
+      "step": 1,
+      "unit": "n",
+      "label": "Icons per row in desktop",
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Section"
+    },
+    {
       "type": "text",
       "id": "heading",
       "label": "Heading",
@@ -181,50 +215,6 @@
       "default": "h6"
     },
     {
-      "type": "header",
-      "content": "Icon settings"
-    },
-    {
-      "type": "range",
-      "id": "mobile_items",
-      "min": 2,
-      "max": 6,
-      "step": 1,
-      "unit": "n",
-      "label": "Items per row in mobile",
-      "default": 4
-    },
-    {
-      "type": "range",
-      "id": "tablet_items",
-      "min": 3,
-      "max": 8,
-      "step": 1,
-      "unit": "n",
-      "label": "Items per row in tablet",
-      "default": 6
-    },
-    {
-      "type": "range",
-      "id": "desktop_items",
-      "min": 6,
-      "max": 14,
-      "step": 1,
-      "unit": "n",
-      "label": "Items per row in desktop",
-      "default": 12
-    },
-    {
-      "type": "header",
-      "content": "Section settings"
-    },
-    {
-      "type": "color",
-      "id": "background_color",
-      "label": "Background color",
-      "default": "transparent"
-    },
-    {
       "type": "range",
       "id": "space_between_elements",
       "label": "Space between elements",
@@ -253,6 +243,12 @@
       "unit": "px",
       "label": "Bottom space",
       "default": 0
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "transparent"
     }
   ],
   "blocks": [
@@ -261,26 +257,36 @@
       "name": "Icon",
       "settings": [
         {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Icon"
+        },
+        {
           "type": "url",
           "id": "url",
-          "label": "Direction URL"
+          "label": "URL"
+        },
+        {
+          "type": "header",
+          "content": "Icon"
         },
         {
           "type": "select",
           "id": "icon_type",
-          "label": "Icon type",
+          "label": "Type",
           "options": [
             {
               "value": "theme-icon",
-              "label": "Theme icon"
+              "label": "Theme"
             },
             {
               "value": "svg",
-              "label": "Custom icon - svg"
+              "label": "svg"
             },
             {
               "value": "image",
-              "label": "Custom icon - png"
+              "label": "png/jpg"
             }
           ],
           "default": "theme-icon"
@@ -288,9 +294,9 @@
         {
           "type": "select",
           "id": "theme_icon",
-          "label": "Theme icon",
-          "default": "facebook",
-          "info": "Applicable only if you choose 'Theme icon'' from the icon type dropdown",
+          "label": "Theme",
+          "default": "box",
+          "info": "Applicable only if you choose 'Theme'' from the icon type dropdown",
           "options": [
             {
               "group": "Shop",
@@ -435,22 +441,16 @@
           ]
         },
         {
-          "type": "liquid",
-          "id": "svg",
-          "label": "Custom icon - svg",
-          "info": "Applicable only if you choose 'Custom icon - svg' from the icon type dropdown"
-        },
-        {
           "type": "image_picker",
           "id": "image",
-          "label": "Custom icon - png",
-          "info": "Applicable only if you choose 'Custom icon - png' from the icon type dropdown"
+          "label": "png/jpg",
+          "info": "Applicable only if you choose 'png/jpg' from the icon type dropdown"
         },
         {
-          "type": "text",
-          "id": "text",
-          "label": "Icon text",
-          "default": "Icon"
+          "type": "liquid",
+          "id": "svg",
+          "label": "svg",
+          "info": "Applicable only if you choose 'svg' from the icon type dropdown"
         }
       ]
     }

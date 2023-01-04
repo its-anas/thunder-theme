@@ -87,8 +87,13 @@
             <div
               class="featured-product-slider"
               data-section-id="{{ section.id }}"
-              data-featured-product-variant-selector-type="{{ section.settings.variant_selector_type }}"
-              data-featured-product-color-selector-type="{{ section.settings.color_selector_type }}"
+              {% for block in section.blocks %}
+                {% case block.type %}
+                  {% when 'variants_selector' %}
+                    data-featured-product-variant-selector-type="{{ block.settings.variant_selector_type }}"
+                    data-featured-product-color-selector-type="{{ block.settings.color_selector_type }}"
+                {% endcase %}
+              {% endfor %}
             >
               <div class="prev">
                 {% render 'snippet-icons', icon: 'chevron-prev' %}
@@ -240,51 +245,8 @@
       "default": false
     },
     {
-      "type": "select",
-      "id": "variant_selector_type",
-      "label": "Variant selector type",
-      "options": [
-        {
-          "value": "block",
-          "label": "Block"
-        },
-        {
-          "value": "dropdown",
-          "label": "Dropdown"
-        }
-      ],
-      "default": "dropdown"
-    },
-    {
-      "type": "select",
-      "id": "color_selector_type",
-      "label": "Color selector type",
-      "info": "For the color swatch to work properly, the product must have variants, every variant must have an image attached to it, every image alt must be written in the format #color:Name, and the color and it's hex must be added in Color swatch tab in theme settings.",
-      "options": [
-        {
-          "value": "block",
-          "label": "Block"
-        },
-        {
-          "value": "dropdown",
-          "label": "Dropdown"
-        },
-        {
-          "value": "color_swatch",
-          "label": "Color swatch"
-        },
-        {
-          "value": "variant_image",
-          "label": "Image variant"
-        }
-      ],
-      "default": "dropdown"
-    },
-    {
-      "type": "color",
-      "id": "background_color",
-      "label": "Background color",
-      "default": "transparent"
+      "type": "header",
+      "content": "Section"
     },
     {
       "type": "range",
@@ -305,6 +267,12 @@
       "step": 10,
       "unit": "px",
       "default": 0
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "transparent"
     }
   ],
   "blocks": [
@@ -313,31 +281,81 @@
     },
     {
       "type": "vendor",
-      "name": "Vendor"
+      "name": "Vendor",
+      "limit": 1
     },
     {
       "type": "name",
-      "name": "Name"
+      "name": "Name",
+      "limit": 1
     },
     {
       "type": "price",
-      "name": "Price"
+      "name": "Price",
+      "limit": 1
     },
     {
       "type": "variants_selector",
-      "name": "Variants selector"
+      "name": "Variants selector",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "select",
+          "id": "variant_selector_type",
+          "label": "Variant selector type",
+          "options": [
+            {
+              "value": "block",
+              "label": "Block"
+            },
+            {
+              "value": "dropdown",
+              "label": "Dropdown"
+            }
+          ],
+          "default": "dropdown"
+        },
+        {
+          "type": "select",
+          "id": "color_selector_type",
+          "label": "Color selector type",
+          "info": "For the color swatch to work properly, the product must have variants, every variant must have an image attached to it, every image alt must be written in the format #color:Name, and the color and it's hex must be added in Color swatch tab in theme settings.",
+          "options": [
+            {
+              "value": "block",
+              "label": "Block"
+            },
+            {
+              "value": "dropdown",
+              "label": "Dropdown"
+            },
+            {
+              "value": "color_swatch",
+              "label": "Color swatch"
+            },
+            {
+              "value": "variant_image",
+              "label": "Image variant"
+            }
+          ],
+          "default": "dropdown"
+        }
+      ]
     },
     {
       "type": "quantity",
-      "name": "Quantity"
+      "name": "Quantity",
+      "limit": 1
     },
     {
       "type": "buttons",
-      "name": "Button"
+      "name": "Button",
+      "limit": 1
     },
     {
       "type": "product-link",
-      "name": "Product link"
+      "name": "Product link",
+      "limit": 1
     }
   ],
   "presets": [

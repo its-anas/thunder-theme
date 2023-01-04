@@ -67,7 +67,7 @@
 
     <div
       data-items-limit="{{ section.settings.items_limit }}"
-      data-image-style="{{ section.settings.image_style }}"
+      data-image-style="cover"
       data-new-tag="{{ settings.new_tag }}"
       data-new-tag-time="{{ settings.new_tag_time }}"
       class="slides-container"
@@ -86,27 +86,6 @@
   "name": "Recently viewed products",
   "class": "section-recently-viewed-products",
   "settings": [
-    {
-      "type": "header",
-      "content": "Product settings",
-      "info": "⚠️ Section is displayed in the store only if the customer (or you) has viewed at least one product."
-    },
-    {
-      "type": "select",
-      "id": "image_style",
-      "label": "Image style",
-      "options": [
-        {
-          "value": "cover",
-          "label": "Fit section"
-        },
-        {
-          "value": "contain",
-          "label": "Full image"
-        }
-      ],
-      "default": "cover"
-    },
     {
       "type": "range",
       "id": "aspect_ratio",
@@ -165,7 +144,7 @@
     },
     {
       "type": "header",
-      "content": "Section settings"
+      "content": "Section"
     },
     {
       "type": "text",
@@ -206,13 +185,6 @@
       "default": "h6"
     },
     {
-      "type": "color",
-      "id": "background_color",
-      "label": "Background color",
-      "default": "transparent",
-      "info": "Applied only if Type is 'Color'"
-    },
-    {
       "type": "range",
       "id": "space_between_elements",
       "label": "Space between elements",
@@ -241,6 +213,13 @@
       "unit": "px",
       "label": "Bottom space",
       "default": 0
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "transparent",
+      "info": "Applied only if 'type' is 'color'"
     }
   ],
 

@@ -19,17 +19,17 @@
   @media screen and (max-width: 750px) {
     .image-with-text__image,
     .image-with-text__content {
-        height: {{ section.settings.mobile_image_height }}px;
+        height: {{ section.settings.mobile_desktop_height }}px;
     }
   }
   @media screen and (min-width: 750px) and (max-width: 1024px) {
     .{{ section.id }}.image-with-text {
-        height: {{ section.settings.image_height | times: 0.75 | round: 0 }}px;
+        height: {{ section.settings.desktop_height | times: 0.75 | round: 0 }}px;
     }
   }
   @media screen and (min-width: 1024px) {
     .{{ section.id }}.image-with-text {
-        height: {{ section.settings.image_height }}px;
+        height: {{ section.settings.desktop_height }}px;
     }
   }
 
@@ -128,29 +128,13 @@
   "class": "section-image-with-text",
   "settings": [
     {
+      "type": "header",
+      "content": "Image"
+    },
+    {
       "type": "image_picker",
       "id": "image",
       "label": "Image"
-    },
-    {
-      "type": "range",
-      "id": "image_height",
-      "min": 600,
-      "max": 800,
-      "step": 10,
-      "unit": "px",
-      "label": "Desktop height",
-      "default": 700
-    },
-    {
-      "type": "range",
-      "id": "mobile_image_height",
-      "min": 300,
-      "max": 450,
-      "step": 10,
-      "unit": "px",
-      "label": "Mobile height",
-      "default": 350
     },
     {
       "type": "select",
@@ -186,12 +170,12 @@
     },
     {
       "type": "header",
-      "content": "Text style"
+      "content": "Text"
     },
     {
       "type": "select",
       "id": "vertical_position",
-      "label": "Text position - Vertical",
+      "label": "Vertical position",
       "options": [
         {
           "value": "top",
@@ -211,7 +195,7 @@
     {
       "type": "select",
       "id": "horizontal_position",
-      "label": "Text position - Horizonal",
+      "label": "Horizontal position",
       "info": "Desktop only",
       "options": [
         {
@@ -232,7 +216,7 @@
     {
       "type": "select",
       "id": "text_alignment",
-      "label": "Text alignment",
+      "label": "Alignment",
       "info": "Desktop only",
       "options": [
         {
@@ -253,7 +237,7 @@
     {
       "type": "range",
       "id": "text_width",
-      "label": "Text width",
+      "label": "Width",
       "info": "Desktop only",
       "min": 70,
       "max": 100,
@@ -263,17 +247,27 @@
     },
     {
       "type": "header",
-      "content": "Background"
+      "content": "Section"
     },
     {
-      "type": "color",
-      "id": "background_color",
-      "label": "Color",
-      "default": "transparent"
+      "type": "range",
+      "id": "desktop_height",
+      "min": 600,
+      "max": 800,
+      "step": 10,
+      "unit": "px",
+      "label": "Desktop height",
+      "default": 700
     },
     {
-      "type": "header",
-      "content": "Section style"
+      "type": "range",
+      "id": "mobile_desktop_height",
+      "min": 300,
+      "max": 450,
+      "step": 10,
+      "unit": "px",
+      "label": "Mobile height",
+      "default": 350
     },
     {
       "type": "range",
@@ -304,6 +298,12 @@
       "unit": "px",
       "label": "Bottom space",
       "default": 0
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "transparent"
     }
   ],
   "blocks": [

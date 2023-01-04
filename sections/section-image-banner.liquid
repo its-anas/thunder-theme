@@ -84,8 +84,8 @@
     {%- endif -%}
   </div>
 
-  <div class="{{ section.id }} image-banner__content container vertical--{{ section.settings.vertical_position }} {% if section.settings.background_style == "full-width" %} overlay {% endif %}">
-    <div class="{{ section.id }} image-banner__box text-alignment--{{ section.settings.text_alignment }} {{ section.id }}-text-width horizontal--{{ section.settings.horizontal_position }} {% if section.settings.background_style == "block" %} overlay {% endif %}">
+  <div class="{{ section.id }} image-banner__content container vertical--{{ section.settings.vertical_position }} {% if section.settings.overlay_style == "full-width" %} overlay {% endif %}">
+    <div class="{{ section.id }} image-banner__box text-alignment--{{ section.settings.text_alignment }} {{ section.id }}-text-width horizontal--{{ section.settings.horizontal_position }} {% if section.settings.overlay_style == "block" %} overlay {% endif %}">
       {%- for block in section.blocks -%}
         {%- case block.type -%}
           {%- when 'subheading' -%}
@@ -140,6 +140,129 @@
       "label": "Image"
     },
     {
+      "type": "header",
+      "content": "Text"
+    },
+    {
+      "type": "select",
+      "id": "vertical_position",
+      "label": "Vertical position",
+      "options": [
+        {
+          "value": "top",
+          "label": "Top"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "bottom",
+          "label": "Bottom"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "horizontal_position",
+      "label": "Horizonal position",
+      "info": "Desktop only",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Alignment",
+      "info": "Desktop only",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "text_width",
+      "label": "Width",
+      "info": "Desktop only",
+      "min": 40,
+      "max": 90,
+      "step": 10,
+      "unit": "%",
+      "default": 50
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Overlay"
+    },
+    {
+      "type": "select",
+      "id": "overlay_style",
+      "label": "Style",
+      "options": [
+        {
+          "value": "block",
+          "label": "Block"
+        },
+        {
+          "value": "full-width",
+          "label": "Full width"
+        }
+      ],
+      "default": "block"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "Opacity",
+      "default": 40
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "Color",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Section"
+    },
+    {
       "type": "checkbox",
       "id": "full_screen_height",
       "label": "Full screen height",
@@ -166,129 +289,6 @@
       "label": "Mobile height",
       "default": 500,
       "info": "Applied only if full screen height is disabled. And the height will expand if the Text is very long."
-    },
-    {
-      "type": "header",
-      "content": "Text background"
-    },
-    {
-      "type": "select",
-      "id": "background_style",
-      "label": "Style",
-      "options": [
-        {
-          "value": "block",
-          "label": "Block"
-        },
-        {
-          "value": "full-width",
-          "label": "Full width"
-        }
-      ],
-      "default": "block"
-    },
-    {
-      "type": "color",
-      "id": "overlay_color",
-      "label": "Overlay color",
-      "default": "#000000"
-    },
-    {
-      "type": "color",
-      "id": "text_color",
-      "label": "Text color",
-      "default": "#ffffff"
-    },
-    {
-      "type": "range",
-      "id": "overlay_opacity",
-      "min": 0,
-      "max": 100,
-      "step": 1,
-      "unit": "%",
-      "label": "Opacity",
-      "default": 40
-    },
-    {
-      "type": "header",
-      "content": "Text style"
-    },
-    {
-      "type": "select",
-      "id": "vertical_position",
-      "label": "Text position - Vertical",
-      "options": [
-        {
-          "value": "top",
-          "label": "Top"
-        },
-        {
-          "value": "center",
-          "label": "Center"
-        },
-        {
-          "value": "bottom",
-          "label": "Bottom"
-        }
-      ],
-      "default": "center"
-    },
-    {
-      "type": "select",
-      "id": "horizontal_position",
-      "label": "Text position - Horizonal",
-      "info": "Desktop only",
-      "options": [
-        {
-          "value": "left",
-          "label": "Left"
-        },
-        {
-          "value": "center",
-          "label": "Center"
-        },
-        {
-          "value": "right",
-          "label": "Right"
-        }
-      ],
-      "default": "center"
-    },
-    {
-      "type": "select",
-      "id": "text_alignment",
-      "label": "Text alignment",
-      "info": "Desktop only",
-      "options": [
-        {
-          "value": "left",
-          "label": "Left"
-        },
-        {
-          "value": "center",
-          "label": "Center"
-        },
-        {
-          "value": "right",
-          "label": "Right"
-        }
-      ],
-      "default": "center"
-    },
-    {
-      "type": "range",
-      "id": "text_width",
-      "label": "Text width",
-      "info": "Desktop only",
-      "min": 40,
-      "max": 90,
-      "step": 10,
-      "unit": "%",
-      "default": 50
-    },
-    {
-      "type": "header",
-      "content": "Section style"
     },
     {
       "type": "range",

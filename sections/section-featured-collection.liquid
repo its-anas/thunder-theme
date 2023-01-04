@@ -90,7 +90,8 @@
                 {% if product.available %}
                   {% if price_difference > 0 %}
                     <p class="tag--animated tag-text">
-                      {{ 'general.others.sale_text' | t }} {{ product.compare_at_price | minus: product.price | money }}
+                      {{ 'general.others.sale_text' | t }}
+                      {{ product.compare_at_price | minus: product.price | money }}
                     </p>
                   {% endif %}
                 {% else %}
@@ -225,7 +226,7 @@
     },
     {
       "type": "header",
-      "content": "Product settings"
+      "content": "Product"
     },
     {
       "type": "range",
@@ -285,7 +286,7 @@
     },
     {
       "type": "header",
-      "content": "Section settings"
+      "content": "Section"
     },
     {
       "type": "text",
@@ -326,13 +327,6 @@
       "default": "h6"
     },
     {
-      "type": "color",
-      "id": "background_color",
-      "label": "Background color",
-      "default": "transparent",
-      "info": "Applied only if Type is 'Color'"
-    },
-    {
       "type": "range",
       "id": "space_between_elements",
       "label": "Space between elements",
@@ -361,6 +355,12 @@
       "unit": "px",
       "label": "Bottom space",
       "default": 0
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "transparent"
     }
   ],
   "presets": [
