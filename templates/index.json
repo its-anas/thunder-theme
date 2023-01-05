@@ -1,74 +1,859 @@
 {
      "sections": {
-          "slideshow": {
-               "type": "section-slideshow"
+          "section-slideshow": {
+               "type": "section-slideshow",
+               "blocks": {
+                    "section-slideshow-0": {
+                         "type": "slide",
+                         "settings": {
+                              "subheading": "",
+                              "subheading_size": "h6",
+                              "heading": "Slide",
+                              "heading_size": "h2",
+                              "text": "<p>Provide additional context and background information about the slide, and help visitors understand the relevance and importance of the content being presented.<\/p>",
+                              "primary_button_text": "Primary button",
+                              "primary_button_link": "",
+                              "secondary_button_text": "Secondary button",
+                              "secondary_button_link": ""
+                         }
+                    },
+                    "section-slideshow-1": {
+                         "type": "slide",
+                         "settings": {
+                              "subheading": "",
+                              "subheading_size": "h6",
+                              "heading": "Slide",
+                              "heading_size": "h2",
+                              "text": "<p>Provide additional context and background information about the slide, and help visitors understand the relevance and importance of the content being presented.<\/p>",
+                              "primary_button_text": "Primary button",
+                              "primary_button_link": "",
+                              "secondary_button_text": "Secondary button",
+                              "secondary_button_link": ""
+                         }
+                    }
+               },
+               "block_order": [
+                    "section-slideshow-0",
+                    "section-slideshow-1"
+               ],
+               "settings": {
+                    "enable_autoplay": true,
+                    "autoplay_delay_time": 4,
+                    "vertical_position": "bottom",
+                    "horizontal_position": "left",
+                    "text_alignment": "left",
+                    "text_width": 50,
+                    "text_color": "#ffffff",
+                    "overlay_opacity": 10,
+                    "overlay_color": "#000000",
+                    "full_screen_height": false,
+                    "image_height": 700,
+                    "mobile_image_height": 500,
+                    "space_between_elements": 1,
+                    "top_space": 0,
+                    "bottom_space": 0
+               }
           },
-          "multi-icon": {
-               "type": "section-multi-icon"
+          "section-multi-icon": {
+               "type": "section-multi-icon",
+               "blocks": {
+                    "section-multi-icon1": {
+                         "type": "image_picker",
+                         "settings": {
+                              "text": "Icon",
+                              "url": "",
+                              "icon_type": "svg",
+                              "theme_icon": "box",
+                              "svg": ""
+                         }
+                    },
+                    "section-multi-icon2": {
+                         "type": "image_picker",
+                         "settings": {
+                              "text": "Icon",
+                              "url": "",
+                              "icon_type": "svg",
+                              "theme_icon": "box",
+                              "svg": ""
+                         }
+                    },
+                    "section-multi-icon3": {
+                         "type": "image_picker",
+                         "settings": {
+                              "text": "Icon",
+                              "url": "",
+                              "icon_type": "svg",
+                              "theme_icon": "box",
+                              "svg": ""
+                         }
+                    },
+                    "section-multi-icon4": {
+                         "type": "image_picker",
+                         "settings": {
+                              "text": "Icon",
+                              "url": "",
+                              "icon_type": "svg",
+                              "theme_icon": "box",
+                              "svg": ""
+                         }
+                    },
+                    "section-multi-icon5": {
+                         "type": "image_picker",
+                         "settings": {
+                              "text": "Icon",
+                              "url": "",
+                              "icon_type": "svg",
+                              "theme_icon": "box",
+                              "svg": ""
+                         }
+                    },
+                    "section-multi-icon6": {
+                         "type": "image_picker",
+                         "settings": {
+                              "text": "Icon",
+                              "url": "",
+                              "icon_type": "svg",
+                              "theme_icon": "box",
+                              "svg": ""
+                         }
+                    }
+               },
+               "block_order": [
+                    "section-multi-icon1",
+                    "section-multi-icon2",
+                    "section-multi-icon3",
+                    "section-multi-icon4",
+                    "section-multi-icon5",
+                    "section-multi-icon6"
+               ],
+               "settings": {
+                    "mobile_items": 4,
+                    "tablet_items": 6,
+                    "desktop_items": 10,
+                    "heading": "Explore",
+                    "heading_size": "h6",
+                    "space_between_elements": 1,
+                    "top_space": 0,
+                    "bottom_space": 0,
+                    "background_color": "transparent"
+               }
           },
-          "gallery": {
-               "type": "section-gallery"
+          "section-gallery": {
+               "type": "section-gallery",
+               "blocks": {
+                    "section-gallery-0": {
+                         "type": "image",
+                         "settings": {
+                              "heading": "Image headline",
+                              "heading_size": "h4",
+                              "text": "<p>More detailed information about the purpose of the image and the content it contains.<\/p>",
+                              "button_text": "Call to action",
+                              "button_link": ""
+                         }
+                    },
+                    "section-gallery-1": {
+                         "type": "image",
+                         "settings": {
+                              "heading": "Image headline",
+                              "heading_size": "h4",
+                              "text": "<p>More detailed information about the purpose of the image and the content it contains.<\/p>",
+                              "button_text": "Call to action",
+                              "button_link": ""
+                         }
+                    },
+                    "section-gallery-2": {
+                         "type": "image",
+                         "settings": {
+                              "heading": "Image headline",
+                              "heading_size": "h4",
+                              "text": "<p>More detailed information about the purpose of the image and the content it contains.<\/p>",
+                              "button_text": "Call to action",
+                              "button_link": ""
+                         }
+                    }
+               },
+               "block_order": [
+                    "section-gallery-0",
+                    "section-gallery-1",
+                    "section-gallery-2"
+               ],
+               "settings": {
+                    "vertical_position": "center",
+                    "horizontal_position": "center",
+                    "text_color": "#ffffff",
+                    "overlay_opacity": 10,
+                    "overlay_color": "#000000",
+                    "gallery_style": "all_in_one",
+                    "deskop_image_height": 700,
+                    "mobile_image_height": 300
+               }
           },
-          "countdown-timer": {
-               "type": "section-countdown-timer"
+          "section-countdown-time": {
+               "type": "section-countdown-timer",
+               "settings": {
+                    "heading": "Promotion title",
+                    "heading_size": "h4",
+                    "text": "<p>Provide context and background information about the event or promotion, and help visitors understand what they can expect and why they should be excited.<\/p>",
+                    "text_width": 70,
+                    "link_text": "Call to action",
+                    "link_url": "",
+                    "button_color": "#fcdb33",
+                    "message": "Offer ended",
+                    "countdown_timer_type": "time",
+                    "digits_size": "small",
+                    "digits_color": "#000000",
+                    "digits_background_color": "#fcdb33",
+                    "time_days": 0,
+                    "time_hours": 6,
+                    "time_mins": 0,
+                    "time_secs": 0,
+                    "afterExpirationTimeOnly": "repeatCountdown",
+                    "date_year": 2023,
+                    "date_month": 1,
+                    "date_day": 1,
+                    "date_hour": 0,
+                    "date_min": 0,
+                    "space_between_elements": 1,
+                    "top_space": 0,
+                    "bottom_space": 0,
+                    "background_color": "transparent"
+               }
           },
-          "featured-collection": {
-               "type": "section-featured-collection"
+          "section-featured-collection": {
+               "type": "section-featured-collection",
+               "settings": {
+                    "collection": "",
+                    "aspect_ratio": 1,
+                    "mobile_items": "2",
+                    "tablet_items": 3,
+                    "desktop_items": 4,
+                    "items_limit": 8,
+                    "heading": "Featured collection",
+                    "heading_size": "h6",
+                    "space_between_elements": 1,
+                    "top_space": 0,
+                    "bottom_space": 0,
+                    "background_color": "transparent"
+               }
           },
-          "promotional-banner": {
-               "type": "section-promotional-banner"
+          "section-promotional-banner": {
+               "type": "section-promotional-banner",
+               "settings": {
+                    "banner_style": "style-1",
+                    "style_1_text": "A brief summary of the offer with a sense of urgency!",
+                    "style_1_text_type": "h3",
+                    "animation_speed": 90,
+                    "style_2_heading": "A quick overview of the promotion with a call to action",
+                    "style_2_heading_type": "h6",
+                    "style_2_button_text": "Primary button",
+                    "style_2_button_url": "",
+                    "height": 100,
+                    "top_space": 0,
+                    "bottom_space": 0,
+                    "text_color": "#000000",
+                    "background_color": "#fcdb33"
+               }
           },
-          "shop-the-look": {
-               "type": "section-shop-the-look"
+          "section-shop-the-look": {
+               "type": "section-shop-the-look",
+               "blocks": {
+                    "section-shop-the-look-0": {
+                         "type": "product",
+                         "settings": {
+                              "product": "",
+                              "desktop_vertical_position": 75,
+                              "desktop_horizontal_position": 80,
+                              "mobile_vertical_position": 50,
+                              "mobile_horizontal_position": 50
+                         }
+                    },
+                    "section-shop-the-look-1": {
+                         "type": "product",
+                         "settings": {
+                              "product": "",
+                              "desktop_vertical_position": 20,
+                              "desktop_horizontal_position": 45,
+                              "mobile_vertical_position": 50,
+                              "mobile_horizontal_position": 50
+                         }
+                    },
+                    "section-shop-the-look-2": {
+                         "type": "product",
+                         "settings": {
+                              "product": "",
+                              "desktop_vertical_position": 60,
+                              "desktop_horizontal_position": 20,
+                              "mobile_vertical_position": 50,
+                              "mobile_horizontal_position": 50
+                         }
+                    }
+               },
+               "block_order": [
+                    "section-shop-the-look-0",
+                    "section-shop-the-look-1",
+                    "section-shop-the-look-2"
+               ],
+               "settings": {
+                    "auto_open_selectors": true,
+                    "selector_color": "#000",
+                    "selector_background_color": "#fff",
+                    "openable_background_color": "#fff",
+                    "desktop_aspect_ratio": 3,
+                    "mobile_aspect_ratio": 1,
+                    "heading": "Shop the look",
+                    "heading_size": "h6",
+                    "top_space": 0,
+                    "bottom_space": 0
+               }
           },
-          "compare": {
-               "type": "section-compare"
+          "section-compare": {
+               "type": "section-compare",
+               "blocks": {
+                    "section-compare-0": {
+                         "type": "product",
+                         "settings": {
+                              "product": "",
+                              "product_name": "",
+                              "product_description": "Short description",
+                              "product_feature_1": "Text",
+                              "product_feature_2": "Text",
+                              "product_feature_3": "Text",
+                              "product_feature_4": "Text",
+                              "product_feature_5": "Text"
+                         }
+                    },
+                    "section-compare-1": {
+                         "type": "product",
+                         "settings": {
+                              "product": "",
+                              "product_name": "",
+                              "product_description": "Short description",
+                              "product_feature_1": "Text",
+                              "product_feature_2": "Text",
+                              "product_feature_3": "Text",
+                              "product_feature_4": "Text",
+                              "product_feature_5": "Text"
+                         }
+                    },
+                    "section-compare-2": {
+                         "type": "product",
+                         "settings": {
+                              "product": "",
+                              "product_name": "",
+                              "product_description": "Short description",
+                              "product_feature_1": "Text",
+                              "product_feature_2": "Text",
+                              "product_feature_3": "Text",
+                              "product_feature_4": "Text",
+                              "product_feature_5": "Text"
+                         }
+                    },
+                    "section-compare-3": {
+                         "type": "product",
+                         "settings": {
+                              "product": "",
+                              "product_name": "",
+                              "product_description": "Short description",
+                              "product_feature_1": "Text",
+                              "product_feature_2": "Text",
+                              "product_feature_3": "Text",
+                              "product_feature_4": "Text",
+                              "product_feature_5": "Text"
+                         }
+                    },
+                    "section-compare-4": {
+                         "type": "product",
+                         "settings": {
+                              "product": "",
+                              "product_name": "",
+                              "product_description": "Short description",
+                              "product_feature_1": "Text",
+                              "product_feature_2": "Text",
+                              "product_feature_3": "Text",
+                              "product_feature_4": "Text",
+                              "product_feature_5": "Text"
+                         }
+                    }
+               },
+               "block_order": [
+                    "section-compare-0",
+                    "section-compare-1",
+                    "section-compare-2",
+                    "section-compare-3",
+                    "section-compare-4"
+               ],
+               "settings": {
+                    "image_size": "medium",
+                    "table_width": 900,
+                    "feature_1": "Feature 1",
+                    "feature_2": "Feature 2",
+                    "feature_3": "Feature 3",
+                    "feature_4": "Feature 4",
+                    "feature_5": "Feature 5",
+                    "features_count": 5,
+                    "heading": "Comparison table",
+                    "heading_size": "h6",
+                    "top_space": 0,
+                    "bottom_space": 0,
+                    "background_color": "transparent"
+               }
           },
-          "promotional-banner2": {
-               "type": "section-promotional-banner"
+          "section-promotional-banner2": {
+               "type": "section-promotional-banner",
+               "settings": {
+                    "banner_style": "style-1",
+                    "style_1_text": "A brief summary of the offer with a sense of urgency!",
+                    "style_1_text_type": "h3",
+                    "animation_speed": 90,
+                    "style_2_heading": "A quick overview of the promotion with a call to action",
+                    "style_2_heading_type": "h6",
+                    "style_2_button_text": "Primary button",
+                    "style_2_button_url": "",
+                    "height": 100,
+                    "top_space": 0,
+                    "bottom_space": 0,
+                    "text_color": "#000000",
+                    "background_color": "#fcdb33"
+               }
           },
-          "featured-collections": {
-               "type": "section-featured-collections"
+          "section-featured-collections": {
+               "type": "section-featured-collections",
+               "blocks": {
+                    "section-featured-collections-0": {
+                         "type": "collection",
+                         "settings": {
+                              "collection": "",
+                              "replace_image": false
+                         }
+                    },
+                    "section-featured-collections-1": {
+                         "type": "collection",
+                         "settings": {
+                              "collection": "",
+                              "replace_image": false
+                         }
+                    },
+                    "section-featured-collections-2": {
+                         "type": "collection",
+                         "settings": {
+                              "collection": "",
+                              "replace_image": false
+                         }
+                    },
+                    "section-featured-collections-3": {
+                         "type": "collection",
+                         "settings": {
+                              "collection": "",
+                              "replace_image": false
+                         }
+                    },
+                    "section-featured-collections-4": {
+                         "type": "collection",
+                         "settings": {
+                              "collection": "",
+                              "replace_image": false
+                         }
+                    },
+                    "section-featured-collections-5": {
+                         "type": "collection",
+                         "settings": {
+                              "collection": "",
+                              "replace_image": false
+                         }
+                    }
+               },
+               "block_order": [
+                    "section-featured-collections-0",
+                    "section-featured-collections-1",
+                    "section-featured-collections-2",
+                    "section-featured-collections-3",
+                    "section-featured-collections-4",
+                    "section-featured-collections-5"
+               ],
+               "settings": {
+                    "aspect_ratio": 0.6,
+                    "mobile_items": "2",
+                    "tablet_items": 3,
+                    "desktop_items": 4,
+                    "heading": "Featured collections",
+                    "heading_size": "h6",
+                    "space_between_elements": 1,
+                    "top_space": 0,
+                    "bottom_space": 0,
+                    "background_color": "transparent"
+               }
           },
-          "video-with-text": {
-               "type": "section-video-with-text"
+          "section-video-with-text": {
+               "type": "section-video-with-text",
+               "blocks": {
+                    "section-video-with-text-0": {
+                         "type": "subheading",
+                         "settings": {
+                              "subheading": "Subheading",
+                              "subheading_size": "h6"
+                         }
+                    },
+                    "section-video-with-text-1": {
+                         "type": "heading",
+                         "settings": {
+                              "heading": "Heading",
+                              "heading_size": "h2"
+                         }
+                    },
+                    "section-video-with-text-2": {
+                         "type": "text",
+                         "settings": {
+                              "text": "<p>Write more in-depth information about the purpose of the video and it's content, and provide additional context and background information as needed.<\/p>"
+                         }
+                    },
+                    "section-video-with-text-3": {
+                         "type": "button",
+                         "settings": {
+                              "primary_button_text": "Primary button",
+                              "primary_button_link": "",
+                              "secondary_button_text": "Secondary button",
+                              "secondary_button_link": ""
+                         }
+                    }
+               },
+               "block_order": [
+                    "section-video-with-text-0",
+                    "section-video-with-text-1",
+                    "section-video-with-text-2",
+                    "section-video-with-text-3"
+               ],
+               "settings": {
+                    "video_url": "https:\/\/www.youtube.com\/watch?v=_9VUPq3SxOc",
+                    "video_height": 400,
+                    "video_horizontal_position": "right",
+                    "video_placement": "first",
+                    "text_alignment": "left",
+                    "text_horizontal_position": "left",
+                    "text_width": 70,
+                    "space_between_elements": 1,
+                    "top_space": 0,
+                    "bottom_space": 0,
+                    "background_color": "transparent"
+               }
           },
-          "animated-rich-text": {
-               "type": "section-animated-rich-text"
+          "section-animated-rich-text": {
+               "type": "section-animated-rich-text",
+               "blocks": {
+                    "section-animated-rich-text-0": {
+                         "type": "subheading",
+                         "settings": {
+                              "subheading": "Clear and concise overview",
+                              "subheading_size": "h6"
+                         }
+                    },
+                    "section-animated-rich-text-1": {
+                         "type": "heading",
+                         "settings": {
+                              "heading": "that changes to synonyms to emphasize the main message",
+                              "heading_size": "h2",
+                              "word_1": "Word 1",
+                              "word_2": "Word 2",
+                              "word_3": "Word 3",
+                              "word_4": "Word 4",
+                              "word_1_color": "#ea4335",
+                              "word_2_color": "#4285f4",
+                              "word_3_color": "#34a853",
+                              "word_4_color": "#fbbc04",
+                              "animated": true,
+                              "words_count": "4",
+                              "animation_placement": "first",
+                              "animation_delay": 6
+                         }
+                    },
+                    "section-animated-rich-text-2": {
+                         "type": "text",
+                         "settings": {
+                              "text": "<p>Provide more information and context for the main message of the section. It should support and expand upon the points made in the heading and animated heading.<\/p>"
+                         }
+                    },
+                    "section-animated-rich-text-3": {
+                         "type": "button",
+                         "settings": {
+                              "primary_button_text": "Primary button",
+                              "primary_button_link": "",
+                              "secondary_button_text": "",
+                              "secondary_button_link": ""
+                         }
+                    }
+               },
+               "block_order": [
+                    "section-animated-rich-text-0",
+                    "section-animated-rich-text-1",
+                    "section-animated-rich-text-2",
+                    "section-animated-rich-text-3"
+               ],
+               "settings": {
+                    "horizontal_position": "center",
+                    "text_alignment": "center",
+                    "text_width": 90,
+                    "space_between_elements": 1,
+                    "top_space": 0,
+                    "bottom_space": 0,
+                    "background_color": "transparent"
+               }
           },
-          "testimonials": {
-               "type": "section-testimonials"
+          "section-testimonials": {
+               "type": "section-testimonials",
+               "blocks": {
+                    "section-testimonials-0": {
+                         "type": "text",
+                         "settings": {
+                              "stars_count": "star-5",
+                              "reviewer_name": "Name",
+                              "review_text": "Put your customer review here"
+                         }
+                    },
+                    "section-testimonials-1": {
+                         "type": "text",
+                         "settings": {
+                              "stars_count": "star-5",
+                              "reviewer_name": "Name",
+                              "review_text": "Put your customer review here"
+                         }
+                    }
+               },
+               "block_order": [
+                    "section-testimonials-0",
+                    "section-testimonials-1"
+               ],
+               "settings": {
+                    "review_width": 250,
+                    "review_height": 150,
+                    "review_border_width": 2,
+                    "review_border_color": "#fff",
+                    "animated": true,
+                    "animation_speed": 40,
+                    "heading": "Testimonials",
+                    "heading_size": "h6",
+                    "space_between_elements": 1,
+                    "top_space": 0,
+                    "bottom_space": 0,
+                    "background_color": "transparent"
+               }
           },
-          "image-banner": {
-               "type": "section-image-banner"
+          "section-image-banner": {
+               "type": "section-image-banner",
+               "blocks": {
+                    "section-image-banner-0": {
+                         "type": "subheading",
+                         "settings": {
+                              "subheading": "Subheading",
+                              "subheading_size": "h6"
+                         }
+                    },
+                    "section-image-banner-1": {
+                         "type": "heading",
+                         "settings": {
+                              "heading": "Heading",
+                              "heading_size": "h2"
+                         }
+                    },
+                    "section-image-banner-2": {
+                         "type": "text",
+                         "settings": {
+                              "text": "<p>Provide more detailed information about the purpose of the banner and the content it contains.<\/p>"
+                         }
+                    },
+                    "section-image-banner-3": {
+                         "type": "button",
+                         "settings": {
+                              "primary_button_text": "Primary button",
+                              "primary_button_link": "",
+                              "secondary_button_text": "Secondary button",
+                              "secondary_button_link": ""
+                         }
+                    }
+               },
+               "block_order": [
+                    "section-image-banner-0",
+                    "section-image-banner-1",
+                    "section-image-banner-2",
+                    "section-image-banner-3"
+               ],
+               "settings": {
+                    "vertical_position": "center",
+                    "horizontal_position": "center",
+                    "text_alignment": "center",
+                    "text_width": 50,
+                    "text_color": "#ffffff",
+                    "overlay_style": "block",
+                    "overlay_opacity": 40,
+                    "overlay_color": "#000000",
+                    "full_screen_height": false,
+                    "desktop_image_height": 700,
+                    "mobile_image_height": 500,
+                    "space_between_elements": 1,
+                    "top_space": 0,
+                    "bottom_space": 0
+               }
           },
-          "text-with-icon": {
-               "type": "section-text-with-icon"
+          "section-text-with-icon": {
+               "type": "section-text-with-icon",
+               "blocks": {
+                    "section-text-with-icon-0": {
+                         "type": "text-with-icon",
+                         "settings": {
+                              "icon_type": "theme-icon",
+                              "theme_icon": "box",
+                              "svg": "",
+                              "heading": "Title",
+                              "heading_size": "h6",
+                              "text": "Highlight the trust-building element of the business and explain how it can be of benefit to the customer",
+                              "button_text": "Learn more",
+                              "button_link": ""
+                         }
+                    },
+                    "section-text-with-icon-1": {
+                         "type": "text-with-icon",
+                         "settings": {
+                              "icon_type": "theme-icon",
+                              "theme_icon": "review",
+                              "svg": "",
+                              "heading": "Title",
+                              "heading_size": "h6",
+                              "text": "Highlight the trust-building element of the business and explain how it can be of benefit to the customer",
+                              "button_text": "Learn more",
+                              "button_link": ""
+                         }
+                    },
+                    "section-text-with-icon-2": {
+                         "type": "text-with-icon",
+                         "settings": {
+                              "icon_type": "theme-icon",
+                              "theme_icon": "contact",
+                              "svg": "",
+                              "heading": "Title",
+                              "heading_size": "h6",
+                              "text": "Highlight the trust-building element of the business and explain how it can be of benefit to the customer",
+                              "button_text": "Learn more",
+                              "button_link": ""
+                         }
+                    }
+               },
+               "block_order": [
+                    "section-text-with-icon-0",
+                    "section-text-with-icon-1",
+                    "section-text-with-icon-2"
+               ],
+               "settings": {
+                    "icon_size": 70,
+                    "content_width": 80,
+                    "space_between_elements": 0.3,
+                    "top_space": 0,
+                    "bottom_space": 0,
+                    "background_color": "transparent"
+               }
           },
-          "faq": {
-               "type": "section-faq"
+          "section-faq": {
+               "type": "section-faq",
+               "blocks": {
+                    "section-faq-0": {
+                         "type": "text",
+                         "settings": {
+                              "question": "Question",
+                              "answer": "A detailed and thorough response to the question being asked."
+                         }
+                    },
+                    "section-faq-1": {
+                         "type": "text",
+                         "settings": {
+                              "question": "Question",
+                              "answer": "A detailed and thorough response to the question being asked."
+                         }
+                    },
+                    "section-faq-2": {
+                         "type": "text",
+                         "settings": {
+                              "question": "Question",
+                              "answer": "A detailed and thorough response to the question being asked."
+                         }
+                    },
+                    "section-faq-3": {
+                         "type": "text",
+                         "settings": {
+                              "question": "Question",
+                              "answer": "A detailed and thorough response to the question being asked."
+                         }
+                    }
+               },
+               "block_order": [
+                    "section-faq-0",
+                    "section-faq-1",
+                    "section-faq-2",
+                    "section-faq-3"
+               ],
+               "settings": {
+                    "show_image": true,
+                    "image_height": 300,
+                    "tabs_width": 1000,
+                    "heading": "FAQ",
+                    "heading_size": "h6",
+                    "space_between_elements": 1,
+                    "top_space": 0,
+                    "bottom_space": 0,
+                    "background_color": "transparent"
+               }
           },
-          "logo-list": {
-               "type": "section-logo-list"
+          "section-logo-list": {
+               "type": "section-logo-list",
+               "blocks": {
+                    "section-logo-list-0": {
+                         "type": "image_picker",
+                         "settings": {}
+                    },
+                    "section-logo-list-1": {
+                         "type": "image_picker",
+                         "settings": {}
+                    },
+                    "section-logo-list-3": {
+                         "type": "image_picker",
+                         "settings": {}
+                    },
+                    "section-logo-list-5": {
+                         "type": "image_picker",
+                         "settings": {}
+                    }
+               },
+               "block_order": [
+                    "section-logo-list-0",
+                    "section-logo-list-1",
+                    "section-logo-list-3",
+                    "section-logo-list-5"
+               ],
+               "settings": {
+                    "animation_speed": 10,
+                    "logo_size": 80,
+                    "heading": "Partners",
+                    "heading_size": "h6",
+                    "space_between_elements": 1,
+                    "top_space": 0,
+                    "bottom_space": 0,
+                    "background_color": "transparent"
+               }
           }
      },
      "order": [
-          "slideshow",
-          "multi-icon",
-          "gallery",
-          "countdown-timer",
-          "featured-collection",
-          "promotional-banner",
-          "shop-the-look",
-          "compare",
-          "promotional-banner2",
-          "featured-collections",
-          "video-with-text",
-          "animated-rich-text",
-          "testimonials",
-          "image-banner",
-          "text-with-icon",
-          "faq",
-          "logo-list"
+          "section-slideshow",
+          "section-multi-icon",
+          "section-gallery",
+          "section-countdown-time",
+          "section-featured-collection",
+          "section-promotional-banner",
+          "section-shop-the-look",
+          "section-compare",
+          "section-promotional-banner2",
+          "section-featured-collections",
+          "section-video-with-text",
+          "section-animated-rich-text",
+          "section-testimonials",
+          "section-image-banner",
+          "section-text-with-icon",
+          "section-faq",
+          "section-logo-list"
      ]
 }

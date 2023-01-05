@@ -31,8 +31,9 @@
       </{{ section.settings.heading_size }}>
     </div>
   {% endif %}
+
   {% if section.settings.text != blank %}
-    <p class="newsletter__text">{{ section.settings.text }}</p>
+    {{ section.settings.text }}
   {% endif %}
 
   {% form 'customer', class: 'newsletter__form' %}
@@ -54,7 +55,6 @@
         placeholder="{{ 'general.newsletter.placeholder' | t }}"
         required
       >
-
       <button
         type="submit"
         class="newsletter__button"
@@ -62,7 +62,6 @@
         id="subscribe"
       >
         <p class="button">{{ 'general.newsletter.button' | t }}</p>
-        <p></p>
       </button>
     </div>
 

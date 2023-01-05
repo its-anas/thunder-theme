@@ -124,10 +124,10 @@
           "settings": {
             "feature_title": "Feature",
             "feature_description": "Put a short description to highlight the feature of the product. For example the material or the color.",
-            "desktop_vertical_position": 56,
-            "desktop_horizontal_position": 43,
-            "mobile_vertical_position": 56,
-            "mobile_horizontal_position": 43
+            "desktop_vertical_position": 75,
+            "desktop_horizontal_position": 80,
+            "mobile_vertical_position": 50,
+            "mobile_horizontal_position": 50
           }
         },
         "feature2": {
@@ -135,10 +135,10 @@
           "settings": {
             "feature_title": "Feature",
             "feature_description": "Put a short description to highlight the feature of the product. For example the material or the color.",
-            "desktop_vertical_position": 73,
-            "desktop_horizontal_position": 60,
-            "mobile_vertical_position": 73,
-            "mobile_horizontal_position": 60
+            "desktop_vertical_position": 20,
+            "desktop_horizontal_position": 45,
+            "mobile_vertical_position": 50,
+            "mobile_horizontal_position": 50
           }
         },
         "feature3": {
@@ -146,9 +146,9 @@
           "settings": {
             "feature_title": "Feature",
             "feature_description": "Put a short description to highlight the feature of the product. For example the material or the color.",
-            "desktop_vertical_position": 20,
-            "desktop_horizontal_position": 50,
-            "mobile_vertical_position": 20,
+            "desktop_vertical_position": 60,
+            "desktop_horizontal_position": 20,
+            "mobile_vertical_position": 50,
             "mobile_horizontal_position": 50
           }
         }
@@ -159,12 +159,13 @@
         "feature3"
       ],
       "settings": {
-        "desktop_aspect_ratio": 4,
+        "auto_open_selectors": true,
+        "selector_color": "#000",
+        "selector_background_color": "#fff",
+        "openable_background_color": "#fff",
+        "desktop_aspect_ratio": 3,
         "mobile_aspect_ratio": 1,
-        "selector_color": "#282828",
-        "selector_background_color": "#ffffff",
-        "openable_background_color": "#ffffff",
-        "heading": "Product features",
+        "heading": "Shop the look",
         "heading_size": "h6",
         "top_space": 0,
         "bottom_space": 0
@@ -173,21 +174,94 @@
     "compare": {
       "type": "section-compare",
       "blocks": {
-        "product1": {
-          "type": "product"
+        "section-compare-0": {
+          "type": "product",
+          "settings": {
+            "product": "",
+            "product_name": "",
+            "product_description": "Short description",
+            "product_feature_1": "Text",
+            "product_feature_2": "Text",
+            "product_feature_3": "Text",
+            "product_feature_4": "Text",
+            "product_feature_5": "Text"
+          }
         },
-        "product2": {
-          "type": "product"
+        "section-compare-1": {
+          "type": "product",
+          "settings": {
+            "product": "",
+            "product_name": "",
+            "product_description": "Short description",
+            "product_feature_1": "Text",
+            "product_feature_2": "Text",
+            "product_feature_3": "Text",
+            "product_feature_4": "Text",
+            "product_feature_5": "Text"
+          }
         },
-        "product3": {
-          "type": "product"
+        "section-compare-2": {
+          "type": "product",
+          "settings": {
+            "product": "",
+            "product_name": "",
+            "product_description": "Short description",
+            "product_feature_1": "Text",
+            "product_feature_2": "Text",
+            "product_feature_3": "Text",
+            "product_feature_4": "Text",
+            "product_feature_5": "Text"
+          }
+        },
+        "section-compare-3": {
+          "type": "product",
+          "settings": {
+            "product": "",
+            "product_name": "",
+            "product_description": "Short description",
+            "product_feature_1": "Text",
+            "product_feature_2": "Text",
+            "product_feature_3": "Text",
+            "product_feature_4": "Text",
+            "product_feature_5": "Text"
+          }
+        },
+        "section-compare-4": {
+          "type": "product",
+          "settings": {
+            "product": "",
+            "product_name": "",
+            "product_description": "Short description",
+            "product_feature_1": "Text",
+            "product_feature_2": "Text",
+            "product_feature_3": "Text",
+            "product_feature_4": "Text",
+            "product_feature_5": "Text"
+          }
         }
       },
       "block_order": [
-        "product1",
-        "product2",
-        "product3"
-      ]
+        "section-compare-0",
+        "section-compare-1",
+        "section-compare-2",
+        "section-compare-3",
+        "section-compare-4"
+      ],
+      "settings": {
+        "image_size": "medium",
+        "table_width": 900,
+        "feature_1": "Feature 1",
+        "feature_2": "Feature 2",
+        "feature_3": "Feature 3",
+        "feature_4": "Feature 4",
+        "feature_5": "Feature 5",
+        "features_count": 5,
+        "heading": "Comparison table",
+        "heading_size": "h6",
+        "top_space": 0,
+        "bottom_space": 0,
+        "background_color": "transparent"
+      }
     },
     "promotional-banner": {
       "type": "section-promotional-banner"
@@ -195,62 +269,51 @@
     "faq": {
       "type": "section-faq",
       "blocks": {
-        "text": {
+        "section-faq-0": {
           "type": "text",
           "settings": {
-            "question": "Put your question here",
-            "answer": "Put the answer here."
+            "question": "Question",
+            "answer": "A detailed and thorough response to the question being asked."
           }
         },
-        "text2": {
+        "section-faq-1": {
           "type": "text",
           "settings": {
-            "question": "Put your question here",
-            "answer": "Put the answer here."
+            "question": "Question",
+            "answer": "A detailed and thorough response to the question being asked."
           }
         },
-        "text3": {
+        "section-faq-2": {
           "type": "text",
           "settings": {
-            "question": "Put your question here",
-            "answer": "Put the answer here."
+            "question": "Question",
+            "answer": "A detailed and thorough response to the question being asked."
           }
         },
-        "text4": {
+        "section-faq-3": {
           "type": "text",
           "settings": {
-            "question": "Put your question here",
-            "answer": "Put the answer here."
-          }
-        },
-        "text5": {
-          "type": "text",
-          "settings": {
-            "question": "Put your question here",
-            "answer": "Put the answer here."
+            "question": "Question",
+            "answer": "A detailed and thorough response to the question being asked."
           }
         }
       },
       "block_order": [
-        "text",
-        "text2",
-        "text3",
-        "text4",
-        "text5"
+        "section-faq-0",
+        "section-faq-1",
+        "section-faq-2",
+        "section-faq-3"
       ],
       "settings": {
+        "show_image": true,
+        "image_height": 300,
+        "tabs_width": 1000,
         "heading": "FAQ",
         "heading_size": "h6",
-        "show_image": true,
-        "image_style": "cover",
-        "background_color": "transparent",
+        "space_between_elements": 1,
         "top_space": 0,
         "bottom_space": 0,
-        "space_between_elements": 1,
-        "tabs_width": 1000,
-        "image_height": 300,
-        "question_background_color": "#222",
-        "answer_background_color": "#101010"
+        "background_color": "transparent"
       }
     },
     "recommended-products": {
