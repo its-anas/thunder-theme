@@ -94,9 +94,6 @@
           "show_social_media_icons": true,
           "show_image": true,
           "delay_time": 5,
-          "heading": "GET 10% OFF",
-          "text": "Subscribe to our newsletter and we will send you a 10% discount code towards your first purchase.",
-          "reject_text": "No thanks, I prefer to pay full price",
           "background_color": "#282828",
           "text_color": "#ffffff"
         }
@@ -140,10 +137,7 @@
           },
           "newsletter": {
             "type": "newsletter",
-            "settings": {
-              "newsletter_heading": "Newsletter",
-              "newsletter_text": "Subscribe to get special offers, free giveaways, and once in a lifetime deals."
-            }
+            "settings": {}
           }
         },
         "block_order": [
