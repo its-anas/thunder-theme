@@ -524,5 +524,51 @@
                     "default": "75"
                }
           ]
+     },
+     {
+          "name": "Quick view",
+          "settings": [
+               {
+                    "type": "select",
+                    "id": "quick_view_variant_selector_type",
+                    "label": "Variant selector type",
+                    "options": [
+                         {
+                              "value": "block",
+                              "label": "Block"
+                         },
+                         {
+                              "value": "dropdown",
+                              "label": "Dropdown"
+                         }
+                    ],
+                    "default": "dropdown"
+               },
+               {
+                    "type": "select",
+                    "id": "quick_view_color_selector_type",
+                    "label": "Color selector type",
+                    "info": "For the color swatch to work properly, the product must have variants, every variant must have an image attached to it, every image alt must be written in the format #color:name, and the color and it's hex must be added in Color swatch tab in theme settings.",
+                    "options": [
+                         {
+                              "value": "block",
+                              "label": "Block"
+                         },
+                         {
+                              "value": "dropdown",
+                              "label": "Dropdown"
+                         },
+                         {
+                              "value": "color_swatch",
+                              "label": "Color swatch"
+                         },
+                         {
+                              "value": "variant_image",
+                              "label": "Image variant"
+                         }
+                    ],
+                    "default": "dropdown"
+               }
+          ]
      }
 ]

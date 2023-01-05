@@ -1771,23 +1771,6 @@ class QuickView extends HTMLElement {
 			}
 		});
 
-		if (Shopify.designMode) {
-			document.addEventListener("shopify:section:select", (event) => {
-				event.target.classList.forEach((i) => {
-					if (i === "main-quick-view") {
-						this.showQuickView();
-					}
-				});
-			});
-			document.addEventListener("shopify:section:deselect", (event) => {
-				event.target.classList.forEach((i) => {
-					if (i === "main-quick-view") {
-						this.hideQuickView();
-					}
-				});
-			});
-		}
-
 		document.querySelector(".theme-overlay").addEventListener("click", () => {
 			if (document.querySelector(".quick-view").classList.contains("active")) {
 				this.hideQuickView();

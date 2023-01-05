@@ -69,10 +69,52 @@
   "class": "section-countdown-timer",
   "settings": [
     {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "A brief summary of the event or promotion"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "options": [
+        {
+          "value": "h1",
+          "label": "h1"
+        },
+        {
+          "value": "h2",
+          "label": "h2"
+        },
+        {
+          "value": "h3",
+          "label": "h3"
+        },
+        {
+          "value": "h4",
+          "label": "h4"
+        },
+        {
+          "value": "h5",
+          "label": "h5"
+        },
+        {
+          "value": "h6",
+          "label": "h6"
+        }
+      ],
+      "default": "h4"
+    },
+    {
       "type": "richtext",
       "id": "text",
       "label": "Text",
-      "default": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>"
+      "default": "<p>Provide context and background information about the event or promotion, and help visitors understand what they can expect and why they should be excited.</p>"
     },
     {
       "type": "range",
@@ -93,7 +135,7 @@
       "type": "text",
       "id": "link_text",
       "label": "Text",
-      "default": "Learn more"
+      "default": "Call to action"
     },
     {
       "type": "url",
@@ -281,44 +323,6 @@
     {
       "type": "header",
       "content": "Section"
-    },
-    {
-      "type": "text",
-      "id": "heading",
-      "label": "Heading",
-      "default": "Heading"
-    },
-    {
-      "type": "select",
-      "id": "heading_size",
-      "label": "Heading size",
-      "options": [
-        {
-          "value": "h1",
-          "label": "h1"
-        },
-        {
-          "value": "h2",
-          "label": "h2"
-        },
-        {
-          "value": "h3",
-          "label": "h3"
-        },
-        {
-          "value": "h4",
-          "label": "h4"
-        },
-        {
-          "value": "h5",
-          "label": "h5"
-        },
-        {
-          "value": "h6",
-          "label": "h6"
-        }
-      ],
-      "default": "h4"
     },
     {
       "type": "range",

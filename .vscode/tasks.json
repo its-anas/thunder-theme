@@ -1,0 +1,13 @@
+{
+	"version": "1.0.0",
+	"tasks": [
+		{
+			"label": "Theme dev",
+			"type": "shell",
+			"command": "shopify theme dev --store live-theme-store",
+			"runOptions": {
+				"runOn": "folderOpen"
+			}
+		}
+	]
+}

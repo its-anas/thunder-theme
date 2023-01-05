@@ -638,6 +638,7 @@
   
   
   
+  
   let variantsInventory = {};
   {% for variant in product.variants %}
   variantsInventory["{{ variant.title }}"] = {{ variant.inventory_quantity }};
@@ -671,6 +672,7 @@
   let currentVariantInventory = {{ current_variant.inventory_quantity }};
   let stockAlertThreshold = {{ stock_alert_threshold }};
   let priceDifferenceText= "{{ price_difference_text }}";
+
 
 
 
@@ -817,7 +819,7 @@
           "type": "text",
           "id": "text",
           "label": "Text",
-          "default": "Hurry Up! Offer ends in:"
+          "default": "Hurry up! Offer ends in:"
         },
         {
           "type": "header",
