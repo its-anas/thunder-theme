@@ -638,12 +638,6 @@
   
   
   
-  
-  
-  
-  
-  
-  
   let variantsInventory = {};
   {% for variant in product.variants %}
   variantsInventory["{{ variant.title }}"] = {{ variant.inventory_quantity }};
@@ -677,12 +671,6 @@
   let currentVariantInventory = {{ current_variant.inventory_quantity }};
   let stockAlertThreshold = {{ stock_alert_threshold }};
   let priceDifferenceText= "{{ price_difference_text }}";
-
-
-
-
-
-
 
 
 
@@ -826,8 +814,37 @@
       "limit": 1,
       "settings": [
         {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Hurry Up! Offer ends in:"
+        },
+        {
           "type": "header",
-          "content": "Style"
+          "content": "Countdown timer"
+        },
+        {
+          "type": "text",
+          "id": "message",
+          "label": "Expiration message",
+          "default": "Offer has expired",
+          "info": "It is optional for Option 1 but required for Option 2"
+        },
+        {
+          "type": "select",
+          "id": "countdown_timer_type",
+          "label": "Type",
+          "options": [
+            {
+              "value": "time",
+              "label": "Option 1: Based on user cookies"
+            },
+            {
+              "value": "date",
+              "label": "Option 2: Based on a date"
+            }
+          ],
+          "default": "time"
         },
         {
           "type": "select",
@@ -856,39 +873,6 @@
           "id": "digits_background_color",
           "label": "Digits background color",
           "default": "#fcdb33"
-        },
-        {
-          "type": "header",
-          "content": "Countdown timer settings"
-        },
-        {
-          "type": "text",
-          "id": "text",
-          "label": "Text",
-          "default": "Hurry Up! Offer ends in:"
-        },
-        {
-          "type": "text",
-          "id": "message",
-          "label": "After expiration message",
-          "default": "Offer has expired",
-          "info": "It is optional for Option 1 but required for Option 2"
-        },
-        {
-          "type": "select",
-          "id": "countdown_timer_type",
-          "label": "Countdown timer type",
-          "options": [
-            {
-              "value": "time",
-              "label": "Option 1: Based on user cookies"
-            },
-            {
-              "value": "date",
-              "label": "Option 2: Based on a date"
-            }
-          ],
-          "default": "time"
         },
         {
           "type": "header",
@@ -1035,7 +1019,7 @@
       "settings": [
         {
           "type": "header",
-          "content": "Trust icon 1"
+          "content": "Icon 1"
         },
         {
           "type": "text",
@@ -1204,7 +1188,7 @@
         },
         {
           "type": "header",
-          "content": "Trust icon 2"
+          "content": "Icon 2"
         },
         {
           "type": "text",
@@ -1373,7 +1357,7 @@
         },
         {
           "type": "header",
-          "content": "Trust icon 3"
+          "content": "Icon 3"
         },
         {
           "type": "text",

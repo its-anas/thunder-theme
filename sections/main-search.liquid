@@ -257,6 +257,22 @@
   "class": "main-search",
   "settings": [
     {
+      "type": "checkbox",
+      "id": "show_filter",
+      "label": "Show filter",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "filters_expanded_at_start",
+      "label": "Filters expanded at start",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Products"
+    },
+    {
       "type": "range",
       "id": "products_per_page",
       "min": 8,
@@ -289,18 +305,6 @@
         }
       ],
       "default": "2"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_filter",
-      "label": "Show filter",
-      "default": true
-    },
-    {
-      "type": "checkbox",
-      "id": "filters_expanded_at_start",
-      "label": "Filters expanded at start",
-      "default": true
     }
   ]
 }

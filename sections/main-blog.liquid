@@ -99,22 +99,20 @@
       "default": "collage"
     },
     {
-      "type": "range",
-      "id": "articles_per_page",
-      "min": 8,
-      "max": 50,
-      "step": 1,
-      "label": "Articles per page",
-      "default": 24
+      "type": "checkbox",
+      "id": "show_publication_date",
+      "label": "Show publication date",
+      "default": true
     },
     {
-      "type": "range",
-      "id": "articles_per_row",
-      "min": 2,
-      "max": 5,
-      "step": 1,
-      "label": "Articles per row - desktop/tablet",
-      "default": 2
+      "type": "checkbox",
+      "id": "show_author",
+      "label": "Show author",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Articles"
     },
     {
       "type": "range",
@@ -136,16 +134,22 @@
       "default": 2.5
     },
     {
-      "type": "checkbox",
-      "id": "show_publication_date",
-      "label": "Show publication date",
-      "default": true
+      "type": "range",
+      "id": "articles_per_page",
+      "min": 8,
+      "max": 50,
+      "step": 1,
+      "label": "Articles per page",
+      "default": 24
     },
     {
-      "type": "checkbox",
-      "id": "show_author",
-      "label": "Show author",
-      "default": true
+      "type": "range",
+      "id": "articles_per_row",
+      "min": 2,
+      "max": 5,
+      "step": 1,
+      "label": "Articles per row - desktop/tablet",
+      "default": 2
     }
   ]
 }
