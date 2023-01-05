@@ -2,7 +2,7 @@
 	height: auto;
 	position: relative;
 	display: flex;
-	--gap: 2.5rem;
+	--gap: 2rem;
 	gap: var(--gap);
 	align-items: center;
 	overflow: hidden;

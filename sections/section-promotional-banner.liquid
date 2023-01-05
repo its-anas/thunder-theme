@@ -76,10 +76,10 @@
       {% endif %}
     {% elsif section.settings.banner_style == 'style-2' %}
       <div class="{{ section.id }} promotional-banner__content--style-2">
-        {% if section.settings.style_2_heading != blank %}
-          <{{ section.settings.style_2_heading_type }}>
-            {{- section.settings.style_2_heading -}}
-          </{{ section.settings.style_2_heading_type }}>
+        {% if section.settings.style_2_text != blank %}
+          <span>
+            {{- section.settings.style_2_text -}}
+          </span>
         {% endif %}
         {% if section.settings.style_2_button_text != blank %}
           <a class="button--link">
@@ -172,41 +172,9 @@
     },
     {
       "type": "text",
-      "id": "style_2_heading",
-      "label": "Heading",
+      "id": "style_2_text",
+      "label": "Text",
       "default": "A quick overview of the promotion with a call to action"
-    },
-    {
-      "type": "select",
-      "id": "style_2_heading_type",
-      "label": "Heading size",
-      "options": [
-        {
-          "value": "h1",
-          "label": "h1"
-        },
-        {
-          "value": "h2",
-          "label": "h2"
-        },
-        {
-          "value": "h3",
-          "label": "h3"
-        },
-        {
-          "value": "h4",
-          "label": "h4"
-        },
-        {
-          "value": "h5",
-          "label": "h5"
-        },
-        {
-          "value": "h6",
-          "label": "h6"
-        }
-      ],
-      "default": "h6"
     },
     {
       "type": "text",

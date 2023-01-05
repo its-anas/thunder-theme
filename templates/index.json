@@ -401,7 +401,7 @@
           "section-promotional-banner2": {
                "type": "section-promotional-banner",
                "settings": {
-                    "banner_style": "style-1",
+                    "banner_style": "style-2",
                     "style_1_text": "A brief summary of the offer with a sense of urgency!",
                     "style_1_text_type": "h3",
                     "animation_speed": 90,
@@ -409,11 +409,11 @@
                     "style_2_heading_type": "h6",
                     "style_2_button_text": "Primary button",
                     "style_2_button_url": "",
-                    "height": 100,
+                    "height": 80,
                     "top_space": 0,
                     "bottom_space": 0,
-                    "text_color": "#000000",
-                    "background_color": "#fcdb33"
+                    "text_color": "#ffffff",
+                    "background_color": "#282828"
                }
           },
           "section-featured-collections": {
