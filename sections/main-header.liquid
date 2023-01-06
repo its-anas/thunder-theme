@@ -219,24 +219,24 @@
                           <div class="menu-mobile__child">
                             <div class="menu-mobile__child-title menu-{{ menu_child_title }}">
                               {% for block in section.blocks %}
-                                {% if block.settings.tab_title == menu_child.title %}
+                                {% if block.settings.submenu_title == menu_child.title %}
                                   <div class="menu__child-icon media">
                                     {% style %}
                                       .menu-mobile__child-title.menu-{{ menu_child_title }} {
                                         padding: 0rem 0.7rem 0rem 0.7rem;
                                       }
                                     {% endstyle %}
-                                    {% if block.settings.tab_icon_type == 'svg' %}
-                                      {% if block.settings.tab_icon_svg == blank %}
+                                    {% if block.settings.submenu_icon_type == 'svg' %}
+                                      {% if block.settings.submenu_icon_svg == blank %}
                                         {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
                                       {% else %}
-                                        {{ block.settings.tab_icon_svg }}
+                                        {{ block.settings.submenu_icon_svg }}
                                       {% endif %}
-                                    {% elsif block.settings.tab_icon_type == 'image' %}
-                                      {% if block.settings.tab_icon_image == blank %}
+                                    {% elsif block.settings.submenu_icon_type == 'image' %}
+                                      {% if block.settings.submenu_icon_image == blank %}
                                         {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
                                       {% else %}
-                                        {%- assign image = block.settings.tab_icon_image -%}
+                                        {%- assign image = block.settings.submenu_icon_image -%}
                                         {%- assign width = '60' -%}
                                         {{
                                           image
@@ -334,14 +334,14 @@
                                 {% endif %}
                               {% endfor %}
                               {% for block in section.blocks %}
-                                {% if block.settings.tab_title == menu_child.title %}
+                                {% if block.settings.submenu_title == menu_child.title %}
                                   <div class="menu-mobile__picture-container">
-                                    {% if block.settings.show_tab_picture == true %}
+                                    {% if block.settings.show_submenu_picture == true %}
                                       <div class="menu-mobile__picture media">
-                                        {% if block.settings.tab_content_image == blank %}
+                                        {% if block.settings.submenu_content_image == blank %}
                                           {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
                                         {% else %}
-                                          {%- assign image = block.settings.tab_content_image -%}
+                                          {%- assign image = block.settings.submenu_content_image -%}
                                           {%- assign sizes = '(min-width 750px) 500px, 100vw' -%}
                                           {%- assign widths = '200, 225, 250, 275, 300, 325, 350, 375, 400' -%}
                                           {%- assign width = '400' -%}
@@ -360,7 +360,7 @@
                                         {% endif %}
                                       </div>
                                       <p class="menu-mobile__picture-description">
-                                        {{ block.settings.tab_description }}
+                                        {{ block.settings.submenu_description }}
                                       </p>
                                     {% endif %}
                                   </div>
@@ -491,19 +491,19 @@
                             {% endstyle %}
                           {% endif %}
                           {% for block in section.blocks %}
-                            {% if block.settings.tab_title == menu_child.title %}
+                            {% if block.settings.submenu_title == menu_child.title %}
                               <div class="menu__child-icon media">
-                                {% if block.settings.tab_icon_type == 'svg' %}
-                                  {% if block.settings.tab_icon_svg == blank %}
+                                {% if block.settings.submenu_icon_type == 'svg' %}
+                                  {% if block.settings.submenu_icon_svg == blank %}
                                     {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
                                   {% else %}
-                                    {{ block.settings.tab_icon_svg }}
+                                    {{ block.settings.submenu_icon_svg }}
                                   {% endif %}
-                                {% elsif block.settings.tab_icon_type == 'image' %}
-                                  {% if block.settings.tab_icon_image == blank %}
+                                {% elsif block.settings.submenu_icon_type == 'image' %}
+                                  {% if block.settings.submenu_icon_image == blank %}
                                     {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
                                   {% else %}
-                                    {%- assign image = block.settings.tab_icon_image -%}
+                                    {%- assign image = block.settings.submenu_icon_image -%}
                                     {%- assign width = '60' -%}
                                     {{
                                       image
@@ -610,8 +610,8 @@
                             {% endstyle %}
                           {% endif %}
                           {% for block in section.blocks %}
-                            {% if block.settings.tab_title == menu_child.title %}
-                              {% if block.settings.show_tab_picture == true %}
+                            {% if block.settings.submenu_title == menu_child.title %}
+                              {% if block.settings.show_submenu_picture == true %}
                                 {% style %}
                                     .menu__childs.menu_parent_title--{{ menu_parent_title }} {
                                       border-right: 1px solid var(--body-text-color);
@@ -646,10 +646,10 @@
 
                                 <div class="menu__content menu_parent_title--{{ menu_parent_title }}">
                                   <div class="menu__picture media">
-                                    {% if block.settings.tab_content_image == blank %}
+                                    {% if block.settings.submenu_content_image == blank %}
                                       {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
                                     {% else %}
-                                      {%- assign image = block.settings.tab_content_image -%}
+                                      {%- assign image = block.settings.submenu_content_image -%}
                                       {%- assign sizes = '600px' -%}
                                       {%- assign widths = '200, 225, 250, 275, 300, 325, 350, 375, 400, 425, 450, 475, 500, 525, 550, 575, 600' -%}
                                       {%- assign width = '600' -%}
@@ -668,7 +668,7 @@
                                     {% endif %}
                                   </div>
                                   <p class="menu__description">
-                                    {{ block.settings.tab_description }}
+                                    {{ block.settings.submenu_description }}
                                   </p>
                                 </div>
                               {% endif %}
@@ -727,52 +727,52 @@
 
 {% schema %}
 {
-  "name": "Header",
+  "name": "t:settings_schema.main-header.name",
   "class": "main-header",
   "settings": [
     {
       "type": "link_list",
       "id": "menu",
-      "label": "Menu",
+      "label": "t:settings_schema.general.menu",
       "default": "main-menu"
     },
     {
       "type": "select",
       "id": "menu_layout",
-      "label": "Layout",
+      "label": "t:settings_schema.general.layout",
       "options": [
         {
           "value": "logo_first",
-          "label": "Logo first, navigation center"
+          "label": "t:settings_schema.main-header.settings.layout.options.logo_first"
         },
         {
           "value": "logo_first_navigation_inline",
-          "label": "Logo first, navigation inline"
+          "label": "t:settings_schema.main-header.settings.layout.options.logo_first_navigation_inline"
         },
         {
           "value": "drawer",
-          "label": "Drawer"
+          "label": "t:settings_schema.main-header.settings.layout.options.drawer"
         }
       ],
       "default": "logo_first",
-      "info": "This is for desktop only. Drawer layout will be applied to mobile."
+      "info": "t:settings_schema.main-header.settings.layout.info"
     },
     {
       "type": "header",
-      "content": "Logo"
+      "content": "t:settings_schema.general.logo"
     },
     {
       "type": "select",
       "id": "logo_type",
-      "label": "Type",
+      "label": "t:settings_schema.general.icon_type.label",
       "options": [
         {
           "value": "svg",
-          "label": "svg"
+          "label": "t:settings_schema.general.icon_svg.label"
         },
         {
           "value": "image",
-          "label": "png/jpg"
+          "label": "t:settings_schema.general.icon_image.label"
         }
       ],
       "default": "svg"
@@ -780,14 +780,14 @@
     {
       "type": "liquid",
       "id": "logo_svg",
-      "label": "svg",
-      "info": "Applicable only if logo type is 'svg'"
+      "label": "t:settings_schema.general.icon_svg.label",
+      "info": "t:settings_schema.general.icon_svg.info"
     },
     {
       "type": "image_picker",
       "id": "logo_image",
-      "label": "png/jpg",
-      "info": "Applicable only if logo type is 'png/jpg'"
+      "label": "t:settings_schema.general.icon_image.label",
+      "info": "t:settings_schema.general.icon_image.label"
     },
     {
       "type": "range",
@@ -796,37 +796,37 @@
       "max": 160,
       "step": 10,
       "unit": "px",
-      "label": "Width",
+      "label": "t:settings_schema.general.width",
       "default": 120
     }
   ],
   "blocks": [
     {
       "type": "mega_menu",
-      "name": "Mega menu",
+      "name": "t:settings_schema.main-header.blocks.mega_menu.label",
       "settings": [
         {
           "type": "text",
-          "id": "tab_title",
-          "label": "Sub-menu name",
-          "info": "Put the name of the sub-menu here, exactly like it's shown in the menu. Make sure they are unique and not duplicates. And also respect the uppercase, lowercase and spaces."
+          "id": "submenu_title",
+          "label": "t:settings_schema.main-header.blocks.mega_menu.settings.submenu_title.label",
+          "info": "t:settings_schema.main-header.blocks.mega_menu.settings.submenu_title.info"
         },
         {
           "type": "header",
-          "content": "Sub-menu icon"
+          "content": "t:settings_schema.main-header.blocks.mega_menu.settings.header_submenu-icon"
         },
         {
           "type": "select",
-          "id": "tab_icon_type",
-          "label": "Type",
+          "id": "submenu_icon_type",
+          "label": "t:settings_schema.general.icon_type.label",
           "options": [
             {
               "value": "svg",
-              "label": "svg"
+              "label": "t:settings_schema.general.icon_svg.label"
             },
             {
               "value": "image",
-              "label": "png/jpg"
+              "label": "t:settings_schema.general.icon_image.label"
             }
           ],
           "default": "svg"
@@ -834,35 +834,35 @@
 
         {
           "type": "liquid",
-          "id": "tab_icon_svg",
-          "label": "svg",
-          "info": "Applicable only if icon type is 'svg'"
+          "id": "submenu_icon_svg",
+          "label": "t:settings_schema.general.icon_svg.label",
+          "info": "t:settings_schema.general.icon_svg.info"
         },
         {
           "type": "image_picker",
-          "id": "tab_icon_image",
-          "label": "png/jpg",
-          "info": "Applicable only if icon type is 'png/jpg'"
+          "id": "submenu_icon_image",
+          "label": "t:settings_schema.general.icon_image.label",
+          "info": "t:settings_schema.general.icon_image.info"
         },
         {
           "type": "header",
-          "content": "Sub-menu picture"
+          "content": "t:settings_schema.main-header.blocks.mega_menu.settings.header_submenu-picture"
         },
         {
           "type": "checkbox",
-          "id": "show_tab_picture",
-          "label": "Show image and description",
+          "id": "show_submenu_picture",
+          "label": "t:settings_schema.main-header.blocks.mega_menu.settings.show_submenu_picture",
           "default": true
         },
         {
           "type": "image_picker",
-          "id": "tab_content_image",
-          "label": "Image"
+          "id": "submenu_content_image",
+          "label": "t:settings_schema.general.image"
         },
         {
           "type": "text",
-          "id": "tab_description",
-          "label": "Description",
+          "id": "submenu_description",
+          "label": "t:settings_schema.general.description",
           "default": "Use the description to provide more information to help the customer make an informed purchasing decision."
         }
       ]

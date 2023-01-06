@@ -1,33 +1,48 @@
 {
     "settings_schema": {
         "general": {
-            "background_color": {
-                "label": "Background color"
+            "menu": "Menu",
+            "layout": "Layout",
+            "logo": "Logo",
+            "width": "Width",
+            "image": "Image",
+            "description": "Description",
+            "icon_type": {
+                "label": "Type"
             },
-            "text_color": {
-                "label": "Text color"
+            "icon_svg": {
+                "label": "SVG",
+                "info": "Applicable only if the selected type is SVG."
+            },
+            "icon_image": {
+                "label": "PNG/JPG",
+                "info": "Applicable only if the selected type is PNG/JPG."
             }
         },
-        "main-announcement-bar": {
-            "name": "Announcement Bar",
+        "main-header": {
+            "name": "Header",
             "settings": {
-                "show_announcement_bar": {
-                    "label": "Show announcement bar"
-                },
-                "enable_autoplay": {
-                    "label": "Enable autoplay"
-                },
-                "delay_time": {
-                    "label": "Delay time"
-                },
-                "button_and_coupon_color": {
-                    "label": "Button/Coupon color"
+                "layout": {
+                    "options": {
+                        "logo_first": "Logo first, navigation center",
+                        "logo_first_navigation_inline": "Logo first, navigation inline",
+                        "drawer": "Drawer"
+                    },
+                    "info": "This is for desktop only. Drawer layout will be applied to mobile."
                 }
             },
             "blocks": {
-                "text_with_button": {
-                    "name": "Text with button",
-                    "settings": {}
+                "mega_menu": {
+                    "label": "Mega Menu",
+                    "settings": {
+                        "submenu_title": {
+                            "label": "Submenu name",
+                            "info": "Put the name of the submenu here, exactly like it's shown in the menu. Make sure they are unique and not duplicates. And also respect the uppercase, lowercase and spaces."
+                        },
+                        "header_submenu-icon": "Submenu icon",
+                        "header_submenu-picture": "Submenu picture",
+                        "show_submenu_picture": "Show image and description"
+                    }
                 }
             }
         }
