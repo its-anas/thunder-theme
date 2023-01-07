@@ -34,16 +34,19 @@
             "space_between_elements": "Space between elements",
             "top_space": "Top space",
             "desktop_only": "Desktop only",
+            "desktop_and_tablet_only": "Desktop and tablet only",
+            "field_width": "Field width",
             "bottom_space": "Bottom space",
             "button": "Button",
             "quantity": "Quantity",
             "button_text": "Button text",
-            "button_link": "Button link",
+            "button_url": "Button URL",
             "primary_button_text": "Primary button text",
             "primary_button_link": "Primary button link",
             "secondary_button_text": "Secondary button text",
             "secondary_button_link": "Secondary button link",
             "url": "URL",
+            "animation_speed": "Animation speed",
             "heading": "Heading",
             "heading_size": "Heading size",
             "subheading": "Subheading",
@@ -93,6 +96,7 @@
             "text_color": "Text color",
             "overlay": "Overlay",
             "opacity": "Opacity",
+            "height": "Height",
             "desktop_height": "Desktop height",
             "mobile_height": "Mobile height",
             "slider": {
@@ -379,13 +383,7 @@
             }
         },
         "section-contact": {
-            "name": "Contact",
-            "settings": {
-                "field_width": {
-                    "label": "Fields width",
-                    "info": "Desktop and tablet only"
-                }
-            }
+            "name": "Contact"
         },
         "section-faq": {
             "name": "FAQ",
@@ -478,7 +476,6 @@
         "section-logo-list": {
             "name": "Logo list",
             "settings": {
-                "animation_speed": "Animation speed",
                 "logo_size": "Logo size (height/width)"
             }
         },
@@ -488,6 +485,23 @@
                 "mobile_items": "Icons per row - mobile",
                 "tablet_items": "Icons per row - tablet",
                 "desktop_items": "Icons per row - desktop"
+            }
+        },
+        "section-newsletter": {
+            "name": "Newsletter"
+        },
+        "section-promotional-banner": {
+            "name": "Promotional banner",
+            "settings": {
+                "banner_style": {
+                    "label": "Banner style",
+                    "options": {
+                        "style-1": "Style 1",
+                        "style-1_info": "Applied only if 'Style 1' is selected",
+                        "style-2": "Style 2",
+                        "style-2_info": "Applied only if 'Style 2' is selected"
+                    }
+                }
             }
         }
     }

@@ -93,40 +93,40 @@
 
 {% schema %}
 {
-  "name": "Promotional banner",
+  "name": "t:sections.section-promotional-banner.name",
   "class": "section-promotional-banner",
   "settings": [
     {
       "type": "select",
       "id": "banner_style",
-      "label": "Banner style",
+      "label": "t:sections.section-promotional-banner.settings.banner_style.label",
       "options": [
         {
           "value": "style-1",
-          "label": "Style 1"
+          "label": "t:sections.section-promotional-banner.settings.banner_style.options.style-1"
         },
         {
           "value": "style-2",
-          "label": "Style 2"
+          "label": "t:sections.section-promotional-banner.settings.banner_style.options.style-2"
         }
       ],
       "default": "style-1"
     },
     {
       "type": "header",
-      "content": "Style 1",
-      "info": "Applied only if 'Style 1' is selected"
+      "content": "t:sections.section-promotional-banner.settings.banner_style.options.style-1",
+      "info": "t:sections.section-promotional-banner.settings.banner_style.options.style-1_info"
     },
     {
       "type": "text",
       "id": "style_1_text",
-      "label": "Heading",
+      "label": "t:sections.general.heading",
       "default": "A brief summary of the offer with a sense of urgency!"
     },
     {
       "type": "select",
       "id": "style_1_text_type",
-      "label": "Heading size",
+      "label": "t:sections.general.heading_size",
       "options": [
         {
           "value": "h1",
@@ -162,34 +162,34 @@
       "max": 260,
       "step": 10,
       "unit": "sec",
-      "label": "Animation speed",
+      "label": "t:sections.general.animation_speed",
       "default": 90
     },
     {
       "type": "header",
-      "content": "Style 2",
-      "info": "Applied only if 'Style 2' is selected"
+      "content": "t:sections.section-promotional-banner.settings.banner_style.options.style-2",
+      "info": "t:sections.section-promotional-banner.settings.banner_style.options.style-2_info"
     },
     {
       "type": "text",
       "id": "style_2_text",
-      "label": "Text",
+      "label": "t:sections.general.text",
       "default": "A quick overview of the promotion with a call to action"
     },
     {
       "type": "text",
       "id": "style_2_button_text",
-      "label": "Button text",
+      "label": "t:sections.general.button_text",
       "default": "Primary button"
     },
     {
       "type": "url",
       "id": "style_2_button_url",
-      "label": "Button url"
+      "label": "t:sections.general.button_url"
     },
     {
       "type": "header",
-      "content": "Section"
+      "content": "t:sections.general.section"
     },
     {
       "type": "range",
@@ -198,7 +198,7 @@
       "max": 150,
       "step": 10,
       "unit": "px",
-      "label": "Height",
+      "label": "t:sections.general.height",
       "default": 100
     },
     {
@@ -208,7 +208,7 @@
       "max": 100,
       "step": 1,
       "unit": "px",
-      "label": "Top space",
+      "label": "t:sections.general.top_space",
       "default": 0
     },
     {
@@ -218,25 +218,25 @@
       "max": 100,
       "step": 1,
       "unit": "px",
-      "label": "Bottom space",
+      "label": "t:sections.general.bottom_space",
       "default": 0
     },
     {
       "type": "color",
       "id": "text_color",
-      "label": "Text color",
+      "label": "t:sections.general.text_color",
       "default": "#000000"
     },
     {
       "type": "color",
       "id": "background_color",
-      "label": "Background color",
+      "label": "t:sections.general.background_color",
       "default": "#fcdb33"
     }
   ],
   "presets": [
     {
-      "name": "Promotional banner"
+      "name": "t:sections.section-promotional-banner.name"
     }
   ]
 }
