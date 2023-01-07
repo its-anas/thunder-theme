@@ -727,52 +727,52 @@
 
 {% schema %}
 {
-  "name": "t:settings_schema.main-header.name",
+  "name": "t:sections.main-header.name",
   "class": "main-header",
   "settings": [
     {
       "type": "link_list",
       "id": "menu",
-      "label": "t:settings_schema.general.menu",
+      "label": "t:sections.general.menu",
       "default": "main-menu"
     },
     {
       "type": "select",
       "id": "menu_layout",
-      "label": "t:settings_schema.general.layout",
+      "label": "t:sections.general.layout",
       "options": [
         {
           "value": "logo_first",
-          "label": "t:settings_schema.main-header.settings.layout.options.logo_first"
+          "label": "t:sections.main-header.settings.layout.options.logo_first"
         },
         {
           "value": "logo_first_navigation_inline",
-          "label": "t:settings_schema.main-header.settings.layout.options.logo_first_navigation_inline"
+          "label": "t:sections.main-header.settings.layout.options.logo_first_navigation_inline"
         },
         {
           "value": "drawer",
-          "label": "t:settings_schema.main-header.settings.layout.options.drawer"
+          "label": "t:sections.main-header.settings.layout.options.drawer"
         }
       ],
       "default": "logo_first",
-      "info": "t:settings_schema.main-header.settings.layout.info"
+      "info": "t:sections.main-header.settings.layout.info"
     },
     {
       "type": "header",
-      "content": "t:settings_schema.general.logo"
+      "content": "t:sections.general.logo"
     },
     {
       "type": "select",
       "id": "logo_type",
-      "label": "t:settings_schema.general.icon_type.label",
+      "label": "t:sections.general.icon_type",
       "options": [
         {
           "value": "svg",
-          "label": "t:settings_schema.general.icon_svg.label"
+          "label": "t:sections.general.icon_svg.label"
         },
         {
           "value": "image",
-          "label": "t:settings_schema.general.icon_image.label"
+          "label": "t:sections.general.icon_image.label"
         }
       ],
       "default": "svg"
@@ -780,14 +780,14 @@
     {
       "type": "liquid",
       "id": "logo_svg",
-      "label": "t:settings_schema.general.icon_svg.label",
-      "info": "t:settings_schema.general.icon_svg.info"
+      "label": "t:sections.general.icon_svg.label",
+      "info": "t:sections.general.icon_svg.info"
     },
     {
       "type": "image_picker",
       "id": "logo_image",
-      "label": "t:settings_schema.general.icon_image.label",
-      "info": "t:settings_schema.general.icon_image.label"
+      "label": "t:sections.general.icon_image.label",
+      "info": "t:sections.general.icon_image.label"
     },
     {
       "type": "range",
@@ -796,37 +796,37 @@
       "max": 160,
       "step": 10,
       "unit": "px",
-      "label": "t:settings_schema.general.width",
+      "label": "t:sections.general.width",
       "default": 120
     }
   ],
   "blocks": [
     {
       "type": "mega_menu",
-      "name": "t:settings_schema.main-header.blocks.mega_menu.label",
+      "name": "t:sections.main-header.blocks.mega_menu.label",
       "settings": [
         {
           "type": "text",
           "id": "submenu_title",
-          "label": "t:settings_schema.main-header.blocks.mega_menu.settings.submenu_title.label",
-          "info": "t:settings_schema.main-header.blocks.mega_menu.settings.submenu_title.info"
+          "label": "t:sections.main-header.blocks.mega_menu.settings.submenu_title.label",
+          "info": "t:sections.main-header.blocks.mega_menu.settings.submenu_title.info"
         },
         {
           "type": "header",
-          "content": "t:settings_schema.main-header.blocks.mega_menu.settings.header_submenu-icon"
+          "content": "t:sections.main-header.blocks.mega_menu.settings.header_submenu-icon"
         },
         {
           "type": "select",
           "id": "submenu_icon_type",
-          "label": "t:settings_schema.general.icon_type.label",
+          "label": "t:sections.general.icon_type",
           "options": [
             {
               "value": "svg",
-              "label": "t:settings_schema.general.icon_svg.label"
+              "label": "t:sections.general.icon_svg.label"
             },
             {
               "value": "image",
-              "label": "t:settings_schema.general.icon_image.label"
+              "label": "t:sections.general.icon_image.label"
             }
           ],
           "default": "svg"
@@ -835,34 +835,34 @@
         {
           "type": "liquid",
           "id": "submenu_icon_svg",
-          "label": "t:settings_schema.general.icon_svg.label",
-          "info": "t:settings_schema.general.icon_svg.info"
+          "label": "t:sections.general.icon_svg.label",
+          "info": "t:sections.general.icon_svg.info"
         },
         {
           "type": "image_picker",
           "id": "submenu_icon_image",
-          "label": "t:settings_schema.general.icon_image.label",
-          "info": "t:settings_schema.general.icon_image.info"
+          "label": "t:sections.general.icon_image.label",
+          "info": "t:sections.general.icon_image.info"
         },
         {
           "type": "header",
-          "content": "t:settings_schema.main-header.blocks.mega_menu.settings.header_submenu-picture"
+          "content": "t:sections.main-header.blocks.mega_menu.settings.header_submenu-picture"
         },
         {
           "type": "checkbox",
           "id": "show_submenu_picture",
-          "label": "t:settings_schema.main-header.blocks.mega_menu.settings.show_submenu_picture",
+          "label": "t:sections.main-header.blocks.mega_menu.settings.show_submenu_picture",
           "default": true
         },
         {
           "type": "image_picker",
           "id": "submenu_content_image",
-          "label": "t:settings_schema.general.image"
+          "label": "t:sections.general.image"
         },
         {
           "type": "text",
           "id": "submenu_description",
-          "label": "t:settings_schema.general.description",
+          "label": "t:sections.general.description",
           "default": "Use the description to provide more information to help the customer make an informed purchasing decision."
         }
       ]

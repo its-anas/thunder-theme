@@ -114,19 +114,19 @@
 
 {% schema %}
 {
-  "name": "Announcement bar",
+  "name": "t:sections.main-announcement-bar.name",
   "class": "main-announcement-bar",
   "settings": [
     {
       "type": "checkbox",
       "id": "show_announcement_bar",
-      "label": "Show announcement bar",
+      "label": "t:sections.main-announcement-bar.settings.show_announcement_bar",
       "default": true
     },
     {
       "type": "checkbox",
       "id": "enable_autoplay",
-      "label": "Enable autoplay",
+      "label": "t:sections.main-announcement-bar.settings.enable_autoplay",
       "default": true
     },
     {
@@ -136,108 +136,108 @@
       "max": 10,
       "step": 1,
       "unit": "s",
-      "label": "Delay time",
+      "label": "t:sections.main-announcement-bar.settings.autoplay_delay_time",
       "default": 4
     },
     {
       "type": "header",
-      "content": "Colors"
+      "content": "t:sections.main-announcement-bar.settings.header_colors"
     },
     {
       "type": "color",
       "id": "background_color",
-      "label": "Background color",
+      "label": "t:sections.general.background_color",
       "default": "#222"
     },
     {
       "type": "color",
       "id": "text_color",
-      "label": "Text color",
+      "label": "t:sections.general.text_color",
       "default": "#fff"
     },
     {
       "type": "color",
       "id": "button_and_coupon_color",
-      "label": "Button/Coupon color",
+      "label": "t:sections.main-announcement-bar.settings.button_and_coupon_color",
       "default": "#fcdb33"
     }
   ],
   "blocks": [
     {
       "type": "text_with_button",
-      "name": "Text with button",
+      "name": "t:sections.main-announcement-bar.blocks.text_with_button.name",
       "settings": [
         {
           "type": "text",
           "id": "text",
-          "label": "Text",
+          "label": "t:sections.general.text",
           "default": "Use this space to promote a specific product or collection, and include a button for easy access"
         },
         {
           "type": "text",
           "id": "button_text",
-          "label": "Button text",
+          "label": "t:sections.general.button_text",
           "default": "Learn more"
         },
         {
           "type": "url",
           "id": "button_link",
-          "label": "Button link"
+          "label": "t:sections.general.button_link"
         }
       ]
     },
     {
       "type": "text_with_coupon",
-      "name": "Text with coupon",
+      "name": "t:sections.main-announcement-bar.blocks.text_with_coupon.name",
       "settings": [
         {
           "type": "text",
           "id": "text",
-          "label": "Text",
+          "label": "t:sections.general.text",
           "default": "Share promotions and offer a coupon code"
         },
         {
           "type": "text",
           "id": "coupon_text",
-          "label": "Coupon",
+          "label": "t:sections.main-announcement-bar.blocks.text_with_coupon.settings.coupon_text",
           "default": "COUPON"
         }
       ]
     },
     {
       "type": "text_with_countdown",
-      "name": "Text with countdown timer",
+      "name": "t:sections.main-announcement-bar.blocks.text_with_countdown.name",
       "limit": 1,
       "settings": [
         {
           "type": "text",
           "id": "text",
-          "label": "Text",
+          "label": "t:sections.general.text",
           "default": "Highlight limited-time offers to encourage sales"
         },
         {
           "type": "header",
-          "content": "Countdown timer"
+          "content": "t:sections.general.countdown-timer.content"
         },
         {
           "type": "text",
           "id": "message",
-          "label": "Expiration message",
+          "label": "t:sections.general.countdown-timer.message.label",
           "default": "Offer ended",
-          "info": "It is optional for Option 1 but required for Option 2"
+          "info": "t:sections.general.countdown-timer.message.info"
         },
         {
           "type": "select",
           "id": "countdown_timer_type",
-          "label": "Type",
+          "label": "t:sections.general.countdown-timer.countdown_timer_type.label",
           "options": [
             {
               "value": "time",
-              "label": "Option 1: Based on user cookies"
+              "label": "t:sections.general.countdown-timer.countdown_timer_type.options.time"
             },
             {
               "value": "date",
-              "label": "Option 2: Based on a date"
+              "label": "t:sections.general.countdown-timer.countdown_timer_type.options.date"
             }
           ],
           "default": "time"
@@ -245,19 +245,19 @@
         {
           "type": "color",
           "id": "digits_color",
-          "label": "Digits color",
+          "label": "t:sections.general.countdown-timer.digits_color",
           "default": "#000000"
         },
         {
           "type": "color",
           "id": "digits_background_color",
-          "label": "Digits background color",
+          "label": "t:sections.general.countdown-timer.digits_background_color",
           "default": "#fcdb33"
         },
         {
           "type": "header",
-          "content": "Option 1: Based on user cookies",
-          "info": "⚠️ Remember that this option also saves your browser cookies. So if your new settings aren't taking effect immediately, simply clear the cookies and refresh the page."
+          "content": "t:sections.general.countdown-timer.countdown_timer_type.options.time",
+          "info": "t:sections.general.countdown-timer.time_info"
         },
         {
           "type": "range",
@@ -266,7 +266,7 @@
           "max": 100,
           "step": 1,
           "unit": "d",
-          "label": "Days",
+          "label": "t:sections.general.countdown-timer.time_days",
           "default": 0
         },
         {
@@ -276,7 +276,7 @@
           "max": 24,
           "step": 1,
           "unit": "h",
-          "label": "Hours",
+          "label": "t:sections.general.countdown-timer.time_hours",
           "default": 6
         },
         {
@@ -286,7 +286,7 @@
           "max": 60,
           "step": 1,
           "unit": "m",
-          "label": "Minutes",
+          "label": "t:sections.general.countdown-timer.time_mins",
           "default": 0
         },
         {
@@ -296,29 +296,29 @@
           "max": 60,
           "step": 1,
           "unit": "s",
-          "label": "Seconds",
+          "label": "t:sections.general.countdown-timer.time_secs",
           "default": 0
         },
         {
           "type": "select",
           "id": "afterExpirationTimeOnly",
-          "label": "After countdown expires",
+          "label": "t:sections.general.countdown-timer.afterExpirationTimeOnly.label",
           "options": [
             {
               "value": "repeatCountdown",
-              "label": "Repeat countdown"
+              "label": "t:sections.general.countdown-timer.afterExpirationTimeOnly.options.repeatCountdown"
             },
             {
               "value": "showMessage",
-              "label": "Show message"
+              "label": "t:sections.general.countdown-timer.afterExpirationTimeOnly.options.showMessage"
             }
           ],
           "default": "repeatCountdown",
-          "info": "This applied only to Option 1."
+          "info": "t:sections.general.countdown-timer.afterExpirationTimeOnly.info"
         },
         {
           "type": "header",
-          "content": "Option 2: Based on a date"
+          "content": "t:sections.general.countdown-timer.countdown_timer_type.options.date"
         },
         {
           "type": "range",
@@ -327,7 +327,7 @@
           "max": 2032,
           "step": 1,
           "unit": "y",
-          "label": "Year",
+          "label": "t:sections.general.countdown-timer.date_year",
           "default": 2023
         },
         {
@@ -337,7 +337,7 @@
           "max": 12,
           "step": 1,
           "unit": "m",
-          "label": "Month",
+          "label": "t:sections.general.countdown-timer.date_month",
           "default": 1
         },
         {
@@ -347,9 +347,9 @@
           "max": 31,
           "step": 1,
           "unit": "d",
-          "label": "Day",
-          "default": 1,
-          "info": "⚠️ Pay attention: If you put 31 to a month that ends with 30 or 28 days, it will result in an error in calculation."
+          "label": "t:sections.general.countdown-timer.date_day",
+          "info": "t:sections.general.countdown-timer.date_day_info",
+          "default": 1
         },
         {
           "type": "range",
@@ -358,7 +358,7 @@
           "max": 24,
           "step": 1,
           "unit": "h",
-          "label": "Hour",
+          "label": "t:sections.general.countdown-timer.date_hour",
           "default": 0
         },
         {
@@ -368,7 +368,7 @@
           "max": 60,
           "step": 1,
           "unit": "m",
-          "label": "Minute",
+          "label": "t:sections.general.countdown-timer.date_min",
           "default": 0
         }
       ]

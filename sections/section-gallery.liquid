@@ -7,7 +7,7 @@
 
   @media screen and (min-width: 750px) and (max-width: 1024px) {
     .{{ section.id }}.image-with-text {
-        height: {{ section.settings.deskop_image_height | times: 0.75 | round: 0 }}px;
+      height: {{ section.settings.deskop_image_height | times: 0.75 | round: 0 }}px;
     }
   }
 
@@ -25,69 +25,69 @@
     color: {{ section.settings.text_color }};
   }
 
-    {% if section.settings.gallery_style == "all_in_one" %}
-      .{{ section.id }}.gallery > div {
-        {% assign full_width = 100.00 %}
-        width: {{ full_width | divided_by: section.blocks.size }}%;
-      }
-    {% endif %}
+  {% if section.settings.gallery_style == "single_row" %}
+    .{{ section.id }}.gallery > div {
+      {% assign full_width = 100.00 %}
+      width: {{ full_width | divided_by: section.blocks.size }}%;
+    }
+  {% endif %}
 
-    {% if section.blocks.size == 1 and section.settings.gallery_style == "multiple_rows" %}
-      .{{ section.id }}.gallery > div:nth-child(1) {
-        width: 100%;
-      }
-    {% endif %}
+  {% if section.blocks.size == 1 and section.settings.gallery_style == "multiple_rows" %}
+    .{{ section.id }}.gallery > div:nth-child(1) {
+      width: 100%;
+    }
+  {% endif %}
 
-    {% if section.blocks.size == 2 and section.settings.gallery_style == "multiple_rows" %}
-      .{{ section.id }}.gallery > div:nth-child(1) {
-        width: 65%;
-      }
-      .{{ section.id }}.gallery > div:nth-child(2) {
-        width: 35%;
-      }
-    {% endif %}
+  {% if section.blocks.size == 2 and section.settings.gallery_style == "multiple_rows" %}
+    .{{ section.id }}.gallery > div:nth-child(1) {
+      width: 65%;
+    }
+    .{{ section.id }}.gallery > div:nth-child(2) {
+      width: 35%;
+    }
+  {% endif %}
 
-    {% if section.blocks.size == 3 and section.settings.gallery_style == "multiple_rows" %}
-      .{{ section.id }}.gallery > div:nth-child(1) {
-        width: 65%;
-      }
-      .{{ section.id }}.gallery > div:nth-child(2) {
-        width: 35%;
-      }
-      .{{ section.id }}.gallery > div:nth-child(3) {
-        width: 100%;
-      }
-    {% endif %}
+  {% if section.blocks.size == 3 and section.settings.gallery_style == "multiple_rows" %}
+    .{{ section.id }}.gallery > div:nth-child(1) {
+      width: 65%;
+    }
+    .{{ section.id }}.gallery > div:nth-child(2) {
+      width: 35%;
+    }
+    .{{ section.id }}.gallery > div:nth-child(3) {
+      width: 100%;
+    }
+  {% endif %}
 
-    {% if section.blocks.size == 4 and section.settings.gallery_style == "multiple_rows" %}
-      .{{ section.id }}.gallery > div:nth-child(1), .gallery > div:nth-child(4) {
-        width: 65%;
-      }
-      .{{ section.id }}.gallery > div:nth-child(2), .gallery > div:nth-child(3) {
-        width: 35%;
-      }
-    {% endif %}
+  {% if section.blocks.size == 4 and section.settings.gallery_style == "multiple_rows" %}
+    .{{ section.id }}.gallery > div:nth-child(1), .gallery > div:nth-child(4) {
+      width: 65%;
+    }
+    .{{ section.id }}.gallery > div:nth-child(2), .gallery > div:nth-child(3) {
+      width: 35%;
+    }
+  {% endif %}
 
-    {% if section.blocks.size == 5 and section.settings.gallery_style == "multiple_rows" %}
-      .{{ section.id }}.gallery > div:nth-child(1), .gallery > div:nth-child(4) {
-        width: 65%;
-      }
-      .{{ section.id }}.gallery > div:nth-child(2), .gallery > div:nth-child(3) {
-        width: 35%;
-      }
-      .{{ section.id }}.gallery > div:nth-child(5) {
-        width: 100%;
-      }
-    {% endif %}
+  {% if section.blocks.size == 5 and section.settings.gallery_style == "multiple_rows" %}
+    .{{ section.id }}.gallery > div:nth-child(1), .gallery > div:nth-child(4) {
+      width: 65%;
+    }
+    .{{ section.id }}.gallery > div:nth-child(2), .gallery > div:nth-child(3) {
+      width: 35%;
+    }
+    .{{ section.id }}.gallery > div:nth-child(5) {
+      width: 100%;
+    }
+  {% endif %}
 
-    {% if section.blocks.size == 6 and section.settings.gallery_style == "multiple_rows" %}
-      .{{ section.id }}.gallery > div:nth-child(1), .gallery > div:nth-child(4), .gallery > div:nth-child(5) {
-        width: 65%;
-      }
-      .{{ section.id }}.gallery > div:nth-child(2), .gallery > div:nth-child(3), .gallery > div:nth-child(6) {
-        width: 35%;
-      }
-    {% endif %}
+  {% if section.blocks.size == 6 and section.settings.gallery_style == "multiple_rows" %}
+    .{{ section.id }}.gallery > div:nth-child(1), .gallery > div:nth-child(4), .gallery > div:nth-child(5) {
+      width: 65%;
+    }
+    .{{ section.id }}.gallery > div:nth-child(2), .gallery > div:nth-child(3), .gallery > div:nth-child(6) {
+      width: 35%;
+    }
+  {% endif %}
   }
 {%- endstyle -%}
 
@@ -100,7 +100,7 @@
         {%- elsif block.settings.image != blank -%}
           <div class="media">
             {%- capture sizes -%}
-                  {%- if section.settings.gallery_style == 'all_in_one' -%}
+                  {%- if section.settings.gallery_style == 'single_row' -%}
                     {%- assign full_width = 100 -%}
                     {{ full_width | divided_by: section.blocks.size }}vw
                   {%- elsif section.settings.gallery_style == 'multiple_rows' -%}
@@ -192,26 +192,26 @@
 
 {% schema %}
 {
-  "name": "Gallery",
+  "name": "t:sections.section-gallery.name",
   "class": "section-gallery",
   "max_blocks": 6,
   "settings": [
     {
       "type": "select",
       "id": "vertical_position",
-      "label": "Text position - Vertical",
+      "label": "t:sections.general.text_position_vertical.label",
       "options": [
         {
           "value": "top",
-          "label": "Top"
+          "label": "t:sections.general.text_position_vertical.options.top"
         },
         {
           "value": "center",
-          "label": "Center"
+          "label": "t:sections.general.text_position_vertical.options.center"
         },
         {
           "value": "bottom",
-          "label": "Bottom"
+          "label": "t:sections.general.text_position_vertical.options.bottom"
         }
       ],
       "default": "center"
@@ -219,20 +219,20 @@
     {
       "type": "select",
       "id": "horizontal_position",
-      "label": "Text position - Horizontal",
-      "info": "Desktop only",
+      "label": "t:sections.general.text_position_horizontal.label",
+      "info": "t:sections.general.desktop_only",
       "options": [
         {
           "value": "left",
-          "label": "Left"
+          "label": "t:sections.general.text_position_horizontal.options.left"
         },
         {
           "value": "center",
-          "label": "Center"
+          "label": "t:sections.general.text_position_horizontal.options.center"
         },
         {
           "value": "right",
-          "label": "Right"
+          "label": "t:sections.general.text_position_horizontal.options.right"
         }
       ],
       "default": "center"
@@ -240,12 +240,12 @@
     {
       "type": "color",
       "id": "text_color",
-      "label": "Text color",
+      "label": "t:sections.general.text_color",
       "default": "#ffffff"
     },
     {
       "type": "header",
-      "content": "Overlay"
+      "content": "t:sections.general.overlay"
     },
     {
       "type": "range",
@@ -254,54 +254,54 @@
       "max": 70,
       "step": 1,
       "unit": "%",
-      "label": "Opacity",
+      "label": "t:sections.general.opacity",
       "default": 10
     },
     {
       "type": "color",
       "id": "overlay_color",
-      "label": "Color",
+      "label": "t:sections.general.color",
       "default": "#000000"
     },
     {
       "type": "header",
-      "content": "Image"
+      "content": "t:sections.general.image"
     },
     {
       "type": "select",
       "id": "gallery_style",
-      "label": "Layout",
+      "label": "t:sections.section-gallery.settings.gallery_style.label",
+      "info": "t:sections.general.desktop_only",
       "options": [
         {
           "value": "multiple_rows",
-          "label": "Multiple rows"
+          "label": "t:sections.section-gallery.settings.gallery_style.options.multiple_rows"
         },
         {
-          "value": "all_in_one",
-          "label": "All in one row"
+          "value": "single_row",
+          "label": "t:sections.section-gallery.settings.gallery_style.options.single_row"
         }
       ],
-      "default": "all_in_one",
-      "info": "Desktop only"
+      "default": "single_row"
     },
     {
       "type": "range",
       "id": "deskop_image_height",
+      "label": "t:sections.general.desktop_height",
       "min": 400,
       "max": 800,
       "step": 10,
       "unit": "px",
-      "label": "Desktop height",
       "default": 700
     },
     {
       "type": "range",
       "id": "mobile_image_height",
+      "label": "t:sections.general.mobile_height",
       "min": 300,
       "max": 500,
       "step": 10,
       "unit": "px",
-      "label": "Mobile height",
       "default": 300
     }
   ],
@@ -313,18 +313,18 @@
         {
           "type": "image_picker",
           "id": "image",
-          "label": "Image"
+          "label": "t:sections.general.image"
         },
         {
           "type": "text",
           "id": "heading",
-          "label": "Heading",
+          "label": "t:sections.general.heading",
           "default": "Image headline"
         },
         {
           "type": "select",
           "id": "heading_size",
-          "label": "Heading size",
+          "label": "t:sections.general.heading_size",
           "options": [
             {
               "value": "h1",
@@ -356,19 +356,19 @@
         {
           "type": "richtext",
           "id": "text",
-          "label": "Text",
+          "label": "t:sections.general.text",
           "default": "<p>More detailed information about the purpose of the image and the content it contains.</p>"
         },
         {
           "type": "text",
           "id": "button_text",
-          "label": "Button text",
+          "label": "t:sections.general.button_text",
           "default": "Call to action"
         },
         {
           "type": "url",
           "id": "button_link",
-          "label": "Button link"
+          "label": "t:sections.general.button_link"
         }
       ]
     }

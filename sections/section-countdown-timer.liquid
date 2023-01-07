@@ -65,23 +65,23 @@
 
 {% schema %}
 {
-  "name": "Countdown timer",
+  "name": "t:sections.general.countdown-timer.content",
   "class": "section-countdown-timer",
   "settings": [
     {
       "type": "header",
-      "content": "Heading"
+      "content": "t:sections.general.heading"
     },
     {
       "type": "text",
       "id": "heading",
-      "label": "Heading",
+      "label": "t:sections.general.heading",
       "default": "Promotion title"
     },
     {
       "type": "select",
       "id": "heading_size",
-      "label": "Heading size",
+      "label": "t:sections.general.heading_size",
       "options": [
         {
           "value": "h1",
@@ -113,14 +113,14 @@
     {
       "type": "richtext",
       "id": "text",
-      "label": "Text",
+      "label": "t:sections.general.text",
       "default": "<p>Provide context and background information about the event or promotion, and help customers understand what they can expect and why they should be excited.</p>"
     },
     {
       "type": "range",
       "id": "text_width",
-      "label": "Text width",
-      "info": "Desktop only",
+      "label": "t:sections.general.text_width",
+      "info": "t:sections.general.desktop_only",
       "min": 40,
       "max": 90,
       "step": 10,
@@ -129,48 +129,48 @@
     },
     {
       "type": "header",
-      "content": "Button"
+      "content": "t:sections.general.button"
     },
     {
       "type": "text",
       "id": "link_text",
-      "label": "Text",
+      "label": "t:sections.general.text",
       "default": "Call to action"
     },
     {
       "type": "url",
       "id": "link_url",
-      "label": "URL"
+      "label": "t:sections.general.url"
     },
     {
       "type": "color",
       "id": "button_color",
-      "label": "Color",
+      "label": "t:sections.general.color",
       "default": "#fcdb33"
     },
     {
       "type": "header",
-      "content": "Countdown timer"
+      "content": "t:sections.general.countdown-timer.content"
     },
     {
       "type": "text",
       "id": "message",
-      "label": "Expiration message",
-      "default": "Offer ended",
-      "info": "It is optional for Option 1 but required for Option 2"
+      "label": "t:sections.general.countdown-timer.message.label",
+      "info": "t:sections.general.countdown-timer.message.info",
+      "default": "Offer ended"
     },
     {
       "type": "select",
       "id": "countdown_timer_type",
-      "label": "Type",
+      "label": "t:sections.general.countdown-timer.countdown_timer_type.label",
       "options": [
         {
           "value": "time",
-          "label": "Option 1: Based on user cookies"
+          "label": "t:sections.general.countdown-timer.countdown_timer_type.options.time"
         },
         {
           "value": "date",
-          "label": "Option 2: Based on a date"
+          "label": "t:sections.general.countdown-timer.countdown_timer_type.options.date"
         }
       ],
       "default": "time"
@@ -178,15 +178,15 @@
     {
       "type": "select",
       "id": "digits_size",
-      "label": "Digits size",
+      "label": "t:sections.general.countdown-timer.digits_size.label",
       "options": [
         {
           "value": "small",
-          "label": "Small"
+          "label": "t:sections.general.countdown-timer.digits_size.options.small"
         },
         {
           "value": "big",
-          "label": "Big"
+          "label": "t:sections.general.countdown-timer.digits_size.options.large"
         }
       ],
       "default": "small"
@@ -194,19 +194,19 @@
     {
       "type": "color",
       "id": "digits_color",
-      "label": "Digits color",
+      "label": "t:sections.general.countdown-timer.digits_color",
       "default": "#000000"
     },
     {
       "type": "color",
       "id": "digits_background_color",
-      "label": "Digits background color",
+      "label": "t:sections.general.countdown-timer.digits_background_color",
       "default": "#fcdb33"
     },
     {
       "type": "header",
-      "content": "Option 1: Based on user cookies",
-      "info": "⚠️ Remember that this option also saves your browser cookies. So if your new settings aren't taking effect immediately, simply clear the cookies and refresh the page."
+      "content": "t:sections.general.countdown-timer.countdown_timer_type.options.time",
+      "info": "t:sections.general.countdown-timer.time_info"
     },
     {
       "type": "range",
@@ -215,7 +215,7 @@
       "max": 100,
       "step": 1,
       "unit": "d",
-      "label": "Days",
+      "label": "t:sections.general.countdown-timer.time_days",
       "default": 0
     },
     {
@@ -225,7 +225,7 @@
       "max": 24,
       "step": 1,
       "unit": "h",
-      "label": "Hours",
+      "label": "t:sections.general.countdown-timer.time_hours",
       "default": 6
     },
     {
@@ -235,7 +235,7 @@
       "max": 60,
       "step": 1,
       "unit": "m",
-      "label": "Minutes",
+      "label": "t:sections.general.countdown-timer.time_mins",
       "default": 0
     },
     {
@@ -245,29 +245,29 @@
       "max": 60,
       "step": 1,
       "unit": "s",
-      "label": "Seconds",
+      "label": "t:sections.general.countdown-timer.time_secs",
       "default": 0
     },
     {
       "type": "select",
       "id": "afterExpirationTimeOnly",
-      "label": "After countdown expires",
+      "label": "t:sections.general.countdown-timer.afterExpirationTimeOnly.label",
       "options": [
         {
           "value": "repeatCountdown",
-          "label": "Repeat countdown"
+          "label": "t:sections.general.countdown-timer.afterExpirationTimeOnly.options.repeatCountdown"
         },
         {
           "value": "showMessage",
-          "label": "Show message"
+          "label": "t:sections.general.countdown-timer.afterExpirationTimeOnly.options.showMessage"
         }
       ],
       "default": "repeatCountdown",
-      "info": "This applied only to Option 1."
+      "info": "t:sections.general.countdown-timer.afterExpirationTimeOnly.info"
     },
     {
       "type": "header",
-      "content": "Option 2: Based on a date"
+      "content": "t:sections.general.countdown-timer.countdown_timer_type.options.date"
     },
     {
       "type": "range",
@@ -276,7 +276,7 @@
       "max": 2032,
       "step": 1,
       "unit": "y",
-      "label": "Year",
+      "label": "t:sections.general.countdown-timer.date_year",
       "default": 2023
     },
     {
@@ -286,7 +286,7 @@
       "max": 12,
       "step": 1,
       "unit": "m",
-      "label": "Month",
+      "label": "t:sections.general.countdown-timer.date_month",
       "default": 1
     },
     {
@@ -296,9 +296,9 @@
       "max": 31,
       "step": 1,
       "unit": "d",
-      "label": "Day",
+      "label": "t:sections.general.countdown-timer.date_day",
       "default": 1,
-      "info": "⚠️ Pay attention: If you put 31 to a month that ends with 30 or 28 days, it will result in an error in calculation."
+      "info": "t:sections.general.countdown-timer.date_day_info"
     },
     {
       "type": "range",
@@ -307,7 +307,7 @@
       "max": 24,
       "step": 1,
       "unit": "h",
-      "label": "Hour",
+      "label": "t:sections.general.countdown-timer.date_hour",
       "default": 0
     },
     {
@@ -317,17 +317,17 @@
       "max": 60,
       "step": 1,
       "unit": "m",
-      "label": "Minute",
+      "label": "t:sections.general.countdown-timer.date_min",
       "default": 0
     },
     {
       "type": "header",
-      "content": "Section"
+      "content": "t:sections.general.section"
     },
     {
       "type": "range",
       "id": "space_between_elements",
-      "label": "Space between elements",
+      "label": "t:sections.general.space_between_elements",
       "min": 1,
       "max": 3,
       "step": 0.5,
@@ -341,7 +341,7 @@
       "max": 100,
       "step": 1,
       "unit": "px",
-      "label": "Top space",
+      "label": "t:sections.general.top_space",
       "default": 0
     },
     {
@@ -351,19 +351,19 @@
       "max": 100,
       "step": 1,
       "unit": "px",
-      "label": "Bottom space",
+      "label": "t:sections.general.bottom_space",
       "default": 0
     },
     {
       "type": "color",
       "id": "background_color",
-      "label": "Background color",
+      "label": "t:sections.general.background_color",
       "default": "transparent"
     }
   ],
   "presets": [
     {
-      "name": "Countdown timer"
+      "name": "t:sections.general.countdown-timer.content"
     }
   ]
 }

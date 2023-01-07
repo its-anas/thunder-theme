@@ -212,36 +212,36 @@
 
 {% schema %}
 {
-  "name": "Compare",
+  "name": "t:sections.section-compare.name",
   "class": "section-compare",
   "max_blocks": 5,
   "settings": [
     {
       "type": "select",
       "id": "image_size",
-      "label": "Image size",
+      "label": "t:sections.section-compare.settings.image_size.label",
       "options": [
         {
           "value": "small",
-          "label": "Small"
+          "label": "t:sections.section-compare.settings.image_size.options.small"
         },
         {
           "value": "medium",
-          "label": "Medium"
+          "label": "t:sections.section-compare.settings.image_size.options.medium"
         },
         {
           "value": "large",
-          "label": "Large"
+          "label": "t:sections.section-compare.settings.image_size.options.large"
         }
       ],
       "default": "medium",
-      "info": "Deskop only"
+      "info": "t:sections.general.desktop_only"
     },
     {
       "type": "range",
       "id": "table_width",
-      "label": "Table width",
-      "info": "Desktop only",
+      "label": "t:sections.section-compare.settings.table_width",
+      "info": "t:sections.general.desktop_only",
       "min": 800,
       "max": 1000,
       "step": 100,
@@ -250,36 +250,36 @@
     },
     {
       "type": "header",
-      "content": "Features"
+      "content": "t:sections.section-compare.settings.header_features"
     },
     {
       "type": "text",
       "id": "feature_1",
-      "label": "Feature #1",
+      "label": "t:sections.section-compare.settings.feature_1",
       "default": "Feature 1"
     },
     {
       "type": "text",
       "id": "feature_2",
-      "label": "Feature #2",
+      "label": "t:sections.section-compare.settings.feature_2",
       "default": "Feature 2"
     },
     {
       "type": "text",
       "id": "feature_3",
-      "label": "Feature #3",
+      "label": "t:sections.section-compare.settings.feature_3",
       "default": "Feature 3"
     },
     {
       "type": "text",
       "id": "feature_4",
-      "label": "Feature #4",
+      "label": "t:sections.section-compare.settings.feature_4",
       "default": "Feature 4"
     },
     {
       "type": "text",
       "id": "feature_5",
-      "label": "Feature #5",
+      "label": "t:sections.section-compare.settings.feature_5",
       "default": "Feature 5"
     },
     {
@@ -288,23 +288,23 @@
       "min": 1,
       "max": 5,
       "step": 1,
-      "label": "Number of features",
+      "label": "t:sections.section-compare.settings.features_count",
       "default": 5
     },
     {
       "type": "header",
-      "content": "Section"
+      "content": "t:sections.general.section"
     },
     {
       "type": "text",
       "id": "heading",
-      "label": "Heading",
+      "label": "t:sections.general.heading",
       "default": "Comparison table"
     },
     {
       "type": "select",
       "id": "heading_size",
-      "label": "Heading size",
+      "label": "t:sections.general.heading_size",
       "options": [
         {
           "value": "h1",
@@ -340,7 +340,7 @@
       "max": 100,
       "step": 1,
       "unit": "px",
-      "label": "Top space",
+      "label": "t:sections.general.top_space",
       "default": 0
     },
     {
@@ -350,13 +350,13 @@
       "max": 100,
       "step": 1,
       "unit": "px",
-      "label": "Bottom space",
+      "label": "t:sections.general.bottom_space",
       "default": 0
     },
     {
       "type": "color",
       "id": "background_color",
-      "label": "Background color",
+      "label": "t:sections.general.background_color",
       "default": "transparent"
     }
   ],
@@ -368,48 +368,48 @@
         {
           "type": "product",
           "id": "product",
-          "label": "Product"
+          "label": "t:sections.general.product"
         },
         {
           "type": "text",
           "id": "product_name",
-          "label": "Product name",
-          "info": "Leave it blank to show the original product name"
+          "label": "t:sections.section-compare.blocks.product.settings.product_name.label",
+          "info": "t:sections.section-compare.blocks.product.settings.product_name.info"
         },
         {
           "type": "text",
           "id": "product_description",
-          "label": "Short description",
+          "label": "t:sections.section-compare.blocks.product.settings.product_description.",
           "default": "Short description"
         },
         {
           "type": "text",
           "id": "product_feature_1",
-          "label": "Product feature #1",
+          "label": "t:sections.section-compare.blocks.product.settings.product_feature_1",
           "default": "Text"
         },
         {
           "type": "text",
           "id": "product_feature_2",
-          "label": "Product feature #2",
+          "label": "t:sections.section-compare.blocks.product.settings.product_feature_2",
           "default": "Text"
         },
         {
           "type": "text",
           "id": "product_feature_3",
-          "label": "Product feature #3",
+          "label": "t:sections.section-compare.blocks.product.settings.product_feature_3",
           "default": "Text"
         },
         {
           "type": "text",
           "id": "product_feature_4",
-          "label": "Product feature #4",
+          "label": "t:sections.section-compare.blocks.product.settings.product_feature_4",
           "default": "Text"
         },
         {
           "type": "text",
           "id": "product_feature_5",
-          "label": "Product feature #5",
+          "label": "t:sections.section-compare.blocks.product.settings.product_feature_5",
           "default": "Text"
         }
       ]

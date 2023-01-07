@@ -155,17 +155,17 @@
 
 {% schema %}
 {
-  "name": "Blog posts",
+  "name": "t:sections.section-blog-posts.name",
   "class": "section-blog-posts",
   "settings": [
     {
       "type": "blog",
       "id": "blog",
-      "label": "Blog"
+      "label": "t:sections.general.blog"
     },
     {
       "type": "header",
-      "content": "Article"
+      "content": "t:sections.section-blog-posts.settings.header_article"
     },
     {
       "type": "range",
@@ -174,13 +174,13 @@
       "max": 2,
       "step": 0.1,
       "unit": "a/r",
-      "label": "Aspect ratio",
+      "label": "t:sections.general.aspect_ratio",
       "default": 1.4
     },
     {
       "type": "select",
       "id": "mobile_items",
-      "label": "Posts per row - mobile",
+      "label": "t:sections.section-blog-posts.settings.mobile_items",
       "options": [
         {
           "value": "1",
@@ -200,7 +200,7 @@
       "max": 6,
       "step": 1,
       "unit": "p",
-      "label": "Posts per row - tablet",
+      "label": "t:sections.section-blog-posts.settings.tablet_items",
       "default": 2
     },
     {
@@ -210,7 +210,7 @@
       "max": 6,
       "step": 1,
       "unit": "p",
-      "label": "Posts per row - desktop",
+      "label": "t:sections.section-blog-posts.settings.desktop_items",
       "default": 3
     },
     {
@@ -220,23 +220,23 @@
       "max": 20,
       "step": 1,
       "unit": "p",
-      "label": "Maximum number of posts",
+      "label": "t:sections.section-blog-posts.settings.items_limit",
       "default": 8
     },
     {
       "type": "header",
-      "content": "Section"
+      "content": "t:sections.general.section"
     },
     {
       "type": "text",
       "id": "heading",
-      "label": "Heading",
+      "label": "t:sections.general.heading",
       "default": "Blog posts"
     },
     {
       "type": "select",
       "id": "heading_size",
-      "label": "Heading size",
+      "label": "t:sections.general.heading_size",
       "options": [
         {
           "value": "h1",
@@ -268,7 +268,7 @@
     {
       "type": "range",
       "id": "space_between_elements",
-      "label": "Space between elements",
+      "label": "t:sections.general.space_between_elements",
       "min": 1,
       "max": 3,
       "step": 0.5,
@@ -282,7 +282,7 @@
       "max": 100,
       "step": 1,
       "unit": "px",
-      "label": "Top space",
+      "label": "t:sections.general.top_space",
       "default": 0
     },
     {
@@ -292,19 +292,19 @@
       "max": 100,
       "step": 1,
       "unit": "px",
-      "label": "Bottom space",
+      "label": "t:sections.general.bottom_space",
       "default": 0
     },
     {
       "type": "color",
       "id": "background_color",
-      "label": "Background color",
+      "label": "t:sections.general.background_color",
       "default": "transparent"
     }
   ],
   "presets": [
     {
-      "name": "Blog posts"
+      "name": "t:sections.section-blog-posts.name"
     }
   ]
 }

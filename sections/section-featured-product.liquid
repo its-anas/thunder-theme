@@ -130,7 +130,7 @@
               <div class="featured-product__vendor" {{ block.shopify_attributes }}>
                 <p>{{ featured_product.vendor }}</p>
               </div>
-            {% when 'name' %}
+            {% when 'title' %}
               <div class="featured-product__name" {{ block.shopify_attributes }}>
                 <h3>{{ featured_product.title }}</h3>
               </div>
@@ -179,7 +179,7 @@
                   {%- endform -%}
                 {% endif %}
               </div>
-            {% when 'product-link' %}
+            {% when 'product_url' %}
               <a
                 href="{{ featured_product.url }}"
                 class="featured-product__url button--link"
@@ -230,28 +230,28 @@
 
 {% schema %}
 {
-  "name": "Featured product",
+  "name": "t:sections.section-featured-product.name",
   "class": "section-featured-product",
   "settings": [
     {
       "type": "product",
       "id": "product",
-      "label": "Product"
+      "label": "t:sections.general.product"
     },
     {
       "type": "checkbox",
       "id": "thumbnails_on_mobile",
-      "label": "Show product thumbnails on mobile instead of indicators",
+      "label": "t:sections.section-featured-product.settings.thumbnails_on_mobile",
       "default": false
     },
     {
       "type": "header",
-      "content": "Section"
+      "content": "t:sections.general.section"
     },
     {
       "type": "range",
       "id": "top_space",
-      "label": "Top space",
+      "label": "t:sections.general.top_space",
       "min": 0,
       "max": 400,
       "step": 10,
@@ -261,7 +261,7 @@
     {
       "type": "range",
       "id": "bottom_space",
-      "label": "Top bottom",
+      "label": "t:sections.general.bottom_space",
       "min": 0,
       "max": 400,
       "step": 10,
@@ -271,7 +271,7 @@
     {
       "type": "color",
       "id": "background_color",
-      "label": "Background color",
+      "label": "t:sections.general.background_color",
       "default": "transparent"
     }
   ],
@@ -281,36 +281,36 @@
     },
     {
       "type": "vendor",
-      "name": "Vendor",
+      "name": "t:sections.general.vendor",
       "limit": 1
     },
     {
-      "type": "name",
-      "name": "Name",
+      "type": "title",
+      "name": "t:sections.general.title",
       "limit": 1
     },
     {
       "type": "price",
-      "name": "Price",
+      "name": "t:sections.general.price",
       "limit": 1
     },
     {
       "type": "variants_selector",
-      "name": "Variants selector",
+      "name": "t:sections.general.variants_selector.label",
       "limit": 1,
       "settings": [
         {
           "type": "select",
           "id": "variant_selector_type",
-          "label": "Variant selector type",
+          "label": "t:sections.general.variants_selector.settings.variant_selector_type.label",
           "options": [
             {
               "value": "block",
-              "label": "Block"
+              "label": "t:sections.general.variants_selector.settings.variant_selector_type.options.block"
             },
             {
               "value": "dropdown",
-              "label": "Dropdown"
+              "label": "t:sections.general.variants_selector.settings.variant_selector_type.options.dropdown"
             }
           ],
           "default": "dropdown"
@@ -318,24 +318,24 @@
         {
           "type": "select",
           "id": "color_selector_type",
-          "label": "Color selector type",
-          "info": "For the color swatch to work properly, the product must have variants, every variant must have an image attached to it, every image alt must be written in the format #color:Name, and the color and it's hex must be added in Color swatch tab in theme settings.",
+          "label": "t:sections.general.color_selector_type.label",
+          "info": "t:sections.general.color_selector_type.info",
           "options": [
             {
               "value": "block",
-              "label": "Block"
+              "label": "t:sections.general.color_selector_type.options.block"
             },
             {
               "value": "dropdown",
-              "label": "Dropdown"
+              "label": "t:sections.general.color_selector_type.options.dropdown"
             },
             {
               "value": "color_swatch",
-              "label": "Color swatch"
+              "label": "t:sections.general.color_selector_type.options.color_swatch"
             },
             {
               "value": "variant_image",
-              "label": "Image variant"
+              "label": "t:sections.general.color_selector_type.options.variant_image"
             }
           ],
           "default": "dropdown"
@@ -344,29 +344,29 @@
     },
     {
       "type": "quantity",
-      "name": "Quantity",
+      "name": "t:sections.general.quantity",
       "limit": 1
     },
     {
       "type": "buttons",
-      "name": "Button",
+      "name": "t:sections.general.button",
       "limit": 1
     },
     {
-      "type": "product-link",
-      "name": "Product link",
+      "type": "product_url",
+      "name": "t:sections.general.product_url",
       "limit": 1
     }
   ],
   "presets": [
     {
-      "name": "Featured product",
+      "name": "t:sections.section-featured-product.name",
       "blocks": [
         {
           "type": "vendor"
         },
         {
-          "type": "name"
+          "type": "title"
         },
         {
           "type": "price"
@@ -381,7 +381,7 @@
           "type": "buttons"
         },
         {
-          "type": "product-link"
+          "type": "product_url"
         }
       ]
     }

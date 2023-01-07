@@ -124,30 +124,30 @@
 
 {% schema %}
 {
-  "name": "Image with text",
+  "name": "t:sections.section-image-with-text.name",
   "class": "section-image-with-text",
   "settings": [
     {
       "type": "header",
-      "content": "Image"
+      "content": "t:sections.general.image"
     },
     {
       "type": "image_picker",
       "id": "image",
-      "label": "Image"
+      "label": "t:sections.general.image"
     },
     {
       "type": "select",
       "id": "image_position",
-      "label": "Style",
+      "label": "t:sections.section-image-with-text.settings.image_position.label",
       "options": [
         {
           "value": "cover",
-          "label": "Fit section"
+          "label": "t:sections.section-image-with-text.settings.image_position.options.cover"
         },
         {
           "value": "contain",
-          "label": "Full image"
+          "label": "t:sections.section-image-with-text.settings.image_position.options.contain"
         }
       ],
       "default": "cover"
@@ -155,39 +155,39 @@
     {
       "type": "select",
       "id": "image_placement",
-      "label": "Placement",
+      "label": "t:sections.section-image-with-text.settings.image_placement.label",
       "options": [
         {
           "value": "first",
-          "label": "Image first"
+          "label": "t:sections.section-image-with-text.settings.image_placement.options.first"
         },
         {
           "value": "second",
-          "label": "Image second"
+          "label": "t:sections.section-image-with-text.settings.image_placement.options.second"
         }
       ],
       "default": "first"
     },
     {
       "type": "header",
-      "content": "Text"
+      "content": "t:sections.general.text"
     },
     {
       "type": "select",
       "id": "vertical_position",
-      "label": "Vertical position",
+      "label": "t:sections.general.vertical_position",
       "options": [
         {
           "value": "top",
-          "label": "Top"
+          "label": "t:sections.general.text_position_vertical.options.top"
         },
         {
           "value": "center",
-          "label": "Center"
+          "label": "t:sections.general.text_position_vertical.options.center"
         },
         {
           "value": "bottom",
-          "label": "Bottom"
+          "label": "t:sections.general.text_position_vertical.options.bottom"
         }
       ],
       "default": "center"
@@ -195,20 +195,20 @@
     {
       "type": "select",
       "id": "horizontal_position",
-      "label": "Horizontal position",
-      "info": "Desktop only",
+      "label": "t:sections.general.horizontal_position",
+      "info": "t:sections.general.desktop_only",
       "options": [
         {
           "value": "left",
-          "label": "Left"
+          "label": "t:sections.general.text_position_horizontal.options.left"
         },
         {
           "value": "center",
-          "label": "Center"
+          "label": "t:sections.general.text_position_horizontal.options.center"
         },
         {
           "value": "right",
-          "label": "Right"
+          "label": "t:sections.general.text_position_horizontal.options.right"
         }
       ],
       "default": "center"
@@ -216,20 +216,20 @@
     {
       "type": "select",
       "id": "text_alignment",
-      "label": "Alignment",
-      "info": "Desktop only",
+      "label": "t:sections.general.alignment",
+      "info": "t:sections.general.desktop_only",
       "options": [
         {
           "value": "left",
-          "label": "Left"
+          "label": "t:sections.general.text_position_horizontal.options.left"
         },
         {
           "value": "center",
-          "label": "Center"
+          "label": "t:sections.general.text_position_horizontal.options.center"
         },
         {
           "value": "right",
-          "label": "Right"
+          "label": "t:sections.general.text_position_horizontal.options.right"
         }
       ],
       "default": "center"
@@ -237,8 +237,8 @@
     {
       "type": "range",
       "id": "text_width",
-      "label": "Width",
-      "info": "Desktop only",
+      "label": "t:sections.general.width",
+      "info": "t:sections.general.desktop_only",
       "min": 70,
       "max": 100,
       "step": 10,
@@ -247,7 +247,7 @@
     },
     {
       "type": "header",
-      "content": "Section"
+      "content": "t:sections.general.section"
     },
     {
       "type": "range",
@@ -256,7 +256,7 @@
       "max": 800,
       "step": 10,
       "unit": "px",
-      "label": "Desktop height",
+      "label": "t:sections.general.desktop_height",
       "default": 700
     },
     {
@@ -266,13 +266,13 @@
       "max": 450,
       "step": 10,
       "unit": "px",
-      "label": "Mobile height",
+      "label": "t:sections.general.mobile_height",
       "default": 350
     },
     {
       "type": "range",
       "id": "space_between_elements",
-      "label": "Space between elements",
+      "label": "t:sections.general.space_between_elements",
       "min": 1,
       "max": 3,
       "step": 0.5,
@@ -286,7 +286,7 @@
       "max": 100,
       "step": 1,
       "unit": "px",
-      "label": "Top space",
+      "label": "t:sections.general.top_space",
       "default": 0
     },
     {
@@ -296,32 +296,32 @@
       "max": 100,
       "step": 1,
       "unit": "px",
-      "label": "Bottom space",
+      "label": "t:sections.general.bottom_space",
       "default": 0
     },
     {
       "type": "color",
       "id": "background_color",
-      "label": "Background color",
+      "label": "t:sections.general.background_color",
       "default": "transparent"
     }
   ],
   "blocks": [
     {
       "type": "subheading",
-      "name": "Subheading",
+      "name": "t:sections.general.subheading",
       "limit": 1,
       "settings": [
         {
           "type": "text",
           "id": "subheading",
-          "label": "Subheading",
+          "label": "t:sections.general.subheading",
           "default": "Context of the section"
         },
         {
           "type": "select",
           "id": "subheading_size",
-          "label": "Subeading size",
+          "label": "t:sections.general.subheading_size",
           "options": [
             {
               "value": "h1",
@@ -354,19 +354,19 @@
     },
     {
       "type": "heading",
-      "name": "Heading",
+      "name": "t:sections.general.heading",
       "limit": 1,
       "settings": [
         {
           "type": "text",
           "id": "heading",
-          "label": "Heading",
+          "label": "t:sections.general.heading",
           "default": "Attention-grabbing Title"
         },
         {
           "type": "select",
           "id": "heading_size",
-          "label": "Heading size",
+          "label": "t:sections.general.heading_size",
           "options": [
             {
               "value": "h1",
@@ -405,37 +405,37 @@
         {
           "type": "richtext",
           "id": "text",
-          "label": "Text",
+          "label": "t:sections.general.text",
           "default": "<p>Highlight the benefits and value of the message being presented in this section, and to encourage customers to take action and engage with the content.</p>"
         }
       ]
     },
     {
       "type": "button",
-      "name": "Button",
+      "name": "t:sections.general.button",
       "limit": 1,
       "settings": [
         {
           "type": "text",
           "id": "primary_button_text",
-          "label": "Primary button text",
+          "label": "t:sections.general.primary_button_text",
           "default": "Primary button"
         },
         {
           "type": "url",
           "id": "primary_button_link",
-          "label": "Primary button link"
+          "label": "t:sections.general.primary_button_link"
         },
         {
           "type": "text",
           "id": "secondary_button_text",
-          "label": "Secondary button text",
+          "label": "t:sections.general.secondary_button_text",
           "default": "Secondary button"
         },
         {
           "type": "url",
           "id": "secondary_button_link",
-          "label": "Secondary button link"
+          "label": "t:sections.general.secondary_button_link"
         }
       ]
     }

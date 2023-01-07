@@ -96,19 +96,19 @@
 
 {% schema %}
 {
-  "name": "FAQ",
+  "name": "t:sections.section-faq.name",
   "class": "section-faq",
   "settings": [
     {
       "type": "checkbox",
       "id": "show_image",
-      "label": "Show image",
+      "label": "t:sections.section-faq.settings.show_image",
       "default": true
     },
     {
       "type": "image_picker",
       "id": "image",
-      "label": "Image"
+      "label": "t:sections.general.image"
     },
     {
       "type": "range",
@@ -117,7 +117,7 @@
       "max": 400,
       "step": 10,
       "unit": "px",
-      "label": "Image height",
+      "label": "t:sections.section-faq.settings.image_height",
       "default": 300
     },
     {
@@ -127,24 +127,24 @@
       "max": 1200,
       "step": 10,
       "unit": "px",
-      "label": "Tabs width",
+      "label": "t:sections.section-faq.settings.tabs_width",
       "default": 1000,
-      "info": "Applied to desktop only"
+      "info": "t:sections.general.desktop_only"
     },
     {
       "type": "header",
-      "content": "Section"
+      "content": "t:sections.general.section"
     },
     {
       "type": "text",
       "id": "heading",
-      "label": "Heading",
+      "label": "t:sections.general.heading",
       "default": "FAQ"
     },
     {
       "type": "select",
       "id": "heading_size",
-      "label": "Heading size",
+      "label": "t:sections.general.heading_size",
       "options": [
         {
           "value": "h1",
@@ -176,7 +176,7 @@
     {
       "type": "range",
       "id": "space_between_elements",
-      "label": "Space between elements",
+      "label": "t:sections.general.space_between_elements",
       "min": 1,
       "max": 3,
       "step": 0.5,
@@ -190,7 +190,7 @@
       "max": 100,
       "step": 1,
       "unit": "px",
-      "label": "Top space",
+      "label": "t:sections.general.top_space",
       "default": 0
     },
     {
@@ -200,31 +200,31 @@
       "max": 100,
       "step": 1,
       "unit": "px",
-      "label": "Bottom space",
+      "label": "t:sections.general.bottom_space",
       "default": 0
     },
     {
       "type": "color",
       "id": "background_color",
-      "label": "Background color",
+      "label": "t:sections.general.background_color",
       "default": "transparent"
     }
   ],
   "blocks": [
     {
       "type": "text",
-      "name": "Q/A",
+      "name": "t:sections.section-faq.blocks.text.name",
       "settings": [
         {
           "type": "text",
           "id": "question",
-          "label": "Question",
+          "label": "t:sections.section-faq.blocks.text.settings.question",
           "default": "Question"
         },
         {
           "type": "text",
           "id": "answer",
-          "label": "Answer",
+          "label": "t:sections.section-faq.blocks.text.settings.answer",
           "default": "A detailed and thorough response to the question being asked."
         }
       ]
@@ -232,7 +232,7 @@
   ],
   "presets": [
     {
-      "name": "FAQ",
+      "name": "t:sections.section-faq.name",
       "blocks": [{ "type": "text" }, { "type": "text" }, { "type": "text" }, { "type": "text" }]
     }
   ]

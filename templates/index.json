@@ -183,7 +183,7 @@
                     "text_color": "#ffffff",
                     "overlay_opacity": 10,
                     "overlay_color": "#000000",
-                    "gallery_style": "all_in_one",
+                    "gallery_style": "single_row",
                     "deskop_image_height": 700,
                     "mobile_image_height": 300
                }
@@ -539,18 +539,11 @@
           "section-animated-rich-text": {
                "type": "section-animated-rich-text",
                "blocks": {
-                    "section-animated-rich-text-0": {
-                         "type": "subheading",
-                         "settings": {
-                              "subheading": "Clear and concise overview",
-                              "subheading_size": "h6"
-                         }
-                    },
                     "section-animated-rich-text-1": {
                          "type": "heading",
                          "settings": {
                               "heading": "that changes to synonyms to emphasize the main message",
-                              "heading_size": "h5",
+                              "heading_size": "h6",
                               "word_1": "Word 1",
                               "word_2": "Word 2",
                               "word_3": "Word 3",

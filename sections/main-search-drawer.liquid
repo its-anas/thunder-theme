@@ -105,90 +105,86 @@
 
 {% schema %}
 {
-  "name": "Search drawer",
+  "name": "t:sections.main-search-drawer.name",
   "class": "main-search-drawer",
   "settings": [
     {
-      "type": "header",
-      "content": "Search behavior"
-    },
-    {
       "type": "checkbox",
       "id": "predictive_search_enabled",
-      "default": true,
-      "label": "Enable product suggestions"
+      "label": "t:sections.main-search-drawer.settings.predictive_search_enabled",
+      "default": true
     }
   ],
   "max_blocks": 3,
   "blocks": [
     {
       "type": "products",
-      "name": "Products",
+      "name": "t:sections.main-search-drawer.blocks.products.name",
       "settings": [
         {
           "type": "text",
           "id": "group_name",
-          "label": "Text",
+          "label": "t:sections.general.text",
           "default": "Popular products"
         },
         {
           "type": "product",
           "id": "product_1",
-          "label": "Product 1"
+          "label": "t:sections.main-search-drawer.blocks.products.settings.product_1"
         },
         {
           "type": "product",
           "id": "product_2",
-          "label": "Product 2"
+          "label": "t:sections.main-search-drawer.blocks.products.settings.product_2"
         },
         {
           "type": "product",
           "id": "product_3",
-          "label": "Product 3"
+          "label": "t:sections.main-search-drawer.blocks.products.settings.product_3"
         }
       ]
     },
     {
       "type": "collections",
-      "name": "Collections",
+      "name": "t:sections.main-search-drawer.blocks.collections.name",
       "settings": [
         {
           "type": "text",
           "id": "group_name",
-          "label": "Text",
+          "label": "t:sections.general.text",
           "default": "Popular collections"
         },
         {
           "type": "collection",
           "id": "collection_1",
-          "label": "Collection 1"
+          "label": "t:sections.main-search-drawer.blocks.collections.settings.collection_1"
         },
         {
           "type": "collection",
           "id": "collection_2",
-          "label": "Collection 2"
+          "label": "t:sections.main-search-drawer.blocks.collections.settings.collection_2"
         },
         {
           "type": "collection",
           "id": "collection_3",
-          "label": "Collection 3"
+          "label": "t:sections.main-search-drawer.blocks.collections.settings.collection_3"
         }
       ]
     },
     {
       "type": "menu",
-      "name": "Menu",
+      "name": "t:sections.main-search-drawer.blocks.menu.name",
       "settings": [
         {
           "type": "text",
           "id": "group_name",
-          "label": "Text",
+          "label": "t:sections.general.text",
           "default": "Menu"
         },
         {
           "type": "link_list",
           "id": "menu",
-          "label": "Menu",
+          "label": "t:sections.general.menu",
           "default": "main-menu"
         }
       ]
