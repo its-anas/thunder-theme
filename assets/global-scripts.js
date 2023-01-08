@@ -517,7 +517,7 @@ function matchVariant(allSelectedVariants, allAvailableVariants) {
 
 	if (allSelectedVariants.length === 1) {
 		let variantValue;
-		if (allSelectedVariants[0].dataset.selectorType === "block") {
+		if (allSelectedVariants[0].dataset.selectorType === "button") {
 			variantValue = allSelectedVariants[0].querySelector("input:checked").value;
 		} else if (allSelectedVariants[0].dataset.selectorType === "dropdown") {
 			variantValue = allSelectedVariants[0].querySelector("select").value;
@@ -531,7 +531,7 @@ function matchVariant(allSelectedVariants, allAvailableVariants) {
 	} else if (allSelectedVariants.length === 2) {
 		let variantValue1;
 		let variantValue2;
-		if (allSelectedVariants[0].dataset.selectorType === "block") {
+		if (allSelectedVariants[0].dataset.selectorType === "button") {
 			variantValue1 = allSelectedVariants[0].querySelector("input:checked").value;
 		} else if (allSelectedVariants[0].dataset.selectorType === "dropdown") {
 			variantValue1 = allSelectedVariants[0].querySelector("select").value;
@@ -541,7 +541,7 @@ function matchVariant(allSelectedVariants, allAvailableVariants) {
 			variantValue1 = allSelectedVariants[0].querySelector("input:checked").value;
 		}
 
-		if (allSelectedVariants[1].dataset.selectorType === "block") {
+		if (allSelectedVariants[1].dataset.selectorType === "button") {
 			variantValue2 = allSelectedVariants[1].querySelector("input:checked").value;
 		} else if (allSelectedVariants[1].dataset.selectorType === "dropdown") {
 			variantValue2 = allSelectedVariants[1].querySelector("select").value;
@@ -556,7 +556,7 @@ function matchVariant(allSelectedVariants, allAvailableVariants) {
 		let variantValue1;
 		let variantValue2;
 		let variantValue3;
-		if (allSelectedVariants[0].dataset.selectorType === "block") {
+		if (allSelectedVariants[0].dataset.selectorType === "button") {
 			variantValue1 = allSelectedVariants[0].querySelector("input:checked").value;
 		} else if (allSelectedVariants[0].dataset.selectorType === "dropdown") {
 			variantValue1 = allSelectedVariants[0].querySelector("select").value;
@@ -566,7 +566,7 @@ function matchVariant(allSelectedVariants, allAvailableVariants) {
 			variantValue1 = allSelectedVariants[0].querySelector("input:checked").value;
 		}
 
-		if (allSelectedVariants[1].dataset.selectorType === "block") {
+		if (allSelectedVariants[1].dataset.selectorType === "button") {
 			variantValue2 = allSelectedVariants[1].querySelector("input:checked").value;
 		} else if (allSelectedVariants[1].dataset.selectorType === "dropdown") {
 			variantValue2 = allSelectedVariants[1].querySelector("select").value;
@@ -576,7 +576,7 @@ function matchVariant(allSelectedVariants, allAvailableVariants) {
 			variantValue2 = allSelectedVariants[1].querySelector("input:checked").value;
 		}
 
-		if (allSelectedVariants[2].dataset.selectorType === "block") {
+		if (allSelectedVariants[2].dataset.selectorType === "button") {
 			variantValue3 = allSelectedVariants[2].querySelector("input:checked").value;
 		} else if (allSelectedVariants[2].dataset.selectorType === "dropdown") {
 			variantValue3 = allSelectedVariants[2].querySelector("select").value;
@@ -1485,7 +1485,7 @@ class QuickView extends HTMLElement {
 						`;
 
 						if (key !== "Color") {
-							if (quickViewVariantSelectorType === "block") {
+							if (quickViewVariantSelectorType === "button") {
 								document.querySelector(`.quick-view__radios-container--${key}`).innerHTML += `
 									<div class="quick-view__radio__content quick-view__radio__content--${key}"></div>
 							`;
@@ -1495,7 +1495,7 @@ class QuickView extends HTMLElement {
 							`;
 							}
 						} else if (key === "Color") {
-							if (quickViewColorSelectorType === "block" || quickViewColorSelectorType === "variant_image" || quickViewColorSelectorType === "color_swatch") {
+							if (quickViewColorSelectorType === "button" || quickViewColorSelectorType === "variant_image" || quickViewColorSelectorType === "color_swatch") {
 								document.querySelector(`.quick-view__radios-container--${key}`).innerHTML += `
 									<div class="quick-view__radio__content quick-view__radio__content--${key}"></div>
 							`;
@@ -1509,7 +1509,7 @@ class QuickView extends HTMLElement {
 						productOptions[key].forEach((value, index) => {
 							if (key !== "Color") {
 								document.querySelector(`.quick-view__radios-container--${key}`).setAttribute("data-selector-type", quickViewVariantSelectorType);
-								if (quickViewVariantSelectorType === "block") {
+								if (quickViewVariantSelectorType === "button") {
 									document.querySelector(`.quick-view__radio__content--${key}`).innerHTML += `
 											<label
 												class="quick-view__radio__label "
@@ -1534,7 +1534,7 @@ class QuickView extends HTMLElement {
 									`;
 								}
 							} else if (key === "Color") {
-								if (quickViewColorSelectorType === "block") {
+								if (quickViewColorSelectorType === "button") {
 									document.querySelector(`.quick-view__radios-container--${key}`).setAttribute("data-selector-type", quickViewColorSelectorType);
 									document.querySelector(`.quick-view__radio__content--${key}`).innerHTML += `
 											<label
@@ -1673,7 +1673,7 @@ class QuickView extends HTMLElement {
 					});
 
 					document.querySelectorAll(".quick-view__radios-container").forEach((selector) => {
-						if (selector.dataset.selectorType === "block" || selector.dataset.selectorType === "variant_image" || selector.dataset.selectorType === "color_swatch") {
+						if (selector.dataset.selectorType === "button" || selector.dataset.selectorType === "variant_image" || selector.dataset.selectorType === "color_swatch") {
 							selector.querySelectorAll("input").forEach((input) => {
 								input.addEventListener("click", () => {
 									selector.querySelectorAll("input").forEach((inp) => {
@@ -2550,7 +2550,7 @@ class FeaturedProduct extends HTMLElement {
 			`;
 
 			if (key !== "Color") {
-				if (this.featuredProductVariantSelectorType === "block") {
+				if (this.featuredProductVariantSelectorType === "button") {
 					this.querySelector(`.featured-product__radios-container--${key}`).innerHTML += `
 									<div class="featured-product__radio__content featured-product__radio__content--${key}"></div>
 							`;
@@ -2560,7 +2560,7 @@ class FeaturedProduct extends HTMLElement {
 							`;
 				}
 			} else if (key === "Color") {
-				if (this.featuredProductColorSelectorType === "block" || this.featuredProductColorSelectorType === "variant_image" || this.featuredProductColorSelectorType === "color_swatch") {
+				if (this.featuredProductColorSelectorType === "button" || this.featuredProductColorSelectorType === "variant_image" || this.featuredProductColorSelectorType === "color_swatch") {
 					this.querySelector(`.featured-product__radios-container--${key}`).innerHTML += `
 									<div class="featured-product__radio__content featured-product__radio__content--${key}"></div>
 							`;
@@ -2574,7 +2574,7 @@ class FeaturedProduct extends HTMLElement {
 			this.featuredProductOptions[key].forEach((value, index) => {
 				if (key !== "Color") {
 					this.querySelector(`.featured-product__radios-container--${key}`).setAttribute("data-selector-type", this.featuredProductVariantSelectorType);
-					if (this.featuredProductVariantSelectorType === "block") {
+					if (this.featuredProductVariantSelectorType === "button") {
 						this.querySelector(`.featured-product__radio__content--${key}`).innerHTML += `
 						<label
 							class="featured-product__radio__label "
@@ -2598,7 +2598,7 @@ class FeaturedProduct extends HTMLElement {
 									`;
 					}
 				} else if (key === "Color") {
-					if (this.featuredProductColorSelectorType === "block") {
+					if (this.featuredProductColorSelectorType === "button") {
 						this.querySelector(`.featured-product__radios-container--${key}`).setAttribute("data-selector-type", this.featuredProductColorSelectorType);
 						this.querySelector(`.featured-product__radio__content--${key}`).innerHTML += `
 											<label
@@ -2721,7 +2721,7 @@ class FeaturedProduct extends HTMLElement {
 		});
 
 		this.querySelectorAll(`.featured-product__radios-container`).forEach((selector) => {
-			if (selector.dataset.selectorType === "block" || selector.dataset.selectorType === "variant_image" || selector.dataset.selectorType === "color_swatch") {
+			if (selector.dataset.selectorType === "button" || selector.dataset.selectorType === "variant_image" || selector.dataset.selectorType === "color_swatch") {
 				selector.querySelectorAll(`input`).forEach((input) => {
 					input.addEventListener("click", () => {
 						selector.querySelectorAll(`input`).forEach((inp) => {

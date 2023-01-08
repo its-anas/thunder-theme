@@ -534,8 +534,8 @@
                     "label": "t:settings_schema.quick_view.settings.quick_view_variant_selector_type.label",
                     "options": [
                          {
-                              "value": "block",
-                              "label": "t:settings_schema.quick_view.settings.quick_view_variant_selector_type.options.block"
+                              "value": "button",
+                              "label": "t:settings_schema.quick_view.settings.quick_view_variant_selector_type.options.button"
                          },
                          {
                               "value": "dropdown",
@@ -551,8 +551,8 @@
                     "info": "t:settings_schema.quick_view.settings.quick_view_color_selector_type.info",
                     "options": [
                          {
-                              "value": "block",
-                              "label": "t:settings_schema.quick_view.settings.quick_view_color_selector_type.options.block"
+                              "value": "button",
+                              "label": "t:settings_schema.quick_view.settings.quick_view_color_selector_type.options.button"
                          },
                          {
                               "value": "dropdown",

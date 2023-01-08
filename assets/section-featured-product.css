@@ -129,6 +129,7 @@
 	cursor: pointer;
 	padding: 1rem;
 	border: 1px solid var(--secondary-text-color);
+	border-radius: var(--global-border-radius);
 }
 
 .featured-product__radio__label.checked {

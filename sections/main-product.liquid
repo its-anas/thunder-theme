@@ -212,7 +212,7 @@
                       <div class="product-page__radios-container">
                         {% if option.name != 'Color' %}
                           <p class="product-page__radio__title">{{ option.name }}</p>
-                          {% if block.settings.variant_selector_type == 'block' %}
+                          {% if block.settings.variant_selector_type == 'button' %}
                             <div class="product-page__radio__content">
                               {% for value in option.values %}
                                 <label
@@ -244,7 +244,7 @@
                           {% endif %}
                         {% elsif option.name == 'Color' %}
                           <p class="product-page__radio__title">{{ option.name }}</p>
-                          {% if block.settings.color_selector_type == 'block' %}
+                          {% if block.settings.color_selector_type == 'button' %}
                             <div class="product-page__radio__content">
                               {% for value in option.values %}
                                 <label
@@ -673,6 +673,12 @@
   
   
   
+  
+  
+  
+  
+  
+  
   let variantsInventory = {};
   {% for variant in product.variants %}
   variantsInventory["{{ variant.title }}"] = {{ variant.inventory_quantity }};
@@ -707,6 +713,12 @@
   let currentVariantInventory = {{ current_variant.inventory_quantity }};
   let stockAlertThreshold = {{ stock_alert_threshold }};
   let priceDifferenceText= "{{ price_difference_text }}";
+
+
+
+
+
+
 
 
 
@@ -825,15 +837,15 @@
           "label": "t:sections.general.variants_selector.settings.variant_selector_type.label",
           "options": [
             {
-              "value": "block",
-              "label": "t:sections.general.variants_selector.settings.variant_selector_type.options.block"
+              "value": "button",
+              "label": "t:sections.general.variants_selector.settings.variant_selector_type.options.button"
             },
             {
               "value": "dropdown",
               "label": "t:sections.general.variants_selector.settings.variant_selector_type.options.dropdown"
             }
           ],
-          "default": "block"
+          "default": "button"
         },
         {
           "type": "select",
@@ -841,8 +853,8 @@
           "label": "t:sections.general.variants_selector.settings.color_selector_type.label",
           "options": [
             {
-              "value": "block",
-              "label": "t:sections.general.variants_selector.settings.color_selector_type.options.block"
+              "value": "button",
+              "label": "t:sections.general.variants_selector.settings.color_selector_type.options.button"
             },
             {
               "value": "dropdown",
@@ -858,7 +870,7 @@
             }
           ],
           "info": "t:sections.general.variants_selector.settings.color_selector_type.info",
-          "default": "block"
+          "default": "button"
         }
       ]
     },
