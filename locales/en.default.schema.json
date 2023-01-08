@@ -65,17 +65,17 @@
                             "block": "Block",
                             "dropdown": "Dropdown"
                         }
+                    },
+                    "color_selector_type": {
+                        "label": "Color selector type",
+                        "info": "For the color swatch to work properly, the product must have variants, every variant must have an image attached to it, every image alt must be written in the format #color:Name, and the color and it's hex must be added in Color swatch tab in theme settings.",
+                        "options": {
+                            "block": "Block",
+                            "dropdown": "Dropdown",
+                            "color_swatch": "Color swatch",
+                            "variant_image": "Variant image"
+                        }
                     }
-                }
-            },
-            "color_selector_type": {
-                "label": "Color selector type",
-                "info": "For the color swatch to work properly, the product must have variants, every variant must have an image attached to it, every image alt must be written in the format #color:Name, and the color and it's hex must be added in Color swatch tab in theme settings.",
-                "options": {
-                    "block": "Block",
-                    "dropdown": "Dropdown",
-                    "color_swatch": "Color swatch",
-                    "variant_image": "Variant image"
                 }
             },
             "menu": "Menu",
@@ -104,6 +104,7 @@
             "vendor": "Vendor",
             "title": "Title",
             "price": "Price",
+            "sale_tag": "Sale tag",
             "settings": "Settings",
             "description": "Description",
             "background_color": "Background color",
@@ -580,6 +581,44 @@
                         "first": "Video first",
                         "second": "Video second"
                     }
+                }
+            }
+        },
+        "main-product": {
+            "name": "Product page",
+            "settings": {
+                "thumbnails_on_mobile": "Show thumbnails on mobile",
+                "stock_alert": {
+                    "name": "Stock alert",
+                    "settings": {
+                        "stock_alert_threshold": "Stock alert threshold"
+                    }
+                }
+            },
+            "blocks": {
+                "buttons": {
+                    "name": "Buttons",
+                    "settings": {
+                        "show_buy_now": "Show 'Buy now' button",
+                        "show_payment_methods": "Show payment methods"
+                    }
+                },
+                "recommended_products": {
+                    "name": "Recommended products",
+                    "settings": {
+                        "content": "Requirement",
+                        "info": "Make sure you have created a custom [metafield](https://help.shopify.com/en/manual/metafields) in [admin settings](/admin/metafields) named \"custom.recommended_products\" and went to the product page and selected the products you want to recommend in the metafields section. Otherwise the recommended products section will not show."
+                    }
+                },
+                "trust_bar": {
+                    "name": "Trust bar",
+                    "settings": {
+                        "icon_1": "Icon 1",
+                        "icon_2": "Icon 2",
+                        "icon_3": "Icon 3"
+                    },
+                    "info": "Applicable only if 'Custom icon - svg' is empty",
+                    "custom_icon_svg": "Custom icon - SVG"
                 }
             }
         }
