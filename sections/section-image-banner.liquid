@@ -103,8 +103,8 @@
               {% if block.settings.primary_button_text != blank %}
                 <a
                   class="button button--primary border"
-                  {% if block.settings.secondary_button_link != blank %}
-                    href="{{ block.settings.primary_button_link }}"
+                  {% if block.settings.secondary_button_url != blank %}
+                    href="{{ block.settings.primary_button_url }}"
                   {% endif %}
                 >
                   <span></span> <span></span> <span></span> <span></span>
@@ -114,8 +114,8 @@
               {% if block.settings.secondary_button_text != blank %}
                 <a
                   class="button button--secondary border"
-                  {% if block.settings.secondary_button_link != blank %}
-                    href="{{ block.settings.secondary_button_link }}"
+                  {% if block.settings.secondary_button_url != blank %}
+                    href="{{ block.settings.secondary_button_url }}"
                   {% endif %}
                 >
                   <span></span> <span></span> <span></span> <span></span>
@@ -188,7 +188,6 @@
       "type": "select",
       "id": "text_alignment",
       "label": "t:sections.general.alignment",
-      "info": "t:sections.general.desktop_only",
       "options": [
         {
           "value": "left",
@@ -265,7 +264,8 @@
     {
       "type": "checkbox",
       "id": "full_screen_height",
-      "label": "t:sections.section-image-banner.settings.full_screen_height",
+      "label": "t:sections.general.full_screen_height",
+      "info": "t:sections.general.full_screen_height_info",
       "default": false
     },
     {
@@ -276,8 +276,7 @@
       "step": 10,
       "unit": "px",
       "label": "t:sections.general.desktop_height",
-      "default": 700,
-      "info": "t:sections.section-image-banner.settings.desktop_mobile_height_info"
+      "default": 700
     },
     {
       "type": "range",
@@ -287,8 +286,7 @@
       "step": 10,
       "unit": "px",
       "label": "t:sections.general.mobile_height",
-      "default": 500,
-      "info": "t:sections.section-image-banner.settings.desktop_mobile_height_info"
+      "default": 500
     },
     {
       "type": "range",
@@ -438,8 +436,8 @@
         },
         {
           "type": "url",
-          "id": "primary_button_link",
-          "label": "t:sections.general.primary_button_link"
+          "id": "primary_button_url",
+          "label": "t:sections.general.primary_button_url"
         },
         {
           "type": "text",
@@ -449,8 +447,8 @@
         },
         {
           "type": "url",
-          "id": "secondary_button_link",
-          "label": "t:sections.general.secondary_button_link"
+          "id": "secondary_button_url",
+          "label": "t:sections.general.secondary_button_url"
         }
       ]
     }

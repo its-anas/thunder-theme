@@ -340,24 +340,16 @@ p[data-spam-detection-disclaimer] > a {
 	text-transform: uppercase;
 }
 
-.text-alignment--center,
-.text-alignment--right,
-.text-alignment--left {
+.text-alignment--center {
 	text-align: center;
 }
 
-@media screen and (min-width: 750px) {
-	.text-alignment--center {
-		text-align: center;
-	}
+.text-alignment--right {
+	text-align: right;
+}
 
-	.text-alignment--right {
-		text-align: right;
-	}
-
-	.text-alignment--left {
-		text-align: left;
-	}
+.text-alignment--left {
+	text-align: left;
 }
 
 .vertical--top {
@@ -2363,7 +2355,7 @@ slider-component .placeholder {
 }
 
 .tag--animated-hover:after {
-	content: "NEW"; 
+	content: "NEW";
 	vertical-align: middle;
 	margin-left: 0.5rem;
 }

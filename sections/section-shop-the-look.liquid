@@ -171,13 +171,13 @@
                   {%- endif -%}
                 </div>
                 <div class="shop-the-look__content">
-                  <p class="shop-the-look__product-title small">
+                  <span class="shop-the-look__product-title">
                     {% if block.settings.product.title == blank %}
                       {{ 'general.placeholder.product' | t }}
                     {% elsif block.settings.product.title != blank %}
                       {{ block.settings.product.title }}
                     {% endif %}
-                  </p>
+                  </span>
                   <div class="shop-the-look__product-price">
                     <p class="price--compare-at">
                       {% if block.settings.product.compare_at_price == blank %}
@@ -212,7 +212,7 @@
                 </div>
               {%- when 'feature' -%}
                 <div class="shop-the-look__feature">
-                  <h6 class="shop-the-look__feature-title">{{ block.settings.feature_title }}</h6>
+                  <span class="shop-the-look__feature-title">{{ block.settings.feature_title }}</span>
                   <p class="shop-the-look__feature-text">
                     {{ block.settings.feature_description }}
                   </p>
@@ -257,47 +257,42 @@
 
 {% schema %}
 {
-  "name": "Shop the look",
+  "name": "t:sections.section-shop-the-look.name",
   "class": "section-shop-the-look",
   "settings": [
     {
       "type": "checkbox",
       "id": "auto_open_selectors",
-      "label": "Auto open the selectors one by one",
+      "label": "t:sections.section-shop-the-look.settings.auto_open_selectors.label",
       "default": true,
-      "info": "It will stop when the user clicks on a selector"
+      "info": "t:sections.section-shop-the-look.settings.auto_open_selectors.info"
     },
     {
       "type": "color",
       "id": "selector_color",
-      "label": "Selector color",
+      "label": "t:sections.section-shop-the-look.settings.selector_color",
       "default": "#000"
     },
     {
       "type": "color",
       "id": "selector_background_color",
-      "label": "Selector background color",
+      "label": "t:sections.section-shop-the-look.settings.selector_background_color",
       "default": "#fff"
     },
     {
       "type": "color",
       "id": "openable_background_color",
-      "label": "Popup background color",
+      "label": "t:sections.section-shop-the-look.settings.openable_background_color",
       "default": "#fff"
     },
     {
       "type": "header",
-      "content": "Image"
+      "content": "t:sections.general.image_desktop"
     },
     {
       "type": "image_picker",
       "id": "image",
-      "label": "Image"
-    },
-    {
-      "type": "image_picker",
-      "id": "mobile_image",
-      "label": "Mobile image"
+      "label": "t:sections.general.image"
     },
     {
       "type": "range",
@@ -306,8 +301,17 @@
       "max": 4,
       "step": 0.1,
       "unit": "a/r",
-      "label": "Desktop aspect ratio",
+      "label": "t:sections.general.aspect_ratio",
       "default": 3
+    },
+    {
+      "type": "header",
+      "content": "t:sections.general.image_mobile"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "t:sections.general.image"
     },
     {
       "type": "range",
@@ -316,23 +320,23 @@
       "max": 2,
       "step": 0.1,
       "unit": "a/r",
-      "label": "Mobile aspect ratio",
+      "label": "t:sections.general.aspect_ratio",
       "default": 1
     },
     {
       "type": "header",
-      "content": "Section"
+      "content": "t:sections.general.section"
     },
     {
       "type": "text",
       "id": "heading",
-      "label": "Heading",
+      "label": "t:sections.general.heading",
       "default": "Shop the look"
     },
     {
       "type": "select",
       "id": "heading_size",
-      "label": "Heading size",
+      "label": "t:sections.general.heading_size",
       "options": [
         {
           "value": "h1",
@@ -368,7 +372,7 @@
       "max": 100,
       "step": 1,
       "unit": "px",
-      "label": "Top space",
+      "label": "t:sections.general.top_space",
       "default": 0
     },
     {
@@ -378,19 +382,23 @@
       "max": 100,
       "step": 1,
       "unit": "px",
-      "label": "Bottom space",
+      "label": "t:sections.general.bottom_space",
       "default": 0
     }
   ],
   "blocks": [
     {
       "type": "product",
-      "name": "Product",
+      "name": "t:sections.general.product",
       "settings": [
         {
           "type": "product",
           "id": "product",
-          "label": "Product"
+          "label": "t:sections.general.product"
+        },
+        {
+          "type": "header",
+          "content": "t:sections.general.desktop"
         },
         {
           "type": "range",
@@ -399,7 +407,7 @@
           "max": 90,
           "step": 1,
           "unit": "%",
-          "label": "Desktop vertical position",
+          "label": "t:sections.general.vertical_position",
           "default": 50
         },
         {
@@ -409,8 +417,12 @@
           "max": 95,
           "step": 1,
           "unit": "%",
-          "label": "Desktop horizontal position",
+          "label": "t:sections.general.horizontal_position",
           "default": 50
+        },
+        {
+          "type": "header",
+          "content": "t:sections.general.mobile"
         },
         {
           "type": "range",
@@ -419,7 +431,7 @@
           "max": 95,
           "step": 1,
           "unit": "%",
-          "label": "Mobile vertical position",
+          "label": "t:sections.general.vertical_position",
           "default": 50
         },
         {
@@ -429,26 +441,30 @@
           "max": 95,
           "step": 1,
           "unit": "%",
-          "label": "Mobile horizontal position",
+          "label": "t:sections.general.horizontal_position",
           "default": 50
         }
       ]
     },
     {
       "type": "feature",
-      "name": "Feature",
+      "name": "t:sections.section-shop-the-look.blocks.feature.name",
       "settings": [
         {
           "type": "text",
           "id": "feature_title",
-          "label": "Feature title",
+          "label": "t:sections.general.title",
           "default": "Feature"
         },
         {
           "type": "text",
           "id": "feature_description",
-          "label": "Feature description",
+          "label": "t:sections.general.description",
           "default": "Put a short description to highlight the feature of the product. For example the material or the color."
+        },
+        {
+          "type": "header",
+          "content": "t:sections.general.desktop"
         },
         {
           "type": "range",
@@ -457,7 +473,7 @@
           "max": 90,
           "step": 1,
           "unit": "%",
-          "label": "Desktop vertical position",
+          "label": "t:sections.general.vertical_position",
           "default": 50
         },
         {
@@ -467,8 +483,12 @@
           "max": 95,
           "step": 1,
           "unit": "%",
-          "label": "Desktop horizontal position",
+          "label": "t:sections.general.horizontal_position",
           "default": 50
+        },
+        {
+          "type": "header",
+          "content": "t:sections.general.mobile"
         },
         {
           "type": "range",
@@ -477,7 +497,7 @@
           "max": 95,
           "step": 1,
           "unit": "%",
-          "label": "Mobile vertical position",
+          "label": "t:sections.general.vertical_position",
           "default": 50
         },
         {
@@ -487,7 +507,7 @@
           "max": 95,
           "step": 1,
           "unit": "%",
-          "label": "Mobile horizontal position",
+          "label": "t:sections.general.horizontal_position",
           "default": 50
         }
       ]

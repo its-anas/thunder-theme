@@ -114,8 +114,8 @@
                 {% if block.settings.primary_button_text != blank %}
                   <a
                     class="button button--primary border"
-                    {% if block.settings.secondary_button_link != blank %}
-                      href="{{ block.settings.primary_button_link }}"
+                    {% if block.settings.secondary_button_url != blank %}
+                      href="{{ block.settings.primary_button_url }}"
                     {% endif %}
                   >
                     <span></span> <span></span> <span></span> <span></span>
@@ -125,8 +125,8 @@
                 {% if block.settings.secondary_button_text != blank %}
                   <a
                     class="button button--secondary border"
-                    {% if block.settings.secondary_button_link != blank %}
-                      href="{{ block.settings.secondary_button_link }}"
+                    {% if block.settings.secondary_button_url != blank %}
+                      href="{{ block.settings.secondary_button_url }}"
                     {% endif %}
                   >
                     <span></span> <span></span> <span></span> <span></span>
@@ -155,13 +155,13 @@
 
 {% schema %}
 {
-  "name": "Slideshow",
+  "name": "t:sections.section-slideshow.name",
   "class": "section-slideshow",
   "settings": [
     {
       "type": "checkbox",
       "id": "enable_autoplay",
-      "label": "Enable autoplay",
+      "label": "t:sections.general.enable_autoplay",
       "default": true
     },
     {
@@ -171,29 +171,29 @@
       "max": 10,
       "step": 1,
       "unit": "s",
-      "label": "Delay time",
+      "label": "t:sections.general.autoplay_delay_time",
       "default": 4
     },
     {
       "type": "header",
-      "content": "Text"
+      "content": "t:sections.general.text"
     },
     {
       "type": "select",
       "id": "vertical_position",
-      "label": "Vertical position",
+      "label": "t:sections.general.vertical_position",
       "options": [
         {
           "value": "top",
-          "label": "Top"
+          "label": "t:sections.general.text_position_vertical.options.top"
         },
         {
           "value": "center",
-          "label": "Center"
+          "label": "t:sections.general.text_position_vertical.options.center"
         },
         {
           "value": "bottom",
-          "label": "Bottom"
+          "label": "t:sections.general.text_position_vertical.options.bottom"
         }
       ],
       "default": "bottom"
@@ -201,20 +201,20 @@
     {
       "type": "select",
       "id": "horizontal_position",
-      "label": "Horizontal position",
-      "info": "Desktop only",
+      "label": "t:sections.general.horizontal_position",
+      "info": "t:sections.general.desktop_only",
       "options": [
         {
           "value": "left",
-          "label": "Left"
+          "label": "t:sections.general.text_position_horizontal.options.left"
         },
         {
           "value": "center",
-          "label": "Center"
+          "label": "t:sections.general.text_position_horizontal.options.center"
         },
         {
           "value": "right",
-          "label": "Right"
+          "label": "t:sections.general.text_position_horizontal.options.right"
         }
       ],
       "default": "left"
@@ -222,20 +222,19 @@
     {
       "type": "select",
       "id": "text_alignment",
-      "label": "Alignment",
-      "info": "Desktop only",
+      "label": "t:sections.general.alignment",
       "options": [
         {
           "value": "left",
-          "label": "Left"
+          "label": "t:sections.general.text_position_horizontal.options.left"
         },
         {
           "value": "center",
-          "label": "Center"
+          "label": "t:sections.general.text_position_horizontal.options.center"
         },
         {
           "value": "right",
-          "label": "Right"
+          "label": "t:sections.general.text_position_horizontal.options.right"
         }
       ],
       "default": "left"
@@ -243,8 +242,8 @@
     {
       "type": "range",
       "id": "text_width",
-      "label": "Width",
-      "info": "Desktop only",
+      "label": "t:sections.general.width",
+      "info": "t:sections.general.desktop_only",
       "min": 40,
       "max": 90,
       "step": 10,
@@ -254,12 +253,12 @@
     {
       "type": "color",
       "id": "text_color",
-      "label": "Color",
+      "label": "t:sections.general.color",
       "default": "#ffffff"
     },
     {
       "type": "header",
-      "content": "Overlay"
+      "content": "t:sections.general.overlay"
     },
     {
       "type": "range",
@@ -268,23 +267,24 @@
       "max": 70,
       "step": 1,
       "unit": "%",
-      "label": "Opacity",
+      "label": "t:sections.general.opacity",
       "default": 10
     },
     {
       "type": "color",
       "id": "overlay_color",
-      "label": "Color",
+      "label": "t:sections.general.color",
       "default": "#000000"
     },
     {
       "type": "header",
-      "content": "Section"
+      "content": "t:sections.general.section"
     },
     {
       "type": "checkbox",
       "id": "full_screen_height",
-      "label": "Full screen height",
+      "label": "t:sections.general.full_screen_height",
+      "info": "t:sections.general.full_screen_height_info",
       "default": false
     },
     {
@@ -294,9 +294,8 @@
       "max": 800,
       "step": 10,
       "unit": "px",
-      "label": "Desktop height",
-      "default": 700,
-      "info": "Applied only if full screen height is disabled"
+      "label": "t:sections.general.desktop_height",
+      "default": 700
     },
     {
       "type": "range",
@@ -305,14 +304,13 @@
       "max": 700,
       "step": 10,
       "unit": "px",
-      "label": "Mobile height",
-      "default": 500,
-      "info": "Applied only if full screen height is disabled"
+      "label": "t:sections.general.mobile_height",
+      "default": 500
     },
     {
       "type": "range",
       "id": "space_between_elements",
-      "label": "Space between elements",
+      "label": "t:sections.general.space_between_elements",
       "min": 1,
       "max": 3,
       "step": 0.5,
@@ -326,7 +324,7 @@
       "max": 100,
       "step": 1,
       "unit": "px",
-      "label": "Top space",
+      "label": "t:sections.general.top_space",
       "default": 0
     },
     {
@@ -336,33 +334,33 @@
       "max": 100,
       "step": 1,
       "unit": "px",
-      "label": "Bottom space",
+      "label": "t:sections.general.bottom_space",
       "default": 0
     }
   ],
   "blocks": [
     {
       "type": "slide",
-      "name": "Slide",
+      "name": "t:sections.section-slideshow.name",
       "settings": [
         {
           "type": "image_picker",
           "id": "image",
-          "label": "Image"
+          "label": "t:sections.general.image"
         },
         {
           "type": "header",
-          "content": "Subheading"
+          "content": "t:sections.general.subheading"
         },
         {
           "type": "text",
           "id": "subheading",
-          "label": "Text"
+          "label": "t:sections.general.text"
         },
         {
           "type": "select",
           "id": "subheading_size",
-          "label": "Size",
+          "label": "t:sections.general.size",
           "options": [
             {
               "value": "h1",
@@ -393,18 +391,18 @@
         },
         {
           "type": "header",
-          "content": "Heading"
+          "content": "t:sections.general.heading"
         },
         {
           "type": "text",
           "id": "heading",
-          "label": "Text",
+          "label": "t:sections.general.text",
           "default": "Slide"
         },
         {
           "type": "select",
           "id": "heading_size",
-          "label": "Size",
+          "label": "t:sections.general.size",
           "options": [
             {
               "value": "h1",
@@ -435,46 +433,46 @@
         },
         {
           "type": "header",
-          "content": "Paragraph"
+          "content": "t:sections.general.text"
         },
         {
           "type": "richtext",
           "id": "text",
-          "label": "Text",
+          "label": "t:sections.general.text",
           "default": "<p>Provide additional context and background information about the slide, and help customers understand the relevance and importance of the content being presented.</p>"
         },
         {
           "type": "header",
-          "content": "Button"
+          "content": "t:sections.general.button"
         },
         {
           "type": "text",
           "id": "primary_button_text",
-          "label": "Primary button text",
+          "label": "t:sections.general.primary_button_text",
           "default": "Primary button"
         },
         {
           "type": "url",
-          "id": "primary_button_link",
-          "label": "Primary button link"
+          "id": "primary_button_url",
+          "label": "t:sections.general.primary_button_url"
         },
         {
           "type": "text",
           "id": "secondary_button_text",
-          "label": "Secondary button text",
+          "label": "t:sections.general.secondary_button_text",
           "default": "Secondary button"
         },
         {
           "type": "url",
-          "id": "secondary_button_link",
-          "label": "Secondary button link"
+          "id": "secondary_button_url",
+          "label": "t:sections.general.secondary_button_url"
         }
       ]
     }
   ],
   "presets": [
     {
-      "name": "Slideshow",
+      "name": "t:sections.section-slideshow.name",
       "blocks": [
         {
           "type": "slide"

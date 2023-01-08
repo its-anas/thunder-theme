@@ -26,6 +26,16 @@
               width: {{ section.settings.text_width }}%;
         }
    }
+   .scrolling-words-container {
+      display: flex;
+      {% if section.settings.text_alignment == "left"%}
+        align-items: flex-start;
+      {% elsif section.settings.text_alignment == "center" %}
+        align-items: center;
+      {% elsif section.settings.text_alignment == "right" %}
+        align-items: flex-end;
+      {% endif %}
+   }
 {%- endstyle -%}
 
 <section reveal-on-scroll class="{{ section.id }} animated-rich-text">
@@ -89,8 +99,8 @@
             {% if block.settings.primary_button_text != blank %}
               <a
                 class="button button--primary border"
-                {% if block.settings.secondary_button_link != blank %}
-                  href="{{ block.settings.primary_button_link }}"
+                {% if block.settings.secondary_button_url != blank %}
+                  href="{{ block.settings.primary_button_url }}"
                 {% endif %}
               >
                 <span></span> <span></span> <span></span> <span></span>
@@ -100,8 +110,8 @@
             {% if block.settings.secondary_button_text != blank %}
               <a
                 class="button button--secondary border"
-                {% if block.settings.secondary_button_link != blank %}
-                  href="{{ block.settings.secondary_button_link }}"
+                {% if block.settings.secondary_button_url != blank %}
+                  href="{{ block.settings.secondary_button_url }}"
                 {% endif %}
               >
                 <span></span> <span></span> <span></span> <span></span>
@@ -144,7 +154,6 @@
       "type": "select",
       "id": "text_alignment",
       "label": "t:sections.general.text_alignment.label",
-      "info": "t:sections.general.desktop_only",
       "options": [
         {
           "value": "left",
@@ -361,7 +370,7 @@
         {
           "type": "checkbox",
           "id": "animated",
-          "label": "t:sections.section-animated-rich-text.blocks.heading.settings.checkbox_animated",
+          "label": "t:sections.general.activate_animation",
           "default": true
         },
         {
@@ -407,7 +416,7 @@
           "max": 10,
           "step": 1,
           "unit": "s",
-          "label": "t:sections.section-animated-rich-text.blocks.heading.settings.animation_delay",
+          "label": "t:sections.general.animation_delay",
           "default": 6
         }
       ]
@@ -438,8 +447,8 @@
         },
         {
           "type": "url",
-          "id": "primary_button_link",
-          "label": "t:sections.general.primary_button_link"
+          "id": "primary_button_url",
+          "label": "t:sections.general.primary_button_url"
         },
         {
           "type": "text",
@@ -448,8 +457,8 @@
         },
         {
           "type": "url",
-          "id": "secondary_button_link",
-          "label": "t:sections.general.secondary_button_link"
+          "id": "secondary_button_url",
+          "label": "t:sections.general.secondary_button_url"
         }
       ]
     }

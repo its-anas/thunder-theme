@@ -192,3 +192,9 @@
 .shop-the-look__feature-text {
 	word-break: break-word;
 }
+
+.shop-the-look__product-title,
+.shop-the-look__feature-title {
+	font-weight: bold;
+	text-transform: uppercase;
+}

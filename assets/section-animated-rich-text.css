@@ -49,7 +49,7 @@
 	overflow: hidden;
 }
 .scrolling-words-box ul {
-	margin: 0 0.625rem;
+	margin: 0;
 	padding: 0;
 }
 .scrolling-words-box ul * {

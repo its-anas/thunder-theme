@@ -12,9 +12,9 @@
                               "heading_size": "h2",
                               "text": "<p>Provide additional context and background information about the slide, and help customers understand the relevance and importance of the content being presented.<\/p>",
                               "primary_button_text": "Primary button",
-                              "primary_button_link": "",
+                              "primary_button_url": "",
                               "secondary_button_text": "Secondary button",
-                              "secondary_button_link": ""
+                              "secondary_button_url": ""
                          }
                     },
                     "section-slideshow-1": {
@@ -26,9 +26,9 @@
                               "heading_size": "h2",
                               "text": "<p>Provide additional context and background information about the slide, and help customers understand the relevance and importance of the content being presented.<\/p>",
                               "primary_button_text": "Primary button",
-                              "primary_button_link": "",
+                              "primary_button_url": "",
                               "secondary_button_text": "Secondary button",
-                              "secondary_button_link": ""
+                              "secondary_button_url": ""
                          }
                     }
                },
@@ -510,9 +510,9 @@
                          "type": "button",
                          "settings": {
                               "primary_button_text": "Primary button",
-                              "primary_button_link": "",
+                              "primary_button_url": "",
                               "secondary_button_text": "Secondary button",
-                              "secondary_button_link": ""
+                              "secondary_button_url": ""
                          }
                     }
                },
@@ -568,9 +568,9 @@
                          "type": "button",
                          "settings": {
                               "primary_button_text": "Primary button",
-                              "primary_button_link": "",
+                              "primary_button_url": "",
                               "secondary_button_text": "",
-                              "secondary_button_link": ""
+                              "secondary_button_url": ""
                          }
                     }
                },
@@ -656,9 +656,9 @@
                          "type": "button",
                          "settings": {
                               "primary_button_text": "Primary button",
-                              "primary_button_link": "",
+                              "primary_button_url": "",
                               "secondary_button_text": "Secondary button",
-                              "secondary_button_link": ""
+                              "secondary_button_url": ""
                          }
                     }
                },
