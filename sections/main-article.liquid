@@ -42,7 +42,7 @@
         {%- when 'picture' -%}
           {% style %}
             .article__picture img {
-              height: {{ block.settings.picture_height }}px;
+              height: {{ block.settings.image_height }}px;
             }
           {% endstyle %}
           {%- if article.image -%}
@@ -230,7 +230,7 @@
 
 {% schema %}
 {
-  "name": "Article",
+  "name": "t:sections.main-article.name",
   "class": "main-article",
   "blocks": [
     {
@@ -238,58 +238,58 @@
     },
     {
       "type": "title",
-      "name": "Title",
+      "name": "t:sections.general.title",
       "limit": 1,
       "settings": [
         {
           "type": "checkbox",
           "id": "show_author",
-          "label": "Show author",
+          "label": "t:sections.main-article.blocks.title.show_author",
           "default": false
         },
         {
           "type": "checkbox",
           "id": "show_date",
-          "label": "Show date",
+          "label": "t:sections.main-article.blocks.title.show_date",
           "default": true
         }
       ]
     },
     {
       "type": "picture",
-      "name": "Picture",
+      "name": "t:sections.general.image",
       "limit": 1,
       "settings": [
         {
           "type": "range",
-          "id": "picture_height",
+          "id": "image_height",
           "min": 400,
           "max": 800,
           "step": 100,
           "unit": "px",
-          "label": "Picture height",
+          "label": "t:sections.general.image_height",
           "default": 400
         }
       ]
     },
     {
       "type": "tags",
-      "name": "Tags",
+      "name": "t:sections.main-article.blocks.tags",
       "limit": 1
     },
     {
       "type": "content",
-      "name": "Content",
+      "name": "t:sections.general.content",
       "limit": 1
     },
     {
       "type": "comments",
-      "name": "Comments",
+      "name": "t:sections.main-article.blocks.comments",
       "limit": 1
     },
     {
       "type": "share",
-      "name": "Share",
+      "name": "t:sections.main-article.blocks.share",
       "limit": 1
     }
   ]

@@ -2,7 +2,7 @@
 
 {% style %}
   .blog__article__image {
-    aspect-ratio: {{ section.settings.article_aspect_ratios }};
+    aspect-ratio: {{ section.settings.article_aspect_ratio }};
   }
 
   @media screen and (min-width: 750px) {
@@ -79,21 +79,21 @@
 
 {% schema %}
 {
-  "name": "Blog",
+  "name": "t:sections.main-blog.name",
   "class": "main-blog",
   "settings": [
     {
       "type": "select",
       "id": "grid_style",
-      "label": "Grid style",
+      "label": "t:sections.main-blog.settings.grid_style.label",
       "options": [
         {
           "value": "collage",
-          "label": "Collage"
+          "label": "t:sections.main-blog.settings.grid_style.options.collage"
         },
         {
           "value": "grid",
-          "label": "Grid"
+          "label": "t:sections.main-blog.settings.grid_style.options.grid"
         }
       ],
       "default": "collage"
@@ -101,26 +101,26 @@
     {
       "type": "checkbox",
       "id": "show_publication_date",
-      "label": "Show publication date",
+      "label": "t:sections.main-blog.settings.show_publication_date",
       "default": true
     },
     {
       "type": "checkbox",
       "id": "show_author",
-      "label": "Show author",
+      "label": "t:sections.main-blog.settings.show_author",
       "default": true
     },
     {
       "type": "header",
-      "content": "Articles"
+      "content": "t:sections.main-blog.settings.articles"
     },
     {
       "type": "range",
-      "id": "article_aspect_ratios",
+      "id": "article_aspect_ratio",
       "min": 1,
       "max": 3,
       "step": 0.1,
-      "label": "Article aspect ratio",
+      "label": "t:sections.main-blog.settings.article_aspect_ratio",
       "default": 1.4
     },
     {
@@ -129,8 +129,8 @@
       "min": 1,
       "max": 3,
       "step": 0.1,
-      "label": "Collage first article aspect ratio",
-      "info": "Only applies to collage style",
+      "label": "t:sections.main-blog.settings.collage_first_article_aspect_ratio",
+      "info": "t:sections.main-blog.settings.collage_first_article_info",
       "default": 2.5
     },
     {
@@ -139,7 +139,7 @@
       "min": 8,
       "max": 50,
       "step": 1,
-      "label": "Articles per page",
+      "label": "t:sections.main-blog.settings.articles_per_page",
       "default": 24
     },
     {
@@ -148,7 +148,7 @@
       "min": 2,
       "max": 5,
       "step": 1,
-      "label": "Articles per row - desktop/tablet",
+      "label": "t:sections.main-blog.settings.articles_per_row",
       "default": 2
     }
   ]

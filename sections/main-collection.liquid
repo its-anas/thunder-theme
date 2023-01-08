@@ -186,24 +186,24 @@
 
 {% schema %}
 {
-  "name": "Collection",
+  "name": "t:sections.main-collection.name",
   "class": "main-collection",
   "settings": [
     {
       "type": "checkbox",
       "id": "show_filter",
-      "label": "Show filter",
+      "label": "t:sections.general.show_filter",
       "default": true
     },
     {
       "type": "checkbox",
       "id": "filters_expanded_at_start",
-      "label": "Filters expanded at start",
+      "label": "t:sections.general.filters_expanded_at_start",
       "default": true
     },
     {
       "type": "header",
-      "content": "Products"
+      "content": "t:sections.general.products"
     },
     {
       "type": "range",
@@ -211,7 +211,7 @@
       "min": 8,
       "max": 50,
       "step": 1,
-      "label": "Products per page",
+      "label": "t:sections.general.search_results.products_per_page",
       "default": 24
     },
     {
@@ -220,13 +220,13 @@
       "min": 3,
       "max": 6,
       "step": 1,
-      "label": "Products per row - desktop/tablet",
+      "label": "t:sections.general.search_results.products_per_row_desktop",
       "default": 4
     },
     {
       "type": "select",
       "id": "products_per_row_mobile",
-      "label": "Products per row - mobile",
+      "label": "t:sections.general.search_results.products_per_row_mobile",
       "options": [
         {
           "value": "1",

@@ -71,32 +71,44 @@
 
 {% schema %}
 {
-  "name": "Product tabs",
+  "name": "t:sections.main-product-tabs.name",
   "class": "main-product-tabs",
   "blocks": [
     {
       "type": "@app"
     },
-    { "type": "product_description_tab", "limit": 1, "name": "Product description", "limit": 1, "settings": [] },
+    {
+      "type": "product_description_tab",
+      "limit": 1,
+      "name": "t:sections.main-product-tabs.blocks.product_description_tab",
+      "limit": 1,
+      "settings": []
+    },
     {
       "type": "tab",
-      "name": "Tab",
+      "name": "t:sections.main-product-tabs.blocks.tab.name",
       "settings": [
         {
           "type": "text",
           "id": "tab_title",
-          "label": "Tab title",
+          "label": "t:sections.main-product-tabs.blocks.tab.settings.tab_title",
           "default": "Tab title"
         },
         {
           "type": "richtext",
           "id": "tab_content",
-          "label": "Tab content",
+          "label": "t:sections.main-product-tabs.blocks.tab.settings.tab_content",
           "default": "<p>Provide a description of the product, their features and benefits, or any other relevant details or information.</p>"
         }
       ]
     },
-    { "type": "share_buttons", "limit": 1, "name": "Share buttons", "limit": 1, "settings": [] }
+    {
+      "type": "share_buttons",
+      "limit": 1,
+      "name": "t:sections.main-product-tabs.blocks.share_buttons",
+      "limit": 1,
+      "settings": []
+    }
   ]
 }
 {% endschema %}

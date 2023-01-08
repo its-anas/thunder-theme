@@ -76,24 +76,24 @@
 
 {% schema %}
 {
-  "name": "Collections list",
+  "name": "t:sections.main-collections-list.name",
   "class": "main-collections-list",
   "settings": [
     {
       "type": "checkbox",
       "id": "show_collection_title",
-      "label": "Show collection title",
+      "label": "t:sections.main-collections-list.settings.show_collection_title",
       "default": true
     },
     {
       "type": "color",
       "id": "text_color",
-      "label": "Text color",
+      "label": "t:sections.general.text_color",
       "default": "#fff"
     },
     {
       "type": "header",
-      "content": "Collections"
+      "content": "t:sections.main-collections-list.settings.collections"
     },
     {
       "type": "range",
@@ -101,7 +101,7 @@
       "min": 8,
       "max": 50,
       "step": 1,
-      "label": "Collections per page",
+      "label": "t:sections.main-collections-list.settings.collections_per_page",
       "default": 24
     },
     {
@@ -110,13 +110,13 @@
       "min": 3,
       "max": 6,
       "step": 1,
-      "label": "Collections per row - Desktop",
+      "label": "t:sections.main-collections-list.settings.collections_per_row_desktop",
       "default": 3
     },
     {
       "type": "select",
       "id": "collections_per_row_mobile",
-      "label": "Collections per row - Mobile",
+      "label": "t:sections.main-collections-list.settings.collections_per_row_mobile",
       "options": [
         {
           "value": "1",

@@ -81,6 +81,7 @@
             "menu": "Menu",
             "collection": "Collection",
             "product": "Product",
+            "Products": "Products",
             "product_url": "Product URL",
             "content": "Content",
             "blog": "Blog",
@@ -95,6 +96,7 @@
             "height_width": "Height/Width",
             "image_desktop": "Image - desktop",
             "image_mobile": "Image - mobile",
+            "image_height": "Image height",
             "size": "Size",
             "border_width": "Border width",
             "border_color": "Border color",
@@ -111,7 +113,10 @@
             "text_color": "Text color",
             "overlay": "Overlay",
             "opacity": "Opacity",
+            "section_height": "Section height",
             "height": "Height",
+            "show_filter": "Show filter",
+            "filters_expanded_at_start": "Filters expanded at start",
             "desktop_height": "Desktop height",
             "mobile_height": "Mobile height",
             "full_screen_height": "Full screen height",
@@ -123,6 +128,11 @@
                 "tablet_items": "Products per row - tablet",
                 "desktop_items": "Products per row - desktop",
                 "items_limit": "Maximum number of products"
+            },
+            "search_results": {
+                "products_per_page": "Maximum number of products per page",
+                "products_per_row_desktop": "Products per row - desktop/tablet",
+                "products_per_row_mobile": "Products per row - mobile"
             },
             "icon": "Icon",
             "icon_size": "Icon size",
@@ -407,7 +417,6 @@
             "name": "FAQ",
             "settings": {
                 "show_image": "Show image",
-                "image_height": "Image height",
                 "tabs_width": "Tabs width"
             },
             "blocks": {
@@ -585,7 +594,7 @@
             }
         },
         "main-product": {
-            "name": "Product page",
+            "name": "Product",
             "settings": {
                 "thumbnails_on_mobile": "Show thumbnails on mobile",
                 "stock_alert": {
@@ -620,6 +629,85 @@
                     "info": "Applicable only if 'Custom icon - svg' is empty",
                     "custom_icon_svg": "Custom icon - SVG"
                 }
+            }
+        },
+        "main-product-tabs": {
+            "name": "Product tabs",
+            "blocks": {
+                "product_description_tab": "Product description",
+                "tab": {
+                    "name": "Tab",
+                    "settings": {
+                        "tab_title": "Tab title",
+                        "tab_content": "Tab content"
+                    }
+                },
+                "share_buttons": "Share buttons"
+            }
+        },
+        "main-collection-header": {
+            "name": "Collection header",
+            "settings": {
+                "show_collection_image": "Show collection image"
+            }
+        },
+        "main-collection": {
+            "name": "Collection"
+        },
+        "main-search": {
+            "name": "Search"
+        },
+        "main-collections-list": {
+            "name": "Collections list",
+            "settings": {
+                "collections": "Collections",
+                "show_collection_title": "Show collection title",
+                "collections_per_page": "Collections per page",
+                "collections_per_row_desktop": "Collections per row - desktop",
+                "collections_per_row_mobile": "Collections per row - mobile"
+            }
+        },
+        "main-page": {
+            "name": "Page"
+        },
+        "main-blog": {
+            "name": "Blog",
+            "settings": {
+                "grid_style": {
+                    "label": "Grid style",
+                    "options": {
+                        "collage": "Collage",
+                        "grid": "Grid"
+                    }
+                },
+                "show_publication_date": "Show publication date",
+                "show_author": "Show author",
+                "articles": "Articles",
+                "article_aspect_ratio": "Article aspect ratio",
+                "collage_first_article_aspect_ratio": "Collage first article aspect ratio",
+                "collage_first_article_info": "Applied only if 'Collage' is selected",
+                "articles_per_page": "Articles per page",
+                "articles_per_row": "Articles per row - desktop/tablet"
+            }
+        },
+        "main-article": {
+            "name": "Article",
+            "blocks": {
+                "title": {
+                    "show_author": "Show author",
+                    "show_date": "Show date"
+                },
+                "tags": "Tags",
+                "comments": "Comments",
+                "share": "Share"
+            }
+        },
+        "main-cart": {
+            "name": "Cart",
+            "blocks": {
+                "total_price": "Total price",
+                "checkout_button": "Checkout button",
+                "order_note": "Order note"
             }
         }
     }
