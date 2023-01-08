@@ -1,5 +1,180 @@
 {
-    "settings_schema": {},
+    "settings_schema": {
+        "typography": {
+            "name": "Typography",
+            "settings": {
+                "headings": "Headings",
+                "heading_font_type": "Heading font type",
+                "heading_style": {
+                    "label": "Heading style",
+                    "options": {
+                        "normal": "Normal",
+                        "uppercase": "Uppercase"
+                    }
+                },
+                "body_text": "Body text",
+                "font_type": "Font type",
+                "font_size": "Font size",
+                "type_scale": "Type scale"
+            }
+        },
+        "colors": {
+            "name": "Colors",
+            "settings": {
+                "text": "Text",
+                "heading_color": "Heading",
+                "body_text_color": "Body text",
+                "secondary_text_color": "Secondary text",
+                "link_color": "Link",
+                "supplementary_colors": "Supplementary colors",
+                "accent_color_1": "Accent 1",
+                "sale_tag_text_color": "Sale tag text",
+                "sale_tag_background_color": "Sale tag background color",
+                "icon_color": "Icon",
+                "error_success": "Error/Success",
+                "error_text_color": "Error text",
+                "error_text_color_info": "Impact the stock alert text and discounted price text too.",
+                "error_background_color": "Error background",
+                "success_text_color": "Success text",
+                "success_background_color": "Success background",
+                "background": "Background",
+                "background_color": "Background",
+                "secondary_background_color": "Secondary background",
+                "global_border": "Global border",
+                "global_border_color": "Border",
+                "header": "Header",
+                "header_text_color": "Text",
+                "header_text_color_info": "Impacts the icons in the header as well.",
+                "header_background_color": "Background",
+                "footer": "Footer",
+                "footer_text_color": "Text",
+                "footer_background_color": "Background",
+                "primary_button": "Primary button",
+                "primary_button_text_color": "Text",
+                "primary_button_background_color": "Background",
+                "primary_button_border_color": "Border",
+                "secondary_button": "Secondary button",
+                "secondary_button_text_color": "Text",
+                "secondary_button_background_color": "Background",
+                "secondary_button_border_color": "Border",
+                "buttons_animation": "Buttons animation",
+                "button_text_border_hover_color": "Text\/border on hover",
+                "button_background_hover_color": "Background on hover",
+                "button_animation_color": "Animated border"
+            }
+        },
+        "payment_methods": {
+            "name": "Payment methods",
+            "settings": {
+                "payment_methods_type": {
+                    "label": "Payment methods type",
+                    "options": {
+                        "enabled": "Option 1: Show the enabled payment methods only",
+                        "chosen": "Option 2: Pick which payment methods to show"
+                    }
+                },
+                "chosen_payment_methods": {
+                    "label": "Option 2: Pick which payment methods to show",
+                    "info": "All available payment methods: afterpay,american_express,apple_pay,bitcoin,dankort,diners_club,discover,dogecoin,dwolla,facebook_pay,forbrugsforeningen,google_pay,ideal,jcb,klarna,klarna-pay-later,litecoin,maestro,master,paypal,shopify_pay,sofort,visa"
+                }
+            }
+        },
+        "appearance": {
+            "name": "Appearance",
+            "settings": {
+                "borders": "Borders",
+                "global_border_width": "Global border width",
+                "global_border_radius": "Global border radius",
+                "show_corner_effect": {
+                    "label": "Show animated border corners",
+                    "info": "Applies only to products listed in collection pages and some sections"
+                },
+                "tags": "Tags",
+                "animate_tags": "Animate tags",
+                "new_tag": "Show 'NEW' tag for new products",
+                "new_tag_time": {
+                    "label": "'NEW' tag count back",
+                    "info": "Show the 'NEW' tag if the product is published in the last X days"
+                },
+                "button": "Button",
+                "button_border_width": "Button border width",
+                "button_symbol": {
+                    "label": "Button symbol",
+                    "info": "A symbol that shows up after buttons and links. e.g. 🢂➜⮕➾⤑↬⮞➤⪢⋙⇌➥↠"
+                }
+            }
+        },
+        "header": {
+            "name": "Header",
+            "settings": {
+                "header_layout": {
+                    "label": "Header layout",
+                    "options": {
+                        "header_first": "Header first, announcement bar second",
+                        "header_second": "Announcement bar first, header second"
+                    }
+                },
+                "header_full_width": "Full width header"
+            }
+        },
+        "color_swatch": {
+            "name": "Color swatch",
+            "settings": {
+                "color_swatch_list": "List of colors and their hex codes"
+            }
+        },
+        "social_media": {
+            "name": "Social media",
+            "settings": {
+                "social_facebook_link": "Facebook link",
+                "social_instagram_link": "Instagram link",
+                "social_twitter_link": "Twitter link",
+                "social_pinterest_link": "Pinterest link",
+                "social_tiktok_link": "TikTok link",
+                "social_snapchat_link": "Snapchat link",
+                "social_youtube_link": "Youtube link",
+                "social_vimeo_link": "Vimeo link"
+            }
+        },
+        "cart": {
+            "name": "Cart",
+            "settings": {
+                "cart_type": {
+                    "label": "Cart type",
+                    "options": {
+                        "drawer": "Drawer",
+                        "page": "Page"
+                    }
+                },
+                "free_shipping_threshold": {
+                    "label": "Free shipping bar minimum order value",
+                    "info": "Enter numbers only without currency symbol or commas (e.g. 100)"
+                }
+            }
+        },
+        "quick_view": {
+            "name": "Quick view",
+            "settings": {
+                "quick_view_variant_selector_type": {
+                    "label": "Variant selector type",
+                    "options": {
+                        "block": "Block",
+                        "dropdown": "Dropdown"
+                    }
+                },
+                "quick_view_color_selector_type": {
+                    "label": "Color selector type",
+                    "info": "For the color swatch to work properly, the product must have variants, every variant must have an image attached to it, every image alt must be written in the format #color:name, and the color and it's hex must be added in Color swatch tab in theme settings.",
+                    "options": {
+                        "block": "Block",
+                        "dropdown": "Dropdown",
+                        "color_swatch": "Color swatch",
+                        "variant_image": "Variant image"
+                    }
+                }
+            }
+        }
+    },
     "sections": {
         "general": {
             "text": "Text",

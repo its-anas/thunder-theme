@@ -8,48 +8,48 @@
           "theme_support_url": "https:\/\/shopify.com"
      },
      {
-          "name": "Typography",
+          "name": "t:settings_schema.typography.name",
           "settings": [
                {
                     "type": "header",
-                    "content": "Headings"
+                    "content": "t:settings_schema.typography.settings.headings"
                },
                {
                     "type": "font_picker",
-                    "id": "headings_font_type",
-                    "label": "Heading font type",
+                    "id": "heading_font_type",
+                    "label": "t:settings_schema.typography.settings.heading_font_type",
                     "default": "montserrat_n5"
                },
                {
                     "type": "select",
-                    "id": "headings_style",
-                    "label": "Headings style",
+                    "id": "heading_style",
+                    "label": "t:settings_schema.typography.settings.heading_style.label",
                     "options": [
                          {
                               "value": "normal",
-                              "label": "Normal"
+                              "label": "t:settings_schema.typography.settings.heading_style.options.normal"
                          },
                          {
                               "value": "uppercase",
-                              "label": "Uppercase"
+                              "label": "t:settings_schema.typography.settings.heading_style.options.uppercase"
                          }
                     ],
                     "default": "uppercase"
                },
                {
                     "type": "header",
-                    "content": "Text color"
+                    "content": "t:settings_schema.typography.settings.body_text"
                },
                {
                     "type": "font_picker",
                     "id": "font_type",
-                    "label": "Font type",
+                    "label": "t:settings_schema.typography.settings.font_type",
                     "default": "montserrat_n5"
                },
                {
                     "type": "range",
                     "id": "size",
-                    "label": "Font size",
+                    "label": "t:settings_schema.typography.settings.font_size",
                     "min": 12,
                     "max": 20,
                     "step": 1,
@@ -58,7 +58,7 @@
                },
                {
                     "type": "header",
-                    "content": "Type Scale "
+                    "content": "t:settings_schema.typography.settings.type_scale"
                },
                {
                     "type": "select",
@@ -66,23 +66,23 @@
                     "options": [
                          {
                               "value": "1.125",
-                              "label": "1.125 - Major Second"
+                              "label": "1.125"
                          },
                          {
                               "value": "1.200",
-                              "label": "1.125 - Minor Third"
+                              "label": "1.200"
                          },
                          {
                               "value": "1.250",
-                              "label": "1.250 - Major Third"
+                              "label": "1.250"
                          },
                          {
                               "value": "1.333",
-                              "label": "1.333 - Perfect Fourth"
+                              "label": "1.333"
                          },
                          {
                               "value": "1.414",
-                              "label": "1.414 - Augmented Fourth"
+                              "label": "1.414"
                          }
                     ],
                     "default": "1.250"
@@ -90,233 +90,233 @@
           ]
      },
      {
-          "name": "Colors",
+          "name": "t:settings_schema.colors.name",
           "settings": [
                {
                     "type": "header",
-                    "content": "Text"
+                    "content": "t:settings_schema.colors.settings.text"
                },
                {
                     "type": "color",
                     "id": "heading_color",
-                    "label": "Heading",
+                    "label": "t:settings_schema.colors.settings.heading_color",
                     "default": "#fff"
                },
                {
                     "type": "color",
                     "id": "body_text_color",
-                    "label": "Body text",
+                    "label": "t:settings_schema.colors.settings.body_text_color",
                     "default": "#fff"
                },
                {
                     "type": "color",
                     "id": "secondary_text_color",
-                    "label": "Secondary text",
+                    "label": "t:settings_schema.colors.settings.secondary_text_color",
                     "default": "#aaaaaa"
                },
                {
                     "type": "color",
                     "id": "link_color",
-                    "label": "Link",
+                    "label": "t:settings_schema.colors.settings.link_color",
                     "default": "#fcdb33"
                },
                {
                     "type": "header",
-                    "content": "Supplementary colors"
+                    "content": "t:settings_schema.colors.settings.supplementary_colors"
                },
                {
                     "type": "color",
                     "id": "accent_color_1",
-                    "label": "Accent 1",
+                    "label": "t:settings_schema.colors.settings.accent_color_1",
                     "default": "#fcdb33"
                },
                {
                     "type": "color",
                     "id": "sale_tag_text_color",
-                    "label": "Sale tag text",
+                    "label": "t:settings_schema.colors.settings.sale_tag_text_color",
                     "default": "#000"
                },
                {
                     "type": "color",
                     "id": "sale_tag_background_color",
-                    "label": "Sale tag background",
+                    "label": "t:settings_schema.colors.settings.sale_tag_background_color",
                     "default": "#fcdb33"
                },
                {
                     "type": "color",
                     "id": "icon_color",
-                    "label": "Icon",
+                    "label": "t:settings_schema.colors.settings.icon_color",
                     "default": "#fff"
                },
                {
                     "type": "header",
-                    "content": "Error/success"
+                    "content": "t:settings_schema.colors.settings.error_success"
                },
                {
                     "type": "color",
                     "id": "error_text_color",
-                    "label": "Error text",
+                    "label": "t:settings_schema.colors.settings.error_text_color",
                     "default": "#7b0000",
-                    "info": "Impact the stock alert text and discounted price text too."
+                    "info": "t:settings_schema.colors.settings.error_text_color_info"
                },
                {
                     "type": "color",
                     "id": "error_background_color",
-                    "label": "Error background",
+                    "label": "t:settings_schema.colors.settings.error_background_color",
                     "default": "#ffbebe"
                },
                {
                     "type": "color",
                     "id": "success_text_color",
-                    "label": "Success text",
+                    "label": "t:settings_schema.colors.settings.success_text_color",
                     "default": "#097b00"
                },
                {
                     "type": "color",
                     "id": "success_background_color",
-                    "label": "Success background",
+                    "label": "t:settings_schema.colors.settings.success_background_color",
                     "default": "#beffc0"
                },
                {
                     "type": "header",
-                    "content": "Background"
+                    "content": "t:settings_schema.colors.settings.background"
                },
                {
                     "type": "color",
                     "id": "background_color",
-                    "label": "Background",
+                    "label": "t:settings_schema.colors.settings.background_color",
                     "default": "#000000"
                },
                {
                     "type": "color",
                     "id": "secondary_background_color",
-                    "label": "Secondary background",
+                    "label": "t:settings_schema.colors.settings.secondary_background_color",
                     "default": "#222"
                },
                {
                     "type": "header",
-                    "content": "Global border"
+                    "content": "t:settings_schema.colors.settings.global_border"
                },
                {
                     "type": "color",
                     "id": "global_border_color",
-                    "label": "Border color",
+                    "label": "t:settings_schema.colors.settings.global_border_color",
                     "default": "#fff"
                },
                {
                     "type": "header",
-                    "content": "Header"
+                    "content": "t:settings_schema.colors.settings.header"
                },
                {
                     "type": "color",
                     "id": "header_text_color",
-                    "label": "Text",
+                    "label": "t:settings_schema.colors.settings.header_text_color",
                     "default": "#fff",
-                    "info": "Impacts the icons in the header as well."
+                    "info": "t:settings_schema.colors.settings.header_text_color_info"
                },
                {
                     "type": "color",
                     "id": "header_background_color",
-                    "label": "Background",
+                    "label": "t:settings_schema.colors.settings.header_background_color",
                     "default": "#000"
                },
                {
                     "type": "header",
-                    "content": "Footer"
+                    "content": "t:settings_schema.colors.settings.footer"
                },
                {
                     "type": "color",
                     "id": "footer_text_color",
-                    "label": "Text",
+                    "label": "t:settings_schema.colors.settings.footer_text_color",
                     "default": "#fff"
                },
                {
                     "type": "color",
                     "id": "footer_background_color",
-                    "label": "Background",
+                    "label": "t:settings_schema.colors.settings.footer_background_color",
                     "default": "#282828"
                },
                {
                     "type": "header",
-                    "content": "Primary button"
+                    "content": "t:settings_schema.colors.settings.primary_button"
                },
                {
                     "type": "color",
                     "id": "primary_button_text_color",
-                    "label": "Text",
+                    "label": "t:settings_schema.colors.settings.primary_button_text_color",
                     "default": "#000000"
                },
                {
                     "type": "color",
                     "id": "primary_button_background_color",
-                    "label": "Background",
+                    "label": "t:settings_schema.colors.settings.primary_button_background_color",
                     "default": "#fcdb33"
                },
                {
                     "type": "color",
                     "id": "primary_button_border_color",
-                    "label": "Border",
+                    "label": "t:settings_schema.colors.settings.primary_button_border_color",
                     "default": "#fcdb33"
                },
                {
                     "type": "header",
-                    "content": "Secondary button"
+                    "content": "t:settings_schema.colors.settings.secondary_button"
                },
                {
                     "type": "color",
                     "id": "secondary_button_text_color",
-                    "label": "Text",
+                    "label": "t:settings_schema.colors.settings.secondary_button_text_color",
                     "default": "#fcdb33"
                },
                {
                     "type": "color",
                     "id": "secondary_button_background_color",
-                    "label": "Background"
+                    "label": "t:settings_schema.colors.settings.secondary_button_background_color"
                },
                {
                     "type": "color",
                     "id": "secondary_button_border_color",
-                    "label": "Border",
+                    "label": "t:settings_schema.colors.settings.secondary_button_border_color",
                     "default": "#fcdb33"
                },
                {
                     "type": "header",
-                    "content": "Buttons animation"
+                    "content": "t:settings_schema.colors.settings.buttons_animation"
                },
                {
                     "type": "color",
                     "id": "button_text_border_hover_color",
-                    "label": "Text\/border on hover",
+                    "label": "t:settings_schema.colors.settings.button_text_border_hover_color",
                     "default": "#fff"
                },
                {
                     "type": "color",
                     "id": "button_background_hover_color",
-                    "label": "Background on hover"
+                    "label": "t:settings_schema.colors.settings.button_background_hover_color"
                },
                {
                     "type": "color",
                     "id": "button_animation_color",
-                    "label": "Animated border",
+                    "label": "t:settings_schema.colors.settings.button_animation_color",
                     "default": "#fcdb33"
                }
           ]
      },
      {
-          "name": "Payment methods",
+          "name": "t:settings_schema.payment_methods.name",
           "settings": [
                {
                     "type": "select",
                     "id": "payment_methods_type",
-                    "label": "Payment methods type",
+                    "label": "t:settings_schema.payment_methods.settings.payment_methods_type.label",
                     "options": [
                          {
                               "value": "enabled",
-                              "label": "Option 1: Show the enabled payment methods only"
+                              "label": "t:settings_schema.payment_methods.settings.payment_methods_type.options.enabled"
                          },
                          {
                               "value": "chosen",
-                              "label": "Option 2: Pick which payment methods to show"
+                              "label": "t:settings_schema.payment_methods.settings.payment_methods_type.options.chosen"
                          }
                     ],
                     "default": "enabled"
@@ -324,18 +324,18 @@
                {
                     "type": "text",
                     "id": "chosen_payment_methods",
-                    "label": "Option 2: Pick which payment methods to show",
-                    "default": "paypal,visa,master,american_express,discover,shopify_pay",
-                    "info": "All available payment methods: afterpay,american_express,apple_pay,bitcoin,dankort,diners_club,discover,dogecoin,dwolla,facebook_pay,forbrugsforeningen,google_pay,ideal,jcb,klarna,klarna-pay-later,litecoin,maestro,master,paypal,shopify_pay,sofort,visa"
+                    "label": "t:settings_schema.payment_methods.settings.chosen_payment_methods.label",
+                    "info": "t:settings_schema.payment_methods.settings.chosen_payment_methods.info",
+                    "default": "paypal,visa,master,american_express,discover,shopify_pay"
                }
           ]
      },
      {
-          "name": "Appearance",
+          "name": "t:settings_schema.appearance.name",
           "settings": [
                {
                     "type": "header",
-                    "content": "Borders"
+                    "content": "t:settings_schema.appearance.settings.borders"
                },
                {
                     "type": "range",
@@ -344,7 +344,7 @@
                     "max": 3,
                     "step": 1,
                     "unit": "px",
-                    "label": "Global border width",
+                    "label": "t:settings_schema.appearance.settings.global_border_width",
                     "default": 2
                },
                {
@@ -354,37 +354,37 @@
                     "max": 25,
                     "step": 1,
                     "unit": "px",
-                    "label": "Global border radius",
+                    "label": "t:settings_schema.appearance.settings.global_border_radius",
                     "default": 0
                },
                {
                     "type": "checkbox",
                     "id": "show_corner_effect",
                     "default": true,
-                    "label": "Show animated border corners",
-                    "info": "Applies only to products listed in collection pages and some sections"
+                    "label": "t:settings_schema.appearance.settings.show_corner_effect.label",
+                    "info": "t:settings_schema.appearance.settings.show_corner_effect.info"
                },
                {
                     "type": "header",
-                    "content": "Tags"
+                    "content": "t:settings_schema.appearance.settings.tags"
                },
                {
                     "type": "checkbox",
                     "id": "animate_tags",
                     "default": true,
-                    "label": "Animate tags"
+                    "label": "t:settings_schema.appearance.settings.animate_tags"
                },
                {
                     "type": "checkbox",
                     "id": "new_tag",
-                    "label": "Show 'NEW' tag for new products",
+                    "label": "t:settings_schema.appearance.settings.new_tag",
                     "default": true
                },
                {
                     "type": "range",
                     "id": "new_tag_time",
-                    "label": "'NEW' tag count back",
-                    "info": "Show the 'NEW' tag if the product is published in the last X days",
+                    "label": "'t:settings_schema.appearance.settings.new_tag_time.label'",
+                    "info": "t:settings_schema.appearance.settings.new_tag_time.info",
                     "min": 0,
                     "max": 90,
                     "step": 1,
@@ -393,12 +393,12 @@
                },
                {
                     "type": "header",
-                    "content": "Button"
+                    "content": "t:settings_schema.appearance.settings.button"
                },
                {
                     "type": "range",
                     "id": "button_border_width",
-                    "label": "Button border width",
+                    "label": "t:settings_schema.appearance.settings.button_border_width",
                     "min": 1,
                     "max": 5,
                     "step": 1,
@@ -408,27 +408,27 @@
                {
                     "type": "text",
                     "id": "button_symbol",
-                    "label": "Button symbol",
-                    "info": "A symbol that shows up after buttons and links. e.g. 🢂➜⮕➾⤑↬⮞➤⪢⋙⇌➥↠",
+                    "label": "t:settings_schema.appearance.settings.button_symbol.label",
+                    "info": "t:settings_schema.appearance.settings.button_symbol.info",
                     "default": "➜"
                }
           ]
      },
      {
-          "name": "Header",
+          "name": "t:settings_schema.header.name",
           "settings": [
                {
                     "type": "select",
                     "id": "header_layout",
-                    "label": "Header layout",
+                    "label": "t:settings_schema.header.settings.header_layout.label",
                     "options": [
                          {
                               "value": "header_first",
-                              "label": "Header first, announcement bar second"
+                              "label": "t:settings_schema.header.settings.header_layout.options.header_first"
                          },
                          {
                               "value": "header_second",
-                              "label": "Announcement bar first, header second"
+                              "label": "t:settings_schema.header.settings.header_layout.options.header_second"
                          }
                     ],
                     "default": "header_first"
@@ -436,82 +436,82 @@
                {
                     "type": "checkbox",
                     "id": "header_full_width",
-                    "label": "Full width header",
+                    "label": "t:settings_schema.header.settings.header_full_width",
                     "default": false
                }
           ]
      },
      {
-          "name": "Color swatch",
+          "name": "t:settings_schema.color_swatch.name",
           "settings": [
                {
                     "type": "textarea",
                     "id": "color_swatch_list",
-                    "label": "List of colors and their hex codes",
+                    "label": "t:settings_schema.color_swatch.settings.color_swatch_list",
                     "default": "Black:#000000, White:#fff, Red:#ff0000, Green:#00ff00, Blue:#0000ff, Gold:#FFD700, Grey:#808080, Purple:#800080"
                }
           ]
      },
      {
-          "name": "Social media",
+          "name": "t:settings_schema.social_media.name",
           "settings": [
                {
                     "type": "url",
                     "id": "social_facebook_link",
-                    "label": "Facebook link"
+                    "label": "t:settings_schema.social_media.settings.social_facebook_link"
                },
                {
                     "type": "url",
                     "id": "social_instagram_link",
-                    "label": "Instagram link"
+                    "label": "t:settings_schema.social_media.settings.social_instagram_link"
                },
                {
                     "type": "url",
                     "id": "social_twitter_link",
-                    "label": "Twitter link"
+                    "label": "t:settings_schema.social_media.settings.social_twitter_link"
                },
                {
                     "type": "url",
                     "id": "social_pinterest_link",
-                    "label": "Pinterest link"
+                    "label": "t:settings_schema.social_media.settings.social_pinterest_link"
                },
                {
                     "type": "url",
                     "id": "social_tiktok_link",
-                    "label": "TikTok link"
+                    "label": "t:settings_schema.social_media.settings.social_tiktok_link"
                },
                {
                     "type": "url",
                     "id": "social_snapchat_link",
-                    "label": "Snapchat link"
+                    "label": "t:settings_schema.social_media.settings.social_snapchat_link"
                },
                {
                     "type": "url",
                     "id": "social_youtube_link",
-                    "label": "YouTube link"
+                    "label": "t:settings_schema.social_media.settings.social_youtube_link"
                },
                {
                     "type": "url",
                     "id": "social_vimeo_link",
-                    "label": "Vimeo link"
+                    "label": "t:settings_schema.social_media.settings.social_vimeo_link"
                }
           ]
      },
      {
-          "name": "Cart",
+          "name": "t:settings_schema.cart.name",
           "settings": [
                {
                     "type": "select",
                     "id": "cart_type",
-                    "label": "Cart type",
+                    "label": "t:settings_schema.cart.settings.cart_type.label",
                     "options": [
                          {
-                              "value": "cart_page",
-                              "label": "Page"
+                              "value": "drawer",
+                              "label": "t:settings_schema.cart.settings.cart_type.options.drawer"
                          },
                          {
-                              "value": "drawer",
-                              "label": "Drawer"
+                              "value": "cart_page",
+                              "label": "t:settings_schema.cart.settings.cart_type.options.page"
                          }
                     ],
                     "default": "drawer"
@@ -519,27 +519,27 @@
                {
                     "type": "text",
                     "id": "free_shipping_threshold",
-                    "label": "Free shipping minimum order value",
-                    "info": "Enter amount using the currency format. e.g. 100",
+                    "label": "t:settings_schema.cart.settings.free_shipping_threshold.label",
+                    "info": "t:settings_schema.cart.settings.free_shipping_threshold.info",
                     "default": "75"
                }
           ]
      },
      {
-          "name": "Quick view",
+          "name": "t:settings_schema.quick_view.name",
           "settings": [
                {
                     "type": "select",
                     "id": "quick_view_variant_selector_type",
-                    "label": "Variant selector type",
+                    "label": "t:settings_schema.quick_view.settings.quick_view_variant_selector_type.label",
                     "options": [
                          {
                               "value": "block",
-                              "label": "Block"
+                              "label": "t:settings_schema.quick_view.settings.quick_view_variant_selector_type.options.block"
                          },
                          {
                               "value": "dropdown",
-                              "label": "Dropdown"
+                              "label": "t:settings_schema.quick_view.settings.quick_view_variant_selector_type.options.dropdown"
                          }
                     ],
                     "default": "dropdown"
@@ -547,24 +547,24 @@
                {
                     "type": "select",
                     "id": "quick_view_color_selector_type",
-                    "label": "Color selector type",
-                    "info": "For the color swatch to work properly, the product must have variants, every variant must have an image attached to it, every image alt must be written in the format #color:name, and the color and it's hex must be added in Color swatch tab in theme settings.",
+                    "label": "t:settings_schema.quick_view.settings.quick_view_color_selector_type.label",
+                    "info": "t:settings_schema.quick_view.settings.quick_view_color_selector_type.info",
                     "options": [
                          {
                               "value": "block",
-                              "label": "Block"
+                              "label": "t:settings_schema.quick_view.settings.quick_view_color_selector_type.options.block"
                          },
                          {
                               "value": "dropdown",
-                              "label": "Dropdown"
+                              "label": "t:settings_schema.quick_view.settings.quick_view_color_selector_type.options.dropdown"
                          },
                          {
                               "value": "color_swatch",
-                              "label": "Color swatch"
+                              "label": "t:settings_schema.quick_view.settings.quick_view_color_selector_type.options.color_swatch"
                          },
                          {
                               "value": "variant_image",
-                              "label": "Image variant"
+                              "label": "t:settings_schema.quick_view.settings.quick_view_color_selector_type.options.variant_image"
                          }
                     ],
                     "default": "dropdown"

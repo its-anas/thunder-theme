@@ -1,17 +1,17 @@
 {% style %}
   :root {
      --font-family: {{ settings.font_type.family }}, {{ settings.font_type.fallback_families }};
-     --heading-font-family: {{ settings.headings_font_type.family }}, {{ settings.headings_font_type.fallback_families }};
+     --heading-font-family: {{ settings.heading_font_type.family }}, {{ settings.heading_font_type.fallback_families }};
      --font-style: {{ settings.font_type.style }};
-     --heading-font-style: {{ settings.headings_font_type.style }};
+     --heading-font-style: {{ settings.heading_font_type.style }};
      --font-weight: {{ settings.font_type.weight }};
-     --heading-font-weight: {{ settings.headings_font_type.weight }};
+     --heading-font-weight: {{ settings.heading_font_type.weight }};
 
      --font-size: {{ settings.size }}px;
      --font-size-type-scale: {{ settings.size }};
      --font-type-scale: {{ settings.type_scale }};
 
-     --heading-style: {{ settings.headings_style }};
+     --heading-style: {{ settings.heading_style }};
      --h1-font-size: calc((((((var(--font-size-type-scale) * var(--font-type-scale)) * var(--font-type-scale)) * var(--font-type-scale)) * var(--font-type-scale)) * var(--font-type-scale)) * var(--font-type-scale) * 1px);
      --h2-font-size: calc(((((var(--font-size-type-scale) * var(--font-type-scale)) * var(--font-type-scale)) * var(--font-type-scale)) * var(--font-type-scale)) * var(--font-type-scale) * 1px);
      --h3-font-size: calc((((var(--font-size-type-scale) * var(--font-type-scale)) * var(--font-type-scale)) * var(--font-type-scale)) * var(--font-type-scale) * 1px);
