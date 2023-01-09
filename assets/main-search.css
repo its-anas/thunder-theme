@@ -141,6 +141,24 @@
 	width: calc(100% / 3);
 }
 
+@media screen and (min-width: 1024px) {
+	.search__item.article a {
+		border-radius: var(--global-border-radius);
+		overflow: hidden;
+	}
+
+	.search__item.article img {
+		width: 100%;
+		height: 100%;
+		transition: all 3s ease;
+	}
+
+	.search__item.article img:hover {
+		transform: scale(1.05);
+		transition: all 3s ease;
+	}
+}
+
 @media screen and (max-width: 750px) {
 	.search__item.article {
 		width: 100%;

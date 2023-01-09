@@ -209,9 +209,9 @@
                 {%- when 'article' -%}
                   <div class="search__item article">
                     <div class="search__item-container">
-                      <div class="search__item__picture article corner-border">
+                      <div class="search__item__picture article">
                         {% if item.image != blank %}
-                          <a href="{{ item.url }}" class="media corner-border-target">
+                          <a href="{{ item.url }}" class="media">
                             {%- assign image = item.image -%}
                             {%- capture sizes -%}(min-width: 1024px) calc((1175px - 6rem) / 3), (min-width: 750px) calc((100vw - 2rem - 6rem) / 3), calc(100vw - 2rem){%- endcapture -%}
                             {%- assign widths = '200, 225, 250, 300, 325, 350, 375, 400, 425, 450, 475, 500' -%}
