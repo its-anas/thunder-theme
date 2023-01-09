@@ -15,9 +15,10 @@
 
 <div reveal-on-scroll class="article">
   <div class="article__container">
+    {% assign breadcrumb_home = 'general.others.breadcrumb_home' | t %}
     {% render 'snippet-breadcrumbs',
       bc1: routes.root_url,
-      bc1_text: 'Home',
+      bc1_text: breadcrumb_home,
       bc2: blog.url,
       bc2_text: blog.title,
       bc3: article.url,

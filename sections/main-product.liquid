@@ -117,11 +117,13 @@
 
 <product-page reveal-on-scroll class="product-page" data-product="{{ product.id }}">
   <div class="product-page__container">
+    {% assign breadcrumb_home = 'general.others.breadcrumb_home' | t %}
+    {% assign breadcrumb_products = 'general.others.breadcrumb_products' | t %}
     {% render 'snippet-breadcrumbs',
       bc1: routes.root_url,
-      bc1_text: 'Home',
+      bc1_text: breadcrumb_home,
       bc2: routes.collections_url,
-      bc2_text: 'Products',
+      bc2_text: breadcrumb_products,
       bc3: product.url,
       bc3_text: product.title
     %}
@@ -691,6 +693,16 @@
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   let variantsInventory = {};
   {% for variant in product.variants %}
   variantsInventory["{{ variant.title }}"] = {{ variant.inventory_quantity }};
@@ -725,6 +737,16 @@
   let currentVariantInventory = {{ current_variant.inventory_quantity }};
   let stockAlertThreshold = {{ stock_alert_threshold }};
   let priceDifferenceText= "{{ price_difference_text }}";
+
+
+
+
+
+
+
+
+
+
 
 
 

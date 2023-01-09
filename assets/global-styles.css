@@ -2355,7 +2355,7 @@ slider-component .placeholder {
 }
 
 .tag--animated-hover:after {
-	content: "NEW";
+	content: var(--new-tag);
 	vertical-align: middle;
 	margin-left: 0.5rem;
 }

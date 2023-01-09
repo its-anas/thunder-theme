@@ -4,6 +4,8 @@ class FilterComponent extends HTMLElement {
 	}
 	connectedCallback() {
 		this.pageType = window.location.pathname.includes("search") ? "search" : "collection";
+		const selector = this.pageType === "search" ? ".page-tab[for='products']" : ".results-count";
+		this.originalText = document.querySelector(selector).innerHTML;
 		this.injectResultsCount(this.buildUrl());
 		document.addEventListener("change", (event) => {
 			if (event.target.form) {
@@ -38,7 +40,7 @@ class FilterComponent extends HTMLElement {
 				const filtersCount = doc.querySelectorAll(".filter-active-filters__remove");
 				document.querySelector("#filterCount").innerHTML = filtersCount.length > 0 ? `(${filtersCount.length})` : "";
 				const selector = this.pageType === "search" ? ".page-tab[for='products']" : ".results-count";
-				document.querySelector(selector).innerHTML = "Products " + resultsCount.innerHTML;
+				document.querySelector(selector).innerHTML = this.originalText + resultsCount.innerHTML;
 			});
 	}
 

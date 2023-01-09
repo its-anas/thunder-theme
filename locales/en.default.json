@@ -69,7 +69,10 @@
             "share": "Share",
             "sold_out": "SOLD OUT",
             "sale_text": "SAVE",
-            "stock_disclaimer": "{{ inventory }} left in stock"
+            "new_tag": "NEW",
+            "stock_disclaimer": "{{ inventory }} left in stock",
+            "breadcrumb_home": "Home",
+            "breadcrumb_products": "Products"
         }
     },
     "pages": {
@@ -92,7 +95,7 @@
         },
         "search": {
             "title": "Search",
-            "title_with_query": "Results for \"{{ query }}\"",
+            "title_with_query": "Results for '{{ query }}'",
             "products_tab": "Products",
             "articles_tab": "Articles",
             "no_results_message": "No results could be found."
@@ -192,7 +195,8 @@
             "new_address_form_add_address_button": "Add address",
             "new_address_form_cancel_button": "Cancel",
             "update_address_form_update_address_button": "Update address",
-            "update_address_form_cancel_button": "Cancel"
+            "update_address_form_cancel_button": "Cancel",
+            "delete_address_confirmation": "Are you sure you want to delete this address?"
         },
         "reset_password": {
             "title": "Recover password",

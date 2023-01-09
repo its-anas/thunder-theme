@@ -813,7 +813,7 @@
                     "name": "Recommended products",
                     "settings": {
                         "content": "Requirement",
-                        "info": "Make sure you have created a custom [metafield](https://help.shopify.com/en/manual/metafields) in [admin settings](/admin/metafields) named \"custom.recommended_products\" and went to the product page and selected the products you want to recommend in the metafields section. Otherwise the recommended products section will not show."
+                        "info": "Make sure you have created a custom [metafield](https://help.shopify.com/en/manual/metafields) in [admin settings](/admin/metafields) named 'custom.recommended_products' and went to the product page and selected the products you want to recommend in the metafields section. Otherwise the recommended products section will not show."
                     }
                 },
                 "trust_bar": {
@@ -823,7 +823,7 @@
                         "icon_2": "Icon 2",
                         "icon_3": "Icon 3"
                     },
-                    "info": "Applicable only if 'Custom icon - svg' is empty",
+                    "info": "Applicable only if the field 'Custom icon - svg' is empty",
                     "custom_icon_svg": "Custom icon - SVG"
                 }
             }

@@ -193,7 +193,7 @@
                   <form
                     method="post"
                     action="/account/addresses/{{ address.id }}"
-                    onsubmit="return confirm('Are you sure you wish to delete this address?');"
+                    onsubmit="return confirm('{{ 'customer.addresses.delete_address_confirmation' | t }}');"
                   >
                     <input type="hidden" name="_method" value="delete">
                     <button
