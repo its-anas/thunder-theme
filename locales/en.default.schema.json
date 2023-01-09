@@ -100,7 +100,7 @@
                 "button_border_width": "Button border width",
                 "button_symbol": {
                     "label": "Button symbol",
-                    "info": "A symbol that shows up after buttons and links. e.g. 🢂➜⮕➾⤑↬⮞➤⪢⋙⇌➥↠"
+                    "info": "A symbol that shows up after buttons and links."
                 }
             }
         },
@@ -177,127 +177,147 @@
     },
     "sections": {
         "general": {
-            "text": "Text",
-            "text_position_horizontal": {
-                "label": "Text position - Horizontal",
+            "info": {
+                "desktop": "Desktop",
+                "mobile": "Mobile",
+                "desktop_only": "Desktop only",
+                "desktop_and_tablet_only": "Desktop and tablet only"
+            },
+            "type": {
+                "menu": "Menu",
+                "collection": "Collection",
+                "blog": "Blog",
+                "url": "URL",
+                "color": "Color",
+                "product": "Product",
+                "product_url": "Product URL"
+            },
+            "header": {
+                "settings": "Settings",
+                "content": "Content",
+                "section": "Section",
+                "layout": "Layout",
+                "logo": "Logo",
+                "thumbnail": "Thumbnail",
+                "products": "Products",
+                "icon": "Icon"
+            },
+            "text": {
+                "text": "Text",
+                "text_width": "Text width",
+                "text_alignment": "Text alignment",
+                "text_position_horizontal": "Text position - Horizontal",
+                "text_position_vertical": "Text position - Vertical"
+            },
+            "horizontal_position": {
+                "label": "Horizontal position",
                 "options": {
                     "left": "Left",
                     "center": "Center",
                     "right": "Right"
                 }
             },
-            "text_position_vertical": {
-                "label": "Text position - Vertical",
+            "vertical_position": {
+                "label": "Vertical position",
                 "options": {
                     "top": "Top",
                     "center": "Center",
                     "bottom": "Bottom"
                 }
             },
-            "text_alignment": {
-                "label": "Text alignment",
+            "alignment": {
+                "label": "Alignment",
                 "options": {
                     "left": "Left",
                     "center": "Center",
                     "right": "Right"
                 }
             },
-            "alignment": "Alignment",
-            "vertical_position": "Vertical position",
-            "horizontal_position": "Horizontal position",
-            "text_width": "Text width",
-            "space_between_elements": "Space between elements",
-            "top_space": "Top space",
-            "desktop": "Desktop",
-            "mobile": "Mobile",
-            "desktop_only": "Desktop only",
-            "desktop_and_tablet_only": "Desktop and tablet only",
-            "field_width": "Field width",
-            "bottom_space": "Bottom space",
-            "button": "Button",
-            "quantity": "Quantity",
-            "button_text": "Button text",
-            "button_url": "Button URL",
-            "primary_button_text": "Primary button text",
-            "primary_button_url": "Primary button URL",
-            "secondary_button_text": "Secondary button text",
-            "secondary_button_url": "Secondary button URL",
-            "url": "URL",
-            "animation": "Animation",
-            "activate_animation": "Activate animation",
-            "animation_speed": "Animation speed",
-            "animation_delay": "Animation delay",
-            "heading": "Heading",
-            "heading_size": "Heading size",
-            "subheading": "Subheading",
-            "subheading_size": "Subheading size",
-            "variants_selector": {
-                "label": "Variants selector",
-                "settings": {
-                    "variant_selector_type": {
-                        "label": "Variant selector type",
-                        "options": {
-                            "button": "Button",
-                            "dropdown": "Dropdown"
-                        }
-                    },
-                    "color_selector_type": {
-                        "label": "Color selector type",
-                        "info": "For the color swatch to work properly, the product must have variants, every variant must have an image attached to it, every image alt must be written in the format #color:Name, and the color and it's hex must be added in Color swatch tab in theme settings.",
-                        "options": {
-                            "button": "Button",
-                            "dropdown": "Dropdown",
-                            "color_swatch": "Color swatch",
-                            "variant_image": "Variant image"
+            "section_settings": {
+                "heading": "Heading",
+                "heading_size": "Heading size",
+                "subheading": "Subheading",
+                "subheading_size": "Subheading size",
+                "space_between_elements": "Space between elements",
+                "top_space": "Top space",
+                "bottom_space": "Bottom space"
+            },
+            "button": {
+                "button": "Button",
+                "button_text": "Button text",
+                "button_url": "Button URL",
+                "primary_button_text": "Primary button text",
+                "primary_button_url": "Primary button URL",
+                "secondary_button_text": "Secondary button text",
+                "secondary_button_url": "Secondary button URL"
+            },
+            "animation": {
+                "animation": "Animation",
+                "activate_animation": "Activate animation",
+                "animation_speed": "Animation speed",
+                "animation_delay": "Animation delay",
+                "enable_autoplay": "Enable autoplay",
+                "autoplay_delay_time": "Delay time"
+            },
+            "product": {
+                "vendor": "Vendor",
+                "title": "Title",
+                "price": "Price",
+                "sale_tag": "Sale tag",
+                "quantity": "Quantity",
+                "variants_selector": {
+                    "label": "Variants selector",
+                    "settings": {
+                        "variant_selector_type": {
+                            "label": "Variant selector type",
+                            "options": {
+                                "button": "Button",
+                                "dropdown": "Dropdown"
+                            }
+                        },
+                        "color_selector_type": {
+                            "label": "Color selector type",
+                            "info": "For the color swatch to work properly, the product must have variants, every variant must have an image attached to it, every image alt must be written in the format #color:Name, and the color and it's hex must be added in Color swatch tab in theme settings.",
+                            "options": {
+                                "button": "Button",
+                                "dropdown": "Dropdown",
+                                "color_swatch": "Color swatch",
+                                "variant_image": "Variant image"
+                            }
                         }
                     }
                 }
             },
-            "menu": "Menu",
-            "collection": "Collection",
-            "product": "Product",
-            "Products": "Products",
-            "product_url": "Product URL",
-            "content": "Content",
-            "blog": "Blog",
-            "section": "Section",
-            "layout": "Layout",
-            "logo": "Logo",
-            "width": "Width",
-            "aspect_ratio": "Aspect ratio",
-            "image": "Image",
-            "video": "Video",
-            "thumbnail": "Thumbnail",
-            "height_width": "Height/Width",
-            "image_desktop": "Image - desktop",
-            "image_mobile": "Image - mobile",
-            "image_height": "Image height",
-            "size": "Size",
-            "border_width": "Border width",
-            "border_color": "Border color",
-            "color": "Color",
-            "colors": "Colors",
-            "style": "Style",
-            "vendor": "Vendor",
-            "title": "Title",
-            "price": "Price",
-            "sale_tag": "Sale tag",
-            "settings": "Settings",
-            "description": "Description",
-            "background_color": "Background color",
-            "text_color": "Text color",
-            "overlay": "Overlay",
-            "opacity": "Opacity",
-            "section_height": "Section height",
-            "height": "Height",
-            "show_filter": "Show filter",
-            "filters_expanded_at_start": "Filters expanded at start",
-            "desktop_height": "Desktop height",
-            "mobile_height": "Mobile height",
-            "full_screen_height": "Full screen height",
-            "enable_autoplay": "Enable autoplay",
-            "autoplay_delay_time": "Delay time",
-            "full_screen_height_info": "When this option is enabled, the heights settings below will be ignored.",
+            "media": {
+                "video": "Video",
+                "image": "Image",
+                "image_desktop": "Image - desktop",
+                "image_mobile": "Image - mobile",
+                "image_height": "Image height"
+            },
+            "color": {
+                "colors": "Colors",
+                "background_color": "Background color",
+                "text_color": "Text color",
+                "description": "Description",
+                "overlay": "Overlay",
+                "opacity": "Opacity",
+                "border_color": "Border color"
+            },
+            "size": {
+                "size": "Size",
+                "height": "Height",
+                "width": "Width",
+                "height_width": "Height/Width",
+                "aspect_ratio": "Aspect ratio",
+                "section_height": "Section height",
+                "desktop_height": "Desktop height",
+                "mobile_height": "Mobile height",
+                "full_screen_height": "Full screen height",
+                "full_screen_height_info": "When this option is enabled, the heights settings below will be ignored.",
+                "field_width": "Field width",
+                "border_width": "Border width"
+            },
             "slider": {
                 "mobile_items": "Products per row - mobile",
                 "tablet_items": "Products per row - tablet",
@@ -305,59 +325,61 @@
                 "items_limit": "Maximum number of products"
             },
             "search_results": {
-                "products_per_page": "Maximum number of products per page",
                 "products_per_row_desktop": "Products per row - desktop/tablet",
-                "products_per_row_mobile": "Products per row - mobile"
+                "products_per_row_mobile": "Products per row - mobile",
+                "products_per_page": "Maximum number of products per page",
+                "show_filter": "Show filter",
+                "filters_expanded_at_start": "Filters expanded at start"
             },
-            "icon": "Icon",
-            "icon_size": "Icon size",
-            "icon_type": "Type",
-            "type": "Type",
-            "icon_svg": {
-                "label": "SVG",
-                "info": "Applicable only if the selected type is SVG."
-            },
-            "icon_image": {
-                "label": "PNG/JPG",
-                "info": "Applicable only if the selected type is PNG/JPG."
-            },
-            "icon_theme": {
-                "label": "Theme",
-                "info": "Applicable only if you choose 'Theme'' from the icon type dropdown",
-                "options": {
-                    "group_shop": "Shop",
-                    "home": "Home",
-                    "account": "Account",
-                    "Search": "Search",
-                    "cart": "Cart",
-                    "group_communication": "Communication",
-                    "phone": "Phone",
-                    "email": "Email",
-                    "contact": "Contact",
-                    "support": "Support",
-                    "group_shipping": "Shipping",
-                    "box": "Box",
-                    "location": "Location",
-                    "map": "Map",
-                    "group_trust": "Trust",
-                    "badge": "Badge",
-                    "shield": "Shield",
-                    "review": "Review",
-                    "group_others": "Others",
-                    "star": "Star",
-                    "play": "Play",
-                    "checkmark": "Checkmark",
-                    "prohibition": "Prohibition",
-                    "warning": "Warning",
-                    "group_social": "Social",
-                    "facebook": "Facebook",
-                    "instagram": "Instagram",
-                    "twitter": "Twitter",
-                    "pinterest": "Pinterest",
-                    "tiktok": "TikTok",
-                    "snapchat": "Snapchat",
-                    "youtube": "Youtube",
-                    "vimeo": "Vimeo"
+            "icon": {
+                "icon_size": "Icon size",
+                "icon_type": "Type",
+                "icon_svg": {
+                    "label": "SVG",
+                    "info": "Applicable only if the selected type is SVG."
+                },
+                "icon_image": {
+                    "label": "PNG/JPG",
+                    "info": "Applicable only if the selected type is PNG/JPG."
+                },
+                "icon_theme": {
+                    "label": "Theme",
+                    "info": "Applicable only if you choose 'Theme'' from the icon type dropdown",
+                    "options": {
+                        "group_shop": "Shop",
+                        "home": "Home",
+                        "account": "Account",
+                        "Search": "Search",
+                        "cart": "Cart",
+                        "group_communication": "Communication",
+                        "phone": "Phone",
+                        "email": "Email",
+                        "contact": "Contact",
+                        "support": "Support",
+                        "group_shipping": "Shipping",
+                        "box": "Box",
+                        "location": "Location",
+                        "map": "Map",
+                        "group_trust": "Trust",
+                        "badge": "Badge",
+                        "shield": "Shield",
+                        "review": "Review",
+                        "group_others": "Others",
+                        "star": "Star",
+                        "play": "Play",
+                        "checkmark": "Checkmark",
+                        "prohibition": "Prohibition",
+                        "warning": "Warning",
+                        "group_social": "Social",
+                        "facebook": "Facebook",
+                        "instagram": "Instagram",
+                        "twitter": "Twitter",
+                        "pinterest": "Pinterest",
+                        "tiktok": "TikTok",
+                        "snapchat": "Snapchat",
+                        "youtube": "Youtube",
+                        "vimeo": "Vimeo"
+                    }
                 }
             },
             "countdown-timer": {

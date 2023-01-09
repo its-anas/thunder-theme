@@ -132,20 +132,20 @@
     {
       "type": "select",
       "id": "horizontal_position",
-      "label": "t:sections.general.text_position_horizontal.label",
-      "info": "t:sections.general.desktop_only",
+      "label": "t:sections.general.horizontal_position.label",
+      "info": "t:sections.general.info.desktop_only",
       "options": [
         {
           "value": "left",
-          "label": "t:sections.general.text_position_horizontal.options.left"
+          "label": "t:sections.general.horizontal_position.options.left"
         },
         {
           "value": "center",
-          "label": "t:sections.general.text_position_horizontal.options.center"
+          "label": "t:sections.general.horizontal_position.options.center"
         },
         {
           "value": "right",
-          "label": "t:sections.general.text_position_horizontal.options.right"
+          "label": "t:sections.general.horizontal_position.options.right"
         }
       ],
       "default": "center"
@@ -153,19 +153,19 @@
     {
       "type": "select",
       "id": "text_alignment",
-      "label": "t:sections.general.text_alignment.label",
+      "label": "t:sections.general.alignment.label",
       "options": [
         {
           "value": "left",
-          "label": "t:sections.general.text_alignment.options.left"
+          "label": "t:sections.general.alignment.options.left"
         },
         {
           "value": "center",
-          "label": "t:sections.general.text_alignment.options.center"
+          "label": "t:sections.general.alignment.options.center"
         },
         {
           "value": "right",
-          "label": "t:sections.general.text_alignment.options.right"
+          "label": "t:sections.general.alignment.options.right"
         }
       ],
       "default": "center"
@@ -174,7 +174,7 @@
       "type": "range",
       "id": "text_width",
       "label": "Text width",
-      "info": "t:sections.general.desktop_only",
+      "info": "t:sections.general.info.desktop_only",
       "min": 40,
       "max": 90,
       "step": 10,
@@ -183,12 +183,12 @@
     },
     {
       "type": "header",
-      "content": "t:sections.general.section"
+      "content": "t:sections.general.header.section"
     },
     {
       "type": "range",
       "id": "space_between_elements",
-      "label": "t:sections.general.space_between_elements",
+      "label": "t:sections.general.section_settings.space_between_elements",
       "min": 1,
       "max": 3,
       "step": 0.5,
@@ -202,7 +202,7 @@
       "max": 100,
       "step": 1,
       "unit": "px",
-      "label": "t:sections.general.top_space",
+      "label": "t:sections.general.section_settings.top_space",
       "default": 0
     },
     {
@@ -212,32 +212,32 @@
       "max": 100,
       "step": 1,
       "unit": "px",
-      "label": "t:sections.general.bottom_space",
+      "label": "t:sections.general.section_settings.bottom_space",
       "default": 0
     },
     {
       "type": "color",
       "id": "background_color",
-      "label": "t:sections.general.background_color",
+      "label": "t:sections.general.color.background_color",
       "default": "transparent"
     }
   ],
   "blocks": [
     {
       "type": "subheading",
-      "name": "t:sections.general.subheading",
+      "name": "t:sections.general.section_settings.subheading",
       "limit": 1,
       "settings": [
         {
           "type": "text",
           "id": "subheading",
-          "label": "t:sections.general.subheading",
+          "label": "t:sections.general.section_settings.subheading",
           "default": "Clear and concise overview"
         },
         {
           "type": "select",
           "id": "subheading_size",
-          "label": "t:sections.general.subheading_size",
+          "label": "t:sections.general.section_settings.subheading_size",
           "options": [
             {
               "value": "h1",
@@ -270,19 +270,19 @@
     },
     {
       "type": "heading",
-      "name": "t:sections.general.heading",
+      "name": "t:sections.general.section_settings.heading",
       "limit": 1,
       "settings": [
         {
           "type": "text",
           "id": "heading",
-          "label": "t:sections.general.heading",
+          "label": "t:sections.general.section_settings.heading",
           "default": "that changes to synonyms to emphasize the main message"
         },
         {
           "type": "select",
           "id": "heading_size",
-          "label": "t:sections.general.heading_size",
+          "label": "t:sections.general.section_settings.heading_size",
           "options": [
             {
               "value": "h1",
@@ -370,7 +370,7 @@
         {
           "type": "checkbox",
           "id": "animated",
-          "label": "t:sections.general.activate_animation",
+          "label": "t:sections.general.animation.activate_animation",
           "default": true
         },
         {
@@ -416,49 +416,49 @@
           "max": 10,
           "step": 1,
           "unit": "s",
-          "label": "t:sections.general.animation_delay",
+          "label": "t:sections.general.animation.animation_delay",
           "default": 6
         }
       ]
     },
     {
       "type": "text",
-      "name": "t:sections.general.text",
+      "name": "t:sections.general.text.text",
       "limit": 5,
       "settings": [
         {
           "type": "richtext",
           "id": "text",
-          "label": "t:sections.general.text",
+          "label": "t:sections.general.text.text",
           "default": "<p>Provide more information and context for the main message of the section. It should support and expand upon the points made in the heading and animated heading.</p>"
         }
       ]
     },
     {
       "type": "button",
-      "name": "t:sections.general.button",
+      "name": "t:sections.general.button.button",
       "limit": 2,
       "settings": [
         {
           "type": "text",
           "id": "primary_button_text",
-          "label": "t:sections.general.primary_button_text",
+          "label": "t:sections.general.button.primary_button_text",
           "default": "Primary button"
         },
         {
           "type": "url",
           "id": "primary_button_url",
-          "label": "t:sections.general.primary_button_url"
+          "label": "t:sections.general.button.primary_button_url"
         },
         {
           "type": "text",
           "id": "secondary_button_text",
-          "label": "t:sections.general.secondary_button_text"
+          "label": "t:sections.general.button.secondary_button_text"
         },
         {
           "type": "url",
           "id": "secondary_button_url",
-          "label": "t:sections.general.secondary_button_url"
+          "label": "t:sections.general.button.secondary_button_url"
         }
       ]
     }

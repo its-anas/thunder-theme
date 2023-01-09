@@ -141,14 +141,14 @@
   "settings": [
     {
       "type": "header",
-      "content": "t:sections.general.video"
+      "content": "t:sections.general.media.video"
     },
     {
       "type": "video_url",
       "id": "video_url",
       "accept": ["youtube"],
       "default": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
-      "label": "t:sections.general.url"
+      "label": "t:sections.general.type.url"
     },
     {
       "type": "range",
@@ -157,26 +157,26 @@
       "max": 450,
       "step": 10,
       "unit": "px",
-      "label": "t:sections.general.height_width",
+      "label": "t:sections.general.size.height_width",
       "default": 400
     },
     {
       "type": "select",
       "id": "video_horizontal_position",
-      "label": "t:sections.general.horizontal_position",
-      "info": "t:sections.general.desktop_only",
+      "label": "t:sections.general.text.text_position_horizontal",
+      "info": "t:sections.general.info.desktop_only",
       "options": [
         {
           "value": "left",
-          "label": "t:sections.general.text_position_horizontal.options.left"
+          "label": "t:sections.general.horizontal_position.options.left"
         },
         {
           "value": "center",
-          "label": "t:sections.general.text_position_horizontal.options.center"
+          "label": "t:sections.general.horizontal_position.options.center"
         },
         {
           "value": "right",
-          "label": "t:sections.general.text_position_horizontal.options.right"
+          "label": "t:sections.general.horizontal_position.options.right"
         }
       ],
       "default": "right"
@@ -200,28 +200,28 @@
     {
       "type": "image_picker",
       "id": "thumbnail",
-      "label": "t:sections.general.thumbnail"
+      "label": "t:sections.general.header.thumbnail"
     },
     {
       "type": "header",
-      "content": "t:sections.general.text"
+      "content": "t:sections.general.text.text"
     },
     {
       "type": "select",
       "id": "text_alignment",
-      "label": "t:sections.general.alignment",
+      "label": "t:sections.general.text.text_alignment",
       "options": [
         {
           "value": "left",
-          "label": "t:sections.general.text_position_horizontal.options.left"
+          "label": "t:sections.general.horizontal_position.options.left"
         },
         {
           "value": "center",
-          "label": "t:sections.general.text_position_horizontal.options.center"
+          "label": "t:sections.general.horizontal_position.options.center"
         },
         {
           "value": "right",
-          "label": "t:sections.general.text_position_horizontal.options.right"
+          "label": "t:sections.general.horizontal_position.options.right"
         }
       ],
       "default": "left"
@@ -229,20 +229,20 @@
     {
       "type": "select",
       "id": "text_horizontal_position",
-      "label": "t:sections.general.horizontal_position",
-      "info": "t:sections.general.desktop_only",
+      "label": "t:sections.general.text.text_position_horizontal",
+      "info": "t:sections.general.info.desktop_only",
       "options": [
         {
           "value": "left",
-          "label": "t:sections.general.text_position_horizontal.options.left"
+          "label": "t:sections.general.horizontal_position.options.left"
         },
         {
           "value": "center",
-          "label": "t:sections.general.text_position_horizontal.options.center"
+          "label": "t:sections.general.horizontal_position.options.center"
         },
         {
           "value": "right",
-          "label": "t:sections.general.text_position_horizontal.options.right"
+          "label": "t:sections.general.horizontal_position.options.right"
         }
       ],
       "default": "left"
@@ -250,8 +250,8 @@
     {
       "type": "range",
       "id": "text_width",
-      "label": "t:sections.general.width",
-      "info": "t:sections.general.desktop_only",
+      "label": "t:sections.general.size.width",
+      "info": "t:sections.general.info.desktop_only",
       "min": 70,
       "max": 100,
       "step": 10,
@@ -260,12 +260,12 @@
     },
     {
       "type": "header",
-      "content": "t:sections.general.section"
+      "content": "t:sections.general.header.section"
     },
     {
       "type": "range",
       "id": "space_between_elements",
-      "label": "t:sections.general.space_between_elements",
+      "label": "t:sections.general.section_settings.space_between_elements",
       "min": 1,
       "max": 3,
       "step": 0.5,
@@ -279,7 +279,7 @@
       "max": 100,
       "step": 1,
       "unit": "px",
-      "label": "t:sections.general.top_space",
+      "label": "t:sections.general.section_settings.top_space",
       "default": 0
     },
     {
@@ -289,32 +289,32 @@
       "max": 100,
       "step": 1,
       "unit": "px",
-      "label": "t:sections.general.bottom_space",
+      "label": "t:sections.general.section_settings.bottom_space",
       "default": 0
     },
     {
       "type": "color",
       "id": "background_color",
-      "label": "t:sections.general.background_color",
+      "label": "t:sections.general.color.background_color",
       "default": "transparent"
     }
   ],
   "blocks": [
     {
       "type": "subheading",
-      "name": "t:sections.general.subheading",
+      "name": "t:sections.general.section_settings.subheading",
       "limit": 1,
       "settings": [
         {
           "type": "text",
           "id": "subheading",
-          "label": "t:sections.general.subheading",
+          "label": "t:sections.general.section_settings.subheading",
           "default": "Subheading"
         },
         {
           "type": "select",
           "id": "subheading_size",
-          "label": "t:sections.general.subheading_size",
+          "label": "t:sections.general.section_settings.subheading_size",
           "options": [
             {
               "value": "h1",
@@ -347,19 +347,19 @@
     },
     {
       "type": "heading",
-      "name": "t:sections.general.heading",
+      "name": "t:sections.general.section_settings.heading",
       "limit": 1,
       "settings": [
         {
           "type": "text",
           "id": "heading",
-          "label": "t:sections.general.heading",
+          "label": "t:sections.general.section_settings.heading",
           "default": "Heading"
         },
         {
           "type": "select",
           "id": "heading_size",
-          "label": "t:sections.general.heading_size",
+          "label": "t:sections.general.section_settings.heading_size",
           "options": [
             {
               "value": "h1",
@@ -392,43 +392,43 @@
     },
     {
       "type": "text",
-      "name": "t:sections.general.text",
+      "name": "t:sections.general.text.text",
       "limit": 1,
       "settings": [
         {
           "type": "richtext",
           "id": "text",
-          "label": "t:sections.general.text",
+          "label": "t:sections.general.text.text",
           "default": "<p>Write more in-depth information about the purpose of the video and it's content, and provide additional context and background information as needed.</p>"
         }
       ]
     },
     {
       "type": "button",
-      "name": "t:sections.general.button",
+      "name": "t:sections.general.button.button",
       "limit": 1,
       "settings": [
         {
           "type": "text",
           "id": "primary_button_text",
-          "label": "t:sections.general.primary_button_text",
+          "label": "t:sections.general.button.primary_button_text",
           "default": "Primary button"
         },
         {
           "type": "url",
           "id": "primary_button_url",
-          "label": "t:sections.general.primary_button_url"
+          "label": "t:sections.general.button.primary_button_url"
         },
         {
           "type": "text",
           "id": "secondary_button_text",
-          "label": "t:sections.general.secondary_button_text",
+          "label": "t:sections.general.button.secondary_button_text",
           "default": "Secondary button"
         },
         {
           "type": "url",
           "id": "secondary_button_url",
-          "label": "t:sections.general.secondary_button_url"
+          "label": "t:sections.general.button.secondary_button_url"
         }
       ]
     }

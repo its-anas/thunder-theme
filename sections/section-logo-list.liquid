@@ -73,7 +73,7 @@
       "max": 60,
       "step": 1,
       "unit": "sec",
-      "label": "t:section.general.animation_speed",
+      "label": "t:sections.general.animation_speed",
       "default": 10
     },
     {
@@ -88,18 +88,18 @@
     },
     {
       "type": "header",
-      "content": "t:sections.general.section"
+      "content": "t:sections.general.header.section"
     },
     {
       "type": "text",
       "id": "heading",
-      "label": "t:sections.general.heading",
+      "label": "t:sections.general.section_settings.heading",
       "default": "Partners"
     },
     {
       "type": "select",
       "id": "heading_size",
-      "label": "t:sections.general.heading_size",
+      "label": "t:sections.general.section_settings.heading_size",
       "options": [
         {
           "value": "h1",
@@ -131,7 +131,7 @@
     {
       "type": "range",
       "id": "space_between_elements",
-      "label": "t:sections.general.space_between_elements",
+      "label": "t:sections.general.section_settings.space_between_elements",
       "min": 1,
       "max": 3,
       "step": 0.5,
@@ -145,7 +145,7 @@
       "max": 100,
       "step": 1,
       "unit": "px",
-      "label": "t:sections.general.top_space",
+      "label": "t:sections.general.section_settings.top_space",
       "default": 0
     },
     {
@@ -155,25 +155,25 @@
       "max": 100,
       "step": 1,
       "unit": "px",
-      "label": "t:sections.general.bottom_space",
+      "label": "t:sections.general.section_settings.bottom_space",
       "default": 0
     },
     {
       "type": "color",
       "id": "background_color",
-      "label": "t:sections.general.background_color",
+      "label": "t:sections.general.color.background_color",
       "default": "transparent"
     }
   ],
   "blocks": [
     {
       "type": "image_picker",
-      "name": "t:sections.general.logo",
+      "name": "t:sections.general.header.logo",
       "settings": [
         {
           "type": "image_picker",
           "id": "logo",
-          "label": "t:sections.general.logo"
+          "label": "t:sections.general.header.logo"
         }
       ]
     }

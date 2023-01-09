@@ -287,12 +287,12 @@
     },
     {
       "type": "header",
-      "content": "t:sections.general.image_desktop"
+      "content": "t:sections.general.media.image_desktop"
     },
     {
       "type": "image_picker",
       "id": "image",
-      "label": "t:sections.general.image"
+      "label": "t:sections.general.media.image"
     },
     {
       "type": "range",
@@ -301,17 +301,17 @@
       "max": 4,
       "step": 0.1,
       "unit": "a/r",
-      "label": "t:sections.general.aspect_ratio",
+      "label": "t:sections.general.size.aspect_ratio",
       "default": 3
     },
     {
       "type": "header",
-      "content": "t:sections.general.image_mobile"
+      "content": "t:sections.general.media.image_mobile"
     },
     {
       "type": "image_picker",
       "id": "mobile_image",
-      "label": "t:sections.general.image"
+      "label": "t:sections.general.media.image"
     },
     {
       "type": "range",
@@ -320,23 +320,23 @@
       "max": 2,
       "step": 0.1,
       "unit": "a/r",
-      "label": "t:sections.general.aspect_ratio",
+      "label": "t:sections.general.size.aspect_ratio",
       "default": 1
     },
     {
       "type": "header",
-      "content": "t:sections.general.section"
+      "content": "t:sections.general.header.section"
     },
     {
       "type": "text",
       "id": "heading",
-      "label": "t:sections.general.heading",
+      "label": "t:sections.general.section_settings.heading",
       "default": "Shop the look"
     },
     {
       "type": "select",
       "id": "heading_size",
-      "label": "t:sections.general.heading_size",
+      "label": "t:sections.general.section_settings.heading_size",
       "options": [
         {
           "value": "h1",
@@ -372,7 +372,7 @@
       "max": 100,
       "step": 1,
       "unit": "px",
-      "label": "t:sections.general.top_space",
+      "label": "t:sections.general.section_settings.top_space",
       "default": 0
     },
     {
@@ -382,23 +382,23 @@
       "max": 100,
       "step": 1,
       "unit": "px",
-      "label": "t:sections.general.bottom_space",
+      "label": "t:sections.general.section_settings.bottom_space",
       "default": 0
     }
   ],
   "blocks": [
     {
       "type": "product",
-      "name": "t:sections.general.product",
+      "name": "t:sections.general.type.product",
       "settings": [
         {
           "type": "product",
           "id": "product",
-          "label": "t:sections.general.product"
+          "label": "t:sections.general.type.product"
         },
         {
           "type": "header",
-          "content": "t:sections.general.desktop"
+          "content": "t:sections.general.info.desktop"
         },
         {
           "type": "range",
@@ -407,7 +407,7 @@
           "max": 90,
           "step": 1,
           "unit": "%",
-          "label": "t:sections.general.vertical_position",
+          "label": "t:sections.general.text.text_position_vertical",
           "default": 50
         },
         {
@@ -417,12 +417,12 @@
           "max": 95,
           "step": 1,
           "unit": "%",
-          "label": "t:sections.general.horizontal_position",
+          "label": "t:sections.general.text.text_position_horizontal",
           "default": 50
         },
         {
           "type": "header",
-          "content": "t:sections.general.mobile"
+          "content": "t:sections.general.info.mobile"
         },
         {
           "type": "range",
@@ -431,7 +431,7 @@
           "max": 95,
           "step": 1,
           "unit": "%",
-          "label": "t:sections.general.vertical_position",
+          "label": "t:sections.general.text.text_position_vertical",
           "default": 50
         },
         {
@@ -441,7 +441,7 @@
           "max": 95,
           "step": 1,
           "unit": "%",
-          "label": "t:sections.general.horizontal_position",
+          "label": "t:sections.general.text.text_position_horizontal",
           "default": 50
         }
       ]
@@ -453,18 +453,18 @@
         {
           "type": "text",
           "id": "feature_title",
-          "label": "t:sections.general.title",
+          "label": "t:sections.general.product.title",
           "default": "Feature"
         },
         {
           "type": "text",
           "id": "feature_description",
-          "label": "t:sections.general.description",
+          "label": "t:sections.general.color.description",
           "default": "Put a short description to highlight the feature of the product. For example the material or the color."
         },
         {
           "type": "header",
-          "content": "t:sections.general.desktop"
+          "content": "t:sections.general.info.desktop"
         },
         {
           "type": "range",
@@ -473,7 +473,7 @@
           "max": 90,
           "step": 1,
           "unit": "%",
-          "label": "t:sections.general.vertical_position",
+          "label": "t:sections.general.text.text_position_vertical",
           "default": 50
         },
         {
@@ -483,12 +483,12 @@
           "max": 95,
           "step": 1,
           "unit": "%",
-          "label": "t:sections.general.horizontal_position",
+          "label": "t:sections.general.text.text_position_horizontal",
           "default": 50
         },
         {
           "type": "header",
-          "content": "t:sections.general.mobile"
+          "content": "t:sections.general.info.mobile"
         },
         {
           "type": "range",
@@ -497,7 +497,7 @@
           "max": 95,
           "step": 1,
           "unit": "%",
-          "label": "t:sections.general.vertical_position",
+          "label": "t:sections.general.text.text_position_vertical",
           "default": 50
         },
         {
@@ -507,7 +507,7 @@
           "max": 95,
           "step": 1,
           "unit": "%",
-          "label": "t:sections.general.horizontal_position",
+          "label": "t:sections.general.text.text_position_horizontal",
           "default": 50
         }
       ]

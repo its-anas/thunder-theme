@@ -174,18 +174,18 @@
     },
     {
       "type": "header",
-      "content": "t:sections.general.section"
+      "content": "t:sections.general.header.section"
     },
     {
       "type": "text",
       "id": "heading",
-      "label": "t:sections.general.heading",
+      "label": "t:sections.general.section_settings.heading",
       "default": "Explore"
     },
     {
       "type": "select",
       "id": "heading_size",
-      "label": "t:sections.general.heading_size",
+      "label": "t:sections.general.section_settings.heading_size",
       "options": [
         {
           "value": "h1",
@@ -217,7 +217,7 @@
     {
       "type": "range",
       "id": "space_between_elements",
-      "label": "t:sections.general.space_between_elements",
+      "label": "t:sections.general.section_settings.space_between_elements",
       "min": 1,
       "max": 3,
       "step": 0.5,
@@ -231,7 +231,7 @@
       "max": 100,
       "step": 1,
       "unit": "px",
-      "label": "t:sections.general.top_space",
+      "label": "t:sections.general.section_settings.top_space",
       "default": 0
     },
     {
@@ -241,52 +241,52 @@
       "max": 100,
       "step": 1,
       "unit": "px",
-      "label": "t:sections.general.bottom_space",
+      "label": "t:sections.general.section_settings.bottom_space",
       "default": 0
     },
     {
       "type": "color",
       "id": "background_color",
-      "label": "t:sections.general.background_color",
+      "label": "t:sections.general.color.background_color",
       "default": "transparent"
     }
   ],
   "blocks": [
     {
       "type": "image_picker",
-      "name": "t:sections.general.icon",
+      "name": "t:sections.general.header.icon",
       "settings": [
         {
           "type": "text",
           "id": "text",
-          "label": "t:sections.general.text",
+          "label": "t:sections.general.text.text",
           "default": "Icon"
         },
         {
           "type": "url",
           "id": "url",
-          "label": "t:sections.general.url"
+          "label": "t:sections.general.type.url"
         },
         {
           "type": "header",
-          "content": "t:sections.general.icon"
+          "content": "t:sections.general.header.icon"
         },
         {
           "type": "select",
           "id": "icon_type",
-          "label": "t:sections.general.icon_type",
+          "label": "t:sections.general.icon.icon_type",
           "options": [
             {
               "value": "theme-icon",
-              "label": "t:sections.general.icon_theme.label"
+              "label": "t:sections.general.icon.icon_theme.label"
             },
             {
               "value": "svg",
-              "label": "t:sections.general.icon_svg.label"
+              "label": "t:sections.general.icon.icon_svg.label"
             },
             {
               "value": "image",
-              "label": "t:sections.general.icon_image.label"
+              "label": "t:sections.general.icon.icon_image.label"
             }
           ],
           "default": "theme-icon"
@@ -294,163 +294,163 @@
         {
           "type": "select",
           "id": "theme_icon",
-          "label": "t:sections.general.icon_theme.label",
+          "label": "t:sections.general.icon.icon_theme.label",
           "default": "box",
-          "info": "t:sections.general.icon_theme.info",
+          "info": "t:sections.general.icon.icon_theme.info",
           "options": [
             {
-              "group": "t:sections.general.icon_theme.options.group_shop",
+              "group": "t:sections.general.icon.icon_theme.options.group_shop",
               "value": "home",
-              "label": "t:sections.general.icon_theme.options.home"
+              "label": "t:sections.general.icon.icon_theme.options.home"
             },
             {
-              "group": "t:sections.general.icon_theme.options.group_shop",
+              "group": "t:sections.general.icon.icon_theme.options.group_shop",
               "value": "account",
-              "label": "t:sections.general.icon_theme.options.account"
+              "label": "t:sections.general.icon.icon_theme.options.account"
             },
             {
-              "group": "t:sections.general.icon_theme.options.group_shop",
+              "group": "t:sections.general.icon.icon_theme.options.group_shop",
               "value": "search",
-              "label": "t:sections.general.icon_theme.options.search"
+              "label": "t:sections.general.icon.icon_theme.options.search"
             },
             {
-              "group": "t:sections.general.icon_theme.options.group_shop",
+              "group": "t:sections.general.icon.icon_theme.options.group_shop",
               "value": "cart",
-              "label": "t:sections.general.icon_theme.options.cart"
+              "label": "t:sections.general.icon.icon_theme.options.cart"
             },
             {
-              "group": "t:sections.general.icon_theme.options.group_shop",
+              "group": "t:sections.general.icon.icon_theme.options.group_shop",
               "value": "phone",
-              "label": "t:sections.general.icon_theme.options.phone"
+              "label": "t:sections.general.icon.icon_theme.options.phone"
             },
             {
-              "group": "t:sections.general.icon_theme.options.group_communication",
+              "group": "t:sections.general.icon.icon_theme.options.group_communication",
               "value": "email",
-              "label": "t:sections.general.icon_theme.options.email"
+              "label": "t:sections.general.icon.icon_theme.options.email"
             },
             {
-              "group": "t:sections.general.icon_theme.options.group_communication",
+              "group": "t:sections.general.icon.icon_theme.options.group_communication",
               "value": "contact",
-              "label": "t:sections.general.icon_theme.options.contact"
+              "label": "t:sections.general.icon.icon_theme.options.contact"
             },
             {
-              "group": "t:sections.general.icon_theme.options.group_communication",
+              "group": "t:sections.general.icon.icon_theme.options.group_communication",
               "value": "support",
-              "label": "t:sections.general.icon_theme.options.support"
+              "label": "t:sections.general.icon.icon_theme.options.support"
             },
             {
-              "group": "t:sections.general.icon_theme.options.group_shipping",
+              "group": "t:sections.general.icon.icon_theme.options.group_shipping",
               "value": "box",
-              "label": "t:sections.general.icon_theme.options.box"
+              "label": "t:sections.general.icon.icon_theme.options.box"
             },
             {
-              "group": "t:sections.general.icon_theme.options.group_shipping",
+              "group": "t:sections.general.icon.icon_theme.options.group_shipping",
               "value": "location",
-              "label": "t:sections.general.icon_theme.options.location"
+              "label": "t:sections.general.icon.icon_theme.options.location"
             },
             {
-              "group": "t:sections.general.icon_theme.options.group_shipping",
+              "group": "t:sections.general.icon.icon_theme.options.group_shipping",
               "value": "map",
-              "label": "t:sections.general.icon_theme.options.map"
+              "label": "t:sections.general.icon.icon_theme.options.map"
             },
             {
-              "group": "t:sections.general.icon_theme.options.group_trust",
+              "group": "t:sections.general.icon.icon_theme.options.group_trust",
               "value": "badge",
-              "label": "t:sections.general.icon_theme.options.badge"
+              "label": "t:sections.general.icon.icon_theme.options.badge"
             },
             {
-              "group": "t:sections.general.icon_theme.options.group_trust",
+              "group": "t:sections.general.icon.icon_theme.options.group_trust",
               "value": "shield",
-              "label": "t:sections.general.icon_theme.options.shield"
+              "label": "t:sections.general.icon.icon_theme.options.shield"
             },
             {
-              "group": "t:sections.general.icon_theme.options.group_trust",
+              "group": "t:sections.general.icon.icon_theme.options.group_trust",
               "value": "review",
-              "label": "t:sections.general.icon_theme.options.review"
+              "label": "t:sections.general.icon.icon_theme.options.review"
             },
             {
-              "group": "t:sections.general.icon_theme.options.group_others",
+              "group": "t:sections.general.icon.icon_theme.options.group_others",
               "value": "star",
-              "label": "t:sections.general.icon_theme.options.star"
+              "label": "t:sections.general.icon.icon_theme.options.star"
             },
             {
-              "group": "t:sections.general.icon_theme.options.group_others",
+              "group": "t:sections.general.icon.icon_theme.options.group_others",
               "value": "play",
-              "label": "t:sections.general.icon_theme.options.play"
+              "label": "t:sections.general.icon.icon_theme.options.play"
             },
             {
-              "group": "t:sections.general.icon_theme.options.group_others",
+              "group": "t:sections.general.icon.icon_theme.options.group_others",
               "value": "checkmark",
-              "label": "t:sections.general.icon_theme.options.checkmark"
+              "label": "t:sections.general.icon.icon_theme.options.checkmark"
             },
             {
-              "group": "t:sections.general.icon_theme.options.group_others",
+              "group": "t:sections.general.icon.icon_theme.options.group_others",
               "value": "prohibition",
-              "label": "t:sections.general.icon_theme.options.prohibition"
+              "label": "t:sections.general.icon.icon_theme.options.prohibition"
             },
             {
-              "group": "t:sections.general.icon_theme.options.group_others",
+              "group": "t:sections.general.icon.icon_theme.options.group_others",
               "value": "warning",
-              "label": "t:sections.general.icon_theme.options.warning"
+              "label": "t:sections.general.icon.icon_theme.options.warning"
             },
             {
-              "group": "t:sections.general.icon_theme.options.group_social",
+              "group": "t:sections.general.icon.icon_theme.options.group_social",
               "value": "share",
               "label": "Share"
             },
             {
-              "group": "t:sections.general.icon_theme.options.group_social",
+              "group": "t:sections.general.icon.icon_theme.options.group_social",
               "value": "facebook",
-              "label": "t:sections.general.icon_theme.options.facebook"
+              "label": "t:sections.general.icon.icon_theme.options.facebook"
             },
             {
-              "group": "t:sections.general.icon_theme.options.group_social",
+              "group": "t:sections.general.icon.icon_theme.options.group_social",
               "value": "instagram",
-              "label": "t:sections.general.icon_theme.options.instagram"
+              "label": "t:sections.general.icon.icon_theme.options.instagram"
             },
             {
-              "group": "t:sections.general.icon_theme.options.group_social",
+              "group": "t:sections.general.icon.icon_theme.options.group_social",
               "value": "twitter",
-              "label": "t:sections.general.icon_theme.options.twitter"
+              "label": "t:sections.general.icon.icon_theme.options.twitter"
             },
             {
-              "group": "t:sections.general.icon_theme.options.group_social",
+              "group": "t:sections.general.icon.icon_theme.options.group_social",
               "value": "pinterest",
-              "label": "t:sections.general.icon_theme.options.pinterest"
+              "label": "t:sections.general.icon.icon_theme.options.pinterest"
             },
             {
-              "group": "t:sections.general.icon_theme.options.group_social",
+              "group": "t:sections.general.icon.icon_theme.options.group_social",
               "value": "tiktok",
-              "label": "t:sections.general.icon_theme.options.tiktok"
+              "label": "t:sections.general.icon.icon_theme.options.tiktok"
             },
             {
-              "group": "t:sections.general.icon_theme.options.group_social",
+              "group": "t:sections.general.icon.icon_theme.options.group_social",
               "value": "snapchat",
-              "label": "t:sections.general.icon_theme.options.snapchat"
+              "label": "t:sections.general.icon.icon_theme.options.snapchat"
             },
             {
-              "group": "t:sections.general.icon_theme.options.group_social",
+              "group": "t:sections.general.icon.icon_theme.options.group_social",
               "value": "youtube",
-              "label": "t:sections.general.icon_theme.options.youtube"
+              "label": "t:sections.general.icon.icon_theme.options.youtube"
             },
             {
-              "group": "t:sections.general.icon_theme.options.group_social",
+              "group": "t:sections.general.icon.icon_theme.options.group_social",
               "value": "vimeo",
-              "label": "t:sections.general.icon_theme.options.vimeo"
+              "label": "t:sections.general.icon.icon_theme.options.vimeo"
             }
           ]
         },
         {
           "type": "liquid",
           "id": "svg",
-          "label": "t:sections.general.icon_svg.label",
-          "info": "t:sections.general.icon_svg.info"
+          "label": "t:sections.general.icon.icon_svg.label",
+          "info": "t:sections.general.icon.icon_svg.info"
         },
         {
           "type": "image_picker",
           "id": "image",
-          "label": "t:sections.general.icon_image.label",
-          "info": "t:sections.general.icon_image.info"
+          "label": "t:sections.general.icon.icon_image.label",
+          "info": "t:sections.general.icon.icon_image.info"
         }
       ]
     }
