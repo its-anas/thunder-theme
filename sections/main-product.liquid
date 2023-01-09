@@ -393,17 +393,7 @@
                   and current_variant.inventory_quantity < stock_alert_threshold
                 %}
                   <div class="product-page__stock-disclaimer" {{ block.shopify_attributes }}>
-                    <svg
-                      class="product-page__stock-disclaimer__svg"
-                      width="25"
-                      height="24"
-                      viewBox="0 0 25 24"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path d="M19.6384 17.5H5.36159L12.5 5.00778L19.6384 17.5Z" stroke="#FB4343"/>
-                      <path d="M12.1297 13.6845L11.9497 8.89453H13.0797L12.8897 13.6845H12.1297ZM12.5197 15.9545C12.333 15.9545 12.1763 15.8912 12.0497 15.7645C11.923 15.6379 11.8597 15.4879 11.8597 15.3145C11.8597 15.1279 11.923 14.9745 12.0497 14.8545C12.1763 14.7345 12.333 14.6745 12.5197 14.6745C12.7063 14.6745 12.8597 14.7345 12.9797 14.8545C13.0997 14.9745 13.1597 15.1279 13.1597 15.3145C13.1597 15.4879 13.0997 15.6379 12.9797 15.7645C12.8597 15.8912 12.7063 15.9545 12.5197 15.9545Z" fill="#FB4343"/>
-                    </svg>
+                    {% render 'snippet-icons', icon: 'alert' %}
                     <p class="product-page__stock-disclaimer__text">
                       {{ 'general.others.stock_disclaimer' | t: inventory: current_variant.inventory_quantity }}
                     </p>
@@ -703,6 +693,11 @@
   
   
   
+  
+  
+  
+  
+  
   let variantsInventory = {};
   {% for variant in product.variants %}
   variantsInventory["{{ variant.title }}"] = {{ variant.inventory_quantity }};
@@ -737,6 +732,11 @@
   let currentVariantInventory = {{ current_variant.inventory_quantity }};
   let stockAlertThreshold = {{ stock_alert_threshold }};
   let priceDifferenceText= "{{ price_difference_text }}";
+
+
+
+
+
 
 
 
