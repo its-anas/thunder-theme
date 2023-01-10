@@ -17,9 +17,11 @@
       background-color: {{ section.settings.background_color }};
   }
   @media screen and (max-width: 750px) {
-    .image-with-text__image,
+    .image-with-text__image {
+        height: {{ section.settings.mobile_height }}px;
+    }
     .image-with-text__content {
-        height: {{ section.settings.mobile_desktop_height }}px;
+        min-height: {{ section.settings.mobile_height }}px;
     }
   }
   @media screen and (min-width: 750px) and (max-width: 1024px) {
@@ -260,7 +262,7 @@
     },
     {
       "type": "range",
-      "id": "mobile_desktop_height",
+      "id": "mobile_height",
       "min": 300,
       "max": 450,
       "step": 10,
