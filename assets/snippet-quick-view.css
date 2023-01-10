@@ -133,10 +133,6 @@ quick-view-component .quick-view__radios-container {
 	padding: 0px;
 }
 
-quick-view-component .quick-view__radios-container select {
-	height: 30px !important;
-}
-
 quick-view-component .quick-view__radios-container .quick-view__color-select-content select {
 	width: 100%;
 }
