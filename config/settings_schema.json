@@ -532,7 +532,6 @@
                     "type": "select",
                     "id": "quick_view_variant_selector_type",
                     "label": "t:settings_schema.quick_view.settings.quick_view_variant_selector_type.label",
-                    "value": "button",
                     "options": [
                          {
                               "value": "button",
