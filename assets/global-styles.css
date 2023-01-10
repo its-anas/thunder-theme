@@ -1625,15 +1625,14 @@ p[data-spam-detection-disclaimer] > a {
 
 /*  ANCHOR: Form */
 
-input {
-	height: 30px;
+select {
+	padding-left: 0.5rem;
 }
 
 input,
 textarea,
 select {
-	height: 30px;
-	padding: 0.5rem;
+	height: 44px;
 	border: 1px solid rgb(144, 144, 144);
 	background-color: var(--secondary-background-color);
 	color: var(--body-text-color);
@@ -1673,14 +1672,6 @@ input[type="checkbox"]:checked {
 	background-position: center;
 	background-repeat: no-repeat; */
 	border: 2px solid var(--global-border-color);
-}
-
-@media screen and (min-width: 1024px) {
-	input,
-	textarea,
-	select {
-		height: 30px;
-	}
 }
 
 input::-webkit-search-cancel-button,
