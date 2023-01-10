@@ -113,6 +113,10 @@ img {
 	}
 }
 
+.hidden-select {
+	opacity: 0;
+}
+
 .placeholder {
 	display: flex;
 	justify-content: center;

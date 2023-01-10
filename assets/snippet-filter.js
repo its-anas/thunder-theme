@@ -170,3 +170,18 @@ document.querySelector(".filter-mobile__button").addEventListener("click", (even
 	let filter = document.querySelector(".filter__box");
 	filter.classList.remove("active");
 });
+
+document.querySelectorAll("select[autoresize=true]").forEach((select) => {
+	resizeOptionParent(select);
+	select.addEventListener("change", resizeSelect);
+});
+
+function resizeOptionParent(select) {
+	document.querySelector(".hidden-select").innerHTML = select.querySelector("option:checked").innerText;
+	select.style.width = `calc(${document.querySelector(".hidden-select").offsetWidth}px + 2.5rem`;
+}
+
+function resizeSelect(event) {
+	document.querySelector(".hidden-select").innerHTML = event.target.querySelector("option:checked").innerText;
+	event.target.style.width = `calc(${document.querySelector(".hidden-select").offsetWidth}px + 1.5rem`;
+}

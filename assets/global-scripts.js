@@ -2,21 +2,6 @@
 
 const headerPadding = document.querySelector(".header-section").classList.contains("boxed") ? "+ 8px" : "";
 
-document.querySelectorAll("select[autoresize=true]").forEach((select) => {
-	resizeOptionParent(select);
-	select.addEventListener("change", resizeSelect);
-});
-
-function resizeOptionParent(select) {
-	document.querySelector(".hidden-select").innerHTML = select.querySelector("option:checked").innerText;
-	select.style.width = `calc(${document.querySelector(".hidden-select").offsetWidth}px + 2.2rem`;
-}
-
-function resizeSelect(event) {
-	document.querySelector(".hidden-select").innerHTML = event.target.querySelector("option:checked").innerText;
-	event.target.style.width = `calc(${document.querySelector(".hidden-select").offsetWidth}px + 1.5rem`;
-}
-
 window.addEventListener("load", () => {
 	updateCartDrawer();
 	endButtonsLoadingAnimation(0);

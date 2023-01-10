@@ -1,6 +1,8 @@
 {{ 'snippet-filter.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'snippet-filter.js' | asset_url }}" defer></script>
 
+<div class="hidden-select" style="width: fit-content;"></div>
+
 <filter-component>
   <div class="filter-head">
     <h6 class="filter-title">{{ 'general.filter.title' | t }}</h6>
