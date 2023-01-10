@@ -200,7 +200,8 @@
                 "logo": "Logo",
                 "thumbnail": "Miniatura",
                 "products": "Prodotti",
-                "icon": "Icona"
+                "icon": "Icona",
+                "style": "Stile"
             },
             "text": {
                 "text": "Testo",

@@ -2440,13 +2440,16 @@ slider-component .placeholder {
 cart-component,
 menu-drawer-component {
 	position: fixed;
-	z-index: 98;
 	z-index: 100;
 	bottom: 0px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	width: 100%;
+}
+
+body:has(.header-section.boxed) cart-component,
+.header-section.boxed menu-drawer-component {
 	padding: 8px;
 }
 

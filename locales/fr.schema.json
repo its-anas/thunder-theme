@@ -200,7 +200,8 @@
                 "logo": "Logo",
                 "thumbnail": "Vignette",
                 "products": "Produits",
-                "icon": "Icône"
+                "icon": "Icône",
+                "style": "Style"
             },
             "text": {
                 "text": "Texte",

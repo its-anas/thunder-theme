@@ -154,7 +154,8 @@ class FilterPriceRange extends HTMLElement {
 customElements.define("filter-price-range", FilterPriceRange);
 
 window.addEventListener("load", () => {
-	document.querySelector(".filter__box").style.height = `calc(100% - ${document.querySelector(".header-section").offsetHeight}px + 8px)`;
+	let headerPadding = document.querySelector(".header-section").classList.contains("boxed") ? "+ 8px" : "";
+	document.querySelector(".filter__box").style.height = `calc(100% - ${document.querySelector(".header-section").offsetHeight}px ${headerPadding})`;
 });
 
 document.querySelector(".show-filter").addEventListener("click", (event) => {

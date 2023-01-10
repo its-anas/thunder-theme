@@ -1,5 +1,7 @@
 // ANCHOR: On load
 
+const headerPadding = document.querySelector(".header-section").classList.contains("boxed") ? "+ 8px" : "";
+
 window.addEventListener("load", () => {
 	updateCartDrawer();
 	endButtonsLoadingAnimation(0);
@@ -674,7 +676,7 @@ customElements.define("shop-the-look", ShopTheLook);
 
 // ANCHOR: Menu drawer
 
-let extraPadding = document.querySelector(".header-section").classList.contains("boxed") ? 15 : 0;
+let extraPadding = document.querySelector(".header-section").classList.contains("boxed") ? 15 : 8;
 let announcementHeight = document.querySelector(".announcement") ? document.querySelector(".announcement").offsetHeight : 0;
 let allChildHeights = [];
 let menuChildContainer = document.querySelectorAll(".menu__childs");
@@ -783,7 +785,7 @@ class MenuDrawerComponent extends HTMLElement {
 		if (Shopify.designMode) {
 			document.addEventListener("shopify:section:load", (event) => {
 				event.target.classList.forEach((i) => {
-					this.style.height = `calc(100% - ${document.querySelector(".header-section").offsetHeight}px + 8px)`;
+					this.style.height = `calc(100% - ${document.querySelector(".header-section").offsetHeight}px ${headerPadding})`;
 					if (i === "main-header") {
 						this.showMenuDrawer();
 					}
@@ -792,7 +794,7 @@ class MenuDrawerComponent extends HTMLElement {
 
 			document.addEventListener("shopify:section:select", (event) => {
 				event.target.classList.forEach((i) => {
-					this.style.height = `calc(100% - ${document.querySelector(".header-section").offsetHeight}px + 8px)`;
+					this.style.height = `calc(100% - ${document.querySelector(".header-section").offsetHeight}px ${headerPadding})`;
 					if (i === "main-header") {
 						this.showMenuDrawer();
 					}
@@ -1114,7 +1116,7 @@ customElements.define("predictive-search", PredictiveSearch);
 let searchDrawer = document.querySelector(".search-drawer");
 
 window.addEventListener("load", () => {
-	document.querySelector(".search-drawer").style.height = `calc(100% - ${document.querySelector(".header-section").offsetHeight}px + 8px)`;
+	document.querySelector(".search-drawer").style.height = `calc(100% - ${document.querySelector(".header-section").offsetHeight}px ${headerPadding})`;
 });
 
 class SearchDrawer extends HTMLElement {
@@ -1178,7 +1180,7 @@ class SearchDrawer extends HTMLElement {
 			document.addEventListener("shopify:section:load", (event) => {
 				event.target.classList.forEach((i) => {
 					if (i === "main-search-drawer") {
-						this.searchDrawer.style.height = `calc(100% - ${document.querySelector(".header-section").offsetHeight}px + 8px)`;
+						this.searchDrawer.style.height = `calc(100% - ${document.querySelector(".header-section").offsetHeight}px ${headerPadding})`;
 						this.showSearchDrawer();
 					}
 				});
@@ -1187,7 +1189,7 @@ class SearchDrawer extends HTMLElement {
 			document.addEventListener("shopify:section:select", (event) => {
 				event.target.classList.forEach((i) => {
 					if (i === "main-search-drawer") {
-						this.searchDrawer.style.height = `calc(100% - ${document.querySelector(".header-section").offsetHeight}px + 8px)`;
+						this.searchDrawer.style.height = `calc(100% - ${document.querySelector(".header-section").offsetHeight}px ${headerPadding})`;
 						this.showSearchDrawer();
 					}
 				});
@@ -1330,7 +1332,7 @@ class CartComponent extends HTMLElement {
 			if (Shopify.designMode) {
 				document.addEventListener("shopify:section:load", (event) => {
 					event.target.classList.forEach((i) => {
-						this.style.height = `calc(100% - ${document.querySelector(".header-section").offsetHeight}px + 8px)`;
+						this.style.height = `calc(100% - ${document.querySelector(".header-section").offsetHeight}px ${headerPadding})`;
 
 						if (i === "main-cart-drawer") {
 							showCartDrawer();
@@ -1340,7 +1342,7 @@ class CartComponent extends HTMLElement {
 
 				document.addEventListener("shopify:section:select", (event) => {
 					event.target.classList.forEach((i) => {
-						this.style.height = `calc(100% - ${document.querySelector(".header-section").offsetHeight}px + 8px)`;
+						this.style.height = `calc(100% - ${document.querySelector(".header-section").offsetHeight}px ${headerPadding})`;
 
 						if (i === "main-cart-drawer") {
 							showCartDrawer();

@@ -200,7 +200,8 @@
                 "logo": "Logo",
                 "thumbnail": "Thumbnail",
                 "products": "Products",
-                "icon": "Icon"
+                "icon": "Icon",
+                "style": "Style"
             },
             "text": {
                 "text": "Text",

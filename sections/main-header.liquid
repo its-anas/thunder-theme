@@ -1,7 +1,7 @@
 {{ 'main-header.css' | asset_url | stylesheet_tag }}
 
 {% style %}
-  .header-section.boxed .header-container .main-header .header .header__content, .menu-mobile__container {
+  .boxed .header__content, .boxed .menu-mobile__container {
     border-radius: var(--global-border-radius);
     border: var(--global-border-width) solid var(--global-border-color);
   }
@@ -740,7 +740,7 @@
     {
       "type": "select",
       "id": "menu_layout",
-      "label": "t:sections.general.header.layout",
+      "label": "t:sections.general.header.style",
       "options": [
         {
           "value": "logo_first",

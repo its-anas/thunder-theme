@@ -19,7 +19,7 @@
     }
   {% else %}
   {% endif %}
-  .cart-drawer__container, .cart-drawer__content--empty, .recommended-products.desktop-only {
+  body:has(.header-section.boxed) .cart-drawer__container, body:has(.header-section.boxed) .cart-drawer__content--empty, body:has(.header-section.boxed) .recommended-products.desktop-only {
     border-radius: var(--global-border-radius);
     border: var(--global-border-width) solid var(--global-border-color);
   }
