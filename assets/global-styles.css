@@ -1625,13 +1625,10 @@ p[data-spam-detection-disclaimer] > a {
 
 /*  ANCHOR: Form */
 
-select {
-	padding-left: 0.5rem;
-}
-
 input,
 textarea,
 select {
+	padding-left: 0.5rem;
 	height: 44px;
 	border: 1px solid rgb(144, 144, 144);
 	background-color: var(--secondary-background-color);
