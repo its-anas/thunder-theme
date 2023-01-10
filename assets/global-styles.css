@@ -435,9 +435,38 @@ p[data-spam-detection-disclaimer] > a {
 
 /* ANCHOR:  Reveal on scroll */
 
-/* Slideshow */
-
 @media (prefers-reduced-motion: no-preference) {
+	/* Slider icons */
+	.prev svg,
+	.next svg,
+	.zoom-icon svg {
+		opacity: 0.5;
+	}
+
+	.prev svg:hover,
+	.next svg:hover,
+	.zoom-icon svg:hover {
+		opacity: 1;
+	}
+
+	.next,
+	.prev,
+	.zoom-icon {
+		opacity: 0;
+	}
+
+	slider-component.reveal .next,
+	slider-component.reveal .prev {
+		animation: 0.6s appear 1s cubic-bezier(0.75, 0, 0.175, 1) forwards;
+	}
+
+	.reveal .next,
+	.reveal .prev,
+	.reveal .zoom-icon {
+		animation: 0.5s appear 0.5s cubic-bezier(0.75, 0, 0.175, 1) forwards;
+	}
+
+	/* Slideshow */
 	.slideshow .slideshow__picture,
 	.slideshow .slideshow__content,
 	.slideshow .slideshow__box *,
@@ -1446,15 +1475,8 @@ p[data-spam-detection-disclaimer] > a {
 	}
 
 	/* Slider component */
-	slider-component .slide .item,
-	slider-component .next,
-	slider-component .prev {
+	slider-component .slide .item {
 		opacity: 0;
-	}
-
-	slider-component.reveal .next,
-	slider-component.reveal .prev {
-		animation: 0.6s appear 1s cubic-bezier(0.75, 0, 0.175, 1) forwards;
 	}
 
 	slider-component.reveal .slide .item {
@@ -2193,13 +2215,6 @@ slider-component .slider-component .next {
 	height: 100%;
 	visibility: hidden;
 	cursor: pointer;
-	transition: 0.2s;
-}
-
-slider-component .slider-component .prev svg,
-slider-component .slider-component .next svg {
-	opacity: 0.5;
-	transition: 0.2s;
 }
 
 @media screen and (max-width: 1024px) {
