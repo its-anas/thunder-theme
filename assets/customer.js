@@ -4,6 +4,15 @@ class customerPopup extends HTMLElement {
 	}
 
 	connectedCallback() {
+		this.querySelector(".customer__popup").style.height = `calc(100% - ${document.querySelector(".header-section").offsetHeight}px +  0.5rem)`;
+		this.querySelector(".customer__popup").style.marginTop = `calc(${document.querySelector(".header-section").offsetHeight}px -  0.5rem)`;
+		let headerSize = document.querySelector(".header-section").offsetHeight;
+		let viewportHeight = window.innerHeight;
+		let spaceLeft = viewportHeight - headerSize;
+		let halfOfSpaceLeft = spaceLeft / 2;
+		let newTop = 100 - (halfOfSpaceLeft / viewportHeight) * 100;
+		this.querySelector(".customer__popup").style.top = `${newTop}%`;
+
 		this.addEventListener("click", (e) => {
 			if (e.target.id === "customer__popup__add-address__button") {
 				this.loadCustomerPopup();
@@ -58,16 +67,6 @@ class customerPopup extends HTMLElement {
 	}
 
 	showPopup() {
-		this.querySelector(".customer__popup").style.height = `calc(100% - ${document.querySelector(".header-section").offsetHeight}px +  0.5rem)`;
-		this.querySelector(".customer__popup").style.marginTop = `calc(${document.querySelector(".header-section").offsetHeight}px -  0.5rem)`;
-		let headerSize = document.querySelector(".header-section").offsetHeight;
-		let viewportHeight = window.innerHeight;
-		let spaceLeft = viewportHeight - headerSize;
-		let halfOfSpaceLeft = spaceLeft / 2;
-		let newTop = 100 - (halfOfSpaceLeft / viewportHeight) * 100;
-
-		document.querySelector(".customer__popup").style.top = `${newTop}%`;
-
 		lockPage();
 
 		this.querySelector(".customer__popup").classList.remove("hidden");
