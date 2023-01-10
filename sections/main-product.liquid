@@ -698,6 +698,7 @@
   
   
   
+  
   let variantsInventory = {};
   {% for variant in product.variants %}
   variantsInventory["{{ variant.title }}"] = {{ variant.inventory_quantity }};
@@ -732,6 +733,7 @@
   let currentVariantInventory = {{ current_variant.inventory_quantity }};
   let stockAlertThreshold = {{ stock_alert_threshold }};
   let priceDifferenceText= "{{ price_difference_text }}";
+
 
 
 
@@ -891,7 +893,7 @@
               "label": "t:sections.general.product.variants_selector.settings.variant_selector_type.options.dropdown"
             }
           ],
-          "default": "button"
+          "default": "dropdown"
         },
         {
           "type": "select",

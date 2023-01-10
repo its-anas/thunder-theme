@@ -1630,6 +1630,9 @@ select {
 	-moz-appearance: none;
 	-webkit-appearance: none;
 	appearance: none;
+}
+
+select:not(.sort-by__select) {
 	padding: 0 1.5rem 0 0.5rem;
 }
 
@@ -1729,7 +1732,6 @@ select::placeholder {
 
 .sort-by__select,
 .sort-by__select:focus {
-	padding: 0rem;
 	background-color: var(--background-color);
 	border: transparent;
 }
