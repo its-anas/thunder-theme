@@ -2893,6 +2893,8 @@ cart-component.hidden {
 		overflow: hidden;
 		height: 100%;
 		transition: all 0.5s ease-in-out;
+		min-width: 315px;
+		max-width: 315px;
 	}
 }
 

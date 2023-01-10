@@ -40,7 +40,7 @@ class FilterComponent extends HTMLElement {
 				const filtersCount = doc.querySelectorAll(".filter-active-filters__remove");
 				document.querySelector("#filterCount").innerHTML = filtersCount.length > 0 ? `(${filtersCount.length})` : "";
 				const selector = this.pageType === "search" ? ".page-tab[for='products']" : ".results-count";
-				document.querySelector(selector).innerHTML = this.originalText + resultsCount.innerHTML;
+				document.querySelector(selector).innerHTML = this.originalText + " " + resultsCount.innerHTML;
 			});
 	}
 

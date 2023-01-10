@@ -86,8 +86,7 @@
 }
 
 .search__content--middle {
-	width: 100%;
-	max-width: 1175px;
+	flex-grow: 1;
 }
 
 .filter__results {
