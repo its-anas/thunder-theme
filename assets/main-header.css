@@ -569,6 +569,7 @@
 
 .menu-mobile__account-container {
 	padding: 1rem;
+	position: relative;
 }
 
 .menu-mobile__account {

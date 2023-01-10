@@ -377,6 +377,7 @@
 
               {%- if shop.customer_accounts_enabled -%}
                 <div class="menu-mobile__account-container">
+                  <div class="shadow-divider"></div>
                   <div class="menu-mobile__account">
                     {% render 'snippet-icons', icon: 'account' %}
                     <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}">

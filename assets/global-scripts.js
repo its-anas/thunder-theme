@@ -821,9 +821,8 @@ class MenuMobile extends HTMLElement {
 	}
 	showHide() {
 		this.querySelectorAll(".menu-mobile__parent").forEach((parent) => {
-			let childsHeight = parent.querySelector(".menu-mobile__parent-childs").scrollHeight;
-
 			parent.querySelector(".menu-mobile__parent-title").addEventListener("click", () => {
+				let childsHeight = parent.querySelector(".menu-mobile__parent-childs").scrollHeight;
 				if (!parent.querySelector(".menu-mobile__parent-childs").classList.contains("active")) {
 					parent.querySelector(".menu-mobile__parent-childs").style.height = `${childsHeight}px`;
 					parent.querySelector(".menu-mobile__parent-childs").classList.add("active");
@@ -834,8 +833,9 @@ class MenuMobile extends HTMLElement {
 			});
 
 			parent.querySelectorAll(".menu-mobile__child").forEach((child) => {
-				let grandchildsHeight = child.querySelector(".menu-mobile__child-childs").scrollHeight;
 				child.querySelector(".menu-mobile__child-title").addEventListener("click", () => {
+					let grandchildsHeight = child.querySelector(".menu-mobile__child-childs").scrollHeight;
+					let childsHeight = parent.querySelector(".menu-mobile__parent-childs").scrollHeight;
 					if (!child.querySelector(".menu-mobile__child-childs").classList.contains("active")) {
 						parent.querySelector(".menu-mobile__parent-childs").style.height = `${childsHeight + grandchildsHeight}px`;
 						child.querySelector(".menu-mobile__child-childs").style.height = `${grandchildsHeight}px`;
