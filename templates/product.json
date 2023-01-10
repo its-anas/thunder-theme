@@ -19,7 +19,11 @@
           "type": "price"
         },
         "variants_selector": {
-          "type": "variants_selector"
+          "type": "variants_selector",
+          "settings": {
+            "variant_selector_type": "dropdown",
+            "color_selector_type": "dropdown"
+          }
         },
         "quantity": {
           "type": "quantity"
