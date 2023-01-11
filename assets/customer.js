@@ -13,12 +13,12 @@ class customerPopup extends HTMLElement {
 		let newTop = 100 - (halfOfSpaceLeft / viewportHeight) * 100;
 		this.querySelector(".customer__popup").style.top = `${newTop}%`;
 
-		this.addEventListener("click", (e) => {
+		document.addEventListener("click", (e) => {
 			if (e.target.id === "customer__popup__add-address__button") {
 				this.loadCustomerPopup();
 				let form = this.querySelector("#customer__popup__add-address__form");
 				this.showPopup();
-			} else if (e.target.id === "customer__popup__add-address__close-icon" || e.target.id === "customer__popup__add-address__cancel-button") {
+			} else if (e.target.id === "customer__popup__add-address__close-icon" || e.target.id === "customer__popup__add-address__cancel-button" || e.target.classList.contains("theme-overlay")) {
 				this.loadCustomerPopup();
 				let form = this.querySelector("#customer__popup__add-address__form");
 				this.hidePopup();

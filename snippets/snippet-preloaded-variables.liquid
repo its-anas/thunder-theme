@@ -14,6 +14,7 @@
   
   
   
+  
   let cartType = '{{ settings.cart_type }}';
   let freeShippingBarFirstMessage =`{{ 'general.free_shipping_bar.first_message' | t }}`;
   let freeShippingBarSecondMessage = `{{ 'general.free_shipping_bar.second_message' | t }}`;
@@ -28,7 +29,6 @@
   let freeShippingThreshold = {{ settings.free_shipping_threshold | times: 100 }};
   let colorSwatchList = {};
   let headerLayout = "{{ settings.header_layout }}";
-  let headerStyle = "drawer";
 
 
   {% liquid
@@ -91,6 +91,7 @@
     }
     return formatString.replace(placeholderRegex, value);
   }
+
 
 
 
