@@ -111,6 +111,9 @@
 	align-items: center;
 	gap: 0.5rem;
 }
+.customer__form__link * {
+	cursor: pointer;
+}
 
 .customer .button--link::after {
 	content: "";
