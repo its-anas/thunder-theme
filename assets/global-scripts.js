@@ -3048,7 +3048,7 @@ class FeaturedProductSlider extends FeaturedProduct {
 			pushActiveClass(".featured-product-slider__slides-container .slide .item", "next");
 			pushActiveClass(".featured-product-slider__indicators span", "next");
 			pushActiveClass(".featured-product-slider__thumbnails .thumbnail", "next");
-			setNewTranslate();
+			updateTranslate();
 		}
 
 		function movePrev() {
@@ -3058,7 +3058,7 @@ class FeaturedProductSlider extends FeaturedProduct {
 			pushActiveClass(".featured-product-slider__slides-container .slide .item", "prev");
 			pushActiveClass(".featured-product-slider__indicators span", "prev");
 			pushActiveClass(".featured-product-slider__thumbnails .thumbnail", "prev");
-			setNewTranslate();
+			updateTranslate();
 		}
 
 		function travelToItem(AllItems, actualItem, follower) {
@@ -3097,7 +3097,7 @@ class FeaturedProductSlider extends FeaturedProduct {
 			});
 		}
 
-		function setNewTranslate() {
+		function updateTranslate() {
 			itemWidth = item.offsetWidth;
 			let actualActiveItemIndex = parseInt(section.querySelector(`.featured-product-slider__indicators .active`).getAttribute("data-slide-to"));
 			newTranslate = actualActiveItemIndex * itemWidth * -1;
@@ -3105,13 +3105,19 @@ class FeaturedProductSlider extends FeaturedProduct {
 		}
 
 		section.querySelector(`.zoom-icon`).addEventListener("click", () => {
-			setNewTranslate();
+			updateTranslate();
 		});
 		section.querySelector(`.featured-product__close`).addEventListener("click", () => {
-			setNewTranslate();
+			updateTranslate();
 		});
 		window.addEventListener("resize", () => {
-			setNewTranslate();
+			updateTranslate();
+		});
+
+		document.querySelectorAll(".featured-product-slider__indicators").forEach((indicator) => {
+			indicator.addEventListener("click", () => {
+				updateTranslate();
+			});
 		});
 
 		window.addEventListener("resize", setMaxScroll);

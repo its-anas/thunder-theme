@@ -351,7 +351,7 @@ class ProductPageSlider extends HTMLElement {
 			pushActiveClass(".product-page-slider__slides-container .slide .item", "next");
 			pushActiveClass(".product-page-slider__indicators span", "next");
 			pushActiveClass(".product-page-slider__thumbnails .thumbnail", "next");
-			setNewTranslate();
+			updateTranslate();
 		}
 
 		function movePrev() {
@@ -361,7 +361,7 @@ class ProductPageSlider extends HTMLElement {
 			pushActiveClass(".product-page-slider__slides-container .slide .item", "prev");
 			pushActiveClass(".product-page-slider__indicators span", "prev");
 			pushActiveClass(".product-page-slider__thumbnails .thumbnail", "prev");
-			setNewTranslate();
+			updateTranslate();
 		}
 
 		function travelToItem(AllItems, actualItem, follower) {
@@ -400,7 +400,7 @@ class ProductPageSlider extends HTMLElement {
 			});
 		}
 
-		function setNewTranslate() {
+		function updateTranslate() {
 			itemWidth = item.offsetWidth;
 			let actualActiveItemIndex = parseInt(document.querySelector(".product-page-slider__indicators .active").getAttribute("data-slide-to"));
 			newTranslate = actualActiveItemIndex * itemWidth * -1;
@@ -408,13 +408,18 @@ class ProductPageSlider extends HTMLElement {
 		}
 
 		document.querySelector(".zoom-icon").addEventListener("click", () => {
-			setNewTranslate();
+			updateTranslate();
 		});
 		document.querySelector(".product-page__close").addEventListener("click", () => {
-			setNewTranslate();
+			updateTranslate();
+		});
+		document.querySelectorAll(".product-page-slider__indicators").forEach((indicator) => {
+			indicator.addEventListener("click", () => {
+				updateTranslate();
+			});
 		});
 		window.addEventListener("resize", () => {
-			setNewTranslate();
+			updateTranslate();
 		});
 		next.addEventListener("click", moveNext);
 		prev.addEventListener("click", movePrev);
