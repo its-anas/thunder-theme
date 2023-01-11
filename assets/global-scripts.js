@@ -723,6 +723,10 @@ if (Shopify.designMode) {
 		setDropdownPadding();
 	});
 
+	document.addEventListener("shopify:section:reorder", (event) => {
+		setDropdownPadding();
+	});
+
 	document.addEventListener("shopify:section:select", (event) => {
 		setDropdownPadding();
 	});
@@ -798,26 +802,44 @@ class MenuDrawerComponent extends HTMLElement {
 		if (Shopify.designMode) {
 			document.addEventListener("shopify:section:load", (event) => {
 				event.target.classList.forEach((i) => {
-					this.style.height = `calc(100% - ${document.querySelector(".header-section").offsetHeight}px ${headerPadding})`;
-					if (i === "main-header") {
-						this.showMenuDrawer();
+					if (headerStyle === "drawer") {
+						if (i === "main-header") {
+							this.style.height = `calc(100% - ${document.querySelector(".header-section").offsetHeight}px ${headerPadding})`;
+							this.showMenuDrawer();
+						}
+					}
+				});
+			});
+
+			document.addEventListener("shopify:section:reorder", (event) => {
+				event.target.classList.forEach((i) => {
+					if (headerStyle === "drawer") {
+						if (i === "main-header") {
+							this.style.height = `calc(100% - ${document.querySelector(".header-section").offsetHeight}px ${headerPadding})`;
+							this.showMenuDrawer();
+						}
 					}
 				});
 			});
 
 			document.addEventListener("shopify:section:select", (event) => {
 				event.target.classList.forEach((i) => {
-					this.style.height = `calc(100% - ${document.querySelector(".header-section").offsetHeight}px ${headerPadding})`;
-					if (i === "main-header") {
-						this.showMenuDrawer();
+					if (headerStyle === "drawer") {
+						if (i === "main-header") {
+							this.style.height = `calc(100% - ${document.querySelector(".header-section").offsetHeight}px ${headerPadding})`;
+							this.showMenuDrawer();
+						}
 					}
 				});
 			});
 
 			document.addEventListener("shopify:section:deselect", (event) => {
 				event.target.classList.forEach((i) => {
-					if (i === "main-header") {
-						this.hideMenuDrawer();
+					if (headerStyle === "drawer") {
+						if (i === "main-header") {
+							this.style.height = `calc(100% - ${document.querySelector(".header-section").offsetHeight}px ${headerPadding})`;
+							this.showMenuDrawer();
+						}
 					}
 				});
 			});
@@ -1227,6 +1249,15 @@ class SearchDrawer extends HTMLElement {
 				});
 			});
 
+			document.addEventListener("shopify:section:reorder", (event) => {
+				event.target.classList.forEach((i) => {
+					if (i === "main-search-drawer") {
+						this.searchDrawer.style.height = `calc(100% - ${document.querySelector(".header-section").offsetHeight}px ${headerPadding})`;
+						this.showSearchDrawer();
+					}
+				});
+			});
+
 			document.addEventListener("shopify:section:select", (event) => {
 				event.target.classList.forEach((i) => {
 					if (i === "main-search-drawer") {
@@ -1373,9 +1404,17 @@ class CartComponent extends HTMLElement {
 			if (Shopify.designMode) {
 				document.addEventListener("shopify:section:load", (event) => {
 					event.target.classList.forEach((i) => {
-						this.style.height = `calc(100% - ${document.querySelector(".header-section").offsetHeight}px ${headerPadding})`;
-
 						if (i === "main-cart-drawer") {
+							this.style.height = `calc(100% - ${document.querySelector(".header-section").offsetHeight}px ${headerPadding})`;
+							showCartDrawer();
+						}
+					});
+				});
+
+				document.addEventListener("shopify:section:reorder", (event) => {
+					event.target.classList.forEach((i) => {
+						if (i === "main-cart-drawer") {
+							this.style.height = `calc(100% - ${document.querySelector(".header-section").offsetHeight}px ${headerPadding})`;
 							showCartDrawer();
 						}
 					});
@@ -1383,9 +1422,8 @@ class CartComponent extends HTMLElement {
 
 				document.addEventListener("shopify:section:select", (event) => {
 					event.target.classList.forEach((i) => {
-						this.style.height = `calc(100% - ${document.querySelector(".header-section").offsetHeight}px ${headerPadding})`;
-
 						if (i === "main-cart-drawer") {
+							this.style.height = `calc(100% - ${document.querySelector(".header-section").offsetHeight}px ${headerPadding})`;
 							showCartDrawer();
 						}
 					});
@@ -1394,7 +1432,8 @@ class CartComponent extends HTMLElement {
 				document.addEventListener("shopify:section:deselect", (event) => {
 					event.target.classList.forEach((i) => {
 						if (i === "main-cart-drawer") {
-							this.hideCartDrawer();
+							this.style.height = `calc(100% - ${document.querySelector(".header-section").offsetHeight}px ${headerPadding})`;
+							showCartDrawer();
 						}
 					});
 				});
@@ -2532,6 +2571,15 @@ class FeaturedProduct extends HTMLElement {
 			document.addEventListener("shopify:section:load", (event) => {
 				this.loadFeaturedProductContent();
 			});
+			document.addEventListener("shopify:section:reorder", (event) => {
+				this.loadFeaturedProductContent();
+			});
+			document.addEventListener("shopify:section:select", (event) => {
+				this.loadFeaturedProductContent();
+			});
+			document.addEventListener("shopify:section:deselect", (event) => {
+				this.loadFeaturedProductContent();
+			});
 		}
 	}
 
@@ -2956,6 +3004,15 @@ class FeaturedProductSlider extends FeaturedProduct {
 
 		if (Shopify.designMode) {
 			document.addEventListener("shopify:section:load", (event) => {
+				this.loadSlider();
+			});
+			document.addEventListener("shopify:section:reorder", (event) => {
+				this.loadSlider();
+			});
+			document.addEventListener("shopify:section:select", (event) => {
+				this.loadSlider();
+			});
+			document.addEventListener("shopify:section:deselect", (event) => {
 				this.loadSlider();
 			});
 		}
