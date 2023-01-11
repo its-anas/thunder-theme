@@ -90,9 +90,16 @@ details[open] svg {
 	opacity: 0.5;
 	pointer-events: none;
 }
-
+.color-filter-group__list-item {
+	position: relative;
+}
 .color-filter-group__list-item input:disabled:before {
-	background: linear-gradient(to bottom right, transparent calc(50% - 1px), black calc(50% - 1px), black calc(50% + 1px), transparent calc(50% + 1px)) no-repeat;
+	content: "";
+	top: 0px;
+	left: 0px;
+	width: calc(100%);
+	height: calc(100%);
+	background: linear-gradient(to bottom right, transparent calc(50% - 1px), var(--background-color) calc(50% - 1px), var(--background-color) calc(50% + 1px), transparent calc(50% + 1px)) no-repeat;
 	position: absolute;
 	z-index: 2;
 }

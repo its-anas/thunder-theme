@@ -174,9 +174,11 @@
                   %}
                 </button>
                 {% if featured_product != blank %}
-                  {%- form 'product', featured_product -%}
-                    {{ form | payment_button }}
-                  {%- endform -%}
+                  <div id="featured-product-buy-now">
+                    {%- form 'product', featured_product -%}
+                      {{ form | payment_button }}
+                    {%- endform -%}
+                  </div>
                 {% endif %}
               </div>
             {% when 'product_url' %}

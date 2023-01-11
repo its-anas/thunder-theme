@@ -68,7 +68,7 @@ class ProductPage extends HTMLElement {
 					if (key == variant.title) {
 						if (variantsInventory[key] > 0 && variantsInventory[key] < stockAlertThreshold) {
 							if (document.querySelector(".product-page__stock-disclaimer__text")) {
-								document.querySelector(".product-page__stock-disclaimer__text").innerHTML = `Only ${variantsInventory[key]} left in stock`;
+								document.querySelector(".product-page__stock-disclaimer__text").innerHTML = stockDisclaimer.replace(/[0-9]+/g, variantsInventory[key]);
 							}
 						}
 						announceSoldout(variantsInventory[key]);
