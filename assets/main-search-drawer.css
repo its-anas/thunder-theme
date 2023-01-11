@@ -93,7 +93,7 @@ body:has(.header-section.boxed) .search-drawer {
 .search-drawer__container .search-drawer__close {
 	position: absolute;
 	right: 0;
-	top: 0;
+	top: 5px;
 	cursor: pointer;
 }
 

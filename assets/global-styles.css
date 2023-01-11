@@ -1654,6 +1654,7 @@ input,
 textarea,
 select {
 	height: 44px;
+	min-height: 44px;
 	border: 1px solid rgb(144, 144, 144);
 	background-color: var(--secondary-background-color);
 	color: var(--body-text-color);
@@ -2121,7 +2122,8 @@ a.remove .loading-spinner svg.mini {
 }
 
 .qv-icon.hide,
-.rm-icon.hide {
+.rm-icon.hide,
+.cl-icon.hide {
 	opacity: 0;
 }
 

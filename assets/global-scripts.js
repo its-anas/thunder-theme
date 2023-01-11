@@ -1047,6 +1047,7 @@ class PredictiveSearch extends HTMLElement {
 	}
 
 	getSearchResults(searchTerm, limit) {
+		this.showSpinner();
 		fetch(window.Shopify.routes.root + `search/suggest?q=${searchTerm}&resources[type]=product&resources[limit]=${limit}&section_id=section-predictive-search`)
 			.then((response) => {
 				if (!response.ok) {
@@ -1061,9 +1062,15 @@ class PredictiveSearch extends HTMLElement {
 				const resultsMarkup = new DOMParser().parseFromString(text, "text/html").querySelector("#shopify-section-section-predictive-search").innerHTML;
 				this.predictiveSearchResults.innerHTML = resultsMarkup;
 				this.open();
+				setTimeout(() => {
+					this.hideSpinner();
+				}, 300);
 			})
 			.catch((error) => {
 				this.close();
+				setTimeout(() => {
+					this.hideSpinner();
+				}, 300);
 				throw error;
 			});
 	}
@@ -1108,13 +1115,29 @@ class PredictiveSearch extends HTMLElement {
 			t = setTimeout(() => fn.apply(this, args), wait);
 		};
 	}
+
+	showSpinner() {
+		if (document.querySelector(".search-drawer__close")) {
+			document.querySelector(".search-drawer__close .loading-spinner").classList.add("active");
+			if (document.querySelector(".search-drawer__close .cl-icon")) {
+				document.querySelector(".search-drawer__close .cl-icon").classList.add("hide");
+			}
+		}
+	}
+
+	hideSpinner() {
+		if (document.querySelector(".search-drawer__close")) {
+			document.querySelector(".search-drawer__close .loading-spinner").classList.remove("active");
+			if (document.querySelector(".search-drawer__close .cl-icon")) {
+				document.querySelector(".search-drawer__close .cl-icon").classList.remove("hide");
+			}
+		}
+	}
 }
 
 customElements.define("predictive-search", PredictiveSearch);
 
 // ANCHOR: Search drawer
-
-let searchDrawer = document.querySelector(".search-drawer");
 
 window.addEventListener("load", () => {
 	document.querySelector(".search-drawer").style.height = `calc(100% - ${document.querySelector(".header-section").offsetHeight}px ${headerPadding})`;
@@ -1139,7 +1162,6 @@ class SearchDrawer extends HTMLElement {
 
 	hideSearchDrawer() {
 		unlockPage();
-
 		this.searchDrawer.classList.remove("active");
 		this.searchDrawer.classList.add("hidden");
 	}
@@ -1168,6 +1190,12 @@ class SearchDrawer extends HTMLElement {
 		document.querySelector(".theme-overlay").addEventListener("click", () => {
 			if (this.searchDrawer.classList.contains("active")) {
 				this.hideSearchDrawer();
+				this.resetSearch();
+			}
+		});
+
+		document.querySelector(".search-drawer__form .buttons button").addEventListener("click", () => {
+			if (this.searchDrawer.classList.contains("active")) {
 				this.resetSearch();
 			}
 		});
