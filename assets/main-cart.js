@@ -22,12 +22,3 @@ document.querySelectorAll(".cart-page__product .remove").forEach((icon) => {
 		});
 	});
 });
-
-const showSpinner = (icon) => {
-	if (icon.querySelector(".loading-spinner")) {
-		icon.querySelector(".loading-spinner").classList.add("active");
-		if (icon.querySelector(".rm-icon")) {
-			icon.querySelector(".rm-icon").classList.add("hide");
-		}
-	}
-};

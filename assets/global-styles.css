@@ -2127,6 +2127,12 @@ a.remove .loading-spinner svg.mini {
 	opacity: 0;
 }
 
+.qv-icon *,
+.rm-icon *,
+.cl-icon * {
+	pointer-events: none;
+}
+
 @keyframes rotate {
 	100% {
 		transform: rotate(360deg);

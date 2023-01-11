@@ -226,19 +226,20 @@ async function updateCartDrawer() {
 						<div class="cart-page__product-prices mobile-only">${prices}</div>
 						${discountsHtml}
 						<div class="quantity"> 
-							<quantity-field class="quantity">
+							<quantity-field class="quantity" data-variant-id="${item.variant_id}">
 								<div class="quantity-field cart" id="quantity-field">
-								<button type="button" class="quantity-field__minus" id="quantity-field__minus">-</button>
-								<input
-								type="quantity"
-								class="quantity-field__input"
-								id="quantity-field__input"
-								name="quantity"
-								min="1"
-								value="${item.quantity}"
-								data-variant-id="${item.variant_id}"
-								>
-								<button type="button" class="quantity-field__plus" id="quantity-field__plus">+</button>
+									<button type="button" class="quantity-field__minus" id="quantity-field__minus">-</button>
+										<input
+										disabled
+										type="quantity"
+										class="quantity-field__input"
+										id="quantity-field__input"
+										name="quantity"
+										min="1"
+										value="${item.quantity}"
+										data-variant-id="${item.variant_id}"
+										>
+									<button type="button" class="quantity-field__plus" id="quantity-field__plus">+</button>
 								</div>
 								<a class="remove mobile-only">
 								<div class="loading-spinner">
@@ -257,7 +258,7 @@ async function updateCartDrawer() {
 						</div>
 						<div class="cart-drawer__product__details-side tablet-desktop-only" data-variant-id="${item.variant_id}">
 						<div class="cart-page__product-prices tablet-desktop-only">${prices}</div>
-							<a class="remove">
+							<a class="remove tablet-desktop-only">
 								<div class="loading-spinner">
 									<svg class="mini" viewBox="25 25 50 50">
 									<circle  stroke="var(--icon-color)" cx="50" cy="50" r="20"></circle>
@@ -307,29 +308,40 @@ async function updateCartDrawer() {
 					button.innerHTML = `${buttonText} - ${formatMoney(data.total_price)}`;
 				}
 			});
-			document.querySelectorAll(".cart-drawer__product__details-side .remove").forEach((icon) => {
+			document.querySelectorAll(".cart-drawer__product .remove").forEach((icon) => {
 				icon.addEventListener("click", () => {
-					if (icon.querySelector(".loading-spinner")) {
-						icon.querySelector(".loading-spinner").classList.add("active");
-						if (icon.querySelector(".rm-icon")) {
-							icon.querySelector(".rm-icon").classList.add("hide");
-						}
-					}
+					showSpinner(icon);
 					let variantId = icon.parentNode.getAttribute("data-variant-id");
 					updateCartQuantity(variantId, 0).then(updateCartDrawer);
 				});
 			});
-			document.querySelectorAll(".quantity-field.cart").forEach((field) => {
-				field.addEventListener("click", () => {
-					let input = field.querySelector("input");
-					let variantId = input.getAttribute("data-variant-id");
-					let quantity = input.value;
+			document.querySelectorAll(".cart-drawer__product").forEach((field) => {
+				field.addEventListener("click", (event) => {
+					if (event.target.classList.contains("quantity-field__minus") || event.target.classList.contains("quantity-field__plus")) {
+						let input = field.querySelector("input");
+						let variantId = input.getAttribute("data-variant-id");
+						let quantity = input.value;
 
-					updateCartQuantity(variantId, quantity).then(updateCartDrawer);
+						showSpinner(field);
+						updateCartQuantity(variantId, quantity).then(updateCartDrawer);
+					}
 				});
 			});
 		});
 }
+
+const showSpinner = (icon) => {
+	if (icon.querySelector(".loading-spinner")) {
+		icon.querySelectorAll(".loading-spinner").forEach((spinner) => {
+			spinner.classList.add("active");
+		});
+	}
+	if (icon.querySelector(".rm-icon")) {
+		icon.querySelectorAll(".rm-icon").forEach((rmIcon) => {
+			rmIcon.classList.add("hide");
+		});
+	}
+};
 
 async function updateCartQuantity(variantId, qty) {
 	let variant = variantId.toString();
