@@ -173,15 +173,15 @@
     <rect x="14.9971" y="5" width="2" height="3" stroke="var(--icon-color)"/>
   </svg>
 {% elsif icon == 'loading-spinner' %}
+  <div class="loading-spinner {{ tiny }}">
+    <svg class="mini" viewBox="25 25 50 50">
+      <circle stroke="var(--link-color)" cx="50" cy="50" r="20"></circle>
+    </svg>
+  </div>
+{% elsif icon == 'loading-spinner-button' %}
   <div class="loading-spinner" style="background-color:{{ spinner_background_color }};">
     <svg viewBox="25 25 50 50">
       <circle stroke="{{ spinner_color }}" cx="50" cy="50" r="20"></circle>
-    </svg>
-  </div>
-{% elsif icon == 'loading-spinner-tiny' %}
-  <div class="loading-spinner tiny">
-    <svg class="mini" viewBox="25 25 50 50">
-      <circle stroke="var(--link-color)" cx="50" cy="50" r="20"></circle>
     </svg>
   </div>
 {% elsif icon == 'quick-view' %}
@@ -196,7 +196,7 @@
     <path d="M19.2323 16.8421H17.8907V15.5314H16.8961V16.8421H15.5623V17.7827H16.8961V19.0934H17.8907V17.7827H19.2323V16.8421Z" fill="black"/>
   </svg>
 {% elsif icon == 'trash' %}
-  <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg class="rm-icon" width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M8.71678 7.78444V18.6032L17.0342 18.6137V7.7832M8.71678 7.78444H6.21533M8.71678 7.78444H11.0416L13.0369 7.7832L17.0342 7.7832M17.0342 7.7832H19.5292" stroke="var(--icon-color)"/>
     <path d="M9.53809 6.79688H16.2578" stroke="var(--icon-color)"/>
     <path d="M14.3414 16.6045L14.3414 9.88672M11.3965 16.6045L11.3965 9.88672" stroke="var(--icon-color)"/>

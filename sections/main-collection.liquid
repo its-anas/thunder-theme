@@ -145,7 +145,7 @@
                         {% if item.available %}
                           <quick-view-button>
                             <div
-                              class="button--link mobile-only"
+                              class="button--link mobile-tablet-only"
                               id="quick-view-button"
                               data-first-available-variant-id="{{ item.first_available_variant.id }}"
                               data-product-handle="{{ item.handle }}"
@@ -156,7 +156,7 @@
                               {% else %}
                                 {{ 'general.buttons.add_to_cart' | t }} +
                               {%- endif -%}
-                              {% render 'snippet-icons', icon: 'loading-spinner-tiny' %}
+                              {% render 'snippet-icons', icon: 'loading-spinner', tiny: 'tiny' %}
                             </div>
                           </quick-view-button>
                         {% endif %}

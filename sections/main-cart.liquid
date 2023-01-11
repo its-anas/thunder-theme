@@ -92,6 +92,7 @@
                             <div class="quantity-field cart" id="quantity-field">
                               <button type="button" class="quantity-field__minus" id="quantity-field__minus">-</button>
                               <input
+                                disabled
                                 type="quantity"
                                 class="quantity-field__input"
                                 id="quantity-field__input"
@@ -107,6 +108,7 @@
                               class="quantity-field__product-remove remove"
                             >
                               {% render 'snippet-icons', icon: 'trash' %}
+                              {% render 'snippet-icons', icon: 'loading-spinner' %}
                             </div>
                           </quantity-field>
                         </div>
@@ -118,6 +120,7 @@
                       <div class="quantity-field cart" id="quantity-field">
                         <button type="button" class="quantity-field__minus" id="quantity-field__minus">-</button>
                         <input
+                          disabled
                           type="quantity"
                           class="quantity-field__input"
                           id="quantity-field__input"
@@ -128,8 +131,12 @@
                         >
                         <button type="button" class="quantity-field__plus" id="quantity-field__plus">+</button>
                       </div>
-                      <div data-variant-id="{{ line_item.variant_id }}" class="quantity-field__product-remove remove">
+                      <div
+                        data-variant-id="{{ line_item.variant_id }}"
+                        class="quantity-field__product-remove remove"
+                      >
                         {% render 'snippet-icons', icon: 'trash' %}
+                        {% render 'snippet-icons', icon: 'loading-spinner' %}
                       </div>
                     </quantity-field>
                   </div>
@@ -242,12 +249,6 @@
     {% endif %}
   </div>
 </div>
-
-<script>
-  document.querySelector('.cart-page__button button').addEventListener('click', () => {
-    document.querySelector('.cart-page__button button .loading-spinner').classList.add('active');
-  });
-</script>
 
 {% schema %}
 {

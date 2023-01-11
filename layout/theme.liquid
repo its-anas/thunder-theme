@@ -5,18 +5,14 @@
     {%- render 'snippet-css-variables' -%}
     <link href="{{ 'global-styles.css' | asset_url }}" rel="stylesheet" type="text/css" media="all">
     {%- render 'snippet-social-meta-tags' -%}
-    {%- render 'snippet-preloaded-scripts' -%}
-    <script src="{{ 'global-scripts.js' | asset_url }}" defer></script>
     <title>
       {{ page_title }}
     </title>
-
     {{ content_for_header }}
   </head>
 
   <body>
     <div class="theme-overlay hidden"></div>
-    <div class="loading-bar"></div>
     <div class="header-section {% if settings.header_full_width == false %}boxed{% endif %} sticky">
       <div class="header-container">
         {% liquid
@@ -38,6 +34,7 @@
       echo content_for_layout
       section 'main-footer'
     -%}
+    <script src="{{ 'global-scripts.js' | asset_url }}" defer></script>
     {%- render 'snippet-preloaded-variables' -%}
   </body>
 </html>

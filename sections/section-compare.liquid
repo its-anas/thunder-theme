@@ -121,7 +121,7 @@
                     {% endif %}
                     <quick-view-button>
                       <div
-                        class="button--link mobile-only"
+                        class="button--link mobile-tablet-only"
                         id="quick-view-button"
                         data-first-available-variant-id="{{ block.settings.product.first_available_variant.id }}"
                         data-product-handle="{{ block.settings.product.handle }}"
@@ -134,7 +134,7 @@
                             Add to cart +
                           {%- endif -%}
                         {%- endif -%}
-                        {% render 'snippet-icons', icon: 'loading-spinner-tiny' %}
+                        {% render 'snippet-icons', icon: 'loading-spinner', tiny: 'tiny' %}
                       </div>
                     </quick-view-button>
                   </p>

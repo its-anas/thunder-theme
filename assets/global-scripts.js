@@ -685,7 +685,8 @@ let margin = 32;
 
 function setDropdownPadding() {
 	document.querySelectorAll(".menu__dropdown-wrapper").forEach((dropdown) => {
-		dropdown.style.paddingTop = `calc(${announcementHeight}px + ${extraPadding}px)`;
+		let dropdownPadding = headerLayout === "header_first" ? `calc(${announcementHeight}px + ${extraPadding}px)` : `${extraPadding}px`;
+		dropdown.style.paddingTop = dropdownPadding;
 	});
 
 	document.querySelectorAll(".menu__grandchilds").forEach((grandchild) => {
@@ -2160,7 +2161,7 @@ class RecentlyViewedComponent extends SliderComponent {
 
 				let quickViewButtonLink =
 					productAvailability === "true"
-						? `<div class="button--link mobile-only"
+						? `<div class="button--link mobile-tablet-only"
 							id="quick-view-button"
 						data-first-available-variant-id="${variant_first_id}"
 						data-product-handle="${handle}"

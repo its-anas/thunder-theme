@@ -100,15 +100,20 @@ img {
 	}
 }
 
-/* Tablet only */
+@media screen and (min-width: 750px) {
+	.mobile-only {
+		display: none !important;
+	}
+}
+
 @media screen and (max-width: 750px) {
 	.tablet-desktop-only {
 		display: none !important;
 	}
 }
 
-@media screen and (min-width: 750px) {
-	.mobile-only {
+@media screen and (min-width: 1024px) {
+	.mobile-tablet-only {
 		display: none !important;
 	}
 }

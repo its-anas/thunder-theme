@@ -433,7 +433,7 @@
                     <span></span> <span></span> <span></span> <span></span>
                     {{ 'general.buttons.add_to_cart' | t }}
                     {% render 'snippet-icons',
-                      icon: 'loading-spinner',
+                      icon: 'loading-spinner-button',
                       spinner_color: 'var(--primary-button-text-color)',
                       spinner_background_color: 'var(--primary-button-background-color)'
                     %}
@@ -539,7 +539,7 @@
                           </a>
                           <quick-view-button>
                             <div
-                              class="button--link mobile-only"
+                              class="button--link mobile-tablet-only"
                               id="quick-view-button"
                               data-first-available-variant-id="{{ bundled_product.first_available_variant.id }}"
                               data-product-handle="{{ bundled_product.handle }}"
@@ -550,7 +550,7 @@
                               {% else %}
                                 {{ 'general.buttons.add_to_cart' | t }} +
                               {%- endif -%}
-                              {% render 'snippet-icons', icon: 'loading-spinner-tiny' %}
+                              {% render 'snippet-icons', icon: 'loading-spinner', tiny: 'tiny' %}
                             </div>
                           </quick-view-button>
                         </div>
@@ -622,6 +622,11 @@
 
 <script defer>
   
+  
+  
+  
+  
+  
   let variantsInventory = {};
   {% for variant in product.variants %}
   variantsInventory["{{ variant.title }}"] = {{ variant.inventory_quantity }};
@@ -656,6 +661,11 @@
   let currentVariantInventory = {{ current_variant.inventory_quantity }};
   let stockAlertThreshold = {{ stock_alert_threshold }};
   let priceDifferenceText= "{{ price_difference_text }}";
+
+
+
+
+
 
 </script>
 

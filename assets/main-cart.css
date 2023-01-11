@@ -122,6 +122,13 @@
 	gap: 0.5rem;
 }
 
+@media screen and (max-width: 750px) {
+	.cart-page__product-details,
+	.cart-page__product-info {
+		width: 100%;
+	}
+}
+
 @media screen and (min-width: 750px) {
 	.cart-page__product-details {
 		gap: 1rem;
@@ -157,6 +164,10 @@
 .cart-page__product-prices {
 	font-size: calc(var(--font-size-type-scale) / var(--font-type-scale) * 1px);
 	text-align: end;
+}
+
+.quantity-field__product-remove {
+	position: relative;
 }
 
 .quantity-field__product-remove,
@@ -319,4 +330,8 @@
 		padding-top: calc(200px + var(--page-top-space));
 		padding-bottom: 200px;
 	}
+}
+
+.rm-icon {
+	pointer-events: none;
 }
