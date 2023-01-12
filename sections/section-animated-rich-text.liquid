@@ -51,6 +51,7 @@
             {% style %}
               .{{ section.id }}.scrolling-words-box > ul {
                 animation: scrollUp{{ block.settings.words_count }} {{ block.settings.animation_delay }}s infinite;
+                -webkit-animation: scrollUp{{ block.settings.words_count }} {{ block.settings.animation_delay }}s infinite;
               }
             {% endstyle %}
             <div class="scrolling-words-container {{ section.settings.text_alignment }}" {{ block.shopify_attributes }}>

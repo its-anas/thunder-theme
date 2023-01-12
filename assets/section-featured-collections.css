@@ -12,32 +12,32 @@
 	grid-row: 1;
 }
 .featured-collections__image {
-	height: 100%;
-	width: 100%;
 	z-index: 1;
+	width: 100%;
+	height: 100%;
 }
 .featured-collections__container {
+	z-index: 2;
+	display: flex;
+	justify-content: center;
+	align-items: flex-end;
 	width: 100%;
 	height: 98%;
-	display: flex;
-	align-items: flex-end;
-	justify-content: center;
-	z-index: 2;
 }
 .featured-collections__title {
-	padding: 10px 0px;
-	min-width: 95%;
-	max-width: 95%;
-	background-color: var(--primary-button-background-color);
-	border-radius: var(--global-border-radius);
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	min-width: 95%;
+	max-width: 95%;
+	padding: 10px 0px;
+	background-color: var(--primary-button-background-color);
+	border-radius: var(--global-border-radius);
 }
 .featured-collections__title .text {
 	max-width: 80%;
-	text-align: center;
 	color: var(--primary-button-text-color);
+	text-align: center;
 }
 .featured-collections__link a {
 	text-transform: uppercase;

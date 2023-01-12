@@ -59,10 +59,10 @@
 }
 
 .search__content {
-	width: 100%;
-	height: auto;
 	position: relative;
 	overflow: hidden;
+	width: 100%;
+	height: auto;
 }
 
 .search__content-head {

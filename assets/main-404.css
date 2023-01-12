@@ -5,16 +5,16 @@
 }
 
 .main-404__container {
-	width: 100%;
-	height: auto;
-	margin-left: auto;
-	margin-right: auto;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	gap: 2rem;
+	width: 100%;
+	height: auto;
 	padding: 1rem;
+	margin-right: auto;
+	margin-left: auto;
+	gap: 2rem;
 }
 
 @media screen and (min-width: 750px) {

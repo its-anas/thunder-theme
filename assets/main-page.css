@@ -5,19 +5,19 @@
 }
 
 .page__container {
-	width: 100%;
-	height: auto;
 	display: flex;
 	flex-direction: column;
-	gap: 1rem;
+	width: 100%;
+	height: auto;
 	min-height: 400px;
+	gap: 1rem;
 }
 
 @media screen and (min-width: 750px) {
 	.page__container {
 		max-width: 100%;
+		min-height: 500px;
 		padding: 2rem;
 		margin: 0 auto;
-		min-height: 500px;
 	}
 }

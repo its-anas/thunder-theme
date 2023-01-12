@@ -1,8 +1,8 @@
 .gallery {
 	display: flex;
+	flex-wrap: wrap;
 	flex-direction: column;
 	justify-content: space-around;
-	flex-wrap: wrap;
 }
 @media screen and (min-width: 750px) {
 	.gallery {
@@ -10,27 +10,27 @@
 	}
 }
 .gallery__item {
+	position: relative;
 	display: flex;
 	flex-direction: column;
-	position: relative;
 	overflow: hidden;
 }
 .gallery__image {
 	width: auto;
 }
 .gallery__content {
-	width: 100%;
-	height: 100%;
 	position: absolute;
 	display: flex;
 	flex-direction: column;
+	width: 100%;
+	height: 100%;
 	gap: 10px;
 }
 
 @media screen and (max-width: 750px) {
 	.gallery__content > .button {
-		margin-left: auto;
-		margin-right: auto;
 		width: 95%;
+		margin-right: auto;
+		margin-left: auto;
 	}
 }

@@ -58,10 +58,10 @@
 }
 
 .collection__content {
-	width: 100%;
-	height: auto;
 	position: relative;
 	overflow: hidden;
+	width: 100%;
+	height: auto;
 }
 
 .collection__content-head {
@@ -220,9 +220,9 @@
 }
 
 .collection__item__name {
+	color: var(--body-text-color);
 	font-size: var(--small-font-size);
 	text-align: center;
-	color: var(--body-text-color);
 }
 
 .collection__item__prices {

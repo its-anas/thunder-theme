@@ -1,9 +1,9 @@
 .faq {
-	height: auto;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	width: 100%;
+	height: auto;
 	padding: 1rem;
 }
 
@@ -18,9 +18,9 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	width: 100%;
 	height: auto;
 	gap: 1rem;
-	width: 100%;
 }
 @media screen and (min-width: 1024px) {
 	.faq__container {
@@ -28,11 +28,11 @@
 	}
 }
 .faq__content {
-	width: 100%;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	width: 100%;
 	gap: 0.3rem;
 }
 @media screen and (min-width: 750px) and (max-width: 1024px) {
@@ -59,10 +59,10 @@
 	}
 }
 .faq__question {
-	height: 2.5rem;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	height: 2.5rem;
 }
 .faq__question-text {
 	padding-left: 0.5rem;
@@ -75,9 +75,9 @@
 	overflow: hidden;
 	height: 0;
 	padding-top: 0;
+	padding-right: 1rem;
 	padding-bottom: 0;
 	padding-left: 1rem;
-	padding-right: 1rem;
 	transition: all 0.2s ease-in-out;
 }
 

@@ -6,8 +6,8 @@
 .blog__container {
 	width: 100%;
 	height: auto;
-	margin-left: auto;
 	margin-right: auto;
+	margin-left: auto;
 }
 
 @media screen and (min-width: 750px) {
@@ -18,8 +18,8 @@
 }
 
 .blog__title {
-	text-align: center;
 	padding: 4rem;
+	text-align: center;
 }
 
 .blog__articles {
@@ -28,16 +28,16 @@
 
 @media screen and (min-width: 750px) {
 	.blog__articles {
-		padding: 1rem;
 		width: 100%;
+		padding: 1rem;
 	}
 }
 
 .blog__articles__container {
-	width: 100%;
-	height: auto;
 	display: flex;
 	flex-wrap: wrap;
+	width: 100%;
+	height: auto;
 	padding: 1rem 0;
 }
 
@@ -61,8 +61,8 @@
 }
 
 .blog__article__image {
-	width: 100%;
 	overflow: hidden;
+	width: 100%;
 	border-radius: var(--global-border-radius);
 }
 
@@ -82,6 +82,6 @@
 }
 
 .blog__article__publication-date {
-	font-size: var(--xsmall-font-size);
 	color: var(--secondary-text-color);
+	font-size: var(--xsmall-font-size);
 }

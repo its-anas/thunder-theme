@@ -3,12 +3,12 @@
 }
 
 quick-view-component {
-	height: 100%;
-	width: 100%;
 	position: fixed;
 	z-index: -1;
 	display: flex;
 	justify-content: center;
+	width: 100%;
+	height: 100%;
 }
 
 @media screen and (max-width: 750px) {
@@ -20,18 +20,18 @@ quick-view-component {
 
 @media screen and (min-width: 750px) {
 	quick-view-component {
-		margin-top: 0 !important;
+		left: 50%;
+		width: 550px;
 		height: auto !important;
 		max-height: 100%;
-		width: 550px;
-		left: 50%;
+		margin-top: 0 !important;
 		transform: translate(-50%, -50%);
 	}
 }
 
 quick-view-component .quick-view {
-	width: 100%;
 	position: relative;
+	width: 100%;
 	padding: 1rem;
 }
 
@@ -62,12 +62,12 @@ quick-view-component .quick-view.hidden {
 }
 
 quick-view-component .quick-view-container {
-	width: 100%;
-	height: 100%;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: flex-start;
+	width: 100%;
+	height: 100%;
 }
 
 quick-view-component .quick-view-container .quantity-text {
@@ -93,15 +93,15 @@ quick-view-component .quick-view__image {
 }
 
 quick-view-component .quick-view__image-box {
-	height: 100%;
 	display: grid;
+	height: 100%;
 }
 
 quick-view-component .quick-view__image-box .media {
-	min-height: 120px;
-	min-width: 120px;
 	grid-column: 1;
 	grid-row: 1;
+	min-width: 120px;
+	min-height: 120px;
 }
 
 quick-view-component .quick-view__image-box .media img {
@@ -128,9 +128,9 @@ quick-view-component .quick-view__radios {
 quick-view-component .quick-view__radios-container {
 	display: flex;
 	flex-direction: column;
-	gap: 0.5rem;
-	border: 0px;
 	padding: 0px;
+	border: 0px;
+	gap: 0.5rem;
 }
 
 quick-view-component .quick-view__radios-container .quick-view__color-select-content select {
@@ -143,8 +143,8 @@ quick-view-component .quick-view__radio__title {
 
 quick-view-component .quick-view__radio__content {
 	display: flex;
-	justify-content: flex-start;
 	flex-wrap: wrap;
+	justify-content: flex-start;
 	gap: 0.5rem;
 }
 
@@ -158,8 +158,8 @@ quick-view-component .quick-view__radio__label {
 
 @media screen and (max-width: 1024px) {
 	quick-view-component .quick-view__radio__label {
-		font-size: var(--xsmall-font-size);
 		padding: 0.8rem;
+		font-size: var(--xsmall-font-size);
 	}
 }
 
@@ -168,16 +168,16 @@ quick-view-component .quick-view__radio__label.checked {
 }
 
 quick-view-component .quick-view__radio__label.variant_image {
+	overflow: hidden;
 	width: 60px;
 	height: 60px;
-	overflow: hidden;
 	padding: 0;
 }
 
 quick-view-component .quick-view__radio__label.color_swatch {
+	overflow: hidden;
 	width: 35px;
 	height: 35px;
-	overflow: hidden;
 	padding: 0;
 }
 
@@ -208,19 +208,19 @@ quick-view-component .quick-view__details {
 }
 
 quick-view-component .quick-view__content {
-	width: 100%;
 	display: flex;
+	flex-grow: 1;
 	flex-direction: column;
 	justify-content: flex-start;
 	align-items: flex-start;
-	gap: 1rem;
 	overflow: auto;
+	width: 100%;
 	padding: 1.5rem 0rem;
-	flex-grow: 1;
+	gap: 1rem;
 }
 
 quick-view-component .quick-view__bottom {
+	position: relative;
 	display: flex;
 	flex-direction: column !important;
-	position: relative;
 }

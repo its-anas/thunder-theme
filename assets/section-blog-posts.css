@@ -4,22 +4,22 @@
 .blog-posts .item {
 	display: flex;
 	flex-direction: column;
-	align-items: center;
 	justify-self: center;
+	align-items: center;
 }
 .blog-posts__image {
-	height: 100%;
 	width: 100%;
+	height: 100%;
 }
 .blog-posts__container {
-	height: auto;
-	width: 100%;
-	max-width: 100%;
-	padding: 10px 0;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: flex-start;
+	width: 100%;
+	max-width: 100%;
+	height: auto;
+	padding: 10px 0;
 }
 .blog-posts__author .text {
 	color: var(--secondary-text-color);
@@ -29,9 +29,9 @@
 }
 .blog-posts__author .text,
 .blog-posts__title .text {
-	text-decoration: none;
-	text-align: left;
 	padding: 0 5px;
+	text-align: left;
+	text-decoration: none;
 }
 .blog-posts__link a {
 	text-transform: uppercase;

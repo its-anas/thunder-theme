@@ -1,25 +1,25 @@
 .article {
-	margin-top: var(--page-top-space);
 	width: 100%;
 	height: auto;
+	margin-top: var(--page-top-space);
 }
 
 .article__head {
-	width: 100%;
-	height: auto;
 	display: flex;
 	flex-direction: column;
+	width: 100%;
+	height: auto;
 }
 
 .article__publication-date,
 .article__author {
-	font-size: var(--xsmall-font-size);
 	color: var(--secondary-text-color);
+	font-size: var(--xsmall-font-size);
 }
 
 .article__picture {
-	width: 100%;
 	overflow: hidden;
+	width: 100%;
 }
 
 .article__picture img {
@@ -51,9 +51,9 @@
 .article__back-button__container {
 	width: 100%;
 	max-width: 100%;
-	margin-left: auto;
-	margin-right: auto;
 	padding: 1rem;
+	margin-right: auto;
+	margin-left: auto;
 }
 
 @media screen and (min-width: 750px) {
@@ -95,10 +95,10 @@
 }
 
 .article__comment {
-	background-color: var(--secondary-background-color);
-	padding: 1rem;
 	display: flex;
 	flex-direction: column;
+	padding: 1rem;
+	background-color: var(--secondary-background-color);
 	gap: 0.3rem;
 	border-radius: var(--global-border-radius);
 }
@@ -128,10 +128,10 @@
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
-	margin-left: auto;
-	margin-right: auto;
-	gap: 1rem;
 	padding-top: 1rem;
+	margin-right: auto;
+	margin-left: auto;
+	gap: 1rem;
 }
 
 .article__comment-form__title {

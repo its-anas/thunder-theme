@@ -57,6 +57,7 @@
 
   .slideshow__indicators span.active::after {
     animation: load {{ section.settings.autoplay_delay_time }}s normal forwards;
+    -webkit-animation: load {{ section.settings.autoplay_delay_time }}s normal forwards;
   }
 
   @media screen and (min-width: 750px) {

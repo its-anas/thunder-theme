@@ -27,8 +27,8 @@
 
 .collections-list__content {
 	display: flex;
-	align-items: center;
 	flex-wrap: wrap;
+	align-items: center;
 	width: 100%;
 	height: auto;
 }

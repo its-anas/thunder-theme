@@ -1,12 +1,12 @@
 .search-drawer {
 	position: fixed;
-	width: 100%;
-	bottom: 0px;
-	right: 0px;
 	z-index: 100;
+	right: 0px;
+	bottom: 0px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	width: 100%;
 	transform: translateX(120%);
 }
 
@@ -31,19 +31,19 @@ body:has(.header-section.boxed) .search-drawer {
 }
 
 .search-drawer__container {
-	width: 100%;
-	height: 100%;
 	z-index: 100;
 	display: flex;
 	flex-direction: column;
-	gap: 0.3rem;
-	padding: 1rem;
 	justify-content: space-between;
+	width: 100%;
+	height: 100%;
+	padding: 1rem;
+	gap: 0.3rem;
 }
 
 .search-drawer__container .buttons {
-	height: 0;
 	position: relative;
+	height: 0;
 	transition: all 0.3s ease-in;
 }
 
@@ -57,14 +57,14 @@ body:has(.header-section.boxed) .search-drawer {
 }
 
 .search-drawer__container .preload {
-	padding: 0.5rem;
-	width: 100%;
 	top: 70px;
 	display: flex;
-	flex-direction: column;
 	flex-grow: 1;
-	gap: 1.2rem;
+	flex-direction: column;
 	overflow: auto;
+	width: 100%;
+	padding: 0.5rem;
+	gap: 1.2rem;
 	opacity: 1;
 	transition: opacity 0.3s ease-in-out;
 }
@@ -92,8 +92,8 @@ body:has(.header-section.boxed) .search-drawer {
 
 .search-drawer__container .search-drawer__close {
 	position: absolute;
-	right: 0;
 	top: 5px;
+	right: 0;
 	cursor: pointer;
 }
 
@@ -104,17 +104,17 @@ body:has(.header-section.boxed) .search-drawer {
 .search-drawer__container input {
 	width: 100%;
 	border: 0px;
-	background-color: transparent;
 	border-bottom: 2px solid var(--body-text-color);
+	background-color: transparent;
 	border-bottom-left-radius: 0px !important;
 }
 
 .search-drawer__container .search-form__results {
+	flex-grow: 1;
+	overflow: auto;
+	background-color: transparent;
 	opacity: 1;
 	transition: opacity 0.3s ease-in;
-	background-color: transparent;
-	overflow: auto;
-	flex-grow: 1;
 	transition: all 0.3s ease-in;
 }
 
@@ -124,8 +124,8 @@ body:has(.header-section.boxed) .search-drawer {
 }
 
 .search-drawer__container .search-results__results-list {
-	border: 0px;
 	padding-top: 0.5rem;
+	border: 0px;
 }
 
 .search-drawer__container .search-form__input::-webkit-search-cancel-button {

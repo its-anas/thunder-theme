@@ -47,11 +47,13 @@
   .{{ section.id }}.testimonials__slide--right {
     {% if section.settings.animated %}
       animation: testimonials-slide--right {{ section.settings.animation_speed }}s linear infinite;
+      -webkit-animation: testimonials-slide--right {{ section.settings.animation_speed }}s linear infinite;
     {% endif %}
   }
   .{{ section.id }}.testimonials__slide--left {
     {% if section.settings.animated %}
       animation: testimonials-slide--left {{ section.settings.animation_speed }}s linear infinite;
+      -webkit-animation: testimonials-slide--left {{ section.settings.animation_speed }}s linear infinite;
     {% endif %}
   }
 {%- endstyle -%}

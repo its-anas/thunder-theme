@@ -1,25 +1,25 @@
 .promotional-banner {
-	height: auto;
 	position: relative;
 	display: flex;
-	--gap: 2rem;
-	gap: var(--gap);
 	align-items: center;
 	overflow: hidden;
+	width: 100%;
+	height: auto;
+	padding-top: 1rem;
+	padding-bottom: 1rem;
+	gap: var(--gap);
 	-webkit-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
-	width: 100%;
-	padding-top: 1rem;
-	padding-bottom: 1rem;
+	--gap: 2rem;
 }
 .promotional-banner__content--style-1 {
-	flex-shrink: 0;
 	display: flex;
+	flex-shrink: 0;
 	justify-content: space-around;
-	gap: var(--gap);
 	min-width: 100%;
+	gap: var(--gap);
 }
 .promotional-banner__content--style-1 > * {
 	flex: 0 0 auto;

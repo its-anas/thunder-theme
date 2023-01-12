@@ -1,10 +1,10 @@
 .loading-bar {
-	width: 0%;
-	height: 5px;
-	background-color: var(--accent-color-1);
 	position: absolute;
 	z-index: 200;
 	left: 0;
+	width: 0%;
+	height: 5px;
+	background-color: var(--accent-color-1);
 }
 
 .loading-bar.show {
@@ -24,8 +24,8 @@
 }
 
 .header-section {
-	width: 100%;
 	z-index: 110;
+	width: 100%;
 }
 
 @media screen and (max-width: 750px) {
@@ -35,8 +35,8 @@
 }
 
 .header-section.boxed {
-	padding: 8px;
 	position: absolute;
+	padding: 8px;
 }
 
 .header-section.sticky {
@@ -49,10 +49,10 @@
 }
 
 .header-container {
-	width: 100%;
 	z-index: 5;
 	display: flex;
 	flex-direction: column;
+	width: 100%;
 }
 
 .header-container {
@@ -60,7 +60,17 @@
 }
 
 .header-container:has(.announcement.reveal) {
+	-webkit-animation: 1s removeOverflow 0.1s forwards;
 	animation: 1s removeOverflow 0.1s forwards;
+}
+
+@-webkit-keyframes removeOverflow {
+	0% {
+		overflow: hidden;
+	}
+	100% {
+		overflow: visible;
+	}
 }
 
 @keyframes removeOverflow {
@@ -74,13 +84,13 @@
 
 .header__content {
 	position: relative;
-	width: 100%;
-	min-height: 55px;
-	height: auto;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
+	width: 100%;
+	height: auto;
+	min-height: 55px;
 	padding: 10px 10px;
 	gap: 1rem;
 }
@@ -103,17 +113,17 @@
 }
 
 .header__logo-container {
-	max-height: 50px;
-	max-width: 250px;
-	overflow: hidden;
 	display: flex;
-	align-items: center;
 	justify-content: flex-start;
+	align-items: center;
+	overflow: hidden;
+	max-width: 250px;
+	max-height: 50px;
 }
 
 .header__menu {
-	padding: 0;
 	justify-content: flex-start;
+	padding: 0;
 }
 
 .header__menu__content {
@@ -137,9 +147,9 @@
 .header__icons {
 	display: flex;
 	flex-direction: row;
+	order: 3;
 	justify-content: center;
 	justify-content: flex-end;
-	order: 3;
 	gap: 0.5rem;
 }
 
@@ -153,16 +163,16 @@
 	position: absolute;
 	top: 13px;
 	right: -2px;
-	font-size: var(--xxsmall-font-size);
-	font-weight: bold;
-	width: 15px;
-	height: 15px;
-	border-radius: 50%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	width: 15px;
+	height: 15px;
 	background-color: var(--accent-color-1);
 	color: black;
+	font-size: var(--xxsmall-font-size);
+	font-weight: bold;
+	border-radius: 50%;
 	opacity: 1;
 	transition: all 0.5s ease-in-out;
 }
@@ -250,11 +260,11 @@
 }
 
 .menu__parent-title {
+	position: relative;
 	display: flex;
 	flex-direction: row;
 	align-items: center;
 	font-weight: bold;
-	position: relative;
 	text-align: center;
 }
 
@@ -272,18 +282,18 @@
 }
 
 .menu__parent-title.filled:after {
-	padding: 0.5rem;
 	position: absolute;
 	left: 100%;
+	padding: 0.5rem;
 }
 
 .menu__dropdown {
-	opacity: 0;
-	z-index: -1;
-	height: 0px;
-	transform: translateY(-10%);
 	position: absolute;
+	z-index: -1;
 	top: 100%;
+	height: 0px;
+	opacity: 0;
+	transform: translateY(-10%);
 	pointer-events: none;
 	transition: all 0.2s cubic-bezier(0.75, 0, 0.175, 1);
 }
@@ -292,36 +302,36 @@
 	display: flex;
 	flex-direction: row;
 	align-items: flex-start;
-	height: auto;
 	overflow: hidden;
+	height: auto;
 }
 
 .menu__childs {
+	position: relative;
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
-	position: relative;
-	margin: 1rem 0;
 	height: 100%;
+	margin: 1rem 0;
 }
 
 .menu__child-icon {
-	height: 60px;
-	width: 60px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	width: 60px;
+	height: 60px;
 	padding: 0.2rem;
 }
 
 .menu__child {
 	display: flex;
 	align-items: center;
-	gap: 0.6rem;
 	width: 100%;
+	min-width: 300px;
 	height: 66.4px;
 	padding: 0rem 1rem;
-	min-width: 300px;
+	gap: 0.6rem;
 }
 
 .menu__child:hover {
@@ -342,12 +352,12 @@
 	position: absolute;
 	top: 0;
 	right: 0;
-	width: 400px;
-	height: 100%;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	width: 400px;
+	height: 100%;
 	padding: 1rem;
 	gap: 1rem;
 	opacity: 0;
@@ -355,8 +365,8 @@
 }
 
 .menu__content .menu__picture {
-	height: 200px;
 	width: 300px;
+	height: 200px;
 }
 
 .menu__content .menu__description {
@@ -364,20 +374,20 @@
 }
 
 .menu__grandchilds {
-	opacity: 0;
 	position: absolute;
-	pointer-events: none;
 	top: 0;
 	left: 100%;
-	height: auto;
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
 	align-items: flex-start;
-	gap: 0.5rem;
 	width: 100%;
-	padding: 1rem 2rem;
 	min-width: 300px;
+	height: auto;
+	padding: 1rem 2rem;
+	opacity: 0;
+	pointer-events: none;
+	gap: 0.5rem;
 }
 
 .menu__grandchild {
@@ -422,22 +432,22 @@
 }
 
 .menu-mobile {
-	width: 100%;
-	height: 100%;
 	position: relative;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	overflow: hidden;
+	width: 100%;
+	height: 100%;
 }
 
 .menu-mobile__container {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
 	width: inherit;
 	height: inherit;
-	display: flex;
-	justify-content: space-between;
-	flex-direction: column;
 }
 
 .menu-mobile__head {
@@ -449,8 +459,8 @@
 }
 
 .menu-mobile__content {
-	height: 100%;
 	overflow-x: auto;
+	height: 100%;
 	padding: 1rem 2rem;
 }
 
@@ -463,25 +473,25 @@
 }
 
 .menu-mobile__parent {
-	width: 100%;
-	overflow: hidden;
 	display: flex;
 	flex-direction: column;
+	overflow: hidden;
+	width: 100%;
 }
 
 .menu-mobile__parent-title {
+	position: relative;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
 	padding: 1rem;
 	cursor: pointer;
-	position: relative;
 }
 
 .menu-mobile__parent-title h6 {
-	font-size: var(--font-size);
 	flex-grow: 1;
+	font-size: var(--font-size);
 }
 
 .menu-mobile__parent-title .svg {
@@ -490,9 +500,9 @@
 }
 
 .menu-mobile__parent-childs {
-	height: 0;
 	display: flex;
 	flex-direction: column;
+	height: 0;
 	transition: height 0.2s cubic-bezier(0.75, 0, 0.175, 1);
 }
 
@@ -505,6 +515,7 @@
 }
 
 .menu-mobile__child-title {
+	position: relative;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
@@ -512,7 +523,6 @@
 	padding: 0.7rem 0.7rem 0.7rem 1rem;
 	font-weight: 600;
 	cursor: pointer;
-	position: relative;
 }
 
 .menu-mobile__child-title .text {
@@ -526,12 +536,12 @@
 }
 
 .menu-mobile__child-childs {
-	height: 0;
-	transition: height 0.2s cubic-bezier(0.75, 0, 0.175, 1);
-	overflow: hidden;
 	display: flex;
 	flex-direction: column;
+	overflow: hidden;
+	height: 0;
 	margin-left: 1rem;
+	transition: height 0.2s cubic-bezier(0.75, 0, 0.175, 1);
 }
 
 .menu-mobile__child-childs.active {
@@ -566,8 +576,8 @@
 }
 
 .menu-mobile__account-container {
-	padding: 1rem;
 	position: relative;
+	padding: 1rem;
 }
 
 .menu-mobile__account {

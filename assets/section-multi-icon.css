@@ -3,11 +3,11 @@
 }
 
 .multi-icon__icon {
-	width: 100%;
-	aspect-ratio: 1/1;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	width: 100%;
+	aspect-ratio: 1/1;
 }
 .multi-icon__icon > * {
 	width: 100%;
