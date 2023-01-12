@@ -108,14 +108,14 @@
                 <div class="compare__content_prices">
                   <p class="price--compare-at">
                     {% if block.settings.product.compare_at_price == blank %}
-                      00.00
+                      0.00
                     {% elsif block.settings.product.compare_at_price != blank %}
                       {{ block.settings.product.compare_at_price | money }}
                     {% endif %}
                   </p>
                   <p class="price--actual">
                     {% if block.settings.product.price == blank %}
-                      00.00
+                      0.00
                     {% elsif block.settings.product.price != blank %}
                       {{ block.settings.product.price | money }}
                     {% endif %}

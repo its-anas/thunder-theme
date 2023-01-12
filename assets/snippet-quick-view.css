@@ -224,3 +224,15 @@ quick-view-component .quick-view__bottom {
 	display: flex;
 	flex-direction: column !important;
 }
+
+.quick-view-add-to-cart.sold-out {
+	pointer-events: none !important;
+	background-color: var(--secondary-text-color) !important;
+	border-color: var(--secondary-text-color) !important;
+}
+
+.quick-view-buy-now.sold-out {
+	height: 0px !important;
+	opacity: 0 !important;
+	pointer-events: none !important;
+}

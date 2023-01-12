@@ -493,6 +493,12 @@
 	border-color: var(--secondary-text-color);
 }
 
+.product-page__buttons .dynamic-buy-button.sold-out {
+	height: 0px !important;
+	opacity: 0 !important;
+	pointer-events: none !important;
+}
+
 .product-page__buttons .add-to-cart-button.sold-out :after {
 	content: "";
 }
@@ -501,12 +507,6 @@
 	height: 0px;
 	opacity: 0;
 	transition: all 0.5s cubic-bezier(0.75, 0, 0.175, 1);
-}
-
-.product-page__buttons .dynamic-buy-button.sold-out {
-	height: 0px !important;
-	opacity: 0 !important;
-	pointer-events: none !important;
 }
 
 .product-page__buttons .dynamic-buy-button.loaded {

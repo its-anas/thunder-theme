@@ -213,7 +213,7 @@
 
   {% if featured_product.variants.size > 0 %}
       {% for variant in featured_product.variants %}
-        featuredProductVariants['{{ variant.id }}'] = { id: "{{ variant.id }}", title: "{{ variant.title }}", price: "{{ variant.price | money }}", compare_at_price: "{{ variant.compare_at_price | money }}", inventory: {{ variant.inventory_quantity }}, featured_image: "{{ variant.featured_image.id }}" };
+        featuredProductVariants['{{ variant.id }}'] = { id: "{{ variant.id }}", title: "{{ variant.title }}", price: "{{ variant.price | money }}", compare_at_price: "{{ variant.compare_at_price | money }}", inventory: {{ variant.inventory_quantity }}, inventory_management: '{{ variant.inventory_management }}', featured_image: "{{ variant.featured_image.id }}" };
       {% endfor %}
     {% endif %}
 

@@ -629,6 +629,7 @@
   
   
   
+  
   let variantsInventory = {};
   {% for variant in product.variants %}
   variantsInventory["{{ variant.title }}"] = {{ variant.inventory_quantity }};
@@ -660,9 +661,11 @@
       `;
 
   let productJson = {{ product | json }};
+  let currentVariantInventoryManagement = "{{ current_variant.inventory_management }}";
   let currentVariantInventory = {{ current_variant.inventory_quantity }};
   let stockAlertThreshold = {{ stock_alert_threshold }};
   let priceDifferenceText= "{{ price_difference_text }}";
+
 
 
 
