@@ -208,12 +208,12 @@
 
 .cart-drawer__interaction .bottom .order-note {
 	cursor: pointer;
-	font-size: var(--xxsmall-font-size);
+	font-size: var(--xsmall-font-size);
 }
 
 .cart-drawer__interaction .bottom .disclaimer {
 	color: var(--secondary-text-color);
-	font-size: var(--xxxsmall-font-size);
+	font-size: var(--xsmall-font-size);
 }
 
 .cart-drawer .recommended-products.desktop-only {

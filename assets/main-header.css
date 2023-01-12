@@ -134,7 +134,7 @@
 	list-style: none;
 }
 
-.header__menu__content * {
+.header__menu__content > * {
 	pointer-events: none;
 	-webkit-animation: 1s removePointerEvents 1s forwards;
 	animation: 1s removePointerEvents 1s forwards;
