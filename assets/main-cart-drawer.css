@@ -216,7 +216,7 @@
 	font-size: var(--xsmall-font-size);
 }
 
-.cart-drawer .recommended-products.desktop-only {
+.cart-drawer .recommended-products.tablet-desktop-only {
 	position: absolute;
 	z-index: 1;
 	left: 0;
@@ -233,12 +233,12 @@
 	backdrop-filter: blur(3px);
 }
 
-.cart-drawer .recommended-products.desktop-only .recommended-products__list-container {
+.cart-drawer .recommended-products.tablet-desktop-only .recommended-products__list-container {
 	flex-direction: column;
 	gap: 2rem;
 }
 
-.cart-drawer .recommended-products.desktop-only .recommended-products__list {
+.cart-drawer .recommended-products.tablet-desktop-only .recommended-products__list {
 	overflow-y: auto;
 	height: 100%;
 }

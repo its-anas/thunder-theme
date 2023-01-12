@@ -1,6 +1,6 @@
 {{ 'main-cart-drawer.css' | asset_url | stylesheet_tag }}
 
-{%- style -%} 
+{%- style -%}
   .cart-drawer__container, .cart-drawer__content--empty {
     background-color: var(--background-color);
   }
@@ -8,7 +8,7 @@
     background-color: {{ settings.secondary_background_color }};
   }
   {% if section.settings.show_cart_recommended_products == true %}
-    .recommended-products.desktop-only.active {
+    .recommended-products.tablet-desktop-only.active {
       transform: translateX(-99%);
       transition: transform 0.8s cubic-bezier(0.75, 0, 0.175, 1);
     }
@@ -19,11 +19,11 @@
     }
   {% else %}
   {% endif %}
-  body:has(.header-section.boxed) .cart-drawer__container, body:has(.header-section.boxed) .cart-drawer__content--empty, body:has(.header-section.boxed) .recommended-products.desktop-only {
+  body:has(.header-section.boxed) .cart-drawer__container, body:has(.header-section.boxed) .cart-drawer__content--empty, body:has(.header-section.boxed) .recommended-products.tablet-desktop-only {
     border-radius: var(--global-border-radius);
     border: var(--global-border-width) solid var(--global-border-color);
   }
-  .cart-drawer .recommended-products.desktop-only {
+  .cart-drawer .recommended-products.tablet-desktop-only {
     background-color: rgb({{ settings.background_color.red }}, {{ settings.background_color.green }}, {{ settings.background_color.blue }}, 0.5);
   }
 {%- endstyle -%}
@@ -108,7 +108,7 @@
           </div>
         </div>
       </div>
-      <div class="recommended-products desktop-only">
+      <div class="recommended-products tablet-desktop-only">
         <p class="recommended-products__title">{{ 'general.cart_drawer.recommended_products_text' | t }}</p>
         <div class="recommended-products__list">
           <div class="recommended-products__list-container"></div>

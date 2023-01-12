@@ -125,11 +125,11 @@ function showCartDrawer() {
 }
 
 function showRecommendedDrawer() {
-	if (!document.querySelector(".recommended-products.desktop-only").classList.contains("active")) {
+	if (!document.querySelector(".recommended-products.tablet-desktop-only").classList.contains("active")) {
 		if (document.querySelector(".cart-drawer__products-list").childElementCount > 0) {
 			setTimeout(() => {
 				if (document.querySelector(".recommended-products__list-container").childElementCount > 0) {
-					document.querySelector(".recommended-products.desktop-only").classList.add("active");
+					document.querySelector(".recommended-products.tablet-desktop-only").classList.add("active");
 					document.querySelector(".recommended-products.mobile-only").classList.add("active");
 				}
 			}, 1000);
@@ -138,8 +138,8 @@ function showRecommendedDrawer() {
 }
 
 function hideRecommendedDrawer() {
-	if (document.querySelector(".recommended-products.desktop-only").classList.contains("active")) {
-		document.querySelector(".recommended-products.desktop-only").classList.remove("active");
+	if (document.querySelector(".recommended-products.tablet-desktop-only").classList.contains("active")) {
+		document.querySelector(".recommended-products.tablet-desktop-only").classList.remove("active");
 		document.querySelector(".recommended-products.mobile-only").classList.remove("active");
 	}
 }
@@ -409,7 +409,7 @@ function addCartRecommendedProducts(cartProducts) {
 					if (products.length === 0) {
 						hideRecommendedDrawer();
 						setTimeout(() => {
-							document.querySelector(".recommended-products.desktop-only .recommended-products__list-container").innerHTML = "";
+							document.querySelector(".recommended-products.tablet-desktop-only .recommended-products__list-container").innerHTML = "";
 							document.querySelector(".recommended-products.mobile-only .recommended-products__list-container").innerHTML = "";
 						}, 500);
 					} else if ((products.length > 0) & document.querySelector("cart-component").classList.contains("active")) {
@@ -424,7 +424,7 @@ function addCartRecommendedProducts(cartProducts) {
 						}
 					});
 					if (products.length > 0) {
-						document.querySelector(".recommended-products.desktop-only .recommended-products__list-container").innerHTML = "";
+						document.querySelector(".recommended-products.tablet-desktop-only .recommended-products__list-container").innerHTML = "";
 						document.querySelector(".recommended-products.mobile-only .recommended-products__list-container").innerHTML = "";
 
 						recommendedProducts.forEach((product) => {
@@ -436,7 +436,7 @@ function addCartRecommendedProducts(cartProducts) {
 								let productWithVariants = variants_size > 1 ? "with" : "without";
 								let quickAddButtonText = variants_size > 1 ? `${quickViewText} +` : `${addToCartText} +`;
 
-								document.querySelector(".recommended-products.desktop-only .recommended-products__list-container").innerHTML += `
+								document.querySelector(".recommended-products.tablet-desktop-only .recommended-products__list-container").innerHTML += `
 									<div class="recommended-product">
 										<div class="recommended-product__image media">
 											<img
@@ -624,13 +624,16 @@ class ShopTheLook extends HTMLElement {
 	connectedCallback() {
 		this.time;
 		this.autoOpen = this.getAttribute("data-auto-open");
-		this.desktopIcons = this.querySelectorAll(".shop-the-look__box.desktop-only .shop-the-look__icon");
+		this.desktopIcons = this.querySelectorAll(".shop-the-look__box.tablet-desktop-only .shop-the-look__icon");
 
 		this.icons = this.querySelectorAll(".shop-the-look__icon");
 		this.addEventListener("click", (event) => {
 			this.icons.forEach((icon) => {
 				if (icon.contains(event.target)) {
 					this.handleSelectedIcon(icon);
+				}
+				if (event.target.classList.contains("cl-icon")) {
+					this.hideAllSelectorsContent();
 				}
 			});
 		});
@@ -657,6 +660,8 @@ class ShopTheLook extends HTMLElement {
 		icon.classList.add("rotate");
 		if (icon.nextElementSibling) {
 			icon.nextElementSibling.classList.add("active");
+		} else if (icon.dataset.blockId) {
+			this.querySelector(`[content-popup="${icon.dataset.blockId}"]`).classList.add("active");
 		}
 	}
 
@@ -664,6 +669,8 @@ class ShopTheLook extends HTMLElement {
 		icon.classList.remove("rotate");
 		if (icon.nextElementSibling) {
 			icon.nextElementSibling.classList.remove("active");
+		} else if (icon.dataset.blockId) {
+			this.querySelector(`[content-popup="${icon.dataset.blockId}"]`).classList.remove("active");
 		}
 	}
 

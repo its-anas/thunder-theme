@@ -19,7 +19,7 @@
     }
   }
 
-  .shop-the-look__product {
+  .shop-the-look__product, .shop-the-look__feature-container {
     background-color: {{ section.settings.openable_background_color }};
   }
 
@@ -132,7 +132,7 @@
               flex-direction: row-reverse;
             {%- endif -%}
           "
-          class="shop-the-look__box desktop-only"
+          class="shop-the-look__box tablet-desktop-only"
         >
           <div class="shop-the-look__icon" {{ block.shopify_attributes }}>
             <div class="shop-the-look__icon-edge"></div>
@@ -197,10 +197,12 @@
                   {% if block.settings.product != blank %}
                     <div
                       class="button--link"
-                      id="quick-view-button"
-                      data-first-available-variant-id="{{ block.settings.product.first_available_variant.id }}"
-                      data-product-handle="{{ block.settings.product.handle }}"
-                      data-product-variants="{% if block.settings.product.variants.size > 1 %}with{% else %}without{% endif %}"
+                      {% if block.settings.product != blank %}
+                        id="quick-view-button"
+                        data-first-available-variant-id="{{ block.settings.product.first_available_variant.id }}"
+                        data-product-handle="{{ block.settings.product.handle }}"
+                        data-product-variants="{% if block.settings.product.variants.size > 1 %}with{% else %}without{% endif %}"
+                      {% endif %}
                     >
                       {%- if block.settings.product.variants.size > 1 -%}
                         {{ 'general.buttons.quick_view' | t }} +
@@ -239,14 +241,54 @@
             >
               <div
                 class="shop-the-look__icon"
-                id="quick-view-button"
-                data-first-available-variant-id="{{ block.settings.product.first_available_variant.id }}"
-                data-product-handle="{{ block.settings.product.handle }}"
-                data-product-variants="{% if block.settings.product.variants.size > 1 %}with{% else %}without{% endif %}"
+                {% if block.settings.product != blank %}
+                  id="quick-view-button"
+                  data-first-available-variant-id="{{ block.settings.product.first_available_variant.id }}"
+                  data-product-handle="{{ block.settings.product.handle }}"
+                  data-product-variants="{% if block.settings.product.variants.size > 1 %}with{% else %}without{% endif %}"
+                {% endif %}
               >
                 <div class="shop-the-look__icon-edge" style="pointer-events: none;"></div>
                 <div class="shop-the-look__icon-edge-background" style="pointer-events: none;"></div>
                 <div class="shop-the-look__icon-center" style="pointer-events: none;"></div>
+              </div>
+            </div>
+          {%- when 'feature' -%}
+            <div
+              style="
+                {%- if block.settings.mobile_vertical_position <= 50 -%}
+                  bottom: {{ block.settings.mobile_vertical_position }}%;
+                {%- else -%}
+                  bottom: calc({{ block.settings.mobile_vertical_position }}% - 80px);
+                {%- endif -%}
+                {%- if block.settings.mobile_horizontal_position <= 50 -%}
+                  left: {{ block.settings.mobile_horizontal_position }}%;
+                {%- else -%}
+                  left: calc({{ block.settings.mobile_horizontal_position }}% - 80px);
+                {%- endif -%}
+              "
+              class="shop-the-look__box mobile-only"
+            >
+              <div class="shop-the-look__icon" data-block-id="{{ block.id }}">
+                <div class="shop-the-look__icon-edge" style="pointer-events: none;"></div>
+                <div class="shop-the-look__icon-edge-background" style="pointer-events: none;"></div>
+                <div class="shop-the-look__icon-center" style="pointer-events: none;"></div>
+              </div>
+            </div>
+        {%- endcase -%}
+      {% endfor %}
+    </div>
+    <div class="shop-the-look__feature-boxes__mobile-wrapper">
+      {% for block in section.blocks %}
+        {%- case block.type -%}
+          {%- when 'feature' -%}
+            <div class="shop-the-look__feature-box mobile-only" content-popup="{{ block.id }}">
+              <div class="shop-the-look__feature-container">
+                {% render 'snippet-icons', icon: 'close' %}
+                <span class="shop-the-look__feature-title">{{ block.settings.feature_title }}</span>
+                <p class="shop-the-look__feature-text">
+                  {{ block.settings.feature_description }}
+                </p>
               </div>
             </div>
         {%- endcase -%}
