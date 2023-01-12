@@ -24,22 +24,6 @@
 	z-index: 1;
 }
 
-.shop-the-look__image:after {
-	content: "";
-	position: absolute;
-	top: 0;
-	left: -20%;
-	height: 100%;
-	transform: skewX(20deg);
-	background-color: var(--background-color);
-}
-
-@media screen and (min-width: 1024px) {
-	.shop-the-look__image:after {
-		transform: skewX(40deg);
-	}
-}
-
 .shop-the-look__container {
 	position: relative;
 	z-index: 2;

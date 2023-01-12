@@ -25,15 +25,6 @@
 	position: relative;
 }
 
-.image-with-text .image-with-text__image:after {
-	content: "";
-	position: absolute;
-	top: 0;
-	right: 0;
-	height: 100%;
-	background-color: var(--background-color);
-}
-
 .image-with-text__image {
 	display: flex;
 	justify-content: center;

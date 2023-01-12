@@ -60,8 +60,8 @@
 }
 
 .header-container:has(.announcement.reveal) {
-	-webkit-animation: 1s removeOverflow 0.1s forwards;
-	animation: 1s removeOverflow 0.1s forwards;
+	-webkit-animation: 1s removeOverflow forwards;
+	animation: 1s removeOverflow forwards;
 }
 
 @-webkit-keyframes removeOverflow {
@@ -132,6 +132,30 @@
 	justify-content: center;
 	align-items: center;
 	list-style: none;
+}
+
+.header__menu__content * {
+	pointer-events: none;
+	-webkit-animation: 1s removePointerEvents 1s forwards;
+	animation: 1s removePointerEvents 1s forwards;
+}
+
+@-webkit-keyframes removePointerEvents {
+	0% {
+		pointer-events: none;
+	}
+	100% {
+		pointer-events: all;
+	}
+}
+
+@keyframes removePointerEvents {
+	0% {
+		pointer-events: none;
+	}
+	100% {
+		pointer-events: all;
+	}
 }
 
 @media screen and (max-width: 1024px) {
