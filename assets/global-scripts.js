@@ -459,6 +459,7 @@ function addCartRecommendedProducts(cartProducts) {
 												data-first-available-variant-id="${variant_first_id}"
 												data-product-handle="${handle}"
 												data-product-variants="${productWithVariants}"
+												data-product-id="${product.id}"
 											>
 												${quickAddButtonText}
 												<div class="loading-spinner tiny"> <svg class="mini" viewBox="25 25 50 50"> <circle stroke="var(--link-color)" cx="50" cy="50" r="20"></circle> </svg> </div>
@@ -488,6 +489,7 @@ function addCartRecommendedProducts(cartProducts) {
 												data-first-available-variant-id="${variant_first_id}"
 												data-product-handle="${handle}"
 												data-product-variants="${productWithVariants}"
+												data-product-id="${product.id}"
 											>
 												${quickAddButtonText}
 												<div class="loading-spinner tiny"> <svg class="mini" viewBox="25 25 50 50"> <circle stroke="var(--link-color)" cx="50" cy="50" r="20"></circle> </svg> </div>
@@ -496,6 +498,32 @@ function addCartRecommendedProducts(cartProducts) {
 									</div>
 								`;
 							}
+
+							// To be improved later
+							fetch(window.Shopify.routes.root + "products/" + product.handle)
+								.then((response) => response.text())
+								.then((text) => {
+									const html = document.createElement("div");
+									html.innerHTML = text;
+									const recommendationsUrl = html.querySelector("recommended-products").dataset.url;
+									fetch(recommendationsUrl)
+										.then((response) => response.text())
+										.then((text) => {
+											const html = document.createElement("div");
+											html.innerHTML = text;
+											const scripts = html.querySelectorAll("recommended-products .desktop-only script[type='application/json']");
+											scripts.forEach((script) => {
+												document.querySelectorAll(".cart-drawer #quick-view-button").forEach((productButton) => {
+													if (productButton.dataset.productId === script.dataset.productId) {
+														productButton.innerHTML += `<script type='application/json'>${script.innerHTML}</script>`;
+													}
+												});
+											});
+										})
+										.catch((e) => {
+											console.error(e);
+										});
+								});
 						});
 					}
 				}
@@ -2230,6 +2258,7 @@ class RecentlyViewedComponent extends SliderComponent {
 				let variant_first_id = parseInt(products[product].variant_first_id);
 				let handle = products[product].handle;
 				let variants_size = parseInt(products[product].variants_size);
+				let variants_inventory = JSON.stringify(products[product].variants_inventory);
 
 				let productWithVariants = variants_size > 1 ? "with" : "without";
 				let newTagClass = newTag === "true" && date_difference < parseInt(newTagTime) ? " tag--animated-hover" : "";
@@ -2248,7 +2277,10 @@ class RecentlyViewedComponent extends SliderComponent {
 							data-first-available-variant-id="${variant_first_id}"
 							data-product-handle="${handle}"
 							data-product-variants="${productWithVariants}"
-								>									
+								>
+								<script type="application/json"> 
+									${variants_inventory}
+								</script>									
 							<div class="loading-spinner">
 								<svg class="mini" viewBox="25 25 50 50">
 								<circle  stroke="var(--icon-color)" cx="50" cy="50" r="20"></circle>
@@ -3294,8 +3326,10 @@ class RecommendedProducts extends HTMLElement {
 					this.innerHTML = recommendations.innerHTML;
 				}
 
-				if (recommendations.querySelector(".slide").childElementCount === 0) {
-					document.querySelector(`.${this.dataset.sectionId}`).remove();
+				if (recommendations.querySelector(".slide")) {
+					if (recommendations.querySelector(".slide").childElementCount === 0) {
+						document.querySelector(`.${this.dataset.sectionId}`).remove();
+					}
 				}
 			})
 			.catch((e) => {

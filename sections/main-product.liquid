@@ -532,6 +532,13 @@
                               data-product-handle="{{ bundled_product.handle }}"
                               data-product-variants="{% if  bundled_product.variants.size > 1 %}with{% else %}without{% endif %}"
                             >
+                              <script type="application/json">
+                                {
+                                  {%- for variant in bundled_product.variants -%}
+                                    "{{ variant.id }}" : {{ variant.inventory_quantity }}{% unless forloop.last %},{% endunless %}
+                                  {%- endfor -%}
+                                }
+                              </script>
                               {% render 'snippet-icons', icon: 'quick-view' %}
                             </div>
                           </div>
@@ -546,6 +553,13 @@
                               data-product-handle="{{ bundled_product.handle }}"
                               data-product-variants="{% if  bundled_product.variants.size > 1 %}with{% else %}without{% endif %}"
                             >
+                              <script type="application/json">
+                                {
+                                  {%- for variant in bundled_product.variants -%}
+                                    "{{ variant.id }}" : {{ variant.inventory_quantity }}{% unless forloop.last %},{% endunless %}
+                                  {%- endfor -%}
+                                }
+                              </script>
                               {%- if bundled_product.variants.size > 1 -%}
                                 {{ 'general.buttons.quick_view' | t }} +
                               {% else %}
@@ -568,8 +582,13 @@
 </product-page>
 
 <script defer>
-  updateRecentlyViewedProductsCookie("{{ product.id }}", "{{ product.title }}", "{{ product.url }}", "{{ product.available }}", "{{ product.featured_image | image_url }}", "{{ product.featured_image.alt }}", "{{ product.featured_image.width }}", "{{ product.featured_image.height }}", "{{ product.price | money }}", "{{ product.compare_at_price | money }}", "{{ product.compare_at_price | minus: product.price }}", "{{ product.compare_at_price | minus: product.price | money }}", "{{ 'now' | date: "%d" | minus: product.published_at | date: "%d" }}", "{{ product.first_available_variant.id }}", "{{ product.handle }}", "{{ product.variants.size }}");
-  function updateRecentlyViewedProductsCookie(productId, productTitle, productUrl, productAvailability, productImage, productImageAlt, productImageWidth, productImageHeight, productPrice, productCompareAtPrice, productPriceDifference, productPriceDifferenceWithCurrency, productDateDifference, productVariantFirstId, productHandle, productVariantsSize) {
+  let productVariantsInventory = {};
+  {% for variant in product.variants %}
+    productVariantsInventory["{{ variant.id }}"] = {{ variant.inventory_quantity }};
+  {% endfor %}
+
+  updateRecentlyViewedProductsCookie("{{ product.id }}", "{{ product.title }}", "{{ product.url }}", "{{ product.available }}", "{{ product.featured_image | image_url }}", "{{ product.featured_image.alt }}", "{{ product.featured_image.width }}", "{{ product.featured_image.height }}", "{{ product.price | money }}", "{{ product.compare_at_price | money }}", "{{ product.compare_at_price | minus: product.price }}", "{{ product.compare_at_price | minus: product.price | money }}", "{{ 'now' | date: "%d" | minus: product.published_at | date: "%d" }}", "{{ product.first_available_variant.id }}", "{{ product.handle }}", "{{ product.variants.size }}", productVariantsInventory);
+  function updateRecentlyViewedProductsCookie(productId, productTitle, productUrl, productAvailability, productImage, productImageAlt, productImageWidth, productImageHeight, productPrice, productCompareAtPrice, productPriceDifference, productPriceDifferenceWithCurrency, productDateDifference, productVariantFirstId, productHandle, productVariantsSize, productVariantsInventory) {
     let recentlyViewedProducts = [];
 
     let recentlyViewedProductsCookie =
@@ -602,6 +621,7 @@
       variant_first_id: productVariantFirstId,
       handle: productHandle,
       variants_size: productVariantsSize,
+      variants_inventory: productVariantsInventory
     };
 
     for (product = 0; product < recentlyViewedProductsCookie.length; product++) {
@@ -622,10 +642,6 @@
 {% # theme-check-enable ParserBlockingScriptTag %}
 
 <script defer>
-  
-  
-  
-  
   
   
   
@@ -665,10 +681,6 @@
   let currentVariantInventory = {{ current_variant.inventory_quantity }};
   let stockAlertThreshold = {{ stock_alert_threshold }};
   let priceDifferenceText= "{{ price_difference_text }}";
-
-
-
-
 
 
 

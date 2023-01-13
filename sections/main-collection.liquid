@@ -94,6 +94,13 @@
                               data-product-handle="{{ item.handle }}"
                               data-product-variants="{% if item.variants.size > 1 %}with{% else %}without{% endif %}"
                             >
+                              <script type="application/json">
+                                {
+                                  {%- for variant in item.variants -%}
+                                    "{{ variant.id }}" : {{ variant.inventory_quantity }}{% unless forloop.last %},{% endunless %}
+                                  {%- endfor -%}
+                                }
+                              </script>
                               {% render 'snippet-icons', icon: 'quick-view' -%}
                             </div>
                           {% endif %}
@@ -151,6 +158,13 @@
                               data-product-handle="{{ item.handle }}"
                               data-product-variants="{% if item.variants.size > 1 %}with{% else %}without{% endif %}"
                             >
+                              <script type="application/json">
+                                {
+                                  {%- for variant in item.variants -%}
+                                    "{{ variant.id }}" : {{ variant.inventory_quantity }}{% unless forloop.last %},{% endunless %}
+                                  {%- endfor -%}
+                                }
+                              </script>
                               {%- if item.variants.size > 1 -%}
                                 {{ 'general.buttons.quick_view' | t }} +
                               {% else %}
