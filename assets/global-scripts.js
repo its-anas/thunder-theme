@@ -1224,6 +1224,7 @@ class SearchDrawer extends HTMLElement {
 	}
 
 	showSearchDrawer() {
+		this.resetSearch();
 		this.searchDrawer.classList.remove("hidden");
 		this.searchDrawer.classList.add("active");
 		lockPage();
@@ -1259,12 +1260,6 @@ class SearchDrawer extends HTMLElement {
 		document.querySelector(".theme-overlay").addEventListener("click", () => {
 			if (this.searchDrawer.classList.contains("active")) {
 				this.hideSearchDrawer();
-				this.resetSearch();
-			}
-		});
-
-		document.querySelector(".search-drawer__form .buttons button").addEventListener("click", () => {
-			if (this.searchDrawer.classList.contains("active")) {
 				this.resetSearch();
 			}
 		});
