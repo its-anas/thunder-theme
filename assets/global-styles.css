@@ -1979,11 +1979,16 @@ input,
 textarea,
 select {
 	height: 44px;
-	min-height: 44px;
 	border: 1px solid rgb(144, 144, 144);
 	background-color: var(--secondary-background-color);
 	color: var(--body-text-color);
 	outline: none;
+}
+
+input:not([type="checkbox"]):not([type="range"]):not(.input-min):not(.input-max),
+textarea,
+select {
+	min-height: 44px;
 }
 
 input,
