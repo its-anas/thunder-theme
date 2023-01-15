@@ -499,6 +499,7 @@ function addCartRecommendedProducts(cartProducts) {
 							}
 
 							// To be improved later
+
 							fetch(window.Shopify.routes.root + "products/" + product.handle)
 								.then((response) => response.text())
 								.then((text) => {
@@ -510,7 +511,8 @@ function addCartRecommendedProducts(cartProducts) {
 										.then((text) => {
 											const html = document.createElement("div");
 											html.innerHTML = text;
-											const scripts = html.querySelectorAll("recommended-products .desktop-only script[type='application/json']");
+											const scripts = html.querySelectorAll("recommended-products .quick-view-button.desktop-only script[type='application/json']");
+
 											scripts.forEach((script) => {
 												document.querySelectorAll(".cart-drawer #quick-view-button").forEach((productButton) => {
 													if (productButton.dataset.productId === script.dataset.productId) {

@@ -3007,6 +3007,10 @@ cart-component.hidden {
 	width: 100%;
 }
 
+.search-form__container .buttons {
+	overflow: hidden;
+}
+
 /* .search-form__container:has(.search-form__results.hidden),
 .search-form__container:has(.buttons.hidden) {
 	height: auto;
