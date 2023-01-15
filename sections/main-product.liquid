@@ -377,9 +377,8 @@
                   <div class="quantity-field" id="quantity-field">
                     <button type="button" class="quantity-field__minus" id="quantity-field__minus">-</button>
                     <input
-                      disabled
                       type="quantity"
-                      class="quantity-field__input"
+                      class="quantity-field__input disabled"
                       id="quantity-field__input"
                       name="quantity"
                       min="1"
@@ -679,6 +678,7 @@
   
   
   
+  
   let variantsInventory = {};
   {% for variant in product.variants %}
   variantsInventory["{{ variant.title }}"] = {{ variant.inventory_quantity }};
@@ -714,6 +714,7 @@
   let currentVariantInventory = {{ current_variant.inventory_quantity }};
   let stockAlertThreshold = {{ stock_alert_threshold }};
   let priceDifferenceText= "{{ price_difference_text }}";
+
 
 
 

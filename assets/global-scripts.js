@@ -230,9 +230,8 @@ async function updateCartDrawer() {
 								<div class="quantity-field cart" id="quantity-field">
 									<button type="button" class="quantity-field__minus" id="quantity-field__minus">-</button>
 										<input
-										disabled
 										type="quantity"
-										class="quantity-field__input"
+										class="quantity-field__input disabled"
 										id="quantity-field__input"
 										name="quantity"
 										min="1"
