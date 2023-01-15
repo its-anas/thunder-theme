@@ -581,14 +581,20 @@
   </div>
 </product-page>
 
+{% capture prices %}
+  {% render 'snippet-prices', product: product %}
+{% endcapture %}
+
 <script defer>
   let productVariantsInventory = {};
   {% for variant in product.variants %}
     productVariantsInventory["{{ variant.id }}"] = {{ variant.inventory_quantity }};
   {% endfor %}
+  let productPrices = "{{ prices | replace: '"', "'" | strip_newlines }}";
 
-  updateRecentlyViewedProductsCookie("{{ product.id }}", "{{ product.title }}", "{{ product.url }}", "{{ product.available }}", "{{ product.featured_image | image_url }}", "{{ product.featured_image.alt }}", "{{ product.featured_image.width }}", "{{ product.featured_image.height }}", "{{ product.price | money }}", "{{ product.compare_at_price | money }}", "{{ product.compare_at_price | minus: product.price }}", "{{ product.compare_at_price | minus: product.price | money }}", "{{ 'now' | date: "%d" | minus: product.published_at | date: "%d" }}", "{{ product.first_available_variant.id }}", "{{ product.handle }}", "{{ product.variants.size }}", productVariantsInventory);
-  function updateRecentlyViewedProductsCookie(productId, productTitle, productUrl, productAvailability, productImage, productImageAlt, productImageWidth, productImageHeight, productPrice, productCompareAtPrice, productPriceDifference, productPriceDifferenceWithCurrency, productDateDifference, productVariantFirstId, productHandle, productVariantsSize, productVariantsInventory) {
+  updateRecentlyViewedProductsCookie("{{ product.id }}", "{{ product.title }}", "{{ product.url }}", "{{ product.available }}", "{{ product.featured_image | image_url }}", "{{ product.featured_image.alt }}", "{{ product.featured_image.width }}", "{{ product.featured_image.height }}", productPrices, "{{ product.compare_at_price | minus: product.price }}", "{{ product.compare_at_price | minus: product.price | money }}", "{{ 'now' | date: "%d" | minus: product.published_at | date: "%d" }}", "{{ product.first_available_variant.id }}", "{{ product.handle }}", "{{ product.variants.size }}", productVariantsInventory);
+
+  function updateRecentlyViewedProductsCookie(productId, productTitle, productUrl, productAvailability, productImage, productImageAlt, productImageWidth, productImageHeight, productPrices, productPriceDifference, productPriceDifferenceWithCurrency, productDateDifference, productVariantFirstId, productHandle, productVariantsSize, productVariantsInventory) {
     let recentlyViewedProducts = [];
 
     let recentlyViewedProductsCookie =
@@ -613,8 +619,7 @@
       image_alt: productImageAlt,
       image_width: productImageWidth,
       image_height: productImageHeight,
-      price: productPrice,
-      compare_at_price: productCompareAtPrice,
+      price: productPrices,
       price_difference: productPriceDifference,
       price_difference_with_currency: productPriceDifferenceWithCurrency,
       date_difference: productDateDifference,
@@ -642,6 +647,34 @@
 {% # theme-check-enable ParserBlockingScriptTag %}
 
 <script defer>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -681,6 +714,34 @@
   let currentVariantInventory = {{ current_variant.inventory_quantity }};
   let stockAlertThreshold = {{ stock_alert_threshold }};
   let priceDifferenceText= "{{ price_difference_text }}";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

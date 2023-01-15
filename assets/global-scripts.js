@@ -1802,11 +1802,11 @@ class QuickView extends HTMLElement {
 		if (selectedVariantInventoryManagement === "shopify") {
 			if (selectedVariantInventory === 0) {
 				document.querySelector(".quick-view-add-to-cart").classList.add("sold-out");
-				document.querySelector(".quick-view-add-to-cart").innerHTML = soldOutText;
+				document.querySelector(".quick-view-add-to-cart").innerHTML = `${soldOutText}`;
 				document.querySelector(".quick-view-buy-now").classList.add("sold-out");
 			} else {
 				document.querySelector(".quick-view-add-to-cart").classList.remove("sold-out");
-				document.querySelector(".quick-view-add-to-cart").innerHTML = addToCartText;
+				document.querySelector(".quick-view-add-to-cart").innerHTML = `<span></span> <span></span> <span></span> <span></span>${addToCartText}<div class="loading-spinner" style="background-color:var(--primary-button-background-color);"> <svg viewBox="25 25 50 50"> <circle stroke="var(--primary-button-text-color)" cx="50" cy="50" r="20"></circle> </svg> </div>`;
 				document.querySelector(".quick-view-buy-now").classList.remove("sold-out");
 			}
 		}
@@ -2245,8 +2245,7 @@ class RecentlyViewedComponent extends SliderComponent {
 				let productImageAlt = products[product].image_alt;
 				let productImageWidth = products[product].image_width;
 				let productImageHeight = products[product].image_height;
-				let productPrice = products[product].price;
-				let productCompareAtPrice = products[product].compare_at_price;
+				let productPrices = products[product].price;
 				let productPriceDifference = products[product].price_difference;
 				let productPriceDifferenceWithCurrency = products[product].price_difference_with_currency;
 				let date_difference = products[product].date_difference;
@@ -2309,23 +2308,22 @@ class RecentlyViewedComponent extends SliderComponent {
 				let tag = productAvailability === "true" ? saleTag : `<p class="tag--disabled tag-text">${soldOutText}</p>`;
 
 				itemElement.innerHTML = `
-                                      <div class="recently-viewed__image corner-border">
-										${tag}
-										${quickViewIcon}
-                                          <a href="${productUrl}" class="media corner-border-target">
-                                                ${itemImage}
-                                          </a>
-                                      </div>
-                                      <div class="recently-viewed__container"> 
-                                          <p class="text ${newTagClass}">
-                                                ${productTitle}
-                                          </p>
-                                      <div class="recently-viewed__price">
-                                          <p class="text price--actual">${productPrice}</p>
-                                          <p class="text price--compare-at">${productCompareAtPrice}</p>
-                                      </div>
-									  ${quickViewButtonLink}
-                                  `;
+						<div class="recently-viewed__image corner-border">
+						${tag}
+						${quickViewIcon}
+							<a href="${productUrl}" class="media corner-border-target">
+								${itemImage}
+							</a>
+						</div>
+						<div class="recently-viewed__container"> 
+							<p class="text ${newTagClass}">
+								${productTitle}
+							</p>
+						<div class="recently-viewed__price"> 
+							${productPrices}
+						</div>
+						${quickViewButtonLink}
+					`;
 
 				this.querySelector(".slide").appendChild(itemElement);
 			}
@@ -2966,7 +2964,7 @@ class FeaturedProduct extends HTMLElement {
 				if (inventory > 0) {
 					if (this.querySelector("#featured-product-add-to-cart").classList.contains("sold-out")) {
 						this.querySelector("#featured-product-add-to-cart").classList.remove("sold-out");
-						this.querySelector("#featured-product-add-to-cart").innerHTML = addToCartText;
+						this.querySelector("#featured-product-add-to-cart").innerHTML = `<span></span> <span></span> <span></span> <span></span>${addToCartText}<div class="loading-spinner" style="background-color:var(--primary-button-background-color);"> <svg viewBox="25 25 50 50"> <circle stroke="var(--primary-button-text-color)" cx="50" cy="50" r="20"></circle> </svg> </div>`;
 						this.querySelector("#featured-product-buy-now").style.display = "block";
 					}
 				} else if (inventory === 0) {

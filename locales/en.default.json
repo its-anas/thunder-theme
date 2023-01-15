@@ -72,7 +72,8 @@
             "new_tag": "NEW",
             "stock_disclaimer": "{{ inventory }} left in stock",
             "breadcrumb_home": "Home",
-            "breadcrumb_products": "Products"
+            "breadcrumb_products": "Products",
+            "multiple_variant_price": "from {{ price }}"
         }
     },
     "pages": {

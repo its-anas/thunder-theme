@@ -154,8 +154,7 @@
                   </p>
                 </div>
                 <div class="featured-collection__price">
-                  <p class="text price--actual">{{ product.price | money }}</p>
-                  <p class="text price--compare-at">{{ product.compare_at_price | money }}</p>
+                  {% render 'snippet-prices', product: product %}
                 </div>
                 {% if product.available %}
                   <quick-view-button>

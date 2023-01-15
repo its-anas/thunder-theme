@@ -174,11 +174,6 @@
 	gap: 0.5rem;
 }
 
-.search__item-container * {
-	color: var(--body-text-color);
-	font-size: var(--small-font-size);
-}
-
 .search__item__picture,
 .search__item__picture img {
 	width: 100%;

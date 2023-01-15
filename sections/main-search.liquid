@@ -175,10 +175,7 @@
                               </a>
 
                               <div class="search__item__prices">
-                                <p class="price--actual">{{ item.price | money }}</p>
-                                {% if item.compare_at_price != 0 %}
-                                  <p class="price--compare-at">{{ item.compare_at_price | money }}</p>
-                                {% endif %}
+                                {% render 'snippet-prices', product: item %}
                               </div>
 
                               {% if item.available %}
