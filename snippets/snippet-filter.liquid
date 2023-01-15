@@ -6,7 +6,7 @@
 <filter-component>
   <div class="filter-head">
     <h6 class="filter-title">{{ 'general.filter.title' | t }}</h6>
-    <div class="filter-close mobile-only">
+    <div class="filter-close mobile-tablet-only">
       {% render 'snippet-icons', icon: 'close' %}
     </div>
   </div>
@@ -210,7 +210,7 @@
       </details>
     {%- endfor -%}
   </form>
-  <div class="filter-mobile__button buttons mobile-only">
+  <div class="filter-mobile__button buttons mobile-tablet-only">
     <div class="shadow-divider"></div>
     <a class="button button--primary border">
       <span></span> <span></span> <span></span> <span></span>{{ 'general.filter.view_results_buttons' | t -}}

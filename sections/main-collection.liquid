@@ -36,7 +36,7 @@
               {% paginate collection.products by section.settings.products_per_page %}
                 <div class="filter__results--head">
                   {% if section.settings.show_filter == true %}
-                    <div class="show-filter mobile-only">
+                    <div class="show-filter mobile-tablet-only">
                       {% render 'snippet-icons', icon: 'search-filter' %}
                       <span>{{ 'general.filter.section_title' | t }}</span>
                       <span id="filterCount"></span>

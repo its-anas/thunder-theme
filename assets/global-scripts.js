@@ -2291,7 +2291,7 @@ class RecentlyViewedComponent extends SliderComponent {
 
 				let quickViewButtonLink =
 					productAvailability === "true"
-						? `<div class="button--link mobile-only"
+						? `<div class="button--link mobile-tablet-only"
 							id="quick-view-button"
 						data-first-available-variant-id="${variant_first_id}"
 						data-product-handle="${handle}"
