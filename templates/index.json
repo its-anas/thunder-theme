@@ -486,13 +486,6 @@
           "section-video-with-text": {
                "type": "section-video-with-text",
                "blocks": {
-                    "section-video-with-text-0": {
-                         "type": "subheading",
-                         "settings": {
-                              "subheading": "Subheading",
-                              "subheading_size": "h6"
-                         }
-                    },
                     "section-video-with-text-1": {
                          "type": "heading",
                          "settings": {
@@ -632,13 +625,6 @@
           "section-image-banner": {
                "type": "section-image-banner",
                "blocks": {
-                    "section-image-banner-0": {
-                         "type": "subheading",
-                         "settings": {
-                              "subheading": "Subheading",
-                              "subheading_size": "h6"
-                         }
-                    },
                     "section-image-banner-1": {
                          "type": "heading",
                          "settings": {

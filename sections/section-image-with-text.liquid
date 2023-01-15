@@ -83,10 +83,6 @@
     <div class="box horizontal--{{ section.settings.horizontal_position }} vertical--{{ section.settings.vertical_position }} text-alignment--{{ section.settings.text_alignment }} {{ section.id }}-text-width">
       {%- for block in section.blocks -%}
         {%- case block.type -%}
-          {%- when 'subheading' -%}
-            <{{ block.settings.subheading_size }} {{ block.shopify_attributes }}>
-              {{ block.settings.subheading }}
-            </{{ block.settings.subheading_size }}>
           {%- when 'heading' -%}
             <{{ block.settings.heading_size }} {{ block.shopify_attributes }}>
               {{ block.settings.heading }}
@@ -309,51 +305,6 @@
   ],
   "blocks": [
     {
-      "type": "subheading",
-      "name": "t:sections.general.section_settings.subheading",
-      "limit": 1,
-      "settings": [
-        {
-          "type": "text",
-          "id": "subheading",
-          "label": "t:sections.general.section_settings.subheading",
-          "default": "Context of the section"
-        },
-        {
-          "type": "select",
-          "id": "subheading_size",
-          "label": "t:sections.general.section_settings.subheading_size",
-          "options": [
-            {
-              "value": "h1",
-              "label": "h1"
-            },
-            {
-              "value": "h2",
-              "label": "h2"
-            },
-            {
-              "value": "h3",
-              "label": "h3"
-            },
-            {
-              "value": "h4",
-              "label": "h4"
-            },
-            {
-              "value": "h5",
-              "label": "h5"
-            },
-            {
-              "value": "h6",
-              "label": "h6"
-            }
-          ],
-          "default": "h6"
-        }
-      ]
-    },
-    {
       "type": "heading",
       "name": "t:sections.general.section_settings.heading",
       "limit": 1,
@@ -445,9 +396,6 @@
     {
       "name": "Image with text",
       "blocks": [
-        {
-          "type": "subheading"
-        },
         {
           "type": "heading"
         },

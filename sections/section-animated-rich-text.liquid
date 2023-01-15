@@ -42,10 +42,6 @@
   <div class="wrapper container {{ section.id }}-space-between text-alignment--{{ section.settings.text_alignment }} {{ section.id }}-text-width horizontal--{{ section.settings.horizontal_position }}">
     {%- for block in section.blocks -%}
       {%- case block.type -%}
-        {%- when 'subheading' -%}
-          <{{ block.settings.subheading_size }} {{ block.shopify_attributes }}>
-            {{ block.settings.subheading }}
-          </{{ block.settings.subheading_size }}>
         {%- when 'heading' -%}
           {% if block.settings.animated %}
             {% style %}
@@ -224,51 +220,6 @@
     }
   ],
   "blocks": [
-    {
-      "type": "subheading",
-      "name": "t:sections.general.section_settings.subheading",
-      "limit": 1,
-      "settings": [
-        {
-          "type": "text",
-          "id": "subheading",
-          "label": "t:sections.general.section_settings.subheading",
-          "default": "Clear and concise overview"
-        },
-        {
-          "type": "select",
-          "id": "subheading_size",
-          "label": "t:sections.general.section_settings.subheading_size",
-          "options": [
-            {
-              "value": "h1",
-              "label": "h1"
-            },
-            {
-              "value": "h2",
-              "label": "h2"
-            },
-            {
-              "value": "h3",
-              "label": "h3"
-            },
-            {
-              "value": "h4",
-              "label": "h4"
-            },
-            {
-              "value": "h5",
-              "label": "h5"
-            },
-            {
-              "value": "h6",
-              "label": "h6"
-            }
-          ],
-          "default": "h6"
-        }
-      ]
-    },
     {
       "type": "heading",
       "name": "t:sections.general.section_settings.heading",
@@ -468,9 +419,6 @@
     {
       "name": "t:sections.section-animated-rich-text.name",
       "blocks": [
-        {
-          "type": "subheading"
-        },
         {
           "type": "heading"
         },
