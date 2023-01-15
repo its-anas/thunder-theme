@@ -108,7 +108,11 @@
                   <p class="newsletter__text">{{ block.settings.newsletter_text }}</p>
                 {% endif %}
 
-                {% form 'customer', class: 'newsletter__form', onsubmit: 'send(event,this)' %}
+                {% form 'customer',
+                  class: 'newsletter__form',
+                  onsubmit: 'send(event,this)',
+                  id: 'contact_form--footer'
+                %}
                   <input type="hidden" name="contact[tags]" value="newsletter">
                   <div class="newsletter__container">
                     <input
@@ -126,7 +130,7 @@
                       type="submit"
                       class="newsletter__button"
                       name="commit"
-                      id="subscribe"
+                      id="subscribe--footer"
                     >
                       <p class="button">{{ 'general.newsletter.button' | t }}</p>
                       <p></p>
@@ -185,7 +189,7 @@
         {% endif %}
         {% if section.settings.show_currency_selector == true %}
           <localization-form>
-            {%- form 'localization' -%}
+            {%- form 'localization', id: 'localization_form--language' -%}
               <div>
                 <select
                   name="country_code"
@@ -203,7 +207,12 @@
                     </option>
                   {%- endfor -%}
                 </select>
-                <input type="hidden" id="hidden_value" name="country_code" value="{{ localization.country.iso_code }}">
+                <input
+                  type="hidden"
+                  id="hidden_value--language"
+                  name="country_code"
+                  value="{{ localization.country.iso_code }}"
+                >
               </div>
             {%- endform -%}
           </localization-form>
