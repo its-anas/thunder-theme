@@ -209,26 +209,7 @@
                 </div>
               {% when 'variants_selector' %}
                 {% unless product.has_only_default_variant %}
-                  <div class="product-page__variants" {{ block.shopify_attributes }}>
-                    {% for option in product.options_with_values %}
-                      <div class="product-page__radios-container">
-                        <p class="product-page__radio__title">{{ option.name }}</p>
-                        <div class="product-page__color-select-content">
-                          <select name="{{ option.name }}">
-                            {% for value in option.values %}
-                              <option
-                                value="{{ value }}"
-                                type="radio"
-                              >
-                                {{ value }}
-                              </option>
-                            {% endfor %}
-                          </select>
-                        </div>
-                      </div>
-                    {% endfor %}
-                  </div>
-                  <div class="product-page__hidden-variants" style="display: none;">
+                  <div class="product-page__variants hide">
                     <select id="product-select" name="id">
                       {% for variant in product.variants %}
                         <option
@@ -485,6 +466,11 @@
   
   
   
+  
+  
+  
+  
+  
   let variantsInventory = {};
   {% for variant in product.variants %}
   variantsInventory["{{ variant.title }}"] = {{ variant.inventory_quantity }};
@@ -520,6 +506,11 @@
   let currentVariantInventory = {{ current_variant.inventory_quantity }};
   let stockAlertThreshold = {{ stock_alert_threshold }};
   let priceDifferenceText= "{{ price_difference_text }}";
+
+
+
+
+
 
 
 

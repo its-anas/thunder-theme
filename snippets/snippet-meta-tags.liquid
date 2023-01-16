@@ -6,9 +6,6 @@
 <link rel="dns-prefetch" href="https://productreviews.shopifycdn.com">
 <link rel="dns-prefetch" href="https://www.google-analytics.com">
 
-{{ 'global-scripts.js' | asset_url | preload_tag: as: 'script' }}
-{{ 'global-styles.css' | asset_url | stylesheet_tag: preload: true }}
-
 {%- unless settings.heading_font_type.system? and settings.font_type.system? -%}
   <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
 {%- endunless -%}

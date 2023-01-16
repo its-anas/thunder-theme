@@ -17,27 +17,11 @@ class ProductPage extends HTMLElement {
 			observer.observe(targetNode, config);
 		}
 
-		document.querySelectorAll(".product-page__radio__content").forEach((content) => {
-			content.querySelectorAll("input.product-page__radio__input").forEach((radio) => {
-				radio.addEventListener("click", () => {
-					content.querySelector(".product-page__radio__label.checked").classList.remove("checked");
-					radio.parentNode.classList.add("checked");
-					syncSelect(content.querySelector("select"), radio.value);
-				});
-			});
-		});
-
-		document.querySelectorAll(".product-page__color-select-content").forEach((content) => {
-			content.querySelector("select").addEventListener("change", () => {
-				let selectValue = content.querySelector("select").value;
-				syncSelect(content.querySelector("select"), selectValue);
-			});
-		});
-
 		announceSoldout(currentVariantInventory);
 
-		if (document.querySelector(".product-page__hidden-variants") && productJson.variants.length > 0) {
+		if (document.querySelector(".product-page__variants") && productJson.variants.length > 0) {
 			function selectCallback(variant, selector) {
+				document.querySelector(".product-page__variants").classList.remove("hide");
 				document.querySelector(".product-page__price--compare-at").innerHTML = "";
 
 				let priceDifference = variant.compare_at_price - variant.price;
@@ -107,9 +91,9 @@ class ProductPage extends HTMLElement {
 					}
 				});
 
-				document.querySelectorAll(".product-page__hidden-variants #product-select option").forEach((option) => {
+				document.querySelectorAll(".product-page__variants #product-select option").forEach((option) => {
 					if (parseInt(option.value) === parseInt(variant.id)) {
-						document.querySelector(".product-page__hidden-variants #product-select option[selected]").removeAttribute("selected");
+						document.querySelector(".product-page__variants #product-select option[selected]").removeAttribute("selected");
 						option.setAttribute("selected", "selected");
 					}
 				});
@@ -131,7 +115,7 @@ class ProductPage extends HTMLElement {
 			if (cartType === "drawer") {
 				event.preventDefault();
 			}
-			let variantId = pageProductVariantsNumber > 1 ? document.querySelector(".product-page__hidden-variants #product-select option[selected]").value : addToCartButton.dataset.actualVariant;
+			let variantId = pageProductVariantsNumber > 1 ? document.querySelector(".product-page__variants #product-select option[selected]").value : addToCartButton.dataset.actualVariant;
 			let quantity = document.querySelector(".product-page__form .quantity-field__input").value;
 			sendToCart(variantId, quantity);
 		});
@@ -184,15 +168,6 @@ class ProductPage extends HTMLElement {
 			});
 		}
 
-		function syncSelect(select, value) {
-			document.querySelectorAll(".selector-wrapper select option").forEach((option) => {
-				if (option.label === value) {
-					option.parentNode.value = value;
-					option.parentNode.dispatchEvent(new Event("change"));
-				}
-			});
-		}
-
 		function callback(mutationList, observer) {
 			for (const mutation of mutationList) {
 				if (mutation.type === "childList" && mutation.target.className === "shopify-payment-button" && mutation.addedNodes.length > 0) {
@@ -228,8 +203,8 @@ class ProductPageSlider extends HTMLElement {
 			this.loadSlider();
 		});
 
-		if (document.querySelector(".product-page__hidden-variants .selector-wrapper select")) {
-			document.querySelectorAll(".product-page__hidden-variants .selector-wrapper select").forEach((select) => {
+		if (document.querySelector(".product-page__variants .selector-wrapper select")) {
+			document.querySelectorAll(".product-page__variants .selector-wrapper select").forEach((select) => {
 				select.addEventListener("change", () => {
 					this.loadSlider();
 				});
@@ -426,8 +401,8 @@ class ProductPageSlider extends HTMLElement {
 		next.addEventListener("click", moveNext);
 		prev.addEventListener("click", movePrev);
 
-		if (document.querySelector(".product-page__hidden-variants .selector-wrapper select")) {
-			document.querySelectorAll(".product-page__hidden-variants .selector-wrapper select").forEach((select) => {
+		if (document.querySelector(".product-page__variants .selector-wrapper select")) {
+			document.querySelectorAll(".product-page__variants .selector-wrapper select").forEach((select) => {
 				select.addEventListener("change", () => {
 					next.removeEventListener("click", moveNext);
 					prev.removeEventListener("click", movePrev);

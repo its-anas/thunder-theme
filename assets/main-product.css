@@ -422,6 +422,10 @@
 	gap: 1rem;
 }
 
+.product-page__variants.hide {
+	display: none;
+}
+
 .product-page__hidden-variants {
 	flex-direction: column;
 	gap: 1rem;
@@ -444,6 +448,7 @@
 }
 
 .product-page .selector-wrapper select {
+	box-sizing: border-box;
 	width: 100%;
 }
 
