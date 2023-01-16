@@ -686,8 +686,39 @@ class MenuMobile extends HTMLElement {
 
 customElements.define("menu-mobile", MenuMobile);
 
-// ANCHOR: Slider component
+// ANCHOR: Recommended products section
+class RecommendedProducts extends HTMLElement {
+	constructor() {
+		super();
+	}
 
+	connectedCallback() {
+		fetch(this.dataset.url)
+			.then((response) => response.text())
+			.then((text) => {
+				const html = document.createElement("div");
+				html.innerHTML = text;
+				const recommendations = html.querySelector("recommended-products");
+
+				if (recommendations && recommendations.innerHTML.trim().length) {
+					this.innerHTML = recommendations.innerHTML;
+				}
+
+				if (recommendations.querySelector(".slide")) {
+					if (recommendations.querySelector(".slide").childElementCount === 0) {
+						document.querySelector(`.${this.dataset.sectionId}`).remove();
+					}
+				}
+			})
+			.catch((e) => {
+				console.error(e);
+			});
+	}
+}
+
+customElements.define("recommended-products", RecommendedProducts);
+
+// ANCHOR: Slider component
 class SliderComponent extends HTMLElement {
 	constructor() {
 		super();
@@ -696,7 +727,7 @@ class SliderComponent extends HTMLElement {
 	connectedCallback() {
 		this.attachShadow({ mode: "open" });
 		this.shadowRoot.innerHTML = "<slot></slot>";
-		if (this.querySelector("recently-viewed-component")) {
+		if (this.querySelector("recently-viewed-component") || this.querySelector("recommended-products")) {
 			setTimeout(() => {
 				this.loadSlider();
 			}, 2000);
@@ -2453,35 +2484,3 @@ class LocalizationForm extends HTMLElement {
 }
 
 customElements.define("localization-form", LocalizationForm);
-
-// ANCHOR: Recommended products section
-class RecommendedProducts extends HTMLElement {
-	constructor() {
-		super();
-	}
-
-	connectedCallback() {
-		fetch(this.dataset.url)
-			.then((response) => response.text())
-			.then((text) => {
-				const html = document.createElement("div");
-				html.innerHTML = text;
-				const recommendations = html.querySelector("recommended-products");
-
-				if (recommendations && recommendations.innerHTML.trim().length) {
-					this.innerHTML = recommendations.innerHTML;
-				}
-
-				if (recommendations.querySelector(".slide")) {
-					if (recommendations.querySelector(".slide").childElementCount === 0) {
-						document.querySelector(`.${this.dataset.sectionId}`).remove();
-					}
-				}
-			})
-			.catch((e) => {
-				console.error(e);
-			});
-	}
-}
-
-customElements.define("recommended-products", RecommendedProducts);
