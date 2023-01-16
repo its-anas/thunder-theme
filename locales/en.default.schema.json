@@ -100,7 +100,7 @@
                 "button_border_width": "Button border width",
                 "button_symbol": {
                     "label": "Button symbol",
-                    "info": "A symbol that shows up after buttons and links."
+                    "info": "A symbol that shows up after links."
                 }
             }
         },

@@ -100,7 +100,7 @@
                 "button_border_width": "Breite des Schaltflächenrahmens",
                 "button_symbol": {
                     "label": "Schaltflächensymbol",
-                    "info": "Ein Symbol, das hinter Schaltflächen und Links erscheint."
+                    "info": "Ein Symbol, das hinter Links erscheint."
                 }
             }
         },

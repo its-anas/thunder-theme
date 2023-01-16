@@ -100,7 +100,7 @@
                 "button_border_width": "Largeur de la bordure du bouton",
                 "button_symbol": {
                     "label": "Symbole du bouton",
-                    "info": "Un symbole qui apparaît après les boutons et les liens."
+                    "info": "Un symbole qui apparaît après les liens."
                 }
             }
         },

@@ -100,7 +100,7 @@
                 "button_border_width": "Ancho del borde del botón",
                 "button_symbol": {
                     "label": "Símbolo de botón",
-                    "info": "Un símbolo que aparece después de los botones y enlaces."
+                    "info": "Un símbolo que aparece después de los enlaces."
                 }
             }
         },

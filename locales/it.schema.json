@@ -100,7 +100,7 @@
                 "button_border_width": "Larghezza del bordo del pulsante",
                 "button_symbol": {
                     "label": "Simbolo del pulsante",
-                    "info": "Un simbolo che appare dopo pulsanti e link."
+                    "info": "Un simbolo che appare dopo i link."
                 }
             }
         },
