@@ -131,3 +131,7 @@ body:has(.header-section.boxed) .search-drawer {
 .search-drawer__container .search-form__input::-webkit-search-cancel-button {
 	opacity: 0 !important;
 }
+
+.search-form__container .buttons {
+	min-height: 48px;
+}

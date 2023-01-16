@@ -1,30 +1,9 @@
 {{ 'main-cart-drawer.css' | asset_url | stylesheet_tag }}
 
 {%- style -%}
-  .cart-drawer__container, .cart-drawer__content--empty {
+  .cart-drawer__container,
+  .cart-drawer__content--empty {
     background-color: var(--background-color);
-  }
-  .recommended-products.mobile-only {
-    background-color: {{ settings.secondary_background_color }};
-  }
-  {% if section.settings.show_cart_recommended_products == true %}
-    .recommended-products.tablet-desktop-only.active {
-      transform: translateX(-99%);
-      transition: transform 0.8s cubic-bezier(0.75, 0, 0.175, 1);
-    }
-    .recommended-products.mobile-only.active {
-      opacity: 1;
-      transform: translateX(0);
-      transition: all 0.5s cubic-bezier(0.75, 0, 0.175, 1);
-    }
-  {% else %}
-  {% endif %}
-  body:has(.header-section.boxed) .cart-drawer__container, body:has(.header-section.boxed) .cart-drawer__content--empty, body:has(.header-section.boxed) .recommended-products.tablet-desktop-only {
-    border-radius: var(--global-border-radius);
-    border: var(--global-border-width) solid var(--global-border-color);
-  }
-  .cart-drawer .recommended-products.tablet-desktop-only {
-    background-color: rgb({{ settings.background_color.red }}, {{ settings.background_color.green }}, {{ settings.background_color.blue }}, 0.5);
   }
 {%- endstyle -%}
 
@@ -57,12 +36,6 @@
 
         <div class="cart-drawer__products">
           <div class="cart-drawer__products-list"></div>
-          <div class="recommended-products mobile-only">
-            <p class="recommended-products__title">{{ 'general.cart_drawer.recommended_products_text' | t }}</p>
-            <div class="recommended-products__list">
-              <div class="recommended-products__list-container"></div>
-            </div>
-          </div>
         </div>
         <div class="cart-drawer__interaction">
           <div class="cart-drawer__interaction--empty">
@@ -92,7 +65,7 @@
                   id="checkout"
                   name="checkout"
                   {% if cart == empty %}
-                    disabled 
+                    disabled
                   {% endif %}
                   class="button button--secondary border"
                   form="cart"
@@ -106,12 +79,6 @@
               <p class="disclaimer">{{ 'pages.cart.tax_disclaimer' | t }}</p>
             </div>
           </div>
-        </div>
-      </div>
-      <div class="recommended-products tablet-desktop-only">
-        <p class="recommended-products__title">{{ 'general.cart_drawer.recommended_products_text' | t }}</p>
-        <div class="recommended-products__list">
-          <div class="recommended-products__list-container"></div>
         </div>
       </div>
     </div>

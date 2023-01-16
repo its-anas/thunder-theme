@@ -120,27 +120,6 @@ function showCartDrawer() {
 		document.querySelector("cart-component").classList.remove("hidden");
 		document.querySelector("cart-component").classList.add("active");
 		lockPage();
-		showRecommendedDrawer();
-	}
-}
-
-function showRecommendedDrawer() {
-	if (!document.querySelector(".recommended-products.tablet-desktop-only").classList.contains("active")) {
-		if (document.querySelector(".cart-drawer__products-list").childElementCount > 0) {
-			setTimeout(() => {
-				if (document.querySelector(".recommended-products__list-container").childElementCount > 0) {
-					document.querySelector(".recommended-products.tablet-desktop-only").classList.add("active");
-					document.querySelector(".recommended-products.mobile-only").classList.add("active");
-				}
-			}, 1000);
-		}
-	}
-}
-
-function hideRecommendedDrawer() {
-	if (document.querySelector(".recommended-products.tablet-desktop-only").classList.contains("active")) {
-		document.querySelector(".recommended-products.tablet-desktop-only").classList.remove("active");
-		document.querySelector(".recommended-products.mobile-only").classList.remove("active");
 	}
 }
 
@@ -166,7 +145,6 @@ async function updateCartDrawer() {
 					updateFreeShippingBar(data.total_price);
 					document.getElementById("header__icons-cart__item-count").innerHTML = data.item_count;
 				}, 500);
-				hideRecommendedDrawer();
 			} else if (data.item_count > 0) {
 				updateFreeShippingBar(data.total_price);
 				document.querySelector(".cart-drawer__interaction--empty").classList.remove("show");
@@ -276,8 +254,6 @@ async function updateCartDrawer() {
 			itemList.forEach((item) => {
 				document.querySelector(".cart-drawer__products-list").innerHTML += item;
 			});
-
-			addCartRecommendedProducts(data.items);
 
 			let cartDiscounts = data.cart_level_discount_applications;
 			let cartDiscountsHTML = "";
@@ -395,141 +371,6 @@ function updateFreeShippingBar(cartAmount) {
 		</div>
 	`;
 	}
-}
-
-function addCartRecommendedProducts(cartProducts) {
-	let recommendedProducts = [];
-
-	cartProducts.forEach((cartProduct) => {
-		fetch(window.Shopify.routes.root + `recommendations/products.json?product_id=${cartProduct.product_id}&limit=5&intent=related`)
-			.then((response) => response.json())
-			.then(({ products }) => {
-				if (products) {
-					if (products.length === 0) {
-						hideRecommendedDrawer();
-						setTimeout(() => {
-							document.querySelector(".recommended-products.tablet-desktop-only .recommended-products__list-container").innerHTML = "";
-							document.querySelector(".recommended-products.mobile-only .recommended-products__list-container").innerHTML = "";
-						}, 500);
-					} else if ((products.length > 0) & document.querySelector("cart-component").classList.contains("active")) {
-						showRecommendedDrawer();
-					}
-
-					products.forEach((product) => {
-						const index = recommendedProducts.findIndex((object) => object.id === product.id);
-
-						if (index === -1) {
-							recommendedProducts.push(product);
-						}
-					});
-					if (products.length > 0) {
-						document.querySelector(".recommended-products.tablet-desktop-only .recommended-products__list-container").innerHTML = "";
-						document.querySelector(".recommended-products.mobile-only .recommended-products__list-container").innerHTML = "";
-
-						recommendedProducts.forEach((product) => {
-							let variant_first_id = parseInt(product.variants[0].id);
-
-							if (!cartProducts.some((cartProduct) => cartProduct.variant_id === variant_first_id)) {
-								let handle = product.handle;
-								let variants_size = parseInt(product.variants.length);
-								let productWithVariants = variants_size > 1 ? "with" : "without";
-								let quickAddButtonText = variants_size > 1 ? `${quickViewText} +` : `${addToCartText} +`;
-
-								document.querySelector(".recommended-products.tablet-desktop-only .recommended-products__list-container").innerHTML += `
-									<div class="recommended-product">
-										<div class="recommended-product__image media">
-											<img
-												srcset="${product.media[0].src}"
-												alt="${product.media[0].alt}"
-												width="${product.media[0].width}"
-												height="${product.media[0].height}"
-												class="cover"
-											>
-										</div>
-										<div class="recommended-product__details">
-										<div class="details">
-											<p class="product-name">${product.title}...</p>
-											<p class="price--actual">${formatMoney(product.price)}</p>
-										</div> 
-										<quick-view-button>
-											<div
-												class="button--link"
-												id="quick-view-button"
-												data-first-available-variant-id="${variant_first_id}"
-												data-product-handle="${handle}"
-												data-product-variants="${productWithVariants}"
-												data-product-id="${product.id}"
-											>
-												${quickAddButtonText}
-												<div class="loading-spinner tiny"> <svg class="mini" viewBox="25 25 50 50"> <circle stroke="var(--link-color)" cx="50" cy="50" r="20"></circle> </svg> </div>
-											</div>
-										</quick-view-button>
-										</div>
-									</div>
-								`;
-								document.querySelector(".recommended-products.mobile-only .recommended-products__list-container").innerHTML += `
-									<div class="recommended-product">
-										<div class="recommended-product__image media">
-											<img
-												srcset="${product.media[0].src}"
-												alt="${product.media[0].alt}"
-												width="${product.media[0].width}"
-												height="${product.media[0].height}"
-												class="cover"
-											>
-										</div>
-										<div class="recommended-product__details">
-											<p class="product-name">${product.title}...</p>
-											<p class="price--actual">${formatMoney(product.price)}</p>
-										<quick-view-button>
-											<div
-												class="button--link"
-												id="quick-view-button"
-												data-first-available-variant-id="${variant_first_id}"
-												data-product-handle="${handle}"
-												data-product-variants="${productWithVariants}"
-												data-product-id="${product.id}"
-											>
-												${quickAddButtonText}
-												<div class="loading-spinner tiny"> <svg class="mini" viewBox="25 25 50 50"> <circle stroke="var(--link-color)" cx="50" cy="50" r="20"></circle> </svg> </div>
-											</div>
-										</quick-view-button>
-									</div>
-								`;
-							}
-
-							// To be improved later
-
-							fetch(window.Shopify.routes.root + "products/" + product.handle)
-								.then((response) => response.text())
-								.then((text) => {
-									const html = document.createElement("div");
-									html.innerHTML = text;
-									const recommendationsUrl = html.querySelector("recommended-products").dataset.url;
-									fetch(recommendationsUrl)
-										.then((response) => response.text())
-										.then((text) => {
-											const html = document.createElement("div");
-											html.innerHTML = text;
-											const scripts = html.querySelectorAll("recommended-products .quick-view-button.desktop-only script[type='application/json']");
-
-											scripts.forEach((script) => {
-												document.querySelectorAll(".cart-drawer #quick-view-button").forEach((productButton) => {
-													if (productButton.dataset.productId === script.dataset.productId) {
-														productButton.innerHTML += `<script type='application/json'>${script.innerHTML}</script>`;
-													}
-												});
-											});
-										})
-										.catch((e) => {
-											console.error(e);
-										});
-								});
-						});
-					}
-				}
-			});
-	});
 }
 
 function fromQuickViewToCart(selectedVariant, quantity) {
@@ -936,7 +777,7 @@ class SliderComponent extends HTMLElement {
 	connectedCallback() {
 		this.attachShadow({ mode: "open" });
 		this.shadowRoot.innerHTML = "<slot></slot>";
-		if (this.querySelector("recently-viewed-component") || this.querySelector("recommended-products")) {
+		if (this.querySelector("recently-viewed-component")) {
 			setTimeout(() => {
 				this.loadSlider();
 			}, 2000);
@@ -1382,8 +1223,6 @@ class CartComponent extends HTMLElement {
 
 		this.classList.remove("active");
 		this.classList.add("hidden");
-
-		hideRecommendedDrawer();
 	}
 
 	decideDrawerAction() {
@@ -1413,7 +1252,6 @@ class CartComponent extends HTMLElement {
 				if ((document.querySelector("cart-component").classList.contains("active") && document.querySelector(".header__icons-search").contains(event.target)) || (document.querySelector("cart-component").classList.contains("active") && document.querySelector(".header__icons-drawer").contains(event.target))) {
 					this.classList.remove("active");
 					this.classList.add("hidden");
-					hideRecommendedDrawer();
 				}
 			});
 
