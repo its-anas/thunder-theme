@@ -17,7 +17,13 @@ const scrollObserver = new IntersectionObserver((entries) => {
 });
 
 document.querySelectorAll("[reveal-on-scroll]").forEach((section) => {
-	scrollObserver.observe(section);
+	if (section.classList.contains("announcement")) {
+		setTimeout(() => {
+			scrollObserver.observe(section);
+		}, 500);
+	} else {
+		scrollObserver.observe(section);
+	}
 });
 
 if (Shopify.designMode) {
