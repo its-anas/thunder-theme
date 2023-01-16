@@ -212,145 +212,19 @@
                   <div class="product-page__variants" {{ block.shopify_attributes }}>
                     {% for option in product.options_with_values %}
                       <div class="product-page__radios-container">
-                        {% if option.name != 'Color' %}
-                          <p class="product-page__radio__title">{{ option.name }}</p>
-                          {% if block.settings.variant_selector_type == 'button' %}
-                            <div class="product-page__radio__content">
-                              {% for value in option.values %}
-                                <label
-                                  class="product-page__radio__label{% if option.selected_value == value %} checked{% endif %}"
-                                  for="{{ option.name | handle }}-{{ value | handle }}"
-                                >
-                                  <input
-                                    type="radio"
-                                    name="{{ option.name }}"
-                                    value="{{ value }}"
-                                    id="{{ option.name | handle }}-{{ value | handle }}"
-                                    class="product-page__radio__input"
-                                  >
-                                  {{ value }}
-                                </label>
-                              {% endfor %}
-                            </div>
-                          {% elsif block.settings.variant_selector_type == 'dropdown' %}
-                            <select name="{{ option.name }}">
-                              {% for value in option.values %}
-                                <option
-                                  value="{{ value }}"
-                                  type="radio"
-                                >
-                                  {{ value }}
-                                </option>
-                              {% endfor %}
-                            </select>
-                          {% endif %}
-                        {% elsif option.name == 'Color' %}
-                          <p class="product-page__radio__title">{{ option.name }}</p>
-                          {% if block.settings.color_selector_type == 'button' %}
-                            <div class="product-page__radio__content">
-                              {% for value in option.values %}
-                                <label
-                                  class="product-page__radio__label{% if option.selected_value == value %} checked{% endif %}"
-                                  for="{{ option.name | handle }}-{{ value | handle }}"
-                                >
-                                  <input
-                                    {% if option.selected_value == value %}
-                                      checked
-                                    {% endif %}
-                                    type="radio"
-                                    name="{{ option.name }}"
-                                    value="{{ value }}"
-                                    id="{{ option.name | handle }}-{{ value | handle }}"
-                                    class="product-page__radio__input"
-                                  >
-                                  {{ value }}
-                                </label>
-                              {% endfor %}
-                            </div>
-                          {% elsif block.settings.color_selector_type == 'dropdown' %}
-                            <div class="product-page__color-select-content">
-                              <select name="{{ option.name }}">
-                                {% for value in option.values %}
-                                  <option
-                                    value="{{ value }}"
-                                    type="radio"
-                                  >
-                                    {{ value }}
-                                  </option>
-                                {% endfor %}
-                              </select>
-                            </div>
-                          {% elsif block.settings.color_selector_type == 'variant_image' %}
-                            <div class="product-page__radio__content">
-                              {% for value in option.values %}
-                                {% liquid
-                                  for variant in product.variants
-                                    if variant.title contains value
-                                      assign variant_image = variant.featured_image
-                                      break
-                                    endif
-                                  endfor
-                                %}
-                                <label
-                                  class="product-page__radio__label media variant_image{% if option.selected_value == value %} checked{% endif %}"
-                                  style=""
-                                  for="{{ option.name | handle }}-{{ value | handle }}"
-                                >
-                                  <input
-                                    {% if option.selected_value == value %}
-                                      checked
-                                    {% endif %}
-                                    type="radio"
-                                    name="{{ option.name }}"
-                                    value="{{ value }}"
-                                    id="{{ option.name | handle }}-{{ value | handle }}"
-                                    class="product-page__radio__input"
-                                  >
-                                  {% if variant_image != blank %}
-                                    {%- assign image = variant_image -%}
-                                    {%- assign widths = '80, 90, 100' -%}
-                                    {%- assign width = '100' -%}
-                                    {{
-                                      image
-                                      | image_url: width: width
-                                      | image_tag:
-                                        loading: 'lazy',
-                                        class: 'contain',
-                                        alt: image.alt,
-                                        width: image.width,
-                                        height: image.height,
-                                        widths: widths
-                                    }}
-                                  {% else %}
-                                    {{ value }}
-                                  {% endif %}
-                                </label>
-                              {% endfor %}
-                            </div>
-                          {% elsif block.settings.color_selector_type == 'color_swatch' %}
-                            <div class="product-page__radio__content">
-                              {% for value in option.values %}
-                                <label
-                                  class=" product-page__radio__label color_swatch{% if option.selected_value == value %} checked{% endif %}"
-                                  style="color: transparent;{% render 'snippet-color-swatch', actual_color: value %}"
-                                  for="{{ option.name | handle }}-{{ value | handle }}"
-                                >
-                                  {{ value }}
-                                  <input
-                                    {% if option.selected_value == value %}
-                                      checked
-                                    {% endif %}
-                                    type="radio"
-                                    name="{{ option.name }}"
-                                    value="{{ value }}"
-                                    id="{{ option.name | handle }}-{{ value | handle }}"
-                                    class="product-page__radio__input"
-                                  >
-                                </label>
-                              {% endfor %}
-                            </div>
-                          {% endif %}
-                        {% endif %}
+                        <p class="product-page__radio__title">{{ option.name }}</p>
+                        <div class="product-page__color-select-content">
+                          <select name="{{ option.name }}">
+                            {% for value in option.values %}
+                              <option
+                                value="{{ value }}"
+                                type="radio"
+                              >
+                                {{ value }}
+                              </option>
+                            {% endfor %}
+                          </select>
+                        </div>
                       </div>
                     {% endfor %}
                   </div>
@@ -606,6 +480,11 @@
   
   
   
+  
+  
+  
+  
+  
   let variantsInventory = {};
   {% for variant in product.variants %}
   variantsInventory["{{ variant.title }}"] = {{ variant.inventory_quantity }};
@@ -641,6 +520,11 @@
   let currentVariantInventory = {{ current_variant.inventory_quantity }};
   let stockAlertThreshold = {{ stock_alert_threshold }};
   let priceDifferenceText= "{{ price_difference_text }}";
+
+
+
+
+
 
 
 
@@ -741,50 +625,7 @@
     {
       "type": "variants_selector",
       "name": "t:sections.general.product.variants_selector.label",
-      "limit": 1,
-      "settings": [
-        {
-          "type": "select",
-          "id": "variant_selector_type",
-          "label": "t:sections.general.product.variants_selector.settings.variant_selector_type.label",
-          "options": [
-            {
-              "value": "button",
-              "label": "t:sections.general.product.variants_selector.settings.variant_selector_type.options.button"
-            },
-            {
-              "value": "dropdown",
-              "label": "t:sections.general.product.variants_selector.settings.variant_selector_type.options.dropdown"
-            }
-          ],
-          "default": "dropdown"
-        },
-        {
-          "type": "select",
-          "id": "color_selector_type",
-          "label": "t:sections.general.product.variants_selector.settings.color_selector_type.label",
-          "options": [
-            {
-              "value": "button",
-              "label": "t:sections.general.product.variants_selector.settings.color_selector_type.options.button"
-            },
-            {
-              "value": "dropdown",
-              "label": "t:sections.general.product.variants_selector.settings.color_selector_type.options.dropdown"
-            },
-            {
-              "value": "color_swatch",
-              "label": "t:sections.general.product.variants_selector.settings.color_selector_type.options.color_swatch"
-            },
-            {
-              "value": "variant_image",
-              "label": "t:sections.general.product.variants_selector.settings.color_selector_type.options.variant_image"
-            }
-          ],
-          "info": "t:sections.general.product.variants_selector.settings.color_selector_type.info",
-          "default": "button"
-        }
-      ]
+      "limit": 1
     },
     {
       "type": "stock_alert",
