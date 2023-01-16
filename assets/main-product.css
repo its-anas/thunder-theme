@@ -599,13 +599,6 @@
 	padding: 0;
 }
 
-.product-page__radio__label.color_swatch {
-	overflow: hidden;
-	width: 35px;
-	height: 35px;
-	padding: 0;
-}
-
 .product-page__radio__input {
 	display: none;
 }

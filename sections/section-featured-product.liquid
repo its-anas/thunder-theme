@@ -90,8 +90,8 @@
               {% for block in section.blocks %}
                 {% case block.type %}
                   {% when 'variants_selector' %}
-                    data-featured-product-variant-selector-type="{{ block.settings.variant_selector_type }}"
-                    data-featured-product-color-selector-type="{{ block.settings.color_selector_type }}"
+                    data-featured-product-variant-selector-type="dropdown"
+                    data-featured-product-color-selector-type="dropdown"
                 {% endcase %}
               {% endfor %}
             >
@@ -300,50 +300,7 @@
     {
       "type": "variants_selector",
       "name": "t:sections.general.product.variants_selector.label",
-      "limit": 1,
-      "settings": [
-        {
-          "type": "select",
-          "id": "variant_selector_type",
-          "label": "t:sections.general.product.variants_selector.settings.variant_selector_type.label",
-          "options": [
-            {
-              "value": "button",
-              "label": "t:sections.general.product.variants_selector.settings.variant_selector_type.options.button"
-            },
-            {
-              "value": "dropdown",
-              "label": "t:sections.general.product.variants_selector.settings.variant_selector_type.options.dropdown"
-            }
-          ],
-          "default": "dropdown"
-        },
-        {
-          "type": "select",
-          "id": "color_selector_type",
-          "label": "t:sections.general.product.variants_selector.settings.color_selector_type.label",
-          "info": "t:sections.general.product.variants_selector.settings.color_selector_type.info",
-          "options": [
-            {
-              "value": "button",
-              "label": "t:sections.general.product.variants_selector.settings.color_selector_type.options.button"
-            },
-            {
-              "value": "dropdown",
-              "label": "t:sections.general.product.variants_selector.settings.color_selector_type.options.dropdown"
-            },
-            {
-              "value": "color_swatch",
-              "label": "t:sections.general.product.variants_selector.settings.color_selector_type.options.color_swatch"
-            },
-            {
-              "value": "variant_image",
-              "label": "t:sections.general.product.variants_selector.settings.color_selector_type.options.variant_image"
-            }
-          ],
-          "default": "dropdown"
-        }
-      ]
+      "limit": 1
     },
     {
       "type": "quantity",

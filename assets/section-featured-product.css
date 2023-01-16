@@ -143,13 +143,6 @@
 	padding: 0;
 }
 
-.featured-product__radio__label.color_swatch {
-	overflow: hidden;
-	width: 35px;
-	height: 35px;
-	padding: 0;
-}
-
 .featured-product__radio__input {
 	display: none;
 }

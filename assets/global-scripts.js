@@ -374,75 +374,21 @@ function matchVariant(allSelectedVariants, allAvailableVariants) {
 
 	if (allSelectedVariants.length === 1) {
 		let variantValue;
-		if (allSelectedVariants[0].dataset.selectorType === "button") {
-			variantValue = allSelectedVariants[0].querySelector("input:checked").value;
-		} else if (allSelectedVariants[0].dataset.selectorType === "dropdown") {
-			variantValue = allSelectedVariants[0].querySelector("select").value;
-		} else if (allSelectedVariants[0].dataset.selectorType === "variant_image") {
-			variantValue = allSelectedVariants[0].querySelector("input:checked").value;
-		} else if (allSelectedVariants[0].dataset.selectorType === "color_swatch") {
-			variantValue = allSelectedVariants[0].querySelector("input:checked").value;
-		}
-
+		variantValue = allSelectedVariants[0].querySelector("select").value;
 		variantsNames = [`${variantValue}`];
 	} else if (allSelectedVariants.length === 2) {
 		let variantValue1;
 		let variantValue2;
-		if (allSelectedVariants[0].dataset.selectorType === "button") {
-			variantValue1 = allSelectedVariants[0].querySelector("input:checked").value;
-		} else if (allSelectedVariants[0].dataset.selectorType === "dropdown") {
-			variantValue1 = allSelectedVariants[0].querySelector("select").value;
-		} else if (allSelectedVariants[0].dataset.selectorType === "variant_image") {
-			variantValue1 = allSelectedVariants[0].querySelector("input:checked").value;
-		} else if (allSelectedVariants[0].dataset.selectorType === "color_swatch") {
-			variantValue1 = allSelectedVariants[0].querySelector("input:checked").value;
-		}
-
-		if (allSelectedVariants[1].dataset.selectorType === "button") {
-			variantValue2 = allSelectedVariants[1].querySelector("input:checked").value;
-		} else if (allSelectedVariants[1].dataset.selectorType === "dropdown") {
-			variantValue2 = allSelectedVariants[1].querySelector("select").value;
-		} else if (allSelectedVariants[1].dataset.selectorType === "variant_image") {
-			variantValue2 = allSelectedVariants[1].querySelector("input:checked").value;
-		} else if (allSelectedVariants[1].dataset.selectorType === "color_swatch") {
-			variantValue2 = allSelectedVariants[1].querySelector("input:checked").value;
-		}
-
+		variantValue1 = allSelectedVariants[0].querySelector("select").value;
+		variantValue2 = allSelectedVariants[1].querySelector("select").value;
 		variantsNames = [`${variantValue1} / ${variantValue2}`, `${variantValue2} / ${variantValue1}`];
 	} else if (allSelectedVariants.length === 3) {
 		let variantValue1;
 		let variantValue2;
 		let variantValue3;
-		if (allSelectedVariants[0].dataset.selectorType === "button") {
-			variantValue1 = allSelectedVariants[0].querySelector("input:checked").value;
-		} else if (allSelectedVariants[0].dataset.selectorType === "dropdown") {
-			variantValue1 = allSelectedVariants[0].querySelector("select").value;
-		} else if (allSelectedVariants[0].dataset.selectorType === "variant_image") {
-			variantValue1 = allSelectedVariants[0].querySelector("input:checked").value;
-		} else if (allSelectedVariants[0].dataset.selectorType === "color_swatch") {
-			variantValue1 = allSelectedVariants[0].querySelector("input:checked").value;
-		}
-
-		if (allSelectedVariants[1].dataset.selectorType === "button") {
-			variantValue2 = allSelectedVariants[1].querySelector("input:checked").value;
-		} else if (allSelectedVariants[1].dataset.selectorType === "dropdown") {
-			variantValue2 = allSelectedVariants[1].querySelector("select").value;
-		} else if (allSelectedVariants[1].dataset.selectorType === "variant_image") {
-			variantValue2 = allSelectedVariants[1].querySelector("input:checked").value;
-		} else if (allSelectedVariants[1].dataset.selectorType === "color_swatch") {
-			variantValue2 = allSelectedVariants[1].querySelector("input:checked").value;
-		}
-
-		if (allSelectedVariants[2].dataset.selectorType === "button") {
-			variantValue3 = allSelectedVariants[2].querySelector("input:checked").value;
-		} else if (allSelectedVariants[2].dataset.selectorType === "dropdown") {
-			variantValue3 = allSelectedVariants[2].querySelector("select").value;
-		} else if (allSelectedVariants[2].dataset.selectorType === "variant_image") {
-			variantValue3 = allSelectedVariants[2].querySelector("input:checked").value;
-		} else if (allSelectedVariants[2].dataset.selectorType === "color_swatch") {
-			variantValue3 = allSelectedVariants[2].querySelector("input:checked").value;
-		}
-
+		variantValue1 = allSelectedVariants[0].querySelector("select").value;
+		variantValue2 = allSelectedVariants[1].querySelector("select").value;
+		variantValue3 = allSelectedVariants[2].querySelector("select").value;
 		variantsNames = [`${variantValue1} / ${variantValue2} / ${variantValue3}`, `${variantValue1} / ${variantValue3} / ${variantValue2}`, `${variantValue2} / ${variantValue1} / ${variantValue3}`, `${variantValue2} / ${variantValue3} / ${variantValue1}`, `${variantValue3} / ${variantValue1} / ${variantValue2}`, `${variantValue3} / ${variantValue2} / ${variantValue1}`];
 	}
 
@@ -2022,27 +1968,9 @@ class FeaturedProduct extends HTMLElement {
 							</div>
 			`;
 
-			if (key !== "Color") {
-				if (this.featuredProductVariantSelectorType === "button") {
-					this.querySelector(`.featured-product__radios-container--${key}`).innerHTML += `
-									<div class="featured-product__radio__content featured-product__radio__content--${key}"></div>
-							`;
-				} else if (this.featuredProductVariantSelectorType === "dropdown") {
-					this.querySelector(`.featured-product__radios-container--${key}`).innerHTML += `
-									<select name="${key}"></select>
-							`;
-				}
-			} else if (key === "Color") {
-				if (this.featuredProductColorSelectorType === "button" || this.featuredProductColorSelectorType === "variant_image" || this.featuredProductColorSelectorType === "color_swatch") {
-					this.querySelector(`.featured-product__radios-container--${key}`).innerHTML += `
-									<div class="featured-product__radio__content featured-product__radio__content--${key}"></div>
-							`;
-				} else if (this.featuredProductColorSelectorType === "dropdown") {
-					this.querySelector(`.featured-product__radios-container--${key}`).innerHTML += `
-									<select name="${key}"></select>
-							`;
-				}
-			}
+			this.querySelector(`.featured-product__radios-container--${key}`).innerHTML += `
+			<select name="${key}"></select>
+			`;
 
 			this.featuredProductOptions[key].forEach((value, index) => {
 				if (key !== "Color") {
@@ -2071,107 +1999,12 @@ class FeaturedProduct extends HTMLElement {
 									`;
 					}
 				} else if (key === "Color") {
-					if (this.featuredProductColorSelectorType === "button") {
-						this.querySelector(`.featured-product__radios-container--${key}`).setAttribute("data-selector-type", this.featuredProductColorSelectorType);
-						this.querySelector(`.featured-product__radio__content--${key}`).innerHTML += `
-											<label
-												class="featured-product__radio__label "
-												for="${handleize(key)}-${handleize(value)}-${this.sectionId}"
-												>
-												<input
-													type="radio"
-													name="${key}"
-													value="${value}"
-													id="${handleize(key)}-${handleize(value)}-${this.sectionId}"
-													class="featured-product__radio__input"
-												>
-												${value}
-											</label>
-										`;
-					} else if (this.featuredProductColorSelectorType === "dropdown") {
-						this.querySelector(`.featured-product__radios-container--${key}`).setAttribute("data-selector-type", this.featuredProductColorSelectorType);
-						this.querySelector(`.featured-product__radios-container--${key} select`).innerHTML += `
+					this.querySelector(`.featured-product__radios-container--${key}`).setAttribute("data-selector-type", this.featuredProductColorSelectorType);
+					this.querySelector(`.featured-product__radios-container--${key} select`).innerHTML += `
 										<option value="${value}" type="radio">
 											${value}
 										</option>
 									`;
-					} else if (this.featuredProductColorSelectorType === "variant_image") {
-						this.querySelector(`.featured-product__radios-container--${key}`).setAttribute("data-selector-type", this.featuredProductColorSelectorType);
-						let done;
-						for (var vkey in this.featuredProductImages) {
-							if (this.featuredProductImages[vkey].alt) {
-								if (this.featuredProductImages[vkey].alt.includes("#color:")) {
-									let altLastPart = this.featuredProductImages[vkey].alt.split("#color:")[1];
-									if (altLastPart === value) {
-										this.querySelector(`.featured-product__radio__content--${key}`).innerHTML += `
-											<label
-												class="featured-product__radio__label media variant_image ${handleize(value)}  "
-												style=""
-												for="${handleize(key)}-${handleize(value)}-${this.sectionId}"
-											>
-												<input  type="radio" name="${key}" value="${value}" id="${handleize(key)}-${handleize(value)}-${this.sectionId}" class="featured-product__radio__input">
-											</label>
-										`;
-										this.querySelector(`.featured-product__radio__content--${key} label.${handleize(value)}`).innerHTML += `
-											<img
-												src="${this.featuredProductImages[vkey].src}"
-												loading="lazy"
-												alt="${this.featuredProductImages[vkey].alt}"
-												width="${this.featuredProductImages[vkey].width}"
-												height="${this.featuredProductImages[vkey].height}"
-												class="cover"
-											>
-										`;
-										done = true;
-										break;
-									}
-								}
-							}
-						}
-
-						if (!done) {
-							this.querySelector(`.featured-product__radio__content--${key}`).innerHTML += `
-								<label
-									class="featured-product__radio__label media variant_image ${handleize(value)}  "
-									style=""
-									for="${handleize(key)}-${handleize(value)}-${this.sectionId}"
-								>
-									<input  type="radio" name="${key}" value="${value}" id="${handleize(key)}-${handleize(value)}-${this.sectionId}" class="featured-product__radio__input">
-								</label>
-							`;
-							this.querySelector(`.featured-product__radio__content--${key} label.${handleize(value)}`).innerHTML += `
-								${value}
-							`;
-						}
-					} else if (this.featuredProductColorSelectorType === "color_swatch") {
-						this.querySelector(`.featured-product__radios-container--${key}`).setAttribute("data-selector-type", this.featuredProductColorSelectorType);
-						let done;
-						for (var color in colorSwatchList) {
-							if (value === color) {
-								this.querySelector(`.featured-product__radio__content--${key}`).innerHTML += `
-									<label
-										class="featured-product__radio__label color_swatch"
-										style="background-color: ${color};"
-										id="${handleize(key)}-${handleize(value)}-${this.sectionId}"
-									>
-									<input  type="radio" name="${key}" value="${value}" id="${handleize(key)}-${handleize(value)}-${this.sectionId}" class="featured-product__radio__input">
-									</label>
-								`;
-								done = true;
-							}
-						}
-						if (!done) {
-							this.querySelector(`.featured-product__radio__content--${key}`).innerHTML += `
-									<label
-										class="featured-product__radio__label color_swatch"
-										id="${handleize(key)}-${handleize(value)}-${this.sectionId}"
-									>
-									<input  type="radio" name="${key}" value="${value}" id="${handleize(key)}-${handleize(value)}-${this.sectionId}" class="featured-product__radio__input">
-									${value}
-									</label>
-								`;
-						}
-					}
 				}
 			});
 		}
@@ -2191,21 +2024,6 @@ class FeaturedProduct extends HTMLElement {
 			selectorContainer.addEventListener("change", () => {
 				this.setVariant();
 			});
-		});
-
-		this.querySelectorAll(`.featured-product__radios-container`).forEach((selector) => {
-			if (selector.dataset.selectorType === "button" || selector.dataset.selectorType === "variant_image" || selector.dataset.selectorType === "color_swatch") {
-				selector.querySelectorAll(`input`).forEach((input) => {
-					input.addEventListener("click", () => {
-						selector.querySelectorAll(`input`).forEach((inp) => {
-							inp.removeAttribute("checked");
-							inp.parentNode.classList.remove("checked");
-						});
-						input.setAttribute("checked", "checked");
-						input.parentNode.classList.add("checked");
-					});
-				});
-			}
 		});
 	}
 
