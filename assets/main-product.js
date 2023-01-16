@@ -19,7 +19,7 @@ class ProductPage extends HTMLElement {
 
 		announceSoldout(currentVariantInventory);
 
-		if (document.querySelector(".product-page__variants") && productJson.variants.length > 0) {
+		if (document.querySelector(".product-page__variants") && productJson.variants.length > 1) {
 			function selectCallback(variant, selector) {
 				document.querySelector(".product-page__variants").classList.remove("hide");
 				document.querySelector(".product-page__price--compare-at").innerHTML = "";

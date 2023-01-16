@@ -208,22 +208,20 @@
                   </div>
                 </div>
               {% when 'variants_selector' %}
-                {% unless product.has_only_default_variant %}
-                  <div class="product-page__variants hide">
-                    <select id="product-select" name="id">
-                      {% for variant in product.variants %}
-                        <option
-                          value="{{ variant.id }}"
-                          {% if variant == product.selected_or_first_available_variant %}
-                            selected="selected"
-                          {% endif %}
-                        >
-                          {{ variant.title }} - {{ variant.price | money }}
-                        </option>
-                      {% endfor %}
-                    </select>
-                  </div>
-                {% endunless %}
+                <div class="product-page__variants hide">
+                  <select id="product-select" name="id">
+                    {% for variant in product.variants %}
+                      <option
+                        value="{{ variant.id }}"
+                        {% if variant == product.selected_or_first_available_variant %}
+                          selected="selected"
+                        {% endif %}
+                      >
+                        {{ variant.title }} - {{ variant.price | money }}
+                      </option>
+                    {% endfor %}
+                  </select>
+                </div>
               {% when 'quantity' %}
                 <quantity-field class="quantity" {{ block.shopify_attributes }}>
                   <label for="quantity-text">
@@ -471,6 +469,8 @@
   
   
   
+  
+  
   let variantsInventory = {};
   {% for variant in product.variants %}
   variantsInventory["{{ variant.title }}"] = {{ variant.inventory_quantity }};
@@ -506,6 +506,8 @@
   let currentVariantInventory = {{ current_variant.inventory_quantity }};
   let stockAlertThreshold = {{ stock_alert_threshold }};
   let priceDifferenceText= "{{ price_difference_text }}";
+
+
 
 
 
