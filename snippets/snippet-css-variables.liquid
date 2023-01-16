@@ -1,4 +1,42 @@
+{%- unless settings.heading_font_type.system? -%}
+  <link rel="preload" href="{{ settings.heading_font_type | font_url }}" as="font" type="font/woff2" crossorigin>
+{%- endunless -%}
+
+{%- unless settings.font_type.system? -%}
+  <link rel="preload" href="{{ settings.font_type | font_url }}" as="font" type="font/woff2" crossorigin>
+{%- endunless -%}
+
+{%- assign heading_font_italic = settings.heading_font_type | font_modify: 'style', 'italic' -%}
+
+{%- assign text_font_italic = settings.font_type | font_modify: 'style', 'italic' -%}
+{%- assign text_font_bold = settings.font_type | font_modify: 'weight', '600' -%}
+
+{%- unless text_font_bold -%}
+  {%- assign text_font_bold = settings.font_type | font_modify: 'weight', 'bolder' -%}
+{%- endunless -%}
+{%- assign text_font_bold_italic = text_font_bold | font_modify: 'style', 'italic' -%}
+
 {% style %}
+  {{ settings.heading_font_type | font_face: font_display: 'swap' }}
+
+  {%- if heading_font_italic -%}
+    {{ heading_font_italic | font_face: font_display: 'swap' }}
+  {%- endif -%}
+
+  {{ settings.font_type | font_face: font_display: 'swap' }}
+
+  {%- if text_font_italic -%}
+    {{ text_font_italic | font_face: font_display: 'swap' }}
+  {%- endif -%}
+
+  {%- if text_font_bold -%}
+    {{ text_font_bold | font_face: font_display: 'swap' }}
+  {%- endif -%}
+
+  {%- if text_font_bold_italic -%}
+    {{ text_font_bold_italic | font_face: font_display: 'swap' }}
+  {%- endif -%}
+
   :root {
      --font-family: {{ settings.font_type.family }}, {{ settings.font_type.fallback_families }};
      --heading-font-family: {{ settings.heading_font_type.family }}, {{ settings.heading_font_type.fallback_families }};

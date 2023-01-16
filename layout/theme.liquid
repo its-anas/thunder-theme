@@ -3,11 +3,15 @@
   <head>
     {%- render 'snippet-meta-tags' -%}
     {%- render 'snippet-css-variables' -%}
-    <link href="{{ 'global-styles.css' | asset_url }}" rel="stylesheet" type="text/css" media="all">
     {%- render 'snippet-social-meta-tags' -%}
+    <link rel="stylesheet" href="{{ 'global-styles.css' | asset_url }}">
+    <script src="{{ 'global-scripts.js' | asset_url }}" defer></script>
     <title>
       {{ page_title }}
     </title>
+    {%- if page_description -%}
+      <meta name="description" content="{{ page_description | escape }}">
+    {%- endif -%}
     {{ content_for_header }}
   </head>
 
@@ -33,7 +37,6 @@
       echo content_for_layout
       section 'main-footer'
     -%}
-    <script src="{{ 'global-scripts.js' | asset_url }}" defer></script>
     {%- render 'snippet-preloaded-variables' -%}
   </body>
 </html>

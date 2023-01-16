@@ -1435,6 +1435,7 @@ class PopupComponent extends HTMLElement {
 
 	openPopupDrawer() {
 		if (this.cookie !== "closed" || Shopify.designMode) {
+			document.querySelector(".header-section").style.zIndex = "98";
 			this.querySelector(".popup").style.display = "flex";
 			this.querySelector(".popup").style.zIndex = "102";
 
@@ -1472,6 +1473,7 @@ class PopupComponent extends HTMLElement {
 			}
 			this.drawer.querySelector(".popup__content").classList.remove("slide-in");
 			this.drawer.classList.remove("border");
+			document.querySelector(".header-section").style.zIndex = "110";
 		}, 300);
 
 		this.saveInCookie("closed");

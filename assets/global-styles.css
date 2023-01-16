@@ -12,15 +12,7 @@ body {
 	margin: 0;
 }
 
-body {
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	min-height: 100vh;
-}
-
 html.lock {
-	overflow: hidden;
 	touch-action: none;
 }
 
