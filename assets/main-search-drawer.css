@@ -49,6 +49,7 @@ body:has(.header-section.boxed) .search-drawer {
 
 .search-drawer__container .buttons.hidden {
 	opacity: 0;
+	pointer-events: none;
 	transition: all 0.3s ease-in;
 }
 

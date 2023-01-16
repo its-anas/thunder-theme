@@ -2907,11 +2907,6 @@ cart-component.hidden {
 	overflow: hidden;
 }
 
-/* .search-form__container:has(.search-form__results.hidden),
-.search-form__container:has(.buttons.hidden) {
-	height: auto;
-} */
-
 @media screen and (max-width: 750px) {
 	.search-form__container {
 		max-width: 100%;

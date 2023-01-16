@@ -498,41 +498,6 @@
                     </p>
                   </a>
                 </div>
-              {% when 'recommended_products' %}
-                {% if product.metafields.custom.recommended_products %}
-                  <div class="product-page__recommended-products-section" {{ block.shopify_attributes }}>
-                    <h6 class="product-page__recommended-products-section-title">Buy it with</h6>
-                    <div class="product-page__recommended-product-list">
-                      {% for bundled_product in product.metafields.custom.recommended_products.value limit: 3 %}
-                        <div class="product-page__recommended-product-container">
-                          <div class="product-page__recommended-product corner-border">
-                            <a href="{{ bundled_product.url }}" class="media corner-border-target">
-                              {%- assign image = bundled_product.featured_image -%}
-                              {%- capture sizes -%}(min-width: 1024px) calc(((var(--page-width) - 10rem ) / 2) / 3), calc((100vw - 4rem) / 3){%- endcapture -%}
-                              {%- assign widths = '100, 125' -%}
-                              {%- assign width = '125' -%}
-                              {{
-                                image
-                                | image_url: width: width
-                                | image_tag:
-                                  loading: 'lazy',
-                                  class: 'cover',
-                                  alt: image.alt,
-                                  width: image.width,
-                                  height: image.height,
-                                  sizes: sizes,
-                                  widths: widths
-                              }}
-                            </a>
-                          </div>
-                          <a href="{{ bundled_product.url }}" class="product-page__recommended-product-title">
-                            {{ bundled_product.title }}
-                          </a>
-                        </div>
-                      {% endfor %}
-                    </div>
-                  </div>
-                {% endif %}
             {% endcase %}
           {% endfor %}
         {% endform %}
@@ -640,6 +605,7 @@
   
   
   
+  
   let variantsInventory = {};
   {% for variant in product.variants %}
   variantsInventory["{{ variant.title }}"] = {{ variant.inventory_quantity }};
@@ -675,6 +641,7 @@
   let currentVariantInventory = {{ current_variant.inventory_quantity }};
   let stockAlertThreshold = {{ stock_alert_threshold }};
   let priceDifferenceText= "{{ price_difference_text }}";
+
 
 
 
@@ -1037,18 +1004,6 @@
           "id": "show_payment_methods",
           "label": "t:sections.main-product.blocks.buttons.settings.show_payment_methods",
           "default": true
-        }
-      ]
-    },
-    {
-      "type": "recommended_products",
-      "name": "t:sections.main-product.blocks.recommended_products.name",
-      "limit": 1,
-      "settings": [
-        {
-          "type": "header",
-          "content": "t:sections.main-product.blocks.recommended_products.settings.content",
-          "info": "t:sections.main-product.blocks.recommended_products.settings.info"
         }
       ]
     },
