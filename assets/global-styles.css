@@ -2048,8 +2048,7 @@ button {
 	outline: none;
 }
 
-button#add-to-cart-button:after,
-button#quick-view-add-to-cart:after {
+button#add-to-cart-button:after {
 	content: "+";
 }
 
@@ -2342,14 +2341,6 @@ button:has(.loading-spinner.active) {
 	pointer-events: none;
 }
 
-.button--link#quick-view-button {
-	width: -webkit-fit-content;
-	width: -moz-fit-content;
-	width: fit-content;
-	font-size: var(--xsmall-font-size);
-	text-decoration: underline;
-}
-
 .loading-spinner {
 	position: absolute;
 	top: 0;
@@ -2397,13 +2388,11 @@ a.remove .loading-spinner svg.mini {
 	animation: dash 1.5s ease-in-out infinite;
 }
 
-.qv-icon.hide,
 .rm-icon.hide,
 .cl-icon.hide {
 	opacity: 0;
 }
 
-.qv-icon *,
 .rm-icon *,
 .cl-icon * {
 	pointer-events: none;
@@ -2730,29 +2719,6 @@ slider-component .placeholder {
 }
 
 /* ANCHOR: Drawers */
-.quick-view-button {
-	z-index: 3;
-	width: 1.5rem;
-	height: 1.5rem;
-	transform: translate(-15%, -15%);
-	transition: all 0.2s ease;
-	cursor: pointer;
-}
-
-@media screen and (min-width: 1024px) {
-	.quick-view-button:hover {
-		transform: scale(1.2) translate(-15%, -15%);
-		transition: all 0.5s ease;
-	}
-}
-
-.quick-view-button svg {
-	pointer-events: none;
-}
-
-#quick-view-button.button--link:after {
-	content: "";
-}
 
 cart-component,
 menu-drawer-component {

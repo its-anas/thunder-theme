@@ -151,28 +151,6 @@
                     "info": "Ingrese solo números sin símbolo de moneda o coma (por ejemplo, 100)"
                 }
             }
-        },
-        "quick_view": {
-            "name": "Vista rápida",
-            "settings": {
-                "quick_view_variant_selector_type": {
-                    "label": "Tipo de selector de variante",
-                    "options": {
-                        "button": "Botón",
-                        "dropdown": "Menú de desplazamiento"
-                    }
-                },
-                "quick_view_color_selector_type": {
-                    "label": "Tipo de selector de color",
-                    "info": "Para que la muestra de color funcione correctamente, el producto debe tener variantes, cada variante debe tener una imagen asociada, cada imagen alternativa debe estar escrita en el formato",
-                    "options": {
-                        "button": "Botón",
-                        "dropdown": "menú de desplazamiento",
-                        "color_swatch": "Color",
-                        "variant_image": "imagen variante"
-                    }
-                }
-            }
         }
     },
     "sections": {

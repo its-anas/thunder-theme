@@ -15,10 +15,10 @@
   
   
   
+  
   let cartType = '{{ settings.cart_type }}';
   let freeShippingBarFirstMessage =`{{ 'general.free_shipping_bar.first_message' | t }}`;
   let freeShippingBarSecondMessage = `{{ 'general.free_shipping_bar.second_message' | t }}`;
-  let quickViewText = `{{ 'general.buttons.quick_view' | t }}`;
   let addToCartText = `{{ 'general.buttons.add_to_cart' | t }}`;
 
   let saleText = `{{ 'general.others.sale_text' | t }}`;
@@ -91,6 +91,7 @@
     }
     return formatString.replace(placeholderRegex, value);
   }
+
 
 
 

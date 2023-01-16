@@ -151,28 +151,6 @@
                     "info": "Inserisci solo numeri senza simbolo di valuta o virgola (ad es. 100)"
                 }
             }
-        },
-        "quick_view": {
-            "name": "Un'occhiata",
-            "settings": {
-                "quick_view_variant_selector_type": {
-                    "label": "Tipo di selettore di varianti",
-                    "options": {
-                        "button": "Pulsante",
-                        "dropdown": "Menù a scorrimento"
-                    }
-                },
-                "quick_view_color_selector_type": {
-                    "label": "Tipo di selezione colore",
-                    "info": "Perché il campione di colore funzioni correttamente, il prodotto deve avere delle varianti, ogni variante deve avere un'immagine associata, ogni immagine alt deve essere scritta nel formato",
-                    "options": {
-                        "button": "Pulsante",
-                        "dropdown": "Menù a scorrimento",
-                        "color_swatch": "Colore",
-                        "variant_image": "Immagine variante"
-                    }
-                }
-            }
         }
     },
     "sections": {

@@ -204,13 +204,6 @@
 	font-size: var(--xxsmall-font-size);
 }
 
-.quick-view-button {
-	position: absolute;
-	z-index: 1;
-	right: 0;
-	bottom: 0;
-}
-
 .search__item__name {
 	color: var(--body-text-color);
 	font-size: var(--small-font-size);

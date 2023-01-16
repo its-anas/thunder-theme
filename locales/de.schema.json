@@ -151,28 +151,6 @@
                     "info": "Geben Sie nur Zahlen ohne Währungssymbol oder Komma ein (z. B. 100)"
                 }
             }
-        },
-        "quick_view": {
-            "name": "Schnellansicht",
-            "settings": {
-                "quick_view_variant_selector_type": {
-                    "label": "Variantenselektortyp",
-                    "options": {
-                        "button": "Knopf",
-                        "dropdown": "Scrollendes Menü"
-                    }
-                },
-                "quick_view_color_selector_type": {
-                    "label": "Farbauswahltyp",
-                    "info": "Damit das Farbfeld richtig funktioniert, muss das Produkt Varianten haben, jede Variante muss ein zugehöriges Bild haben, jedes alternative Bild muss im Format geschrieben sein",
-                    "options": {
-                        "button": "Knopf",
-                        "dropdown": "Scrollendes Menü",
-                        "color_swatch": "Farbe",
-                        "variant_image": "Variantenbild"
-                    }
-                }
-            }
         }
     },
     "sections": {

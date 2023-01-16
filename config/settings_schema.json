@@ -524,51 +524,5 @@
                     "default": "75"
                }
           ]
-     },
-     {
-          "name": "t:settings_schema.quick_view.name",
-          "settings": [
-               {
-                    "type": "select",
-                    "id": "quick_view_variant_selector_type",
-                    "label": "t:settings_schema.quick_view.settings.quick_view_variant_selector_type.label",
-                    "options": [
-                         {
-                              "value": "button",
-                              "label": "t:settings_schema.quick_view.settings.quick_view_variant_selector_type.options.button"
-                         },
-                         {
-                              "value": "dropdown",
-                              "label": "t:settings_schema.quick_view.settings.quick_view_variant_selector_type.options.dropdown"
-                         }
-                    ],
-                    "default": "dropdown"
-               },
-               {
-                    "type": "select",
-                    "id": "quick_view_color_selector_type",
-                    "label": "t:settings_schema.quick_view.settings.quick_view_color_selector_type.label",
-                    "info": "t:settings_schema.quick_view.settings.quick_view_color_selector_type.info",
-                    "options": [
-                         {
-                              "value": "button",
-                              "label": "t:settings_schema.quick_view.settings.quick_view_color_selector_type.options.button"
-                         },
-                         {
-                              "value": "dropdown",
-                              "label": "t:settings_schema.quick_view.settings.quick_view_color_selector_type.options.dropdown"
-                         },
-                         {
-                              "value": "color_swatch",
-                              "label": "t:settings_schema.quick_view.settings.quick_view_color_selector_type.options.color_swatch"
-                         },
-                         {
-                              "value": "variant_image",
-                              "label": "t:settings_schema.quick_view.settings.quick_view_color_selector_type.options.variant_image"
-                         }
-                    ],
-                    "default": "dropdown"
-               }
-          ]
      }
 ]

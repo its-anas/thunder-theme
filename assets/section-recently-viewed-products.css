@@ -16,11 +16,7 @@
 	top: 0.2rem;
 	left: 0.2rem;
 }
-.recently-viewed__image .quick-view-button {
-	position: absolute;
-	right: 0.1rem;
-	bottom: 0.1rem;
-}
+
 .recently-viewed__container {
 	display: flex;
 	flex-grow: 1;

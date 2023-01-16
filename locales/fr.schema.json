@@ -151,28 +151,6 @@
                     "info": "Saisissez uniquement des chiffres sans symbole de devise ni virgule (par exemple, 100)"
                 }
             }
-        },
-        "quick_view": {
-            "name": "Aperçu rapide",
-            "settings": {
-                "quick_view_variant_selector_type": {
-                    "label": "Type de sélecteur de variante",
-                    "options": {
-                        "button": "Bouton",
-                        "dropdown": "Menu déroulant"
-                    }
-                },
-                "quick_view_color_selector_type": {
-                    "label": "Type de sélecteur de couleur",
-                    "info": "Pour que l'échantillon de couleur fonctionne correctement, le produit doit avoir des variantes, chaque variante doit être associée à une image, chaque image alt doit être écrite au format",
-                    "options": {
-                        "button": "Bouton",
-                        "dropdown": "Menu déroulant",
-                        "color_swatch": "Couleur",
-                        "variant_image": "Image variante"
-                    }
-                }
-            }
         }
     },
     "sections": {
