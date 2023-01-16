@@ -747,6 +747,7 @@ p[data-spam-detection-disclaimer] > a {
 	/* Product page */
 
 	product-page .slide .item-picture,
+	product-page .product-page__info,
 	product-page .thumbnail {
 		opacity: 0;
 	}
@@ -754,6 +755,11 @@ p[data-spam-detection-disclaimer] > a {
 	product-page.reveal .slide .item-picture {
 		-webkit-animation: 0.5s zoomIn cubic-bezier(0.75, 0, 0.175, 1) forwards;
 		animation: 0.5s zoomIn cubic-bezier(0.75, 0, 0.175, 1) forwards;
+	}
+
+	product-page.reveal .product-page__info {
+		-webkit-animation: 1s slideLeft cubic-bezier(0.75, 0, 0.175, 1) forwards;
+		animation: 1s slideLeft cubic-bezier(0.75, 0, 0.175, 1) forwards;
 	}
 
 	product-page.reveal .thumbnail {
