@@ -1925,8 +1925,6 @@ class FeaturedProduct extends HTMLElement {
 		this.shadowRoot.innerHTML = "<slot></slot>";
 
 		this.sectionId = this.querySelector("[data-section-id]").dataset.sectionId;
-		this.featuredProductVariantSelectorType = this.querySelector("[data-featured-product-variant-selector-type]").dataset.featuredProductVariantSelectorType;
-		this.featuredProductColorSelectorType = this.querySelector("[data-featured-product-color-selector-type]").dataset.featuredProductColorSelectorType;
 
 		this.featuredProductImages = JSON.parse(localStorage.getItem(`featuredProductImages-${this.sectionId}`));
 		this.featuredProductVariants = JSON.parse(localStorage.getItem(`featuredProductVariants-${this.sectionId}`));
@@ -1992,60 +1990,9 @@ class FeaturedProduct extends HTMLElement {
 		}
 
 		if (Object.keys(this.featuredProductVariants).length > 1) {
-			this.addOptions();
 			this.runVariant();
 		} else if (Object.keys(this.featuredProductVariants).length === 1) {
 			this.setVariant();
-		}
-	}
-
-	addOptions() {
-		for (var key in this.featuredProductOptions) {
-			this.querySelector(".featured-product__options").innerHTML += `
-							<div class="featured-product__radios-container featured-product__radios-container--${key}">
-								<p class="featured-product__radio__title">${key}</p>
-							</div>
-			`;
-
-			this.querySelector(`.featured-product__radios-container--${key}`).innerHTML += `
-			<select name="${key}"></select>
-			`;
-
-			this.featuredProductOptions[key].forEach((value, index) => {
-				if (key !== "Color") {
-					this.querySelector(`.featured-product__radios-container--${key}`).setAttribute("data-selector-type", this.featuredProductVariantSelectorType);
-					if (this.featuredProductVariantSelectorType === "button") {
-						this.querySelector(`.featured-product__radio__content--${key}`).innerHTML += `
-						<label
-							class="featured-product__radio__label "
-							for="${handleize(key)}-${handleize(value)}-${this.sectionId}"
-							>
-							<input
-								type="radio"
-								name="${key}"
-								value="${value}"
-								id="${handleize(key)}-${handleize(value)}-${this.sectionId}"
-								class="featured-product__radio__input"
-							>
-							${value}
-						</label>
-						`;
-					} else if (this.featuredProductVariantSelectorType === "dropdown") {
-						this.querySelector(`.featured-product__radios-container--${key} select`).innerHTML += `
-										<option value="${value}" type="radio">
-											${value}
-										</option>
-									`;
-					}
-				} else if (key === "Color") {
-					this.querySelector(`.featured-product__radios-container--${key}`).setAttribute("data-selector-type", this.featuredProductColorSelectorType);
-					this.querySelector(`.featured-product__radios-container--${key} select`).innerHTML += `
-										<option value="${value}" type="radio">
-											${value}
-										</option>
-									`;
-				}
-			});
 		}
 	}
 
@@ -2166,6 +2113,7 @@ class FeaturedProduct extends HTMLElement {
 
 			let injectedFunction = `sendToCart(${selectedVariant.id},${quantity})`;
 			this.querySelector("#featured-product-add-to-cart").setAttribute("onclick", injectedFunction);
+			this.querySelector("#featured-product-buy-now input[name='id']").setAttribute("value", selectedVariant.id);
 
 			this.querySelector(".featured-product__quantity-field #quantity-field").addEventListener("click", () => {
 				quantity = this.querySelector(".featured-product__quantity-field .quantity-field__input").value;
@@ -2230,8 +2178,6 @@ class FeaturedProductSlider extends FeaturedProduct {
 
 	connectedCallback() {
 		this.sectionId = this.querySelector("[data-section-id]").dataset.sectionId;
-		this.featuredProductVariantSelectorType = this.querySelector("[data-featured-product-variant-selector-type]").dataset.featuredProductVariantSelectorType;
-		this.featuredProductColorSelectorType = this.querySelector("[data-featured-product-color-selector-type]").dataset.featuredProductColorSelectorType;
 
 		this.featuredProductImages = JSON.parse(localStorage.getItem(`featuredProductImages-${this.sectionId}`));
 		this.featuredProductVariants = JSON.parse(localStorage.getItem(`featuredProductVariants-${this.sectionId}`));

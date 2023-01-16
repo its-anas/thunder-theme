@@ -87,13 +87,6 @@
             <div
               class="featured-product-slider"
               data-section-id="{{ section.id }}"
-              {% for block in section.blocks %}
-                {% case block.type %}
-                  {% when 'variants_selector' %}
-                    data-featured-product-variant-selector-type="dropdown"
-                    data-featured-product-color-selector-type="dropdown"
-                {% endcase %}
-              {% endfor %}
             >
               <div class="prev">
                 {% render 'snippet-icons', icon: 'chevron-prev' %}
@@ -141,7 +134,32 @@
                 </p>
               </div>
             {% when 'variants_selector' %}
-              <div class="featured-product__options" {{ block.shopify_attributes }}></div>
+              <div class="featured-product__options">
+                <div class="featured-product__options" {{ block.shopify_attributes }}>
+                  {%- for option in featured_product.options_with_values -%}
+                    <div
+                      class="featured-product__radios-container featured-product__radios-container--{{ option.name }}"
+                    >
+                      <p class="featured-product__radio__title">{{ option.name }}</p>
+                      <select
+                        name="{{ option.name }}"
+                      >
+                        {%- for value in option.values -%}
+                          <option
+                            value="{{ value | escape }}"
+                            {% if option.selected_value == value %}
+                              selected="selected"
+                            {% endif %}
+                            type="radio"
+                          >
+                            {{- value -}}
+                          </option>
+                        {%- endfor -%}
+                      </select>
+                    </div>
+                  {%- endfor -%}
+                </div>
+              </div>
 
             {% when 'quantity' %}
               <div class="featured-product__quantity-field" {{ block.shopify_attributes }}>
@@ -173,13 +191,18 @@
                     spinner_background_color: 'var(--primary-button-background-color)'
                   %}
                 </button>
-                {% if featured_product != blank %}
-                  <div id="featured-product-buy-now">
-                    {%- form 'product', featured_product -%}
-                      {{ form | payment_button }}
-                    {%- endform -%}
-                  </div>
-                {% endif %}
+
+                <div id="featured-product-buy-now">
+                  {%- form 'product', featured_product, class: 'form', novalidate: 'novalidate' -%}
+                    <input
+                      type="hidden"
+                      name="id"
+                      value="{{ featured_product.selected_or_first_available_variant.id }}"
+                      disabled
+                    >
+                    {{ form | payment_button }}
+                  {%- endform -%}
+                </div>
               </div>
             {% when 'product_url' %}
               <a
