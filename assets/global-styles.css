@@ -2048,10 +2048,6 @@ button {
 	outline: none;
 }
 
-button#add-to-cart-button:after {
-	content: "+";
-}
-
 .shopify-payment-button__button {
 	position: relative;
 	box-sizing: border-box;
